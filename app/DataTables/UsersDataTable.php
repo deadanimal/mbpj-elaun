@@ -17,11 +17,20 @@ class UsersDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
+
+    protected $actions = ['print', 'excel'];
+
     public function dataTable($query)
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'users.action')
+            ->addColumn('action', function($row){
+                           $btn = '<a href="javascript:void(0)" class="edit btn btn-info btn-sm">View</a>';
+                           $btn = $btn.'<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';
+                           $btn = $btn.'<a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
+                     return $btn;
+                    })
+            ->rawColumns(['action'])
             ->editColumn('created_at', function ($request) {
                 return $request->created_at->locale('ms')->isoFormat('DD/MM/YYYY');
             });;
@@ -52,7 +61,8 @@ class UsersDataTable extends DataTable
                     ->orderBy(0,'asc')
                     ->parameters([
                         'responsive' => true,
-                        'autoWidth' => false
+                        'autoWidth' => false,
+                       
                       ])
                     
                     ;
@@ -74,6 +84,10 @@ class UsersDataTable extends DataTable
             'name',
             'email',
             'created_at',
+            [ "data" => 'action', 
+            "title" => "Action",
+            "name" => 'action'
+            ]
         ];
     }
 

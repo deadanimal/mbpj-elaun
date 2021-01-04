@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('bantuan','bantuanController',['except' => ['show','destroy']]);
 	Route::resource('tuntutan','tuntutanController',['except' => ['show','destroy']]);
 	Route::resource('laporan','laporanController',['except' => ['show','destroy']]);
-	Route::resource('permohonan-baru','permohonanbaruController',['except' => ['show','destroy']]);
+	Route::resource('permohonan-baru','permohonanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
 		Route::get('/{user_id}', [
 			'uses' => 'permohonanbaruController@show',
