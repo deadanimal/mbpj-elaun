@@ -21,7 +21,13 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'users.action')
+            ->addColumn('action', function($row){
+                            $btn = '<i data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-sm ni ni-align-center"></i>';
+                            $btn = $btn.'<i data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold"></i>';
+                            $btn = $btn.'<i data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove"></i>';
+                     return $btn;
+                    })
+            ->rawColumns(['action'])
             ->editColumn('created_at', function ($request) {
                 return $request->created_at->locale('ms')->isoFormat('DD/MM/YYYY');
             });;
