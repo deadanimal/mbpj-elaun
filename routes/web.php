@@ -25,7 +25,7 @@ Route::get('charts',function(){
 });
 
 Route::group([
-	'prefix' => 'kakitangan',
+	'prefix' => 'pentadbir-sistem',
 	'middleware' => [
 	'auth',
 	'role:1'
