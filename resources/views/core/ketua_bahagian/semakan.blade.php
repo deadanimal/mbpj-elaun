@@ -7,7 +7,7 @@
 
 @section('content')
     @include('forms.header', [
-        'title' => __('Permohonan Kerja Lebih Masa') . ' ',
+        'title' => __('Selamat Datang ke Modeul Ketua Bahagian') . ' ',
         'description' => __(''),
         'class' => 'col-lg-7'
     ])
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" onclick="revealButton()" class="btn btn-success mt-4">{{ __('Semak') }}</button>
+                                    <button type="submit" onclick="revealButton()" class="btn btn-success mt-4">{{ __('Mohon Baru') }}</button>
                                 </div>
                             </div>
                         </form>

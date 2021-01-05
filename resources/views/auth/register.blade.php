@@ -61,9 +61,15 @@
                                     </div>
                                     <select class="form-control{{ $errors->has('user_type') ? ' is-invalid' : '' }}" id="user_type" name="user_type">
                                         <option value="" selected hidden>{{ __('User Type') }}</option>
-                                        <option value="1" @if (old('user_type') == 1) selected @endif>{{ __('Admin') }}</option>
-                                        <option value="2" @if (old('user_type') == 2) selected @endif>{{ __('Creator') }}</option>
-                                        <option value="3" @if (old('user_type') == 3) selected @endif>{{ __('Member') }}</option>
+                                        <option value="1" @if (old('user_type') == 1) selected @endif>{{ __('Pentadbir Sistem') }}</option>
+                                        <option value="2" @if (old('user_type') == 2) selected @endif>{{ __('Penyelia') }}</option>
+                                        <option value="3" @if (old('user_type') == 3) selected @endif>{{ __('Datuk Bandar') }}</option>
+                                        <option value="4" @if (old('user_type') == 4) selected @endif>{{ __('Ketua Bahagian') }}</option>
+                                        <option value="5" @if (old('user_type') == 5) selected @endif>{{ __('Ketua Jabatan') }}</option>
+                                        <option value="6" @if (old('user_type') == 6) selected @endif>{{ __('Kerani Semakan') }}</option>
+                                        <option value="7" @if (old('user_type') == 7) selected @endif>{{ __('Kerani Pemeriksaan') }}</option>
+                                        <option value="8" @if (old('user_type') == 8) selected @endif>{{ __('Kakitangan') }}</option>
+                                        <option value="9" @if (old('user_type') == 9) selected @endif>{{ __('Pelulus Pindaan') }}</option>
                                     </select>
                                 </div>
                                 @if ($errors->has('user_type'))
