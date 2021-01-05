@@ -38,18 +38,13 @@
                             <div class="col">
                                 <h3 class="mb-0">Pengurusan Sistem Elaun</h3>
                             </div>
-                            <div class="col text-right">
-                                <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Action
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                                </div>
+                            <div class="col-3 text-right">
+                                <select id="jenisTable" name="jenisTable" class="custom-select" >
+                                    <option value="permohonanTable" selected="selected">Permohonan</option>
+                                    <option value="tuntutanTable">Tuntutan</option>
+                                    <option value="tuntutanTable">Lulus</option>
+                                    <option value="tuntutanTable">Tolak</option>
+                                </select>                       
                             </div>
                         </div>
                     </div>
