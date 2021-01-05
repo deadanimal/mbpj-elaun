@@ -1,7 +1,7 @@
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner scroll-scrollx_visible">
         <div class="sidenav-header d-flex align-items-center">
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="{{ route('dashboard.index') }}">
                 <img src="{{ asset('argon') }}/img/mbpj/logo/logo-mbpj(2).png" class="navbar-brand-img" alt="...">
             </a>
             <div class="ml-auto">
@@ -22,7 +22,7 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('home') }}" role="button" >
+                        <a class="nav-link" href="{{ route('dashboard.index') }}" role="button" >
                             <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">{{ __('Dashboard') }}</span>
                         </a>
@@ -207,7 +207,7 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('home') }}" role="button" >
+                        <a class="nav-link" href="{{ route('dashboard.index') }}" role="button" >
                             <i class="ni ni-shop text-primary"></i>
                             <span class="nav-link-text">{{ __('Dashboard') }}</span>
                         </a>
@@ -238,19 +238,19 @@
                         
                     </li>
                     <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
-                        <a class="nav-link " href="{{ route('penyelia.semakan') }}" >
+                        <a class="nav-link " href="{{ route('penyelia-semakan.index') }}" >
                             <i class="fab fa-laravel" style="color: #f4645f;"></i>
                             <span class="nav-link-text" >{{ __('Semakan') }}</span>
                         </a>
                     </li>
                     <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('bantuan.index') }}" >
+                        <a class="nav-link" href="{{ route('penyelia-bantuan.index') }}" >
                             <i class="ni ni-collection text-yellow"></i>
                             <span class="nav-link-text">{{ __('Bantuan') }}</span>
                         </a>
                     </li>
                     <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('laporan.index') }}" >
+                        <a class="nav-link" href="{{ route('penyelia-laporan.index') }}" >
                             <i class="ni ni-chart-pie-35"></i>
                             <span class="nav-link-text">Laporan</span>
                         </a>
