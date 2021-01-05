@@ -1,27 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\penyelia;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-use DataTables;
-use App\DataTables\UsersDataTable;
 
-class penyeliaController extends Controller
+class bantuanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.penyelia.dashboard');
-    }
-    
-    public function index2(UsersDataTable $dataTable)
-    {
-        return $dataTable->render('core.penyelia.semakan');
+        //
+        return view('core.penyelia.bantuan');
     }
 
     /**

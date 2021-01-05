@@ -11,7 +11,7 @@
                 {{ __('Default') }} 
             @endslot
 
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboards') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
         @include('layouts.headers.cards') 
@@ -21,7 +21,7 @@
                 {{ __('Default') }} 
             @endslot
 
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboards') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
         @include('layouts.headers.cards') 

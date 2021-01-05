@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
+use DataTables;
+use App\DataTables\UsersDataTable;
 
 class HomeController extends Controller
 {
@@ -19,8 +22,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        return view('pages.dashboard');
+        return $dataTable->render('pages.dashboard');
     }
 }

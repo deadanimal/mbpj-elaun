@@ -11,7 +11,7 @@
                 {{ __('Default') }} 
             @endslot
 
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboards') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
         @include('layouts.headers.cards') 
@@ -21,7 +21,7 @@
                 {{ __('Default') }} 
             @endslot
 
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboards') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
         @include('layouts.headers.cards') 
@@ -36,7 +36,7 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="mb-0">Pengurusan Sistem Elaun</h3>
+                                <h3 class="mb-0">Datuk Bandar Pengurusan Sistem Elaun</h3>
                             </div>
                             <div class="col text-right">
                                 <div class="btn-group">
