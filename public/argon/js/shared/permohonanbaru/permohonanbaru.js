@@ -1,28 +1,33 @@
-$(document).ready(function(){
+$('#divPermohonanIndividu').hide();
+$('#divPermohonanBerkumpulan').hide();
 
-    $("#permohonanbaruModal").on("hidden.bs.modal", function(){
-        $('#frmPermohonanBaru').trigger("reset");
-        $("#frmPermohonanBaru .close").click();
-    });
+    $(function () {
 
-    $("#jenisPermohonan").on("change", function() {
-        $("#" + $(this).val()).show().siblings().hide();
-    })
+        $("#jenisPermohonan").change(function () {
+            if ($(this).val() == "frmPermohonanIndividu") {
+                document.getElementById('modaldialog').className = "modal-dialog modal-lg"
+                document.getElementById('selectpermohonan').className = "col-sm-12"
+                $('#divPermohonanIndividu').show();
+                $("#divPermohonanBerkumpulan").hide();
+
+            }
+            else if ($(this).val() == "frmPermohonanBerkumpulan") {
+                document.getElementById('modaldialog').className = "modal-dialog modal-xl"
+                document.getElementById('selectpermohonan').className = "col-sm-6"
+                $('#divPermohonanIndividu').hide();
+                $("#divPermohonanBerkumpulan").show();
+
+            }else{
+            $('#divPermohonanIndividu').hide();
+            $('#divPermohonanBerkumpulan').hide();
     
-})
+            }
+    
+        });
+
+        
 
 
-function permohonanbaruForm(user_id) {
-    $.ajax({
-        type: 'GET',
-        url: '/permohonan-baru/' + user_id,
-        success: function(data) {
-            $("#permohonanbaru-error-bag").hide();
-
-            $('#permohonanbaruModal').modal('show');
-        },
-        error: function(data) {
-            console.log(data);
-        }
     });
-}
+
+   

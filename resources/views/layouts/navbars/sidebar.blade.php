@@ -91,8 +91,8 @@
                 </ul>
                 @endif
 
-                @if(Auth::user()->role_id == '2'  )
-                
+                {{-- 2nd sidebar for Penyelia --}}
+                @if(Auth::user()->role_id == '2')
                 
                 <hr class="my-3">
                 <ul class="navbar-nav mb-md-3">
@@ -117,6 +117,134 @@
                     </li>
                     <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
                         <a class="nav-link" href="penyelia-laporan" >
+                            <i class="ni ni-chart-pie-35"></i>
+                            <span class="nav-link-text">Laporan</span>
+                        </a>
+                    </li>
+                </ul>
+
+                {{-- 2nd sidebar for KB --}}
+                @elseif(Auth::user()->role_id == '4')
+                
+                <hr class="my-3">
+                <ul class="navbar-nav mb-md-3">
+                <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
+                        <a class="nav-link" href="ketua-bahagian-dashboard" role="button" >
+                            <i class="ni ni-shop text-primary"></i>
+                            <span class="nav-link-text">{{ __('Dashboard') }}</span>
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
+                        <a class="nav-link " href="ketua-bahagian-semakan" >
+                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <span class="nav-link-text" >{{ __('Semakan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
+                        <a class="nav-link" href="ketua-bahagian-bantuan" >
+                            <i class="ni ni-collection text-yellow"></i>
+                            <span class="nav-link-text">{{ __('Bantuan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
+                        <a class="nav-link" href="ketua-bahagian-laporan" >
+                            <i class="ni ni-chart-pie-35"></i>
+                            <span class="nav-link-text">Laporan</span>
+                        </a>
+                    </li>
+                </ul>
+
+                {{-- 2nd sidebar for KJ --}}
+                @elseif(Auth::user()->role_id == '5')
+                
+                <hr class="my-3">
+                <ul class="navbar-nav mb-md-3">
+                <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
+                        <a class="nav-link" href="ketua-jabatan-dashboard" role="button" >
+                            <i class="ni ni-shop text-primary"></i>
+                            <span class="nav-link-text">{{ __('Dashboard') }}</span>
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
+                        <a class="nav-link " href="ketua-jabatan-semakan" >
+                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <span class="nav-link-text" >{{ __('Semakan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
+                        <a class="nav-link" href="ketua-jabatan-bantuan" >
+                            <i class="ni ni-collection text-yellow"></i>
+                            <span class="nav-link-text">{{ __('Bantuan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
+                        <a class="nav-link" href="ketua-jabatan-laporan" >
+                            <i class="ni ni-chart-pie-35"></i>
+                            <span class="nav-link-text">Laporan</span>
+                        </a>
+                    </li>
+                </ul>
+
+                {{-- 2nd sidebar for KS --}}
+                @elseif(Auth::user()->role_id == '6')
+                
+                <hr class="my-3">
+                <ul class="navbar-nav mb-md-3">
+                <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
+                        <a class="nav-link" href="kerani-semakan-dashboard" role="button" >
+                            <i class="ni ni-shop text-primary"></i>
+                            <span class="nav-link-text">{{ __('Dashboard') }}</span>
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
+                        <a class="nav-link " href="kerani-semakan-semakan" >
+                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <span class="nav-link-text" >{{ __('Semakan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
+                        <a class="nav-link" href="kerani-semakan-bantuan" >
+                            <i class="ni ni-collection text-yellow"></i>
+                            <span class="nav-link-text">{{ __('Bantuan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
+                        <a class="nav-link" href="kerani-semakan-laporan" >
+                            <i class="ni ni-chart-pie-35"></i>
+                            <span class="nav-link-text">Laporan</span>
+                        </a>
+                    </li>
+                </ul>
+
+                {{-- 2nd sidebar for KP --}}
+                @elseif(Auth::user()->role_id == '7')
+                
+                <hr class="my-3">
+                <ul class="navbar-nav mb-md-3">
+                <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
+                        <a class="nav-link" href="kerani-pemeriksa-dashboard" role="button" >
+                            <i class="ni ni-shop text-primary"></i>
+                            <span class="nav-link-text">{{ __('Dashboard') }}</span>
+                        </a>
+                        
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
+                        <a class="nav-link " href="kerani-pemeriksa-semakan" >
+                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <span class="nav-link-text" >{{ __('Semakan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
+                        <a class="nav-link" href="kerani-pemeriksa-bantuan" >
+                            <i class="ni ni-collection text-yellow"></i>
+                            <span class="nav-link-text">{{ __('Bantuan') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
+                        <a class="nav-link" href="kerani-pemeriksa-laporan" >
                             <i class="ni ni-chart-pie-35"></i>
                             <span class="nav-link-text">Laporan</span>
                         </a>

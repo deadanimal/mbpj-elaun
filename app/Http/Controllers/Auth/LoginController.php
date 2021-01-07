@@ -40,8 +40,26 @@ class LoginController extends Controller
                     return 'penyelia/dashboard';
                 break; 
             case '3':
-                return 'datuk-bandar/dashboard';
-            break; 
+                    return 'datuk-bandar/dashboard';
+                break; 
+            case '4':
+                    return 'ketua-bahagian/dashboard';
+                break; 
+            case '5':
+                    return 'ketua-jabatan/dashboard';
+                break; 
+            case '6':
+                    return 'kerani-semakan/dashboard';
+                break; 
+            case '7':
+                    return 'kerani-pemeriksaan/dashboard';
+                break; 
+            case '8':
+                    return 'kakitangan/dashboard';
+                break; 
+            case '9':
+                    return 'pelulus-pindaan/dashboard';
+                break; 
             default:
                     return '/login'; 
                 break;
