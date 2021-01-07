@@ -64,7 +64,6 @@ class UsersDataTable extends DataTable
                     ->parameters([
                         'responsive' => true,
                         'autoWidth' => false,
-                       
                       ])
                     
                     ;

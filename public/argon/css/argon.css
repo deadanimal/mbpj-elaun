@@ -4296,6 +4296,12 @@ input[type='button'].btn-block
     color: #212529;
 }
 
+.scrollable-menu
+{
+    max-height:250px;
+    overflow:auto; 
+}
+
 .btn-group,
 .btn-group-vertical
 {
@@ -7157,7 +7163,8 @@ button.close
     left: 0;
 
     display: none;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-y: auto;
 
     outline: 0;
 }
