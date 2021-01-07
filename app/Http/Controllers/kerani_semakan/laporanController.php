@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\kerani_semakan;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use DataTables;
 use App\DataTables\UsersDataTable;
 
-class penyeliaController extends Controller
+class laporanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('core.penyelia.dashboard');
-    }
-    
-    public function index2(UsersDataTable $dataTable)
-    {
-        return $dataTable->render('core.penyelia.semakan');
+        return $dataTable->render('core.kerani_semakan.laporan');
     }
 
     /**

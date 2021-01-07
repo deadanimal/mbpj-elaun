@@ -81,4 +81,34 @@ class User extends Authenticatable
     {
         return $this->role_id == 3;
     }
+
+    public function isKetuaBahagian()
+    {
+        return $this->role_id == 4;
+    }
+
+    public function isKetuaJabatan()
+    {
+        return $this->role_id == 5;
+    }
+
+    public function isKeraniSemakan()
+    {
+        return $this->role_id == 6;
+    }
+
+    public function isKeraniPemeriksaan()
+    {
+        return $this->role_id == 7;
+    }
+
+    public function isKakitangan()
+    {
+        return $this->role_id == 8;
+    }
+
+    public function isPelulusPindaan()
+    {
+        return $this->role_id == 9;
+    }
 }
