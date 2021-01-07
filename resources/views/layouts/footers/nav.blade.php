@@ -1,4 +1,4 @@
-<div class="row align-items-center justify-content-lg-between">
+<div class="row align-items-center justify-content-lg-between mx-auto">
     <div class="col-xl-6">
         <div class="copyright text-center text-lg-left text-muted">
             &copy; {{ now()->year }} <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a> &amp; <a href="https://www.updivision.com" class="font-weight-bold ml-1" target="_blank">Updivision</a>

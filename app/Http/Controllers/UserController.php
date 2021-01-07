@@ -99,4 +99,8 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
     }
+
+    public function apitest(){
+        return response()->json(User::get(), 200);
+    }
 }

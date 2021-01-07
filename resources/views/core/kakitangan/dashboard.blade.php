@@ -40,18 +40,36 @@
                             </div>
                             <div class="col-3 text-right">
                                 <select id="jenisTable" name="jenisTable" class="custom-select" >
-                                    <option value="permohonanTable" selected="selected">Permohonan</option>
-                                    <option value="tuntutanTable">Tuntutan</option>
-                                    <option value="tuntutanTable">Lulus</option>
-                                    <option value="tuntutanTable">Tolak</option>
+                                    <option value="permohonanan" selected="selected">Permohonan</option>
+                                    <option value="tuntutan">Tuntutan</option>
+                                    <option value="lulus">Lulus</option>
+                                    <option value="tolak">Tolak</option>
                                 </select>                       
                             </div>
                         </div>
                     </div>
                     
-                        <div class="row">
+                        <div id="permohonan" class="row">
                             <div class="col-lg-12">
                                 {!! $dataTable->table() !!}
+                            </div>
+                        </div>
+
+                        <div id="tuntutan" class="row">
+                            <div class="col-lg-12">
+                            <h1>table tuntutan sini</h1>
+                            </div>
+                        </div>
+
+                        <div id="lulus" class="row">
+                            <div class="col-lg-12">
+                            <h1>table lulus sini</h1>
+                            </div>
+                        </div>
+
+                        <div id="tolak" class="row">
+                            <div class="col-lg-12">
+                                <h1>table tolak sini</h1>
                             </div>
                         </div>
                     
@@ -136,6 +154,7 @@
     
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+    
     
     {!! $dataTable->scripts() !!}
     
