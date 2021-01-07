@@ -8,7 +8,7 @@
     {{-- @component('layouts.headers.auth') 
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
-                {{ __('Ketua Bahagian') }} 
+                {{ __('Ketua Jabatan') }} 
             @endslot
 
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
@@ -18,7 +18,7 @@
     @endcomponent --}}
 
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Ketua Bahagian') . ' ',
+        'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
         'description' => __(''),
         'class' => 'col-lg-7'
     ])

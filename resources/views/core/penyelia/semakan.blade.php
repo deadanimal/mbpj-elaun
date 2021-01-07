@@ -24,10 +24,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('profile.update') }}" autocomplete="off"
-                            enctype="multipart/form-data">
+                        {{-- <form method="post" action="/penyelia/penyelia-semakan" autocomplete="off" enctype="multipart/form-data">--}}
+                        <form  method="get" action="/penyelia/penyelia-semakan" autocomplete="off"
+                             enctype="multipart/form-data">
                             @csrf
-                            @method('put')
+                            {{-- @method('put') --}}
 
                             <h6 class="heading-small text-muted mb-4">{{ __('Maklumat Peribadi') }}</h6>
 
@@ -91,7 +92,8 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" onclick="revealButton()" class="btn btn-success mt-4">{{ __('Semak') }}</button>
+                                    <button type="submit" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
+                                    {{-- <button type="button" value="submit" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button> --}}
                                 </div>
                             </div>
                         </form>
@@ -204,7 +206,7 @@
 
                         {{-- Modal Edit --}}
                         <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-                            <div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-dialog-scrollable modal-md" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h6 class="modal-title" id="modal-title-default">Permohonan Baru Kerja Lebih Masa</h6>
@@ -218,6 +220,7 @@
                                             <div class="card-body px-lg-4 py-lg-4">
                                                 <div class="text-left mb-4">
                                                     <h5>* Jenis Permohonan</h5>
+                                                    <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="JENIS PERMOHONAN" readonly>
                                                 </div>
 
                                                 <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">

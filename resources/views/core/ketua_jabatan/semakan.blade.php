@@ -7,7 +7,7 @@
 
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Ketua Bahagian') . ' ',
+        'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
         'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
         'class' => 'col-lg-7'
     ])
@@ -43,7 +43,26 @@
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div>
-                                
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
+                                            <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+    
+                                            @include('alerts.feedback', ['field' => 'name'])
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
+                                            <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+    
+                                            @include('alerts.feedback', ['field' => 'name'])
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row"> 
                                    <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -91,7 +110,7 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" id="semakKetuaBahagian" class="btn btn-success mt-4">{{ __('Semak') }}</button>
+                                    <button type="submit" id="semakKetuaJabatan" class="btn btn-success mt-4">{{ __('Semak') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -182,7 +201,7 @@
             </div>
             
         <!-- letak tab heading -->
-        <div class="mb-4" id="ketuaBahagianReveal" style="display: none;">
+        <div class="mb-4" id="ketuaJabatanReveal" style="display: none;">
             <button class="btn hide btn-secondary" id="permohonanIndividu" type="button">Permohonan Individu</button>
             <button class="btn hide btn-secondary" id="permohonanBerkumpulan" type="button">Permohonan Berkumpulan</button>
         </div>
@@ -533,6 +552,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-bahagian/revealButtonKetuaBahagian.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-jabatan/revealButtonKetuaJabatan.js"></script>
     {!! $dataTable->scripts() !!}
 @endpush
