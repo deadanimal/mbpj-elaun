@@ -97,7 +97,7 @@ class User extends Authenticatable
         return $this->role_id == 6;
     }
 
-    public function isKeraniPemeriksaan()
+    public function isKeraniPemeriksa()
     {
         return $this->role_id == 7;
     }
