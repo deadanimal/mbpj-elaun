@@ -200,7 +200,37 @@
                             </div>
                         </div>
                         <div class="col-12 mt-2">
-                        {!! $dataTable->table() !!}
+                            <div class="table-responsive py-4">
+                                <table class="table" id="datatable-basic">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        @foreach($Users as $user)
+                                        <tr>
+                                            <td>{{$user->id}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->created_at}}</td>
+                                            <td>
+                                                <a onclick="event.preventDefault();editPermohonanForm({{$user->id}});" href="#" class="edit open-modal" data-toggle="modal" value="{{$user->id}}"><button class="btn btn-primary" data-toggle="tooltip" title="Kemaskini"><font color="white">Kemaskini</font></a>
+                                                <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a>
+                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" title="Tolak"><font color="white">Tolak</font></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        
+                                    </tbody>
+                                </table>
+    
+                            </div>
 
                         {{-- Modal for 3 action buttons  --}}
 
@@ -382,5 +412,5 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/revealButtonPenyelia.js"></script>
-    {!! $dataTable->scripts() !!}
+    
 @endpush
