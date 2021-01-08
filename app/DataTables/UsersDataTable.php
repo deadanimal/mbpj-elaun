@@ -26,7 +26,7 @@ class UsersDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', function($row){
 
-                            $btn = '<i data-toggle="modal" data-target="#modal-default" class="btn btn-primary btn-sm ni ni-align-center"></i>';
+                            $btn = '<i data-toggle="modal" id="buttonEdit" onclick="changeDataTarget()" data-target="" class="btn btn-primary btn-sm ni ni-align-center"></i>';
                             $btn = $btn.'<i data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold"></i>';
                             $btn = $btn.'<i data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove"></i>';
 
