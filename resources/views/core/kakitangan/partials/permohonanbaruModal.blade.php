@@ -34,6 +34,8 @@
                         
                     </form>
                     
+                    {{-- permohonan individu --}}
+
                     <hr class="my-auto">
                     <div id="divPermohonanIndividu" class="my-3">
                         <form id="frmPermohonanIndividu">

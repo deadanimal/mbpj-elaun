@@ -17,17 +17,13 @@ $('#divPermohonanBerkumpulan').hide();
                 $('#divPermohonanIndividu').hide();
                 $("#divPermohonanBerkumpulan").show();
 
-            }else{
+            } else{
             $('#divPermohonanIndividu').hide();
             $('#divPermohonanBerkumpulan').hide();
     
             }
     
         });
-
-        
-
-
     });
 
    
