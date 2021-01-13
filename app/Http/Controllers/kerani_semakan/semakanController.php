@@ -4,7 +4,7 @@ namespace App\Http\Controllers\kerani_semakan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\User;
 use DataTables;
 use App\DataTables\UsersDataTable;
 
@@ -17,7 +17,13 @@ class semakanController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('core.kerani_semakan.semakan');
+        // return $dataTable->render('core.kerani_semakan.semakan');
+
+        // return $dataTable->render('core.ketua_jabatan.semakan');
+
+        $User = User::orderBy('id','asc')->get();
+        
+        return view('core.kerani_semakan.semakan')->with('Users',$User);
     }
 
     /**

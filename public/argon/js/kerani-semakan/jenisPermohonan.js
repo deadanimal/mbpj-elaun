@@ -18,7 +18,7 @@ function retrieveTabPilihan(id) {
         document.getElementById("modal-title-berkumpulan-title").innerHTML = "Permohonan Kerja Lebih Masa";
         document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
     } else {
-        console.log("out of Tab Pilihan")
+        console.log("out of Tab Pilihan");
     }
 }
 
@@ -41,5 +41,23 @@ function changeDataTarget(id) {
         console.log(id);
     } else if (pilihan == "out"){
         console.log("out of Data Target");
+    }
+
+    // for displaying/hiding if status == after/before OT 
+    var statusPermohonan = document.getElementById("statusPermohonan").textContent;
+    var blockWaktuKerjaIndividu = document.getElementById("waktuKerjaIndividu");
+    var blockWaktuKerjaBerkumpulan = document.getElementById("waktuKerjaBerkumpulan");
+    console.log(statusPermohonan);
+
+    if ( statusPermohonan == "Before") {
+        blockWaktuKerjaIndividu.style.display = "none";
+        blockWaktuKerjaBerkumpulan.style.display = "none";
+        console.log("if before");
+    } else if (statusPermohonan == "After") {
+        blockWaktuKerjaIndividu.style.display = "block";
+        blockWaktuKerjaBerkumpulan.style.display = "block";
+        console.log("if after");
+    } else {
+        console.log("status not recognized");
     }
 }
