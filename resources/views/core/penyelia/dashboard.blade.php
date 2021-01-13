@@ -43,7 +43,7 @@
                     
                         <div class="row">
                             <div class="col-lg-12">
-                                <!-- {!! $dataTable->table() !!} -->
+                                {!! $dataTable->table() !!}
                             </div>
                         </div>
                     
