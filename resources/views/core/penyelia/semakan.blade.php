@@ -217,6 +217,6 @@
     <script src="{{ asset('argon') }}/js/penyelia/revealButtonPenyelia.js"></script>
 
     <script src="{{ asset('argon') }}/js/penyelia/jenisPermohonan.js"></script>
-    {!! $dataTable->scripts() !!}
+
 
 @endpush

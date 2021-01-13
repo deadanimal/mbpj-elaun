@@ -68,7 +68,7 @@
                                         Tahun
                                     </button>
                                     <div class="dropdown-menu scrollable-menu">
-                                    @for ($year = date('Y'); $year > date('Y') - 100; $year--)
+                                    @for ($year = date('Y'); $year > date('Y') - 60; $year--)
                                     <a class="dropdown-item" href="#" value="{{$year}}">
                                             {{$year}}
                                     </a>
@@ -143,7 +143,35 @@
                         </div>
                     </div>
                     <div class="col-12 mt-2">
-                    {!! $dataTable->table() !!}
+                        <div class="table-responsive py-4">
+                            <table class="table table-flush" id="datatable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Created At</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    @foreach($Users as $user)
+                                    <tr>
+                                        <td>{{$user->id}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$user->created_at}}</td>
+                                        <td>
+                                            Lulus
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+
+                        </div>
                         <div class="col-12 my-4">
                            
                             <form class="form-inline" style="display: flex; justify-content: flex-end">
@@ -155,7 +183,7 @@
                                     <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">
                                                   
                             </form>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -182,5 +210,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/amchart.js"></script>
-    {!! $dataTable->scripts() !!}
+    <script src="{{ asset('argon') }}/js/kakitangan/tuntutan.js"></script>
+
 @endpush
