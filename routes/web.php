@@ -274,6 +274,14 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
+		Route::get('#permohonan-individu',[
+			'uses' => 'kakitangan\permohonanController@getPermohonanIndividu',
+			'as'   => 'permohonanbaru.individu'
+		]);
+		Route::get('#permohonan-berkumpulan',[
+			'uses' => 'kakitangan\permohonanController@getPermohonanBerkumpulan',
+			'as'   => 'permohonanbaru.berkumpulan'
+		]);
 	});
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);

@@ -214,8 +214,8 @@
                                 </div>
                                 
                                 <div class="col align-self-center text-right">
-                                    <a href="#" class="edit open-modal" data-toggle="modal" data-target="#permohonanbaruModal">
-                                    <button class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">{{ __('Mohon Baru') }}</button></a>
+                                    <button id="add" class="btn btn-sm btn-primary" type="button" title="Tambah Pekerja">{{ __('Tambah Pekerja') }}</button>
+                                    <button id="remove" class="btn btn-sm btn-primary" type="button" title="Buang Pekerja" disabled>{{ __('Buang Pekerja') }}</button>
                                 </div>
                             </div>
 
@@ -238,26 +238,10 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
+                            <div id="new_chq">
 
-                                        @include('alerts.feedback', ['field' => 'name'])
-                                    </div>
-                                </div> 
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
-
-                                        @include('alerts.feedback', ['field' => 'name'])
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" value="1" id="total_chq">
                         </div>  
                     </form>
                 </div>
@@ -265,6 +249,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hide" id="template" hidden>
+    <div id="inputpekerja_00" class="row">
+        <div class="col-sm-6">
+            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
+                <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
+
+                @include('alerts.feedback', ['field' => 'name'])
+            </div>
+        </div> 
+        <div class="col-sm-6">
+            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
+                <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
+
+                @include('alerts.feedback', ['field' => 'name'])
             </div>
         </div>
     </div>
