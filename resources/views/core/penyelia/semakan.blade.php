@@ -15,20 +15,22 @@
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col-xl-8">
+
+                {{-- Tab options --}}
                 <div class="nav-wrapper">
                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" 
+                            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
                                 href="#formPermohonanKerjaLebihMasa" role="tab" aria-controls="tabs-icons-text-1" 
-                                aria-selected="true">
+                                aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
                                 <i class="ni ni-time-alarm"></i>
                                 Permohonan Kerja Lebih Masa
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" 
+                            <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
                                 href="#formTuntuanElaunLebihMasa" role="tab" aria-controls="tabs-icons-text-2" 
-                                aria-selected="false">
+                                aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
                                 <i class="ni ni-money-coins"></i>
                                 Tuntuan Elaun Lebih Masa
                             </a>
@@ -37,13 +39,26 @@
                 </div>
                 <div class="card shadow">
                     <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="formPermohonanKerjaLebihMasa" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                                @include('core.penyelia.partials.formPermohonanKerjaLebihMasa')
+                        <div class="tab-content" id="myTabContent">  
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected value="out">Pilih Jenis Permohonan</option>
+                                        <option value="individu">Permohonan Individu</option>
+                                        <option value="berkumpulan">Permohonan Berkumpulan</option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="tab-pane fade" id="formTuntuanElaunLebihMasa" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
-                                @include('core.penyelia.partials.formTuntuanElaunLebihMasa')
+                            <div class="tab-pane fade show active" id="formPermohonanKerjaLebihMasa" role="tabpanel" aria-labelledby="tabPilihanPermohonanKerjaLebihMasa">
+                                {{-- Tab content -> Form --}}
+                                @include('core.ketua_bahagian.partials.formPermohonanKerjaLebihMasa')
+                            </div>
+
+                            <div class="tab-pane fade" id="formTuntuanElaunLebihMasa" role="tabpanel" aria-labelledby="tabPilihanTuntutanElaunLebihMasa">
+                                {{-- Tab content -> Form --}}
+                                @include('core.ketua_bahagian.partials.formTuntuanElaunLebihMasa')
                             </div>
                         </div>
                     </div>
@@ -133,69 +148,15 @@
                 </div>
             </div>
             
+            {{-- Datatables --}}
+            @include('core.penyelia.partials.dataTablesPenyelia')
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h2 class="mb-2">{{ __('Permohonan Baru Kerja Lebih Masa') }}</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="datatable-basic">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Created At</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        @foreach($Users as $user)
-                                        <tr>
-                                            <td>{{$user->id}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->created_at}}</td>
-                                            <td>
-                                                <a onclick="event.preventDefault();editPermohonanForm({{$user->id}});" href="#" class="edit open-modal" data-toggle="modal" value="{{$user->id}}"><button class="btn btn-primary" data-toggle="tooltip" title="Kemaskini"><font color="white">Kemaskini</font></a>
-                                                <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a>
-                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" title="Tolak"><font color="white">Tolak</font></a>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                        
-                                    </tbody>
-                                </table>
-    
-                            </div>
-
-                                <div class="col-12 my-4">
-                                    <form class="form-inline" style="display: flex; justify-content: flex-end">
-                                        <label for="jam">Jumlah Persamaan Jam:</label>
-                                        <input type="text" class="form-control mx-sm-3" id="jam" placeholder="">
-
-                                        <label for="masa">Jumlah Tuntutan Lebih Masa:</label>
-                                        <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">   
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         @include('layouts.footers.auth')
     </div>
 
+{{-- Modal --}}
 @include('core.penyelia.partials.modalSemakan')
 @endsection
 
@@ -214,9 +175,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/penyelia/revealButtonPenyelia.js"></script>
-
     <script src="{{ asset('argon') }}/js/penyelia/jenisPermohonan.js"></script>
-
+    <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 
 @endpush
