@@ -52,7 +52,7 @@ class CreateMajlisTable extends Migration
         });
 
         Schema::create('majlis_ge_unit', function (Blueprint $table) {
-            $table->string('ge_kod_unit',2);
+            $table->string('ge_kod_unit',2)->primary();
             $table->string('ge_keterangan',50);
             $table->string('ge_alamat1',35);
             $table->string('ge_alamat2',35);
