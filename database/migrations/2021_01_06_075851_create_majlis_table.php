@@ -14,6 +14,7 @@ class CreateMajlisTable extends Migration
     public function up()
     {
         Schema::create('majlis_ge_jabatan', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('ge_kod_jabatan',2)->primary();
             $table->string('ge_keterangan_jabatan',50);
             $table->string('ge_alamat1',35);
@@ -33,6 +34,7 @@ class CreateMajlisTable extends Migration
         });
 
         Schema::create('majlis_ge_bahagian', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('ge_kod_bahagian',2)->primary();
             $table->string('ge_keterangan',60);
             $table->string('ge_alamat1',35);
@@ -52,6 +54,7 @@ class CreateMajlisTable extends Migration
         });
 
         Schema::create('majlis_ge_unit', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('ge_kod_unit',2)->primary();
             $table->string('ge_keterangan',50);
             $table->string('ge_alamat1',35);
