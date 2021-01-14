@@ -55,9 +55,9 @@
             @yield('content')
         </div>
 
-        @if(!auth()->check() || in_array(request()->route()->getName(), ['welcome', 'page.pricing', 'page.lock']))
+        {{-- @if(!auth()->check() || in_array(request()->route()->getName(), ['welcome', 'page.pricing', 'page.lock']))
             @include('layouts.footers.guest')
-        @endif
+        @endif --}}
 
         <!-- <script src="/js/buttons/js/dataTables.buttons.js"></script>
         <script src="/vendor/datatables/buttons.server-side.js"></script> -->

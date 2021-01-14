@@ -11,8 +11,12 @@
 |
 */
 
+// Route::get('/', function () {
+// 	return view('pages.welcome');
+// })->name('welcome');
+
 Route::get('/', function () {
-	return view('pages.welcome');
+	return view('auth.login');
 })->name('welcome');
 
 Auth::routes();
