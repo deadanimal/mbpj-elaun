@@ -11,8 +11,12 @@
 |
 */
 
+// Route::get('/', function () {
+// 	return view('pages.welcome');
+// })->name('welcome');
+
 Route::get('/', function () {
-	return view('pages.welcome');
+	return view('auth.login');
 })->name('welcome');
 
 Auth::routes();
@@ -273,6 +277,14 @@ Route::group([
 		Route::get('/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
+		]);
+		Route::get('#permohonan-individu',[
+			'uses' => 'kakitangan\permohonanController@getPermohonanIndividu',
+			'as'   => 'permohonanbaru.individu'
+		]);
+		Route::get('#permohonan-berkumpulan',[
+			'uses' => 'kakitangan\permohonanController@getPermohonanBerkumpulan',
+			'as'   => 'permohonanbaru.berkumpulan'
 		]);
 	});
 

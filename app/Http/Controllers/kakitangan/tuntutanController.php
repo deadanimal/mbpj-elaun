@@ -15,9 +15,11 @@ class tuntutanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.kakitangan.tuntutan');
+        $User = User::orderBy('id','asc')->get();
+        
+        return view('core.kakitangan.tuntutan')->with('Users',$User);
     }
 
     /**
