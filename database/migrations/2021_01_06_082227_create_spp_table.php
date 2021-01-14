@@ -16,7 +16,8 @@ class CreateSppTable extends Migration
 
         Schema::create('spp_hr_gelaran_jawatan', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_kod_gelaran',5)->primary('hr_kod_gelaran');
+            $table->primary('hr_kod_gelaran');
+            $table->char('hr_kod_gelaran',5);
             $table->string('hr_penerangan',100);
             $table->string('hr_singkatan',10);
             $table->char('hr_kod_jawatan',5);
@@ -25,14 +26,16 @@ class CreateSppTable extends Migration
 
         Schema::create('spp_hr_jawatan', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_kod_jawatan',5)->primary('hr_kod_jawatan');
+            $table->primary('hr_kod_jawatan');
+            $table->char('hr_kod_jawatan',5);
             $table->string('hr_nama_jawatan');
             $table->char('hr_aktif_ind',1);
         });
 
         Schema::create('spp_hr_maklumat_peribadi', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_no_pekerja',5)->primary('hr_no_pekerja');
+            $table->primary('hr_no_pekerja');
+            $table->char('hr_no_pekerja',5);
             $table->char('hr_no_kpbaru',12);
             $table->string('hr_nama_pekerja',100);
             $table->string('hr_no_kplama',8);
@@ -69,28 +72,32 @@ class CreateSppTable extends Migration
 
         Schema::create('spp_hr_maklumat_pekerjaan', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_no_pekerja',5)->primary('hr_no_pekerja');
+            $table->primary('hr_no_pekerja');
+            $table->char('hr_no_pekerja',5);
             $table->char('hr_kod_jawatan',5);
             $table->char('hr_catatan',200);
         });
 
         Schema::create('spp_hr_elaun', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_kod_elaun',5)->primary('hr_kod_elaun');
+            $table->primary('hr_kod_elaun');
+            $table->char('hr_kod_elaun',5);
             $table->string('hr_penerangan_elaun',200);
             $table->string('hr_catatan',200);
         });
 
         Schema::create('spp_hr_cuti_umum', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_kod_cuti_umum',5)->primary('hr_kod_cuti_umum');
+            $table->primary('hr_kod_cuti_umum');
+            $table->char('hr_kod_cuti_umum',5);
             $table->date('hr_tarikh')->unique();
             $table->string('hr_catatan',200);
         });
 
         Schema::create('spp_hr_cuti', function (Blueprint $table) {
             // $table->increments('id');
-            $table->char('hr_kod_cuti',5)->primary('hr_kod_cuti');
+            $table->primary('hr_kod_cuti');
+            $table->char('hr_kod_cuti',5);
             $table->string('hr_keterangan',50);
             $table->char('hr_singkatan',5);
             $table->integer('hr_jumlah_cuti')->length(3)->nullable();
