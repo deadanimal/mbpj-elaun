@@ -21,10 +21,57 @@ class UsersTableSeeder extends Seeder
         // ]);
 
         DB::table('users')->insert([
-            'id' => 1,
-            'name' => 'Pentadbir Sistem',
-            'email' => 'admin@argon.com',
-            'role_id' => 1,
+            'id' => 2,
+            'name' => 'Penyelia',
+            'email' => 'py@argon.com',
+            'role_id' => 2,
+            'password' => Hash::make('secret'), // secret
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id' => 3,
+            'name' => 'Datuk Bandar',
+            'email' => 'db@argon.com',
+            'role_id' => 3,
+            'password' => Hash::make('secret'), // secret
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'id' => 4,
+            'name' => 'Ketua Bahagian',
+            'email' => 'kb@argon.com',
+            'role_id' => 4,
+            'password' => Hash::make('secret'), // secret
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id' => 5,
+            'name' => 'Ketua Jabatan',
+            'email' => 'kj@argon.com',
+            'role_id' => 5,
+            'password' => Hash::make('secret'), // secret
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'id' => 8,
+            'name' => 'Kakitangan',
+            'email' => 'kt@argon.com',
+            'role_id' => 8,
             'password' => Hash::make('secret'), // secret
             'remember_token' => Str::random(10),
             'email_verified_at' => now(),
