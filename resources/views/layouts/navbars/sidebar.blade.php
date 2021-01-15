@@ -1,7 +1,8 @@
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner scroll-scrollx_visible">
         <div class="sidenav-header d-flex align-items-center">
-            <a class="navbar-brand" href="{{ route('dashboard.index') }}">
+            {{-- <a class="navbar-brand" href="{{ route('dashboard.index') }}"> --}}
+            <a class="navbar-brand" href="">
                 <img src="{{ asset('argon') }}/img/mbpj/logo/logo-mbpj(2).png" class="navbar-brand-img" alt="...">
             </a>
             <div class="ml-auto">
