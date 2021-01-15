@@ -53,12 +53,12 @@
     
                                 <div class="tab-pane fade show active" id="formPermohonanKerjaLebihMasa" role="tabpanel" aria-labelledby="tabPilihanPermohonanKerjaLebihMasa">
                                     {{-- Tab content -> Form --}}
-                                    @include('core.ketua_bahagian.partials.formPermohonanKerjaLebihMasa')
+                                    @include('core.kerani_semakan.partials.formPermohonanKerjaLebihMasa')
                                 </div>
     
                                 <div class="tab-pane fade" id="formTuntuanElaunLebihMasa" role="tabpanel" aria-labelledby="tabPilihanTuntutanElaunLebihMasa">
                                     {{-- Tab content -> Form --}}
-                                    @include('core.ketua_bahagian.partials.formTuntuanElaunLebihMasa')
+                                    @include('core.kerani_semakan.partials.formTuntuanElaunLebihMasa')
                                 </div>
                             </div>
                         </div>

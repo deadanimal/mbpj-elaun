@@ -47,15 +47,20 @@ function changeDataTarget(id) {
     var statusPermohonan = document.getElementById("statusPermohonan").textContent;
     var blockWaktuKerjaIndividu = document.getElementById("waktuKerjaIndividu");
     var blockWaktuKerjaBerkumpulan = document.getElementById("waktuKerjaBerkumpulan");
+    var titleEKedatangan = document.getElementById("titleEKedatangan");
     console.log(statusPermohonan);
+    console.log(titleEKedatangan.textContent);
 
     if ( statusPermohonan == "Before") {
         blockWaktuKerjaIndividu.style.display = "none";
         blockWaktuKerjaBerkumpulan.style.display = "none";
+        titleEKedatangan.style.display = "none";
         console.log("if before");
     } else if (statusPermohonan == "After") {
         blockWaktuKerjaIndividu.style.display = "block";
         blockWaktuKerjaBerkumpulan.style.display = "block";
+        titleEKedatangan.style.display = "block";
+
         console.log("if after");
     } else {
         console.log("status not recognized");
