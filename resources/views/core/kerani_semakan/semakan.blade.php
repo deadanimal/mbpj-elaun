@@ -148,8 +148,7 @@
                 </div>
             </div>
             
-
-            {{-- Datatables Ketua Bahagian --}}
+            {{-- Datatables Kerani Semakan --}}
             @include('core.kerani_semakan.partials.dataTablesKeraniSemakan')
         </div>
 
