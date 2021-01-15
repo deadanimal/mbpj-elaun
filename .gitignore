@@ -7,6 +7,7 @@
 .history/
 .phpintel/
 .env
+.DS_Store
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -15,4 +16,3 @@ yarn-error.log
 *.orig
 .vscode/
 .DS_Store
-
