@@ -78,7 +78,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="waktuKerjaIndividu">
                             <div class="text-left mb-4">
                                 <h5>* Jenis Permohonan</h5>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanIndividuInModal" placeholder="" readonly>
@@ -161,7 +161,7 @@
                 <div class="col">
                     <h6 class="modal-title" id="modal-title-berkumpulan-title"></h6>
                 </div>
-                <div class="col">
+                <div class="col" id="titleEKedatangan">
                     <h6 class="modal-title ml-4">eKedatangan</h6>
                 </div>
                 <button onclick="closeModal('modal-default')" type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -244,10 +244,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col">
+                        <div class="col" id="waktuKerjaBerkumpulan">
                             <div class="text-left mb-4">
                                 <h5>* Jenis Permohonan</h5>
-                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanIndividuInModal" placeholder="" readonly>
+                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanBerkumpulanInModal" placeholder="" readonly>
                             </div>
                             <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
