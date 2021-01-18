@@ -157,7 +157,10 @@
     </div>
 
 {{-- Modal --}}
-@include('core.ketua_bahagian.partials.modalSemakan')
+@include('core.ketua_bahagian.partials.modals-semakan.modalEditIndividuKetuaBahagian')
+@include('core.ketua_bahagian.partials.modals-semakan.modalEditBerkumpulanKetuaBahagian')
+@include('core.ketua_bahagian.partials.modals-semakan.modalValidateKetuaBahagian')
+@include('core.ketua_bahagian.partials.modals-semakan.modalRejectKetuaBahagian')
 @endsection
 
 @push('css')
