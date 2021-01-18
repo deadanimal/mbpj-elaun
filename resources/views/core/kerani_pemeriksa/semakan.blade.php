@@ -155,8 +155,11 @@
         @include('layouts.footers.auth')
     </div>
 
-
-@include('core.kerani_pemeriksa.partials.modalSemakan')
+{{-- Modal --}}
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalEditIndividuKeraniPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalEditBerkumpulanKeraniPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalValidateKeraniPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalRejectKeraniPemeriksa')
 @endsection
 
 @push('css')
