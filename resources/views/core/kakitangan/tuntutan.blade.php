@@ -90,36 +90,6 @@
                                     </div>
                                     </div>
                                 </div>
-                                
-
-                                <!-- {{ Form::open(['url' => 'foo/bar']) }}
-                               
-                                {{ Form::selectYear('year', 1970, \Carbon\Carbon::now()->year) }}
-                                {{Form::date('name', \Carbon\Carbon::now()->year)}}
-                                {{ Form::close() }} -->
-                                
-                                <!-- <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label> -->
-                                <!-- <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>                  letak bulan dropdown sini
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                                </div> -->
-
-                                <!-- <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>                  letak tahun dropdown sini
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                                </div> -->
-
-                                <!-- <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>                  letak jenis carian (eg:permohonan/tuntutan) dropdown sini
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                                </div> -->
-
                                 </form>
                             </div>
                         </div>
