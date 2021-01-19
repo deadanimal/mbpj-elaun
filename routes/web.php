@@ -90,7 +90,7 @@ Route::group([
 		]);
 	});
 	Route::resource('penyelia-dashboard','penyelia\penyeliaController',['except' => ['show','destroy']]);
-	Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['show','destroy']]);
+	Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['destroy']]);
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
 
