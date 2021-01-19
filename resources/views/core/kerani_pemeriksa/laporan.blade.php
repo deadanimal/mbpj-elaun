@@ -19,7 +19,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-2">{{ __('Statistik Permohonan') }}</h2>
+                                <h2 class="mb-2">{{ __('Jumlah Permohonan Kerja Lebih Masa') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-2">{{ __('Statistik Permohonan') }}</h2>
+                                <h2 class="mb-2">{{ __('Jumlah Permohonan Diluluskan') }}</h2>
                             
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-2">{{ __('Statistik Permohonan') }}</h2>
+                                <h2 class="mb-2">{{ __('Jumlah Permohonan Elaun Kerja Lebih Masa') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-2">{{ __('Statistik Permohonan') }}</h2>
+                                <h2 class="mb-2">{{ __('Jumlah tuntutan Elaun Tahun Semasa') }}</h2>
                             
                             </div>
                         </div>

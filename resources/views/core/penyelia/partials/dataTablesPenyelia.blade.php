@@ -13,12 +13,16 @@
                     <table class="table" id="datatable">
                         <thead class="thead-light">
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Created At</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>No</th>
+                                <th>Tarikh Permohonan</th>
+                                <th>Masa Mula</th>
+                                <th>Masa Akhir</th>
+                                <th>Masa</th>
+                                <th>Hari</th>
+                                <th>Waktu</th>
+                                <th>Kadar Jam</th>
+                                <th>Tujuan</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,9 +30,13 @@
                             @foreach($Users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
+                                <td>12/1/2020</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at}}</td>
+                                <td>Selasa</td>
+                                <td>Petang</td>
+                                <td>3</td>
                                 {{-- <td id="statusPermohonan">Before</td> --}}
                                 <td id="statusPermohonan">After</td>
                                 <td>
