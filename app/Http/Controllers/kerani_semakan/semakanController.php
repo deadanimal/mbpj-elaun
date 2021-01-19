@@ -19,8 +19,6 @@ class semakanController extends Controller
     {
         // return $dataTable->render('core.kerani_semakan.semakan');
 
-        // return $dataTable->render('core.ketua_jabatan.semakan');
-
         $User = User::orderBy('id','asc')->get();
         
         return view('core.kerani_semakan.semakan')->with('Users',$User);
