@@ -17,9 +17,12 @@ class semakanController extends Controller
      */
     public function index()
     {
-        $User = User::orderBy('id','asc')->get();
+        if(request()->ajax()) {
+            return datatables()->of(User::select("*"))
+            ->make(true);
+        }
         
-        return view('core.penyelia.semakan')->with('Users',$User);
+        return view('core.penyelia.semakan');
     }
 
     /**
@@ -52,6 +55,13 @@ class semakanController extends Controller
     public function show($id)
     {
         //
+        
+        // dd($id);
+
+        return datatables()->of(User::all()->where('id',$id))->make(true);
+        
+
+        return Response::json($id);
     }
 
     /**
