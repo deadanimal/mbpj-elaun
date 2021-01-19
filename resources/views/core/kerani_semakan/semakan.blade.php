@@ -148,15 +148,18 @@
                 </div>
             </div>
             
-
-            {{-- Datatables Ketua Bahagian --}}
+            {{-- Datatables Kerani Semakan --}}
             @include('core.kerani_semakan.partials.dataTablesKeraniSemakan')
         </div>
 
         @include('layouts.footers.auth')
     </div>
 
-@include('core.kerani_semakan.partials.modalSemakan')
+{{--  Modal --}}
+@include('core.kerani_semakan.partials.modals-semakan.modalEditIndividuKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalEditBerkumpulanKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalValidateKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalRejectKeraniSemakan')
 @endsection
 
 @push('css')

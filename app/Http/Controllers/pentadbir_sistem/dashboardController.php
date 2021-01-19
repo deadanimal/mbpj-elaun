@@ -1,27 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\kerani_semakan;
+namespace App\Http\Controllers\pentadbir_sistem;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
-use DataTables;
-use App\DataTables\UsersDataTable;
+use app\User;
 
-class semakanController extends Controller
+class dashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        // return $dataTable->render('core.kerani_semakan.semakan');
-
+        //
         $User = User::orderBy('id','asc')->get();
         
-        return view('core.kerani_semakan.semakan')->with('Users',$User);
+        return view('core.pentadbir_sistem.dashboard')->with('Users',$User);
     }
 
     /**
