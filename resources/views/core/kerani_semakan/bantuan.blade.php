@@ -21,7 +21,17 @@
                         </div>
                     </div>
                     <div class="card-body">
-                       
+                        <div class="col-6 ml-5">
+                            <strong>
+                                Panduan ini akan membimbing anda melalui asas menggunakan
+                                Sistem Pengurusan Elaun Lebih Masa termasuk cara mendaftar, 
+                                log masuk ke laman web dan mengisi borang
+                            </strong>
+                            <div class="mt-4">
+                                <span class="text-blue ni ni-folder-17"></span>
+                                <a href="">Muat turun manual pengguna</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,6 +48,19 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="col-6 ml-5">
+                            <strong>
+                                Versi Sistem Elaun Lebih Masa
+                            </strong>
+                            <div class="mt-4">
+                                <span class="text-blue ni ni-settings">
+                                    <strong>
+                                        Versi 2020 1.0
+                                    </strong> 
+                                </span>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

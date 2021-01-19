@@ -70,7 +70,7 @@
                 <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h3 class="mb-0">{{ __('Nota Permohanan Kerja Lebih Masa') }}</h3>
+                                <h3 class="mb-0">{{ __('Analisa Permohonan') }}</h3>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                                 <div class="progress-wrapper">
                                     <div class="progress-info">
                                         
-                                        <span>Task completed</span>
+                                        <span>Permohonan Kerja Lebih Masa Diluluskan</span>
                                         
                                         <div class="progress-percentage">
                                         <span>60%</span>
@@ -97,7 +97,7 @@
                                 <div class="progress-wrapper">
                                     <div class="progress-info">
                                         
-                                        <span>Task completed</span>
+                                        <span>Permohonan Kerja Lebih Masa Ditolak</span>
                                         
                                         <div class="progress-percentage">
                                         <span>60%</span>
@@ -114,7 +114,7 @@
                                 <div class="progress-wrapper">
                                     <div class="progress-info">
                                         
-                                        <span>Task completed</span>
+                                        <span>Permohonan Elaun Kerja Lebih Masa Diluluskan</span>
                                         
                                         <div class="progress-percentage">
                                         <span>60%</span>
@@ -131,7 +131,7 @@
                                 <div class="progress-wrapper">
                                     <div class="progress-info">
                                         
-                                        <span>Task completed</span>
+                                        <span>Permohonan Elaun Kerja Lebih Masa Ditolak</span>
                                         
                                         <div class="progress-percentage">
                                         <span>60%</span>
