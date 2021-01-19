@@ -34,17 +34,17 @@ Route::group([
 	'auth',
 	'role:1'
 	]], function () {
-	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['show','destroy']]);
+	Route::resource('/dashboard','pentadbir_sistem\dashboardController',['except' => ['show','destroy']]);
 	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
 	Route::resource('/tag', 'TagController', ['except' => ['show']]);
 	Route::resource('/item', 'ItemController', ['except' => ['show']]);
 	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);
-	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
+	Route::resource('/modul-aduan','pentadbir_sistem\modulAduanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
-	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
-	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['show','destroy']]);
+	Route::resource('/modul-laporan','pentadbir_sistem\modulLaporanController',['except' => ['show','destroy']]);
+	Route::resource('/pengurusan-pengguna','pentadbir_sistem\pengurusanPenggunaController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
 		Route::get('/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
