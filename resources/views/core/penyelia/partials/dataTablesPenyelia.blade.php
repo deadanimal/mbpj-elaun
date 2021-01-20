@@ -28,7 +28,7 @@
                         <tbody>
                             
 
-                            @foreach($Users as $user)
+                           {{-- @foreach($Users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
                                 <td>12/1/2020</td>
@@ -38,7 +38,7 @@
                                 <td>Selasa</td>
                                 <td>Petang</td>
                                 <td>3</td>
-                                {{-- <td id="statusPermohonan">Before</td> --}}
+                                <td id="statusPermohonan">Before</td> 
                                 <td id="statusPermohonan">After</td>
                                 <td>
                                     <i data-toggle="modal" id="buttonEdit" onclick="changeDataTarget({{$user->id}})" data-target="" class="btn btn-primary btn-sm ni ni-align-center"></i>
@@ -46,7 +46,7 @@
                                     <i data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove"></i>
                                 </td>
                             </tr>
-                            @endforeach
+                            @endforeach --}}
 
                             
                         </tbody>
