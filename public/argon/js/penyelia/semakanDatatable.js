@@ -103,12 +103,6 @@ function showDatatable(){
                 ],
                 
             });
-
-               
-        //   },error: function(result){
-        //       console.log('Error:',result)
-        //   }
-        // });
        
 }
 
