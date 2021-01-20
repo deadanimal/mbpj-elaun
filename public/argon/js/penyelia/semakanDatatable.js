@@ -41,7 +41,11 @@ $(document).ready(function(){
 })
 
 function checkUser(){
-    showDatatable();
+    var pilihan = document.getElementById('selectJenisPermohonan').value;
+    if (pilihan == 'individu' || pilihan == 'berkumpulan'){
+        showDatatable();
+    }else 
+    alert('Sila pilih jenis permohonan');
 }
 function showDatatable(){
     var id = document.querySelector("#noPekerja").value
@@ -88,16 +92,37 @@ function showDatatable(){
                 columnDefs: [
                     {
                         targets: 5,
-                        render: function(data,type,row){
+                        mRender: function(data,type,row){
                             console.log(data.id);
-                            var button = $("<i></i>",{
-                                "id": data[0] + "button",
-                                "value":data.id,
-                                "type": "button",
-                                "onclick":test(data.id),
-                                "class": "btn btn-primary btn-sm ni ni-align-center"
-                            });
-                            return button.prop("outerHTML");
+                            var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""  type="button"></i>' 
+                            var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" type="button" value='+data.id+'></i>' 
+                            var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')" type="button" value='+data.id+'></i>' 
+                            var allButton = button1 + button2 + button3;
+                            return allButton;
+                            // var button1 = $("<i></i>",{
+                            //     "id": "button1",
+                            //     "value":data.id,
+                            //     "type": "button",
+                            //     "onclick":test(data.id),
+                            //     "class": "btn btn-primary btn-sm ni ni-align-center"
+                            // });
+                            // var button2 = $("<i></i>",{
+                            //     "id":  "button2",
+                            //     "value":data.id,
+                            //     "type": "button",
+                            //     "onclick":test(data.id),
+                            //     "class": "btn btn-primary btn-sm ni ni-align-center"
+                            // });
+                            // var button3 = $("<i></i>",{
+                            //     "id": "button3",
+                            //     "value":data.id,
+                            //     "type": "button",
+                            //     "onclick":test(data.id),
+                            //     "class": "btn btn-primary btn-sm ni ni-align-center"
+                            // });
+                            
+                            
+                            // return button1.prop("outerHTML");
                         }
                     }
                 ],
