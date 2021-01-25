@@ -14,7 +14,7 @@ class CreatePermohonanBarusTable extends Migration
     public function up()
     {
         Schema::create('permohonan_barus', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id_permohonan_baru');
             $table->string('tarikh_permohonan');
             $table->string('masa_mula');
             $table->string('masa_akhir');
@@ -23,6 +23,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('waktu');
             $table->string('kadar_jam');
             $table->string('tujuan');
+            $table->string('status');
             $table->timestamps();
         });
     }

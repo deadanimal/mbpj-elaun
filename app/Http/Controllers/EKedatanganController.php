@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\penyelia;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\eKedatangan;
 use Illuminate\Http\Request;
-use App\User;
-use App\PermohonanBaru;
-use DataTables;
-use App\DataTables\UsersDataTable;
 
-class semakanController extends Controller
+class EKedatanganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +14,7 @@ class semakanController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            return datatables()->of(User::select("*"))
-            ->make(true);
-        }
-        
-        return view('core.penyelia.semakan');
+        //
     }
 
     /**
@@ -50,29 +41,21 @@ class semakanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\eKedatangan  $eKedatangan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(eKedatangan $eKedatangan)
     {
         //
-        
-        // dd($id);
-
-        // return datatables()->of(User::all()->where('id',$id))->make(true);
-        return datatables()->of(PermohonanBaru::all())->make(true);
-        
-
-        return Response::json($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\eKedatangan  $eKedatangan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(eKedatangan $eKedatangan)
     {
         //
     }
@@ -81,10 +64,10 @@ class semakanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\eKedatangan  $eKedatangan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, eKedatangan $eKedatangan)
     {
         //
     }
@@ -92,10 +75,10 @@ class semakanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\eKedatangan  $eKedatangan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(eKedatangan $eKedatangan)
     {
         //
     }
