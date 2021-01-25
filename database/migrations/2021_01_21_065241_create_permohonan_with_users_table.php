@@ -11,10 +11,10 @@ class CreatePermohonanWithUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() 
     {
         Schema::create('permohonan_with_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_permohonan_with_users');
             $table->unsignedBigInteger('id_permohonan_baru');
             $table->text('users_id', 500);
             $table->string('jenis_permohonan');

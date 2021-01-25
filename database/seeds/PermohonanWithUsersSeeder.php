@@ -11,6 +11,37 @@ class PermohonanWithUsersSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('permohonan_with_users')->insert([
+            'id_permohonan_with_users' => 1,
+            'id_permohonan_baru' => '1',
+            'users_id' => '4',
+            'jenis_permohonan' => 'OT1',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('permohonan_with_users')->insert([
+            'id_permohonan_with_users' => 2,
+            'id_permohonan_baru' => '2',
+            'users_id' => '4',
+            'jenis_permohonan' => 'EL1',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('permohonan_with_users')->insert([
+            'id_permohonan_with_users' => 3,
+            'id_permohonan_baru' => '3',
+            'users_id' => '4,5',
+            'jenis_permohonan' => 'OT2',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('permohonan_with_users')->insert([
+            'id_permohonan_with_users' => 4,
+            'id_permohonan_baru' => '4',
+            'users_id' => '4,6',
+            'jenis_permohonan' => 'EL2',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
