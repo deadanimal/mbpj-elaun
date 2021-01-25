@@ -43,5 +43,13 @@ class PermohonanWithUsersSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('permohonan_with_users')->insert([
+            'id_permohonan_with_users' => 5,
+            'id_permohonan_baru' => '5',
+            'users_id' => '7',
+            'jenis_permohonan' => 'OT1',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

@@ -70,5 +70,20 @@ class PermohonanBaruSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('permohonan_barus')->insert([
+            'id_permohonan_baru' => 5,
+            'tarikh_permohonan' => '1/1/2021',
+            'masa_mula' => '10:00',
+            'masa_akhir' => '10:00',
+            'masa' => '10:00',
+            'hari' => 'Rabu',
+            'waktu' => 'Pagi',
+            'kadar_jam' => '7',
+            'tujuan' => 'Saja2', 
+            'status' => 'OT1', // OT for borang A, EL for borang B
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

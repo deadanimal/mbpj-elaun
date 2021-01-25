@@ -16,13 +16,36 @@ $(document).ready(function(){
 
 function checkUser(){
     var pilihan = document.getElementById('selectJenisPermohonan').value;
+    var id = document.querySelector("#noPekerja").value;
+
     if (pilihan == 'individu' || pilihan == 'berkumpulan'){
-        showDatatable();
+        showDatatable(pilihan);
     }else 
-    alert('Sila pilih jenis permohonan');
+        alert('Sila pilih jenis permohonan');
 }
-function showDatatable(){
-    var id = document.querySelector("#noPekerja").value
+
+function showUser() {
+    var id = document.querySelector("#noPekerja").value;
+
+    $.ajax({
+        type: 'GET',
+        url: 'penyelia-semakan/semakan-pekerja/' + id,
+        success: function(data) {
+            console.log(data.users);
+
+            $("#formPermohonanKerjaLebihMasa input[name=nama]").val(data.users.name);
+
+            $('input').css('color', 'black')
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+}
+
+
+function showDatatable(pilihan){
+    var id = document.querySelector("#noPekerja").value;
 
                 table = $('#datatable1').DataTable({
                 destroy: true,
@@ -31,11 +54,14 @@ function showDatatable(){
             ajax: {
                 url: "penyelia-semakan/"+id,
                 type: 'GET',
-                },
+                data: {
+                    pilihan: pilihan
+                }
+            },
                 
                 columns: [
             
-                    {data: 'id_permohonan_baru'},
+                    {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'tarikh_permohonan'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
@@ -51,7 +77,7 @@ function showDatatable(){
                     {
                         targets: 9,
                         mRender: function(data,type,row){
-                            console.log(data.id);
+                            console.log(data);
                             // var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+','+data.status+')" data-target=""></i>' 
                             var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""></i>' 
                             var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
@@ -63,42 +89,9 @@ function showDatatable(){
                 ],
                 
             });
-       
-}
-
-function test(id){
-    console.log("masuk", id);
+         
 }
 
 $.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
     return $(value).val();
 };
-
-// function editTaskForm(todo_id) {
-//     $.ajax({
-//         type: 'GET',
-//         url: '/todolist/' + todo_id,
-//         success: function(data) {
-//             $("#edit-error-bag").hide();
-//             $("#frmEditTodo input[name=todo]").val(data.title.title);
-//             $("#frmEditTodo input[name=description]").val(data.title.description);
-//             $("#frmEditTodo input[name=todo_id]").val(data.title.id);
-//             $('#editTodoModal').modal('show');
-//         },
-//         error: function(data) {
-//             console.log(data);
-//         }
-//     });
-// }
-
-
-// CONTROLLER FOR AJAX GET
-// public function show($id)
-// {
-//     $todos = Todo::find($id);
-
-//     return response()->json([
-//         'error' => false,
-//         'title'  => $todos,
-//     ], 200);
-// }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\penyelia;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use DataTables;
 use App\User;
 use App\PermohonanBaru;
-use DataTables;
+use App\permohonan_with_users;
+use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class semakanController extends Controller
 {
@@ -53,17 +55,47 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
+    { 
+        $pilihan = $request->input('pilihan');
+
+        if ($pilihan == 'individu') {
+            return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'OT1')
+                                    ->orWhere('jenis_permohonan', 'EL1')
+                                    ->having('users_id','=', $id)
+                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                    ->get())
+                                    ->make(true); 
+
+        } else if ($pilihan == 'berkumpulan') {
+            $permohonanBaru = array();
+            $permohonans = permohonan_with_users::where('jenis_permohonan', 'OT2')
+                                ->orWhere('jenis_permohonan', 'EL2')
+                                ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                ->get();
+
+            foreach ($permohonans as $key=>$permohonan) {
+                $users = $permohonan->users_id;
+
+                $usersExploded = explode(",", $users);
+                $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
+
+                if (in_array($id, $usersExploded)) {
+                    $permohonanBaru[$key] = $dataPermohonan;
+                }
+            }
+            return datatables()->of($permohonanBaru)->make(true);
+        } 
+    }
+
+    public function findUser($id)
     {
-        //
-        
-        // dd($id);
+        $users = User::find($id);
 
-        // return datatables()->of(User::all()->where('id',$id))->make(true);
-        return datatables()->of(PermohonanBaru::all())->make(true);
-        
-
-        return Response::json($id);
+        return response()->json([
+                    'error' => false,
+                    'users'  => $users,
+                ], 200);
     }
 
     /**
