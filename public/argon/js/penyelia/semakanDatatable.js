@@ -5,6 +5,7 @@ var table = $("#datatable1").DataTable();
     responsive:true,
     autoWidth:false,
 });
+
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -32,12 +33,10 @@ function checkUser(){
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
     if (pilihan == 'individu') {
-        pilihan = '0'+tabPilihan;
-        // pilihan = '0';
+        pilihan = '0' + tabPilihan;
     }
     if (pilihan == 'berkumpulan') {
-        pilihan = '1'+tabPilihan;
-        // pilihan = '1';
+        pilihan = '1' + tabPilihan;
     }
 
     switch(pilihan) {

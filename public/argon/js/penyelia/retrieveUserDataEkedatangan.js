@@ -45,6 +45,7 @@ function retrieveUserData(id_user, id_permohonan_baru) {
             $("#formModalEditIndividu input[name=tarikhMohon]").val(data.permohonans.tarikh_permohonan);
 
             // Kelulusan
+
             $("#formKelulusan input[name=penyelia]").val(data.penyelia.name);
             $("#formKelulusan input[name=ketuaBahagian]").val(data.ketuaBahagian.name);
             $("#formKelulusan input[name=ketuaJabatan]").val(data.ketuaJabatan.name);
