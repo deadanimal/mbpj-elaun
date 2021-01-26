@@ -7,7 +7,7 @@ document.getElementById("modal-title-berkumpulan-title").innerHTML = "Permohonan
 document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
 
 function retrieveTabPilihan(id) {
-    console.log(id);
+    // console.log(id);
     if (id == "tabPilihanTuntutanElaunLebihMasa") {
         document.getElementById("modal-title-individu-title").innerHTML = "Tuntutan Elaun Lebih Masa";
         document.getElementById("modal-title-berkumpulan-title").innerHTML = "Tuntutan Elaun Lebih Masa";

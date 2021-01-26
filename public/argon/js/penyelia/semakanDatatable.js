@@ -12,16 +12,50 @@ $(document).ready(function(){
         }
     });
     
-})
+}) 
+
+var tabPilihan = '0';
+$(document).ready(function(){
+    $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
+        tabPilihan = '1';
+    });
+    $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
+        tabPilihan = '0';
+    });
+});
 
 function checkUser(){
+    // OT1 = 00
+    // EL1 = 01
+    // OT2 = 10
+    // EL2 = 11
     var pilihan = document.getElementById('selectJenisPermohonan').value;
-    var id = document.querySelector("#noPekerja").value;
 
-    if (pilihan == 'individu' || pilihan == 'berkumpulan'){
-        showDatatable(pilihan);
-    }else 
-        alert('Sila pilih jenis permohonan');
+    if (pilihan == 'individu') {
+        pilihan = '0'+tabPilihan;
+        // pilihan = '0';
+    }
+    if (pilihan == 'berkumpulan') {
+        pilihan = '1'+tabPilihan;
+        // pilihan = '1';
+    }
+
+    switch(pilihan) {
+        case '00':
+            showDatatable(pilihan);
+            break;
+        case '01':
+            showDatatable(pilihan);
+            break;
+        case '10':
+            showDatatable(pilihan);
+            break;
+        case '11':
+            showDatatable(pilihan);
+            break;
+        default:
+            alert('Sila pilih jenis permohonan');
+    }
 }
 
 function showUser() {
@@ -31,8 +65,6 @@ function showUser() {
         type: 'GET',
         url: 'penyelia-semakan/semakan-pekerja/' + id,
         success: function(data) {
-            console.log(data.users);
-
             $("#formPermohonanKerjaLebihMasa input[name=nama]").val(data.users.name);
 
             $('input').css('color', 'black')
@@ -42,7 +74,6 @@ function showUser() {
         }
     });
 }
-
 
 function showDatatable(pilihan){
     var id = document.querySelector("#noPekerja").value;
