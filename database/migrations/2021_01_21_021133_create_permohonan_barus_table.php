@@ -24,7 +24,20 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('kadar_jam');
             $table->string('tujuan');
             $table->string('status');
+            $table->unsignedInteger('id_penyelia');
+            $table->unsignedInteger('id_ketua_bahagian');
+            $table->unsignedInteger('id_ketua_jabatan');
+            $table->unsignedInteger('id_kerani_pemeriksa');
+            $table->unsignedInteger('id_kerani_semakan');
             $table->timestamps();
+        });
+
+        Schema::table('permohonan_barus', function($table) {
+            $table->foreign('id_penyelia')->references('id')->on('users');
+            $table->foreign('id_ketua_bahagian')->references('id')->on('users');
+            $table->foreign('id_ketua_jabatan')->references('id')->on('users');
+            $table->foreign('id_kerani_pemeriksa')->references('id')->on('users');
+            $table->foreign('id_kerani_semakan')->references('id')->on('users');
         });
     }
 

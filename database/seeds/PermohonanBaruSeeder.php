@@ -22,6 +22,11 @@ class PermohonanBaruSeeder extends Seeder
             'kadar_jam' => '7',
             'tujuan' => 'Saja2', 
             'status' => 'OT1', // OT for borang A, EL for borang B
+            'id_penyelia' => '2',
+            'id_ketua_bahagian' => '4',
+            'id_ketua_jabatan' => '5',
+            'id_kerani_pemeriksa' => '6',
+            'id_kerani_semakan' => '7',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -37,6 +42,11 @@ class PermohonanBaruSeeder extends Seeder
             'kadar_jam' => '7',
             'tujuan' => 'Saja2', 
             'status' => 'EL1', // OT for borang A, EL for borang B
+            'id_penyelia' => '2',
+            'id_ketua_bahagian' => '4',
+            'id_ketua_jabatan' => '5',
+            'id_kerani_pemeriksa' => '6',
+            'id_kerani_semakan' => '7',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -52,6 +62,11 @@ class PermohonanBaruSeeder extends Seeder
             'kadar_jam' => '7',
             'tujuan' => 'Saja2', 
             'status' => 'OT2', // OT for borang A, EL for borang B
+            'id_penyelia' => '2',
+            'id_ketua_bahagian' => '4',
+            'id_ketua_jabatan' => '5',
+            'id_kerani_pemeriksa' => '6',
+            'id_kerani_semakan' => '7',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -67,6 +82,11 @@ class PermohonanBaruSeeder extends Seeder
             'kadar_jam' => '7',
             'tujuan' => 'Saja2', 
             'status' => 'EL2', // OT for borang A, EL for borang B
+            'id_penyelia' => '2',
+            'id_ketua_bahagian' => '4',
+            'id_ketua_jabatan' => '5',
+            'id_kerani_pemeriksa' => '6',
+            'id_kerani_semakan' => '7',
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -82,6 +102,11 @@ class PermohonanBaruSeeder extends Seeder
             'kadar_jam' => '7',
             'tujuan' => 'Saja2', 
             'status' => 'OT1', // OT for borang A, EL for borang B
+            'id_penyelia' => '2',
+            'id_ketua_bahagian' => '4',
+            'id_ketua_jabatan' => '5',
+            'id_kerani_pemeriksa' => '6',
+            'id_kerani_semakan' => '7',
             'created_at' => now(),
             'updated_at' => now()
         ]);

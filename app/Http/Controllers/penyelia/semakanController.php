@@ -5,6 +5,7 @@ namespace App\Http\Controllers\penyelia;
 use DataTables;
 use App\User;
 use App\PermohonanBaru;
+use App\eKedatangan;
 use App\permohonan_with_users;
 use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
@@ -129,6 +130,37 @@ class semakanController extends Controller
         return response()->json([
                     'error' => false,
                     'users'  => $users,
+                ], 200);
+    }
+
+    public function findPermohonan($idPermohananBaru)
+    {
+        $permohonans = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
+
+        $penyelia = User::find($permohonans->id_penyelia);
+        $ketuaBahagian = User::find($permohonans->id_ketua_bahagian);
+        $ketuaJabatan = User::find($permohonans->id_ketua_jabatan);
+        $keraniPemeriksa = User::find($permohonans->id_kerani_pemeriksa);
+        $keraniSemakan = User::find($permohonans->id_kerani_semakan);
+
+        return response()->json([
+                    'error' => false,
+                    'permohonans'  => $permohonans,
+                    'penyelia' => $penyelia,
+                    'ketuaBahagian' => $ketuaBahagian,
+                    'ketuaJabatan' => $ketuaJabatan,
+                    'keraniPemeriksa' => $keraniPemeriksa,
+                    'keraniSemakan' => $keraniSemakan
+                ], 200);
+    }
+
+    public function findEkedatangan($id_user)
+    {
+        $ekedatangans = eKedatangan::where('id_user', $id_user)->first();
+
+        return response()->json([
+                    'error' => false,
+                    'ekedatangans'  => $ekedatangans,
                 ], 200);
     }
 

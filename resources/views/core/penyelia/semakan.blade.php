@@ -173,5 +173,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/penyelia/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush
