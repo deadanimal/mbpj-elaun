@@ -65,7 +65,7 @@ function showUser() {
         type: 'GET',
         url: 'penyelia-semakan/semakan-pekerja/' + id,
         success: function(data) {
-            $("#formPermohonanKerjaLebihMasa input[name=nama]").val(data.users.name);
+            $("#formOTEL input[name=nama]").val(data.users.name);
 
             $('input').css('color', 'black')
         },

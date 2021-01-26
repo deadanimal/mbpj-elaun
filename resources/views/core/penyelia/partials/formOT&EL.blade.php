@@ -1,4 +1,4 @@
-<form  method="get" action="/penyelia/penyelia-semakan" autocomplete="off" enctype="multipart/form-data">
+<form  method="get" id="formOTEL" action="{{ route('penyelia-semakan.index')}}"" autocomplete="off" enctype="multipart/form-data">
     @csrf
 
         <h6 class="heading-small text-muted mb-4">{{ __('Maklumat Peribadi') }}</h6>
@@ -10,7 +10,7 @@
             <div class="col-sm-6 ml--3">
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
-                    <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+                    <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
 
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
