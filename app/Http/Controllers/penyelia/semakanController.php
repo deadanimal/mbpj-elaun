@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\penyelia;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\User;
 use DataTables;
+use App\User;
+use App\PermohonanBaru;
+use App\eKedatangan;
+use App\permohonan_with_users;
+use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class semakanController extends Controller
 {
@@ -51,17 +55,113 @@ class semakanController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * OT1 == 00
+     * EL1 == 01
+     * OT2 == 10
+     * EL2 == 11
+     * 
      */
-    public function show($id)
+    public function show(Request $request, $id)
+    { 
+        $pilihan = $request->input('pilihan');
+        $permohonanBaru = array();
+
+        switch ($pilihan) {
+            case '00':
+                return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'OT1')
+                                    ->having('users_id','=', $id)
+                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                    ->get())
+                                    ->make(true); 
+                break;
+            case '01':
+                return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'EL1')
+                                    ->having('users_id','=', $id)
+                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                    ->get())
+                                    ->make(true); 
+                break;
+            case '10':
+                $permohonans = permohonan_with_users::where('jenis_permohonan', 'OT2')
+                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                    ->get();
+
+                foreach ($permohonans as $key=>$permohonan) {
+                    $users = $permohonan->users_id;
+
+                    $usersExploded = explode(",", $users);
+                    $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
+
+                    if (in_array($id, $usersExploded)) {
+                        $permohonanBaru[$key] = $dataPermohonan;
+                    }
+                }
+                return datatables()->of($permohonanBaru)->make(true);
+                break;
+            case '11':
+                $permohonans = permohonan_with_users::where('jenis_permohonan', 'EL2')
+                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                    ->get();
+
+                foreach ($permohonans as $key=>$permohonan) {
+                    $users = $permohonan->users_id;
+
+                    $usersExploded = explode(",", $users);
+                    $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
+
+                    if (in_array($id, $usersExploded)) {
+                        $permohonanBaru[$key] = $dataPermohonan;
+                    }
+                }
+                return datatables()->of($permohonanBaru)->make(true);
+                break;
+            
+            default:
+                return 1;
+                break;
+        }
+    }
+
+    public function findUser($id)
     {
-        //
-        
-        // dd($id);
+        $users = User::find($id);
 
-        return datatables()->of(User::all()->where('id',$id))->make(true);
-        
+        return response()->json([
+                    'error' => false,
+                    'users'  => $users,
+                ], 200);
+    }
 
-        return Response::json($id);
+    public function findPermohonan($idPermohananBaru)
+    {
+        $permohonans = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
+
+        $penyelia = User::find($permohonans->id_penyelia);
+        $ketuaBahagian = User::find($permohonans->id_ketua_bahagian);
+        $ketuaJabatan = User::find($permohonans->id_ketua_jabatan);
+        $keraniPemeriksa = User::find($permohonans->id_kerani_pemeriksa);
+        $keraniSemakan = User::find($permohonans->id_kerani_semakan);
+
+        return response()->json([
+                    'error' => false,
+                    'permohonans'  => $permohonans,
+                    'penyelia' => $penyelia,
+                    'ketuaBahagian' => $ketuaBahagian,
+                    'ketuaJabatan' => $ketuaJabatan,
+                    'keraniPemeriksa' => $keraniPemeriksa,
+                    'keraniSemakan' => $keraniSemakan
+                ], 200);
+    }
+
+    public function findEkedatangan($id_user)
+    {
+        $ekedatangans = eKedatangan::where('id_user', $id_user)->first();
+
+        return response()->json([
+                    'error' => false,
+                    'ekedatangans'  => $ekedatangans,
+                ], 200);
     }
 
     /**

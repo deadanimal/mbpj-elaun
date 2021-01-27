@@ -1,6 +1,6 @@
 var selectStatus = [
-    "Enabled",
-    "Disabled"
+    "Aktif",
+    "Nyahaktif"
 ];
 
 var selectRole = [
@@ -23,26 +23,28 @@ var table = $('#datatable').DataTable({
 
         {data: 'name', name: 'name'},
 
-        {data: 'email', name: 'email'},
-
         {data: 'created_at', name: 'created_at'},
         
         {data: 'role_id', name: 'role_id'},
         
+        {data: 'email', name: 'email'},
+        
         {data: 'status', name: 'status'},
+
+        {data: null, name: null},
 
        
     ],
     columnDefs:[
         
         {
-        targets:3, render:function(data){
+        targets:2, render:function(data){
             console.log(data)
             return moment(data).format('DD/MM/YYYY');
         }},
         {
         type: "html-input",
-        targets:4, render:function(data,type,row){
+        targets:3, render:function(data,type,row){
             var role;
             if(type == 'display' || row != null){
                 if(data == 1){
@@ -93,6 +95,11 @@ var table = $('#datatable').DataTable({
 
         }},
         {
+        targets: 4, render:function(data,type,row){
+            return "<span class='text-primary'>"+data+"</span>";
+        }
+        },
+        {
         type: "html-input",
         targets:5, render:function(data,type,row){
             var status;
@@ -135,23 +142,15 @@ var table = $('#datatable').DataTable({
                 }
 
             }
-            // var $select = $("<select></select>", {
-            //     	"id": row[0]+"start",
-            //         "value": status
-            //     });
-            //     $.each(selectStatus, function(k,v){
-            //     	var $option = $("<option></option>", {
-            //         	"text": v,
-            //             "value": v
-            //         });
-            //         if(status === v){
-            //         	$option.attr("selected", "selected")
-            //         }
-            //     	$select.append($option);
-            //     });
-            //     return $select.prop("outerHTML");
 
         }},
+        {
+        targets: 6,
+            render: function(data,type,row){
+            console.log(data.id);
+            var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="editKemaskiniForm('+data.id+')" data-target=""  >Kemaskini</button>' 
+            return button1;
+        }}
     ],
 
     processing: true,

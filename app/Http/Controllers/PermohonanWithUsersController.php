@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\pentadbir_sistem;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\permohonan_with_users;
 use Illuminate\Http\Request;
-use App\User;
-use Carbon\Carbon;
 
-
-class modulAduanController extends Controller
+class PermohonanWithUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,19 +15,6 @@ class modulAduanController extends Controller
     public function index()
     {
         //
-        $user = User::select("*");
-
-        if(request()->ajax()) {
-            return datatables()->of($user)
-        ->editColumn('created_at', function ($user) {
-            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
-        })
-        ->filterColumn('created_at', function ($query, $keyword) {
-            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
-        })
-        ->make(true);
-        }
-        return view('core.pentadbir_sistem.modulAduan');
     }
 
     /**
@@ -57,10 +41,10 @@ class modulAduanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\permohonan_with_users  $permohonan_with_users
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(permohonan_with_users $permohonan_with_users)
     {
         //
     }
@@ -68,10 +52,10 @@ class modulAduanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\permohonan_with_users  $permohonan_with_users
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(permohonan_with_users $permohonan_with_users)
     {
         //
     }
@@ -80,10 +64,10 @@ class modulAduanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\permohonan_with_users  $permohonan_with_users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, permohonan_with_users $permohonan_with_users)
     {
         //
     }
@@ -91,10 +75,10 @@ class modulAduanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\permohonan_with_users  $permohonan_with_users
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(permohonan_with_users $permohonan_with_users)
     {
         //
     }
