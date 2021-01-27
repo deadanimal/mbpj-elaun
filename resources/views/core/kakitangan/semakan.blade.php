@@ -165,7 +165,24 @@
                             <div class="table-responsive py-4">
                                 <table class="table table-flush" id="datatable">
                                     <thead class="thead-light">
-                                        <tr>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tarikh Permohonan</th>
+                                        <th>Masa Mula</th>
+                                        <th>Masa Akhir</th>
+                                        <th>Masa</th>
+                                        <th>Hari</th>
+                                        <th>Waktu</th>
+                                        <th>Kadar Jam</th>
+                                        <th>Tujuan</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        
+                                    </tbody>
+                                        <!-- <tr>
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Email</th>
@@ -175,7 +192,7 @@
                                     </thead>
                                     <tbody>
                                         
-                                        @foreach($Users as $user)
+                                        {{-- @foreach($Users as $user)
                                         <tr>
                                             <td>{{$user->id}}</td>
                                             <td>{{$user->name}}</td>
@@ -183,13 +200,13 @@
                                             <td>{{$user->created_at}}</td>
                                             <td>
                                                 <a onclick="event.preventDefault();editKemaskiniForm({{$user->id}});" href="#" class="edit open-modal" data-toggle="modal" value="{{$user->id}}"><button class="btn btn-primary" data-toggle="tooltip"><font color="white">Kemaskini</font></a>
-                                                <!-- <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a> -->
-                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" ><font color="white">Tolak</font></a>
+                                                <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a>
+                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" ><font color="white">Tolak</font></a> 
                                             </td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach--}}
                                         
-                                    </tbody>
+                                    </tbody> -->
                                 </table>
 
                             </div>
