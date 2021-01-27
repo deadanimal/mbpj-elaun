@@ -4,9 +4,7 @@ namespace App\Http\Controllers\kakitangan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\User;
-use Carbon\Carbon;
 use DataTables;
 use App\DataTables\UsersDataTable;
 use App\DataTables\kakitangan\permohonanDataTable;
@@ -21,22 +19,9 @@ class permohonanController extends Controller
     public function index()
     {
 
-        // $timeFormat = User::select("created_at");
-
-        $user = User::select("*");
-
-        if(request()->ajax()) {
-            return datatables()->of($user)
-        ->editColumn('created_at', function ($user) {
-            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
-        })
-        ->filterColumn('created_at', function ($query, $keyword) {
-            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
-        })
-        ->make(true);
-        }
+        $User = User::orderBy('id','asc')->get();
         
-        return view('core.kakitangan.permohonanbaru');
+        return view('core.kakitangan.permohonanbaru')->with('Users',$User);
     
     }
 
@@ -112,10 +97,8 @@ class permohonanController extends Controller
         //
     }
 
-    public function getFormattedTime(){
-
-        
-        
+    public function getPermohonanIndividu(UsersDataTable $UsersDataTable){
+        return $UsersDataTable->render('core.kakitangan.permohonanbaru');
     }
 
     public function getPermohonanBerkumpulan(permohonanDataTable $permohonanDataTable){

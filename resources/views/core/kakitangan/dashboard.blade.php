@@ -32,8 +32,8 @@
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header ">
+            <div class="card">
+                    <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="mb-0">Pengurusan Sistem Elaun</h3>
@@ -49,114 +49,29 @@
                         </div>
                     </div>
                     
-                    <div id="permohonan" class="row">
-                        <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="datatable1">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan permohonan</a>
+                        <div id="permohonan" class="row">
+                            <div class="col-lg-12">
+                                {!! $dataTable->table() !!}
                             </div>
                         </div>
-                    </div>
-                            
 
-                    <div id="tuntutan" class="row">
-                    <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="tuntutanDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan tuntutan</a>
+                        <div id="tuntutan" class="row">
+                            <div class="col-lg-12">
+                            <h1>table tuntutan sini</h1>
                             </div>
                         </div>
-                    </div>
 
-                    <div id="lulus" class="row">
-                    <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="lulusDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan permohonan</a>
+                        <div id="lulus" class="row">
+                            <div class="col-lg-12">
+                            <h1>table lulus sini</h1>
                             </div>
                         </div>
-                    </div>
 
-                    <div id="tolak" class="row">
-                    <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="tolakDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan permohonan</a>
+                        <div id="tolak" class="row">
+                            <div class="col-lg-12">
+                                <h1>table tolak sini</h1>
                             </div>
                         </div>
-                    </div>
                     
                    
                     <!-- <div class="table-responsive"> -->
@@ -241,7 +156,7 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     
     
-    
+    {!! $dataTable->scripts() !!}
     
 
 @endpush
