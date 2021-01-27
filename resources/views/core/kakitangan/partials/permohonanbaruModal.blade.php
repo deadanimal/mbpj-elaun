@@ -37,8 +37,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
+                                        <label class="form-control-label" for="namaPekerja">{{ __('Nama') }}</label>
+                                        <input type="text" name="name" id="namaPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->name) }}" required disabled autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -49,7 +49,7 @@
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
                                         <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
-
+                                        
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div>
@@ -59,13 +59,13 @@
                                 <div class="col-sm">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="tarikh-mohon">{{ __('Tarikh Mohon') }}</label>
-                                        <input type="date" name="name" id="tarikh-mohon" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="11/01/2021" disabled>
+                                        <input type="date" name="name" id="tarikh-mohon" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{Carbon\Carbon::now()->toDateString()}}" disabled>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="row mt-5"> 
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -80,7 +80,7 @@
                             <div class="row"> 
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="masa-akhir">{{ __('Masa Akhir') }}</label>
+                                        <label class="form-control-label" for="masa-akhir">{{ __('Masa Mula') }}</label>
                                         <input type="date" name="name" id="masa-akhir" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" >
 
                                         @include('alerts.feedback', ['field' => 'name'])
@@ -91,7 +91,7 @@
                             <div class="row"> 
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="masa-mula">{{ __('Masa Mula') }}</label>
+                                        <label class="form-control-label" for="masa-mula">{{ __('Masa Akhir') }}</label>
                                         <input type="date" name="name" id="masa-mula" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" >
 
                                         @include('alerts.feedback', ['field' => 'name'])
@@ -126,8 +126,26 @@
                             <div class="row"> 
                                 <div class="col-sm">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-email">{{ __('No. KP Baru') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}">
+                                        <label class="form-control-label" for="pegawaiSokong">{{ __('Pegawai Sokong') }}</label>
+                                        <select class="js-example-basic-single" name="pegawaiSokong" id="pegawaiSokong">
+                                            <option value="AL">Encik Ali</option>
+                                                
+                                            <option value="AB">Encik Abu</option>
+                                        </select>
+
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> 
+                                <div class="col-sm">
+                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="pegawaiLulus">{{ __('Pegawai Pelulus') }}</label>
+                                        <select class="js-example-basic-single" name="pegawaiLulus" id="pegawaiLulus">
+                                            <option value="AL">Encik Ali</option>
+                                                
+                                            <option value="AB">Encik Abu</option>
+                                        </select>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -157,8 +175,12 @@
                                 </div> 
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                                        <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
+                                        <label class="form-control-label" for="pegawaiPelulus">{{ __('Pegawai Pelulus') }}</label>
+                                        <select class="js-example-basic-single" name="pegawaiPelulus" id="pegawaiPelulus">
+                                            <option value="AL">Encik Ali</option>
+                                                
+                                            <option value="AB">Encik Abu</option>
+                                        </select>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -168,16 +190,16 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
+                                        <label class="form-control-label" for="tarikh-kerja">{{ __('Tarikh Kerja') }}</label>
+                                        <input type="date" name="name" id="tarikh-kerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" min="{{Carbon\Carbon::now()->toDateString()}}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div> 
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                                        <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
+                                        <label class="form-control-label" for="masa-mula">{{ __('Masa Mula') }}</label>
+                                        <input type="date" name="name" id="masa-mula" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" min="{{Carbon\Carbon::now()->toDateString()}}" value="{{Carbon\Carbon::now()->toDateString()}}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -187,16 +209,16 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
+                                        <label class="form-control-label" for="masa-akhir">{{ __('Masa Akhir') }}</label>
+                                        <input type="date" name="name" id="masa-akhir" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" min="{{Carbon\Carbon::now()->toDateString()}}" value="{{Carbon\Carbon::now()->toDateString()}}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                                        <textarea type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" ></textarea>
+                                        <label class="form-control-label" for="sebab">{{ __('Sebab-Sebab Lebih Masa') }}</label>
+                                        <textarea type="text" name="name" id="sebab" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Catatan') }}"></textarea>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -206,8 +228,8 @@
                             <div class="row"> 
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                                        <textarea type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" ></textarea>
+                                        <label class="form-control-label" for="lokasi">{{ __('Lokasi') }}</label>
+                                        <textarea type="text" name="name" id="lokasi" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Catatan') }}" ></textarea>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -219,24 +241,6 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
-
-                                        @include('alerts.feedback', ['field' => 'name'])
-                                    </div>
-                                </div> 
-                                <div class="col-sm-6">
-                                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                                        <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
-
-                                        @include('alerts.feedback', ['field' => 'name'])
-                                    </div>
-                                </div>
-                            </div>
 
                             <div id="new_chq">
 
@@ -247,8 +251,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-success">Hantar</button>
             </div>
         </div>
     </div>

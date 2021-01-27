@@ -4,6 +4,8 @@ namespace App\Http\Controllers\pentadbir_sistem;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use Carbon\Carbon;
 
 
 class modulAduanController extends Controller
@@ -16,6 +18,18 @@ class modulAduanController extends Controller
     public function index()
     {
         //
+        $user = User::select("*");
+
+        if(request()->ajax()) {
+            return datatables()->of($user)
+        ->editColumn('created_at', function ($user) {
+            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
+        })
+        ->filterColumn('created_at', function ($query, $keyword) {
+            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
+        })
+        ->make(true);
+        }
         return view('core.pentadbir_sistem.modulAduan');
     }
 
