@@ -40,7 +40,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
-                            
+                               
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -51,15 +51,8 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade show active" id="formPermohonanKerjaLebihMasa" role="tabpanel" aria-labelledby="tabPilihanPermohonanKerjaLebihMasa">
-                                {{-- Tab content -> Form --}}
-                                @include('core.penyelia.partials.formPermohonanKerjaLebihMasa')
-                            </div>
-
-                            <div class="tab-pane fade" id="formTuntuanElaunLebihMasa" role="tabpanel" aria-labelledby="tabPilihanTuntutanElaunLebihMasa">
-                                {{-- Tab content -> Form --}}
-                                @include('core.penyelia.partials.formTuntuanElaunLebihMasa')
-                            </div>
+                            {{-- Form semakan --}}
+                                @include('core.penyelia.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
@@ -180,6 +173,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/penyelia/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
-
 @endpush
