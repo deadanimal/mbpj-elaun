@@ -20,40 +20,41 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             // return redirect('/home');
             $role = Auth::user()->role_id; 
-        
+            
+        // dd($role);
         // Check user role
-        switch ($role) {
-            case '1':
-                    return 'pentadbir-sistem/dashboard';
-                break;
-            case '2':
-                    return 'penyelia/dashboard';
-                break; 
-            case '3':
-                    return 'datuk-bandar/dashboard';
-                break; 
-            case '4':
-                    return 'ketua-bahagian/dashboard';
-                break; 
-            case '5':
-                    return 'ketua-jabatan/dashboard';
-                break; 
-            case '6':
-                    return 'kerani-semakan/dashboard';
-                break; 
-            case '7':
-                    return 'kerani-pemeriksaan/dashboard';
-                break; 
-            case '8':
-                    return 'kakitangan/dashboard';
-                break; 
-            case '9':
-                    return 'pelulus-pindaan/dashboard';
-                break; 
-            default:
-                    return '/login'; 
-                break;
-        }
+        // switch ($role) {
+        //     case '1':
+        //             return $next($request);
+        //         break;
+        //     case '2':
+        //             return $next($request);
+        //         break; 
+        //     case '3':
+        //             return $next($request);
+        //         break; 
+        //     case '4':
+        //             return $next($request);
+        //         break; 
+        //     case '5':
+        //             return $next($request);
+        //         break; 
+        //     case '6':
+        //             return $next($request);
+        //         break; 
+        //     case '7':
+        //             return $next($request);
+        //         break; 
+        //     case '8':
+        //             return $next($request);
+        //         break; 
+        //     case '9':
+        //             return $next($request);
+        //         break; 
+        //     default:
+        //             return '/login'; 
+        //         break;
+        // }
         }
 
         return $next($request);

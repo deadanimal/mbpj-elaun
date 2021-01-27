@@ -1,5 +1,6 @@
 var table = $("#datatable1").DataTable();
     table = $('#datatable1').DataTable({
+        scrollX: false,
         destroy:true,
     "lengthMenu": [ 5, 10, 25, 50 ],
     // processing: false,
@@ -60,12 +61,13 @@ function showDatatable(){
             // data = JSON.parse(result);
 
                 table = $('#datatable1').DataTable({
+                // scrollX: false,
                 destroy: true,
                 "lengthMenu": [ 5, 10, 25, 50 ],
                 processing: false,
                 serverSide: true,
-                responsive:true,
-                autoWidth:false,
+                // responsive:true,
+                // autoWidth:false,
             ajax: {
                 url: "penyelia-semakan/"+id,
                 type: 'GET',
@@ -74,14 +76,22 @@ function showDatatable(){
                 columns: [
             
                     {data: 'id', name: 'id'},
+
+                    {data: null , name: null},
             
                     {data: 'name', name: 'name'},
             
                     {data: 'email', name: 'email'},
             
                     {data: 'created_at', name: 'created_at'},
+
+                    {data: null , name: null},
+
+                    {data: null , name: null},
                     
                     {data: 'status', name: 'status'},
+
+                    {data: null , name: null, id:"statusPermohonan"},
             
                     {data: null , name: null},
             
@@ -91,12 +101,36 @@ function showDatatable(){
                 ],
                 columnDefs: [
                     {
+                        targets: 1,
+                        render:function(data,type,row){
+                            return "<span>12/1/2020</span>"
+                        }
+                    },
+                    {
                         targets: 5,
-                        mRender: function(data,type,row){
+                        render:function(data,type,row){
+                            return "<span>Selasa</span>"
+                        }
+                    },
+                    {
+                        targets: 6,
+                        render:function(data,type,row){
+                            return "<span>Petang</span>"
+                        }
+                    },
+                    {
+                        targets: 8,
+                        render:function(data,type,row){
+                            return "<span>Before</span>"
+                        }
+                    },
+                    {
+                        targets: 9,
+                        render: function(data,type,row){
                             console.log(data.id);
-                            var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""  type="button"></i>' 
-                            var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" type="button" value='+data.id+'></i>' 
-                            var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')" type="button" value='+data.id+'></i>' 
+                            var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""  ></i>' 
+                            var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
+                            var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')"  value='+data.id+'></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
                             // var button1 = $("<i></i>",{

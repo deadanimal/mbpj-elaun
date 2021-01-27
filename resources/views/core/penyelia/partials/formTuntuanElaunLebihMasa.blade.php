@@ -73,7 +73,7 @@
             </div>
 
             <div class="text-right">
-                <button type="submit" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
+                <button type="button" onclick="event.preventDefault();checkUser();" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
                 {{-- <button type="button" value="submit" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button> --}}
             </div>
         </div>
