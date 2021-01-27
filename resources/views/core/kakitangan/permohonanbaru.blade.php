@@ -1,27 +1,16 @@
 @extends('layouts.app', [
     'title' => __('User Profile'),
+    'navClass' => 'bg-default',
     'parentSection' => 'laravel',
     'elementName' => 'profile'
 ])
 
 @section('content')
-@component('layouts.headers.auth') 
-    <!-- @component('layouts.headers.breadcrumbs')
-            @slot('title') 
-                {{ __('Permohonan Kerja Lebih Masa') }} 
-            @endslot
-
-        @endcomponent -->
-    <!-- <div class="container-fluid my-auto"> -->
-        <div class="row">
-            <div class="col-xl-12 mt-4 py-2">
-                <h2 class="mb-2" style="color:white;">
-                    Permohonan Kerja Lebih Masa
-                </h2>
-            </div>
-        </div>
-    <!-- </div> -->
-@endcomponent
+    @include('forms.header', [
+        'title' => __('Permohonan Kerja Lebih Masa') . ' ',
+        'description' => __(''),
+        'class' => 'col-lg-7'
+    ])
 
     <div class="container-fluid mt--6">
         <div class="row">
@@ -55,7 +44,7 @@
                                    <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('Nama') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Sarip Dol') }}" value="Sarip Dol" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -63,7 +52,7 @@
                                     <div class="col">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('Jawatan') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Pegawai') }}" value="Pegawai" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'email'])
                                         </div>
@@ -74,7 +63,7 @@
                                    <div class="col">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('No. KP Baru') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="910234564555" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -82,7 +71,7 @@
                                     <div class="col">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="Pengurusan" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'email'])
                                         </div>
@@ -90,7 +79,7 @@
                                     <div class="col">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('Jabatan') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="Teknologi Maklumat" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'email'])
                                         </div>
@@ -101,7 +90,7 @@
                                    <div class="col-lg-4">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('Gaji Matriks') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="2,455" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -109,7 +98,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email">{{ __('Gred') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="F41" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'email'])
                                         </div>
@@ -185,25 +174,33 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="col-lg-12 mt-2">
+                                        <div class="col-12 mt-2">
                                             <div class="table-responsive py-4">
-                                                <table class="table " id="permohonanbaruDT">
+                                                <table class="table table-flush" id="datatable">
                                                     <thead class="thead-light">
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Tarikh Permohonan</th>
-                                                        <th>Masa Mula</th>
-                                                        <th>Masa Akhir</th>
-                                                        <th>Masa</th>
-                                                        <th>Hari</th>
-                                                        <th>Waktu</th>
-                                                        <th>Kadar Jam</th>
-                                                        <th>Tujuan</th>
-                                                        <th></th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Created At</th>
+                                                            <th>Actions</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
                                                         
+                                                        @foreach($Users as $user)
+                                                        <tr>
+                                                            <td>{{$user->id}}</td>
+                                                            <td>{{$user->name}}</td>
+                                                            <td>{{$user->email}}</td>
+                                                            <td>{{$user->created_at}}</td>
+                                                            <td>
+                                                                <a onclick="event.preventDefault();editPermohonanForm({{$user->id}});" href="#" class="edit open-modal" data-toggle="modal" value="{{$user->id}}"><button class="btn btn-primary" data-toggle="tooltip" title="Kemaskini"><font color="white">Kemaskini</font></a>
+                                                                <!-- <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a> -->
+                                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" title="Tolak"><font color="white">Tolak</font></a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
                                                         
                                                     </tbody>
                                                 </table>
@@ -238,7 +235,7 @@
                                     <div class="card-body">
                                         <div class="col-12 mt-2">
                                             <div class="table-responsive py-4">
-                                                <table class="table table-flush" id="datatable">
+                                                <table class="table table-flush" id="datatable1">
                                                     <thead class="thead-light">
                                                         <tr>
                                                             <th>ID</th>
@@ -249,7 +246,21 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                       
+                                                        
+                                                        @foreach($Users as $user)
+                                                        <tr>
+                                                            <td>{{$user->id}}</td>
+                                                            <td>{{$user->name}}</td>
+                                                            <td>{{$user->email}}</td>
+                                                            <td>{{$user->created_at}}</td>
+                                                            <td>
+                                                                <a onclick="event.preventDefault();editPermohonanForm({{$user->id}});" href="#" class="edit open-modal" data-toggle="modal" value="{{$user->id}}"><button class="btn btn-primary" data-toggle="tooltip" title="Kemaskini"><font color="white">Kemaskini</font></a>
+                                                                <!-- <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a> -->
+                                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" title="Tolak"><font color="white">Tolak</font></a>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                        
                                                     </tbody>
                                                 </table>
                     

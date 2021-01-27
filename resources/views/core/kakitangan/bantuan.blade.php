@@ -21,17 +21,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-6 ml-5">
-                            <strong>
-                                Panduan ini akan membimbing anda melalui asas menggunakan
-                                Sistem Pengurusan Elaun Lebih Masa termasuk cara mendaftar, 
-                                log masuk ke laman web dan mengisi borang
-                            </strong>
-                            <div class="mt-4">
-                                <span class="text-blue ni ni-folder-17"></span>
-                                <a href="">Muat turun manual pengguna</a>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -48,18 +38,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-6 ml-5">
-                            <strong>
-                                Versi Sistem Elaun Lebih Masa
-                            </strong>
-                            <div class="mt-4">
-                                <span class="text-blue ni ni-settings">
-                                    <strong>
-                                        Versi 2020 1.0
-                                    </strong> 
-                                </span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -86,8 +64,8 @@
                                 <div class="row"> 
                                    <div class="col-12">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="tajuk-aduan">{{ __('Tajuk Aduan') }}</label>
-                                            <input name="name" id="tajuk-aduan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Tajuk Aduan') }}" value="" >
+                                            <label class="form-control-label" for="input-email">{{ __('Tajuk Aduan') }}</label>
+                                            <input name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" >
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -97,8 +75,8 @@
                                 <div class="row"> 
                                    <div class="col">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="keterangan-aduan">{{ __('Keterangan Aduan') }}</label>
-                                            <textarea type="text" name="name" id="keterangan-aduan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Catatan') }}" value="" ></textarea>
+                                            <label class="form-control-label" for="input-email">{{ __('Keterangan Aduan') }}</label>
+                                            <textarea type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" ></textarea>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>

@@ -51,11 +51,10 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Tarikh Daftar</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
                                             <th>Jenis</th>
-                                            <th>Emel</th>
                                             <th>Status</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

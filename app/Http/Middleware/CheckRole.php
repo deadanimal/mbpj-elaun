@@ -16,13 +16,11 @@ class CheckRole
     public function handle($request, Closure $next, $role)
     {
         // dd($request->user()->role_id,$role);
-        // dd($role);
         if ( $request->user()->role_id != $role) {
-            // dd($role);
+            
             abort(403);
         }
-        
-        // dd($role);
+
         return $next($request);
     }
 }
