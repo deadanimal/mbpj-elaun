@@ -110,23 +110,32 @@
                             <div class="col-8">
                                 <h2 class="mb-2">{{ __('Senarai Permohonan Borang B1') }}</h2>
                             </div>
+                            <div class="col-4 text-right">
+                                <span id="printButton" onclick="printTuntutan()" style="cursor: pointer"><i class="fa fa-print fa-3x" ></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 mt-2">
                         <div class="table-responsive py-4">
-                            <table class="table table-flush" id="datatable">
+                            <table class="table table-flush" id="tuntutanDT">
                                 <thead class="thead-light">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Created At</th>
-                                        <th>Status</th>
-                                    </tr>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tarikh Permohonan</th>
+                                    <th>Masa Mula</th>
+                                    <th>Masa Akhir</th>
+                                    <th>Masa</th>
+                                    <th>Hari</th>
+                                    <th>Waktu</th>
+                                    <th>Kadar Jam</th>
+                                    <th>Tujuan</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
+
                                 <tbody>
                                     
-                                    @foreach($Users as $user)
+                                    {{-- @foreach($Users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->name}}</td>
@@ -136,7 +145,7 @@
                                             Lulus
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                     
                                 </tbody>
                             </table>

@@ -58,15 +58,15 @@
                             <div class="col-6">
                                 <h2>Audit Trail</h2>
                             </div>
-                            <div class="col-6 text-right">
-                                <span id="printButton" onclick="printAudit()" style="cursor: pointer"><i class="fa fa-print fa-3x" ></i></span>
+                            <div id="printdiv" class="col-6 text-right">
+                                
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table table-flush" id="datatable">
+                                <table class="table table-flush" id="adminDT">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>ID</th>

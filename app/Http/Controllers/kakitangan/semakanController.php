@@ -5,6 +5,7 @@ namespace App\Http\Controllers\kakitangan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Carbon\Carbon;
 use DataTables;
 use App\DataTables\UsersDataTable;
 
@@ -17,9 +18,20 @@ class semakanController extends Controller
      */
     public function index()
     {
-        $User = User::orderBy('id','asc')->get();
+        $user = User::select("*");
+
+        if(request()->ajax()) {
+            return datatables()->of($user)
+        ->editColumn('created_at', function ($user) {
+            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
+        })
+        ->filterColumn('created_at', function ($query, $keyword) {
+            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
+        })
+        ->make(true);
+        }
         
-        return view('core.kakitangan.semakan')->with('Users',$User);
+        return view('core.kakitangan.semakan');
     }
 
     /**
