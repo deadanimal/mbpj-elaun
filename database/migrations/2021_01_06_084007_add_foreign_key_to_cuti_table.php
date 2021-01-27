@@ -13,10 +13,10 @@ class AddForeignKeyToCutiTable extends Migration
      */
     public function up()
     {
-        Schema::table('spp_hr_cuti', function (Blueprint $table) {
-            $table->char('hr_kod_cuti_umum',5);
-            $table->foreign('hr_kod_cuti_umum')->references('hr_kod_cuti_umum')->on('spp_hr_cuti_umum');
-        });
+        // Schema::table('spp_hr_cuti', function (Blueprint $table) {
+        //     $table->char('hr_kod_cuti_umum',5);
+        //     $table->foreign('hr_kod_cuti_umum')->references('hr_kod_cuti_umum')->on('spp_hr_cuti_umum');
+        // });
     }
 
     /**
@@ -26,8 +26,8 @@ class AddForeignKeyToCutiTable extends Migration
      */
     public function down()
     {
-        Schema::table('spp_hr_cuti', function (Blueprint $table) {
-            //
-        });
+        // Schema::table('spp_hr_cuti', function (Blueprint $table) {
+        //     //
+        // });
     }
 }
