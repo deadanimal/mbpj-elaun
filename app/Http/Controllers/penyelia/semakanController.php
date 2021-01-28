@@ -61,6 +61,8 @@ class semakanController extends Controller
      * OT2 == 10
      * EL2 == 11
      * 
+     * This function is used to display all permohonans related to 1 pekerja 
+     * 
      */
     public function show(Request $request, $id)
     { 
@@ -93,7 +95,8 @@ class semakanController extends Controller
                     $usersExploded = explode(",", $users);
                     $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
 
-                    if (in_array($id, $usersExploded)) {
+                    // if ($usersExploded->contains($id)) {
+                    if (in_array($id, $usersExploded)){
                         $permohonanBaru[$key] = $dataPermohonan;
                     }
                 }
@@ -110,7 +113,8 @@ class semakanController extends Controller
                     $usersExploded = explode(",", $users);
                     $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
 
-                    if (in_array($id, $usersExploded)) {
+                    // if ($usersExploded->contains($id)) {
+                    if (in_array($id, $usersExploded)){
                         $permohonanBaru[$key] = $dataPermohonan;
                     }
                 }
@@ -135,32 +139,47 @@ class semakanController extends Controller
 
     public function findPermohonan($idPermohananBaru)
     {
-        $permohonans = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
+        $permohonan = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
 
-        $penyelia = User::find($permohonans->id_penyelia);
-        $ketuaBahagian = User::find($permohonans->id_ketua_bahagian);
-        $ketuaJabatan = User::find($permohonans->id_ketua_jabatan);
-        $keraniPemeriksa = User::find($permohonans->id_kerani_pemeriksa);
-        $keraniSemakan = User::find($permohonans->id_kerani_semakan);
+        $permohonanBerkumpulan = permohonan_with_users::where('id_permohonan_baru', $idPermohananBaru)->first();
+
+        $users = $permohonanBerkumpulan->users_id;
+        $usersExploded = explode(",", $users);
+
+
+
+        $penyelia = User::find($permohonan->id_penyelia);
+        $ketuaBahagian = User::find($permohonan->id_ketua_bahagian);
+        $ketuaJabatan = User::find($permohonan->id_ketua_jabatan);
+        $keraniPemeriksa = User::find($permohonan->id_kerani_pemeriksa);
+        $keraniSemakan = User::find($permohonan->id_kerani_semakan);
 
         return response()->json([
                     'error' => false,
-                    'permohonans'  => $permohonans,
+                    'permohonan'  => $permohonan,
                     'penyelia' => $penyelia,
                     'ketuaBahagian' => $ketuaBahagian,
                     'ketuaJabatan' => $ketuaJabatan,
                     'keraniPemeriksa' => $keraniPemeriksa,
-                    'keraniSemakan' => $keraniSemakan
+                    'keraniSemakan' => $keraniSemakan,
+                    'senaraiKakitangan' => $usersExploded
                 ], 200);
     }
 
     public function findEkedatangan($id_user)
     {
-        $ekedatangans = eKedatangan::where('id_user', $id_user)->first();
+        // $ekedatangans = eKedatangan::where('id_user', $id_user)->first();
+
+        $ekedatangans = eKedatangan::where('id_user', $id_user)
+                                    ->join('users', 'users.id', '=', 'e_kedatangans.id_user')
+                                    ->first();
+        
+        $user_name = $ekedatangans->name;
 
         return response()->json([
                     'error' => false,
                     'ekedatangans'  => $ekedatangans,
+                    'user_name' => $user_name
                 ], 200);
     }
 

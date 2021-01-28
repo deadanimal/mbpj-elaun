@@ -95,8 +95,8 @@ Route::group([
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
 
 	Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
-	Route::get('/penyelia-semakan/modal-semakan/{id}', 'penyelia\semakanController@findPermohonan' );
-	Route::get('/penyelia-semakan/ekedatangan-semakan/{id}', 'penyelia\semakanController@findEkedatangan' );
+	Route::get('/penyelia-semakan/semakan-permohonan/{id}', 'penyelia\semakanController@findPermohonan' );
+	Route::get('/penyelia-semakan/semakan-ekedatangan/{id}', 'penyelia\semakanController@findEkedatangan' );
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
 		return view('profile.index',['link'=>$link]);

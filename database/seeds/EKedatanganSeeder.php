@@ -35,7 +35,7 @@ class EKedatanganSeeder extends Seeder
         DB::table('e_kedatangans')->insert([
             'id_ekedatangan' => 2,
             'id_user' => '5',
-            'tarikh' => '1/1/2021',
+            'tarikh' => '2/1/2021',
             'waktu_masuk' => '10:00',
             'waktu_keluar' => '18:00',
             'jumlah_waktu_kerja' => '13',
@@ -56,7 +56,7 @@ class EKedatanganSeeder extends Seeder
         DB::table('e_kedatangans')->insert([
             'id_ekedatangan' => 3,
             'id_user' => '6',
-            'tarikh' => '1/1/2021',
+            'tarikh' => '4/1/2021',
             'waktu_masuk' => '10:00',
             'waktu_keluar' => '18:00',
             'jumlah_waktu_kerja' => '13',
@@ -77,7 +77,7 @@ class EKedatanganSeeder extends Seeder
         DB::table('e_kedatangans')->insert([
             'id_ekedatangan' => 4,
             'id_user' => '7',
-            'tarikh' => '1/1/2021',
+            'tarikh' => '4/1/2021',
             'waktu_masuk' => '10:00',
             'waktu_keluar' => '18:00',
             'jumlah_waktu_kerja' => '13',
@@ -98,7 +98,7 @@ class EKedatanganSeeder extends Seeder
         DB::table('e_kedatangans')->insert([
             'id_ekedatangan' => 5,
             'id_user' => '8',
-            'tarikh' => '1/1/2021',
+            'tarikh' => '5/1/2021',
             'waktu_masuk' => '10:00',
             'waktu_keluar' => '18:00',
             'jumlah_waktu_kerja' => '13',
@@ -119,7 +119,7 @@ class EKedatanganSeeder extends Seeder
         DB::table('e_kedatangans')->insert([
             'id_ekedatangan' => 6,
             'id_user' => '3',
-            'tarikh' => '1/1/2021',
+            'tarikh' => '6/1/2021',
             'waktu_masuk' => '10:00',
             'waktu_keluar' => '18:00',
             'jumlah_waktu_kerja' => '13',

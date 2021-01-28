@@ -17,11 +17,11 @@ $(document).ready(function(){
 
 var tabPilihan = '0';
 $(document).ready(function(){
-    $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
-        tabPilihan = '1';
-    });
     $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
         tabPilihan = '0';
+    });
+    $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
+        tabPilihan = '1';
     });
 });
 
@@ -32,12 +32,14 @@ function checkUser(){
     // EL2 = 11
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
+
     if (pilihan == 'individu') {
         pilihan = '0' + tabPilihan;
     }
     if (pilihan == 'berkumpulan') {
         pilihan = '1' + tabPilihan;
     }
+
 
     switch(pilihan) {
         case '00':
@@ -107,8 +109,7 @@ function showDatatable(pilihan){
                     {
                         targets: 9,
                         mRender: function(data,type,row){
-                            // console.log('idPermohonanBaru = '+data.id_permohonan_baru);
-                            var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData('+id_user+', '+data.id_permohonan_baru+');" data-target=""></i>' 
+                            var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+'); " data-target=""></i>' 
                             var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
                             var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')" value='+data.id+'></i>' 
                             var allButton = button1 + button2 + button3;
