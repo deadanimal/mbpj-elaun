@@ -40,7 +40,6 @@ function checkUser(){
         pilihan = '1' + tabPilihan;
     }
 
-
     switch(pilihan) {
         case '00':
             showDatatable(pilihan);
@@ -78,6 +77,7 @@ function showUser() {
 
 function showDatatable(pilihan){
     var id_user = document.querySelector("#noPekerja").value;
+    var id_authenticated_user = document.querySelector("#semakanAuthenticatedUserID").value;
 
                 table = $('#datatable1').DataTable({
                 destroy: true,
@@ -109,8 +109,8 @@ function showDatatable(pilihan){
                     {
                         targets: 9,
                         mRender: function(data,type,row){
-                            var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+'); " data-target=""></i>' 
-                            var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+');"></i>' 
+                            var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan( '+id_authenticated_user+' , '+data.id_permohonan_baru+');" value=""></i>' 
                             var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')" value='+data.id+'></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;

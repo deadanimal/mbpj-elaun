@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PermohonanBaru extends Model
 {
     protected $table = 'permohonan_barus';
+    protected $primaryKey = 'id_permohonan_baru';
     protected $fillable = [
         'tarikh_permohonan',
         'masa_mula',

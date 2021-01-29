@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-5" style="border-right-style: solid; border-width: 0.5px;">
+                        <div class="col-md-5 border-right">
                             <div class="text-left mb-4">
                                 <h5>* Jenis Permohonan</h5>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanIndividuInModal" placeholder="" readonly>
@@ -80,10 +80,9 @@
                                 @include('core.penyelia.partials.modals-semakan.ekedatangan')
                             </div>
 
-                            {{-- <div class="row"> --}}
-                                {{-- Kelulusan --}}
-                                @include('core.penyelia.partials.modals-semakan.kelulusan')
-                            {{-- </div> --}}
+                            {{-- Kelulusan --}}
+                            @include('core.penyelia.partials.modals-semakan.kelulusan')
+
                         </div>
                         
                     </div>

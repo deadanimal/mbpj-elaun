@@ -147,7 +147,6 @@ class semakanController extends Controller
         $usersExploded = explode(",", $users);
 
 
-
         $penyelia = User::find($permohonan->id_penyelia);
         $ketuaBahagian = User::find($permohonan->id_ketua_bahagian);
         $ketuaJabatan = User::find($permohonan->id_ketua_jabatan);
@@ -168,8 +167,6 @@ class semakanController extends Controller
 
     public function findEkedatangan($id_user)
     {
-        // $ekedatangans = eKedatangan::where('id_user', $id_user)->first();
-
         $ekedatangans = eKedatangan::where('id_user', $id_user)
                                     ->join('users', 'users.id', '=', 'e_kedatangans.id_user')
                                     ->first();
@@ -191,7 +188,7 @@ class semakanController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 
     }
 
     /**
@@ -203,7 +200,45 @@ class semakanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //    
+    }
+    
+    public function updateKelulusan(Request $request, $idAuthenticatedUser)
+    {
+        $user = User::find($idAuthenticatedUser);
+        $role = $user->role_id;
+        $idPermohonanBaru = $request->input('id_permohonan_baru');
+        $permohonan = PermohonanBaru::find($idPermohonanBaru);
+
+        switch ($role) {
+            case '2':
+                $permohonan->id_penyelia = $idAuthenticatedUser;
+                $permohonan->save();
+                return 1; 
+                break;
+            case '4':
+                $permohonan->id_ketua_bahagian = $idAuthenticatedUser;
+                $permohonan->save();
+                return 1; 
+                break;
+            case '5':
+                $permohonan->id_ketua_jabatan = $idAuthenticatedUser;
+                $permohonan->save();
+                return 1; 
+                break;
+            case '6':
+                $permohonan->id_kerani_semakan = $idAuthenticatedUser;
+                $permohonan->save();
+                return 1; 
+                break;
+            case '7':
+                $permohonan->id_kerani_pemeriksa = $idAuthenticatedUser;
+                $permohonan->save();
+                return 1; 
+                break;
+            default:
+                break;
+        }
     }
 
     /**

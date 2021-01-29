@@ -16,6 +16,9 @@
         <div class="row">
             <div class="col-xl-8">
 
+                {{-- Fecth authenticated user id --}}
+                <input name="invisible" type="hidden" id="semakanAuthenticatedUserID" value="{{ auth()->user()->id }}">
+
                 {{-- Tab options --}}
                 <div class="nav-wrapper">
                     <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
@@ -174,5 +177,6 @@
     <script src="{{ asset('argon') }}/js/penyelia/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/penyelia/saveKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

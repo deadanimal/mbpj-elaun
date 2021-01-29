@@ -5,8 +5,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val("");
     
     $.ajax({
-        type: 'GET',
         url: 'penyelia-semakan/semakan-pekerja/' + id_user,
+        type: 'GET',
         success: function(data) {
             $("#formModalEditIndividu input[name=nama]").val(data.users.name);
 
@@ -18,14 +18,19 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     });
    
     $.ajax({
-        type: 'GET',
         url: 'penyelia-semakan/semakan-permohonan/' + id_permohonan_baru,
+        type: 'GET',
         success: function(data) {
 
             $("#formModalEditIndividu input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
 
             // Kelulusan
-            $("#formKelulusan input[name=penyelia]").val(data.penyelia.name);
+            if (data.permohonan.id_penyelia != '0') {
+                $("#formKelulusan input[name=penyelia]").val(data.penyelia.name);
+            } else {
+                $("#formKelulusan input[name=penyelia]").val("");
+                console.log("penyelia 0");
+            }
             $("#formKelulusan input[name=ketuaBahagian]").val(data.ketuaBahagian.name);
             $("#formKelulusan input[name=ketuaJabatan]").val(data.ketuaJabatan.name);
             $("#formKelulusan input[name=keraniPemeriksa]").val(data.keraniPemeriksa.name);
@@ -71,8 +76,8 @@ function fillInSenaraiKakitangan(senaraiKakitangan, jenisPermohonan) {
     senaraiKakitangan.forEach(element => {
         $(document).ready(function(){
             $.ajax({
-                type: 'GET',
                 url: 'penyelia-semakan/semakan-pekerja/' + element,
+                type: 'GET',
                 success: function(data) {
                     $("#senaraiKakitanganBerkumpulan").append('<li class="nav-item mb-1" onclick="fillInKedatangan('+data.users.id+','+"'"+ jenisPermohonan +"'"+')" id="'+data.users.id+'" role="presentation"><a class="nav-link" data-bs-toggle="pill" href="#" role="tab" aria-controls="test1" aria-selected="true">'+data.users.name+'</a></li>');
                 },
@@ -89,8 +94,8 @@ function fillInSenaraiKakitangan(senaraiKakitangan, jenisPermohonan) {
 
 function fillInKedatangan(idKakitangan, jenisPermohonan) {    
     $.ajax({
-        type: 'GET',
         url: 'penyelia-semakan/semakan-ekedatangan/' + idKakitangan,
+        type: 'GET',
         success: function(data) {
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
             $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);

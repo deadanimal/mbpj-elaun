@@ -24,7 +24,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('kadar_jam');
             $table->string('tujuan');
             $table->string('status');
-            $table->unsignedInteger('id_penyelia');
+            $table->unsignedInteger('id_penyelia')->default('0');
             $table->unsignedInteger('id_ketua_bahagian');
             $table->unsignedInteger('id_ketua_jabatan');
             $table->unsignedInteger('id_kerani_pemeriksa');
