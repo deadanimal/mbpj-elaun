@@ -97,9 +97,7 @@ Route::group([
 	Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
 	Route::get('/penyelia-semakan/semakan-permohonan/{id}', 'penyelia\semakanController@findPermohonan' );
 	Route::get('/penyelia-semakan/semakan-ekedatangan/{id}', 'penyelia\semakanController@findEkedatangan' );
-	// Route::put('/penyelia-semakan/semakan-kelulusan/{id}', 'penyelia\semakanController@updateKelulusan' );
 	Route::post('/penyelia-semakan/semakan-kelulusan/{id}', 'penyelia\semakanController@updateKelulusan' );
-	// Route::get('/penyelia-semakan/semakan-kelulusan/{id}', 'penyelia\semakanController@updateKelulusan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
@@ -135,9 +133,14 @@ Route::group([
 		]);
 	});
 	Route::resource('ketua-bahagian-dashboard','ketua_bahagian\ketuaBahagianController',['except' => ['show','destroy']]);
-	Route::resource('ketua-bahagian-semakan','ketua_bahagian\semakanController',['except' => ['show','destroy']]);
+	Route::resource('ketua-bahagian-semakan','ketua_bahagian\semakanController',['except' => ['destroy']]);
 	Route::resource('ketua-bahagian-laporan','ketua_bahagian\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-bahagian-bantuan','ketua_bahagian\bantuanController',['except' => ['show','destroy']]);
+
+	Route::get('/ketua-bahagian-semakan/semakan-pekerja/{id}', 'ketua_bahagian\semakanController@findUser' );
+	Route::get('/ketua-bahagian-semakan/semakan-permohonan/{id}', 'ketua_bahagian\semakanController@findPermohonan' );
+	Route::get('/ketua-bahagian-semakan/semakan-ekedatangan/{id}', 'ketua_bahagian\semakanController@findEkedatangan' );
+	Route::post('/ketua-bahagian-semakan/semakan-kelulusan/{id}', 'ketua_bahagian\semakanController@updateKelulusan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

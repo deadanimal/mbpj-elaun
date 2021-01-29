@@ -138,6 +138,18 @@ class UsersTableSeeder extends Seeder
     ]);
 
     DB::table('users')->insert([
+        'id' => 10,
+        'name' => 'Ketua Bahagian 2',
+        'email' => 'kb2@argon.com',
+        'role_id' => 4,
+        'password' => Hash::make('secret'), // secret
+        'remember_token' => Str::random(10),
+        'email_verified_at' => now(),
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
+
+    DB::table('users')->insert([
         'id' => 5,
         'name' => 'Ketua Jabatan',
         'email' => 'kj@argon.com',
