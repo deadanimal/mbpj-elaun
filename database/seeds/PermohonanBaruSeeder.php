@@ -24,7 +24,7 @@ class PermohonanBaruSeeder extends Seeder
             'status' => 'OT1', // OT for borang A, EL for borang B
             'id_penyelia' => '0',
             'id_ketua_bahagian' => '0',
-            'id_ketua_jabatan' => '5',
+            'id_ketua_jabatan' => '0',
             'id_kerani_pemeriksa' => '6',
             'id_kerani_semakan' => '7',
             'created_at' => now(),
