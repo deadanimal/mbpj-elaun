@@ -147,7 +147,6 @@ class semakanController extends Controller
         $users = $permohonanBerkumpulan->users_id;
         $usersExploded = explode(",", $users);
 
-
         $penyelia = User::find($permohonan->id_penyelia);
         $ketuaBahagian = User::find($permohonan->id_ketua_bahagian);
         $ketuaJabatan = User::find($permohonan->id_ketua_jabatan);

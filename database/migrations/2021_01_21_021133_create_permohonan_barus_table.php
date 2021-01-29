@@ -25,10 +25,10 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('tujuan');
             $table->string('status');
             $table->unsignedInteger('id_penyelia')->default('0');
-            $table->unsignedInteger('id_ketua_bahagian');
-            $table->unsignedInteger('id_ketua_jabatan');
-            $table->unsignedInteger('id_kerani_pemeriksa');
-            $table->unsignedInteger('id_kerani_semakan');
+            $table->unsignedInteger('id_ketua_bahagian')->default('0');
+            $table->unsignedInteger('id_ketua_jabatan')->default('0');
+            $table->unsignedInteger('id_kerani_pemeriksa')->default('0');
+            $table->unsignedInteger('id_kerani_semakan')->default('0');
             $table->timestamps();
         });
 

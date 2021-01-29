@@ -17,4 +17,9 @@ class PermohonanBaru extends Model
         'waktu',
         'kadar_jam',
         'tujuan'];
+
+    // Default value
+    protected $attributes = [
+        'id_penyelia' => 0,
+    ];
 }
