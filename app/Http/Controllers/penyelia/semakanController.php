@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\penyelia;
 
-use DataTables;
 use App\User;
-use App\PermohonanBaru;
+use DataTables;
 use App\eKedatangan;
-use App\permohonan_with_users;
+use App\PermohonanBaru;
 use Illuminate\Http\Request;
+use App\permohonan_with_users;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class semakanController extends Controller
 {
@@ -203,11 +204,11 @@ class semakanController extends Controller
         //    
     }
     
-    public function updateKelulusan(Request $request, $idAuthenticatedUser)
+    public function updateKelulusan($idPermohonanBaru)
     {
-        $user = User::find($idAuthenticatedUser);
+        $idAuthenticatedUser = Auth::id();
+        $user = Auth::user();
         $role = $user->role_id;
-        $idPermohonanBaru = $request->input('id_permohonan_baru');
         $permohonan = PermohonanBaru::find($idPermohonanBaru);
 
         switch ($role) {
