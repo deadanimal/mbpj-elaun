@@ -21,9 +21,9 @@ class PermohonanBaru extends Model
     // Default value
     protected $attributes = [
         'id_penyelia' => 0,
-        'id_ketua_bahagian' => 0,
-        'id_ketua_jabatan' => 0,
-        'id_kerani_semakan' => 0,
-        'id_kerani_pemeriksa' => 0
+        'id_ketuaBahagian' => 0,
+        'id_ketuaJabatan' => 0,
+        'id_keraniSemakan' => 0,
+        'id_keraniPemeriksa' => 0
     ];
 }

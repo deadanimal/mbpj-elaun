@@ -56,7 +56,7 @@ class EKedatanganSeeder extends Seeder
         DB::table('e_kedatangans')->insert([
             'id_ekedatangan' => 3,
             'id_user' => '6',
-            'tarikh' => '4/1/2021',
+            'tarikh' => '3/1/2021',
             'waktu_masuk' => '10:00',
             'waktu_keluar' => '18:00',
             'jumlah_waktu_kerja' => '13',

@@ -6,6 +6,7 @@ use App\User;
 use DataTables;
 use App\eKedatangan;
 use App\PermohonanBaru;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\permohonan_with_users;
 use App\DataTables\UsersDataTable;
@@ -114,7 +115,6 @@ class semakanController extends Controller
                     $usersExploded = explode(",", $users);
                     $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
 
-                    // if ($usersExploded->contains($id)) {
                     if (in_array($id, $usersExploded)){
                         $permohonanBaru[$key] = $dataPermohonan;
                     }
@@ -140,6 +140,8 @@ class semakanController extends Controller
 
     public function findPermohonan($idPermohananBaru)
     {
+        $array = [];
+
         $permohonan = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
 
         $permohonanBerkumpulan = permohonan_with_users::where('id_permohonan_baru', $idPermohananBaru)->first();
@@ -148,19 +150,24 @@ class semakanController extends Controller
         $usersExploded = explode(",", $users);
 
         $penyelia = User::find($permohonan->id_penyelia);
-        $ketuaBahagian = User::find($permohonan->id_ketua_bahagian);
-        $ketuaJabatan = User::find($permohonan->id_ketua_jabatan);
-        $keraniPemeriksa = User::find($permohonan->id_kerani_pemeriksa);
-        $keraniSemakan = User::find($permohonan->id_kerani_semakan);
+        $array = Arr::prepend($array, $penyelia, 'penyelia');
+
+        $ketuaBahagian = User::find($permohonan->id_ketuaBahagian);
+        $array = Arr::prepend($array, $ketuaBahagian, 'ketuaBahagian');
+
+        $ketuaJabatan = User::find($permohonan->id_ketuaJabatan);
+        $array = Arr::prepend($array, $ketuaJabatan, 'ketuaJabatan');
+
+        $keraniPemeriksa = User::find($permohonan->id_keraniPemeriksa);
+        $array = Arr::prepend($array, $keraniPemeriksa, 'keraniPemeriksa');
+
+        $keraniSemakan = User::find($permohonan->id_keraniSemakan);
+        $array = Arr::prepend($array, $keraniSemakan, 'keraniSemakan');
 
         return response()->json([
                     'error' => false,
                     'permohonan'  => $permohonan,
-                    'penyelia' => $penyelia,
-                    'ketuaBahagian' => $ketuaBahagian,
-                    'ketuaJabatan' => $ketuaJabatan,
-                    'keraniPemeriksa' => $keraniPemeriksa,
-                    'keraniSemakan' => $keraniSemakan,
+                    'arrayKelulusan' => $array,
                     'senaraiKakitangan' => $usersExploded
                 ], 200);
     }

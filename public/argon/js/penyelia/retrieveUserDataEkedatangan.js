@@ -25,19 +25,20 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $("#formModalEditIndividu input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
 
             // Kelulusan
-            if (data.permohonan.id_penyelia != '0') {
-                $("#formKelulusan input[name=penyelia]").val(data.penyelia.name);
-            } else {
-                $("#formKelulusan input[name=penyelia]").val("");
-                console.log("penyelia 0");
+           
+            for (const [key, value] of Object.entries(data.arrayKelulusan)) {
+                if (typeof value === 'object' && value !== null) {
+                    $("#formKelulusan input[name="+key+"]").val(value.name);
+                    console.log("if");
+                } else {
+                    $("#formKelulusan input[name="+key+"]").val("");
+                    console.log("else");
+                }
             }
-            $("#formKelulusan input[name=ketuaBahagian]").val(data.ketuaBahagian.name);
-            $("#formKelulusan input[name=ketuaJabatan]").val(data.ketuaJabatan.name);
-            $("#formKelulusan input[name=keraniPemeriksa]").val(data.keraniPemeriksa.name);
-            $("#formKelulusan input[name=keraniSemakan]").val(data.keraniSemakan.name);
 
             var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
             var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
+
             switch (jenisPermohonan) {
                 case "OT1":
                     block_ekedatanganIndividu.style.display = "none";

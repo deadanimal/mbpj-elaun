@@ -14,7 +14,7 @@
 // Route::get('/', function () {
 // 	return view('pages.welcome');
 // })->name('welcome');
-
+ 
 Route::get('/', function () {
 	return view('auth.login');
 })->name('welcome');
