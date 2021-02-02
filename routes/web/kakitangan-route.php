@@ -1,32 +1,36 @@
 <?php 
 
 Route::group([
-	'prefix' => 'pentadbir-sistem',
+	'prefix' => 'kakitangan',
 	'middleware' => [
 	'auth',
-	'role:1'
+	'role:8'
 	]], function () {
-	Route::resource('/dashboard','pentadbir_sistem\dashboardController',['except' => ['show','destroy']]);
+	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['show','destroy']]);
 	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
 	Route::resource('/tag', 'TagController', ['except' => ['show']]);
 	Route::resource('/item', 'ItemController', ['except' => ['show']]);
 	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);
-	Route::resource('/modul-aduan','pentadbir_sistem\modulAduanController',['except' => ['show','destroy']]);
+	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
-	Route::resource('/modul-laporan','pentadbir_sistem\modulLaporanController',['except' => ['show','destroy']]);
-	Route::resource('/pengurusan-pengguna','pentadbir_sistem\pengurusanPenggunaController',['except' => ['show','destroy']]);
+	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
+	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
 		Route::get('/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
+		Route::get('#permohonan-individu',[
+			'uses' => 'kakitangan\permohonanController@getPermohonanIndividu',
+			'as'   => 'permohonanbaru.individu'
+		]);
+		Route::get('#permohonan-berkumpulan',[
+			'uses' => 'kakitangan\permohonanController@getPermohonanBerkumpulan',
+			'as'   => 'permohonanbaru.berkumpulan'
+		]);
 	});
-	// Route::resource('penyelia-dashboard','penyelia\penyeliaController',['except' => ['show','destroy']]);
-	// Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['show','destroy']]);
-	// Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
-	// Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
