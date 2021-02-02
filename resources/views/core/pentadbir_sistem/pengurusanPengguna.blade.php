@@ -39,14 +39,14 @@
                                 <h2>Pengurusan Pengguna</h2>
                             </div>
                             <div class="col-6 content-end">
-                                <input type="text" class="form-control rounded" placeholder="Carian">
+                                <input type="text" class="form-control rounded" id="carianPengguna" placeholder="Carian">
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="col-12">
                             <div class="table-responsive">
-                                <table class="table table-flush" id="datatable">
+                                <table class="table table-flush" id="pengurusanDT">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>ID</th>
@@ -62,19 +62,6 @@
                                     </tbody>
                                 </table>
 
-                            </div>
-                            <div class="col-12 my-4">
-                            
-                                <form class="form-inline" style="display: flex; justify-content: flex-end">
-                                    
-                                        <label for="jam">Jumlah Persamaan Jam:</label>
-                                        <input type="text" class="form-control mx-sm-3" id="jam" placeholder="">
-
-                                        <label for="masa">Jumlah Tuntutan Lebih Masa:</label>
-                                        <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">
-                                                    
-                                </form>
-                                
                             </div>
                         </div>
                     </div>

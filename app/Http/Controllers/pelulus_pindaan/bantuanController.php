@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\pelulus_pindaan;
 
-use App\eKedatangan;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use Carbon\Carbon;
+use DataTables;
 
-class EKedatanganController extends Controller
+class bantuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +18,20 @@ class EKedatanganController extends Controller
     public function index()
     {
         //
+        $user = User::select("*");
+
+        if(request()->ajax()) {
+            return datatables()->of($user)
+        ->editColumn('created_at', function ($user) {
+            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
+        })
+        ->filterColumn('created_at', function ($query, $keyword) {
+            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
+        })
+        ->make(true);
+        }
+        
+        return view('core.pelulus_pindaan.bantuan');
     }
 
     /**
@@ -41,36 +58,21 @@ class EKedatanganController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\eKedatangan  $eKedatangan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(eKedatangan $eKedatangan)
+    public function show($id)
     {
         //
-    }
-
-    public function findEkedatangan($id_user)
-    {
-        $ekedatangans = eKedatangan::where('id_user', $id_user)
-                                    ->join('users', 'users.id', '=', 'e_kedatangans.id_user')
-                                    ->first();
-        
-        $user_name = $ekedatangans->name;
-
-        return response()->json([
-                    'error' => false,
-                    'ekedatangans'  => $ekedatangans,
-                    'user_name' => $user_name
-                ], 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\eKedatangan  $eKedatangan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(eKedatangan $eKedatangan)
+    public function edit($id)
     {
         //
     }
@@ -79,10 +81,10 @@ class EKedatanganController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\eKedatangan  $eKedatangan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, eKedatangan $eKedatangan)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,10 +92,10 @@ class EKedatanganController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\eKedatangan  $eKedatangan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(eKedatangan $eKedatangan)
+    public function destroy($id)
     {
         //
     }

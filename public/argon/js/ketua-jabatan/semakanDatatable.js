@@ -63,7 +63,7 @@ function showUser() {
 
     $.ajax({
         type: 'GET',
-        url: 'user/semakan-pekerja/' + id,
+        url: 'ketua-jabatan-semakan/semakan-pekerja/' + id,
         success: function(data) {
             $("#formOTEL input[name=nama]").val(data.users.name);
 
@@ -83,7 +83,7 @@ function showDatatable(pilihan){
                 processing: false,
                 serverSide: true,
             ajax: {
-                url: "penyelia-semakan/"+id_user,
+                url: "ketua-jabatan-semakan/"+id_user,
                 type: 'GET',
                 data: {
                     pilihan: pilihan

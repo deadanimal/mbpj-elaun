@@ -45,6 +45,7 @@ $(document).ready(function(){
     });
 
     var permohonanDT = $("#datatable1").DataTable({
+        dom: "lrtip",
         scrollX: false,
         destroy: true,
         lengthMenu: [ 5, 10, 25, 50 ],
@@ -53,6 +54,7 @@ $(document).ready(function(){
     })     
 
     var tuntutanDT = $("#tuntutanDT").DataTable({
+        dom: "lrtip",
         scrollX: false,
         destroy: true,
         lengthMenu: [ 5, 10, 25, 50 ],
@@ -61,6 +63,7 @@ $(document).ready(function(){
     })   
 
     var lulusDT = $("#lulusDT").DataTable({
+        dom: "lrtip",
         scrollX: false,
         destroy: true,
         lengthMenu: [ 5, 10, 25, 50 ],
@@ -69,6 +72,7 @@ $(document).ready(function(){
     })   
 
     var tolakDT = $("#tolakDT").DataTable({
+        dom: "lrtip",
         scrollX: false,
         destroy: true,
         lengthMenu: [ 5, 10, 25, 50 ],

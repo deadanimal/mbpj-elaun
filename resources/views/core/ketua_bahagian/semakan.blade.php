@@ -37,10 +37,10 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
+                               
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -51,19 +51,14 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade show active" id="formPermohonanKerjaLebihMasa" role="tabpanel" aria-labelledby="tabPilihanPermohonanKerjaLebihMasa">
-                                {{-- Tab content -> Form --}}
-                                @include('core.ketua_bahagian.partials.formPermohonanKerjaLebihMasa')
-                            </div>
-
-                            <div class="tab-pane fade" id="formTuntuanElaunLebihMasa" role="tabpanel" aria-labelledby="tabPilihanTuntutanElaunLebihMasa">
-                                {{-- Tab content -> Form --}}
-                                @include('core.ketua_bahagian.partials.formTuntuanElaunLebihMasa')
-                            </div>
+                            {{-- Form semakan --}}
+                                @include('core.ketua_bahagian.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
             </div>
+            
+
             <div class="col-xl-4 d-flex">
                 <div class="card flex-fill">
                 <div class="card-header">
@@ -146,6 +141,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
 
             {{-- Datatables Ketua Bahagian --}}
@@ -179,5 +175,8 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-bahagian/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-bahagian/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-bahagian/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-bahagian/saveKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

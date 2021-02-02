@@ -55,11 +55,32 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-6">
+                            <div class="col-5">
                                 <h2>Audit Trail</h2>
                             </div>
-                            <div id="printdiv" class="col-6 text-right">
-                                
+                            <div class="col-6" >
+                                <form id = "joiningDateSearch">
+                                    <div class="form-row justify-content-end align-items-end">
+                                        <div class="form-group col-sm-5">
+                                            <label class ="col-form-label col-form-label-sm" for="Doctor-name">From</label>
+                                            <input type="date" id="min"
+                                                class="form-control form-control-sm" autocomplete="off">
+                                        </div>
+                                        <div class="form-group col-sm-5">
+                                            <label class ="col-form-label col-form-label-sm" for="dob">To</label>
+                                            <input type="date" id="max"
+                                                class="form-control form-control-sm" autocomplete="off">
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <button class="form-control form-control-sm btn btn-sm btn-primary" id="btnGo" type="button">Search</button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                                                                    
+                            </div>
+                            <div class="col-1 text-right">
+                                <span id="printButton" onclick="printTuntutan()" style="cursor: pointer"><i class="fa fa-print fa-3x" ></i></span>
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
 // Route::get('/', function () {
 // 	return view('pages.welcome');
 // })->name('welcome');
-
+ 
 Route::get('/', function () {
 	return view('auth.login');
 })->name('welcome');
@@ -94,9 +94,13 @@ Route::group([
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
 
-	Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
-	Route::get('/penyelia-semakan/modal-semakan/{id}', 'penyelia\semakanController@findPermohonan' );
-	Route::get('/penyelia-semakan/ekedatangan-semakan/{id}', 'penyelia\semakanController@findEkedatangan' );
+	// Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
+	
+	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
+	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
+	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@updateKelulusan' );
+	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
+
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
 		return view('profile.index',['link'=>$link]);
@@ -131,9 +135,14 @@ Route::group([
 		]);
 	});
 	Route::resource('ketua-bahagian-dashboard','ketua_bahagian\ketuaBahagianController',['except' => ['show','destroy']]);
-	Route::resource('ketua-bahagian-semakan','ketua_bahagian\semakanController',['except' => ['show','destroy']]);
+	Route::resource('ketua-bahagian-semakan','ketua_bahagian\semakanController',['except' => ['destroy']]);
 	Route::resource('ketua-bahagian-laporan','ketua_bahagian\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-bahagian-bantuan','ketua_bahagian\bantuanController',['except' => ['show','destroy']]);
+
+	Route::get('/ketua-bahagian-semakan/semakan-pekerja/{id}', 'ketua_bahagian\semakanController@findUser' );
+	Route::get('/ketua-bahagian-semakan/semakan-permohonan/{id}', 'ketua_bahagian\semakanController@findPermohonan' );
+	Route::get('/ketua-bahagian-semakan/semakan-ekedatangan/{id}', 'ketua_bahagian\semakanController@findEkedatangan' );
+	Route::post('/ketua-bahagian-semakan/semakan-kelulusan/{id}', 'ketua_bahagian\semakanController@updateKelulusan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
@@ -169,9 +178,14 @@ Route::group([
 		]);
 	});
 	Route::resource('ketua-jabatan-dashboard','ketua_jabatan\ketuaJabatanController',['except' => ['show','destroy']]);
-	Route::resource('ketua-jabatan-semakan','ketua_jabatan\semakanController',['except' => ['show','destroy']]);
+	Route::resource('ketua-jabatan-semakan','ketua_jabatan\semakanController',['except' => ['destroy']]);
 	Route::resource('ketua-jabatan-laporan','ketua_jabatan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-jabatan-bantuan','ketua_jabatan\bantuanController',['except' => ['show','destroy']]);
+
+	Route::get('/ketua-jabatan-semakan/semakan-pekerja/{id}', 'ketua_jabatan\semakanController@findUser' );
+	Route::get('/ketua-jabatan-semakan/semakan-permohonan/{id}', 'ketua_jabatan\semakanController@findPermohonan' );
+	Route::get('/ketua-jabatan-semakan/semakan-ekedatangan/{id}', 'ketua_jabatan\semakanController@findEkedatangan' );
+	Route::post('/ketua-jabatan-semakan/semakan-kelulusan/{id}', 'ketua_jabatan\semakanController@updateKelulusan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
@@ -313,6 +327,20 @@ Route::group(
 					function () {
 	Route::resource('/dashboard','datuk_bandar\dashboardController');
 	Route::resource('/bantuan','datuk_bandar\bantuanController');
+
+});
+
+Route::group(
+	[
+		'prefix' => 'pelulus-pindaan',
+		'middleware' => [
+						'auth',
+						'role:9'
+						]
+					], 
+					function () {
+	Route::resource('/dashboard','pelulus_pindaan\dashboardController');
+	Route::resource('/bantuan','pelulus_pindaan\bantuanController');
 
 });
 

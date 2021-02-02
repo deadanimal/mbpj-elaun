@@ -1,9 +1,12 @@
-$('#datatable').dataTable({
+var permohonanDT = $('#permohonanDT').dataTable({
+    dom: "lrtip",
     scrollX: false,
     destroy: true,
-    "lengthMenu": [ 5, 10, 25, 50 ],
-    processing: true,
-    serverSide: true,
+    lengthMenu: [ 5, 10, 25, 50 ],
+    responsive: false,
+    autoWidth:true,
+    // processing: true,
+    // serverSide: true,
     ajax: {
         url: "semakan/",
         type: 'GET',
@@ -11,25 +14,25 @@ $('#datatable').dataTable({
         
         columns: [
     
-            {data: 'id', name: 'id'},
+            {data: 'id',    name: 'id'},
     
-            {data: null , name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
     
-            {data: null, name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
     
-            {data: null, name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
     
-            {data: 'created_at', name: 'created_at'},
+            {data: 'created_at',    name: 'created_at'},
     
-            {data: null , name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
     
-            {data: null , name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
             
-            {data: 'status', name: 'status'},
+            {data: 'status',    name: 'status'},
     
-            {data: null , name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
     
-            {data: null , name: null, searchable:false},
+            {data: null,    name: null, searchable:false},
     
             // {data: null, name: null},
     
@@ -54,13 +57,10 @@ $('#datatable').dataTable({
                     return "<span>5.30 PM</span>"
                 }
             },
-            // {
-            //     type: "html-input",
-            //     targets: 4,
-            //     render:function(data,type,row){
-            //         return moment(data).format("DD/MM/YYYY")
-            //     }
-            // },
+            {
+                targets: [4],
+                type: "date",
+            },
             {
                 targets: 5,
                 render:function(data,type,row){
@@ -102,3 +102,63 @@ function editKemaskiniForm(id){
 function closeModal(modal){
     $("#"+modal).modal("hide");
 }
+
+$.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+
+        console.log(data);
+        var valid = true;
+        var min = moment($("#min").val());
+        if (!min.isValid()) { min = null; }
+      console.log(min);
+
+        var max = moment($("#max").val());
+        if (!max.isValid()) { max = null; }
+
+        if (min === null && max === null) {
+            
+            valid = true;
+        }
+        else {
+
+            $.each(settings.aoColumns, function (i, col) {
+              
+                if (col.type == "date") {
+                    var cDate = moment(data[i],'DD/MM/YYYY');
+                  console.log(cDate);
+                
+                    if (cDate.isValid()) {
+                        if (max !== null && max.isBefore(cDate)) {
+                            valid = false;
+                        }
+                        if (min !== null && cDate.isBefore(min)) {
+                            valid = false;
+                        }
+                    }
+                    else {
+                        valid = false;
+                    }
+                }
+            });
+        }
+        return valid;
+});
+
+$("#btnGo").click(function () {
+    console.log("searching")
+    console.log($('#jenisTable').val())
+    $('#permohonanDT').DataTable().column().search(
+        $('#carian').val(),
+        $('#jenisTable').val()
+        ).draw();
+});
+
+function filterColumn ( i ) {
+    $('#permohonanDT').DataTable().column( i ).search(
+        $('#col'+i+'_filter').val()
+    ).draw();
+}
+
+$('input.column_filter').on( 'keyup click', function () {
+    filterColumn( $(this).attr('data-column') );
+} );
