@@ -49,6 +49,21 @@ class EKedatanganController extends Controller
         //
     }
 
+    public function findEkedatangan($id_user)
+    {
+        $ekedatangans = eKedatangan::where('id_user', $id_user)
+                                    ->join('users', 'users.id', '=', 'e_kedatangans.id_user')
+                                    ->first();
+        
+        $user_name = $ekedatangans->name;
+
+        return response()->json([
+                    'error' => false,
+                    'ekedatangans'  => $ekedatangans,
+                    'user_name' => $user_name
+                ], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

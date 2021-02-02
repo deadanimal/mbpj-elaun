@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\penyelia;
 
 use DataTables;
-use App\User;
 use App\PermohonanBaru;
-use App\eKedatangan;
-use App\permohonan_with_users;
 use Illuminate\Http\Request;
+use App\permohonan_with_users;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -61,6 +59,8 @@ class semakanController extends Controller
      * OT2 == 10
      * EL2 == 11
      * 
+     * This function is used to display all permohonans related to 1 pekerja 
+     * 
      */
     public function show(Request $request, $id)
     { 
@@ -93,7 +93,7 @@ class semakanController extends Controller
                     $usersExploded = explode(",", $users);
                     $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
 
-                    if (in_array($id, $usersExploded)) {
+                    if (in_array($id, $usersExploded)){
                         $permohonanBaru[$key] = $dataPermohonan;
                     }
                 }
@@ -110,7 +110,7 @@ class semakanController extends Controller
                     $usersExploded = explode(",", $users);
                     $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
 
-                    if (in_array($id, $usersExploded)) {
+                    if (in_array($id, $usersExploded)){
                         $permohonanBaru[$key] = $dataPermohonan;
                     }
                 }
@@ -123,47 +123,6 @@ class semakanController extends Controller
         }
     }
 
-    public function findUser($id)
-    {
-        $users = User::find($id);
-
-        return response()->json([
-                    'error' => false,
-                    'users'  => $users,
-                ], 200);
-    }
-
-    public function findPermohonan($idPermohananBaru)
-    {
-        $permohonans = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
-
-        $penyelia = User::find($permohonans->id_penyelia);
-        $ketuaBahagian = User::find($permohonans->id_ketua_bahagian);
-        $ketuaJabatan = User::find($permohonans->id_ketua_jabatan);
-        $keraniPemeriksa = User::find($permohonans->id_kerani_pemeriksa);
-        $keraniSemakan = User::find($permohonans->id_kerani_semakan);
-
-        return response()->json([
-                    'error' => false,
-                    'permohonans'  => $permohonans,
-                    'penyelia' => $penyelia,
-                    'ketuaBahagian' => $ketuaBahagian,
-                    'ketuaJabatan' => $ketuaJabatan,
-                    'keraniPemeriksa' => $keraniPemeriksa,
-                    'keraniSemakan' => $keraniSemakan
-                ], 200);
-    }
-
-    public function findEkedatangan($id_user)
-    {
-        $ekedatangans = eKedatangan::where('id_user', $id_user)->first();
-
-        return response()->json([
-                    'error' => false,
-                    'ekedatangans'  => $ekedatangans,
-                ], 200);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -172,7 +131,7 @@ class semakanController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 
     }
 
     /**
@@ -184,7 +143,7 @@ class semakanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //    
     }
 
     /**

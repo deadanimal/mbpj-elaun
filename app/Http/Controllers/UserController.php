@@ -87,6 +87,16 @@ class UserController extends Controller
         return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
     }
 
+    public function findUser($id)
+    {
+        $users = User::find($id);
+
+        return response()->json([
+                    'error' => false,
+                    'users'  => $users,
+                ], 200);
+    }
+
     /**
      * Remove the specified user from storage
      *

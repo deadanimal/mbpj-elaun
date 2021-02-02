@@ -102,6 +102,18 @@ class UsersTableSeeder extends Seeder
     ]);
 
     DB::table('users')->insert([
+        'id' => 9,
+        'name' => 'Penyelia 2',
+        'email' => 'py2@argon.com',
+        'role_id' => 2,
+        'password' => Hash::make('secret'), // secret
+        'remember_token' => Str::random(10),
+        'email_verified_at' => now(),
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
+
+    DB::table('users')->insert([
         'id' => 3,
         'name' => 'Datuk Bandar',
         'email' => 'db@argon.com',
@@ -117,6 +129,18 @@ class UsersTableSeeder extends Seeder
         'id' => 4,
         'name' => 'Ketua Bahagian',
         'email' => 'kb@argon.com',
+        'role_id' => 4,
+        'password' => Hash::make('secret'), // secret
+        'remember_token' => Str::random(10),
+        'email_verified_at' => now(),
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
+
+    DB::table('users')->insert([
+        'id' => 10,
+        'name' => 'Ketua Bahagian 2',
+        'email' => 'kb2@argon.com',
         'role_id' => 4,
         'password' => Hash::make('secret'), // secret
         'remember_token' => Str::random(10),
