@@ -94,10 +94,12 @@ Route::group([
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
 
-	Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
-	Route::get('/penyelia-semakan/semakan-permohonan/{id}', 'penyelia\semakanController@findPermohonan' );
-	Route::get('/penyelia-semakan/semakan-ekedatangan/{id}', 'penyelia\semakanController@findEkedatangan' );
-	Route::post('/penyelia-semakan/semakan-kelulusan/{id}', 'penyelia\semakanController@updateKelulusan' );
+	// Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
+	
+	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
+	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
+	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@updateKelulusan' );
+	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

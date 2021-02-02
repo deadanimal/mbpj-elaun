@@ -63,7 +63,7 @@ function showUser() {
 
     $.ajax({
         type: 'GET',
-        url: 'penyelia-semakan/semakan-pekerja/' + id,
+        url: 'user/semakan-pekerja/' + id,
         success: function(data) {
             $("#formOTEL input[name=nama]").val(data.users.name);
 

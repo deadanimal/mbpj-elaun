@@ -5,7 +5,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val("");
     
     $.ajax({
-        url: 'penyelia-semakan/semakan-pekerja/' + id_user,
+        url: 'user/semakan-pekerja/' + id_user,
         type: 'GET',
         success: function(data) {
             $("#formModalEditIndividu input[name=nama]").val(data.users.name);
@@ -18,14 +18,13 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     });
    
     $.ajax({
-        url: 'penyelia-semakan/semakan-permohonan/' + id_permohonan_baru,
+        url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET',
         success: function(data) {
 
             $("#formModalEditIndividu input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
 
             // Kelulusan
-           
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
                 if (typeof value === 'object' && value !== null) {
                     $("#formKelulusan input[name="+key+"]").val(value.name);
@@ -77,7 +76,7 @@ function fillInSenaraiKakitangan(senaraiKakitangan, jenisPermohonan) {
     senaraiKakitangan.forEach(element => {
         $(document).ready(function(){
             $.ajax({
-                url: 'penyelia-semakan/semakan-pekerja/' + element,
+                url: 'user/semakan-pekerja/' + element,
                 type: 'GET',
                 success: function(data) {
                     $("#senaraiKakitanganBerkumpulan").append('<li class="nav-item mb-1" onclick="fillInKedatangan('+data.users.id+','+"'"+ jenisPermohonan +"'"+')" id="'+data.users.id+'" role="presentation"><a class="nav-link" data-bs-toggle="pill" href="#" role="tab" aria-controls="test1" aria-selected="true">'+data.users.name+'</a></li>');
@@ -95,7 +94,7 @@ function fillInSenaraiKakitangan(senaraiKakitangan, jenisPermohonan) {
 
 function fillInKedatangan(idKakitangan, jenisPermohonan) {    
     $.ajax({
-        url: 'penyelia-semakan/semakan-ekedatangan/' + idKakitangan,
+        url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
         success: function(data) {
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);

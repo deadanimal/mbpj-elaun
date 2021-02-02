@@ -1,7 +1,7 @@
 function saveIDforKelulusan(id_permohonan_baru) {
     
     $.ajax({
-        url: "penyelia-semakan/semakan-kelulusan/" + id_permohonan_baru,
+        url: "permohonan-baru/semakan-kelulusan/" + id_permohonan_baru,
         type: 'POST',
         success: function() {
             console.log('updated');
