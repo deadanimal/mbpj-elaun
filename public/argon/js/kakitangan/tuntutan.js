@@ -1,7 +1,13 @@
-var table = $('#tuntutanDT').DataTable({
-      
-  "lengthMenu": [ 5, 10, 25, 50 ],
-  buttons: [
+var table = $('#tuntutansDT').dataTable({
+    dom: "lrtip",
+    scrollX: false,
+    destroy: true,
+    lengthMenu: [ 5, 10, 25, 50 ],
+    responsive: false,
+    autoWidth:true,
+    // processing: true,
+    serverSide: true,
+    buttons: [
     {
       extend:'pdfHtml5',
       title:'Senarai Permohonan Tuntutan'  
@@ -40,22 +46,26 @@ ajax: {
   ],
   columnDefs: [
       {
-          targets: 1,
-          render:function(data,type,row){
-              return "<span>12/1/2020</span>"
+            targets: 1,
+            render:function(data,type,row){
+                return "<span>12/1/2020</span>"
           }
       },
       {
-          targets: 2,
-          render:function(data,type,row){
-              return "<span>2.30 PM</span>"
+            targets: 2,
+            render:function(data,type,row){
+                return "<span>2.30 PM</span>"
           }
       },
       {
-          targets: 3,
-          render:function(data,type,row){
+            targets: 3,
+            render:function(data,type,row){
               return "<span>5.30 PM</span>"
           }
+      },
+      {
+            targets: [4],
+            type: "date",
       },
       {
           targets: 5,
@@ -94,3 +104,55 @@ function printTuntutan(){
 console.log("gfhj")
 table.button( '.buttons-pdf' ).trigger();
 }
+
+$.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+
+        console.log(data);
+        var valid = true;
+        var min = moment($("#min").val());
+        if (!min.isValid()) { min = null; }
+      console.log(min);
+
+        var max = moment($("#max").val());
+        if (!max.isValid()) { max = null; }
+
+        if (min === null && max === null) {
+            
+            valid = true;
+        }
+        else {
+
+            $.each(settings.aoColumns, function (i, col) {
+              
+                if (col.type == "date") {
+                    var cDate = moment(data[i],'DD/MM/YYYY');
+                  console.log(cDate);
+                
+                    if (cDate.isValid()) {
+                        if (max !== null && max.isBefore(cDate)) {
+                            valid = false;
+                        }
+                        if (min !== null && cDate.isBefore(min)) {
+                            valid = false;
+                        }
+                    }
+                    else {
+                        valid = false;
+                    }
+                }
+            });
+        }
+        return valid;
+});
+
+$("#btnGo").click(function () {
+    console.log("searching")
+    console.log($('#jenisTable').val())
+    console.log($('#carian').val())
+    
+    $('#tuntutansDT').DataTable().column().search(
+        $('#carian').val(),
+        $('#jenisTable').val()
+        ).draw();
+});
