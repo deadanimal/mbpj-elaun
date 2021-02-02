@@ -83,7 +83,7 @@ function showDatatable(pilihan){
                 processing: false,
                 serverSide: true,
             ajax: {
-                url: "ketua-bahagian-semakan/"+id_user,
+                url: "kerani-pemeriksa-semakan/"+id_user,
                 type: 'GET',
                 data: {
                     pilihan: pilihan

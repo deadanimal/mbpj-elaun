@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\kerani_pemeriksa;
 
+use App\User;
 use DataTables;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class semakanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
         if(request()->ajax()) {
             return datatables()->of(User::select("*"))
