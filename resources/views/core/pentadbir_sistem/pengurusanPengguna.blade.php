@@ -39,7 +39,7 @@
                                 <h2>Pengurusan Pengguna</h2>
                             </div>
                             <div class="col-6 content-end">
-                                <input type="text" class="form-control rounded" id="carianPengguna" placeholder="Carian">
+                                <input type="text" class="form-control form-control-sm rounded-pill" id="carianPengguna" placeholder="Carian">
                             </div>
                         </div>
                     </div>

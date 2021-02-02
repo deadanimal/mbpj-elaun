@@ -42,14 +42,14 @@
                                 <form id = "joiningDateSearch">
                                     <div class="form-row justify-content-end align-items-end">
                                         <div class="form-group col-sm-5">
-                                            <label class ="col-form-label col-form-label-sm" for="Doctor-name">From</label>
-                                            <input type="date" id="min"
-                                                class="form-control form-control-sm" autocomplete="off">
+                                            <label class ="col-form-label col-form-label-sm" for="min">From</label>
+                                            <input id="min"
+                                                class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
                                         </div>
                                         <div class="form-group col-sm-5">
-                                            <label class ="col-form-label col-form-label-sm" for="dob">To</label>
-                                            <input type="date" id="max"
-                                                class="form-control form-control-sm" autocomplete="off">
+                                            <label class ="col-form-label col-form-label-sm" for="max">To</label>
+                                            <input id="max"
+                                                class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <button class="form-control form-control-sm btn btn-sm btn-primary" id="btnGo" type="button">Search</button>

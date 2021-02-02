@@ -62,14 +62,14 @@
                                         <div class="col-7">            
                                             <div class="form-row align-items-end">
                                                 <div class="col-sm-3">
-                                                    <label class ="col-form-label col-form-label-sm" for="Doctor-name">From</label>
-                                                    <input type="date" id="min"
-                                                        class="form-control form-control-sm" autocomplete="off">
+                                                    <label class ="col-form-label col-form-label-sm" for="min">From</label>
+                                                    <input id="min"
+                                                        class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <label class ="col-form-label col-form-label-sm" for="dob">To</label>
-                                                    <input type="date" id="max"
-                                                        class="form-control form-control-sm" autocomplete="off">
+                                                    <label class ="col-form-label col-form-label-sm" for="max">To</label>
+                                                    <input id="max"
+                                                        class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" >

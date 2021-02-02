@@ -30,45 +30,26 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col-6">
                                 <h3 class="mb-0">{{ __('Senarai Maklum Balas') }}</h3>
                             </div>
-                            <div class="col-sm-2 text-right">
-                                <div class="btn-group">
-                                <button type="button" class="btn btn-outline-default mb-2 mr-sm-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Bulan
-                                </button>
-                                    <div class="dropdown-menu scrollable-menu">
-                                        <a class="dropdown-item" href="#">Januari</a>
-                                        <a class="dropdown-item" href="#">Februari</a>
-                                        <a class="dropdown-item" href="#">Mac</a>
-                                        <a class="dropdown-item" href="#">April</a>
-                                        <a class="dropdown-item" href="#">Mei</a>
-                                        <a class="dropdown-item" href="#">Jun</a>
-                                        <a class="dropdown-item" href="#">Julai</a>
-                                        <a class="dropdown-item" href="#">Ogos</a>
-                                        <a class="dropdown-item" href="#">September</a>
-                                        <a class="dropdown-item" href="#">Oktober</a>
-                                        <a class="dropdown-item" href="#">November</a>
-                                        <a class="dropdown-item" href="#">Disember</a>
+                            <div class="col-6">            
+                                <div class="form-row align-items-end">
+                                    <div class="col-sm-5">
+                                        <label class ="col-form-label col-form-label-sm" for="min">From</label>
+                                        <input id="min"
+                                            class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class ="col-form-label col-form-label-sm" for="max">To</label>
+                                        <input id="max"
+                                            class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                    </div>
+                                    <div class="col-sm-2 text-center">
+                                        <button class="btn btn-sm btn-primary" id="btnGo" type="button">Search</button>
                                     </div>
                                 </div>
-                            </div>
-                                
-                            <div class="col-sm-2 text-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-default mb-2 mr-sm-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Tahun
-                                    </button>
-                                    <div class="dropdown-menu scrollable-menu">
-                                    @for ($year = date('Y'); $year > date('Y') - 60; $year--)
-                                    <a class="dropdown-item" href="#" value="{{$year}}">
-                                            {{$year}}
-                                    </a>
-                                    @endfor
-                                    </div>
-                                </div>
-                            </div>
+                            </div>     
                         </div>
                     </div>
                     <div class="card-body">
