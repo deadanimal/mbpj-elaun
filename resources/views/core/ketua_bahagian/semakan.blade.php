@@ -176,7 +176,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-bahagian/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-bahagian/semakanDatatable.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-bahagian/retrieveUserDataEkedatangan.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-bahagian/saveKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

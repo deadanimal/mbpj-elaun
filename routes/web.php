@@ -93,8 +93,6 @@ Route::group([
 	Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['destroy']]);
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
-
-	// Route::get('/penyelia-semakan/semakan-pekerja/{id}', 'penyelia\semakanController@findUser' );
 	
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
@@ -139,10 +137,10 @@ Route::group([
 	Route::resource('ketua-bahagian-laporan','ketua_bahagian\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-bahagian-bantuan','ketua_bahagian\bantuanController',['except' => ['show','destroy']]);
 
-	Route::get('/ketua-bahagian-semakan/semakan-pekerja/{id}', 'ketua_bahagian\semakanController@findUser' );
-	Route::get('/ketua-bahagian-semakan/semakan-permohonan/{id}', 'ketua_bahagian\semakanController@findPermohonan' );
-	Route::get('/ketua-bahagian-semakan/semakan-ekedatangan/{id}', 'ketua_bahagian\semakanController@findEkedatangan' );
-	Route::post('/ketua-bahagian-semakan/semakan-kelulusan/{id}', 'ketua_bahagian\semakanController@updateKelulusan' );
+	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
+	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
+	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@updateKelulusan' );
+	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

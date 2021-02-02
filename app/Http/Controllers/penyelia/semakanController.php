@@ -6,8 +6,6 @@ use DataTables;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
 use App\permohonan_with_users;
-use App\DataTables\UsersDataTable;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class semakanController extends Controller
