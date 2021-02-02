@@ -180,10 +180,10 @@ Route::group([
 	Route::resource('ketua-jabatan-laporan','ketua_jabatan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-jabatan-bantuan','ketua_jabatan\bantuanController',['except' => ['show','destroy']]);
 
-	Route::get('/ketua-jabatan-semakan/semakan-pekerja/{id}', 'ketua_jabatan\semakanController@findUser' );
-	Route::get('/ketua-jabatan-semakan/semakan-permohonan/{id}', 'ketua_jabatan\semakanController@findPermohonan' );
-	Route::get('/ketua-jabatan-semakan/semakan-ekedatangan/{id}', 'ketua_jabatan\semakanController@findEkedatangan' );
-	Route::post('/ketua-jabatan-semakan/semakan-kelulusan/{id}', 'ketua_jabatan\semakanController@updateKelulusan' );
+	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
+	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
+	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@updateKelulusan' );
+	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

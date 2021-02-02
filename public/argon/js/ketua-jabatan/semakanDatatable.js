@@ -59,11 +59,11 @@ function checkUser(){
 }
 
 function showUser() {
-    var id = document.querySelector("#noPekerja").value;
+    var id_user = document.querySelector("#noPekerja").value;
 
     $.ajax({
         type: 'GET',
-        url: 'ketua-jabatan-semakan/semakan-pekerja/' + id,
+        url: 'user/semakan-pekerja/' + id_user,
         success: function(data) {
             $("#formOTEL input[name=nama]").val(data.users.name);
 
