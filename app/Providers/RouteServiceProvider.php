@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 
 
         parent::boot();
     }
@@ -39,7 +39,25 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/penyelia-route.php'));
+
+        Route::middleware('web')
+            ->namespace($this->namespace)    
+            ->group(base_path('routes/web/ketua-bahagian-route.php'));
+
+        Route::middleware('web')
+            ->namespace($this->namespace)    
+            ->group(base_path('routes/web/ketua-jabatan-route.php'));
+
+        Route::middleware('web')
+            ->namespace($this->namespace)    
+            ->group(base_path('routes/web/kerani-semakan-route.php'));
+
+        Route::middleware('web')
+            ->namespace($this->namespace)    
+            ->group(base_path('routes/web/kerani-pemeriksa-route.php'));
     }
 
     /**
