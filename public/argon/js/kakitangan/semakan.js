@@ -108,11 +108,11 @@ $.fn.dataTable.ext.search.push(
 
         console.log(data);
         var valid = true;
-        var min = moment($("#min").val());
+        var min = moment($("#min").val(),"DD/MM/YYYY");
         if (!min.isValid()) { min = null; }
       console.log(min);
 
-        var max = moment($("#max").val());
+        var max = moment($("#max").val(),"DD/MM/YYYY");
         if (!max.isValid()) { max = null; }
 
         if (min === null && max === null) {
@@ -162,3 +162,11 @@ function filterColumn ( i ) {
 $('input.column_filter').on( 'keyup click', function () {
     filterColumn( $(this).attr('data-column') );
 } );
+
+$('#min').datepicker({
+    dateFormat: 'dd/mm/yy',
+});
+
+$('#max').datepicker({
+    dateFormat: 'dd/mm/yy',
+});

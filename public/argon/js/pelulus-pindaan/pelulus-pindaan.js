@@ -83,11 +83,11 @@ $.fn.dataTable.ext.search.push(
 
           
         var valid = true;
-        var min = moment($("#min").val());
+        var min = moment($("#min").val(),'DD/MM/YYYY');
         if (!min.isValid()) { min = null; }
       console.log(min);
 
-        var max = moment($("#max").val());
+        var max = moment($("#max").val(),'DD/MM/YYYY');
         if (!max.isValid()) { max = null; }
 
         if (min === null && max === null) {
@@ -121,4 +121,12 @@ $.fn.dataTable.ext.search.push(
 
 $("#btnGo").click(function () {
     $('#pindaanDT').DataTable().draw();
+});
+
+$('#min').datepicker({
+    dateFormat: 'dd/mm/yy',
+});
+
+$('#max').datepicker({
+    dateFormat: 'dd/mm/yy',
 });
