@@ -185,9 +185,9 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="col-lg-12 mt-2">
-                                            <div class="table-responsive py-4">
-                                                <table class="table " id="permohonanbaruDT">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table class="table " id="individuDT">
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th>No</th>
@@ -213,11 +213,11 @@
                                             
                                                 <form class="form-inline" style="display: flex; justify-content: flex-end">
                                                     
-                                                        <label for="jam">Jumlah Persamaan Jam:</label>
-                                                        <input type="text" class="form-control mx-sm-3" id="jam" placeholder="">
+                                                        <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
+                                                        <input type="text" class="form-control form-control-sm column_filter" id="filterIndividu0" placeholder="" autocomplete="off" data-column="0">
 
-                                                        <label for="masa">Jumlah Tuntutan Lebih Masa:</label>
-                                                        <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">
+                                                        <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
+                                                        <input type="text" class="form-control form-control-sm column_filter" id="filterIndividu4" placeholder="" autocomplete="off" data-column="4">
                                                                     
                                                 </form>
                                                 
@@ -236,16 +236,21 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="col-12 mt-2">
-                                            <div class="table-responsive py-4">
-                                                <table class="table table-flush" id="datatable">
+                                        <div class="col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-flush" id="berkumpulanDT">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>ID</th>
-                                                            <th>Name</th>
-                                                            <th>Email</th>
-                                                            <th>Created At</th>
-                                                            <th>Actions</th>
+                                                            <th>No</th>
+                                                            <th>Tarikh Permohonan</th>
+                                                            <th>Masa Mula</th>
+                                                            <th>Masa Akhir</th>
+                                                            <th>Masa</th>
+                                                            <th>Hari</th>
+                                                            <th>Waktu</th>
+                                                            <th>Kadar Jam</th>
+                                                            <th>Tujuan</th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -258,11 +263,11 @@
                                             
                                                 <form class="form-inline" style="display: flex; justify-content: flex-end">
                                                     
-                                                        <label for="jam">Jumlah Persamaan Jam:</label>
-                                                        <input type="text" class="form-control mx-sm-3" id="jam" placeholder="">
+                                                        <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
+                                                        <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan0" placeholder="" autocomplete="off" data-column="0">
 
-                                                        <label for="masa">Jumlah Tuntutan Lebih Masa:</label>
-                                                        <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">
+                                                        <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
+                                                        <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan4" placeholder="" autocomplete="off" data-column="4">
                                                                     
                                                 </form>
                                                 

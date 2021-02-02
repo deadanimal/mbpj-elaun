@@ -39,7 +39,7 @@
                                 <h3 class="mb-0">Pengurusan Sistem Elaun</h3>
                             </div>
                             <div class="col-3 text-right">
-                                <select id="jenisTable" name="jenisTable" class="custom-select" >
+                                <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" >
                                     <option value="permohonanan" selected="selected">Permohonan</option>
                                     <option value="tuntutan">Tuntutan</option>
                                     <option value="lulus">Lulus</option>
@@ -70,9 +70,15 @@
                                 </table>
                             </div>
 
+                            @if(Auth::user()->role_id == '2' )
                             <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan permohonan</a>
+                                <a href="/penyelia/semakan">Lihat selanjutnya di semakan permohonan</a>
                             </div>
+                            @elseif(Auth::user()->role_id == '8' )
+                            <div class="col-12 py-2 my-4 text-center">
+                                <a href="/kakitangan/semakan">Lihat selanjutnya di semakan permohonan</a>
+                            </div>
+                            @endif
                         </div>
                     </div>
                             

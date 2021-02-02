@@ -16,7 +16,19 @@ var selectRole = [
 ];
 
  
-var table = $('#datatable').DataTable({
+var table = $('#pengurusanDT').DataTable({
+    dom: 'lrtip',
+    responsive:true,
+    autoWidth:false,
+    processing: true,
+    serverSide: false,
+    lengthMenu: [ 5, 10, 25, 50 ],
+
+    ajax: {
+        url: "pengurusan-pengguna",
+        type: 'GET',
+        },
+
     columns: [
 
         {data: 'id', name: 'id'},
@@ -153,23 +165,21 @@ var table = $('#datatable').DataTable({
         }}
     ],
 
-    processing: true,
-    serverSide: false,
-    
-    ajax: {
-        url: "pengurusan-pengguna",
-        type: 'GET',
-        },
-        "lengthMenu": [ 5, 10, 25, 50 ],
-    
-  responsive:true,
-  autoWidth:false,
-  
 });
 
 $.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
     return $(value).val();
 };
+
+$('#carianPengguna').on( 'keyup click', function () {
+    filter();
+} );
+
+function filter() {
+    $('#pengurusanDT').DataTable().search(
+        $('#carianPengguna').val()
+    ).draw();
+}
 
 // $("#datatable td select").on('change', function() {
 //     var $td = $(this).parent();

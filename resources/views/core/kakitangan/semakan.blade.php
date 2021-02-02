@@ -50,101 +50,44 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-12">
-                                <form class="form-inline">
-                                <div class="col-6">
-                                    <input type="text" class="form-control w-100 mb-2 mr-sm-2 rounded" id="inlineFormInputName2" placeholder="Carian">
-                                </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <form id = "joiningDateSearch">
+                                <div class="col-12">
+                                    <div class="row align-items-end">
+                                        <div class="col-5">
+                                            <input type="text" class="form-control form-control-sm w-100 rounded-pill" id="carian" placeholder="Carian">
+                                        </div>
 
-                                <div class="col">
-                                    <div class="btn-group">
-                                <button type="button" class="btn btn-outline-default mb-2 mr-sm-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Bulan
-                                </button>
-                                    <div class="dropdown-menu scrollable-menu">
-                                        <a class="dropdown-item" href="#">Januari</a>
-                                        <a class="dropdown-item" href="#">Februari</a>
-                                        <a class="dropdown-item" href="#">Mac</a>
-                                        <a class="dropdown-item" href="#">April</a>
-                                        <a class="dropdown-item" href="#">Mei</a>
-                                        <a class="dropdown-item" href="#">Jun</a>
-                                        <a class="dropdown-item" href="#">Julai</a>
-                                        <a class="dropdown-item" href="#">Ogos</a>
-                                        <a class="dropdown-item" href="#">September</a>
-                                        <a class="dropdown-item" href="#">Oktober</a>
-                                        <a class="dropdown-item" href="#">November</a>
-                                        <a class="dropdown-item" href="#">Disember</a>
-                                    </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col">
-                                    <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-default mb-2 mr-sm-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Tahun
-                                    </button>
-                                    <div class="dropdown-menu scrollable-menu">
-                                    @for ($year = date('Y'); $year > date('Y') - 100; $year--)
-                                    <a class="dropdown-item" href="#" value="{{$year}}">
-                                            {{$year}}
-                                    </a>
-                                    @endfor
-                                    </div>
+                                        <div class="col-7">            
+                                            <div class="form-row align-items-end">
+                                                <div class="col-sm-3">
+                                                    <label class ="col-form-label col-form-label-sm" for="Doctor-name">From</label>
+                                                    <input type="date" id="min"
+                                                        class="form-control form-control-sm" autocomplete="off">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label class ="col-form-label col-form-label-sm" for="dob">To</label>
+                                                    <input type="date" id="max"
+                                                        class="form-control form-control-sm" autocomplete="off">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" >
+                                                        <option value="permohonan" selected="selected">Permohonan</option>
+                                                        <option value="tuntutan">Tuntutan</option>
+                                                        <option value="lulus">Lulus</option>
+                                                        <option value="tolak">Tolak</option>
+                                                    </select>    
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="btn btn-sm btn-primary" id="btnGo" type="button">Search</button>
+                                                </div>
+                                            </div>
+                                        </div>                                
                                     </div>
                                 </div>
-                                
-                                <div class="col">
-                                    <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-default mb-2 mr-sm-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Permohonan
-                                    </button>
-                                    <div class="dropdown-menu scrollable-menu">
-                                        <a class="dropdown-item" href="#">Permohonan</a>
-                                        <a class="dropdown-item" href="#">Tuntutan</a>
-                                        <a class="dropdown-item" href="#">Lulus</a>
-                                        <a class="dropdown-item" href="#">Tolak</a>
-                                    </div>
-                                    </div>
-                                </div>
-                                
-
-                                <!-- {{ Form::open(['url' => 'foo/bar']) }}
-                               
-                                {{ Form::selectYear('year', 1970, \Carbon\Carbon::now()->year) }}
-                                {{Form::date('name', \Carbon\Carbon::now()->year)}}
-                                {{ Form::close() }} -->
-                                
-                                <!-- <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label> -->
-                                <!-- <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>                  letak bulan dropdown sini
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                                </div> -->
-
-                                <!-- <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>                  letak tahun dropdown sini
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                                </div> -->
-
-                                <!-- <div class="input-group mb-2 mr-sm-2">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>                  letak jenis carian (eg:permohonan/tuntutan) dropdown sini
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                                </div> -->
-
-                                </form>
-                            </div>
+                            </form>
                         </div>
-                    </div>
-                    
-                    <div class="col-12 mt-2">
-                       
                     </div>
                 </div>
             </div>
@@ -152,79 +95,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h2 class="mb-2">{{ __('Senarai Permohonan Borang B1') }}</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-12 mt-2">
-                            <div class="table-responsive py-4">
-                                <table class="table table-flush" id="datatable">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tarikh Permohonan</th>
-                                        <th>Masa Mula</th>
-                                        <th>Masa Akhir</th>
-                                        <th>Masa</th>
-                                        <th>Hari</th>
-                                        <th>Waktu</th>
-                                        <th>Kadar Jam</th>
-                                        <th>Tujuan</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        
-                                    </tbody>
-                                        <!-- <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Created At</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        {{-- @foreach($Users as $user)
-                                        <tr>
-                                            <td>{{$user->id}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->created_at}}</td>
-                                            <td>
-                                                <a onclick="event.preventDefault();editKemaskiniForm({{$user->id}});" href="#" class="edit open-modal" data-toggle="modal" value="{{$user->id}}"><button class="btn btn-primary" data-toggle="tooltip"><font color="white">Kemaskini</font></a>
-                                                <a onclick="event.preventDefault();lulusPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-success" data-toggle="tooltip" title="Lulus"><font color="white">Lulus</font></a>
-                                                <a onclick="event.preventDefault();tolakPermohonanForm({{$user->id}});" href="#" class="delete" data-toggle="modal"><button class="btn btn-danger" data-toggle="tooltip" ><font color="white">Tolak</font></a> 
-                                            </td>
-                                        </tr>
-                                        @endforeach--}}
-                                        
-                                    </tbody> -->
-                                </table>
-
-                            </div>
-                            <div class="col-12 my-4">
-                            
-                                <form class="form-inline" style="display: flex; justify-content: flex-end">
-                                    
-                                        <label for="jam">Jumlah Persamaan Jam:</label>
-                                        <input type="text" class="form-control mx-sm-3" id="jam" placeholder="">
-
-                                        <label for="masa">Jumlah Tuntutan Lebih Masa:</label>
-                                        <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">
-                                                    
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('core.kakitangan.partials.semakanDT.datatables')
             </div>
         </div>
     </div>

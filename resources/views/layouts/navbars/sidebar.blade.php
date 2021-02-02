@@ -132,7 +132,7 @@
                     </li>                    
                 </ul>
                 
-                @elseif(Auth::user()->role_id == '3'  )
+                @elseif(Auth::user()->role_id == '3'  || Auth::user()->role_id == '9')
                 <div class="navbar-inner">
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
