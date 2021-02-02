@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ketua_jabatan;
 
+use App\User;
 use DataTables;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;

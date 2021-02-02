@@ -24,9 +24,14 @@ Route::group([
 		]);
 	});
 	Route::resource('kerani-semakan-dashboard','kerani_semakan\keraniSemakanController',['except' => ['show','destroy']]);
-	Route::resource('kerani-semakan-semakan','kerani_semakan\semakanController',['except' => ['show','destroy']]);
+	Route::resource('kerani-semakan-semakan','kerani_semakan\semakanController',['except' => ['destroy']]);
 	Route::resource('kerani-semakan-laporan','kerani_semakan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('kerani-semakan-bantuan','kerani_semakan\bantuanController',['except' => ['show','destroy']]);
+
+	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
+	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
+	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@updateKelulusan' );
+	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

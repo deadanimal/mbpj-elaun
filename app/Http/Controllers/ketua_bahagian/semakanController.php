@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\ketua_bahagian;
 
+use App\User;
 use DataTables;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
-use App\permohonan_with_users;
+use App\permohonan_with_users; 
 use App\Http\Controllers\Controller;
 
 class semakanController extends Controller

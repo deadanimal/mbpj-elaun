@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\penyelia;
 
+use App\User;
 use DataTables;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
