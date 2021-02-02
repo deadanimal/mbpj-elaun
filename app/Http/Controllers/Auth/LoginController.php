@@ -27,7 +27,7 @@ class LoginController extends Controller
      * @var string
      */
     public function redirectTo(){
-        
+         
         // User role
         $role = Auth::user()->role_id; 
         
