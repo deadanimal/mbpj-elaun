@@ -1,11 +1,12 @@
 table = $('#aduanDT').DataTable({
+    dom: 'lrtip',
     scrollX: false,
     destroy: true,
     "lengthMenu": [ 5, 10, 25, 50 ],
-    processing: true,
-    serverSide: true,
-    // responsive:true,
-    // autoWidth:false,
+    // processing: true,
+    // serverSide: true,
+    responsive:true,
+    autoWidth:false,
 ajax: {
     url: "modul-aduan/",
     type: 'GET',
@@ -30,7 +31,10 @@ ajax: {
        
     ],
     columnDefs: [
-
+        {
+            targets: [1],
+            type: "date"
+        },
         {
             targets: 2,
             render:function(data,type,row){
@@ -64,6 +68,57 @@ ajax: {
     
 });
 
-$.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
-    return $(value).val();
-};
+
+$.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+
+        console.log(data);
+        var valid = true;
+        var min = moment($("#min").val(),"DD/MM/YYYY");
+        if (!min.isValid()) { min = null; }
+      console.log(min);
+
+        var max = moment($("#max").val(),"DD/MM/YYYY");
+        if (!max.isValid()) { max = null; }
+
+        if (min === null && max === null) {
+            
+            valid = true;
+        }
+        else {
+
+            $.each(settings.aoColumns, function (i, col) {
+              
+                if (col.type == "date") {
+                    var cDate = moment(data[i],'DD/MM/YYYY');
+                  console.log(cDate);
+                
+                    if (cDate.isValid()) {
+                        if (max !== null && max.isBefore(cDate)) {
+                            valid = false;
+                        }
+                        if (min !== null && cDate.isBefore(min)) {
+                            valid = false;
+                        }
+                    }
+                    else {
+                        valid = false;
+                    }
+                }
+            });
+        }
+        return valid;
+});
+
+$("#btnGo").click(function () {
+    
+    $('#aduanDT').DataTable().draw();
+});
+
+$('#min').datepicker({
+    dateFormat: 'dd/mm/yy',
+});
+
+$('#max').datepicker({
+    dateFormat: 'dd/mm/yy',
+});
