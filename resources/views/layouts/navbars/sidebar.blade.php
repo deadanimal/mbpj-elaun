@@ -1,4 +1,4 @@
-<nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+<nav onload="sidebar()" class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner scroll-scrollx_visible">
         <div class="sidenav-header d-flex align-items-center">
             <a class="navbar-brand" href="">
@@ -16,48 +16,41 @@
             </div>
         </div>
 
-        @switch($group)
+        @switch(Auth::user()->role_id)
             @case(1)
-                @include('layouts.navbars.partials.ktsidebar')
-                @break
-            
-            @case(2)
-                @include('layouts.navbars.partials.dbppsidebar')
-                @break
-            
-            @case(3)
                 @include('layouts.navbars.partials.adminsidebar')
-                @break
+            @break
 
+            @case(2)
             @case(4)
+            @case(5)
+            @case(6)
+            @case(7)
                 @include('layouts.navbars.partials.ktsidebar')
                 @include('layouts.navbars.partials.2ndsidebar')
-                @break
+            @break
+
+            @case(3)
+            @case(9)
+                @include('layouts.navbars.partials.dbppsidebar')
+            @break
+
+            @case(8)
+                @include('layouts.navbars.partials.ktsidebar')
+            @break
 
             @default
-                @include('layouts.navbars.partials.unauthenticated')
-                
-            @endswitch
-
-        {{-- @if(Auth::user()->status == 00)
-            @include('layouts.navbars.partials.unauthenticated')
-
-        @elseif(Auth::user()->role_id == '2' ||  Auth::user()->role_id == '4' || Auth::user()->role_id == '5' || Auth::user()->role_id == '6' || Auth::user()->role_id == '7' || Auth::user()->role_id == '8' )
-            @include('layouts.navbars.partials.ktsidebar')
-
-        @elseif(Auth::user()->role_id == '1' ) 
-            @include('layouts.navbars.partials.adminsidebar')
-        
-        @elseif(Auth::user()->role_id == '3'  || Auth::user()->role_id == '9')
-            @include('layouts.navbars.partials.dbppsidebar')
-        @endif --}}
-
-        {{-- 2nd sidebar for Penyelia / KB / KJ / KS / KP --}}
-        {{-- @if(Auth::user()->role_id == '2' ||  Auth::user()->role_id == '4' || Auth::user()->role_id == '5' || Auth::user()->role_id == '6' || Auth::user()->role_id == '7' )
-            @include('layouts.navbars.partials.2ndsidebar')
+                @include('layouts.navbars.partials.unauthenticatedsidebar')
             
-        @endif --}}
+        @endswitch
+
             </div>
         </div>
     </div>
 </nav>
+
+@push('js')
+        
+            
+
+@endpush
