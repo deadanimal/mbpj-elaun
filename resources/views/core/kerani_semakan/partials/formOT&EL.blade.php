@@ -1,15 +1,5 @@
-<form  method="get" action="/penyelia/penyelia-semakan" autocomplete="off" enctype="multipart/form-data">
+<form  method="get" id="formOTEL" action="{{ route('kerani-semakan-semakan.index')}}"" autocomplete="off" enctype="multipart/form-data">
     @csrf
-    {{-- @method('put') --}}
-        {{-- <div class="col-sm-6">
-            <div class="form-group">
-                <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                    <option selected value="out">Pilih Jenis Permohonan</option>
-                    <option value="individu">Permohonan Individu</option>
-                    <option value="berkumpulan">Permohonan Berkumpulan</option>
-                </select>
-            </div>
-        </div> --}}
 
         <h6 class="heading-small text-muted mb-4">{{ __('Maklumat Peribadi') }}</h6>
 
@@ -20,7 +10,7 @@
             <div class="col-sm-6 ml--3">
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
-                    <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+                    <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
 
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
@@ -30,7 +20,7 @@
                 <div class="col-md-8">
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-email">{{ __('Nama') }}</label>
-                        <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
+                        <input type="email" name="nama" id="nama-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>
 
                         @include('alerts.feedback', ['field' => 'name'])
                     </div>
@@ -38,7 +28,7 @@
                 <div class="col">
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-email">{{ __('Jawatan') }}</label>
-                        <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
+                        <input type="email" name="jawatan" id="jawatan-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>
 
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
@@ -49,7 +39,7 @@
             <div class="col">
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-email">{{ __('No. KP Baru') }}</label>
-                        <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
+                        <input type="email" name="noKPbaru" id="noKPBaru-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>
 
                         @include('alerts.feedback', ['field' => 'name'])
                     </div>
@@ -57,7 +47,7 @@
                 <div class="col">
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
-                        <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
+                        <input type="email" name="bahagian" id="bahagian-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>
 
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
@@ -65,7 +55,7 @@
                 <div class="col">
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-email">{{ __('Jabatan') }}</label>
-                        <input type="email" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" disabled>
+                        <input type="email" name="jabatan" id="jabatan-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>
 
                         @include('alerts.feedback', ['field' => 'email'])
                     </div>
@@ -73,8 +63,7 @@
             </div>
 
             <div class="text-right">
-                <button type="submit" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
-                {{-- <button type="button" value="submit" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button> --}}
+                <button type="button" onclick="event.preventDefault();checkUser();showUser();" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
             </div>
         </div>
 </form>

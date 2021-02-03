@@ -10,34 +10,23 @@
             </div>
             <div class="col-12 mt-2">
                 <div class="table-responsive py-4">
-                    <table class="table" id="datatable">
+                    <table class="table" id="datatable1">
                         <thead class="thead-light">
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Created At</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>No</th>
+                                <th>Tarikh Permohonan</th>
+                                <th>Masa Mula</th>
+                                <th>Masa Akhir</th>
+                                <th>Masa</th>
+                                <th>Hari</th>
+                                <th>Waktu</th>
+                                <th>Kadar Jam</th>
+                                <th>Tujuan</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($Users as $user)
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->created_at}}</td>
-                                {{-- <td id="statusPermohonan">Before</td> --}}
-                                <td id="statusPermohonan">After</td>
-                                <td>
-                                    <i data-toggle="modal" id="buttonEdit" onclick="changeDataTarget({{$user->id}})" data-target="" class="btn btn-primary btn-sm ni ni-align-center"></i>
-                                    <i data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold"></i>
-                                    <i data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove"></i>
-                                </td>
-                            </tr>
-                            @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>

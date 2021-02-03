@@ -16,53 +16,46 @@
         <div class="row">
             <div class="col-xl-8">
 
-                    {{-- Tab options --}}
-                    <div class="nav-wrapper">
-                        <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#formPermohonanKerjaLebihMasa" role="tab" aria-controls="tabs-icons-text-1" 
-                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
-                                    <i class="ni ni-time-alarm"></i>
-                                    Permohonan Kerja Lebih Masa
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
-                                    href="#formTuntuanElaunLebihMasa" role="tab" aria-controls="tabs-icons-text-2" 
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
-                                    <i class="ni ni-money-coins"></i>
-                                    Tuntuan Elaun Lebih Masa
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-    
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="tab-content" id="myTabContent">  
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                            <option selected value="out">Pilih Jenis Permohonan</option>
-                                            <option value="individu">Permohonan Individu</option>
-                                            <option value="berkumpulan">Permohonan Berkumpulan</option>
-                                        </select>
-                                    </div>
-                                </div>
-    
-                                <div class="tab-pane fade show active" id="formPermohonanKerjaLebihMasa" role="tabpanel" aria-labelledby="tabPilihanPermohonanKerjaLebihMasa">
-                                    {{-- Tab content -> Form --}}
-                                    @include('core.kerani_semakan.partials.formPermohonanKerjaLebihMasa')
-                                </div>
-    
-                                <div class="tab-pane fade" id="formTuntuanElaunLebihMasa" role="tabpanel" aria-labelledby="tabPilihanTuntutanElaunLebihMasa">
-                                    {{-- Tab content -> Form --}}
-                                    @include('core.kerani_semakan.partials.formTuntuanElaunLebihMasa')
+                {{-- Tab options --}}
+                <div class="nav-wrapper">
+                    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
+                                href="#formPermohonanKerjaLebihMasa" role="tab" aria-controls="tabs-icons-text-1" 
+                                aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
+                                <i class="ni ni-time-alarm"></i>
+                                Permohonan Kerja Lebih Masa
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
+                                href="#formTuntuanElaunLebihMasa" role="tab" aria-controls="tabs-icons-text-2" 
+                                aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
+                                <i class="ni ni-money-coins"></i>
+                                Tuntuan Elaun Lebih Masa
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">  
+                               
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected value="out">Pilih Jenis Permohonan</option>
+                                        <option value="individu">Permohonan Individu</option>
+                                        <option value="berkumpulan">Permohonan Berkumpulan</option>
+                                    </select>
                                 </div>
                             </div>
+
+                            {{-- Form semakan --}}
+                                @include('core.kerani_semakan.partials.formOT&EL')
                         </div>
                     </div>
+                </div>
 
             </div>
             <div class="col-xl-4 d-flex">
@@ -178,5 +171,9 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/kerani-semakan/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/kerani-semakan/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
-@endpush
+@endpush 
+

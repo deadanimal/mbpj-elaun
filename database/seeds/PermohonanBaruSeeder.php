@@ -25,8 +25,8 @@ class PermohonanBaruSeeder extends Seeder
             // 'id_penyelia' => '0',
             // 'id_ketuaBahagian' => '0',
             // 'id_ketuaJabatan' => '0',
-            'id_keraniPemeriksa' => '7',
-            'id_keraniSemakan' => '6',
+            // 'id_keraniPemeriksa' => '7',
+            // 'id_keraniSemakan' => '6',
             'created_at' => now(),
             'updated_at' => now()
         ]);
