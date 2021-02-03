@@ -4,7 +4,8 @@ namespace App\Http\Controllers\penyelia;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use DataTables;
 use App\DataTables\UsersDataTable;
 

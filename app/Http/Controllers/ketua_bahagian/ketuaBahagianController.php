@@ -4,7 +4,8 @@ namespace App\Http\Controllers\ketua_bahagian;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use DataTables;
 use App\DataTables\UsersDataTable;
 
@@ -17,6 +18,7 @@ class ketuaBahagianController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
+        
         return $dataTable->render('core.ketua_bahagian.dashboard');
     }
     
