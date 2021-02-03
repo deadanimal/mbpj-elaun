@@ -19,8 +19,13 @@ class semakanController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return datatables()->of(User::select("*"))
-            ->make(true);
+            // return datatables()->of(PermohonanBaru::select("*"))
+            // ->make(true);
+
+            return datatables()->of(permohonan_with_users::where('jenis_permohonan',"like" ,'OT%')
+                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
+                                    ->get())
+                                    ->make(true); 
         }
         
         return view('core.penyelia.semakan');

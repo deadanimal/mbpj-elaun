@@ -1,9 +1,39 @@
-var table = $("#datatable1").DataTable();
-    table = $('#datatable1').DataTable({
-        destroy:true,
-    "lengthMenu": [ 5, 10, 25, 50 ],
-    responsive:true,
-    autoWidth:false,
+var table = $('#datatable1').DataTable({
+    destroy: true,
+    processing: false,
+    serverSide: true,
+ajax: {
+    url: "penyelia-semakan/",
+    type: 'GET',
+
+},
+    
+    columns: [
+
+        {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
+        {data: 'tarikh_permohonan'},
+        {data: 'masa_mula'},
+        {data: 'masa_akhir'},
+        {data: 'masa'},
+        {data: 'hari'},
+        {data: 'waktu'},
+        {data: 'kadar_jam'},
+        {data: 'tujuan'},
+        {data: 'id_user'}
+       
+    ],  
+    columnDefs: [
+        {
+            targets: 9,
+            mRender: function(data,type,row){
+                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData('+data+', '+data+', '+ "'"+data+"'"+');"></i>' 
+                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan('+data+');" value=""></i>' 
+                var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data+')" value='+data+'></i>' 
+                var allButton = button1 + button2 + button3;
+                return allButton;
+            }
+        }
+    ], 
 });
 
 $(document).ready(function(){

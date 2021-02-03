@@ -18,7 +18,9 @@ function retrieveTabPilihan(id) {
         document.getElementById("modal-title-berkumpulan-title").innerHTML = "Permohonan Kerja Lebih Masa";
         document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
     } else {
-        console.log("out of Tab Pilihan")
+        document.getElementById("modal-title-individu-title").innerHTML = "Pengesahan Kerja Lebih Masa";
+        document.getElementById("modal-title-berkumpulan-title").innerHTML = "Pengesahan Kerja Lebih Masa";
+        document.getElementById("titleTable").innerHTML = "Pengesahan Baru Kerja Lebih Masa";
     }
 } 
 
