@@ -1,27 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\penyelia;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use DataTables;
-use App\DataTables\UsersDataTable;
 
-class penyeliaController extends Controller
+class SideBarController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.penyelia.dashboard');
+        $role = Auth::user()->role_id;
+        $group2 = [3,9];
+
+        $name = Auth::user()->role->name;
+        $temp = strtolower($name);
+        $temp = str_replace(" ","-",$temp);
+
+        if ($role == '8') {
+            return view('layouts.navbars.sidebar')->with(['group' => '1']);
+        } elseif ($group2->contains($role)) {
+            return view('layouts.navbars.sidebar')->with(['group' => '2']);
+        } elseif ($role == '1') {
+            return view('layouts.navbars.sidebar')->with(['group' => '3']);
+        } else {
+            return view('layouts.navbars.sidebar')->with(['group' => '4', 'name' => $temp]);
+        }
     }
-    
-    
 
     /**
      * Show the form for creating a new resource.

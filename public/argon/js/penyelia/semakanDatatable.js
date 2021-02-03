@@ -115,10 +115,8 @@ function showDatatable(pilihan){
                             return allButton;
                         }
                     }
-                ],
-                
-            });
-         
+                ], 
+            });        
 }
 
 $.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
