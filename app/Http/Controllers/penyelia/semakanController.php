@@ -75,32 +75,14 @@ class semakanController extends Controller
                 break;
             case '10':
                 $permohonans = permohonan_with_users::findPermohonanWithNoID('OT2');
+                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
 
-                foreach ($permohonans as $key=>$permohonan) {
-                    $users = $permohonan->users_id;
-
-                    $usersExploded = explode(",", $users);
-                    $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
-
-                    if (in_array($id, $usersExploded)){
-                        $permohonanBaru[$key] = $dataPermohonan;
-                    }
-                }
                 return datatables()->of($permohonanBaru)->make(true);
                 break;
             case '11':
                 $permohonans = permohonan_with_users::findPermohonanWithNoID('EL2');
-
-                foreach ($permohonans as $key=>$permohonan) {
-                    $users = $permohonan->users_id;
-
-                    $usersExploded = explode(",", $users);
-                    $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
-
-                    if (in_array($id, $usersExploded)){
-                        $permohonanBaru[$key] = $dataPermohonan;
-                    }
-                }
+                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
+                
                 return datatables()->of($permohonanBaru)->make(true);
                 break;
             

@@ -68,51 +68,21 @@ class semakanController extends Controller
 
         switch ($pilihan) {
             case '00':
-                return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'OT1')
-                                    ->having('users_id','=', $id)
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get())
-                                    ->make(true); 
+                return datatables()->of(permohonan_with_users::findPermohonanWithID('OT1', $id))->make(true); 
                 break;
             case '01':
-                return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'EL1')
-                                    ->having('users_id','=', $id)
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get())
-                                    ->make(true); 
+                return datatables()->of(permohonan_with_users::findPermohonanWithID('EL1', $id))->make(true); 
                 break;
             case '10':
-                $permohonans = permohonan_with_users::where('jenis_permohonan', 'OT2')
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get();
+                $permohonans = permohonan_with_users::findPermohonanWithNoID('OT2');
+                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
 
-                foreach ($permohonans as $key=>$permohonan) {
-                    $users = $permohonan->users_id;
-
-                    $usersExploded = explode(",", $users);
-                    $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
-
-                    if (in_array($id, $usersExploded)){
-                        $permohonanBaru[$key] = $dataPermohonan;
-                    }
-                }
                 return datatables()->of($permohonanBaru)->make(true);
                 break;
             case '11':
-                $permohonans = permohonan_with_users::where('jenis_permohonan', 'EL2')
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get();
-
-                foreach ($permohonans as $key=>$permohonan) {
-                    $users = $permohonan->users_id;
-
-                    $usersExploded = explode(",", $users);
-                    $dataPermohonan = PermohonanBaru::where('id_permohonan_baru', $permohonan->id_permohonan_baru)->first();
-
-                    if (in_array($id, $usersExploded)){
-                        $permohonanBaru[$key] = $dataPermohonan;
-                    }
-                }
+                $permohonans = permohonan_with_users::findPermohonanWithNoID('EL2');
+                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
+                
                 return datatables()->of($permohonanBaru)->make(true);
                 break;
             

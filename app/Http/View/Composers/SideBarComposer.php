@@ -3,8 +3,7 @@
 namespace App\Http\View\Composers;
 
 use Illuminate\Support\Facades\Auth;
-
- use Illuminate\View\View;
+use Illuminate\View\View;
 
 class SideBarComposer
 {
