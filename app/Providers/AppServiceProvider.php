@@ -6,6 +6,8 @@ use App\Item;
 use App\User;
 use App\Observers\ItemObserver;
 use App\Observers\UserObserver;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Item::observe(ItemObserver::class);
         User::observe(UserObserver::class);
+
+        View::composer('layouts.navbars.partials.2ndsidebar', 'App\Http\View\Composers\SideBarComposer');
     }
 
     /**

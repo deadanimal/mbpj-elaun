@@ -19,13 +19,8 @@ class semakanController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            // return datatables()->of(PermohonanBaru::select("*"))
-            // ->make(true);
-
-            return datatables()->of(permohonan_with_users::where('jenis_permohonan',"like" ,'OT%')
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get())
-                                    ->make(true); 
+            return datatables()->of(User::select("*"))
+            ->make(true);
         }
         
         return view('core.penyelia.semakan');
@@ -73,23 +68,13 @@ class semakanController extends Controller
 
         switch ($pilihan) {
             case '00':
-                return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'OT1')
-                                    ->having('users_id','=', $id)
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get())
-                                    ->make(true); 
+                return datatables()->of(permohonan_with_users::findPermohonanWithID('OT1', $id))->make(true); 
                 break;
             case '01':
-                return datatables()->of(permohonan_with_users::where('jenis_permohonan', 'EL1')
-                                    ->having('users_id','=', $id)
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get())
-                                    ->make(true); 
+                return datatables()->of(permohonan_with_users::findPermohonanWithID('EL1', $id))->make(true); 
                 break;
             case '10':
-                $permohonans = permohonan_with_users::where('jenis_permohonan', 'OT2')
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get();
+                $permohonans = permohonan_with_users::findPermohonanWithNoID('OT2');
 
                 foreach ($permohonans as $key=>$permohonan) {
                     $users = $permohonan->users_id;
@@ -104,9 +89,7 @@ class semakanController extends Controller
                 return datatables()->of($permohonanBaru)->make(true);
                 break;
             case '11':
-                $permohonans = permohonan_with_users::where('jenis_permohonan', 'EL2')
-                                    ->join('permohonan_barus', 'permohonan_with_users.id_permohonan_baru', '=', 'permohonan_barus.id_permohonan_baru')
-                                    ->get();
+                $permohonans = permohonan_with_users::findPermohonanWithNoID('EL2');
 
                 foreach ($permohonans as $key=>$permohonan) {
                     $users = $permohonan->users_id;
