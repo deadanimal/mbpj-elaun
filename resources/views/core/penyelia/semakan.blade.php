@@ -4,7 +4,7 @@
     'parentSection' => 'laravel',
     'elementName' => 'profile'
 ])
-
+ 
 @section('content')
     @include('forms.header', [
         'title' => __('Semakan Permohonan') . ' ',

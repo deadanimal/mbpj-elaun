@@ -173,7 +173,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-jabatan/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-jabatan/semakanDatatable.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-jabatan/retrieveUserDataEkedatangan.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-jabatan/saveKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

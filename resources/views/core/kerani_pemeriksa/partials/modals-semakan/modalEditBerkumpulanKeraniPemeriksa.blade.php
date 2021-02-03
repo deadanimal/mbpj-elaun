@@ -1,57 +1,36 @@
 <div class="modal fade" id="modal-default-berkumpulan" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal- modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-dialog modal- modal-dialog-centered  modal-xl" role="document">
         <div class="modal-content">
-            <div class="modal-header mb-3">
-                <div class="col"></div>
-                <div class="col">
-                    <h6 class="modal-title" id="modal-title-berkumpulan-title"></h6>
-                </div>
-                <div class="col" id="titleEKedatangan">
-                    <h6 class="modal-title ml-4">eKedatangan</h6>
-                </div>
-                <button onclick="closeModal('modal-default')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-berkumpulan-title"></h6>
+                <button onclick="closeModal('modal-default-berkumpulan')" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body p-0">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col" style="border-right-style: solid; border-width: 0.5px;">
-                            <h5>Senarai Nama Kakitangan Terlibat: </h5>
-                            <ul class="nav nav-pills list-group" id="senaraiKakitanganBerkumpulan" role="tab">
-                                <li class="nav-item mb-1" role="presentation">
-                                    <a class="nav-link active" id="test1" data-bs-toggle="pill" href="#testRetrieveDataContent" role="tab" aria-controls="test1" aria-selected="true">Sariff 1</a>
-                                </li>
-                                <li class="nav-item mb-1" role="presentation">
-                                    <a class="nav-link" id="test2" data-bs-toggle="pill" href="#testRetrieveDataContent2" role="tab" aria-controls="test2" aria-selected="false">Sarif 2</a>
-                                </li>
-                                <li class="nav-item mb-1" role="presentation">
-                                    <a class="nav-link" id="test3" data-bs-toggle="pill" href="#testRetrieveDataContent3" role="tab" aria-controls="test3" aria-selected="false">Sariff 3</a>
-                                </li>
-                                <li class="nav-item mb-1" role="presentation">
-                                    <a class="nav-link" id="test2" data-bs-toggle="pill" href="#testRetrieveDataContent2" role="tab" aria-controls="test2" aria-selected="false">Sarif 2</a>
-                                </li>
-                                <li class="nav-item mb-1" role="presentation">
-                                    <a class="nav-link" id="test3" data-bs-toggle="pill" href="#testRetrieveDataContent3" role="tab" aria-controls="test3" aria-selected="false">Sariff 3</a>
-                                </li>
-                                <li class="" role="">
-                                    <a class="" id="" data-bs-toggle="" href="" role="" aria-controls="" aria-selected=""></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col" style="border-right-style: solid; border-width: 0.5px;">
-                            <div class="text-left mb-4">
+                        <div class="col-sm-5 border-right">
+                            <div class="text-left mt-2">
                                 <h5>* Jenis Permohonan</h5>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanBerkumpulanInModal" placeholder="" readonly>
                             </div>
+
+                            <h5 class="mt-3">Senarai Nama Kakitangan Terlibat: </h5>
+                            <div class="mb-2 card-body border" style="height: 200px; overflow-y: scroll;">
+                                <ul class="nav nav-pills list-group" id="senaraiKakitanganBerkumpulan" role="tab">
+                                    {{-- JS appends <li> --}}
+                                </ul>
+                            </div>
+
                             <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
-
+    
                                 @include('alerts.success')
                                 @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
-
-                                <div class="form-group mb-5">
+    
+                                <div class="form-group mb-2">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
                                     <input class="form-control" type="text" placeholder="Default input">
 
@@ -89,96 +68,43 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col" id="waktuKerjaBerkumpulan">
-                            <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
-                                @csrf
-                                @method('put')
-
-                                @include('alerts.success')
-                                @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
-
-                                {{-- Use IF condition here by verifying status = before/after to display data--}}
-
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane show active" id="testRetrieveDataContent" role="tabpanel" aria-labelledby="test1">
-                                        <div class="form-group mb-1">
-                                            <label class="form-control-label">{{ __('Nama') }}</label>
-                                            <input class="form-control" type="text" placeholder="Sariff 1">
+                        <div class="col-sm-7">
+                            <div class="row" id="waktuKerjaBerkumpulan">
+                                <form method="post" id="ekedatanganModalEL" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
         
-                                            @include('alerts.feedback', ['field' => 'name'])
-                                        </div>
+                                    @include('alerts.success')
+                                    @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
 
-                                        <div class="form-group mb-5">
-                                            <label class="form-control-label">{{ __('No Pekerja') }}</label>
-                                            <input class="form-control" type="text" placeholder="XXXXXXXXXXX">
-        
-                                            @include('alerts.feedback', ['field' => 'name'])
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="testRetrieveDataContent2" role="tabpanel" aria-labelledby="test2">
-                                        <div class="form-group mb-1">
-                                            <label class="form-control-label">{{ __('Nama') }}</label>
-                                            <input class="form-control" type="text" placeholder="Sariff 2">
-        
-                                            @include('alerts.feedback', ['field' => 'name'])
-                                        </div>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane show active mt-2" id="testRetrieveDataContent" role="tabpanel" aria-labelledby="test1">
+                                            <div class="form-group mb-1">
+                                                <label class="form-control-label">{{ __('Nama') }}</label>
+                                                <input class="form-control" name="ekedatanganNama" type="text" placeholder="">
+            
+                                                @include('alerts.feedback', ['field' => 'name'])
+                                            </div>
 
-                                        <div class="form-group mb-5">
-                                            <label class="form-control-label">{{ __('No Pekerja') }}</label>
-                                            <input class="form-control" type="text" placeholder="XXXXXXXXXXX">
-        
-                                            @include('alerts.feedback', ['field' => 'name'])
+                                            <div class="form-group mb-5">
+                                                <label class="form-control-label">{{ __('No Pekerja') }}</label>
+                                                <input class="form-control" name="ekedatanganNoPekerja" type="text" placeholder="">
+            
+                                                @include('alerts.feedback', ['field' => 'name'])
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="testRetrieveDataContent3" role="tabpanel" aria-labelledby="test3">
-                                        <div class="form-group mb-1">
-                                            <label class="form-control-label">{{ __('Nama') }}</label>
-                                            <input class="form-control" type="text" placeholder="Sariff 3">
-        
-                                            @include('alerts.feedback', ['field' => 'name'])
-                                        </div>
-
-                                        <div class="form-group mb-5">
-                                            <label class="form-control-label">{{ __('No Pekerja') }}</label>
-                                            <input class="form-control" type="text" placeholder="XXXXXXXXXXX">
-        
-                                            @include('alerts.feedback', ['field' => 'name'])
-                                        </div>
-                                    </div>
+                                </form>
+                            </div>
+                            <div class="row">
+                                <div id="eKedatanganBerkumpulan">
+                                    {{-- eKedatangan --}}
+                                    @include('core.kerani_pemeriksa.partials.modals-semakan.ekedatangan')
                                 </div>
-                                {{-- ------------- END OF IF---------- --}}
 
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label">{{ __('Tarikh Kerja') }}</label>
-                                    <input class="form-control" type="text" placeholder="Default input">
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label">{{ __('Masa Akhir') }}</label>
-                                    <input class="form-control" type="text" placeholder="Default input">
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group mb-5">
-                                    <label class="form-control-label">{{ __('Masa Mula') }}</label>
-                                    <input class="form-control" type="text" placeholder="Default input">
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Lokasi') }}</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" resize="none"></textarea>
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                            </form>
+                                {{-- Kelulusan --}}
+                                @include('core.kerani_pemeriksa.partials.modals-semakan.kelulusan')
+                            </div>
                         </div>
                     </div>
                     <div class="text-center mb-3">

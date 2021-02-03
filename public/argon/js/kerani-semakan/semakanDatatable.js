@@ -59,11 +59,11 @@ function checkUser(){
 }
 
 function showUser() {
-    var id_user = document.querySelector("#noPekerja").value;
+    var id = document.querySelector("#noPekerja").value;
 
     $.ajax({
         type: 'GET',
-        url: 'user/semakan-pekerja/' + id_user,
+        url: 'user/semakan-pekerja/' + id,
         success: function(data) {
             $("#formOTEL input[name=nama]").val(data.users.name);
 
@@ -83,7 +83,7 @@ function showDatatable(pilihan){
                 processing: false,
                 serverSide: true,
             ajax: {
-                url: "ketua-jabatan-semakan/"+id_user,
+                url: "kerani-semakan-semakan/"+id_user,
                 type: 'GET',
                 data: {
                     pilihan: pilihan

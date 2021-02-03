@@ -196,5 +196,18 @@ class UsersTableSeeder extends Seeder
         'created_at' => now(),
         'updated_at' => now()
     ]);
+    DB::table('users')->insert([
+        'id' => 11,
+        'name' => 'Pelulus Pindaan',
+        'email' => 'pp@argon.com',
+        'role_id' => 9,
+        'password' => Hash::make('secret'), // secret
+        'remember_token' => Str::random(10),
+        'email_verified_at' => now(),
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
+
+
     }
 }

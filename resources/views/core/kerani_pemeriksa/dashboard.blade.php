@@ -7,14 +7,14 @@
     @component('layouts.headers.auth') 
     @component('layouts.headers.breadcrumbs')
         @slot('title') 
-            {{ __('Kerani Pemeriksa') }} 
+            {{ __('Kerani Semakan') }} 
         @endslot
 
-        <li class="breadcrumb-item"><a href="{{ route('kerani-pemeriksa-dashboard.index') }}">{{ __('Dashboards') }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('kerani-semakan-dashboard.index') }}">{{ __('Dashboards') }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
     @endcomponent
 
-    <h1><strong class="text-white">Selamat Datang Ke Modul Kerani Pemeriksa</strong></h1>
+    <h1><strong class="text-white">Selamat Datang Ke Modul Kerani Semakan</strong></h1>
     <h3 class="text-white mb-4 ml-4">" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya "</h3>
 
     @include('layouts.headers.cards') 

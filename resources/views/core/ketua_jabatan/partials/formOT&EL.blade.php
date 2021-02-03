@@ -1,4 +1,4 @@
-<form  method="get" id="formOTEL" action="{{ route('ketua-bahagian-semakan.index')}}"" autocomplete="off" enctype="multipart/form-data">
+<form  method="get" id="formOTEL" action="{{ route('ketua-jabatan-semakan.index')}}"" autocomplete="off" enctype="multipart/form-data">
     @csrf
 
         <h6 class="heading-small text-muted mb-4">{{ __('Maklumat Peribadi') }}</h6>
