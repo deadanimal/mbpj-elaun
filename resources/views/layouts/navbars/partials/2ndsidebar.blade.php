@@ -1,8 +1,3 @@
-@php 
-        $name = Auth::user()->role->name;
-        $temp = strtolower($name);
-        $temp = str_replace(" ","-",$temp);
-@endphp
 <hr class="my-3">
     <ul class="navbar-nav mb-md-3">
         <li class="nav-item {{ $parentSection == 'dashboards' ? 'active' : '' }}">
