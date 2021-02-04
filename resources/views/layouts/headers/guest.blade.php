@@ -3,7 +3,7 @@
         <div class="header-body text-center mb-7">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-9">
-                    <h1 class="text-white">{{ __('Selamat Datang ke Sistem Kerja Lebih Masa MBPJ') }}</h1>
+                    <h1 class="text-white">{{ __('Selamat Datang ke Sistem Pengurusan Elaun Lebih Masa') }}</h1>
                 </div>
             </div>
         </div>
