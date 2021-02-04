@@ -36,7 +36,7 @@
             </div>
 
             <div class="row"> 
-            <div class="col">
+                <div class="col">
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label class="form-control-label" for="input-email">{{ __('No. KP Baru') }}</label>
                         <input type="email" name="noKPbaru" id="noKPBaru-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>

@@ -21,7 +21,7 @@
                                 <ul class="nav nav-pills list-group" id="senaraiKakitanganBerkumpulan" role="tab">
                                     {{-- JS appends <li> --}}
                                 </ul>
-                            </div>
+                            </div> 
 
                             <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
