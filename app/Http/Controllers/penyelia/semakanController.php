@@ -85,7 +85,15 @@ class semakanController extends Controller
                 
                 return datatables()->of($permohonanBaru)->make(true);
                 break;
-            
+            case '02':
+                return datatables()->of(permohonan_with_users::findPermohonanWithID('PS1', $id))->make(true); 
+                break;
+            case '12':
+                $permohonans = permohonan_with_users::findPermohonanWithNoID('PS2');
+                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
+                
+                return datatables()->of($permohonanBaru)->make(true);
+                break;
             default:
                 return 1;
                 break;
