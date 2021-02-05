@@ -14,14 +14,12 @@ class CreatePermohonanWithUsersTable extends Migration
     public function up() 
     {
         Schema::create('permohonan_with_users', function (Blueprint $table) {
-            $table->bigIncrements('id_permohonan_with_users');
             $table->unsignedBigInteger('id_permohonan_baru');
-            $table->text('users_id', 500);
-            $table->string('jenis_permohonan');
-            $table->timestamps();
+            $table->unsignedInteger('id');
         });
 
         Schema::table('permohonan_with_users', function($table) {
+            $table->foreign('id')->references('id')->on('users');
             $table->foreign('id_permohonan_baru')->references('id_permohonan_baru')->on('permohonan_barus');
         });
     }

@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
     $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
         tabPilihan = '2';
-    });
+    }); 
 });
 
 function checkUser(){

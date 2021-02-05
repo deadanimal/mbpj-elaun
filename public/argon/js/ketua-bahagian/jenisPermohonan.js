@@ -7,7 +7,6 @@ document.getElementById("modal-title-berkumpulan-title").innerHTML = "Permohonan
 document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
 
 function retrieveTabPilihan(id) {
-    // console.log(id);
     if (id == "tabPilihanTuntutanElaunLebihMasa") {
         document.getElementById("modal-title-individu-title").innerHTML = "Tuntutan Elaun Lebih Masa";
         document.getElementById("modal-title-berkumpulan-title").innerHTML = "Tuntutan Elaun Lebih Masa";
@@ -17,14 +16,15 @@ function retrieveTabPilihan(id) {
         document.getElementById("modal-title-individu-title").innerHTML = "Permohonan Kerja Lebih Masa";
         document.getElementById("modal-title-berkumpulan-title").innerHTML = "Permohonan Kerja Lebih Masa";
         document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
-    } else {
-        console.log("out of Tab Pilihan")
+    } else { 
+        document.getElementById("modal-title-individu-title").innerHTML = "Pengesahan Kerja Lebih Masa";
+        document.getElementById("modal-title-berkumpulan-title").innerHTML = "Pengesahan Kerja Lebih Masa";
+        document.getElementById("titleTable").innerHTML = "Pengesahan Kerja Lebih Masa";
     }
 } 
 
 function changeDataTarget() {
     var pilihan = document.getElementById('selectJenisPermohonan').value;
-    // console.log("changeDataTarget = "+pilihan);
 
     if (pilihan == "individu") {
         document.getElementById("buttonEdit").setAttribute("data-target", "#modal-default");

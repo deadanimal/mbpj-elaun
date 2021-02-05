@@ -57,6 +57,8 @@ class semakanController extends Controller
      * EL1 == 01
      * OT2 == 10
      * EL2 == 11
+     * PS1 == 02
+     * PS2 == 12
      * 
      * This function is used to display all permohonans related to 1 pekerja 
      * 
@@ -68,24 +70,23 @@ class semakanController extends Controller
 
         switch ($pilihan) {
             case '00':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('OT1', $id))->make(true); 
+                return datatables()->of($this->findPermohonanWithID('OT1', $id))->make(true); 
                 break;
             case '01':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('EL1', $id))->make(true); 
+                return datatables()->of($this->findPermohonanWithID('EL1', $id))->make(true); 
                 break;
             case '10':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('OT2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-
-                return datatables()->of($permohonanBaru)->make(true);
+                return datatables()->of($this->findPermohonanWithID('OT2', $id))->make(true);
                 break;
             case '11':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('EL2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-                
-                return datatables()->of($permohonanBaru)->make(true);
+                return datatables()->of($this->findPermohonanWithID('EL2', $id))->make(true);
                 break;
-            
+            case '02':
+                return datatables()->of($this->findPermohonanWithID('PS1', $id))->make(true);
+                break;
+            case '12':
+                return datatables()->of($this->findPermohonanWithID('PS2', $id))->make(true);
+                break;
             default:
                 return 1;
                 break;

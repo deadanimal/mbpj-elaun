@@ -6,32 +6,29 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
-        type: 'GET',
+        type: 'GET', 
         success: function(data) {
-            $("#formModalEditIndividu input[name=nama]").val(data.users.name);
+            $("#formModalEdit input[name=nama]").val(data.users.name);
 
             $('input').css('color', 'black')
         },
         error: function(data) {
             console.log(data);
-        }
+        } 
     });
    
     $.ajax({
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET',
         success: function(data) {
-
-            $("#formModalEditIndividu input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
+            $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
 
             // Kelulusan
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
                 if (typeof value === 'object' && value !== null) {
                     $("#formKelulusan input[name="+key+"]").val(value.name);
-                    console.log("if");
                 } else {
                     $("#formKelulusan input[name="+key+"]").val("");
-                    console.log("else");
                 }
             }
 
@@ -50,10 +47,20 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 
                 case "EL1":
                     block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0], jenisPermohonan);
+                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan);
                     break;
 
                 case "EL2":
+                    block_ekedatanganBerkumpulan.style.display = "block";
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
+                    break;
+
+                case "PS1":
+                    block_ekedatanganIndividu.style.display = "block";
+                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan);
+                    break;
+
+                case "PS2":
                     block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
                     break;
@@ -74,33 +81,30 @@ function fillInSenaraiKakitangan(senaraiKakitangan, jenisPermohonan) {
     $("#senaraiKakitanganBerkumpulan").html("");
 
     senaraiKakitangan.forEach(element => {
-        $(document).ready(function(){
-            $.ajax({
-                url: 'user/semakan-pekerja/' + element,
-                type: 'GET',
-                success: function(data) {
-                    $("#senaraiKakitanganBerkumpulan").append('<li class="nav-item mb-1" onclick="fillInKedatangan('+data.users.id+','+"'"+ jenisPermohonan +"'"+')" id="'+data.users.id+'" role="presentation"><a class="nav-link" data-bs-toggle="pill" href="#" role="tab" aria-controls="test1" aria-selected="true">'+data.users.name+'</a></li>');
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
-        });
-        $(document).ready(function(){
-            $("#senaraiKakitanganBerkumpulan").append('<li class="" role=""><a class="" id="" data-bs-toggle="" href="" role="" aria-controls="" aria-selected=""></a></li>');
-        });   
+        $("#senaraiKakitanganBerkumpulan").append('<li class="nav-item mb-1" onclick="fillInKedatangan('+element.id+','+"'"+ jenisPermohonan +"'"+')" id="'+element.id+'" role="presentation"><a class="nav-link" data-bs-toggle="pill" href="#" role="tab" aria-controls="test1" aria-selected="true">'+element.name+'</a></li>');
     });
+
+    // For making the last element border shorter
+    $(document).ready(function(){
+        $("#senaraiKakitanganBerkumpulan").append('<li class="" role=""><a class="" id="" data-bs-toggle="" href="" role="" aria-controls="" aria-selected=""></a></li>');
+    });  
 }
 
-function fillInKedatangan(idKakitangan, jenisPermohonan) {    
+function fillInKedatangan(idKakitangan, jenisPermohonan) {  
+    console.log(idKakitangan);  
+
+    $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
+    $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
+
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
         success: function(data) {
+            let array =  ["EL1", "EL2", "PS1", "PS2"];
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
             $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
 
-            if (jenisPermohonan == "EL1" || jenisPermohonan == "EL2") {
+            if (array.includes(jenisPermohonan)) {
                 // eKedatangan
                 $("#formEkedatangan input[name=tarikh]").val(data.ekedatangans.tarikh);
                 $("#formEkedatangan input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);
