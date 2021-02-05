@@ -71,7 +71,6 @@
                     @include('core.penyelia.partials.dataTablesPenyelia')
     
             </div>
-
         </div>
 
         @include('layouts.footers.auth')

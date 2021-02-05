@@ -37,7 +37,7 @@ class CreateEKedatangansTable extends Migration
         Schema::table('e_kedatangans', function($table) {
             $table->foreign('id_user')->references('id')->on('users');
         });
-    }
+    }  
 
     /**
      * Reverse the migrations.
