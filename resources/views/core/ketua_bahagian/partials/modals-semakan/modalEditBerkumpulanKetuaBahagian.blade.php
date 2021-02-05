@@ -23,7 +23,7 @@
                                 </ul>
                             </div>
 
-                            <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('profile.update') }}" id='formModalEdit' autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
     
@@ -32,7 +32,7 @@
     
                                 <div class="form-group mb-2">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
-                                    <input class="form-control" type="text" placeholder="Default input">
+                                    <input class="form-control" name="tarikhMohon" id="semakan-modal-tarikhMohon" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>

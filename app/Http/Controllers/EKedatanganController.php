@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\eKedatangan;
 use Illuminate\Http\Request;
 
@@ -51,16 +52,12 @@ class EKedatanganController extends Controller
 
     public function findEkedatangan($id_user)
     {
-        $ekedatangans = eKedatangan::where('id_user', $id_user)
-                                    ->join('users', 'users.id', '=', 'e_kedatangans.id_user')
-                                    ->first();
-        
-        $user_name = $ekedatangans->name;
+        $user_ekedatangan = User::with('ekedatangan')->find($id_user);
 
         return response()->json([
                     'error' => false,
-                    'ekedatangans'  => $ekedatangans,
-                    'user_name' => $user_name
+                    'ekedatangans'  => $user_ekedatangan->ekedatangan,
+                    'user_name' => $user_ekedatangan->name
                 ], 200);
     }
 

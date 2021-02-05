@@ -1,5 +1,4 @@
-var table = $("#datatable1").DataTable();
-    table = $('#datatable1').DataTable({
+var table = $('#datatable1').DataTable({
         destroy:true,
     "lengthMenu": [ 5, 10, 25, 50 ],
     responsive:true,
@@ -23,6 +22,9 @@ $(document).ready(function(){
     $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
         tabPilihan = '1';
     });
+    $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
+        tabPilihan = '2';
+    });
 });
 
 function checkUser(){
@@ -30,32 +32,23 @@ function checkUser(){
     // EL1 = 01
     // OT2 = 10
     // EL2 = 11
+    // PS1 = 02
+    // PS2 = 12
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
-
-    if (pilihan == 'individu') {
-        pilihan = '0' + tabPilihan;
-    }
-    if (pilihan == 'berkumpulan') {
-        pilihan = '1' + tabPilihan;
-    }
-
-    switch(pilihan) {
-        case '00':
-            showDatatable(pilihan);
+    switch (pilihan) {
+        case 'individu':
+            pilihan = '0' + tabPilihan;
             break;
-        case '01':
-            showDatatable(pilihan);
-            break;
-        case '10':
-            showDatatable(pilihan);
-            break;
-        case '11':
-            showDatatable(pilihan);
+        case 'berkumpulan':
+            pilihan = '1' + tabPilihan;
             break;
         default:
             alert('Sila pilih jenis permohonan');
+            break;
     }
+
+    showDatatable(pilihan);
 }
 
 function showUser() {
@@ -113,7 +106,7 @@ function showDatatable(pilihan){
                             var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')" value='+data.id+'></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
-                        }
+                        } 
                     }
                 ],
                 

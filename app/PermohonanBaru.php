@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PermohonanBaru extends Model
@@ -26,4 +27,10 @@ class PermohonanBaru extends Model
         'id_keraniSemakan' => 0,
         'id_keraniPemeriksa' => 0
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
+                    ->as('permohonan_with_users');
+    }
 }
