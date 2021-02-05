@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\eKedatangan;
+use App\PermohonanBaru;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -110,5 +112,15 @@ class User extends Authenticatable
     public function isPelulusPindaan()
     {
         return $this->role_id == 9;
+    }
+
+    public function permohonans()
+    {
+        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'id', 'id_permohonan_baru');
+    }
+
+    public function ekedatangan()
+    {
+        return $this->hasOne(eKedatangan::class, 'id_user', 'id');
     }
 }

@@ -20,12 +20,11 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->truncate();
         DB::table('items')->truncate();
         DB::table('permohonan_barus')->truncate();
-        DB::table('permohonan_with_users')->truncate();
         DB::table('e_kedatangans')->truncate();
 
         $this->call([RolesTableSeeder::class, UsersTableSeeder::class]);
         $this->call([TagsTableSeeder::class, CategoriesTableSeeder::class, ItemsTableSeeder::class, PermohonanBaruSeeder::class]);
-        $this->call([EKedatanganSeeder::class,PermohonanWithUsersSeeder::class]);
+        $this->call([EKedatanganSeeder::class]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }

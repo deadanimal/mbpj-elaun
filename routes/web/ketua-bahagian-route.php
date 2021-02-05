@@ -21,7 +21,7 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
-	});
+	}); 
 	Route::resource('ketua-bahagian-dashboard','ketua_bahagian\ketuaBahagianController',['except' => ['show','destroy']]);
 	Route::resource('ketua-bahagian-semakan','ketua_bahagian\semakanController',['except' => ['destroy']]);
 	Route::resource('ketua-bahagian-laporan','ketua_bahagian\laporanController',['except' => ['show','destroy']]);

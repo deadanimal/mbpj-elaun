@@ -14,46 +14,44 @@ class PermohonanBaruController extends Controller
 {
     public function findPermohonan($idPermohananBaru)
     {
-        $array = [];
-
-        $permohonan = PermohonanBaru::where('id_permohonan_baru', $idPermohananBaru)->first();
-
-        $permohonanBerkumpulan = permohonan_with_users::where('id_permohonan_baru', $idPermohananBaru)->first();
-
-        $users = $permohonanBerkumpulan->users_id;
-        $usersExploded = explode(",", $users);
-
-        $penyelia = User::find($permohonan->id_penyelia);
-        $array = Arr::prepend($array, $penyelia, 'penyelia');
-
-        $ketuaBahagian = User::find($permohonan->id_ketuaBahagian);
-        $array = Arr::prepend($array, $ketuaBahagian, 'ketuaBahagian');
-
-        $ketuaJabatan = User::find($permohonan->id_ketuaJabatan);
-        $array = Arr::prepend($array, $ketuaJabatan, 'ketuaJabatan');
-
-        $keraniPemeriksa = User::find($permohonan->id_keraniPemeriksa);
-        $array = Arr::prepend($array, $keraniPemeriksa, 'keraniPemeriksa');
-
-        $keraniSemakan = User::find($permohonan->id_keraniSemakan);
-        $array = Arr::prepend($array, $keraniSemakan, 'keraniSemakan');
+        $permohonan = PermohonanBaru::with('users')->find($idPermohananBaru);
 
         return response()->json([
                     'error' => false,
                     'permohonan'  => $permohonan,
-                    'arrayKelulusan' => $array,
-                    'senaraiKakitangan' => $usersExploded
+                    'arrayKelulusan' => $this->getKelulusanWithData($permohonan),
+                    'senaraiKakitangan' => $permohonan->users
                 ], 200);
+    }
+
+    public function getKelulusanWithData($permohonan)
+    {
+        $arrayKelulusan = [];
+
+        $penyelia = User::find($permohonan->id_penyelia); 
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, $penyelia, 'penyelia');
+
+        $ketuaBahagian = User::find($permohonan->id_ketuaBahagian);
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, $ketuaBahagian, 'ketuaBahagian');
+
+        $ketuaJabatan = User::find($permohonan->id_ketuaJabatan);
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, $ketuaJabatan, 'ketuaJabatan');
+
+        $keraniPemeriksa = User::find($permohonan->id_keraniPemeriksa);
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, $keraniPemeriksa, 'keraniPemeriksa');
+
+        $keraniSemakan = User::find($permohonan->id_keraniSemakan);
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, $keraniSemakan, 'keraniSemakan');
+
+        return $arrayKelulusan;
     }
 
     public function updateKelulusan($idPermohonanBaru)
     {
         $idAuthenticatedUser = Auth::id();
-        $user = Auth::user();
-        $role = $user->role_id;
         $permohonan = PermohonanBaru::find($idPermohonanBaru);
 
-        switch ($role) {
+        switch (Auth::user()->role_id) {
             case '2':
                 $permohonan->id_penyelia = $idAuthenticatedUser;
                 $permohonan->save();
