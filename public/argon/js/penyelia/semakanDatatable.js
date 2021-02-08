@@ -1,5 +1,5 @@
 
-let jenisPilihan = 'OT';
+var jenisPilihan = 'OT';
 var tabPilihan = '0';
 
     
@@ -15,17 +15,22 @@ $(document).ready(function(){
 }) 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
     jenisPilihan = 'OT';
+    $("#selectJenisPermohonan").val("out").trigger("change")
     getAllPermohonan();
 });
 $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
+    $("#selectJenisPermohonan").val("out").trigger("change")
+
     getAllPermohonan();
 });
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
     jenisPilihan = 'PS';
+    $("#selectJenisPermohonan").val("out").trigger("change")
     getAllPermohonan();
 });
 $("#padamCarian").click(function(){
+    $("#selectJenisPermohonan").val("out").trigger("change")
     getAllPermohonan();
 });
 
@@ -35,14 +40,14 @@ function getAllPermohonan(){
     
     
     console.log('permohonan: ',jenisPilihan)
-    var table = $('#semakanPYDT').DataTable({
+    var table = $('#semakanPYDT').dataTable({
         dom:'lrtip',
         destroy:true,
         lengthMenu: [ 5, 10, 25, 50 ],
         responsive:false,
         autoWidth:false,
         processing:false,
-        serverSide:true,
+        serverSide:false,
         ajax: {
             url: "penyelia-semakan/",
             type: 'GET',
@@ -55,16 +60,15 @@ function getAllPermohonan(){
         
                 {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                 {data: 'tarikh_permohonan'},
-                {data: 'masa_mula', searchable:false},
-                {data: 'masa_akhir', searchable:false},
-                {data: 'masa', searchable:false},
-                {data: 'hari', searchable:false},
-                {data: 'waktu', searchable:false},
-                {data: 'kadar_jam', searchable:false},
-                {data: 'tujuan', searchable:false},
-                {data: null, searchable:false},
-                {data: 'users_id'},
-                {data: 'jenis_permohonan'}
+                {data: 'masa_mula' },
+                {data: 'masa_akhir' },
+                {data: 'masa' },
+                {data: 'hari' },
+                {data: 'waktu' },
+                {data: 'kadar_jam' },
+                {data: 'tujuan' },
+                {data: null },
+                {data: 'pivot_id'}
                
             ],  
             columnDefs: [
@@ -86,11 +90,6 @@ function getAllPermohonan(){
                         var allButton = button1 + button2 + button3;
                         return allButton;
                     }
-                },
-                {
-                    targets: [10],
-                    // visible:false,
-                    searchable: true,
                 },
             ],
     });
@@ -143,6 +142,7 @@ function showUser() {
         }
     });
     }
+    
 }
 
 function showDatatable(pilihan){
@@ -161,11 +161,11 @@ function showDatatable(pilihan){
     }else if(pilihan == 12){
         jenisPermohonan = 'PS2'
     }
-                table = $('#semakanPYDT').DataTable({
+                table = $('#semakanPYDT').dataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: false,
-                serverSide: true,
+                serverSide: false,
             ajax: {
                 url: "penyelia-semakan/"+id_user,
                 type: 'GET',
@@ -186,8 +186,6 @@ function showDatatable(pilihan){
                     {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
-                    {data: 'users_id'},
-                    {data: 'jenis_permohonan'}
 
                    
                 ],  
@@ -196,8 +194,9 @@ function showDatatable(pilihan){
                         targets: [1],
                         type: "date",
                         render: function(data,type,row){
-                            newDate = new Date(data);
-                            return newDate;
+                        
+                            formattedDate = moment(data).format("DD/MM/YYYY")
+                            return formattedDate;
                         }
                         
                     },
@@ -211,20 +210,13 @@ function showDatatable(pilihan){
                             return allButton;
                         }
                     },
-                    {
-                        targets: [10],
-                        // visible:false,
-                        searchable: true,
-                    },
                 ],
                 
             });
-
             $('#semakanPYDT').DataTable().search(
                 $("#noPekerja").val(),
                 jenisPermohonan
             ).draw();
-         
 }
 
 $("#selectJenisPermohonan").on("change",function(){
@@ -321,3 +313,8 @@ $('#min').datepicker({
 $('#max').datepicker({
     dateFormat: 'dd/mm/yy',
 });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("value")
+    tabPilihan = target;
+    });

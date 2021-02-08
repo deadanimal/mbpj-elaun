@@ -119,6 +119,11 @@ class User extends Authenticatable
         return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'id', 'id_permohonan_baru');
     }
 
+    public function permohonanss()
+    {
+        return $this->hasMany(PermohonanBaru::class);
+    }
+
     public function ekedatangan()
     {
         return $this->hasOne(eKedatangan::class, 'id_user', 'id');
