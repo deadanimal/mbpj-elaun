@@ -1,5 +1,5 @@
 var jenisPilihan = 'OT';
-var tabPilihan = 'OT';
+var tabPilihan = '0';
 
 $(document).ready(function(){
     $.ajaxSetup({
@@ -87,22 +87,32 @@ function getAllPermohonan(){
 }
 
 function checkUser(){
+    // OT1 = 00
+    // EL1 = 01
+    // OT2 = 10
+    // EL2 = 11
+    // PS1 = 02
+    // PS2 = 12
     var id = document.querySelector("#noPekerja").value;
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
     switch (pilihan) {
         case 'individu':
-            pilihan = tabPilihan + '1';
+            pilihan = '0' + tabPilihan;
             break;
         case 'berkumpulan':
-            pilihan = tabPilihan + '2';
+            pilihan = '1' + tabPilihan;
             break;
         default:
             alert('Sila pilih jenis permohonan');
             break;
     }
 
+    if(id != ''){
     showDatatable(pilihan);
+    }else {
+        alert('Sila isi no. pekerja');
+    }
 }
 
 function showUser() {
@@ -129,6 +139,20 @@ function showDatatable(pilihan){
     
     var id_user = document.querySelector("#noPekerja").value;
 
+    var jenisPermohonan = '';
+    if(pilihan == 00){
+        jenisPermohonan = 'OT1'
+    }else if(pilihan == 10){
+        jenisPermohonan = 'OT2'
+    }else if(pilihan == 01){
+        jenisPermohonan = 'EL1'
+    }else if(pilihan == 11){
+        jenisPermohonan = 'EL2'
+    }else if(pilihan == 02){
+        jenisPermohonan = 'PS1'
+    }else if(pilihan == 12){
+        jenisPermohonan = 'PS2'
+    }
                 table = $('#semakanPYDT').dataTable({
                 dom: 'lrtip',
                 destroy: true,
@@ -141,7 +165,7 @@ function showDatatable(pilihan){
                     pilihan: pilihan
                 }
             },
-
+                
                 columns: [
             
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
@@ -177,10 +201,9 @@ function showDatatable(pilihan){
                 ],
                 
             });
-            
             $('#semakanPYDT').DataTable().search(
                 $("#noPekerja").val(),
-                pilihan
+                jenisPermohonan
             ).draw();
 }
 
@@ -189,19 +212,38 @@ $("#selectJenisPermohonan").on("change",function(){
     var jenisPermohonan = '';
     switch (pilihan) {
         case 'individu':
-            pilihan = tabPilihan + '1';
+            pilihan = '0' + tabPilihan;
             break;
         case 'berkumpulan':
-            pilihan = tabPilihan + '2';
+            pilihan = '1' + tabPilihan;
             break;
         default:
             getAllPermohonan();
             break;
     }
     console.log(pilihan)
-   
-    $('#semakanPYDT').DataTable().search(       
-        pilihan
+    // OT1 = 00
+    // EL1 = 01
+    // OT2 = 10
+    // EL2 = 11
+    // PS1 = 02
+    // PS2 = 12
+    if(pilihan == 00){
+        jenisPermohonan = 'OT1'
+    }else if(pilihan == 10){
+        jenisPermohonan = 'OT2'
+    }else if(pilihan == 01){
+        jenisPermohonan = 'EL1'
+    }else if(pilihan == 11){
+        jenisPermohonan = 'EL2'
+    }else if(pilihan == 02){
+        jenisPermohonan = 'PS1'
+    }else if(pilihan == 12){
+        jenisPermohonan = 'PS2'
+    }
+    $('#semakanPYDT').DataTable().search(
+        
+        jenisPermohonan
     ).draw();
 });
 
@@ -259,7 +301,7 @@ $('#max').datepicker({
     dateFormat: 'dd/mm/yy',
 });
 
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("value")
     tabPilihan = target;
-});
+    });

@@ -14,34 +14,28 @@ $(document).ready(function(){
     
 }) 
 
-var tabPilihan = '0';
+var tabPilihan = 'OT';
 $(document).ready(function(){
     $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
-        tabPilihan = '0';
+        tabPilihan = 'OT';
     });
     $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
-        tabPilihan = '1';
+        tabPilihan = 'EL';
     });
     $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
-        tabPilihan = '2';
+        tabPilihan = 'PS';
     });
 });
 
 function checkUser(){
-    // OT1 = 00
-    // EL1 = 01
-    // OT2 = 10
-    // EL2 = 11
-    // PS1 = 02
-    // PS2 = 12
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
     switch (pilihan) {
         case 'individu':
-            pilihan = '0' + tabPilihan;
+            pilihan = tabPilihan + '1';
             break;
         case 'berkumpulan':
-            pilihan = '1' + tabPilihan;
+            pilihan = tabPilihan + '2';
             break;
         default:
             alert('Sila pilih jenis permohonan');
@@ -59,7 +53,6 @@ function showUser() {
         url: 'user/semakan-pekerja/' + id,
         success: function(data) {
             $("#formOTEL input[name=nama]").val(data.users.name);
-
             $('input').css('color', 'black')
         },
         error: function(data) {

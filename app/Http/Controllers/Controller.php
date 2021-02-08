@@ -18,7 +18,7 @@ class Controller extends BaseController
 
         return $permohonans = User::find($id)->permohonans->where('status', $jenisPermohonan);
 
-        // ----- Just another way to do this ------
+        // ----- Just another (bad) way to do this ------
         // $user_permohonans = User::find($id)->permohonans;        
         // $permohonans = $user_permohonans->filter(function($user_permohonan) use ($jenisPermohonan){
         //     return $user_permohonan->status == $jenisPermohonan ?? $user_permohonan;
@@ -27,7 +27,6 @@ class Controller extends BaseController
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
-        
         return $permohonans = PermohonanBaru::with("users")->where('status', 'like', $jenisPermohonan.'%')->get();
     }
 }
