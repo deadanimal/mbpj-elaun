@@ -67,8 +67,7 @@ function getAllPermohonan(){
                 {data: 'waktu' },
                 {data: 'kadar_jam' },
                 {data: 'tujuan' },
-                {data: null },
-                {data: 'pivot_id'}
+                {data: null }
                
             ],  
             columnDefs: [
