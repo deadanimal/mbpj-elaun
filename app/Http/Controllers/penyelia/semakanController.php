@@ -16,11 +16,12 @@ class semakanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $jenisPilihan = $request->input('jenisPilihan');
+        // dd($this->findAllPermohonanForTypes($jenisPilihan));
         if(request()->ajax()) {
-            return datatables()->of(User::select("*"))
-            ->make(true);
+            return datatables()->of($this->findAllPermohonanForTypes($jenisPilihan))->make(true);
         }
         
         return view('core.penyelia.semakan');
@@ -68,31 +69,22 @@ class semakanController extends Controller
 
         switch ($pilihan) {
             case '00':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('OT1', $id))->make(true); 
+                return datatables()->of($this->findPermohonanWithID('OT1', $id))->make(true); 
                 break;
             case '01':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('EL1', $id))->make(true); 
+                return datatables()->of($this->findPermohonanWithID('EL1', $id))->make(true); 
                 break;
             case '10':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('OT2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-
-                return datatables()->of($permohonanBaru)->make(true);
+                return datatables()->of($this->findPermohonanWithID('OT2', $id))->make(true);
                 break;
             case '11':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('EL2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-                
-                return datatables()->of($permohonanBaru)->make(true);
+                return datatables()->of($this->findPermohonanWithID('EL2', $id))->make(true);
                 break;
             case '02':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('PS1', $id))->make(true); 
+                return datatables()->of($this->findPermohonanWithID('PS1', $id))->make(true); 
                 break;
-            case '12':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('PS2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-                
-                return datatables()->of($permohonanBaru)->make(true);
+            case '12':  
+                return datatables()->of($this->findPermohonanWithID('PS2', $id))->make(true);
                 break;
             default:
                 return 1;

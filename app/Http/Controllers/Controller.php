@@ -25,4 +25,9 @@ class Controller extends BaseController
         // });
         // return $permohonans;
     }
+
+    public function findAllPermohonanForTypes($jenisPermohonan){
+        
+        return $permohonans = PermohonanBaru::with("users")->where('status', 'like', $jenisPermohonan.'%')->get();
+    }
 }
