@@ -19,7 +19,7 @@ class semakanController extends Controller
     public function index(Request $request)
     {
         $jenisPilihan = $request->input('jenisPilihan');
-        // dd($this->findAllPermohonanForTypes($jenisPilihan));
+
         if(request()->ajax()) {
             return datatables()->of($this->findAllPermohonanForTypes($jenisPilihan))->make(true);
         }

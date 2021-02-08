@@ -66,31 +66,8 @@ class semakanController extends Controller
     public function show(Request $request, $id)
     { 
         $pilihan = $request->input('pilihan');
-        $permohonanBaru = array();
 
-        switch ($pilihan) {
-            case '00':
-                return datatables()->of($this->findPermohonanWithID('OT1', $id))->make(true); 
-                break;
-            case '01':
-                return datatables()->of($this->findPermohonanWithID('EL1', $id))->make(true); 
-                break;
-            case '10':
-                return datatables()->of($this->findPermohonanWithID('OT2', $id))->make(true);
-                break;
-            case '11':
-                return datatables()->of($this->findPermohonanWithID('EL2', $id))->make(true);
-                break;
-            case '02':
-                return datatables()->of($this->findPermohonanWithID('PS1', $id))->make(true);
-                break;
-            case '12':
-                return datatables()->of($this->findPermohonanWithID('PS2', $id))->make(true);
-                break;
-            default:
-                return 1;
-                break;
-        }
+        return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
     }
 
     /**
