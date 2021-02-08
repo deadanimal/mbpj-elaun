@@ -3,6 +3,10 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     // Clear up name and no pekerja for Elaun
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val("");
+
+    if (condition) {
+        
+    }
     
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
