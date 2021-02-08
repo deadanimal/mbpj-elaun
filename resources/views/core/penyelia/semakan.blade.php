@@ -21,24 +21,24 @@
                         <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-1" 
-                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
+                                    href="#" role="tab" aria-controls="tabs-icons-text-1" value="0"
+                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa');">
                                     <i class="ni ni-time-alarm"></i>
                                     Permohonan Kerja Lebih Masa
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanPengesahanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-2" 
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa')">
+                                    href="#" role="tab" aria-controls="tabs-icons-text-2" value="2"
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa');">
                                     <i class="ni ni-money-coins"></i>
                                     Pengesahan Kerja Lebih Masa
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-3" 
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
+                                    href="#" role="tab" aria-controls="tabs-icons-text-3" value="1"
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa');">
                                     <i class="ni ni-money-coins"></i>
                                     Tuntuan Elaun Lebih Masa
                                 </a>
@@ -53,8 +53,8 @@
                                
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected value="out">Pilih Jenis Permohonan</option>
+                                    <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example" autocomplete="off">
+                                        <option selected="selected" value="out">Pilih Jenis Permohonan</option>
                                         <option value="individu">Permohonan Individu</option>
                                         <option value="berkumpulan">Permohonan Berkumpulan</option>
                                     </select>
