@@ -3,39 +3,16 @@
         @include('alerts.success')
         @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
 
-
-        <div class="col">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-8">
-                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                        <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
-                        <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
-
-                        @include('alerts.feedback', ['field' => 'name'])
-                    </div>
-                </div>
-                <div class="col-4">            
-                    <div class="form-row justify-content-end align-items-end">
-                        <div class="col-sm-6">
-                            <label class ="form-control-label" for="min">From</label>
-                            <input id="min"
-                                class="form-control" value="dd / mm / yyyy" autocomplete="off">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class ="form-control-label" for="max">To</label>
-                            <input id="max"
-                                class="form-control" value="dd / mm / yyyy" autocomplete="off">
-                        </div>
-                    </div>
-                </div>              
-            </div>
-            <div class="row"> 
-                <div class="col-md-8">
-                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                        <label class="form-control-label" for="input-email">{{ __('Nama') }}</label>
-                        <input type="email" name="nama" id="nama-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" disabled>
-
-                        @include('alerts.feedback', ['field' => 'name'])
+                <div class="col-5">
+                    <div class="form-group">
+                        <h6 class="heading-small text-muted mb-3">{{ __('Maklumat Peribadi') }}</h6>
+                        <select id="selectJenisPermohonan" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
+                            <option selected value="out">Pilih Jenis Permohonan</option>
+                            <option value="individu">Permohonan Individu</option>
+                            <option value="berkumpulan">Permohonan Berkumpulan</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-7">
@@ -62,12 +39,28 @@
 
             <div class="row"> 
                 <div class="col-5">
-                    <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                        <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
-                        <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
+                    <div class="row">
+                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                            <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
+                            <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
 
-                        @include('alerts.feedback', ['field' => 'name'])
+                            @include('alerts.feedback', ['field' => 'name'])
+                        </div>
                     </div>
+                    <div class="row">           
+                        <div class="form-row justify-content-end align-items-end">
+                            <div class="col-sm-6">
+                                <label class ="form-control-label" for="min">From</label>
+                                <input id="min"
+                                    class="form-control" value="dd / mm / yyyy" autocomplete="off">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class ="form-control-label" for="max">To</label>
+                                <input id="max"
+                                    class="form-control" value="dd / mm / yyyy" autocomplete="off">
+                            </div>
+                        </div>         
+                    </div>  
                 </div>
                 <div class="col-7">
                     <div class="row">
@@ -98,18 +91,13 @@
                     </div>
                 </div>
             </div>
-
-
-            <div class="row justify-content-end mx-4">
-                <div class="col-2">
-                <button type="button" onclick="event.preventDefault();" id="padamCarian" class="btn btn-md btn-danger">{{ __('Padam Carian') }}</button>
+            <div class="row justify-content-end align-items-end">
+                <div class="col-md-auto">
+                    <button type="button" onclick="event.preventDefault();" id="padamCarian" class="btn btn-md btn-danger">{{ __('Padam Carian') }}</button>
                 </div>
-                <div class="col-1">
-                    <button type="button" id="semakPenyelia" class="btn btn-md btn-success ">{{ __('Semak') }}</button>
-                    <input id="search" value="0" hidden>
-
+                <div class="col-md-auto">
+                    <button type="button" onclick="event.preventDefault();checkUser();showUser();" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
                 </div>
-            </div>
-           
+            </div>    
         </div>
 </form>
