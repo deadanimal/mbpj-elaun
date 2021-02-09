@@ -23,8 +23,8 @@
                                 <th>Kadar Jam</th>
                                 <th>Tujuan</th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th hidden>Status</th>
+                                <th hidden></th>
                             </tr>
                         </thead>
                         <tbody>
