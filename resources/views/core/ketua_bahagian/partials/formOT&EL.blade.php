@@ -3,12 +3,12 @@
         @include('alerts.success')
         @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
 
-        <div class="row">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-5">
                     <div class="form-group">
                         <h6 class="heading-small text-muted mb-3">{{ __('Maklumat Peribadi') }}</h6>
-                        <select id="selectJenisPermohonan" class="form-select form-select-sm col-5" aria-label=".form-select-sm example">
+                        <select id="selectJenisPermohonan" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
                             <option selected value="out">Pilih Jenis Permohonan</option>
                             <option value="individu">Permohonan Individu</option>
                             <option value="berkumpulan">Permohonan Berkumpulan</option>
