@@ -106,8 +106,7 @@ function showDatatable(pilihan){
                     {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
-                    {data: 'status'},
-                    {data: null, visible:false}
+                    {data: 'status'}
                 ],  
                 columnDefs: [
                     {
