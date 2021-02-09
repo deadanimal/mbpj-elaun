@@ -25,10 +25,7 @@ function retrieveTabPilihan(id) {
 } 
 
 function changeDataTarget(status) {
-    // var pilihan = document.getElementById('selectJenisPermohonan').value;
-    // console.log("changeDataTarget = "+pilihan);
     var pilihan = status[2];
-    console.log(status);
     if (pilihan == "1") {
         document.getElementById("buttonEdit").setAttribute("data-target", "#modal-default");
         document.getElementById("pilihanJenisPermohonanIndividuInModal").setAttribute("placeholder", "Permohonan Individu");
