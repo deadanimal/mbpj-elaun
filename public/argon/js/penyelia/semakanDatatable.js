@@ -7,84 +7,33 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    getAllPermohonan();
+    showDatatable(jenisPilihan);
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
     jenisPilihan = 'OT';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    getAllPermohonan();
+    showDatatable(jenisPilihan);
 });
 
 $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    getAllPermohonan();
+    showDatatable(jenisPilihan);
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
     jenisPilihan = 'PS';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    getAllPermohonan();
+    showDatatable(jenisPilihan);
 });
 
 $("#padamCarian").click(function(){
+    $("#noPekerja").val("");
+    $("#nama-semakan").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    getAllPermohonan();
+    showDatatable(jenisPilihan);
 });
-
-function getAllPermohonan(){
-    console.log('permohonan: ',jenisPilihan)
-    var table = $('#semakanPYDT').dataTable({
-        dom:'lrtip',
-        destroy:true,
-        lengthMenu: [ 5, 10, 25, 50 ],
-        responsive:false,
-        autoWidth:false,
-        processing:false,
-        serverSide:false,
-        ajax: {
-            url: "penyelia-semakan/",
-            type: 'GET',
-            data: {
-                jenisPilihan: jenisPilihan 
-            }
-        },  
-            columns: [
-                {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                {data: 'tarikh_permohonan'},
-                {data: 'masa_mula' },
-                {data: 'masa_akhir' },
-                {data: 'masa' },
-                {data: 'hari' },
-                {data: 'waktu' },
-                {data: 'kadar_jam' },
-                {data: 'tujuan' },
-                {data: null }
-               
-            ],  
-            columnDefs: [
-                {
-                    targets: [1],
-                    type: 'date',
-                    render: function(data,type,row){
-                        formattedDate = moment(data).format("DD/MM/YYYY")
-                        return formattedDate;
-                    }
-                },
-                {
-                    targets: 9,
-                    mRender: function(data,type,row){
-                        var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData();"></i>' 
-                        var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan();" value=""></i>' 
-                        var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test()" value=></i>' 
-                        var allButton = button1 + button2 + button3;
-                        return allButton;
-                    }
-                },
-            ],
-    });
-}
 
 function checkUser(){
     var id = document.querySelector("#noPekerja").value;
@@ -128,17 +77,21 @@ function showUser() {
 function showDatatable(pilihan){
     
     var id_user = document.querySelector("#noPekerja").value;
-
+    if(id_user == ''){
+        id_user = 'noID';
+    }
+            console.log(id_user, pilihan)
                 table = $('#semakanPYDT').dataTable({
                 dom: 'lrtip',
                 destroy: true,
-                processing: false,
+                processing: true,
                 serverSide: false,
             ajax: {
                 url: "penyelia-semakan/"+id_user,
                 type: 'GET',
                 data: {
-                    pilihan: pilihan
+                    // pilihan: pilihan
+                    pilihan: id_user != '' ? pilihan : jenisPilihan
                 }
             },
 
@@ -154,6 +107,8 @@ function showDatatable(pilihan){
                     {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
+                    {data: 'status'},
+                    // {data: 'users[0].id', name: 'users_id'}
                 ],  
                 columnDefs: [
                     {
@@ -167,21 +122,53 @@ function showDatatable(pilihan){
                     {
                         targets: 9,
                         mRender: function(data,type,row){
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget(); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+');"></i>' 
-                            var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan('+data.id_permohonan_baru+');" value=""></i>' 
-                            var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')" value='+data.id+'></i>' 
-                            var allButton = button1 + button2 + button3;
-                            return allButton;
+                            if(id_user != "noID"){
+                                console.log(id_user,',',data.id_permohonan_baru,',',data.status)
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+');"></i>' 
+                                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan('+data.id_permohonan_baru+');" value=""></i>' 
+                                var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+id_user+')" value='+data.id+'></i>' 
+                                var allButton = button1 + button2 + button3;
+                                return allButton;
+                            }else 
+                            {
+                                console.log(data.users[0].id);
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+'); retrieveUserData('+data.users[0].id+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+');"></i>' 
+                                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan('+data.id_permohonan_baru+');" value=""></i>' 
+                                var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.users[0].id+')" value='+data.id+'></i>' 
+                                var allButton = button1 + button2 + button3;
+                                return allButton;
+                            }
                         }
                     },
+                    {
+                        targets: 10,
+                        visible: false,
+                        searchable: true
+                    },
+                    // {
+                    //     targets: 11,
+                    //     render: function(data,type,row){
+
+                    //         console.log(data)
+                    //         return data;
+                    //     }
+                    // }
                 ],
                 
             });
-            
+            if(id_user != ''){
             $('#semakanPYDT').DataTable().search(
                 $("#noPekerja").val(),
                 pilihan
             ).draw();
+            }else
+            {
+                
+            }
+}
+
+function test(a){
+    console.log('test',a);
 }
 
 $("#selectJenisPermohonan").on("change",function(){
@@ -195,7 +182,7 @@ $("#selectJenisPermohonan").on("change",function(){
             pilihan = tabPilihan + '2';
             break;
         default:
-            getAllPermohonan();
+            showDatatable(jenisPilihan);
             break;
     }
     console.log(pilihan)

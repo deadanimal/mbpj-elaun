@@ -23,7 +23,7 @@
                                 </ul>
                             </div> 
 
-                            <form method="post" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('profile.update') }}" id="formModalEdit" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
     

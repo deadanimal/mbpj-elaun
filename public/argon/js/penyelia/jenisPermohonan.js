@@ -24,17 +24,18 @@ function retrieveTabPilihan(id) {
     }
 } 
 
-function changeDataTarget() {
-    var pilihan = document.getElementById('selectJenisPermohonan').value;
+function changeDataTarget(status) {
+    // var pilihan = document.getElementById('selectJenisPermohonan').value;
     // console.log("changeDataTarget = "+pilihan);
-
-    if (pilihan == "individu") {
+    var pilihan = status[2];
+    console.log(status);
+    if (pilihan == "1") {
         document.getElementById("buttonEdit").setAttribute("data-target", "#modal-default");
         document.getElementById("pilihanJenisPermohonanIndividuInModal").setAttribute("placeholder", "Permohonan Individu");
         $("#modal-default").modal("show");
         $("#modal-default-berkumpulan").modal("dispose");
     }
-    else if (pilihan == "berkumpulan"){
+    else if (pilihan == "2"){
         document.getElementById("buttonEdit").setAttribute("data-target", "#modal-default-berkumpulan");
         document.getElementById("pilihanJenisPermohonanBerkumpulanInModal").setAttribute("placeholder", "Permohonan Berkumpulan");
         $("#modal-default-berkumpulan").modal("show");
