@@ -81,7 +81,7 @@ function showDatatable(pilihan){
         id_user = 'noID';
     }
             console.log(id_user, pilihan)
-                table = $('#semakanPYDT').dataTable({
+                table = $('#semakanKSDT').dataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
@@ -147,7 +147,7 @@ function showDatatable(pilihan){
                 
             });
             if(id_user != ''){
-            $('#semakanPYDT').DataTable().search(
+            $('#semakanKSDT').DataTable().search(
                 $("#noPekerja").val(),
                 pilihan
             ).draw();
@@ -177,7 +177,7 @@ $("#selectJenisPermohonan").on("change",function(){
     }
     console.log(pilihan)
    
-    $('#semakanPYDT').DataTable().search(       
+    $('#semakanKSDT').DataTable().search(       
         pilihan
     ).draw();
 });
