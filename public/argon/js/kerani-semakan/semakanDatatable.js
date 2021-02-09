@@ -172,7 +172,7 @@ $("#selectJenisPermohonan").on("change",function(){
             pilihan = tabPilihan + '2';
             break;
         default:
-            showDatatable(jenisPilihan);
+            showDatatable(tabPilihan);
             break;
     }
     console.log(pilihan)
