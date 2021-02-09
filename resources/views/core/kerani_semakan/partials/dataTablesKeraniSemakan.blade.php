@@ -10,7 +10,7 @@
             </div>
             <div class="col-12 mt-2">
                 <div class="table-responsive py-4">
-                    <table class="table" id="datatable1">
+                    <table class="table" id="semakanKSDT">
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
