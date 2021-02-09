@@ -14,29 +14,39 @@
 
     <div class="container-fluid mt--6">
         <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-12">
 
                 {{-- Tab options --}}
-                <div class="nav-wrapper">
-                    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
-                                href="#formPermohonanKerjaLebihMasa" role="tab" aria-controls="tabs-icons-text-1" 
-                                aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
-                                <i class="ni ni-time-alarm"></i>
-                                Permohonan Kerja Lebih Masa
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
-                                href="#formTuntuanElaunLebihMasa" role="tab" aria-controls="tabs-icons-text-2" 
-                                aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
-                                <i class="ni ni-money-coins"></i>
-                                Tuntuan Elaun Lebih Masa
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
+                                    href="#" role="tab" aria-controls="tabs-icons-text-1" value="OT"
+                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa');">
+                                    <i class="ni ni-time-alarm"></i>
+                                    Permohonan Kerja Lebih Masa
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanPengesahanKerjaLebihMasa" data-toggle="tab" 
+                                    href="#" role="tab" aria-controls="tabs-icons-text-2" value="PS"
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa');">
+                                    <i class="ni ni-money-coins"></i>
+                                    Pengesahan Kerja Lebih Masa
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
+                                    href="#" role="tab" aria-controls="tabs-icons-text-3" value="EL"
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa');">
+                                    <i class="ni ni-money-coins"></i>
+                                    Tuntuan Elaun Lebih Masa
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
@@ -48,88 +58,6 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="col-xl-4 d-flex">
-                <div class="card flex-fill">
-                <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="mb-0">{{ __('Nota Permohanan Kerja Lebih Masa') }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="progress-wrapper">
-                                    <div class="progress-info">
-                                        
-                                        <span>Task completed</span>
-                                        
-                                        <div class="progress-percentage">
-                                        <span>60%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="progress-wrapper">
-                                    <div class="progress-info">
-                                        
-                                        <span>Task completed</span>
-                                        
-                                        <div class="progress-percentage">
-                                        <span>60%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="progress-wrapper">
-                                    <div class="progress-info">
-                                        
-                                        <span>Task completed</span>
-                                        
-                                        <div class="progress-percentage">
-                                        <span>60%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="progress-wrapper">
-                                    <div class="progress-info">
-                                        
-                                        <span>Task completed</span>
-                                        
-                                        <div class="progress-percentage">
-                                        <span>60%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
             </div>
             
             {{-- Datatables Kerani Semakan --}}

@@ -62,18 +62,6 @@ class semakanController extends Controller
         $pilihan = $request->input('pilihan');
         $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
         
-        // dd($this->findAllPermohonanForTypes($pilihan)->pivot->id);
-        // $permohonans = User::find($id)->permohonans->where('status', $jenisPermohonan);
-        // $array = array();
-        // $permohonans = $this->findAllPermohonanForTypes($pilihan);
-        
-        // foreach ($permohonans as $permohonan) {
-        //     foreach ($permohonan->users as $user) {
-        //         array_push($array,$user->id);
-        //     }
-        // }
-        // $permohonanUser = $permohonan->permohonan_with_users;
-        // dd($array);
         if(strlen($pilihan) == 3){
             return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
         }else
