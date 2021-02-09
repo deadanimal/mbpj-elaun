@@ -50,16 +50,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
-                               
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <select id="selectJenisPermohonan" class="form-select form-select-sm" aria-label=".form-select-sm example" autocomplete="off">
-                                        <option selected="selected" value="out">Pilih Jenis Permohonan</option>
-                                        <option value="individu">Permohonan Individu</option>
-                                        <option value="berkumpulan">Permohonan Berkumpulan</option>
-                                    </select>
-                                </div>
-                            </div>
+                        
 
                             {{-- Form semakan --}}
                                 @include('core.penyelia.partials.formOT&EL')
