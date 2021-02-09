@@ -18,10 +18,6 @@ class semakanController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            return datatables()->of(User::select("*"))
-            ->make(true);
-        }
         
         return view('core.kerani_semakan.semakan');
     }
@@ -64,32 +60,17 @@ class semakanController extends Controller
     public function show(Request $request, $id)
     { 
         $pilihan = $request->input('pilihan');
-        $permohonanBaru = array();
-
-        switch ($pilihan) {
-            case '00':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('OT1', $id))->make(true); 
-                break;
-            case '01':
-                return datatables()->of(permohonan_with_users::findPermohonanWithID('EL1', $id))->make(true); 
-                break;
-            case '10':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('OT2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-
-                return datatables()->of($permohonanBaru)->make(true);
-                break;
-            case '11':
-                $permohonans = permohonan_with_users::findPermohonanWithNoID('EL2');
-                $permohonanBaru = $this->findPermohonansAccordingToTargetUser($permohonans, $id);
-                
-                return datatables()->of($permohonanBaru)->make(true);
-                break;
-            
-            default:
-                return 1;
-                break;
+        $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
+        
+        if(strlen($pilihan) == 3){
+            return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
+        }else
+        {
+            return datatables()->of($this->findAllPermohonanForTypes($pilihan))
+            ->make(true);
         }
+        
+        
     }
 
     /**

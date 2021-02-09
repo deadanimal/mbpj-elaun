@@ -18,10 +18,6 @@ class semakanController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            return datatables()->of(User::select("*"))
-            ->make(true);
-        }
         
         return view('core.ketua_bahagian.semakan');
     }
@@ -66,8 +62,17 @@ class semakanController extends Controller
     public function show(Request $request, $id)
     { 
         $pilihan = $request->input('pilihan');
+        $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
         
-        return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
+        if(strlen($pilihan) == 3){
+            return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
+        }else
+        {
+            return datatables()->of($this->findAllPermohonanForTypes($pilihan))
+            ->make(true);
+        }
+        
+        
     }
 
     /**
