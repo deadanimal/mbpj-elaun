@@ -1,4 +1,4 @@
-<form  method="get" id="formOTEL" action="{{ route('ketua-bahagian-semakan.index')}}"" autocomplete="off" enctype="multipart/form-data">
+<form  method="get" id="formOTEL" action="{{ route('ketua-jabatan-semakan.index')}}"" autocomplete="off" enctype="multipart/form-data">
     @csrf
         @include('alerts.success')
         @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
