@@ -18,12 +18,7 @@ class semakanController extends Controller
      */
     public function index(Request $request)
     {
-        $jenisPilihan = $request->input('jenisPilihan');
 
-        if(request()->ajax()) {
-            return datatables()->of($this->findAllPermohonanForTypes($jenisPilihan))->make(true);
-        }
-        
         return view('core.penyelia.semakan');
     }
 
@@ -65,31 +60,29 @@ class semakanController extends Controller
     public function show(Request $request, $id)
     { 
         $pilihan = $request->input('pilihan');
-        $permohonanBaru = array();
-
-        switch ($pilihan) {
-            case '00':
-                return datatables()->of($this->findPermohonanWithID('OT1', $id))->make(true); 
-                break;
-            case '01':
-                return datatables()->of($this->findPermohonanWithID('EL1', $id))->make(true); 
-                break;
-            case '10':
-                return datatables()->of($this->findPermohonanWithID('OT2', $id))->make(true);
-                break;
-            case '11':
-                return datatables()->of($this->findPermohonanWithID('EL2', $id))->make(true);
-                break;
-            case '02':
-                return datatables()->of($this->findPermohonanWithID('PS1', $id))->make(true); 
-                break;
-            case '12':  
-                return datatables()->of($this->findPermohonanWithID('PS2', $id))->make(true);
-                break;
-            default:
-                return 1;
-                break;
+        $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
+        
+        // dd($this->findAllPermohonanForTypes($pilihan)->pivot->id);
+        // $permohonans = User::find($id)->permohonans->where('status', $jenisPermohonan);
+        // $array = array();
+        // $permohonans = $this->findAllPermohonanForTypes($pilihan);
+        
+        // foreach ($permohonans as $permohonan) {
+        //     foreach ($permohonan->users as $user) {
+        //         array_push($array,$user->id);
+        //     }
+        // }
+        // $permohonanUser = $permohonan->permohonan_with_users;
+        // dd($array);
+        if(strlen($pilihan) == 3){
+            return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
+        }else
+        {
+            return datatables()->of($this->findAllPermohonanForTypes($pilihan))
+            ->make(true);
         }
+        
+        
     }
 
     /**

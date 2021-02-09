@@ -66,7 +66,7 @@ class semakanController extends Controller
     public function show(Request $request, $id)
     { 
         $pilihan = $request->input('pilihan');
-
+        
         return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
     }
 
