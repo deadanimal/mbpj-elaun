@@ -90,7 +90,6 @@ function showDatatable(pilihan){
                 url: "penyelia-semakan/"+id_user,
                 type: 'GET',
                 data: {
-                    // pilihan: pilihan
                     pilihan: id_user != '' ? pilihan : jenisPilihan
                 }
             },
@@ -107,8 +106,7 @@ function showDatatable(pilihan){
                     {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
-                    {data: 'status'},
-                    // {data: 'users[0].id', name: 'users_id'}
+                    {data: 'status'}
                 ],  
                 columnDefs: [
                     {
@@ -144,15 +142,7 @@ function showDatatable(pilihan){
                         targets: 10,
                         visible: false,
                         searchable: true
-                    },
-                    // {
-                    //     targets: 11,
-                    //     render: function(data,type,row){
-
-                    //         console.log(data)
-                    //         return data;
-                    //     }
-                    // }
+                    }
                 ],
                 
             });
