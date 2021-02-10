@@ -40,36 +40,45 @@ class PermohonanBaruController extends Controller
     public function updateKelulusan($idPermohonanBaru)
     {
         $idAuthenticatedUser = Auth::id();
+        $roleAuthUser = Auth::user();
         $permohonan = PermohonanBaru::find($idPermohonanBaru);
 
-        switch (Auth::user()->role_id) {
-            case '2':
-                $permohonan->id_penyelia = $idAuthenticatedUser;
-                $permohonan->save();
-                return 1; 
-                break;
-            case '4':
-                $permohonan->id_ketuaBahagian = $idAuthenticatedUser;
-                $permohonan->save();
-                return 1; 
-                break;
-            case '5':
-                $permohonan->id_ketuaJabatan = $idAuthenticatedUser;
-                $permohonan->save();
-                return 1; 
-                break;
-            case '6':
-                $permohonan->id_keraniSemakan = $idAuthenticatedUser;
-                $permohonan->save();
-                return 1; 
-                break;
-            case '7':
-                $permohonan->id_keraniPemeriksa = $idAuthenticatedUser;
-                $permohonan->save();
-                return 1; 
-                break;
-            default:
-                break;
-        }
+
+        // switch (Auth::user()->role_id) {
+        //     case '2':
+        //         $permohonan->id_penyelia = $idAuthenticatedUser;
+        //         $permohonan->save();
+        //         return 1; 
+        //         break;
+        //     case '4':
+        //         $permohonan->id_ketuaBahagian = $idAuthenticatedUser;
+        //         $permohonan->save();
+        //         return 1; 
+        //         break;
+        //     case '5':
+        //         $permohonan->id_ketuaJabatan = $idAuthenticatedUser;
+        //         $permohonan->save();
+        //         return 1; 
+        //         break;
+        //     case '6':
+        //         $permohonan->id_keraniSemakan = $idAuthenticatedUser;
+        //         $permohonan->save();
+        //         return 1; 
+        //         break;
+        //     case '7':
+        //         $permohonan->id_keraniPemeriksa = $idAuthenticatedUser;
+        //         $permohonan->save();
+        //         return 1; 
+        //         break;
+        //     default:
+        //         break;
+        // }
+    }
+
+    public function saveCatatan(Request $request, $idPermohananBaru)
+    {
+        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $permohonan->catatan = $request->input('catatan');
+        $permohonan->save();
     }
 }

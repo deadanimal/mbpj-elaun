@@ -106,7 +106,7 @@ function showDatatable(pilihan){
                     {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
-                    {data: 'status'}
+                    {data: 'jenis_permohonan'}
                 ],  
                 columnDefs: [
                     {
@@ -121,8 +121,8 @@ function showDatatable(pilihan){
                         targets: 9,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
-                                console.log(id_user,',',data.id_permohonan_baru,',',data.status)
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+');"></i>' 
+                                console.log(id_user,',',data.id_permohonan_baru,',',data.jenis_permohonan)
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                                 var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan('+data.id_permohonan_baru+');" value=""></i>' 
                                 var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+id_user+')" value='+data.id+'></i>' 
                                 var allButton = button1 + button2 + button3;
@@ -130,7 +130,7 @@ function showDatatable(pilihan){
                             }else 
                             {
                                 console.log(data.users[0].id);
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+'); retrieveUserData('+data.users[0].id+', '+data.id_permohonan_baru+', '+ "'"+data.status+"'"+');"></i>' 
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].id+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                                 var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="saveIDforKelulusan('+data.id_permohonan_baru+');" value=""></i>' 
                                 var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.users[0].id+')" value='+data.id+'></i>' 
                                 var allButton = button1 + button2 + button3;
