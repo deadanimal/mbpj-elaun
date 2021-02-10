@@ -167,9 +167,15 @@ $("#selectJenisPermohonan").on("change",function(){
     switch (pilihan) {
         case 'individu':
             pilihan = tabPilihan + '1';
+            $('#semakanKPDT').DataTable().search(       
+                pilihan
+            ).draw();
             break;
         case 'berkumpulan':
             pilihan = tabPilihan + '2';
+            $('#semakanKPDT').DataTable().search(       
+                pilihan
+            ).draw();
             break;
         default:
             showDatatable(tabPilihan);
@@ -177,9 +183,7 @@ $("#selectJenisPermohonan").on("change",function(){
     }
     console.log(pilihan)
    
-    $('#semakanKPDT').DataTable().search(       
-        pilihan
-    ).draw();
+
 });
 
 $.fn.dataTable.ext.search.push(
