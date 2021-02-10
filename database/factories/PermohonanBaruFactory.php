@@ -16,9 +16,8 @@ $factory->define(PermohonanBaru::class, function (Faker $faker) {
         'waktu' => $faker->randomElement($array = array ('Pagi','Petang','Malam')),
         'kadar_jam' => $faker->randomDigit,
         'tujuan' => $faker->sentence,
-        'status' => $faker->randomElement($array = array ('OT1','OT2','EL1', 'EL2', 'PS1', 'PS2')),
-        'perkembangan' => $faker->randomElement($array = array ('diterima', 'ditolak', 'dalam_proses')),
-        'catatan' => $faker->sentence,
+        'jenis_permohonan' => $faker->randomElement($array = array ('OT1','OT2','EL1', 'EL2', 'PS1', 'PS2')),
+        'status' => 'DALAM PROSES',
         'created_at' => now(),
         'updated_at' => now()
     ];
