@@ -1,15 +1,18 @@
-@extends('layouts.app', ['class' => 'bg-default'])
+@extends('layouts.app')
 
 @section('content')
     @include('layouts.headers.guest', ['infoLogin' => 1])
+    
 
-    <div class="container mt--8 pb-5">
+    <div class="container mt--9 pb-4">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 
-                <div class="card bg-secondary shadow border-0">
+                <div class="card bg-secondary shadow border-0 mb--2">
                     <div class="card-body px-lg-5 py-lg-5">
-                        {{-- <div class="text-muted text-center mt-2 mb-3">{{ __('Log masuk') }}</div> --}}
+                        <div class="row mb-5 justify-content-center">
+                            <img src="{{ asset('argon') }}/img/mbpj/logo/logo-mbpj(2).png" class="navbar-brand-img" alt="..." style="height: 50%; width: 50%;">
+                        </div>
                         <form role="form" method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }} mb-3">
@@ -53,4 +56,5 @@
             </div>
         </div>
     </div>
+
 @endsection

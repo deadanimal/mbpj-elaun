@@ -1,9 +1,9 @@
-<div class="row align-items-center justify-content-lg-between mx-auto">
+{{-- <div class="row align-items-center justify-content-lg-between mx-auto">
     <div class="col-xl-6">
         <div class="copyright text-center text-lg-left text-muted">
             &copy; {{ now()->year }} 
         </div>
-    </div>
+    </div> --}}
     {{-- <div class="col-xl-6">
         <ul class="nav nav-footer justify-content-center justify-content-lg-end">
             <li class="nav-item">
@@ -23,4 +23,4 @@
             </li>
         </ul>
     </div> --}}
-</div>
+{{-- </div> --}}

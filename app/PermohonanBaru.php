@@ -17,15 +17,13 @@ class PermohonanBaru extends Model
         'hari',
         'waktu',
         'kadar_jam',
-        'tujuan'];
+        'tujuan',
+        'catatan'];
 
     // Default value
     protected $attributes = [
-        'id_penyelia' => 0,
-        'id_ketuaBahagian' => 0,
-        'id_ketuaJabatan' => 0,
-        'id_keraniSemakan' => 0,
-        'id_keraniPemeriksa' => 0
+        'id_peg_sokong' => 0,
+        'id_peg_pelulus' => 0,
     ];
 
     public function users()
