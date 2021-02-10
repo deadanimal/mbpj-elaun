@@ -2,7 +2,6 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-// use App\Model;
 use App\PermohonanBaru;
 use Faker\Generator as Faker;
 
@@ -18,6 +17,8 @@ $factory->define(PermohonanBaru::class, function (Faker $faker) {
         'kadar_jam' => $faker->randomDigit,
         'tujuan' => $faker->sentence,
         'status' => $faker->randomElement($array = array ('OT1','OT2','EL1', 'EL2', 'PS1', 'PS2')),
+        'perkembangan' => $faker->randomElement($array = array ('diterima', 'ditolak', 'dalam_proses')),
+        'catatan' => $faker->sentence,
         'created_at' => now(),
         'updated_at' => now()
     ];
