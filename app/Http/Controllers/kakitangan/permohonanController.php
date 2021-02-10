@@ -18,23 +18,27 @@ class permohonanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         // $timeFormat = User::select("created_at");
 
-        $user = User::select("*");
+        // $user = User::select("*");
 
-        if(request()->ajax()) {
-            return datatables()->of($user)
-        ->editColumn('created_at', function ($user) {
-            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
-        })
-        ->filterColumn('created_at', function ($query, $keyword) {
-            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
-        })
-        ->make(true);
-        }
+        // if(request()->ajax()) {
+        //     return datatables()->of($user)
+        // ->editColumn('created_at', function ($user) {
+        //     return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
+        // })
+        // ->filterColumn('created_at', function ($query, $keyword) {
+        //     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
+        // })
+        // ->make(true);
+        // }
+
+
+            
+
         
         return view('core.kakitangan.permohonanbaru');
     
@@ -67,15 +71,17 @@ class permohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
-        $user = User::find($id);
+        $pilihan = $request->input('pilihan');
+        // dd($pilihan);
 
-        return response()->json([
-            'error' => false,
-            'title'  => $user,
-        ], 200);
+        // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
+        
+        if(request()->ajax()){
+            return datatables()->of($this->findPermohonanWithID($pilihan,$id)->where('perkembangan','dalam_proses'))->make(true); 
+        }
     }
 
     /**

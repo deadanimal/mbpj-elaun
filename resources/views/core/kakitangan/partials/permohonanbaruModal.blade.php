@@ -252,7 +252,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-success">Hantar</button>
+                <button type="button" class="btn btn-success" onclick="hantarPermohonan()">Hantar</button>
             </div>
         </div>
     </div>

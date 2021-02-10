@@ -1,5 +1,9 @@
 
 
+var rowNum = 0;
+var individu = "OT1";
+var berkumpulan = "OT2";
+
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 
@@ -43,7 +47,6 @@ $('#divPermohonanBerkumpulan').hide();
 $('#add').on('click', add);
 $('#remove').on('click', remove);
 
-var rowNum = 0;
 
 function add() {
 
@@ -89,218 +92,183 @@ function remove() {
     // }
 }
 
-var table = $('#individuDT').DataTable({
-    dom: 'lrtip',
-    scrollX: false,
-    destroy: true,
-    "lengthMenu": [ 5, 10, 25, 50 ],
-    processing: false,
-    serverSide: true,
-    // responsive:true,
-    // autoWidth:false,
-ajax: {
-    url: "permohonan-baru/",
-    type: 'GET',
-    },
+
+$(document).ready(function(){
+
+    getIndividuDT();
+    getBerkumpulanDT();
+
     
-    columns: [
 
-        {data: 'id', name: 'id'},
+})
 
-        {data: null , name: null, searchable:false},
-
-        {data: null, name: null, searchable:false},
-
-        {data: null, name: null, searchable:false},
-
-        {data: 'created_at', name: 'created_at'},
-
-        {data: null , name: null, searchable:false},
-
-        {data: null , name: null, searchable:false},
-        
-        {data: 'status', name: 'status'},
-
-        {data: null , name: null, searchable:false},
-
-        {data: null , name: null, searchable:false},
-
-        // {data: null, name: null},
-
-       
-    ],
-    columnDefs: [
+function getIndividuDT(){
+    var id_user = document.querySelector("#noPekerja").value;
+    var individuDT = $('#individuDT').DataTable({
+        dom: 'lrtip',
+        scrollX: false,
+        destroy: true,
+        "lengthMenu": [ 5, 10, 25, 50 ],
+        processing: false,
+        serverSide: true,
+        // responsive:true,
+        // autoWidth:false,
+    ajax: {
+        url: "permohonan-baru/"+id_user,
+        type: 'GET',
+        data:
         {
-            targets: 1,
-            render:function(data,type,row){
-                return "<span>12/1/2020</span>"
-            }
-        },
-        {
-            targets: 2,
-            render:function(data,type,row){
-                return "<span>2.30 PM</span>"
-            }
-        },
-        {
-            targets: 3,
-            render:function(data,type,row){
-                return "<span>5.30 PM</span>"
-            }
-        },
-        {
-            type: "date",
-            targets: [4],
-            
-        },
-        {
-            targets: 5,
-            render:function(data,type,row){
-                return "<span>Selasa</span>"
-            }
-        },
-        {
-            targets: 6,
-            render:function(data,type,row){
-                return "<span>Petang</span>"
-            }
-        },
-        {
-            targets: 8,
-            render:function(data,type,row){
-                return "<span>Before</span>"
-            }
-        },
-        {
-            targets: 9,
-            render: function(data,type,row){
-                console.log(data.id);
-                var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""  ></i>' 
-                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
-                var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')"  value='+data.id+'></i>' 
-                var allButton = button1 + button2 + button3;
-                return allButton;
-            }
+            pilihan: individu
         }
-    ],
-    
-});
-
-var table = $('#berkumpulanDT').DataTable({
-    dom: 'lrtip',
-    scrollX: false,
-    destroy: true,
-    "lengthMenu": [ 5, 10, 25, 50 ],
-    processing: false,
-    serverSide: true,
-    // responsive:true,
-    // autoWidth:false,
-ajax: {
-    url: "permohonan-baru/",
-    type: 'GET',
-    },
-    
-    columns: [
-
-        {data: 'id', name: 'id'},
-
-        {data: null , name: null, searchable:false},
-
-        {data: null, name: null, searchable:false},
-
-        {data: null, name: null, searchable:false},
-
-        {data: 'created_at', name: 'created_at'},
-
-        {data: null , name: null, searchable:false},
-
-        {data: null , name: null, searchable:false},
+        },
         
-        {data: 'status', name: 'status'},
+        columns: [
 
-        {data: null , name: null, searchable:false},
-
-        {data: null , name: null, searchable:false},
-
-        // {data: null, name: null},
-
-       
-    ],
-    columnDefs: [
-        {
-            targets: 1,
-            render:function(data,type,row){
-                return "<span>12/1/2020</span>"
+            {data: null},
+            {data: 'tarikh_permohonan'},
+            {data: 'perkembangan'},
+            {data: 'masa_mula'},
+            {data: 'masa_akhir'},
+            {data: 'masa'},
+            {data: 'hari'},
+            {data: 'waktu'},
+            {data: 'kadar_jam'},
+            {data: 'tujuan'},
+            {data: 'catatan'},
+            {data: null},
+            {data: 'status'}
+        
+        ],
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0
+            },
+            {
+                targets: [1],
+                type: "date",
+                render: function(data,type,row){
+                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    return formattedDate;
+                }
+            },
+            {
+                targets: 2,
+                render: function(data,type,row){
+                    return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                }
+            },
+            {
+                targets: 11,
+                mRender: function(data,type,row)
+                {
+                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+');"></i>'  
+                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data+')"></i>' 
+                    var allButton = button1 + button2;
+                    return allButton;
+                }
+                
+            },
+            {
+                targets: 12,
+                visible: false,
+                searchable: true
             }
-        },
-        {
-            targets: 2,
-            render:function(data,type,row){
-                return "<span>2.30 PM</span>"
-            }
-        },
-        {
-            targets: 3,
-            render:function(data,type,row){
-                return "<span>5.30 PM</span>"
-            }
-        },
-        {
-            type: "date",
-            targets: [4],
-            
-        },
-        {
-            targets: 5,
-            render:function(data,type,row){
-                return "<span>Selasa</span>"
-            }
-        },
-        {
-            targets: 6,
-            render:function(data,type,row){
-                return "<span>Petang</span>"
-            }
-        },
-        {
-            targets: 8,
-            render:function(data,type,row){
-                return "<span>Before</span>"
-            }
-        },
-        {
-            targets: 9,
-            render: function(data,type,row){
-                console.log(data.id);
-                var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""  ></i>' 
-                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
-                var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')"  value='+data.id+'></i>' 
-                var allButton = button1 + button2 + button3;
-                return allButton;
-            }
-        }
-    ],
+        ],
+        order: [ 1, 'asc' ]
+        
+    });
+    individuDT.on( 'order.dt search.dt', function () {
+        individuDT.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
     
-});
-
-function filterColumnIndividu ( i ) {
-    $('#individuDT').DataTable().column( i ).search(
-        $('#filterIndividu'+i).val()
-    ).draw();
 }
 
-$('input.column_filter').on( 'keyup click', function () {
-    filterColumnIndividu( $(this).attr('data-column') );
-} );
+function getBerkumpulanDT(){
+    var id_user = document.querySelector("#noPekerja").value;
+    var berkumpulanDT = $('#berkumpulanDT').DataTable({
+        dom: 'lrtip',
+        scrollX: false,
+        destroy: true,
+        "lengthMenu": [ 5, 10, 25, 50 ],
+        processing: false,
+        serverSide: true,
+        // responsive:true,
+        // autoWidth:false,
+    ajax: {
+        url: "permohonan-baru/"+id_user,
+        type: 'GET',
+        data:
+        {
+            pilihan: berkumpulan
+        }
+        },
+        
+        columns: [
 
-function filterColumnBerkumpulan ( i ) {
-    $('#berkumpulanDT').DataTable().column( i ).search(
-        $('#filterKumpulan'+i).val()
-    ).draw();
+            {data: null, name: null},
+            {data: 'tarikh_permohonan'},
+            {data: 'perkembangan'},
+            {data: 'masa_mula'},
+            {data: 'masa_akhir'},
+            {data: 'masa'},
+            {data: 'hari'},
+            {data: 'waktu'},
+            {data: 'kadar_jam'},
+            {data: 'tujuan'},
+            {data: 'catatan'},
+            {data: null},
+            {data: 'status'}
+        
+        ],
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0
+            },
+            {
+                targets: [1],
+                type: "date",
+                render: function(data,type,row){
+                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    return formattedDate;
+                }
+            },
+            {
+                targets: 2,
+                render: function(data,type,row){
+                    return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                }
+            },
+            {
+                targets: 11,
+                mRender: function(data,type,row)
+                {
+                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+');"></i>'  
+                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+"'"+data.status+"'"+')"></i>' 
+                    var allButton = button1 + button2;
+                    return allButton;
+                }
+            },
+            {
+                targets: 12,
+                visible: false,
+                searchable: true
+            }
+        ],
+        order: [[ 1, 'asc' ]]
+        
+    });
+    berkumpulanDT.on( 'order.dt search.dt', function () {
+        berkumpulanDT.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
 }
-
-$('input.column_filter_bk').on( 'keyup click', function () {
-    filterColumnBerkumpulan( $(this).attr('data-column') );
-} );
 
 $('.js-example-basic-single').select2();
+
