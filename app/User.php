@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Catatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
 use Illuminate\Notifications\Notifiable;
@@ -127,5 +128,10 @@ class User extends Authenticatable
     public function ekedatangan()
     {
         return $this->hasOne(eKedatangan::class, 'id_user', 'id');
+    }
+
+    public function catatans()
+    {
+        return $this->hasMany(Catatan::class, 'id_user', 'id');
     }
 }
