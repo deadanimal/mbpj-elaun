@@ -167,19 +167,22 @@ $("#selectJenisPermohonan").on("change",function(){
     switch (pilihan) {
         case 'individu':
             pilihan = tabPilihan + '1';
+            $('#semakanKBDT').DataTable().search(       
+                pilihan
+            ).draw();
             break;
         case 'berkumpulan':
-            pilihan = tabPilihan + '2';
+            pilihan = tabPilihan + '2';  
+            $('#semakanKBDT').DataTable().search(       
+                pilihan
+            ).draw();
             break;
         default:
             showDatatable(tabPilihan);
             break;
     }
     console.log(pilihan)
-   
-    $('#semakanKBDT').DataTable().search(       
-        pilihan
-    ).draw();
+
 });
 
 $.fn.dataTable.ext.search.push(
