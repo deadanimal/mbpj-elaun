@@ -45,7 +45,7 @@
                                 <div class="col-sm-6 ml--3">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+                                        <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -192,6 +192,7 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Tarikh Permohonan</th>
+                                                        <th>Status</th>
                                                         <th>Masa Mula</th>
                                                         <th>Masa Akhir</th>
                                                         <th>Masa</th>
@@ -199,7 +200,10 @@
                                                         <th>Waktu</th>
                                                         <th>Kadar Jam</th>
                                                         <th>Tujuan</th>
+                                                        <th>Catatan</th>
                                                         <th></th>
+                                                        <th hidden>Status</th>
+                                                        <th hidden></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -243,6 +247,7 @@
                                                         <tr>
                                                             <th>No</th>
                                                             <th>Tarikh Permohonan</th>
+                                                            <th>Status</th>
                                                             <th>Masa Mula</th>
                                                             <th>Masa Akhir</th>
                                                             <th>Masa</th>
@@ -250,7 +255,10 @@
                                                             <th>Waktu</th>
                                                             <th>Kadar Jam</th>
                                                             <th>Tujuan</th>
+                                                            <th>Catatan</th>
                                                             <th></th>
+                                                            <th hidden>Status</th>
+                                                            <th hidden></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -308,6 +316,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/permohonanbaru.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/semakanPermohonanBaru.js"></script>
 
 
 @endpush

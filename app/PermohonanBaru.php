@@ -18,12 +18,15 @@ class PermohonanBaru extends Model
         'waktu',
         'kadar_jam',
         'tujuan',
-        'catatan'];
+        'catatan'
+    ];
 
     // Default value
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
+        'catatan' => '-',
+        'jenis_permohonan' => 'DALAM PROSES'
     ];
 
     public function users()

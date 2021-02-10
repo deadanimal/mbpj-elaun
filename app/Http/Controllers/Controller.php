@@ -16,17 +16,17 @@ class Controller extends BaseController
 
     public function findPermohonanWithID($jenisPermohonan, $id){
 
-        return $permohonans = User::find($id)->permohonans->where('status', $jenisPermohonan);
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan);
 
         // ----- Just another (bad) way to do this ------
         // $user_permohonans = User::find($id)->permohonans;        
         // $permohonans = $user_permohonans->filter(function($user_permohonan) use ($jenisPermohonan){
-        //     return $user_permohonan->status == $jenisPermohonan ?? $user_permohonan;
+        //     return $user_permohonan->jenis_permohonan == $jenisPermohonan ?? $user_permohonan;
         // });
         // return $permohonans;
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
-        return $permohonans = PermohonanBaru::with("users")->where('status', 'like', $jenisPermohonan.'%')->get();
+        return $permohonans = PermohonanBaru::with("users")->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
     }
 }
