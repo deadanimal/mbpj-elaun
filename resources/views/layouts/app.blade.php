@@ -44,11 +44,15 @@
         <!-- Argon CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     </head>
-    <body class="{{ $class ?? '' }}">
+    @guest()
+    <body style="background-image: url('{{ asset('argon') }}/img/landingpage.jpg'); background-size: cover;">
+    @endguest
+    
         @auth()
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+        <body class="bg-default">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
             @if (!in_array(request()->route()->getName(), ['welcome', 'page.pricing', 'page.lock']))
                 @include('layouts.navbars.sidebar')
             @endif
@@ -63,8 +67,6 @@
             @include('layouts.footers.guest')
         @endif --}}
 
-        <!-- <script src="/js/buttons/js/dataTables.buttons.js"></script>
-        <script src="/vendor/datatables/buttons.server-side.js"></script> -->
         <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
         <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
