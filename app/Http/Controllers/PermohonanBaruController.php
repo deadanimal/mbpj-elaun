@@ -74,11 +74,4 @@ class PermohonanBaruController extends Controller
         //         break;
         // }
     }
-
-    public function saveCatatan(Request $request, $idPermohananBaru)
-    {
-        $permohonan = PermohonanBaru::find($idPermohananBaru);
-        $permohonan->catatan = $request->input('catatan');
-        $permohonan->save();
-    }
 }

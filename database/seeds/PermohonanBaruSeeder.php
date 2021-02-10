@@ -20,14 +20,14 @@ class PermohonanBaruSeeder extends Seeder
             $individu = ['OT1', 'EL1', 'PS1'];
             $kumpulan = ['OT2', 'EL2', 'PS2'];
 
-            if (in_array($permohonan->status, $individu)) {
+            if (in_array($permohonan->jenis_permohonan, $individu)) {
                 $users = User::inRandomOrder()->pluck('id');
                 foreach ($users as $user) {
                     $permohonan->users()->attach($user);
                     break;
                 }
             }
-            if (in_array($permohonan->status, $kumpulan)) {
+            if (in_array($permohonan->jenis_permohonan, $kumpulan)) {
                 $users = User::inRandomOrder()->take(rand(2,3))->pluck('id');
                 $permohonan->users()->attach($users);
             }

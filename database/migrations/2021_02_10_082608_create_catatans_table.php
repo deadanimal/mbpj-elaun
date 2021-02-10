@@ -16,9 +16,9 @@ class CreateCatatansTable extends Migration
         Schema::create('catatans', function (Blueprint $table) {
             $table->id('id_catatan');
             $table->string('catatan');
-            $table->string('status');
+            $table->string('jenis_permohonan');
             $table->unsignedInteger('is_kemaskini');
-            $table->string('masa');
+            $table->time('masa');
             $table->unsignedInteger('id_user');
             $table->unsignedBigInteger('id_permohonan_baru');
             $table->timestamps();

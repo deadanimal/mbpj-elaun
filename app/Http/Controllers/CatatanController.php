@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Catatan;
+use App\PermohonanBaru;
 use Illuminate\Http\Request;
 
 class CatatanController extends Controller
@@ -36,6 +37,19 @@ class CatatanController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function saveCatatan(Request $request, $idPermohananBaru)
+    {
+        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $catatan = new Catatan([
+            'catatan' => $request->input('catatan'),
+            'jenis_permohonan' => $request->input('jenis_permohonan'),
+            'is_kemaskini' => $request->input('is_kemaskini'),
+            'id_user' => auth()->id(),
+            'masa' => now()
+        ]);
+        $permohonan->catatans()->save($catatan);
     }
 
     /**

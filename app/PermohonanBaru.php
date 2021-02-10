@@ -17,15 +17,13 @@ class PermohonanBaru extends Model
         'hari',
         'waktu',
         'kadar_jam',
-        'tujuan',
-        'catatan'
+        'tujuan'
     ];
 
     // Default value
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'catatan' => '-',
         'jenis_permohonan' => 'DALAM PROSES'
     ];
 
@@ -33,5 +31,10 @@ class PermohonanBaru extends Model
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
                     ->as('permohonan_with_users');
+    }
+
+    public function catatans()
+    {
+        return $this->hasMany(Catatan::class, 'id_permohonan_baru', 'id_permohonan_baru');
     }
 }
