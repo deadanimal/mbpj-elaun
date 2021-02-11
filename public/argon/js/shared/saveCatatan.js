@@ -12,7 +12,7 @@ function saveCatatan() {
 
     if (document.getElementById('perluKemaskini').checked) {
         is_kemaskini = 1;
-        clearInputCatatan();
+        // clearInputCatatan();
     } 
 
     $.ajax({

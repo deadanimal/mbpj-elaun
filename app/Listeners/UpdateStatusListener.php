@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Listeners;
+
+use App\Events\PermohonanStatusChangedEvent;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class UpdateStatusListener
+{
+    /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Handle the event.
+     * 
+     * is_terima can be 0 -> rejected (TINDAKAN)
+     *                  1 -> approved
+     * 
+     * is_renewedPermohonan can be 0 -> not a new permohonan AND rejected
+     *                             1 -> renewed because it needs kemaskini
+     * is_renewedPermohonan is diregarded if is_terima == 0 (rejected)
+     * 
+     * @param  PermohonanStatusChangedEvent  $event
+     * @return void
+     */
+    public function handle(PermohonanStatusChangedEvent $event)
+    {
+        $event->permohonan->refresh();
+        $is_terima = $event->is_terima;
+        $is_renewedPermohonan = $event->is_renewedPermohonan;
+
+        if ($is_terima) {
+            $event->permohonan->status = $is_renewedPermohonan ? "DALAM PROSES" : "DITERIMA";
+        } else {
+            $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
+            $event->permohonan->status = $is_kemaskini ? "PERLU KEMASKINI" : "DITOLAK";
+        }
+
+        $event->permohonan->save();
+    }
+}
