@@ -20,6 +20,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\PermohonanStatusChangedEvent' => [
             'App\Listeners\UpdateStatusListener',
+            'App\Listeners\UpdateJenisPermohonanListener',
         ]
     ];
 
