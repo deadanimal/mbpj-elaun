@@ -24,13 +24,14 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
 
             // Kelulusan
-            for (const [key, value] of Object.entries(data.arrayKelulusan)) {
-                if (typeof value === 'object' && value !== null) {
-                    $("#formKelulusan input[name="+key+"]").val(value.name);
-                } else {
-                    $("#formKelulusan input[name="+key+"]").val("");
-                }
-            }
+            console.log(data.arrayKelulusan);
+            // for (const [key, value] of Object.entries(data.arrayKelulusan)) {
+            //     if (typeof value === 'object' && value !== null) {
+            //         $("#formKelulusan input[name="+key+"]").val(value.name);
+            //     } else {
+            //         $("#formKelulusan input[name="+key+"]").val(""); 
+            //     }
+            // }
 
             var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
             var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");

@@ -21,13 +21,15 @@ class UpdateJenisPermohonanListener
     /**
      * Handle the event.
      *
+     * PC = permohonan closed
+     * 
      * @param  PermohonanStatusChangedEvent  $event
      * @return void
      */
     public function handle(PermohonanStatusChangedEvent $event)
     {
         $event->permohonan->refresh();
-        $array = array(0 =>'OT', 1 => 'PS', 2 => 'EL');
+        $array = array(0 =>'OT', 1 => 'PS', 2 => 'EL', 3 => 'PC');
 
         $jenis_permohonan = $event->permohonan->jenis_permohonan;
         $level_permohonan = substr($jenis_permohonan, 0, -1);

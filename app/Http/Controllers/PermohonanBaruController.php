@@ -27,13 +27,13 @@ class PermohonanBaruController extends Controller
 
     public function getKelulusanWithData($permohonan)
     {
-        $arrayKelulusan = [];
+        $arrayKelulusan = array();
 
         $pegSokong = User::find($permohonan->id_peg_sokong); 
         $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegSokong, 'Pegawai Sokong');
 
         $pegPelulus = User::find($permohonan->id_peg_pelulus);
-        $arrayKelulusan = Arr::prepend($pegPelulus, $pegPelulus, 'Pegawai Pelulus');
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegPelulus, 'Pegawai Pelulus');
 
         return $arrayKelulusan;
     }
