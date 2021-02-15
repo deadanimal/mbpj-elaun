@@ -14,7 +14,7 @@ $factory->define(PermohonanBaru::class, function (Faker $faker) {
         'masa' => $faker->time($format = 'H:i', $max = 'now'),
         'hari' => $faker->dayOfWeek($max = 'now')  ,
         'waktu' => $faker->randomElement($array = array ('Pagi','Petang','Malam')),
-        'kadar_jam' => $faker->randomDigit,
+        'kadar_jam' => $faker->randomDigitNotNull,
         'tujuan' => $faker->sentence,
         'id_peg_sokong' => $faker->randomElement($array = array ('2','4')),
         'id_peg_pelulus' => $faker->randomElement($array = array ('10','5')),

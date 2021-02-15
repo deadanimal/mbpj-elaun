@@ -18,7 +18,8 @@ class PermohonanBaru extends Model
         'hari',
         'waktu',
         'kadar_jam',
-        'tujuan'
+        'tujuan',
+        'peg_sokong_approved'
     ];
 
     // Default value
@@ -35,13 +36,19 @@ class PermohonanBaru extends Model
 
     public function scopePermohonanPegawaiPelulus($query)
     {
-        return $query->where('id_peg_pelulus', Auth::id());
+        return $query->pegawaiSokongApproved();
     }
 
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
-        return $query->where('id_peg_sokong', Auth::id())
-                     ->orWhere('id_peg_pelulus', Auth::id()) ;
+        return $query->pegawaiSokongApproved()
+                     ->orWhere('id_peg_sokong', Auth::id());
+    }
+
+    public function scopePegawaiSokongApproved($query)
+    {
+        return $query->where('peg_sokong_approved', 1)
+                     ->where('id_peg_pelulus', Auth::id());
     }
 
     public function users()
