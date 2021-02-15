@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class PermohonanBaru extends Model
@@ -26,6 +27,22 @@ class PermohonanBaru extends Model
         'id_peg_pelulus' => 0,
         'jenis_permohonan' => 'DALAM PROSES'
     ];
+
+    public function scopePermohonanPegawaiSokong($query)
+    {
+        return $query->where('id_peg_sokong', Auth::id());
+    }
+
+    public function scopePermohonanPegawaiPelulus($query)
+    {
+        return $query->where('id_peg_pelulus', Auth::id());
+    }
+
+    public function scopePermohonanPegawaiSokongAtauPelulus($query)
+    {
+        return $query->where('id_peg_sokong', Auth::id())
+                     ->orWhere('id_peg_pelulus', Auth::id()) ;
+    }
 
     public function users()
     {

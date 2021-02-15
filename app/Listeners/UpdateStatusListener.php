@@ -40,7 +40,7 @@ class UpdateStatusListener
 
         if ($is_terima) {
             $event->permohonan->status = "DITERIMA";
-        } elseif($is_renewedPermohonan){
+        } elseif ($is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
         } else {
             $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
