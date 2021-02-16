@@ -19,6 +19,11 @@ class Controller extends BaseController
         return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan);
     }
 
+    public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
+        $jenisPermohonan = $jenisPermohonan.substring(0,-1);
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%');
+    }
+
     public function findAllPermohonanForTypes($jenisPermohonan){
         $is_penyelia = Auth::user()->role_id == '2' ? 1 : 0;
         $is_ketuaJabatan = Auth::user()->role_id == '5' ? 1 : 0;

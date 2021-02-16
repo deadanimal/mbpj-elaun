@@ -136,7 +136,7 @@ class permohonanController extends Controller
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
         
         if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithID($pilihan,$id))->make(true); 
+            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$id))->make(true); 
         }
     }
 
