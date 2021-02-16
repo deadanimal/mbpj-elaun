@@ -16,7 +16,9 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function findPermohonanWithID($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan);
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan)
+                                                          ->isNotDeleted();
+
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
@@ -30,15 +32,24 @@ class Controller extends BaseController
         $is_ketuaBahagian = Auth::user()->role_id == '4' ? 1 : 0;
 
         if ($is_penyelia) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
+            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()
+                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                               ->isNotDeleted()
+                                                               ->get();
         }
         
         if ($is_ketuaJabatan) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
+            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
+                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                               ->isNotDeleted()
+                                                               ->get();
         }
 
         if ($is_ketuaBahagian) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
+            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()
+                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                               ->isNotDeleted()
+                                                               ->get();
         }
     }
 }   

@@ -26,7 +26,7 @@ class PermohonanBaru extends Model
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'jenis_permohonan_kakitangan' => 'OT1',
+        'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => 'OT1'
     ];
 
@@ -50,6 +50,11 @@ class PermohonanBaru extends Model
     {
         return $query->where('peg_sokong_approved', 1)
                      ->where('id_peg_pelulus', Auth::id());
+    }
+
+    public function scopeIsNotDeleted($query)
+    {
+        return $query->where('is_deleted', 0);
     }
 
     public function users()

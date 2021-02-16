@@ -29,6 +29,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->unsignedInteger('id_peg_sokong')->default('0');
             $table->unsignedInteger('id_peg_pelulus')->default('0');
             $table->unsignedInteger('peg_sokong_approved')->default('0');
+            $table->unsignedInteger('is_deleted')->default('0');
             $table->timestamps();
         }); 
 
