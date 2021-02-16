@@ -118,7 +118,7 @@
 
                                 <div class="text-right">
                                     <a href="#" class="edit open-modal" data-toggle="modal" data-target="#permohonanbaruModal">
-                                    <button class="btn btn-primary" data-toggle="tooltip" title="Edit">{{ __('Mohon Baru') }}</button></a>
+                                    <button onclick="setEnableDropdown();" class="btn btn-primary" data-toggle="tooltip" title="Edit">{{ __('Mohon Baru') }}</button></a>
                                 </div>
                             </div>
                     </div>
@@ -204,6 +204,7 @@
                                                         <th></th>
                                                         <th hidden>Status</th>
                                                         <th hidden></th>
+                                                        <th hidden></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -258,6 +259,7 @@
                                                             <th>Catatan</th>
                                                             <th></th>
                                                             <th hidden>Status</th>
+                                                            <th hidden></th>
                                                             <th hidden></th>
                                                         </tr>
                                                     </thead>
