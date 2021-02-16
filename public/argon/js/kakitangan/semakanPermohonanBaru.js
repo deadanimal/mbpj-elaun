@@ -102,7 +102,7 @@ function hantarPermohonanIndividu(){
     var hour = masaMulaID.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = individu;
-    var catatan = "-"
+    // var catatan = "-"
     if(hour >= 6 && hour < 12)
     {
         waktu = "Pagi";
@@ -118,7 +118,7 @@ function hantarPermohonanIndividu(){
     var user_id = namaPekerjaID;
     var object = {id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
-                    jenis_permohonan:jenis_permohonan,catatan:catatan,tujuan:sebab,lokasi:lokasi};
+                    jenis_permohonan:jenis_permohonan,tujuan:sebab};
     console.log(object,individu);
     $.ajax({
         url: '/penyelia/permohonan-baru',
