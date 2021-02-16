@@ -98,9 +98,29 @@ $(document).ready(function(){
     getIndividuDT();
     getBerkumpulanDT();
 
-    
 
 })
+
+function setEnableDropdown(){
+    document.getElementById("jenisPermohonan").disabled = false;
+    $('#divPermohonanIndividu').hide();
+    $('#divPermohonanBerkumpulan').hide();
+    if ($("#jenisPermohonan").val() == "frmPermohonanIndividu") {
+        document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
+        document.getElementById('selectpermohonan').className = "col-sm-12"
+        $('#divPermohonanIndividu').show();
+        $("#divPermohonanBerkumpulan").hide();
+
+    }
+    else if ($("#jenisPermohonan").val() == "frmPermohonanBerkumpulan") {
+        document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-xl"
+        document.getElementById('selectpermohonan').className = "col-sm-6"
+        $('#divPermohonanIndividu').hide();
+        $("#divPermohonanBerkumpulan").show();
+        $("#pekerjaAddDiv").show();
+
+    }
+}
 
 function getIndividuDT(){
     var id_user = document.querySelector("#noPekerja").value;
@@ -126,7 +146,7 @@ function getIndividuDT(){
 
             {data: null},
             {data: 'tarikh_permohonan'},
-            {data: 'perkembangan'},
+            {data: 'status'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
             {data: 'masa'},
@@ -136,8 +156,8 @@ function getIndividuDT(){
             {data: 'tujuan'},
             {data: 'catatan'},
             {data: null},
-            {data: 'status'}
-        
+            {data: 'jenis_permohonan'},
+            {data: 'id_permohonan_baru'}
         ],
         columnDefs: [
             {
@@ -163,8 +183,9 @@ function getIndividuDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {
-                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+');"></i>'  
-                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data+')"></i>' 
+                    console.log(data.id_permohonan_baru);
+                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                     var allButton = button1 + button2;
                     return allButton;
                 }
@@ -172,6 +193,11 @@ function getIndividuDT(){
             },
             {
                 targets: 12,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 13,
                 visible: false,
                 searchable: true
             }
@@ -211,7 +237,7 @@ function getBerkumpulanDT(){
 
             {data: null, name: null},
             {data: 'tarikh_permohonan'},
-            {data: 'perkembangan'},
+            {data: 'status'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
             {data: 'masa'},
@@ -221,7 +247,8 @@ function getBerkumpulanDT(){
             {data: 'tujuan'},
             {data: 'catatan'},
             {data: null},
-            {data: 'status'}
+            {data: 'jenis_permohonan'},
+            {data: 'id_permohonan_baru'}
         
         ],
         columnDefs: [
@@ -248,14 +275,19 @@ function getBerkumpulanDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {
-                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.status+"'"+');"></i>'  
-                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+"'"+data.status+"'"+')"></i>' 
+                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
                     var allButton = button1 + button2;
                     return allButton;
                 }
             },
             {
                 targets: 12,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 13,
                 visible: false,
                 searchable: true
             }
@@ -272,3 +304,10 @@ function getBerkumpulanDT(){
 
 $('.js-example-basic-single').select2();
 
+$('#masa-mulaBK').timepicker();
+
+$('#masa-akhirBK').timepicker();
+
+$('#masa-mulaID').timepicker();
+
+$('#masa-akhirID').timepicker();

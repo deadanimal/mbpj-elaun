@@ -22,6 +22,10 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
+		Route::get('/semak-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@findPermohonan',
+			'as' => 'permohonan-baru.findPermohonan',
+		]);
 	});
 
 	Route::resource('penyelia-dashboard','penyelia\penyeliaController',['except' => ['show','destroy']]);
