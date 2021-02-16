@@ -80,7 +80,7 @@ class permohonanController extends Controller
                 // 'masa_mula' => 'required',
                 // 'masa_akhir' => 'required',
                 'tujuan' => 'required',
-                'lokasi' => 'required',
+                // 'lokasi' => 'required',
                 
             ));
             if ($validator->fails()) {
@@ -115,7 +115,8 @@ class permohonanController extends Controller
             if ($validator->fails()) {
                 dd('fail');
             }
-            var_dump('ni ot2',$jenisPermohonan,$data['namaPekerja'],$data['sebab']);
+            // var_dump('ni ot2',$jenisPermohonan,$data['namaPekerja'],$data['sebab']);
+            
 
         }
     }
@@ -135,7 +136,7 @@ class permohonanController extends Controller
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
         
         if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithID($pilihan,$id)->where('status','DALAM PROSES'))->make(true); 
+            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$id))->make(true); 
         }
     }
 

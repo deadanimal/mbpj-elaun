@@ -52,11 +52,11 @@ function add() {
 
     var div = document.getElementById("new_chq");
     var nodelist = div.getElementsByTagName("div");
-    if(nodelist.length > -1){
+    if(nodelist.length >= 0){
         document.getElementById("remove").disabled = false
         rowNum++;
 
-        $("#total_chq").val(rowNum);
+        // $("#total_chq").val(rowNum);
         $("#inputpekerja_00").clone().prop('id','inputpekerja_'+rowNum).appendTo("#new_chq");
         $('#total_chq').val(rowNum);
         
@@ -86,10 +86,12 @@ function remove() {
         // console.log("enable button tambah")
 
     }
-    // if(nodelist.length == 0){
-    //     document.getElementById("remove").disabled = true
-    //     console.log("disable button buang")
-    // }
+    if(nodelist.length == 0){
+        rowNum = 0;
+        $('#total_chq').val(0);
+        document.getElementById("remove").disabled = true
+        console.log("disable button buang")
+    }
 }
 
 
@@ -154,7 +156,7 @@ function getIndividuDT(){
             {data: 'waktu'},
             {data: 'kadar_jam'},
             {data: 'tujuan'},
-            {data: 'catatan'},
+            {data: null},
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'}
@@ -245,7 +247,7 @@ function getBerkumpulanDT(){
             {data: 'waktu'},
             {data: 'kadar_jam'},
             {data: 'tujuan'},
-            {data: 'catatan'},
+            {data: null},
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'}
