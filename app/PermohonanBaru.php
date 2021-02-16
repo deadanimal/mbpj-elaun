@@ -43,7 +43,8 @@ class PermohonanBaru extends Model
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
         return $query->pegawaiSokongApproved()
-                     ->orWhere('id_peg_sokong', Auth::id());
+                     ->orWhere('id_peg_sokong', Auth::id())
+                     ->IsNotApproved();
     }
 
     public function scopePegawaiSokongApproved($query)
@@ -55,6 +56,11 @@ class PermohonanBaru extends Model
     public function scopeIsNotDeleted($query)
     {
         return $query->where('is_deleted', 0);
+    }
+
+    public function scopeIsNotApproved($query)
+    {
+        return $query->where('peg_sokong_approved', 0);
     }
 
     public function users()

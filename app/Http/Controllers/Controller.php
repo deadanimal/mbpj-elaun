@@ -34,6 +34,7 @@ class Controller extends BaseController
         if ($is_penyelia) {
             return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()
                                                                ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                               ->isNotApproved()
                                                                ->isNotDeleted()
                                                                ->get();
         }
