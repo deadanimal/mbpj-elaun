@@ -25,9 +25,9 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('tujuan');
             $table->string('status');
             $table->string('jenis_permohonan');
-            $table->string('catatan');
             $table->unsignedInteger('id_peg_sokong')->default('0');
             $table->unsignedInteger('id_peg_pelulus')->default('0');
+            $table->unsignedInteger('peg_sokong_approved')->default('0');
             $table->timestamps();
         }); 
 

@@ -24,11 +24,24 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
 
             // Kelulusan
+            var array = ['penyelia', 'ketuaBahagian', 'ketuaJabatan', 'keraniPemeriksa', 'keraniSemakan'];
+            array.forEach(function(item) {
+                $("#formKelulusan input[name="+item+"]").val("-"); 
+            });
+
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
-                if (typeof value === 'object' && value !== null) {
-                    $("#formKelulusan input[name="+key+"]").val(value.name);
-                } else {
-                    $("#formKelulusan input[name="+key+"]").val("");
+                let is_penyelia = value.role_id == 2 ? 1 : 0;
+                let is_ketuaBahagian = value.role_id == 4 ? 1 : 0;
+                let is_peg_sokong = key == 'peg_sokong' ? 1 : 0;
+                let is_peg_pelulus = key == 'peg_pelulus' ? 1 : 0;
+
+                if (is_peg_sokong) {
+                    let name = is_penyelia ? 'penyelia' : 'ketuaBahagian';
+                    $("#formKelulusan input[name="+name+"]").val(value.name);
+                } 
+                if (is_peg_pelulus) {
+                    let name = is_ketuaBahagian ? 'ketuaBahagian' : 'ketuaJabatan';
+                    $("#formKelulusan input[name="+name+"]").val(value.name); 
                 }
             }
 

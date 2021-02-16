@@ -1,25 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\penyelia;
+namespace App\Http\Controllers;
 
-use App\User;
-use DataTables;
+use App\Catatan;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
-use App\permohonan_with_users;
-use App\Http\Controllers\Controller;
+use App\Events\PermohonanStatusChangedEvent;
 
-class semakanController extends Controller
+class CatatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        return view('core.penyelia.semakan');
+        //
     }
 
     /**
@@ -43,62 +40,63 @@ class semakanController extends Controller
         //
     }
 
+    public function saveCatatan(Request $request, $idPermohananBaru)
+    {
+        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $catatan = new Catatan([
+            'catatan' => $request->input('catatan'),
+            'jenis_permohonan' => $request->input('jenis_permohonan'),
+            'is_kemaskini' => $request->input('is_kemaskini'),
+            'id_user' => auth()->id(),
+            'masa' => now()
+        ]);
+
+        $permohonan->catatans()->save($catatan);
+        
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 0));
+    }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Catatan  $catatan
      * @return \Illuminate\Http\Response
-     * 
-     * OT1 == 00
-     * EL1 == 01
-     * OT2 == 10
-     * EL2 == 11
-     * 
-     * This function is used to display all permohonans related to 1 pekerja 
-     * 
      */
-    public function show(Request $request, $id)
-    { 
-        $pilihan = $request->input('pilihan');
-        $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
-        
-        if (strlen($pilihan) == 3){
-            return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
-        } else {
-            return datatables()->of($this->findAllPermohonanForTypes($pilihan))->make(true);
-        }   
+    public function show(Catatan $catatan)
+    {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Catatan  $catatan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Catatan $catatan)
     {
-        // 
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Catatan  $catatan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Catatan $catatan)
     {
-        //    
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Catatan  $catatan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Catatan $catatan)
     {
         //
     }

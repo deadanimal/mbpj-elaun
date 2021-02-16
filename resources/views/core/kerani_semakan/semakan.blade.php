@@ -92,7 +92,7 @@
     <script src="{{ asset('argon') }}/js/kerani-semakan/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/kerani-semakan/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
-    <script src="{{ asset('argon') }}/js/shared/saveKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush 
 

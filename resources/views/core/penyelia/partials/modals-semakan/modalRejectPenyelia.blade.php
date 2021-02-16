@@ -2,17 +2,30 @@
     <div class="modal-dialog modal-secondary modal-dialog-centered modal-" role="document">
         <div class="modal-content">
             <div class="modal-header bg-blue">
-                <h6 class="modal-title text-white" id="modal-title-notification">Notifikasi</h6>
+                <h6 class="modal-title text-white" id="modal-title-notification">Tindakan</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h1 class="heading m-2 text-center">Tolak Permohonan</h1>
                 <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
                     @csrf
+
                     <div class="form-group">
-                        <textarea class="form-control" name="catatan" id="semakan-catatan" rows="3">{{ __('Catatan') }}</textarea>
+                        <input class="form-group-input" type="radio" name="radioTindakan" id="perluKemaskini">
+                        <label class="form-group-label" for="perluKemaskini">
+                            Perlu Kemaskini
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-group-input" type="radio" name="radioTindakan" id="perluKemaskini2">
+                        <label class="form-group-label" for="tolak">
+                            Tolak
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <h4 class="text-muted">Catatan</h4>
+                        <textarea class="form-control" name="catatan" id="semakan-catatan" rows="3"></textarea>
 
                         @include('alerts.feedback', ['field' => 'name'])
                     </div>
