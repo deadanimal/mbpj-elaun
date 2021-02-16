@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class PermohonanBaru extends Model
@@ -18,20 +19,46 @@ class PermohonanBaru extends Model
         'waktu',
         'kadar_jam',
         'tujuan',
-        'catatan'
+        'peg_sokong_approved'
     ];
 
     // Default value
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'catatan' => '-',
         'jenis_permohonan' => 'DALAM PROSES'
     ];
+
+    public function scopePermohonanPegawaiSokong($query)
+    {
+        return $query->where('id_peg_sokong', Auth::id());
+    }
+
+    public function scopePermohonanPegawaiPelulus($query)
+    {
+        return $query->pegawaiSokongApproved();
+    }
+
+    public function scopePermohonanPegawaiSokongAtauPelulus($query)
+    {
+        return $query->pegawaiSokongApproved()
+                     ->orWhere('id_peg_sokong', Auth::id());
+    }
+
+    public function scopePegawaiSokongApproved($query)
+    {
+        return $query->where('peg_sokong_approved', 1)
+                     ->where('id_peg_pelulus', Auth::id());
+    }
 
     public function users()
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
                     ->as('permohonan_with_users');
+    }
+
+    public function catatans()
+    {
+        return $this->hasMany(Catatan::class, 'id_permohonan_baru', 'id_permohonan_baru');
     }
 }

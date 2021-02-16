@@ -5,7 +5,11 @@ namespace App\Http\Controllers\kakitangan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\User;
+use App\PermohonanBaru;
+use App\permohonan_with_users;
 use Carbon\Carbon;
 use DataTables;
 use App\DataTables\UsersDataTable;
@@ -63,6 +67,57 @@ class permohonanController extends Controller
     public function store(Request $request)
     {
         //
+        $jenisPermohonan = $request->input('jenisPermohonan');
+        $data = $request->input('object');
+        $array = array($data);
+
+        if($jenisPermohonan == 'OT1' ){
+            $validator = Validator::make($data, array(
+                
+                'id_peg_pelulus' => 'required',
+                'id_peg_sokong' => 'required' ,
+                'tarikh_permohonan' => 'required',
+                // 'masa_mula' => 'required',
+                // 'masa_akhir' => 'required',
+                'tujuan' => 'required',
+                'lokasi' => 'required',
+                
+            ));
+            if ($validator->fails()) {
+                dd('fail');
+            }
+            PermohonanBaru::insert([$data]);
+            $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
+
+            if ($permohonans->jenis_permohonan == $jenisPermohonan) {
+                $users = Auth::user()->id;
+                $permohonans->users()->attach($users);
+                
+            }
+
+            return response()->json(
+                [
+                    'message' => 'success',
+                ],200);
+
+        }else if($jenisPermohonan == 'OT2'){
+            $validator = Validator::make($request->input('object'), array(
+                
+                'id_peg_pelulus' => 'required',
+                // 'id_peg_sokong' => 'required' ,
+                'tarikh_permohonan' => 'required',
+                'masa_mula' => 'required',
+                'masa_akhir' => 'required',
+                'tujuan' => 'required',
+                'lokasi' => 'required',
+                
+            ));
+            if ($validator->fails()) {
+                dd('fail');
+            }
+            var_dump('ni ot2',$jenisPermohonan,$data['namaPekerja'],$data['sebab']);
+
+        }
     }
 
     /**
@@ -75,12 +130,12 @@ class permohonanController extends Controller
     {
         //
         $pilihan = $request->input('pilihan');
-        // dd($pilihan);
+        // dd($id);
 
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
         
         if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithID($pilihan,$id)->where('perkembangan','dalam_proses'))->make(true); 
+            return datatables()->of($this->findPermohonanWithID($pilihan,$id)->where('status','DALAM PROSES'))->make(true); 
         }
     }
 
@@ -124,7 +179,15 @@ class permohonanController extends Controller
         
     }
 
-    public function getPermohonanBerkumpulan(permohonanDataTable $permohonanDataTable){
-        return $permohonanDataTable->render('core.kakitangan.permohonanbaru');
-    }
+   public function findPermohonan(Request $request){
+
+    $id_permohonan_baru = $request->input('id_permohonan_baru');
+    $permohonan = PermohonanBaru::find($id_permohonan_baru);
+
+        return response()->json([
+                    'error' => false,
+                    'permohonan'  => $permohonan,
+                ], 200);
+
+   }
 }

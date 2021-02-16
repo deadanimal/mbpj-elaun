@@ -22,6 +22,10 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
+		Route::get('/semak-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@findPermohonan',
+			'as' => 'permohonan-baru.findPermohonan',
+		]);
 	});
 
 	Route::resource('penyelia-dashboard','penyelia\penyeliaController',['except' => ['show','destroy']]);
@@ -31,8 +35,8 @@ Route::group([
 	
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
-	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@updateKelulusan' );
-	Route::post('/permohonan-baru/semakan-kelulusan/catatan/{id}', 'PermohonanBaruController@saveCatatan' );
+	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
+	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);

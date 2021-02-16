@@ -1,28 +1,40 @@
-// var id_permohonan;
+var counterPermohonan = 0;
 
-// function bufferIDPermohonan(id_permohonan_baru) {
-//     id_permohonan = id_permohonan_baru;
-//     console.log('buffer '+ id_permohonan);
-// }
+function counterBuffer(counter) {
+    counterPermohonan = counter;
+}
 
 function saveCatatan() {
     var catatan = document.getElementById('semakan-catatan').value;
-    var id_permohonan = document.getElementById('tolakBtn').getAttribute('value');
-    console.log('savecatatan '+ id_permohonan);
-    console.log('catatan '+ catatan);
-    
+    var id_permohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('value');
+    var jenisPermohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('data-value');
+    var is_kemaskini = 0;
+
+    if (document.getElementById('perluKemaskini').checked) {
+        is_kemaskini = 1;
+        // clearInputCatatan();
+    } 
+
     $.ajax({
-        url: "permohonan-baru/semakan-kelulusan/catatan/" + id_permohonan,
+        url: "catatan/" + id_permohonan,
         type: 'POST',
         data: {
-            catatan : catatan
+            catatan : catatan,
+            jenis_permohonan : jenisPermohonan,
+            is_kemaskini : is_kemaskini
         },
         success: function() {
             console.log("Catatan saved");
-            // $("#modal-reject").modal("hide");
+            
         },
         error: function() {
             console.log('Catatan failed');
         }
     });
+}
+
+function clearInputCatatan() {
+    document.getElementById('semakan-catatan').value = "";
+    document.getElementById('perluKemaskini2').checked = false;
+    document.getElementById('perluKemaskini').checked = false;
 }
