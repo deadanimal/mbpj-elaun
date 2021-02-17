@@ -15,11 +15,19 @@ Route::group([
 	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
-	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['show','destroy']]);
+	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
 		Route::get('/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
+		]);
+		Route::get('/semak-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@findPermohonan',
+			'as' => 'permohonan-baru.findPermohonan',
+		]);
+		Route::post('/hantar-permohonan',[
+			'uses' => 'kakitangan\permohonanController@store',
+			'as' => 'permohonan-baru.store',
 		]);
 	}); 
 	Route::resource('ketua-bahagian-dashboard','ketua_bahagian\ketuaBahagianController',['except' => ['show','destroy']]);

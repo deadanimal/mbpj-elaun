@@ -101,7 +101,7 @@ function hantarPermohonanBerkumpulan(){
     console.log(object,berkumpulan);
 
     $.ajax({
-        url: '/penyelia/permohonan-baru',
+        url: 'permohonan-baru/hantar-permohonan',
         type: 'POST', 
         data:{
             object:object,
@@ -154,7 +154,7 @@ function hantarPermohonanIndividu(){
                     jenis_permohonan:jenis_permohonan,tujuan:sebab};
     console.log(object,individu);
     $.ajax({
-        url: '/penyelia/permohonan-baru',
+        url: 'permohonan-baru/hantar-permohonan',
         type: 'POST', 
         data:{
             user_id:user_id,
