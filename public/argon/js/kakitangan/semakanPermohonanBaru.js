@@ -64,8 +64,40 @@ function hantarPermohonanBerkumpulan(){
     var masaAkhirBK = document.querySelector("#masa-akhirBK").value;
     var sebab = document.querySelector("#sebabBK").value;
     var lokasi = document.querySelector("#lokasiBK").value;
-    var object = {namaPekerja:namaPekerja,pegPelulus:pegPelulusBK,tarikhKerja:tarikhKerjaBK,
-                    masaMula:masaMulaBK,masaAkhir:masaAkhirBK,sebab:sebab,lokasi:lokasi};
+    var hari = moment(tarikhKerjaBK).format("dddd");
+    var masa = getTimeDifference(masaMulaBK,masaAkhirBK);
+    var waktu = "";
+    var hour = masaMulaBK.substring(0,2);
+    var status = "DALAM PROSES";
+    var jenis_permohonan = berkumpulan;
+    if(hour >= 6 && hour < 12)
+    {
+        waktu = "Pagi";
+    }else if(hour >= 12 && hour <= 19)
+    {
+        waktu = "Petang"
+    }else
+    {
+        waktu = "Malam"
+    }
+    var nopekerja = [namaPekerja];
+    console.log('node',nodelist.length/5);
+    $(".pekerjasform").each(function(j){
+
+        var formlength = this.children.length
+
+        for(var i = 0; i< formlength; i++){
+            var nopekerjas = this.children[i];
+            var input = nopekerjas.getElementsByClassName("inputnopekerja")[0].value
+            nopekerja.push(input) 
+            console.log(input);
+        }
+
+    })
+    console.log(nopekerja);
+    var object = {id_peg_pelulus:pegPelulusBK,id_peg_sokong:5,tarikh_permohonan:tarikhKerjaBK,
+        masa_mula:masaMulaBK,masa_akhir:masaAkhirBK,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
+        jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:berkumpulan};
     console.log(object,berkumpulan);
 
     $.ajax({
@@ -73,7 +105,8 @@ function hantarPermohonanBerkumpulan(){
         type: 'POST', 
         data:{
             object:object,
-            jenisPermohonan:berkumpulan
+            jenisPermohonan:jenis_permohonan,
+            pekerja:nopekerja
         },
         success: function(data) {
             
