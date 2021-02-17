@@ -16,7 +16,7 @@ class UpdateStatusListener
      */
     public function __construct()
     {
-        //
+        // 
     }
 
     /**
@@ -44,27 +44,48 @@ class UpdateStatusListener
         $is_peg_sokong = Auth::id() == $id_peg_sokong ? 1 : 0;
 
         if ($is_terima) {
-            if ($is_peg_sokong) {
-                $event->permohonan->peg_sokong_approved = 1;
-                
-            } else {
-                $event->permohonan->peg_sokong_approved = 0;
-                $event->permohonan->status = "DITERIMA";
-
-            }
+            $this->permohonanApproved($event, $is_peg_sokong);
 
         } elseif ($is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
+            $event->permohonan->progres = 'Belum disahkan';
 
         } else {
-            $event->permohonan->peg_sokong_approved = 0;
-            
-            $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
-            $event->permohonan->status = $is_kemaskini ? "PERLU KEMASKINI" : "DITOLAK";
+            $this->permohonanRejected($event);
 
         }
 
         $event->permohonan->save();
         $event->permohonan->refresh();
+    }
+
+    public function permohonanApproved(PermohonanStatusChangedEvent $event, $is_peg_sokong)
+    {
+        if ($is_peg_sokong) {
+            $event->permohonan->peg_sokong_approved = 1;
+            $event->permohonan->progres = 'Sah P1';
+            
+        } else {
+            $event->permohonan->peg_sokong_approved = 0;
+            $event->permohonan->status = "DITERIMA";
+            $event->permohonan->progres = 'Sah P2';
+
+        }
+    }
+
+    public function permohonanRejected(PermohonanStatusChangedEvent $event)
+    {
+        $event->permohonan->peg_sokong_approved = 0;
+
+        $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
+
+        if ($is_kemaskini) {
+            $event->permohonan->status = "PERLU KEMASKINI";
+            $event->permohonan->progres = 'Belum disahkan';
+
+        } else {
+            $event->permohonan->status = "DITOLAK";
+
+        }
     }
 }

@@ -20,7 +20,8 @@ class PermohonanBaru extends Model
         'waktu',
         'kadar_jam',
         'tujuan',
-        'peg_sokong_approved'
+        'peg_sokong_approved',
+        'jenis_permohonan_kakitangan'
     ];
 
     // Default value
