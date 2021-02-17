@@ -47,6 +47,7 @@ class UpdateJenisPermohonanListener
                     $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
                 }
                 break;
+            case 'DALAM PROSES':
             case 'PERLU KEMASKINI':
             case 'DITOLAK':
                 if ($is_not_approved_peg_sokong) {
