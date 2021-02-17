@@ -36,6 +36,7 @@ class PermohonanBaru extends Model
         return $query->where(function (Builder $q) {
                         return $q->where('id_peg_sokong', Auth::id())
                                  ->isNotApproved()
+                                 ->isNotDitolakOrPerluKemaskini()
                                  ->isNotDeleted();
         });
     } 
@@ -45,6 +46,7 @@ class PermohonanBaru extends Model
         return $query->where(function (Builder $q) {
                             return $q->where('id_peg_pelulus', Auth::id())
                                      ->isApproved()
+                                     ->isNotRejected()
                                      ->isNotDeleted();
 });
     }
@@ -70,6 +72,12 @@ class PermohonanBaru extends Model
     public function scopeIsApproved($query)
     {
         return $query->where('peg_sokong_approved', 1);
+    }
+
+    public function scopeIsNotDitolakOrPerluKemaskini($query)
+    {
+        return $query->where('status', '!=', 'DITOLAK')
+                     ->where('status', '!=', 'PERLU KEMASKINI');
     }
 
     public function users()

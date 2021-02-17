@@ -40,10 +40,29 @@ class UpdateJenisPermohonanListener
 
         $key = array_search($level_permohonan, $array); 
 
-        if ($is_not_approved_peg_sokong && $is_not_dalam_proses) {
-            $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
-            $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
+        switch ($event->permohonan->status) {
+            case 'DITERIMA':
+                if ($is_not_approved_peg_sokong) {
+                    $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+                    $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
+                }
+                break;
+            case 'PERLU KEMASKINI':
+            case 'DITOLAK':
+                if ($is_not_approved_peg_sokong) {
+                    $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+                }
+                break;
+            
+            default:
+                # code...
+                break;
         }
+
+        // if ($is_not_approved_peg_sokong && $is_not_dalam_proses ) {
+        //     $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+        //     $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
+        // }
 
         $event->permohonan->save();
         $event->permohonan->refresh();

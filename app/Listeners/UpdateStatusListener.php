@@ -26,7 +26,7 @@ class UpdateStatusListener
      *                  1 -> approved
      * 
      * is_renewedPermohonan can be 0 -> not a renewed pemohonan
-     *                             1 -> renewed because it needs kemaskini
+     *                             1 -> renewed because it needs kemaskini OR KT sends for the next step
      * is_renewedPermohonan is diregarded if is_terima == 0 (rejected)
      * 
      * @param  PermohonanStatusChangedEvent  $event
