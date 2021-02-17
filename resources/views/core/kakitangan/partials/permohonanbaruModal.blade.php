@@ -247,7 +247,7 @@
                                 </div>
 
 
-                                <div id="new_chq">
+                                <div id="new_chq" class="pekerjasform">
 
                                 </div>
                                 <input type="hidden" value="1" id="total_chq">
@@ -266,11 +266,11 @@
 </div>
 
 <div class="hide" id="template" hidden>
-    <div id="inputpekerja_00" class="row">
-        <div class="col-sm-6">
+    <div id="inputpekerja_00" class="row inputpekerjaform">
+        <div class="col-sm-6 divInputPekerja">
             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required disabled autofocus>
+                <label class="form-control-label" for="inputnopekerja">{{ __('Nama') }}</label>
+                <input type="text" name="inputnopekerja" id="inputnopekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} inputnopekerja" placeholder="{{ __('No Pekerja') }}" value="" required autofocus>
 
                 @include('alerts.feedback', ['field' => 'name'])
             </div>
@@ -278,7 +278,7 @@
         <div class="col-sm-6">
             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                 <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
+                <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" >
 
                 @include('alerts.feedback', ['field' => 'name'])
             </div>

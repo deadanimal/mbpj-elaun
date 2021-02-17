@@ -20,8 +20,12 @@ class Controller extends BaseController
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
-        $jenisPermohonan = $jenisPermohonan.substring(0,-1);
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%');
+        // $jenisPermohonan = substr($jenisPermohonan,0,2);
+        // dd($jenisPermohonan);
+        // dd(substr($jenisPermohonan,0,-1));
+        // dd(PermohonanBaru::with('users')->where('id',$id)->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get());
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan);
+        // return $permohonans = PermohonanBaru::with('users')->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get();
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
