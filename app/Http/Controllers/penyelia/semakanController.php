@@ -66,8 +66,8 @@ class semakanController extends Controller
             return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
         } else {
             return datatables()->of($this->findAllPermohonanForTypes($pilihan))->make(true);
-        }   
-    }
+        }
+    } 
 
     /**
      * Show the form for editing the specified resource.

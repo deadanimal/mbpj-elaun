@@ -11,7 +11,7 @@ class UpdateJenisPermohonanListener
     /**
      * Create the event listener.
      *
-     * @return void
+     * @return void 
      */
     public function __construct()
     {
@@ -35,16 +35,28 @@ class UpdateJenisPermohonanListener
         $level_permohonan = substr($jenis_permohonan, 0, -1);
 
         $is_individu = $jenis_permohonan[2] == "1" ? 1 : 0;
-        $is_approved_peg_sokong = $event->permohonan->peg_sokong_approved == 1 ? 1 : 0;
-        $is_NOT_dalam_proses = $event->permohonan->status != 'DALAM PROSES' ? 1 : 0;
+        $is_not_approved_peg_sokong = $event->permohonan->peg_sokong_approved == 0 ? 1 : 0;
 
         $key = array_search($level_permohonan, $array); 
 
-        if ($is_approved_peg_sokong && $is_NOT_dalam_proses) {
-            $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
-            $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
+        switch ($event->permohonan->status) {
+            case 'DITERIMA':
+                if ($is_not_approved_peg_sokong) {
+                    $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+                    $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
+                }
+                break;
+                
+            case 'PERLU KEMASKINI': 
+            case 'DALAM PROSES':
+            case 'DITOLAK':
+                $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+                break;
+            
+            default:
+                # code...
+                break;
         }
-
         $event->permohonan->save();
         $event->permohonan->refresh();
     }

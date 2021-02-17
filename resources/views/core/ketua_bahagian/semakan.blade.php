@@ -4,11 +4,11 @@
     'parentSection' => 'laravel',
     'elementName' => 'profile'
 ])
-
+ 
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Ketua Bahagian') . ' ',
-        'description' => __('" Sistem Pengurusan Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
+        'title' => __('Semakan Permohonan') . ' ',
+        'description' => __(''),
         'class' => 'col-lg-7'
     ])
 
@@ -21,24 +21,24 @@
                         <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-1" 
-                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
+                                    href="#" role="tab" aria-controls="tabs-icons-text-1" value="OT"
+                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa');">
                                     <i class="ni ni-time-alarm"></i>
                                     Permohonan Kerja Lebih Masa
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanPengesahanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-2" 
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa')">
+                                    href="#" role="tab" aria-controls="tabs-icons-text-2" value="PS"
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa');">
                                     <i class="ni ni-money-coins"></i>
                                     Pengesahan Kerja Lebih Masa
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-3" 
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
+                                    href="#" role="tab" aria-controls="tabs-icons-text-3" value="EL"
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa');">
                                     <i class="ni ni-money-coins"></i>
                                     Tuntuan Elaun Lebih Masa
                                 </a>
@@ -50,6 +50,8 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
+                        
+
                             {{-- Form semakan --}}
                                 @include('core.ketua_bahagian.partials.formOT&EL')
                         </div>
@@ -58,12 +60,12 @@
 
                     {{-- Datatables --}}
                     @include('core.ketua_bahagian.partials.dataTablesKetuaBahagian')
-
+    
             </div>
         </div>
 
         @include('layouts.footers.auth')
-    </div>  
+    </div>
 
 {{-- Modal --}}
 @include('core.ketua_bahagian.partials.modals-semakan.modalEditIndividuKetuaBahagian')
@@ -91,5 +93,6 @@
     <script src="{{ asset('argon') }}/js/ketua-bahagian/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

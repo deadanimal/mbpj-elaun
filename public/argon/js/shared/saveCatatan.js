@@ -13,7 +13,7 @@ function saveCatatan() {
     if (document.getElementById('perluKemaskini').checked) {
         is_kemaskini = 1;
         // clearInputCatatan();
-    } 
+    }  
 
     $.ajax({
         url: "catatan/" + id_permohonan,
@@ -25,6 +25,7 @@ function saveCatatan() {
         },
         success: function() {
             console.log("Catatan saved");
+            showDatatable(jenisPermohonan);
             
         },
         error: function() {

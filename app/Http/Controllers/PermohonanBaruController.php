@@ -34,7 +34,6 @@ class PermohonanBaruController extends Controller
 
         $pegPelulus = User::find($permohonan->id_peg_pelulus);
         $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegPelulus, 'peg_pelulus');
-
         
         return $arrayKelulusan;
     }

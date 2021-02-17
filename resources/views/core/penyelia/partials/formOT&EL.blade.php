@@ -99,5 +99,5 @@
                     <button type="button" onclick="event.preventDefault();checkUser();showUser();" id="semakPenyelia" class="btn btn-success mt-4">{{ __('Semak') }}</button>
                 </div>
             </div>    
-        </div>
+        </div> 
 </form>

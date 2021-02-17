@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class PermohonanBaru extends Model
 {
@@ -19,37 +20,67 @@ class PermohonanBaru extends Model
         'waktu',
         'kadar_jam',
         'tujuan',
-        'peg_sokong_approved'
+        'peg_sokong_approved',
+        'jenis_permohonan_kakitangan'
     ];
 
     // Default value
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'jenis_permohonan_kakitangan' => 'OT1',
+        'status' => 'DALAM PROSES',
+        'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => 'OT1'
     ];
 
     public function scopePermohonanPegawaiSokong($query)
     {
-        return $query->where('id_peg_sokong', Auth::id());
-    }
+        return $query->where(function (Builder $q) {
+                        return $q->where('id_peg_sokong', Auth::id())
+                                 ->isNotApproved()
+                                 ->isNotDitolakOrPerluKemaskini()
+                                 ->isNotDeleted();
+        });
+    } 
 
     public function scopePermohonanPegawaiPelulus($query)
     {
-        return $query->pegawaiSokongApproved();
+        return $query->where(function (Builder $q) {
+                            return $q->where('id_peg_pelulus', Auth::id())
+                                     ->isApproved()
+                                     ->isNotDitolakOrPerluKemaskini()
+                                     ->isNotDeleted();
+});
     }
 
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
-        return $query->pegawaiSokongApproved()
-                     ->orWhere('id_peg_sokong', Auth::id());
+        return $query->permohonanPegawaiSokong()
+                     ->orWhere(function (Builder $q) {
+                            return $q->permohonanPegawaiPelulus();
+                        });
     }
 
-    public function scopePegawaiSokongApproved($query)
+    public function scopeIsNotDeleted($query)
     {
-        return $query->where('peg_sokong_approved', 1)
-                     ->where('id_peg_pelulus', Auth::id());
+        return $query->where('is_deleted', 0);
+    }
+
+    public function scopeIsNotApproved($query)
+    {
+        return $query->where('peg_sokong_approved', 0);
+    }
+
+    public function scopeIsApproved($query)
+    {
+        return $query->where('peg_sokong_approved', 1);
+    }
+
+    public function scopeIsNotDitolakOrPerluKemaskini($query)
+    {
+        // return $query->where('status', '!=', 'DITOLAK')
+        //              ->where('status', '!=', 'PERLU KEMASKINI');
+        return $query->whereNotIn('status', ['DITOLAK', 'PERLU KEMASKINI']);
     }
 
     public function users()
