@@ -15,7 +15,7 @@
                                 <h5>* Jenis Permohonan</h5>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanIndividuInModal" placeholder="" readonly>
                             </div>
-                            <form method="post" action="{{ route('profile.update') }}" id="formModalEditIndividu" autocomplete="off" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('profile.update') }}" id="formModalEdit" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
     

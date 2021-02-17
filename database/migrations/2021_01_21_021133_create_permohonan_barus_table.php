@@ -24,11 +24,13 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('kadar_jam');
             $table->string('tujuan');
             $table->string('status');
-            $table->string('jenis_permohonan_kakitangan')->default("OT1");
+            $table->string('progres')->default('Belum sah');
+            $table->string('jenis_permohonan_kakitangan')->default('OT1');
             $table->string('jenis_permohonan');
             $table->unsignedInteger('id_peg_sokong')->default('0');
             $table->unsignedInteger('id_peg_pelulus')->default('0');
             $table->unsignedInteger('peg_sokong_approved')->default('0');
+            $table->unsignedInteger('is_deleted')->default('0');
             $table->timestamps();
         }); 
 
