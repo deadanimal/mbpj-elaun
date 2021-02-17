@@ -27,6 +27,7 @@ class PermohonanBaru extends Model
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
+        'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => 'OT1'
     ];
