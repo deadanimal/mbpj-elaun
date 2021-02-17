@@ -101,22 +101,40 @@ class permohonanController extends Controller
                 ],200);
 
         }else if($jenisPermohonan == 'OT2'){
-            $validator = Validator::make($request->input('object'), array(
+            // dd($request->all());
+            $validator = Validator::make($request->all(), [ 
                 
-                'id_peg_pelulus' => 'required',
+                'object.id_peg_pelulus' => 'required',
                 // 'id_peg_sokong' => 'required' ,
-                'tarikh_permohonan' => 'required',
-                'masa_mula' => 'required',
-                'masa_akhir' => 'required',
-                'tujuan' => 'required',
-                'lokasi' => 'required',
-                
-            ));
-            if ($validator->fails()) {
-                dd('fail');
-            }
-            // var_dump('ni ot2',$jenisPermohonan,$data['namaPekerja'],$data['sebab']);
+                'object.tarikh_permohonan' => 'required',
+                'object.masa_mula' => 'required',
+                'object.masa_akhir' => 'required',
+                'object.tujuan' => 'required',
+                // 'object.lokasi' => 'required',
+                'pekerja.*' => 'required|distinct',
             
+            ]);
+            if ($validator->fails()) {
+                dd('fail',$request->all());
+            }else{
+                PermohonanBaru::insert([$data]);
+                $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
+    
+                if ($permohonans->jenis_permohonan == $jenisPermohonan) {
+                    foreach($request->input('pekerja') as $pekerjas){
+                        $users = User::find($pekerjas)->id;
+                        $permohonans->users()->attach($users);
+                    }
+                    
+                    
+                }
+    
+                return response()->json(
+                    [
+                        'message' => 'success',
+                    ],200);
+            // dd("lepas validate",$request->input('pekerja'));
+            }
 
         }
     }
@@ -131,12 +149,13 @@ class permohonanController extends Controller
     {
         //
         $pilihan = $request->input('pilihan');
-        // dd($id);
+        // dd($pilihan);
+        // dd(substr($pilihan,0,2));
 
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
         
         if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$id))->make(true); 
+            return datatables()->of($this->findPermohonanWithID($pilihan,$id)->where('jenis_permohonan_kakitangan',$pilihan))->make(true); 
         }
     }
 

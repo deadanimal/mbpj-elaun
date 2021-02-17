@@ -4,11 +4,11 @@
     'parentSection' => 'laravel',
     'elementName' => 'profile'
 ])
-
+ 
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
-        'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
+        'title' => __('Semakan Permohonan') . ' ',
+        'description' => __(''),
         'class' => 'col-lg-7'
     ])
 
@@ -50,19 +50,18 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
-                               
+                        
 
                             {{-- Form semakan --}}
                                 @include('core.ketua_jabatan.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
+
+                    {{-- Datatables --}}
+                    @include('core.ketua_jabatan.partials.dataTablesKetuaJabatan')
+    
             </div>
-
-
-            {{-- Datatables Ketua Jabatan --}}
-            @include('core.ketua_jabatan.partials.dataTablesKetuaJabatan')
-
         </div>
 
         @include('layouts.footers.auth')
@@ -94,5 +93,6 @@
     <script src="{{ asset('argon') }}/js/ketua-jabatan/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

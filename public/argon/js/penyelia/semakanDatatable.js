@@ -36,7 +36,7 @@ $("#padamCarian").click(function(){
 });
 
 function checkUser(){
-    var id = document.querySelector("#noPekerja").value;
+    // var id = document.querySelector("#noPekerja").value;
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
     switch (pilihan) {

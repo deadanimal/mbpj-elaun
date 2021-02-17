@@ -21,9 +21,9 @@
                                 <ul class="nav nav-pills list-group" id="senaraiKakitanganBerkumpulan" role="tab">
                                     {{-- JS appends <li> --}}
                                 </ul>
-                            </div>
+                            </div> 
 
-                            <form method="post" action="{{ route('profile.update') }}" id='formModalEdit' autocomplete="off" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('profile.update') }}" id="formModalEdit" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
     
@@ -32,7 +32,7 @@
     
                                 <div class="form-group mb-2">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
-                                    <input class="form-control" name="tarikhMohon" id="semakan-modal-tarikhMohon" type="text" placeholder="">
+                                    <input class="form-control" type="text" placeholder="Default input">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>

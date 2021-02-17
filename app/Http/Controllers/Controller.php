@@ -16,29 +16,42 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function findPermohonanWithID($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan);
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan)
+                                                          ->isNotDeleted();
+
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
-        $jenisPermohonan = $jenisPermohonan.substring(0,-1);
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%');
+        // $jenisPermohonan = substr($jenisPermohonan,0,2);
+        // dd($jenisPermohonan);
+        // dd(substr($jenisPermohonan,0,-1));
+        // dd(PermohonanBaru::with('users')->where('id',$id)->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get());
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan);
+        // return $permohonans = PermohonanBaru::with('users')->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get();
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
-        $is_penyelia = Auth::user()->role_id == '2' ? 1 : 0;
-        $is_ketuaJabatan = Auth::user()->role_id == '5' ? 1 : 0;
-        $is_ketuaBahagian = Auth::user()->role_id == '4' ? 1 : 0;
 
-        if ($is_penyelia) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
-        }
-        
-        if ($is_ketuaJabatan) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
-        }
-
-        if ($is_ketuaBahagian) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()->where('jenis_permohonan', 'like', $jenisPermohonan.'%')->get();
+        switch (Auth::user()->role_id) {
+            case '2':
+                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()
+                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                               ->get();
+                break;
+            case '4':
+                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()
+                                                                   ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                                   ->get();
+                break;
+            case '5':
+                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
+                                                                   ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                                   ->get();
+                break;
+            
+            default:
+                return 404;
+                break;
         }
     }
 }   

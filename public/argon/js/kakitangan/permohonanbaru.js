@@ -1,9 +1,13 @@
-
-
 var rowNum = 0;
 var individu = "OT1";
 var berkumpulan = "OT2";
-
+$('#total_chq').val(0);
+var last_chq_no = 0;
+var div = document.getElementById("new_chq");
+var nodelist = div.getElementsByTagName("div");
+if(nodelist.length == 0){
+    document.getElementById("remove").disabled = true
+}
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 
@@ -58,6 +62,7 @@ function add() {
 
         // $("#total_chq").val(rowNum);
         $("#inputpekerja_00").clone().prop('id','inputpekerja_'+rowNum).appendTo("#new_chq");
+        $("inputpekerja_"+rowNum).prop('class','inputpekerja');
         $('#total_chq').val(rowNum);
         
     }
@@ -72,15 +77,16 @@ function add() {
 }
 
 function remove() {
-    var div = document.getElementById("new_chq");
-    var nodelist = div.getElementsByTagName("div");
+    
 
-    if(nodelist.length <= 20){
-        var last_chq_no = $('#total_chq').val();
+    if(nodelist.length > 0){
+        last_chq_no = $('#total_chq').val();
 
         if (last_chq_no > 0) {
             $('#inputpekerja_' + last_chq_no).remove();
-            $('#total_chq').val(last_chq_no - 1);
+            rowNum--;
+            var before = last_chq_no - 1;
+            $('#total_chq').val(before);
         }
         // document.getElementById("add").disabled = false
         // console.log("enable button tambah")
@@ -182,6 +188,12 @@ function getIndividuDT(){
                 }
             },
             {
+                targets: 10,
+                mRender: function(data,type,row){
+                    return '<div>asd</div>';
+                }
+            },
+            {
                 targets: 11,
                 mRender: function(data,type,row)
                 {
@@ -271,6 +283,12 @@ function getBerkumpulanDT(){
                 targets: 2,
                 render: function(data,type,row){
                     return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                }
+            },
+            {
+                targets: 10,
+                mRender: function(data,type,row){
+                    return '<div>asd</div>';
                 }
             },
             {
