@@ -77,8 +77,9 @@ class PermohonanBaru extends Model
 
     public function scopeIsNotDitolakOrPerluKemaskini($query)
     {
-        return $query->where('status', '!=', 'DITOLAK')
-                     ->orWhere('status', '!=', 'PERLU KEMASKINI');
+        // return $query->where('status', '!=', 'DITOLAK')
+        //              ->where('status', '!=', 'PERLU KEMASKINI');
+        return $query->whereNotIn('status', ['DITOLAK', 'PERLU KEMASKINI']);
     }
 
     public function users()

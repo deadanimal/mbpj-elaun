@@ -13,7 +13,7 @@ function saveCatatan() {
     if (document.getElementById('perluKemaskini').checked) {
         is_kemaskini = 1;
         // clearInputCatatan();
-    } 
+    }  
 
     $.ajax({
         url: "catatan/" + id_permohonan,

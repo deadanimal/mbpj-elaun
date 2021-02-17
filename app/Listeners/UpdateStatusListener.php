@@ -57,6 +57,8 @@ class UpdateStatusListener
             $event->permohonan->status = "DALAM PROSES";
 
         } else {
+            $event->permohonan->peg_sokong_approved = 0;
+            
             $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
             $event->permohonan->status = $is_kemaskini ? "PERLU KEMASKINI" : "DITOLAK";
 
