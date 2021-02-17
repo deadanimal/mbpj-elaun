@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class PermohonanBaru extends Model
 {
@@ -32,25 +33,28 @@ class PermohonanBaru extends Model
 
     public function scopePermohonanPegawaiSokong($query)
     {
-        return $query->where('id_peg_sokong', Auth::id());
-    }
+        return $query->where(function (Builder $q) {
+                        return $q->where('id_peg_sokong', Auth::id())
+                                 ->isNotApproved()
+                                 ->isNotDeleted();
+        });
+    } 
 
     public function scopePermohonanPegawaiPelulus($query)
     {
-        return $query->pegawaiSokongApproved();
+        return $query->where(function (Builder $q) {
+                            return $q->where('id_peg_pelulus', Auth::id())
+                                     ->isApproved()
+                                     ->isNotDeleted();
+});
     }
 
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
-        return $query->pegawaiSokongApproved()
-                     ->orWhere('id_peg_sokong', Auth::id())
-                     ->IsNotApproved();
-    }
-
-    public function scopePegawaiSokongApproved($query)
-    {
-        return $query->where('peg_sokong_approved', 1)
-                     ->where('id_peg_pelulus', Auth::id());
+        return $query->permohonanPegawaiSokong()
+                     ->orWhere(function (Builder $q) {
+                            return $q->permohonanPegawaiPelulus();
+                        });
     }
 
     public function scopeIsNotDeleted($query)
@@ -61,6 +65,11 @@ class PermohonanBaru extends Model
     public function scopeIsNotApproved($query)
     {
         return $query->where('peg_sokong_approved', 0);
+    }
+
+    public function scopeIsApproved($query)
+    {
+        return $query->where('peg_sokong_approved', 1);
     }
 
     public function users()

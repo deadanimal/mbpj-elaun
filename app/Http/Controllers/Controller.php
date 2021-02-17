@@ -27,30 +27,27 @@ class Controller extends BaseController
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
-        $is_penyelia = Auth::user()->role_id == '2' ? 1 : 0;
-        $is_ketuaJabatan = Auth::user()->role_id == '5' ? 1 : 0;
-        $is_ketuaBahagian = Auth::user()->role_id == '4' ? 1 : 0;
 
-        if ($is_penyelia) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()
+        switch (Auth::user()->role_id) {
+            case '2':
+                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()
                                                                ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
-                                                               ->isNotApproved()
-                                                               ->isNotDeleted()
                                                                ->get();
-        }
-        
-        if ($is_ketuaJabatan) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
-                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
-                                                               ->isNotDeleted()
-                                                               ->get();
-        }
-
-        if ($is_ketuaBahagian) {
-            return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()
-                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
-                                                               ->isNotDeleted()
-                                                               ->get();
+                break;
+            case '4':
+                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()
+                                                                   ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                                   ->get();
+                break;
+            case '5':
+                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
+                                                                   ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                                                   ->get();
+                break;
+            
+            default:
+                return 404;
+                break;
         }
     }
 }   
