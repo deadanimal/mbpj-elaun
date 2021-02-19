@@ -26,8 +26,8 @@ class Controller extends BaseController
         // dd($jenisPermohonan);
         // dd(substr($jenisPermohonan,0,-1));
         // dd(PermohonanBaru::with('users')->where('id',$id)->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get());
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan)
-                                                        ->where('jenis_permohonan', $jenisPermohonan);
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan);
+                                                        // ->where('jenis_permohonan', $jenisPermohonan);
         // return $permohonans = PermohonanBaru::with('users')->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get();
     }
 

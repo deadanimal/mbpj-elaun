@@ -15,7 +15,7 @@
                                 <h5>* Jenis Permohonan</h5>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="pilihanJenisPermohonanIndividuInModal" placeholder="" readonly>
                             </div>
-                            <form method="post" action="{{ route('profile.update') }}" id="formModalEditIndividu" autocomplete="off" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('profile.update') }}" id="formModalEdit" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
     
@@ -24,7 +24,7 @@
     
                                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }} mb-2">
                                     <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
-                                    <input type="text" name="nama" id="semakan-modal-nama" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
+                                    <input type="text" name="nama" id="pemeriksa-modal-nama" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="form-group mb-5">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
-                                    <input class="form-control" name="tarikhMohon" id="semakan-modal-tarikhMohon" type="text" placeholder="">
+                                    <input class="form-control" name="tarikhMohon" id="pemeriksa-modal-tarikhMohon" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>

@@ -4,10 +4,10 @@
     'parentSection' => 'laravel',
     'elementName' => 'profile'
 ])
-
+ 
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Kerani Semakan') . ' ',
+        'title' => __('Selamat Datang ke Modul Ketua Semakan') . ' ',
         'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
         'class' => 'col-lg-7'
     ])
@@ -50,28 +50,28 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
-                               
+                        
 
                             {{-- Form semakan --}}
-                                @include('core.kerani_semakan.partials.formOT&EL')
+                                @include('core.ketua_semakan.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
 
+                    {{-- Datatables --}}
+                    @include('core.ketua_semakan.partials.dataTablesKetuaSemakan')
+    
             </div>
-            
-            {{-- Datatables Kerani Semakan --}}
-            @include('core.kerani_semakan.partials.dataTablesKeraniSemakan')
         </div>
 
         @include('layouts.footers.auth')
     </div>
 
-{{--  Modal --}}
-@include('core.kerani_semakan.partials.modals-semakan.modalEditIndividuKeraniSemakan')
-@include('core.kerani_semakan.partials.modals-semakan.modalEditBerkumpulanKeraniSemakan')
-@include('core.kerani_semakan.partials.modals-semakan.modalValidateKeraniSemakan')
-@include('core.kerani_semakan.partials.modals-semakan.modalRejectKeraniSemakan')
+{{-- Modal --}}
+@include('core.ketua_semakan.partials.modals-semakan.modalEditIndividuKetuaSemakan')
+@include('core.ketua_semakan.partials.modals-semakan.modalEditBerkumpulanKetuaSemakan')
+@include('core.ketua_semakan.partials.modals-semakan.modalValidateKetuaSemakan')
+@include('core.ketua_semakan.partials.modals-semakan.modalRejectKetuaSemakan')
 @endsection
 
 @push('css')
@@ -89,10 +89,10 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/kerani-semakan/jenisPermohonan.js"></script>
-    <script src="{{ asset('argon') }}/js/kerani-semakan/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-semakan/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-semakan/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
-@endpush 
-
+@endpush
