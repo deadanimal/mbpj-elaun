@@ -22,7 +22,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         type: 'GET',
         success: function(data) {
             $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
-            console.log(data.arrayKelulusan);
+
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
             array.forEach(function(item) {
