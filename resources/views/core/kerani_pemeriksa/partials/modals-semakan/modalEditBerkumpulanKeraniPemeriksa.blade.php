@@ -79,18 +79,23 @@
 
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane show active mt-2" id="testRetrieveDataContent" role="tabpanel" aria-labelledby="test1">
-                                            <div class="form-group mb-1">
-                                                <label class="form-control-label">{{ __('Nama') }}</label>
-                                                <input class="form-control" name="ekedatanganNama" type="text" placeholder="">
-            
-                                                @include('alerts.feedback', ['field' => 'name'])
-                                            </div>
-
-                                            <div class="form-group mb-5">
-                                                <label class="form-control-label">{{ __('No Pekerja') }}</label>
-                                                <input class="form-control" name="ekedatanganNoPekerja" type="text" placeholder="">
-            
-                                                @include('alerts.feedback', ['field' => 'name'])
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">{{ __('Nama') }}</label>
+                                                        <input class="form-control" name="ekedatanganNama" type="text" placeholder="">
+                    
+                                                        @include('alerts.feedback', ['field' => 'name'])
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">{{ __('No Pekerja') }}</label>
+                                                        <input class="form-control" name="ekedatanganNoPekerja" type="text" placeholder="">
+                    
+                                                        @include('alerts.feedback', ['field' => 'name'])
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
