@@ -1,97 +1,140 @@
-var permohonanDT = $('#permohonanDT').dataTable({
-    dom: "lrtip",
-    scrollX: false,
-    destroy: true,
-    lengthMenu: [ 5, 10, 25, 50 ],
-    responsive: false,
-    autoWidth:true,
-    // processing: true,
-    // serverSide: true,
-    ajax: {
-        url: "semakan/",
-        type: 'GET',
-        },
-        
-        columns: [
-    
-            {data: 'id',    name: 'id'},
-    
-            {data: null,    name: null, searchable:false},
-    
-            {data: null,    name: null, searchable:false},
-    
-            {data: null,    name: null, searchable:false},
-    
-            {data: 'created_at',    name: 'created_at'},
-    
-            {data: null,    name: null, searchable:false},
-    
-            {data: null,    name: null, searchable:false},
+var pilihanKT = ['OT1','OT2','PS1','PS2'];
+var pilihanReal = ['PS1','PS2','EL1','EL2'];
+$(document).ready(function(){
+    var nopekerja = document.querySelector("#nopekerja").value;
+    var permohonanDT = $('#permohonanDT').DataTable({
+        dom: "lrtip",
+        scrollX: false,
+        destroy: true,
+        lengthMenu: [ 5, 10, 25, 50 ],
+        responsive: false,
+        autoWidth:true,
+        // processing: true,
+        // serverSide: true,
+        ajax: {
+            url: "semakan/"+nopekerja,
+            type: 'GET',
+            data:{
+                nopekerja:nopekerja,
+                pilihanKT:pilihanKT,
+                pilihanReal:pilihanReal
+            },
+            },
             
-            {data: 'status',    name: 'status'},
+            columns: [
     
-            {data: null,    name: null, searchable:false},
-    
-            {data: null,    name: null, searchable:false},
-    
-            // {data: null, name: null},
-    
-           
-        ],
-        columnDefs: [
-            {
-                targets: 1,
-                render:function(data,type,row){
-                    return "<span>12/1/2020</span>"
+                {data: null},
+                {data: 'tarikh_permohonan'},
+                {data: 'status'},
+                {data: 'masa_mula'},
+                {data: 'masa_akhir'},
+                {data: 'masa'},
+                {data: 'hari'},
+                {data: 'waktu'},
+                {data: 'kadar_jam'},
+                {data: 'tujuan'},
+                {data: null},
+                {data: null},
+                {data: 'jenis_permohonan'},
+                {data: 'id_permohonan_baru'},
+                {data: 'jenis_permohonan_kakitangan'}
+            ],
+            columnDefs: [
+                {
+                    searchable: false,
+                    orderable: false,
+                    targets: 0
+                },
+                {
+                    targets: [1],
+                    type: "date",
+                    render: function(data,type,row){
+                        formattedDate = moment(data).format("DD/MM/YYYY")
+                        return formattedDate;
+                    }
+                },
+                {
+                    targets: 2,
+                    render: function(data,type,row){
+                        if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
+                            if(data == "DITERIMA"){
+                                return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="SS">SEMAK SEMULA</div>' 
+                            }else{
+                                return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                            }
+                        }else{
+                            
+                            return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                        }
+                    }
+                },
+                {
+                    targets: 10,
+                    mRender: function(data,type,row){
+                        return '<div>asd</div>';
+                    }
+                },
+                {
+                    targets: 11,
+                    mRender: function(data,type,row)
+                    {
+                        if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
+                            if(row['status'] == "DITERIMA"){
+                                console.log(data.id_permohonan_baru);
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.id_permohonan_baru+"'"+','+"'"+data.jenis_permohonan+"'"+','+"'"+data.jenis_permohonan_kakitangan+"'"+');"></i>'  
+                                // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                                var allButton = button1 ;
+                                return allButton;
+                            }else{
+                                // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                                var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                                var allButton = button2;
+                                return allButton;
+                            }
+                        
+                        }
+                        else{
+                            
+                        }
+                    }
+                    
+                },
+                {
+                    targets: 12,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 13,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 14,
+                    visible: true,
+                    searchable: true
                 }
-            },
-            {
-                targets: 2,
-                render:function(data,type,row){
-                    return "<span>2.30 PM</span>"
-                }
-            },
-            {
-                targets: 3,
-                render:function(data,type,row){
-                    return "<span>5.30 PM</span>"
-                }
-            },
-            {
-                targets: [4],
-                type: "date",
-            },
-            {
-                targets: 5,
-                render:function(data,type,row){
-                    return "<span>Selasa</span>"
-                }
-            },
-            {
-                targets: 6,
-                render:function(data,type,row){
-                    return "<span>Petang</span>"
-                }
-            },
-            {
-                targets: 8,
-                render:function(data,type,row){
-                    return "<span>Before</span>"
-                }
-            },
-            {
-                targets: 9,
-                render: function(data,type,row){
-                    // console.log(data.id);
-                    var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="editKemaskiniForm('+data.id+')" data-target=""  >Kemaskini</button>' 
-                    var allButton = button1 
-                    return allButton;
-                }
-            }
-        ],
-});
-
-
+                
+            ],
+            order: [ 1, 'asc' ]
+            
+                // {
+                //     targets: 9,
+                //     render: function(data,type,row){
+                //         // console.log(data.id);
+                //         var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="editKemaskiniForm('+data.id+')" data-target=""  >Kemaskini</button>' 
+                //         var allButton = button1 
+                //         return allButton;
+                //     }
+                // }
+            
+    });
+    permohonanDT.on( 'order.dt search.dt', function () {
+        permohonanDT.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+})
 function editKemaskiniForm(id){
     $("#frmTuntutan input[name=name1]").val(id);
     $('#borangB1Modal').modal('show');
@@ -152,16 +195,6 @@ $("#btnGo").click(function () {
         $('#jenisTable').val()
         ).draw();
 });
-
-function filterColumn ( i ) {
-    $('#permohonanDT').DataTable().column( i ).search(
-        $('#col'+i+'_filter').val()
-    ).draw();
-}
-
-$('input.column_filter').on( 'keyup click', function () {
-    filterColumn( $(this).attr('data-column') );
-} );
 
 $('#min').datepicker({
     dateFormat: 'dd/mm/yy',
