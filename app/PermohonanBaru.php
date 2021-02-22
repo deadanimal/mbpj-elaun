@@ -19,9 +19,12 @@ class PermohonanBaru extends Model
         'hari',
         'waktu',
         'kadar_jam',
+        'id_peg_sokong',
+        'id_peg_pelulus',
         'tujuan',
         'peg_sokong_approved',
-        'jenis_permohonan_kakitangan'
+        'jenis_permohonan_kakitangan',
+        'jenis_permohonan'
     ];
 
     // Default value
@@ -30,7 +33,7 @@ class PermohonanBaru extends Model
         'id_peg_pelulus' => 0,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
-        'jenis_permohonan' => 'OT1'
+        'jenis_permohonan' => ''
     ];
 
     public function scopePermohonanPegawaiSokong($query)

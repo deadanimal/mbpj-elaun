@@ -4,10 +4,17 @@ namespace App\Http\Controllers\kakitangan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\User;
+use App\PermohonanBaru;
+use App\permohonan_with_users;
 use Carbon\Carbon;
 use DataTables;
 use App\DataTables\UsersDataTable;
+use App\Events\PermohonanStatusChangedEvent;
+
 
 class semakanController extends Controller
 {
@@ -18,18 +25,8 @@ class semakanController extends Controller
      */
     public function index()
     {
-        $user = User::select("*");
-
-        if(request()->ajax()) {
-            return datatables()->of($user)
-        ->editColumn('created_at', function ($user) {
-            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
-        })
-        ->filterColumn('created_at', function ($query, $keyword) {
-            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
-        })
-        ->make(true);
-        }
+        
+       
         
         return view('core.kakitangan.semakan');
     }
@@ -61,9 +58,28 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        //
+        $pilihanKT = $request->input('pilihanKT');
+        $pilihanReal = $request->input('pilihanReal');
+
+        if(request()->ajax()){
+                
+                return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
+            
+        }
+    }
+
+    public function showModal(Request $request,$id){
+        $pilihanKT = $request->input('pilihanKT');
+        $pilihanReal = $request->input('pilihanReal');
+        // dd($id);
+        $permohonan = PermohonanBaru::find($id);
+        return response()->json([
+            'permohonan' => $permohonan,
+            
+        ],200);
+        
     }
 
     /**
@@ -87,6 +103,39 @@ class semakanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $permohonan = PermohonanBaru::find($id);
+        $validator = Validator::make($request->all(), [ 
+                
+            'object.tarikh_permohonan' => 'required',
+            'object.masa_mula' => 'required',
+            'object.masa_akhir' => 'required',
+            'object.masa'   => 'required',
+            'object.waktu'  => 'required',
+            'object.tujuan' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            foreach ($errors->all() as $message) {
+                dd($message);
+            }
+        }else{
+
+        $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
+        $permohonan->masa_mula = $request->input('object.masa_mula');
+        $permohonan->masa_akhir = $request->input('object.masa_akhir');
+        $permohonan->masa = $request->input('object.masa');
+        $permohonan->waktu = $request->input('object.waktu');
+        $permohonan->tujuan = $request->input('object.tujuan');
+
+        $permohonan->save();
+        $permohonan->refresh();
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 1));
+        return response()->json([
+            'permohonan' => $permohonan
+        ],200);
+        }
+        
     }
 
     /**

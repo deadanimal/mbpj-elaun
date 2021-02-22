@@ -16,7 +16,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function findPermohonanWithID($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan)
+        return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan', $jenisPermohonan)
                                                           ->isNotDeleted();
 
     }
@@ -26,9 +26,15 @@ class Controller extends BaseController
         // dd($jenisPermohonan);
         // dd(substr($jenisPermohonan,0,-1));
         // dd(PermohonanBaru::with('users')->where('id',$id)->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get());
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan)
-                                                        ->where('jenis_permohonan', $jenisPermohonan);
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan);
+                                                        
         // return $permohonans = PermohonanBaru::with('users')->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get();
+    }
+
+    public function findPermohonanWithIDSemakan($jenisPermohonan,$jenisPermohonanKT,$id){
+        return $permohonans = User::find($id)->permohonans()->whereIn('jenis_permohonan',$jenisPermohonan)
+                                                        ->whereIn('jenis_permohonan_kakitangan',$jenisPermohonanKT)
+                                                        ->isNotDeleted();
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
