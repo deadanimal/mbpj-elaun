@@ -8,7 +8,7 @@
     @component('layouts.headers.auth') 
         
     @endcomponent
-
+    <input type="text" id="nopekerja" value="{{Auth::user()->id }}" hidden>
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col-6">
@@ -122,4 +122,5 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/semakan.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/hantarPengesahan.js"></script>
 @endpush
