@@ -9,25 +9,43 @@
         @include('alerts.success')
         @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
 
-        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-            <label class="form-control-label" for="input-name">{{ __('Penyelia') }}</label>
-            <input type="text" name="penyelia" id="kelulusan-penyelia" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="" required autofocus>
-
-            @include('alerts.feedback', ['field' => 'name'])
+        <div class="row">
+            <div class="col">
+                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                    <label class="form-control-label" for="input-name">{{ __('Pegawai Sokong') }}</label>
+                    <input type="text" name="peg_sokong" id="kelulusan-peg-sokong" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="">
+        
+                    @include('alerts.feedback', ['field' => 'name'])
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                    <label class="form-control-label" for="input-name">{{ __('Jawatan') }}</label>
+                    <input type="text" name="jawatan_peg_sokong" id="kelulusan-jawatan-peg-sokong" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="">
+        
+                    @include('alerts.feedback', ['field' => 'name'])
+                </div>
+            </div>
         </div>
-        <div class="form-group mt--3">
-            <label class="form-control-label">{{ __('Ketua Bahagian') }}</label>
-            <input class="form-control" name="ketuaBahagian" id="kelulusan-ketuaBahagian" type="text" placeholder="">
-
-            @include('alerts.feedback', ['field' => 'name'])
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label">{{ __('Pegawai Pelulus') }}</label>
+                    <input class="form-control" name="peg_pelulus" id="kelulusan-peg-pelulus" type="text" placeholder="">
+        
+                    @include('alerts.feedback', ['field' => 'name'])
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                    <label class="form-control-label" for="input-name">{{ __('Jawatan') }}</label>
+                    <input type="text" name="jawatan_peg_pelulus" id="kelulusan-jawatan-peg-pelulus" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="">
+        
+                    @include('alerts.feedback', ['field' => 'name'])
+                </div>
+            </div>
         </div>
-        <div class="form-group mt--3">
-            <label class="form-control-label">{{ __('Ketua Jabatan') }}</label>
-            <input class="form-control" name="ketuaJabatan" id="kelulusan-ketuaJabatan" type="text" placeholder="">
-
-            @include('alerts.feedback', ['field' => 'name'])
-        </div>
-        <div class="form-group mt--3">
+        <div class="form-group">
             <label class="form-control-label">{{ __('Kerani Pemeriksa') }}</label>
             <input class="form-control" name="keraniPemeriksa" id="kelulusan-keraniPemeriksa" type="text" placeholder="">
 

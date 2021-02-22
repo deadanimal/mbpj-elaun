@@ -49,14 +49,6 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * OT1 == 00
-     * EL1 == 01
-     * OT2 == 10
-     * EL2 == 11
-     * PS1 == 02
-     * PS2 == 12
-     * 
-     * This function is used to display all permohonans related to 1 pekerja 
      * 
      */
     public function show(Request $request, $id)

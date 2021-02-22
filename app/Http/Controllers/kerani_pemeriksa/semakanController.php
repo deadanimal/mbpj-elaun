@@ -49,12 +49,6 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * OT1 == 00
-     * EL1 == 01
-     * OT2 == 10
-     * EL2 == 11
-     * 
-     * This function is used to display all permohonans related to 1 pekerja 
      * 
      */
     public function show(Request $request, $id)
@@ -62,12 +56,10 @@ class semakanController extends Controller
         $pilihan = $request->input('pilihan');
         $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
         
-        if(strlen($pilihan) == 3){
+        if (strlen($pilihan) == 3){
             return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
-        }else
-        {
-            return datatables()->of($this->findAllPermohonanForTypes($pilihan))
-            ->make(true);
+        } else {
+            return datatables()->of($this->findAllPermohonanForTypes($pilihan))->make(true);
         }
         
         

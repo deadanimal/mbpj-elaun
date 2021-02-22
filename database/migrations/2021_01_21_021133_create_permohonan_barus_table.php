@@ -16,6 +16,7 @@ class CreatePermohonanBarusTable extends Migration
         Schema::create('permohonan_barus', function (Blueprint $table) {
             $table->bigIncrements('id_permohonan_baru');
             $table->string('tarikh_permohonan');
+            $table->string('tarikh_akhir_kerja');
             $table->string('masa_mula');
             $table->string('masa_akhir');
             $table->string('masa');
@@ -29,14 +30,19 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('jenis_permohonan');
             $table->unsignedInteger('id_peg_sokong')->default('0');
             $table->unsignedInteger('id_peg_pelulus')->default('0');
+            $table->unsignedInteger('id_kerani_pemeriksa')->default('0');
+            $table->unsignedInteger('id_kerani_semakan')->default('0');
             $table->unsignedInteger('peg_sokong_approved')->default('0');
             $table->unsignedInteger('is_deleted')->default('0');
+            $table->unsignedInteger('status_akhir');
             $table->timestamps();
         }); 
 
         Schema::table('permohonan_barus', function($table) {
             $table->foreign('id_peg_sokong')->references('id')->on('users');
             $table->foreign('id_peg_pelulus')->references('id')->on('users');
+            $table->foreign('id_kerani_pemeriksa')->references('id')->on('users');
+            $table->foreign('id_kerani_semakan')->references('id')->on('users');
         });
     }
 

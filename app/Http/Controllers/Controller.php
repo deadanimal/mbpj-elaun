@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\PermohonanBaru;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,19 +16,22 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function findPermohonanWithID($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan', $jenisPermohonan)
-                                                          ->isNotDeleted();
+        return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan', $jenisPermohonan)
+                                                           ->isNotDeleted();                                     
+
 
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
-        // $jenisPermohonan = substr($jenisPermohonan,0,2);
-        // dd($jenisPermohonan);
-        // dd(substr($jenisPermohonan,0,-1));
-        // dd(PermohonanBaru::with('users')->where('id',$id)->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get());
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan)
-                                                        ->where('jenis_permohonan', $jenisPermohonan);
-        // return $permohonans = PermohonanBaru::with('users')->where('jenis_permohonan_kakitangan','like' ,$jenisPermohonan.'%')->get();
+
+        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan);
+
+    }
+
+    public function findPermohonanWithIDSemakan($jenisPermohonan,$jenisPermohonanKT,$id){
+        return $permohonans = User::find($id)->permohonans()->whereIn('jenis_permohonan',$jenisPermohonan)
+                                                        ->whereIn('jenis_permohonan_kakitangan',$jenisPermohonanKT)
+                                                        ->isNotDeleted();
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){

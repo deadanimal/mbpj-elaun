@@ -69,6 +69,8 @@ class permohonanController extends Controller
         //
         $jenisPermohonan = $request->input('jenisPermohonan');
         $data = $request->input('object');
+        // dd($request->input('pekerja'));
+        $pekerja = array($request->input('pekerja'));
         $array = array($data);
 
         if($jenisPermohonan == 'OT1' ){
@@ -86,10 +88,27 @@ class permohonanController extends Controller
             if ($validator->fails()) {
                 dd('fail');
             }
-            PermohonanBaru::insert([$data]);
-            $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
+            $permohonanbaru = new PermohonanBaru([
+                'id_peg_pelulus'    => $data['id_peg_pelulus'],
+                'id_peg_sokong' => $data['id_peg_sokong'],
+                'tarikh_permohonan' => $data['tarikh_permohonan'],
+                'masa_mula' => $data['masa_mula'],
+                'masa_akhir'    => $data['masa_akhir'],
+                'tujuan'    => $data['tujuan'],
+                'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
+                'masa'  =>  $data['masa'],
+                'waktu' =>  $data['waktu'],
+                'hari'  =>  $data['hari'],
+                'kadar_jam' =>  $data['kadar_jam'],
+                'status'    =>  $data['status'],
+                'jenis_permohonan'  =>  $data['jenis_permohonan']
+            ]);
+            // $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
+            $permohonanbaru->save();
+            $permohonanbaru->refresh();
+            $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
-            if ($permohonans->jenis_permohonan == $jenisPermohonan) {
+            if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
                 $users = Auth::user()->id;
                 $permohonans->users()->attach($users);
                 
@@ -117,12 +136,35 @@ class permohonanController extends Controller
             if ($validator->fails()) {
                 dd('fail',$request->all());
             }else{
-                PermohonanBaru::insert([$data]);
-                $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
-    
-                if ($permohonans->jenis_permohonan == $jenisPermohonan) {
-                    foreach($request->input('pekerja') as $pekerjas){
-                        $users = User::find($pekerjas)->id;
+                // dd($data);
+                $permohonanbaru = new PermohonanBaru([
+                    'id_peg_pelulus'    => $data['id_peg_pelulus'],
+                    'id_peg_sokong' => $data['id_peg_sokong'],
+                    'tarikh_permohonan' => $data['tarikh_permohonan'],
+                    'masa_mula' => $data['masa_mula'],
+                    'masa_akhir'    => $data['masa_akhir'],
+                    'tujuan'    => $data['tujuan'],
+                    'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
+                    'masa'  =>  $data['masa'],
+                    'waktu' =>  $data['waktu'],
+                    'hari'  =>  $data['hari'],
+                    'kadar_jam' =>  $data['kadar_jam'],
+                    'status'    =>  $data['status'],
+                    'jenis_permohonan'  =>  $data['jenis_permohonan'],
+                    
+                ]);
+                // 
+                $permohonanbaru->save();
+                $permohonanbaru->refresh();
+                $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
+                // dd($permohonans);
+                // dd($permohonanbaru->jenis_permohonan);
+                if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
+                    foreach($pekerja as $pekerjas){
+                        // dd($pekerjas);
+                        $users = User::find($pekerjas)->pluck('id');
+                        // dd($users);
+                        // print_r($users);
                         $permohonans->users()->attach($users);
                     }
                     

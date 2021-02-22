@@ -19,9 +19,13 @@ class PermohonanBaru extends Model
         'hari',
         'waktu',
         'kadar_jam',
+        'id_peg_sokong',
+        'id_peg_pelulus',
         'tujuan',
         'peg_sokong_approved',
-        'jenis_permohonan_kakitangan'
+        'jenis_permohonan_kakitangan',
+        'status_akhir',
+        'jenis_permohonan'
     ];
 
     // Default value
@@ -30,7 +34,8 @@ class PermohonanBaru extends Model
         'id_peg_pelulus' => 0,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
-        'jenis_permohonan' => 'OT1'
+        'jenis_permohonan' => '',
+        'status_akhir' => 2,
     ];
 
     public function scopePermohonanPegawaiSokong($query)
@@ -78,8 +83,6 @@ class PermohonanBaru extends Model
 
     public function scopeIsNotDitolakOrPerluKemaskini($query)
     {
-        // return $query->where('status', '!=', 'DITOLAK')
-        //              ->where('status', '!=', 'PERLU KEMASKINI');
         return $query->whereNotIn('status', ['DITOLAK', 'PERLU KEMASKINI']);
     }
 

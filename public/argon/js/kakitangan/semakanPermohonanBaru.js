@@ -95,9 +95,21 @@ function hantarPermohonanBerkumpulan(){
 
     })
     console.log(nopekerja);
-    var object = {id_peg_pelulus:pegPelulusBK,id_peg_sokong:5,tarikh_permohonan:tarikhKerjaBK,
-        masa_mula:masaMulaBK,masa_akhir:masaAkhirBK,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
-        jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:berkumpulan};
+    var object = {
+        id_peg_pelulus:pegPelulusBK,
+        id_peg_sokong:5,
+        tarikh_permohonan:tarikhKerjaBK,
+        masa_mula:masaMulaBK,
+        masa_akhir:masaAkhirBK,
+        masa:masa,
+        hari:hari,
+        waktu:waktu,
+        kadar_jam:"1.125",
+        status:status,
+        jenis_permohonan:jenis_permohonan,
+        tujuan:sebab,
+        jenis_permohonan_kakitangan:berkumpulan
+    };
     console.log(object,berkumpulan);
 
     $.ajax({
@@ -151,7 +163,7 @@ function hantarPermohonanIndividu(){
     var user_id = namaPekerjaID;
     var object = {id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
-                    jenis_permohonan:jenis_permohonan,tujuan:sebab};
+                    jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};
     console.log(object,individu);
     $.ajax({
         url: 'permohonan-baru/hantar-permohonan',

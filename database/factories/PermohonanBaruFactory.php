@@ -9,6 +9,7 @@ $factory->define(PermohonanBaru::class, function (Faker $faker) {
     return [
 
         'tarikh_permohonan' => $faker->date,
+        'tarikh_akhir_kerja' => $faker->date,
         'masa_mula' => $faker->time($format = 'H:i', $max = 'now'),
         'masa_akhir' => $faker->time($format = 'H:i', $max = 'now'),
         'masa' => $faker->time($format = 'H:i', $max = 'now'),
