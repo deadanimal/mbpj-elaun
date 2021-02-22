@@ -21,21 +21,27 @@ class PermohonanBaru extends Model
         'kadar_jam',
         'id_peg_sokong',
         'id_peg_pelulus',
+        'id_kerani_pemeriksa',
+        'id_kerani_semakan',
         'tujuan',
         'peg_sokong_approved',
         'jenis_permohonan_kakitangan',
         'status_akhir',
-        'jenis_permohonan'
+        'jenis_permohonan',
+        'tarikh_akhir_kerja'
     ];
 
     // Default value
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
+        'id_kerani_pemeriksa' => 7,
+        'id_kerani_semakan' => 6,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
         'status_akhir' => 2,
+        'tarikh_akhir_kerja' => '2021-01-01'
     ];
 
     public function scopePermohonanPegawaiSokong($query)
@@ -44,6 +50,7 @@ class PermohonanBaru extends Model
                         return $q->where('id_peg_sokong', Auth::id())
                                  ->isNotApproved()
                                  ->isNotDitolakOrPerluKemaskini()
+                                 ->notSahP2()
                                  ->isNotDeleted();
         });
     } 
@@ -54,8 +61,9 @@ class PermohonanBaru extends Model
                             return $q->where('id_peg_pelulus', Auth::id())
                                      ->isApproved()
                                      ->isNotDitolakOrPerluKemaskini()
+                                     ->notSahP2()
                                      ->isNotDeleted();
-});
+        });
     }
 
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
@@ -63,7 +71,7 @@ class PermohonanBaru extends Model
         return $query->permohonanPegawaiSokong()
                      ->orWhere(function (Builder $q) {
                             return $q->permohonanPegawaiPelulus();
-                        });
+                    })->notSahP2();
     }
 
     public function scopeIsNotDeleted($query)
@@ -84,6 +92,11 @@ class PermohonanBaru extends Model
     public function scopeIsNotDitolakOrPerluKemaskini($query)
     {
         return $query->whereNotIn('status', ['DITOLAK', 'PERLU KEMASKINI']);
+    }
+
+    public function scopeNotSahP2($query)
+    {
+        return $query->where('progres', '!=', 'Sah P2');
     }
 
     public function users()
