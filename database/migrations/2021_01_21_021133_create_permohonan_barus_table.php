@@ -16,6 +16,7 @@ class CreatePermohonanBarusTable extends Migration
         Schema::create('permohonan_barus', function (Blueprint $table) {
             $table->bigIncrements('id_permohonan_baru');
             $table->string('tarikh_permohonan');
+            $table->string('tarikh_akhir_kerja');
             $table->string('masa_mula');
             $table->string('masa_akhir');
             $table->string('masa');
@@ -33,6 +34,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->unsignedInteger('id_kerani_semakan')->default('0');
             $table->unsignedInteger('peg_sokong_approved')->default('0');
             $table->unsignedInteger('is_deleted')->default('0');
+            $table->unsignedInteger('status_akhir');
             $table->timestamps();
         }); 
 
