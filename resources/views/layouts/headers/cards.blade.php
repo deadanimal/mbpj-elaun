@@ -6,12 +6,12 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Kerja Lebih Masa</h5>
-                        <span class="h2 font-weight-bold mb-0">350,897</span>
+                        <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasa }}</span>
                     </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                         <i class="ni ni-active-40"></i>
-                    </div>
+                    </div> 
                 </div>
             </div>
             <p class="mt-3 mb-0 text-sm">
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Diluluskan</h5>
-                    <span class="h2 font-weight-bold mb-0">2,356</span>
+                    <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanDiluluskan }}</span>
                 </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tidak Diluluskan</h5>
-                    <span class="h2 font-weight-bold mb-0">924</span>
+                    <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTidakDiluluskan }}</span>
                 </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tahun Semasa</h5>
-                        <span class="h2 font-weight-bold mb-0">49,65%</span>
+                        <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasa }}</span>
                     </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">

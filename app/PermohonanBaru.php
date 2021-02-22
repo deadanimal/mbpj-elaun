@@ -24,6 +24,7 @@ class PermohonanBaru extends Model
         'tujuan',
         'peg_sokong_approved',
         'jenis_permohonan_kakitangan',
+        'status_akhir',
         'jenis_permohonan'
     ];
 
@@ -33,7 +34,8 @@ class PermohonanBaru extends Model
         'id_peg_pelulus' => 0,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
-        'jenis_permohonan' => ''
+        'jenis_permohonan' => '',
+        'status_akhir' => 2,
     ];
 
     public function scopePermohonanPegawaiSokong($query)
@@ -81,8 +83,6 @@ class PermohonanBaru extends Model
 
     public function scopeIsNotDitolakOrPerluKemaskini($query)
     {
-        // return $query->where('status', '!=', 'DITOLAK')
-        //              ->where('status', '!=', 'PERLU KEMASKINI');
         return $query->whereNotIn('status', ['DITOLAK', 'PERLU KEMASKINI']);
     }
 

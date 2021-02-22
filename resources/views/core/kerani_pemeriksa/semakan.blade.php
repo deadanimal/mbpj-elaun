@@ -4,10 +4,10 @@
     'parentSection' => 'laravel',
     'elementName' => 'profile'
 ])
-
+ 
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Kerani Pemeriksa') . ' ',
+        'title' => __('Selamat Datang ke Modul Ketua Pemeriksa') . ' ',
         'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
         'class' => 'col-lg-7'
     ])
@@ -50,29 +50,28 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
-                               
+                        
 
                             {{-- Form semakan --}}
-                                @include('core.kerani_pemeriksa.partials.formOT&EL')
+                                @include('core.ketua_pemeriksa.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
 
-                
+                    {{-- Datatables --}}
+                    @include('core.ketua_pemeriksa.partials.dataTablesKetuaPemeriksa')
+    
             </div>
-
-            {{-- Datatables Kerani Semakan --}}
-            @include('core.kerani_semakan.partials.dataTablesKeraniSemakan')
         </div>
 
         @include('layouts.footers.auth')
     </div>
 
 {{-- Modal --}}
-@include('core.kerani_pemeriksa.partials.modals-semakan.modalEditIndividuKeraniPemeriksa')
-@include('core.kerani_pemeriksa.partials.modals-semakan.modalEditBerkumpulanKeraniPemeriksa')
-@include('core.kerani_pemeriksa.partials.modals-semakan.modalValidateKeraniPemeriksa')
-@include('core.kerani_pemeriksa.partials.modals-semakan.modalRejectKeraniPemeriksa')
+@include('core.ketua_pemeriksa.partials.modals-semakan.modalEditIndividuKetuaPemeriksa')
+@include('core.ketua_pemeriksa.partials.modals-semakan.modalEditBerkumpulanKetuaPemeriksa')
+@include('core.ketua_pemeriksa.partials.modals-semakan.modalValidateKetuaPemeriksa')
+@include('core.ketua_pemeriksa.partials.modals-semakan.modalRejectKetuaPemeriksa')
 @endsection
 
 @push('css')
@@ -90,9 +89,10 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/kerani-pemeriksa/jenisPermohonan.js"></script>
-    <script src="{{ asset('argon') }}/js/kerani-pemeriksa/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-pemeriksa/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/ketua-pemeriksa/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
-@endpush 
+@endpush
