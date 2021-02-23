@@ -90,7 +90,7 @@ function showDatatable(){
             },
 
             {
-                targets: 10,
+                targets: 11,
                 mRender: function(data,type,row)
                 {
                     if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
@@ -125,22 +125,22 @@ function showDatatable(){
                 
             },
             {
-                targets: 11,
-                visible: false,
-                searchable: true
-            },
-            {
                 targets: 12,
                 visible: false,
                 searchable: true
             },
             {
                 targets: 13,
-                visible: true,
+                visible: false,
                 searchable: true
             },
             {
                 targets: 14,
+                visible: true,
+                searchable: true
+            },
+            {
+                targets: 15,
                 visible: false,
                 searchable: true
             }

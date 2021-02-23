@@ -199,7 +199,7 @@ function getIndividuDT(){
                 }
             },
             {
-                targets: 10,
+                targets: 11,
                 mRender: function(data,type,row)
                 {
                     console.log(data.id_permohonan_baru);
@@ -211,12 +211,12 @@ function getIndividuDT(){
                 
             },
             {
-                targets: 11,
+                targets: 12,
                 visible: false,
                 searchable: true
             },
             {
-                targets: 12,
+                targets: 13,
                 visible: false,
                 searchable: true
             }
@@ -297,7 +297,7 @@ function getBerkumpulanDT(){
                 }
             },
             {
-                targets: 10,
+                targets: 11,
                 mRender: function(data,type,row)
                 {
                     var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
@@ -307,12 +307,12 @@ function getBerkumpulanDT(){
                 }
             },
             {
-                targets: 11,
+                targets: 12,
                 visible: false,
                 searchable: true
             },
             {
-                targets: 12,
+                targets: 13,
                 visible: false,
                 searchable: true
             }
@@ -328,6 +328,13 @@ function getBerkumpulanDT(){
 }
 
 $('.js-example-basic-single').select2();
+
+$('#tarikh-kerjaID').datepicker({
+    dateFormat: 'dd/mm/yy',
+});
+$('#tarikh-kerjaBK').datepicker({
+    dateFormat: 'dd/mm/yy',
+});
 
 $('#masa-mulaBK').timepicker();
 
