@@ -81,13 +81,13 @@ console.log(id_permohonan_baru)
             object : object,
         },
         success: function(data) {
-            $("#borangB1Modal").modal("dispose");
+            $("#borangB1Modal").modal("hide");
             Swal.fire(  
                 'Dihantar untuk Pengesahan!',
                 'Klik butang dibawah untuk tutup!',
                 'success'
                 )
-            
+            showDatatable();
             console.log(data.permohonan);
 
         },

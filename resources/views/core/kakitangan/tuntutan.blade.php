@@ -85,7 +85,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-2">{{ __('Senarai Permohonan Borang B1') }}</h2>
+                                <h2 class="mb-2">{{ __('Senarai Tuntutan Elaun Lebih Masa') }}</h2>
                             </div>
                             <div class="col-4 text-right">
                                 <span id="printButton" onclick="printTuntutan()" style="cursor: pointer"><i class="fa fa-print fa-3x" ></i></span>
@@ -99,6 +99,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tarikh Permohonan</th>
+                                    <th>Status</th>
                                     <th>Masa Mula</th>
                                     <th>Masa Akhir</th>
                                     <th>Masa</th>
@@ -106,7 +107,13 @@
                                     <th>Waktu</th>
                                     <th>Kadar Jam</th>
                                     <th>Tujuan</th>
+                                    <th>Catatan</th>
                                     <th></th>
+                                    <th hidden>Status</th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th hidden></th>
+                                    <th ></th>
                                 </tr>
                                 </thead>
 
@@ -119,7 +126,7 @@
                 </div>
             </div>
         </div>
-            
+            <input id="idpekerja" value="{{$user}}" hidden>
         @include('layouts.footers.auth')
     </div>
 @endsection
@@ -141,5 +148,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/amchart.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/tuntutan.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/hantarElaun.js"></script>
 
 @endpush

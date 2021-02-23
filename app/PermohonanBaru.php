@@ -35,8 +35,8 @@ class PermohonanBaru extends Model
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'id_kerani_pemeriksa' => 7,
         'id_kerani_semakan' => 6,
+        'id_kerani_pemeriksa' => 7,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
