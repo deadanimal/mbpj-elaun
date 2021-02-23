@@ -5,7 +5,7 @@
                 <h4 class="modal-title">
                     Permohonan Baru Kerja Lebih Masa
                 </h4>
-                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                <button onclick="event.preventDefault();closeModal('permohonanbaruModal')" aria-hidden="true" class="close" data-dismiss="modal" type="button">
                     ×
                 </button>
             </div>
@@ -155,7 +155,7 @@
                     </form>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button id="submitBtn" type="button" class="btn btn-success" onclick="hantarPermohonanIndividu();">Hantar</button>
+                        <button id="submitBtn" type="button" class="btn btn-success" onclick="event.preventDefault();hantarPermohonanIndividu();">Hantar</button>
                     </div>
                 </div>
 
@@ -255,8 +255,8 @@
                         </div>  
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button id="submitBtn" type="button" class="btn btn-success" onclick="hantarPermohonanBerkumpulan();">Hantar</button>
+                        <button type="button" class="btn btn-secondary" onclick="event.preventDefault();closeModal('permohonanbaruModal');" data-dismiss="modal">Batal</button>
+                        <button id="submitBtn" type="button" class="btn btn-success" onclick="event.preventDefault();hantarPermohonanBerkumpulan();">Hantar</button>
                     </div>
                 </div>
             </div>

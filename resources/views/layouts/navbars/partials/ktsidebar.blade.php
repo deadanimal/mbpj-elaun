@@ -21,7 +21,7 @@
                                     <a href="permohonan-baru" class="nav-link">{{ __('Permohonan Baru') }}</a>
                                 </li>
                                 <li class="nav-item  {{ $elementName == 'role-management' ? 'active' : '' }}">
-                                    <a href="semakan" class="nav-link">{{ __('Semakan') }}</a>
+                                    <a href="semakan" class="nav-link">{{ __('Pengesahan Permohonan') }}</a>
                                 </li>
                                 
                             </ul>
@@ -37,7 +37,7 @@
                     <li class="nav-item {{ $parentSection == 'tuntutan' ? 'active' : '' }}">
                         <a class="nav-link" href="tuntutan" >
                             <i class="ni ni-ui-04 text-info"></i>
-                            <span class="nav-link-text">{{ __('Tuntutan') }}</span>
+                            <span class="nav-link-text">{{ __('Tuntutan Elaun') }}</span>
                         </a>
                         
                     </li>

@@ -25,17 +25,21 @@ class PermohonanBaru extends Model
         'peg_sokong_approved',
         'jenis_permohonan_kakitangan',
         'status_akhir',
-        'jenis_permohonan'
+        'jenis_permohonan',
+        'tarikh_akhir_kerja'
     ];
 
     // Default value
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
+        'id_kerani_semakan' => 6,
+        'id_kerani_pemeriksa' => 7,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
         'status_akhir' => 2,
+        'tarikh_akhir_kerja' => '2021-01-01'
     ];
 
     public function scopePermohonanPegawaiSokong($query)

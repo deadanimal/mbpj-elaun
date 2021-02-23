@@ -117,8 +117,8 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <a href="#" class="edit open-modal" data-toggle="modal" data-target="#permohonanbaruModal">
-                                    <button onclick="setEnableDropdown();" class="btn btn-primary" data-toggle="tooltip" title="Edit">{{ __('Mohon Baru') }}</button></a>
+                                    <!-- <a href="#"> -->
+                                    <button  onclick="event.preventDefault();setEnableDropdown();" class="btn btn-primary" data-toggle="tooltip" title="Edit">{{ __('Mohon Baru') }}</button></a>
                                 </div>
                             </div>
                     </div>
