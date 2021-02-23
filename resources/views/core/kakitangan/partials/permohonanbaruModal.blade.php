@@ -70,7 +70,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="tarikh-kerjaID">{{ __('Tarikh Kerja') }}</label>
-                                        <input type="date" name="tarikh-kerjaID" id="tarikh-kerjaID" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}" >
+                                        <input name="tarikh-kerjaID" id="tarikh-kerjaID" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  >
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -114,7 +114,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="lokasiID">{{ __('Lokasi') }}</label>
-                                        <textarea type="text" name="lokasiID" id="lokasiID" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ old('email', auth()->user()->name) }}"></textarea>
+                                        <textarea type="text" name="lokasiID" id="lokasiID" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}"></textarea>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -193,7 +193,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="tarikh-kerjaBK">{{ __('Tarikh Kerja') }}</label>
-                                        <input type="date" name="tarikh-kerjaBK" id="tarikh-kerjaBK" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" min="{{Carbon\Carbon::now()->toDateString()}}" required autofocus>
+                                        <input name="tarikh-kerjaBK" id="tarikh-kerjaBK" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" min="{{Carbon\Carbon::now()->toDateString()}}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
