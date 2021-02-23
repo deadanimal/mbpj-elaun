@@ -21,6 +21,8 @@ class PermohonanBaru extends Model
         'kadar_jam',
         'id_peg_sokong',
         'id_peg_pelulus',
+        'id_kerani_pemeriksa',
+        'id_kerani_semakan',
         'tujuan',
         'peg_sokong_approved',
         'jenis_permohonan_kakitangan',
@@ -48,6 +50,7 @@ class PermohonanBaru extends Model
                         return $q->where('id_peg_sokong', Auth::id())
                                  ->isNotApproved()
                                  ->isNotDitolakOrPerluKemaskini()
+                                 ->notSahP2()
                                  ->isNotDeleted();
         });
     } 
@@ -58,8 +61,9 @@ class PermohonanBaru extends Model
                             return $q->where('id_peg_pelulus', Auth::id())
                                      ->isApproved()
                                      ->isNotDitolakOrPerluKemaskini()
+                                     ->notSahP2()
                                      ->isNotDeleted();
-});
+        });
     }
 
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
@@ -67,7 +71,7 @@ class PermohonanBaru extends Model
         return $query->permohonanPegawaiSokong()
                      ->orWhere(function (Builder $q) {
                             return $q->permohonanPegawaiPelulus();
-                        });
+                    })->notSahP2();
     }
 
     public function scopeIsNotDeleted($query)
@@ -88,6 +92,11 @@ class PermohonanBaru extends Model
     public function scopeIsNotDitolakOrPerluKemaskini($query)
     {
         return $query->whereNotIn('status', ['DITOLAK', 'PERLU KEMASKINI']);
+    }
+
+    public function scopeNotSahP2($query)
+    {
+        return $query->where('progres', '!=', 'Sah P2');
     }
 
     public function users()
