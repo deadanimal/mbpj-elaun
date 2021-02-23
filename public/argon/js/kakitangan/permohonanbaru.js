@@ -257,6 +257,7 @@ function getBerkumpulanDT(){
             {data: null, name: null},
             {data: 'tarikh_permohonan'},
             {data: 'status'},
+            {data: 'progres'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
             {data: 'masa'},
@@ -264,7 +265,6 @@ function getBerkumpulanDT(){
             {data: 'waktu'},
             {data: 'kadar_jam'},
             {data: 'tujuan'},
-            {data: null},
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'}
@@ -291,13 +291,13 @@ function getBerkumpulanDT(){
                 }
             },
             {
-                targets: 10,
-                mRender: function(data,type,row){
-                    return '<div>asd</div>';
+                targets: 3,
+                render: function(data,type,row){
+                    return '<div id="progres" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                 }
             },
             {
-                targets: 11,
+                targets: 10,
                 mRender: function(data,type,row)
                 {
                     var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
@@ -307,12 +307,12 @@ function getBerkumpulanDT(){
                 }
             },
             {
-                targets: 12,
+                targets: 11,
                 visible: false,
                 searchable: true
             },
             {
-                targets: 13,
+                targets: 12,
                 visible: false,
                 searchable: true
             }

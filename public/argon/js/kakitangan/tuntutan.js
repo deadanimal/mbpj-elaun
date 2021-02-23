@@ -39,6 +39,7 @@ function showDatatable(){
             {data: null},
             {data: 'tarikh_permohonan'},
             {data: 'status'},
+            {data: 'progres'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
             {data: 'masa'},
@@ -47,11 +48,10 @@ function showDatatable(){
             {data: 'kadar_jam'},
             {data: 'tujuan'},
             {data: null},
-            {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'},
             {data: 'jenis_permohonan_kakitangan'},
-            {data: 'progres'}
+            
         ],
         columnDefs: [
             {
@@ -81,15 +81,16 @@ function showDatatable(){
                         return '<div id="status" class=" text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                     }
                 }
-            },
+            }, 
             {
-                targets: 10,
-                mRender: function(data,type,row){
-                    return '<div>asd</div>';
+                targets: 3,
+                render: function(data,type,row){
+                    return '<div id="progres" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                 }
             },
+
             {
-                targets: 11,
+                targets: 10,
                 mRender: function(data,type,row)
                 {
                     if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
@@ -124,22 +125,22 @@ function showDatatable(){
                 
             },
             {
+                targets: 11,
+                visible: false,
+                searchable: true
+            },
+            {
                 targets: 12,
                 visible: false,
                 searchable: true
             },
             {
                 targets: 13,
-                visible: false,
-                searchable: true
-            },
-            {
-                targets: 14,
                 visible: true,
                 searchable: true
             },
             {
-                targets: 15,
+                targets: 14,
                 visible: false,
                 searchable: true
             }
