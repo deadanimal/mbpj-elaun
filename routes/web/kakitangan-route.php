@@ -29,6 +29,12 @@ Route::group([
 	});
 	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
+	Route::group(['prefix' => 'tuntutan'], function () {
+		Route::put('/hantar-tuntutan/{user_id}', [
+			'uses' => 'kakitangan\tuntutanController@update',
+			'as'   => 'tuntutan.update',
+		]);
+	});
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {

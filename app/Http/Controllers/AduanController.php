@@ -1,20 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\kakitangan;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Aduan;
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use App\PermohonanBaru;
-use App\permohonan_with_users;
-use Carbon\Carbon;
-use DataTables;
-use App\Events\PermohonanStatusChangedEvent;
 
-class tuntutanController extends Controller
+class AduanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,13 +14,7 @@ class tuntutanController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->id;
-
-        if(request()->ajax()) {
-            return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
-        }
-        
-        return view('core.kakitangan.tuntutan')->with('user',$user);
+        //
     }
 
     /**
@@ -56,10 +41,10 @@ class tuntutanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Aduan  $aduan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Aduan $aduan)
     {
         //
     }
@@ -67,10 +52,10 @@ class tuntutanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Aduan  $aduan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Aduan $aduan)
     {
         //
     }
@@ -79,27 +64,21 @@ class tuntutanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Aduan  $aduan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Aduan $aduan)
     {
         //
-        $permohonan = PermohonanBaru::find($id);
-        event(new PermohonanStatusChangedEvent($permohonan, 0, 1));
-        return response()->json([
-            'permohonan' => $permohonan
-        ],200);
-        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Aduan  $aduan
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Aduan $aduan)
     {
         //
     }

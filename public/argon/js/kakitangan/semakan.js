@@ -1,6 +1,12 @@
 var pilihanKT = ['OT1','OT2','PS1','PS2'];
 var pilihanReal = ['PS1','PS2','EL1','EL2'];
 $(document).ready(function(){
+    
+    showDatatable()
+
+})
+
+function showDatatable(){
     var nopekerja = document.querySelector("#nopekerja").value;
     var permohonanDT = $('#permohonanDT').DataTable({
         dom: "lrtip",
@@ -57,7 +63,7 @@ $(document).ready(function(){
                     targets: 2,
                     render: function(data,type,row){
                         if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
-                            if(data == "DITERIMA"){
+                            if(data == "DITERIMA" && row['progres'] == 'Sah P2' && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2") )){
                                 return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="SS">SEMAK SEMULA</div>' 
                             }else{
                                 return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
@@ -134,7 +140,7 @@ $(document).ready(function(){
             cell.innerHTML = i+1;
         } );
     } ).draw();
-})
+}
 function editKemaskiniForm(id){
     $("#frmTuntutan input[name=name1]").val(id);
     $('#borangB1Modal').modal('show');

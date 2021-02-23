@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Aduan;
 use App\Catatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
@@ -133,5 +134,15 @@ class User extends Authenticatable
     public function catatans()
     {
         return $this->hasMany(Catatan::class, 'id_user', 'id');
+    }
+
+    /**
+     * Get all of the aduans for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function aduans(): HasMany
+    {
+        return $this->hasMany(Aduan::class, 'id_user', 'id');
     }
 }

@@ -101,7 +101,9 @@ class permohonanController extends Controller
                 'hari'  =>  $data['hari'],
                 'kadar_jam' =>  $data['kadar_jam'],
                 'status'    =>  $data['status'],
-                'jenis_permohonan'  =>  $data['jenis_permohonan']
+                'jenis_permohonan'  =>  $data['jenis_permohonan'],
+                'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
+
             ]);
             // $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
             $permohonanbaru->save();
@@ -151,6 +153,7 @@ class permohonanController extends Controller
                     'kadar_jam' =>  $data['kadar_jam'],
                     'status'    =>  $data['status'],
                     'jenis_permohonan'  =>  $data['jenis_permohonan'],
+                    'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
                     
                 ]);
                 // 

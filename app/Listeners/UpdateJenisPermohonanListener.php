@@ -51,6 +51,7 @@ class UpdateJenisPermohonanListener
             case 'DALAM PROSES':
             case 'DITOLAK':
                 $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+                $event->permohonan->status_akhir = 0;
                 break;
             
             default:

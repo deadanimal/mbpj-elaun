@@ -113,11 +113,14 @@ function setEnableDropdown(){
     document.getElementById("jenisPermohonan").disabled = false;
     $('#divPermohonanIndividu').hide();
     $('#divPermohonanBerkumpulan').hide();
+    $("#permohonanbaruModal").modal("show");
+
     if ($("#jenisPermohonan").val() == "frmPermohonanIndividu") {
         document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
         document.getElementById('selectpermohonan').className = "col-sm-12"
         $('#divPermohonanIndividu').show();
         $("#divPermohonanBerkumpulan").hide();
+        $("#permohonanbaruModal").modal("show");
 
     }
     else if ($("#jenisPermohonan").val() == "frmPermohonanBerkumpulan") {
@@ -126,6 +129,8 @@ function setEnableDropdown(){
         $('#divPermohonanIndividu').hide();
         $("#divPermohonanBerkumpulan").show();
         $("#pekerjaAddDiv").show();
+        $("#permohonanbaruModal").modal("show");
+
 
     }
 }

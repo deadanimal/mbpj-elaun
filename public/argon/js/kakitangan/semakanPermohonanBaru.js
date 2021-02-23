@@ -14,6 +14,7 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
         document.getElementById('selectpermohonan').className = "col-sm-12"
         $('#divPermohonanIndividu').show();
         $("#divPermohonanBerkumpulan").hide();
+        $("#permohonanbaruModal").modal("show");
         console.log('ot1',jenis_permohonan)
     }else if(jenis_permohonan == 'OT2'){
         $("#permohonanbaruModal").modal("show");
@@ -24,6 +25,7 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
         document.getElementById('selectpermohonan').className = "col-sm-6"
         $('#divPermohonanIndividu').hide();
         $('#divPermohonanBerkumpulan').show();
+        $("#permohonanbaruModal").modal("show");
         console.log('ot2',jenis_permohonan)
     }
 
@@ -96,6 +98,7 @@ function hantarPermohonanBerkumpulan(){
     })
     console.log(nopekerja);
     var object = {
+        tarikh_akhir_kerja:'2021-01-01',
         id_peg_pelulus:pegPelulusBK,
         id_peg_sokong:5,
         tarikh_permohonan:tarikhKerjaBK,
@@ -121,7 +124,11 @@ function hantarPermohonanBerkumpulan(){
             pekerja:nopekerja
         },
         success: function(data) {
-            
+            // $("#permohonanbaruModal").modal("hide");
+            $('#permohonanbaruModal').modal('hide');
+            // $(".modal").modal("hide");
+            successAlert();
+            getBerkumpulanDT();
             console.log(data);
 
         },
@@ -161,7 +168,7 @@ function hantarPermohonanIndividu(){
 
     console.log("hari",hari,"masa",masa,"waktu",waktu);
     var user_id = namaPekerjaID;
-    var object = {id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
+    var object = {tarikh_akhir_kerja:'2020-01-01',id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
                     jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};
     console.log(object,individu);
@@ -174,7 +181,13 @@ function hantarPermohonanIndividu(){
             jenisPermohonan:jenis_permohonan
         },
         success: function(data) {
+            // $(".modal").modal("hide");
             
+            $('#permohonanbaruModal').modal('hide');
+
+            // $("#permohonanbaruModal").modal("hide");
+            successAlert();
+            getIndividuDT();
             console.log(data);
 
         },
@@ -184,6 +197,13 @@ function hantarPermohonanIndividu(){
     });
 }
 
+function successAlert(){
+    Swal.fire(  
+        'Permohonan anda telah dihantar dan akan diproses',
+        'Klik butang dibawah untuk tutup!',
+        'success'
+        )
+}
 function timeStringToMins(s) {
     s = s.split(':');
     s[0] = /m$/i.test(s[1]) && s[0] == 12? 0 : s[0];
