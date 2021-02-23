@@ -100,6 +100,7 @@
                                     <th>No</th>
                                     <th>Tarikh Permohonan</th>
                                     <th>Status</th>
+                                    <th>Progres</th>
                                     <th>Masa Mula</th>
                                     <th>Masa Akhir</th>
                                     <th>Masa</th>
@@ -107,7 +108,6 @@
                                     <th>Waktu</th>
                                     <th>Kadar Jam</th>
                                     <th>Tujuan</th>
-                                    <th>Catatan</th>
                                     <th></th>
                                     <th hidden>Status</th>
                                     <th hidden></th>
