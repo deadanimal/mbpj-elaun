@@ -139,11 +139,6 @@ function showDatatable(){
                 visible: true,
                 searchable: true
             },
-            {
-                targets: 15,
-                visible: false,
-                searchable: true
-            }
             
         ],
         order: [ 1, 'asc' ]
