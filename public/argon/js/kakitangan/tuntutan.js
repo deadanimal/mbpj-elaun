@@ -1,105 +1,158 @@
-var table = $('#tuntutansDT').dataTable({
-    dom: "lrtip",
-    scrollX: false,
-    destroy: true,
-    lengthMenu: [ 5, 10, 25, 50 ],
-    responsive: false,
-    autoWidth:true,
-    // processing: true,
-    // serverSide: true,
-    buttons: [
-    {
-      extend:'pdfHtml5',
-      title:'Senarai Permohonan Tuntutan'  
-    }
-],
-ajax: {
-  url: "tuntutan/",
-  type: 'GET',
-  },
-  
-  columns: [
+var pilihanKT = ['PS1','PS2','EL1','EL2'];
+var pilihanReal = ['EL1','EL2'];
 
-      {data: 'id', name: 'id'},
+$(document).ready(function(){
 
-      {data: null , name: null, searchable:false},
-
-      {data: null, name: null, searchable:false},
-
-      {data: null, name: null, searchable:false},
-
-      {data: 'created_at', name: 'created_at'},
-
-      {data: null , name: null, searchable:false},
-
-      {data: null , name: null, searchable:false},
-      
-      {data: 'status', name: 'status'},
-
-      {data: null , name: null, searchable:false},
-
-      {data: null , name: null, searchable:false},
-
-      // {data: null, name: null},
-
-     
-  ],
-  columnDefs: [
-      {
-            targets: 1,
-            render:function(data,type,row){
-                return "<span>12/1/2020</span>"
-          }
-      },
-      {
-            targets: 2,
-            render:function(data,type,row){
-                return "<span>2.30 PM</span>"
-          }
-      },
-      {
-            targets: 3,
-            render:function(data,type,row){
-              return "<span>5.30 PM</span>"
-          }
-      },
-      {
-            targets: [4],
-            type: "date",
-      },
-      {
-          targets: 5,
-          render:function(data,type,row){
-              return "<span>Selasa</span>"
-          }
-      },
-      {
-          targets: 6,
-          render:function(data,type,row){
-              return "<span>Petang</span>"
-          }
-      },
-      {
-          targets: 8,
-          render:function(data,type,row){
-              return "<span>Before</span>"
-          }
-      },
-      {
-          targets: 9,
-          render: function(data,type,row){
-              console.log(data.id);
-              var button1 = '<i data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+data.id+')" data-target=""  ></i>' 
-              var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></i>' 
-              var button3 = '<i id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')"  value='+data.id+'></i>' 
-              var allButton = button1 + button2 + button3;
-              return allButton;
-              
-          }
-      }
-  ],
+    showDatatable();
 });
 
+
+function showDatatable(){
+    var nopekerja = $("#idpekerja").val();
+    var tuntutansDT = $('#tuntutansDT').DataTable({
+        dom: "lrtip",
+        scrollX: false,
+        destroy: true,
+        lengthMenu: [ 5, 10, 25, 50 ],
+        responsive: false,
+        autoWidth:true,
+        // processing: true,
+        // serverSide: true,
+        buttons: [
+        {
+        extend:'pdfHtml5',
+        title:'Senarai Permohonan Tuntutan'  
+        }
+    ],
+    ajax: {
+        url: "semakan/"+nopekerja,
+        type: 'GET',
+        data:{
+            nopekerja:nopekerja,
+            pilihanKT:pilihanKT,
+            pilihanReal:pilihanReal
+        },
+        },
+        
+        columns: [
+
+            {data: null},
+            {data: 'tarikh_permohonan'},
+            {data: 'status'},
+            {data: 'masa_mula'},
+            {data: 'masa_akhir'},
+            {data: 'masa'},
+            {data: 'hari'},
+            {data: 'waktu'},
+            {data: 'kadar_jam'},
+            {data: 'tujuan'},
+            {data: null},
+            {data: null},
+            {data: 'jenis_permohonan'},
+            {data: 'id_permohonan_baru'},
+            {data: 'jenis_permohonan_kakitangan'},
+            {data: 'progres'}
+        ],
+        columnDefs: [
+            {
+                searchable: false,
+                orderable: false,
+                targets: 0
+            },
+            {
+                targets: [1],
+                type: "date",
+                render: function(data,type,row){
+                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    return formattedDate;
+                }
+            },
+            {
+                targets: 2,
+                render: function(data,type,row){
+                    if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
+                        if(data == "DITERIMA" && row['progres'] == 'Sah P2' && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS2") )){
+                            return '<div id="status" class=" text-center text-white bg-success btn-sm "  data-target=""  value="SS">SEMAK SEMULA</div>' 
+                        }else{
+                            return '<div id="status" class="text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                        }
+                    }else{
+                        
+                        return '<div id="status" class=" text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                    }
+                }
+            },
+            {
+                targets: 10,
+                mRender: function(data,type,row){
+                    return '<div>asd</div>';
+                }
+            },
+            {
+                targets: 11,
+                mRender: function(data,type,row)
+                {
+                    if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
+                        // FOR STATUS SEMAK SEMULA
+                        if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("PS1"||"PS2"))){
+                            console.log(data.id_permohonan_baru);
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-success btn-sm ni ni-check-bold"  onclick="hantarElaun('+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                            // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var allButton = button1 ;
+                            return allButton;
+                        }
+                        // FOR STATUS DITERIMA
+                        else if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("EL1"||"EL2"))){ 
+                            // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                            var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var allButton = button2;
+                            return allButton;
+                        }
+                        // FOR STATUS DALAM PROSES
+                        else if(row['status'] == "DALAM PROSES"){
+                            var button1 = 'test';
+                            var allButton = button1;
+                            return allButton;
+                        }
+
+                    
+                    }
+                    else{
+                        
+                    }
+                }
+                
+            },
+            {
+                targets: 12,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 13,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 14,
+                visible: true,
+                searchable: true
+            },
+            {
+                targets: 15,
+                visible: false,
+                searchable: true
+            }
+            
+        ],
+        order: [ 1, 'asc' ]
+    });
+    tuntutansDT.on( 'order.dt search.dt', function () {
+        tuntutansDT.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+}
 function printTuntutan(){
 console.log("gfhj")
 table.button( '.buttons-pdf' ).trigger();

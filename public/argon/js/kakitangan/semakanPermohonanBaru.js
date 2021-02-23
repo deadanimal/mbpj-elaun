@@ -14,6 +14,7 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
         document.getElementById('selectpermohonan').className = "col-sm-12"
         $('#divPermohonanIndividu').show();
         $("#divPermohonanBerkumpulan").hide();
+        $("#permohonanbaruModal").modal("show");
         console.log('ot1',jenis_permohonan)
     }else if(jenis_permohonan == 'OT2'){
         $("#permohonanbaruModal").modal("show");
@@ -24,6 +25,7 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
         document.getElementById('selectpermohonan').className = "col-sm-6"
         $('#divPermohonanIndividu').hide();
         $('#divPermohonanBerkumpulan').show();
+        $("#permohonanbaruModal").modal("show");
         console.log('ot2',jenis_permohonan)
     }
 
@@ -121,7 +123,11 @@ function hantarPermohonanBerkumpulan(){
             pekerja:nopekerja
         },
         success: function(data) {
-            
+            // $("#permohonanbaruModal").modal("hide");
+            $('#permohonanbaruModal').modal('hide');
+            // $(".modal").modal("hide");
+            successAlert();
+            getBerkumpulanDT();
             console.log(data);
 
         },
@@ -174,7 +180,13 @@ function hantarPermohonanIndividu(){
             jenisPermohonan:jenis_permohonan
         },
         success: function(data) {
+            // $(".modal").modal("hide");
             
+            $('#permohonanbaruModal').modal('hide');
+
+            // $("#permohonanbaruModal").modal("hide");
+            successAlert();
+            getIndividuDT();
             console.log(data);
 
         },
@@ -184,6 +196,13 @@ function hantarPermohonanIndividu(){
     });
 }
 
+function successAlert(){
+    Swal.fire(  
+        'Permohonan anda telah dihantar dan akan diproses',
+        'Klik butang dibawah untuk tutup!',
+        'success'
+        )
+}
 function timeStringToMins(s) {
     s = s.split(':');
     s[0] = /m$/i.test(s[1]) && s[0] == 12? 0 : s[0];

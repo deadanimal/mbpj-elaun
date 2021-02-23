@@ -5,9 +5,14 @@ namespace App\Http\Controllers\kakitangan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use App\PermohonanBaru;
+use App\permohonan_with_users;
 use Carbon\Carbon;
 use DataTables;
-use App\DataTables\UsersDataTable;
+use App\Events\PermohonanStatusChangedEvent;
 
 class tuntutanController extends Controller
 {
@@ -18,20 +23,13 @@ class tuntutanController extends Controller
      */
     public function index()
     {
-        $user = User::select("*");
+        $user = Auth::user()->id;
 
         if(request()->ajax()) {
-            return datatables()->of($user)
-        ->editColumn('created_at', function ($user) {
-            return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
-        })
-        ->filterColumn('created_at', function ($query, $keyword) {
-            $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
-        })
-        ->make(true);
+            return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
         }
         
-        return view('core.kakitangan.tuntutan');
+        return view('core.kakitangan.tuntutan')->with('user',$user);
     }
 
     /**
@@ -87,6 +85,12 @@ class tuntutanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $permohonan = PermohonanBaru::find($id);
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 1));
+        return response()->json([
+            'permohonan' => $permohonan
+        ],200);
+        
     }
 
     /**
