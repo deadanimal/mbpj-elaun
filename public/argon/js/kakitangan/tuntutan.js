@@ -85,7 +85,16 @@ function showDatatable(){
             {
                 targets: 3,
                 render: function(data,type,row){
-                    return '<div id="progres" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    if(data == "Sah P2" && row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS2"))){
+                        return '<div id="progres" class="container text-white bg-success btn-sm "  data-target=""  value="BSH" >BELUM DISAHKAN</div>' 
+
+                    }else{
+                        return '<div id="progres" class="text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                    
+                    // }else{
+                    
+                    // return '<div id="status" class=" text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                    }
                 }
             },
 
