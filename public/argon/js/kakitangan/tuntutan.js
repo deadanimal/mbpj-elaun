@@ -114,13 +114,13 @@ function showDatatable(){
                         // FOR STATUS DITERIMA
                         else if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("EL1"||"EL2"))){ 
                             // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
-                            var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
-                            var allButton = button2;
+                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var allButton = button1;
                             return allButton;
                         }
                         // FOR STATUS DALAM PROSES
                         else if(row['status'] == "DALAM PROSES"){
-                            var button1 = 'test';
+                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                             var allButton = button1;
                             return allButton;
                         }

@@ -23,29 +23,8 @@ class permohonanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-
-        // $timeFormat = User::select("created_at");
-
-        // $user = User::select("*");
-
-        // if(request()->ajax()) {
-        //     return datatables()->of($user)
-        // ->editColumn('created_at', function ($user) {
-        //     return $user->created_at ? with(new Carbon($user->created_at))->format('d/m/Y') : '';;
-        // })
-        // ->filterColumn('created_at', function ($query, $keyword) {
-        //     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
-        // })
-        // ->make(true);
-        // }
-
-
-            
-
-        
+    {        
         return view('core.kakitangan.permohonanbaru');
-    
     }
 
     /**
@@ -233,14 +212,16 @@ class permohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         //
-    }
-
-    public function getFormattedTime(){
-
-        
+        $permohonan = PermohonanBaru::find($id);
+        $permohonan->is_deleted = 1;
+        $permohonan->save();
+        $permohonan->refresh();
+        return response()->json([
+            'permohonan' => $permohonan
+        ],200);
         
     }
 

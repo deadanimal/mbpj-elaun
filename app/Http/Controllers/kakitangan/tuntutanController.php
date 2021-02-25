@@ -99,8 +99,16 @@ class tuntutanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         //
+        $permohonan = PermohonanBaru::find($id);
+        $permohonan->is_deleted = 1;
+        $permohonan->save();
+        $permohonan->refresh();
+        return response()->json([
+            'permohonan' => $permohonan
+        ],200);
+        
     }
 }

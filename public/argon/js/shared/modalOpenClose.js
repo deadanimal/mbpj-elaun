@@ -1,3 +1,3 @@
 function closeModal(modalId) {
-    $("'#"+modalId + "'").modal("hide");
+    $("#"+modalId + "").modal("hide");
 }

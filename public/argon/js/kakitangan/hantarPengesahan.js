@@ -41,6 +41,25 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             }
             $("#borangB1Modal").modal("show");
             
+            // console.log(data.permohonan);
+
+        },
+        error: function(data) {
+            console.log(data);
+        } 
+    });
+}
+
+function deletePermohonan(id_permohonan_baru){
+
+    $.ajax({
+        url: 'semakan/delete-permohonan/' + id_permohonan_baru,
+        type: 'put', 
+        data:{
+            id_permohonan_baru : id_permohonan_baru
+        },
+        success: function(data) {
+            showDatatable();
             console.log(data.permohonan);
 
         },
@@ -60,7 +79,7 @@ function hantarPengesahan(){
     var tujuan = $("#borangB1Modal textarea[name=tujuan]").val();
     var id_permohonan_baru = $("#borangB1Modal input[name=idPermohonan]").val();
     console.log(jenisPermohonanKT)
-console.log(id_permohonan_baru)
+    console.log(id_permohonan_baru)
     var masa = getTimeDifference(masaMula,masaAkhir);
     
     var object = {
