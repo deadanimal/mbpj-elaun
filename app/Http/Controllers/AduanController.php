@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Aduan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AduanController extends Controller
 {
@@ -15,6 +16,18 @@ class AduanController extends Controller
     public function index()
     {
         //
+    }
+
+    public function saveAduan(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $aduan = new Aduan([
+            'tajukAduan' => $request->input('tajukAduan'),
+            'keteranganAduan' => $request->input('keteranganAduan')
+        ]);
+        
+        $user->aduans()->associate($aduan);
+        $user->save();
     }
 
     /**

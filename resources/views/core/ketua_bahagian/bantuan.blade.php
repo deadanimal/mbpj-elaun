@@ -107,7 +107,7 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Mohon Baru') }}</button>
+                                    <button type="button" class="btn btn-success mt-4">{{ __('Hantar') }}</button>
                                 </div>
                             </div>
                         </form>

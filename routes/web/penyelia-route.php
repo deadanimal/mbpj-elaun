@@ -42,6 +42,7 @@ Route::group([
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
+	Route::post('/bantuan/aduan', 'AduanController@saveAduan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
