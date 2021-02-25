@@ -95,7 +95,7 @@ function showDatatable(){
                     {
                         if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                             if(row['status'] == "DITERIMA"){
-                                console.log(data.id_permohonan_baru);
+                                // console.log(data.id_permohonan_baru);
                                 var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.id_permohonan_baru+"'"+','+"'"+data.jenis_permohonan+"'"+','+"'"+data.jenis_permohonan_kakitangan+"'"+');"></i>'  
                                 // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                                 var allButton = button1 ;

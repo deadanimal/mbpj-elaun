@@ -319,6 +319,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/permohonanbaru.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/semakanPermohonanBaru.js"></script>
-
+    <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 
 @endpush
