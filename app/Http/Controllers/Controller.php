@@ -24,7 +24,8 @@ class Controller extends BaseController
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
 
-        return $permohonans = User::find($id)->permohonans->where('jenis_permohonan_kakitangan', $jenisPermohonan);
+        return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan_kakitangan', $jenisPermohonan)
+                                                        ->isNotDeleted();
 
     }
 

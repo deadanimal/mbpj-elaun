@@ -12,8 +12,28 @@ Route::group([
 	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);
+	Route::group(['prefix' => 'semakan'], function () {
+		Route::get('/{user_id}', [
+			'uses' => 'kakitangan\semakanController@show',
+			'as'   => 'semakan.show',
+		]);
+		Route::get('/semak-permohonan/{user_id}', [
+			'uses' => 'kakitangan\semakanController@showModal',
+			'as'   => 'semakan.showModal',
+		]);
+		Route::put('/hantar-permohonan/{user_id}', [
+			'uses' => 'kakitangan\semakanController@update',
+			'as'   => 'semakan.update',
+		]);
+	});
 	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
+	Route::group(['prefix' => 'tuntutan'], function () {
+		Route::put('/hantar-tuntutan/{user_id}', [
+			'uses' => 'kakitangan\tuntutanController@update',
+			'as'   => 'tuntutan.update',
+		]);
+	});
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {

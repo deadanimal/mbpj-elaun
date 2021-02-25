@@ -32,6 +32,29 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
     
 }
 
+function deletePermohonan(id_permohonan_baru){
+
+    $.ajax({
+        url: 'permohonan-baru/delete-permohonan/' + id_permohonan_baru,
+        type: 'put', 
+        data:{
+            id_permohonan_baru : id_permohonan_baru
+        },
+        success: function(data) {
+            if(data.permohonan.jenis_permohonan_kakitangan == "OT1"){
+            getIndividuDT();
+            }else if(data.permohonan.jenis_permohonan_kakitangan == "OT2"){
+            getBerkumpulanDT();
+            }
+            console.log(data.permohonan);
+
+        },
+        error: function(data) {
+            console.log(data);
+        } 
+    });
+}
+
 function getPermohonan(id_permohonan_baru){
 
     $.ajax({
@@ -54,14 +77,11 @@ function getPermohonan(id_permohonan_baru){
 
 }
 
-function deletePermohonan(s){
-    console.log(s);
-}
 
 function hantarPermohonanBerkumpulan(){
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
     var pegPelulusBK = document.querySelector("#pegawaiLulusBK").value;
-    var tarikhKerjaBK = document.querySelector("#tarikh-kerjaBK").value;
+    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD/MM/YYYY").format("YYYY-MM-DD");
     var masaMulaBK = document.querySelector("#masa-mulaBK").value;
     var masaAkhirBK = document.querySelector("#masa-akhirBK").value;
     var sebab = document.querySelector("#sebabBK").value;
@@ -143,7 +163,7 @@ function hantarPermohonanIndividu(){
     var namaPekerjaID = document.querySelector("#namaPekerjaID").value;
     var pegPelulusID = document.querySelector("#pegawaiLulusID").value;
     var pegSokongID = document.querySelector("#pegawaiSokongID").value;
-    var tarikhKerjaID = document.querySelector("#tarikh-kerjaID").value;
+    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD/MM/YYYY").format("YYYY-MM-DD");
     var masaMulaID = document.querySelector("#masa-mulaID").value;
     var masaAkhirID = document.querySelector("#masa-akhirID").value;
     var sebab = document.querySelector("#sebabID").value;
