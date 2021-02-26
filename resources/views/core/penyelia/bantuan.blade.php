@@ -85,7 +85,7 @@
                                    <div class="col-12">
                                         <div class="form-group">
                                             <label class="form-control-label">{{ __('Tajuk Aduan') }}</label>
-                                            <input name="tajukAduan" id="bantuan-tajukAduan" class="form-control" placeholder="" value="" >
+                                            <input name="tajukAduan" id="bantuan-tajukAduan" class="form-control" placeholder="" value="">
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="text-right">
-                                    <button type="button" onclick="saveAduan()" class="btn btn-success mt-4">{{ __('Hantar') }}</button>
+                                    <button type="button" onclick="saveAduan();" class="btn btn-success mt-4">{{ __('Hantar') }}</button>
                                 </div>
                             </div>
                         </form>
