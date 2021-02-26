@@ -1,6 +1,15 @@
 function saveAduan() {
     var tajukAduan = document.getElementById('bantuan-tajukAduan').value;
     var keteranganAduan = document.getElementById('bantuan-keteranganAduan').value;
+    
+    console.log(tajukAduan);
+    console.log(keteranganAduan);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $.ajax({
         url: 'bantuan/aduan',
