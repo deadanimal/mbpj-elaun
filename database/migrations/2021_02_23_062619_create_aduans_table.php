@@ -15,8 +15,8 @@ class CreateAduansTable extends Migration
     {
         Schema::create('aduans', function (Blueprint $table) {
             $table->id('id_aduan');
-            $table->string('tajuk');
-            $table->string('keterangan');
+            $table->string('tajuk')->nullable();
+            $table->string('keterangan')->nullable();
             $table->unsignedInteger('id_user');
             $table->timestamps();
         });

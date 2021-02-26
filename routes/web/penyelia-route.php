@@ -68,13 +68,14 @@ Route::group([
 	Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['destroy']]);
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
+
+	Route::resource('/bantuan/aduan', 'AduanController' );
 	
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
-	Route::post('/bantuan/aduan', 'AduanController@saveAduan' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

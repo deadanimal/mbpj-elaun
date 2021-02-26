@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Aduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,17 +19,10 @@ class AduanController extends Controller
         //
     }
 
-    public function saveAduan(Request $request)
-    {
-        $user = User::find(Auth::id());
-        $aduan = new Aduan([
-            'tajukAduan' => $request->input('tajukAduan'),
-            'keteranganAduan' => $request->input('keteranganAduan')
-        ]);
+    // public function saveAduan(Request $request)
+    // {
         
-        $user->aduans()->associate($aduan);
-        $user->save();
-    }
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +42,13 @@ class AduanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $aduan = new Aduan([
+            'tajukAduan' => $request->input('tajukAduan'),
+            'keteranganAduan' => $request->input('keteranganAduan')
+        ]);
+
+        $aduan->user()->associate(Auth::id());
+        $aduan->save();
     }
 
     /**

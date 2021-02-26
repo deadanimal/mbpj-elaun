@@ -141,7 +141,11 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function aduans(): HasMany
+    // public function aduans(): HasMany
+    // {
+    //     return $this->hasMany(Aduan::class, 'id_user', 'id');
+    // }
+    public function aduans()
     {
         return $this->hasMany(Aduan::class, 'id_user', 'id');
     }
