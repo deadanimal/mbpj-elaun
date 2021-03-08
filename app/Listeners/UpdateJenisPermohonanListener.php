@@ -55,7 +55,10 @@ class UpdateJenisPermohonanListener
                 $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
                 $event->permohonan->status_akhir = 0; 
                 break;
-            
+            case 'BATAL':
+                $event->permohonan->status_akhir = 0;
+                $event->permohonan->id_deleted = 1;
+                break;
             default: 
                 # code...
                 break;
