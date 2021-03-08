@@ -5,6 +5,13 @@ function approvedKelulusan(id_permohonan_baru, pilihan) {
         type: 'POST',
         success: function() {
             console.log('Approved');
+
+            Swal.fire(
+                'Permohonan Diluluskan',
+                'Sedang Diproses',
+                'success'
+              );
+
             showDatatable(pilihan);
         },
         error: function() {

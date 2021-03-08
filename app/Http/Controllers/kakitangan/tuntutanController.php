@@ -86,7 +86,7 @@ class tuntutanController extends Controller
     {
         //
         $permohonan = PermohonanBaru::find($id);
-        event(new PermohonanStatusChangedEvent($permohonan, 0, 1));
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));
         return response()->json([
             'permohonan' => $permohonan
         ],200);

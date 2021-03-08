@@ -130,7 +130,7 @@ class semakanController extends Controller
 
         $permohonan->save();
         $permohonan->refresh();
-        event(new PermohonanStatusChangedEvent($permohonan, 0, 1));
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));
         return response()->json([
             'permohonan' => $permohonan
         ],200);
