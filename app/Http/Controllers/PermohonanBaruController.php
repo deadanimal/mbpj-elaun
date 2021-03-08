@@ -42,6 +42,6 @@ class PermohonanBaruController extends Controller
     {
         $permohonan = PermohonanBaru::find($idPermohonanBaru);
 
-        event(new PermohonanStatusChangedEvent($permohonan, 1, 0));
+        event(new PermohonanStatusChangedEvent($permohonan, 1, 0, 0));
     }
 }

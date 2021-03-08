@@ -202,6 +202,7 @@
                                                         <th>Kadar Jam</th>
                                                         <th>Tujuan</th>
                                                         <th></th>
+                                                        <th>id user</th>
                                                         <th hidden>Status</th>
                                                         <th hidden></th>
                                                         <th hidden></th>
@@ -258,6 +259,7 @@
                                                             <th>Kadar Jam</th>
                                                             <th>Tujuan</th>
                                                             <th></th>
+                                                            <th>id user</th>
                                                             <th hidden>Status</th>
                                                             <th hidden></th>
                                                             <th hidden></th>
