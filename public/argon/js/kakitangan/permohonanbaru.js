@@ -2,9 +2,11 @@ var rowNum = 0;
 var individu = "OT1";
 var berkumpulan = "OT2";
 $('#total_chq').val(0);
+var edit = 0;
 var last_chq_no = 0;
 var div = document.getElementById("new_chq");
 var nodelist = div.getElementsByTagName("div");
+var idPermohonan = 0;
 if(nodelist.length == 0){
     document.getElementById("remove").disabled = true
 }
@@ -63,6 +65,7 @@ function add() {
         // $("#total_chq").val(rowNum);
         $("#inputpekerja_00").clone().prop('id','inputpekerja_'+rowNum).appendTo("#new_chq");
         $("inputpekerja_"+rowNum).prop('class','inputpekerja');
+        $("#buttonremove").attr("id","buttonremove_"+rowNum);
         $('#total_chq').val(rowNum);
         
     }
@@ -100,6 +103,24 @@ function remove() {
     }
 }
 
+function buang(elementid){
+    last_chq_no = $('#total_chq').val();
+    console.log(elementid);
+    var currNum = elementid.substring(13,14);
+    console.log(currNum)
+    $('#inputpekerja_' + currNum).remove();
+    var before = last_chq_no - 1;
+    rowNum--;
+    $('#total_chq').val(before);
+    console.log(before)
+    if(nodelist.length == 0){
+        rowNum = 0;
+        $('#total_chq').val(0);
+        document.getElementById("remove").disabled = true
+        console.log("disable button buang")
+    }
+}
+
 
 $(document).ready(function(){
 
@@ -110,11 +131,16 @@ $(document).ready(function(){
 })
 
 function setEnableDropdown(){
+    edit = 0;
+    console.log(edit);  
     document.getElementById("jenisPermohonan").disabled = false;
+    $("#jenisPermohonan").val("pilihan")
+    document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
+    document.getElementById('selectpermohonan').className = "col-sm-12"
     $('#divPermohonanIndividu').hide();
     $('#divPermohonanBerkumpulan').hide();
     $("#permohonanbaruModal").modal("show");
-
+    $(".modal-footer").show();
     if ($("#jenisPermohonan").val() == "frmPermohonanIndividu") {
         document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
         document.getElementById('selectpermohonan').className = "col-sm-12"
@@ -170,7 +196,8 @@ function getIndividuDT(){
             {data: 'tujuan'},
             {data: null},
             {data: 'jenis_permohonan'},
-            {data: 'id_permohonan_baru'}
+            {data: 'id_permohonan_baru'},
+            {data: 'is_rejected_individually'}
         ],
         columnDefs: [
             {
@@ -189,7 +216,18 @@ function getIndividuDT(){
             {
                 targets: 2,
                 render: function(data,type,row){
-                    return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    if(data == "DITERIMA"){
+                        return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "DITOLAK"){
+                        return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "DALAM PROSES"){
+                        return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "PERLU KEMASKINI"){
+                        return '<div id="status" class="container text-white bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
                 }
             },
             {
@@ -202,11 +240,24 @@ function getIndividuDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {
-                    console.log(data.id_permohonan_baru);
-                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
-                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
-                    var allButton = button1 + button2;
-                    return allButton;
+                    if(row['progres'] == "Belum sah" || row['status'] == "PERLU KEMASKINI"){
+                        console.log(data.id_permohonan_baru);
+                        var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                        var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                        var allButton = button1 + button2;
+                        return allButton;
+                    }
+                    else if(row['status'] == "DITOLAK"){
+                        var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                        var allButton = button1 ;
+                        return allButton;
+                    }
+                    else if(row['progres'] == "Sah P1" || row['progres'] == "Sah P2"){
+                        console.log('nothing here');
+                        var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                        var allButton = button1 ;
+                        return allButton;
+                    }
                 }
                 
             },
@@ -218,6 +269,11 @@ function getIndividuDT(){
             {
                 targets: 13,
                 visible: false,
+                searchable: true
+            },
+            {
+                targets: 14,
+                visible: true,
                 searchable: true
             }
         ],
@@ -267,7 +323,8 @@ function getBerkumpulanDT(){
             {data: 'tujuan'},
             {data: null},
             {data: 'jenis_permohonan'},
-            {data: 'id_permohonan_baru'}
+            {data: 'id_permohonan_baru'},
+            {data: 'is_rejected_individually'}
         
         ],
         columnDefs: [
@@ -287,7 +344,12 @@ function getBerkumpulanDT(){
             {
                 targets: 2,
                 render: function(data,type,row){
-                    return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    if(row['is_rejected_individually'] == '0'){
+                        return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }else if(row['is_rejected_individually'] == '1'){
+                        data = "DITOLAK"
+                        return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
                 }
             },
             {
@@ -299,11 +361,15 @@ function getBerkumpulanDT(){
             {
                 targets: 11,
                 mRender: function(data,type,row)
-                {
+                {   
+                    if(row['is_rejected_individually'] == "1"){
+                        return '';
+                    }else{
                     var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                     var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
                     var allButton = button1 + button2;
                     return allButton;
+                    }
                 }
             },
             {
@@ -314,6 +380,11 @@ function getBerkumpulanDT(){
             {
                 targets: 13,
                 visible: false,
+                searchable: true
+            },
+            {
+                targets: 14,
+                visible: true,
                 searchable: true
             }
         ],

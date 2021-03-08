@@ -102,6 +102,7 @@ class PermohonanBaru extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
+                    ->withPivot('is_rejected_individually')
                     ->as('permohonan_with_users');
     }
 

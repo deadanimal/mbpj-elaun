@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="jenisPermohonan"><font color="red">*</font> Jenis Permohonan</label>
                                     <select id="jenisPermohonan" name="jenisPermohonan" class="form-control custom-select" autocomplete="off">
-                                        <option disabled selected="true" value> -- pilih satu pilihan -- </option>
+                                        <option disabled selected="true" value="pilihan"> -- pilih satu pilihan -- </option>
                                         <option value="frmPermohonanIndividu">Permohonan Individu</option>
                                         <option value="frmPermohonanBerkumpulan">Permohonan Berkumpulan</option>
                                     </select>                       
@@ -153,7 +153,7 @@
                             
                         </div>
                     </form>
-                    <div class="modal-footer">
+                    <div id="footerID" class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="event.preventDefault();closeModal('permohonanbaruModal');" data-dismiss="modal">Batal</button>
                         <button id="submitBtn" type="button" class="btn btn-success" onclick="event.preventDefault();hantarPermohonanIndividu();">Hantar</button>
                     </div>
@@ -239,7 +239,7 @@
                                 </div>
                             </div>
                             <div id="pekerjaAddDiv">
-                                <div class="row">
+                                <div id="divbuttonAdd" class="row">
                                     <div class="col align-self-center text-right">
                                         <button id="add" class="btn btn-sm btn-primary" type="button" title="Tambah Pekerja">{{ __('Tambah Pekerja') }}</button>
                                         <button id="remove" class="btn btn-sm btn-primary" type="button" title="Buang Pekerja" disabled>{{ __('Buang Pekerja') }}</button>
@@ -254,7 +254,7 @@
                             </div>
                         </div>  
                     </form>
-                    <div class="modal-footer">
+                    <div id="footerBK" class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="event.preventDefault();closeModal('permohonanbaruModal');" data-dismiss="modal">Batal</button>
                         <button id="submitBtn" type="button" class="btn btn-success" onclick="event.preventDefault();hantarPermohonanBerkumpulan();">Hantar</button>
                     </div>
@@ -266,8 +266,8 @@
 </div>
 
 <div class="hide" id="template" hidden>
-    <div id="inputpekerja_00" class="row inputpekerjaform">
-        <div class="col-sm-6 divInputPekerja">
+    <div id="inputpekerja_00" class="row align-items-center inputpekerjaform">
+        <div class="col-sm-5 divInputPekerja">
             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                 <label class="form-control-label" for="inputnopekerja">{{ __('Nama') }}</label>
                 <input type="text" name="inputnopekerja" id="inputnopekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} inputnopekerja" placeholder="{{ __('No Pekerja') }}" value="" required autofocus>
@@ -282,6 +282,11 @@
 
                 @include('alerts.feedback', ['field' => 'name'])
             </div>
+        </div>
+        <div class="col-sm-1 ">
+            <button onclick="buang(this.id);" id="buttonremove" aria-hidden="true" class="close" type="button">
+                ×
+            </button>
         </div>
     </div>
 </div>
