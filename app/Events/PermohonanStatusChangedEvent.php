@@ -18,17 +18,19 @@ class PermohonanStatusChangedEvent
     public $permohonan;
     public $is_terima;
     public $is_renewedPermohonan;
+    public $is_batal;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(PermohonanBaru $permohonan, $is_terima, $is_renewedPermohonan)
+    public function __construct(PermohonanBaru $permohonan, $is_terima, $is_renewedPermohonan, $is_batal)
     {
         $this->permohonan = $permohonan;
         $this->is_terima = $is_terima;
         $this->is_renewedPermohonan = $is_renewedPermohonan;
+        $this->is_batal = $is_batal;
     }
 
     /**

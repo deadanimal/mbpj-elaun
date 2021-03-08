@@ -27,7 +27,7 @@ class UpdateStatusListener
      * 
      * is_renewedPermohonan can be 0 -> not a renewed pemohonan
      *                             1 -> renewed because it needs kemaskini OR KT sends for the next step
-     * is_renewedPermohonan is diregarded if is_terima == 0 (rejected)
+     * is_renewedPermohonan is disregarded if is_terima == 0 (rejected)
      * 
      * @param  PermohonanStatusChangedEvent  $event
      * @return void
@@ -39,6 +39,7 @@ class UpdateStatusListener
         $jenis_permohonan = $event->permohonan->jenis_permohonan;
         $id_peg_sokong =  $event->permohonan->id_peg_sokong;
 
+        $is_batal = $event->is_batal;
         $is_terima = $event->is_terima;
         $is_renewedPermohonan = $event->is_renewedPermohonan;
         $is_peg_sokong = Auth::id() == $id_peg_sokong ? 1 : 0;
@@ -50,6 +51,9 @@ class UpdateStatusListener
             $event->permohonan->status = "DALAM PROSES";
             $event->permohonan->progres = 'Belum disahkan';
 
+        } elseif ($is_batal) {
+            $event->permohonan->status = "BATAL";
+            $event->permohonan->status_akhir = 0;
         } else {
             $this->permohonanRejected($event);
 
