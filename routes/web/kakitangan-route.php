@@ -38,13 +38,21 @@ Route::group([
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
-		Route::get('/{user_id}', [
+		Route::get('/get-permohonan/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
 		Route::get('/semak-permohonan/{id}',[
 			'uses' => 'kakitangan\permohonanController@findPermohonan',
 			'as' => 'permohonan-baru.findPermohonan',
+		]);
+		Route::put('/delete-permohonan/{user_id}', [
+			'uses' => 'kakitangan\permohonanController@destroy',
+			'as'   => 'permohonan-baru.delete',
+		]);
+		Route::put('/kemaskini-permohonan/{user_id}', [
+			'uses' => 'kakitangan\permohonanController@update',
+			'as'   => 'permohonan-baru.update',
 		]);
 		Route::post('/hantar-permohonan',[
 			'uses' => 'kakitangan\permohonanController@store',

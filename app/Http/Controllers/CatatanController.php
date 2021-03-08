@@ -53,7 +53,7 @@ class CatatanController extends Controller
 
         $permohonan->catatans()->save($catatan);
         
-        event(new PermohonanStatusChangedEvent($permohonan, 0, 0));
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 0, 0));
     }
 
     /**

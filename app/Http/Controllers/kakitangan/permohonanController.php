@@ -204,6 +204,39 @@ class permohonanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $permohonan = PermohonanBaru::find($id);
+        $validator = Validator::make($request->all(), [ 
+                
+            'object.tarikh_permohonan' => 'required',
+            'object.masa_mula' => 'required',
+            'object.masa_akhir' => 'required',
+            'object.masa'   => 'required',
+            'object.waktu'  => 'required',
+            'object.tujuan' => 'required',
+
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            foreach ($errors->all() as $message) {
+                dd($message);
+            }
+        }else{
+
+        $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
+        $permohonan->masa_mula = $request->input('object.masa_mula');
+        $permohonan->masa_akhir = $request->input('object.masa_akhir');
+        $permohonan->status = $request->input('object.status');
+        $permohonan->progres = "Belum sah";
+        $permohonan->masa = $request->input('object.masa');
+        $permohonan->waktu = $request->input('object.waktu');
+        $permohonan->tujuan = $request->input('object.tujuan');
+
+        $permohonan->save();
+        $permohonan->refresh();
+        return response()->json([
+            'permohonan' => $permohonan
+        ],200);
+        }
     }
 
     /**
@@ -228,12 +261,27 @@ class permohonanController extends Controller
    public function findPermohonan(Request $request){
 
     $id_permohonan_baru = $request->input('id_permohonan_baru');
-    $permohonan = PermohonanBaru::find($id_permohonan_baru);
+    $jenis_permohonan = $request->input('jenis_permohonan');
+    $currUserID = auth()->user()->id;
+        if($jenis_permohonan == 'OT1'){
+            $permohonan = User::find(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+            return response()->json([
+                        'error' => false,
+                        'permohonan'  => $permohonan,
+                    ], 200);
 
-        return response()->json([
-                    'error' => false,
-                    'permohonan'  => $permohonan,
-                ], 200);
+        }
+        else if($jenis_permohonan == "OT2"){
+            $permohonanUsers = PermohonanBaru::find($id_permohonan_baru)->users()->get()->toArray();
+            $permohonan = PermohonanBaru::find($id_permohonan_baru);
+            return response()->json([
+                        'error' => false,
+                        'permohonanUsers' =>  $permohonanUsers,
+                        'permohonan'  => $permohonan,
+                        'userId' => $currUserID
+                    ], 200);
 
-   }
+        }
+
+    }
 }

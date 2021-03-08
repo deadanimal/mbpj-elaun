@@ -24,11 +24,12 @@ class PermohonanStatusChangedEvent
      *
      * @return void
      */
-    public function __construct(PermohonanBaru $permohonan, $is_terima, $is_renewedPermohonan)
+    public function __construct(PermohonanBaru $permohonan, $is_terima, $is_renewedPermohonan, $isbatal)
     {
         $this->permohonan = $permohonan;
         $this->is_terima = $is_terima;
         $this->is_renewedPermohonan = $is_renewedPermohonan;
+        
     }
 
     /**
