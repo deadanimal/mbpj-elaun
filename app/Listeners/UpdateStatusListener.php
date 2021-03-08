@@ -53,7 +53,6 @@ class UpdateStatusListener
 
         } elseif ($is_batal) {
             $event->permohonan->status = "BATAL";
-            $event->permohonan->status_akhir = 0;
         } else {
             $this->permohonanRejected($event);
 
