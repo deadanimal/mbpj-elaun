@@ -2,7 +2,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 
     // Clear up name and no pekerja for Elaun
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
-    $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val("");
+    $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
 
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
@@ -22,6 +22,11 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         type: 'GET',
         success: function(data) {
             $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
+            $("#formModalEdit input[name=tarikhAkhirKerja]").val(data.permohonan.tarikh_akhir_kerja);
+            $("#formModalEdit input[name=masaMula]").val(data.permohonan.masa_mula);
+            $("#formModalEdit input[name=masaAkhir]").val(data.permohonan.masa_akhir);
+            $("#formModalEdit input[name=tujuan]").val(data.permohonan.tujuan);
+            // $("#formModalEdit input[name=lokasi]").val(data.permohonan.lokasi); 
 
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];

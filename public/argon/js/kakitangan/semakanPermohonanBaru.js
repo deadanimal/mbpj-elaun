@@ -12,9 +12,6 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
     console.log(edit)
     // $(".modal-footer").hide();
     
-
-
-    
 }
 
 function deletePermohonan(id_permohonan_baru){
