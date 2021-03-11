@@ -16,10 +16,12 @@ class PermohonanBaruController extends Controller
     public function findPermohonan($idPermohananBaru)
     {
         $permohonan = PermohonanBaru::with('users')->find($idPermohananBaru);
+        $tarikhPermohonan = $permohonan->created_at->format('Y-m-d');
 
         return response()->json([
                     'error' => false,
                     'permohonan'  => $permohonan,
+                    'tarikh_permohonan' => $tarikhPermohonan,
                     'arrayKelulusan' => $this->getKelulusanWithData($permohonan),
                     'senaraiKakitangan' => $permohonan->users
                 ], 200);

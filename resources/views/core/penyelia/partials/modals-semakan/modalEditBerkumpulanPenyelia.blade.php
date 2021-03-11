@@ -30,39 +30,63 @@
                                 @include('alerts.success')
                                 @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
     
-                                <div class="form-group mb-2">
+                                <div class="form-group mb-5">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
                                     <input class="form-control" name="tarikhMohon" id="semakan-modal-tarikhMohon" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
-                                <div class="form-group mb-5">
-                                    <label class="form-control-label">{{ __('Tarikh Kerja') }}</label>
-                                    <input class="form-control" name="tarikhAkhirKerja" id="semakan-modal-tarikhAkhirKerja" type="text" placeholder="Default input">
- 
-                                    @include('alerts.feedback', ['field' => 'name'])
+                                <div class="row">
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Tarikh Mula Kerja') }}</label>
+                                        <input class="form-control" name="tarikhMulaKerja" id="semakan-modal-tarikhMulaKerja" type="text" placeholder="Default input">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Masa Mula') }}</label>
+                                        <input class="form-control" name="masaMula" id="semakan-modal-masaMula" type="text" placeholder="">
+                                        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label">{{ __('Masa Mula') }}</label>
-                                    <input class="form-control" name="masaMula" id="semakan-modal-masaMula" type="text" placeholder="">
-                                    
-                                    @include('alerts.feedback', ['field' => 'name'])
+                                <div class="row">
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Tarikh Akhir Kerja') }}</label>
+                                        <input class="form-control" name="tarikhAkhirKerja" id="semakan-modal-tarikhAkhirKerja" type="text" placeholder="Default input">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Masa Akhir') }}</label>
+                                        <input class="form-control" name="masaAkhir" id="semakan-modal-masaAkhir" type="text" placeholder="">
+    
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label">{{ __('Masa Akhir') }}</label>
-                                    <input class="form-control" name="masaAkhir" id="semakan-modal-masaAkhir" type="text" placeholder="">
+                                <div class="row mb-5">
+                                    <div class="col form-group">
+                                        <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
+                                        <input class="form-control" name="masaMulaSebenar" id="semakan-modal-masaMulaSebenar" type="text" placeholder="">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group">
+                                        <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
+                                        <input class="form-control" name="masaAkhirSebenar" id="semakan-modal-masaAkhirSebenar" type="text" placeholder="">
+    
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">{{ __('Lokasi') }}</label>
+                                    <input class="form-control" name="lokasi" id="semakan-modal-lokasi" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
                                     <textarea class="form-control" name="tujuan" id="semakan-modal-tujuan" rows="3"></textarea>
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Lokasi') }}</label>
-                                    <textarea class="form-control" name="lokasi" id="semakan-modal-lokasi" rows="3" resize="none"></textarea>
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>

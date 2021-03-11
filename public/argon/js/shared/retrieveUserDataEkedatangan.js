@@ -21,12 +21,13 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         success: function(data) {
-            $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
+            $("#formModalEdit input[name=tarikhMohon]").val(data.tarikh_permohonan);
+            $("#formModalEdit input[name=tarikhMulaKerja]").val(data.permohonan.tarikh_mula_kerja);
             $("#formModalEdit input[name=tarikhAkhirKerja]").val(data.permohonan.tarikh_akhir_kerja);
             $("#formModalEdit input[name=masaMula]").val(data.permohonan.masa_mula);
             $("#formModalEdit input[name=masaAkhir]").val(data.permohonan.masa_akhir);
             $("#formModalEdit input[name=tujuan]").val(data.permohonan.tujuan);
-            // $("#formModalEdit input[name=lokasi]").val(data.permohonan.lokasi); 
+            $("#formModalEdit input[name=lokasi]").val(data.permohonan.lokasi); 
 
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
