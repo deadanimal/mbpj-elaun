@@ -3,6 +3,8 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
 
+    fillInMasaSebenar(idKakitangan, id_permohonan_baru);
+
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
@@ -28,13 +30,15 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
                 $("#formEkedatangan input[name=jumlahOT3]").val(data.ekedatangans.jumlah_OT_3);
                 $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val(data.ekedatangans.jumlah_OT_keseluruhan);
                 $("#formEkedatangan input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
-            }
+            }  
         },
         error: function(data) {
             console.log(data);
         }
     });
+}
 
+function fillInMasaSebenar(idKakitangan, id_permohonan_baru) {
     $.ajax({
         url: 'masa-sebenar/' + idKakitangan,
         type: 'GET',

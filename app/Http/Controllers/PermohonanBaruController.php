@@ -72,7 +72,6 @@ class PermohonanBaruController extends Controller
             }
         }
 
-
         return response()->json([
             'error' => false,
             'masa_mula_sebenar' => $masa_mula_sebenar,

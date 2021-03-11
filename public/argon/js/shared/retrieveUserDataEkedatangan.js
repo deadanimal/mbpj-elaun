@@ -21,6 +21,10 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val("");
     $("#formEkedatangan input[name=waktuAnjal]").val("");
 
+    // Clear masa sebenar
+    $("#formModalEdit input[name=masaMulaSebenar]").val(""); 
+    $("#formModalEdit input[name=masaAkhirSebenar]").val(""); 
+
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
         type: 'GET', 
@@ -71,22 +75,22 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 
                 case "EL1":
                     block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan);
+                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
                     break;
 
                 case "EL2":
                     block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
 
                 case "PS1":
                     block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan);
+                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
                     break;
 
                 case "PS2":
                     block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
             
                 default:
