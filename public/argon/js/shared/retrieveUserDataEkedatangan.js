@@ -19,7 +19,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
    
     $.ajax({
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
-        type: 'GET',
+        type: 'GET', 
         success: function(data) {
             $("#formModalEdit input[name=tarikhMohon]").val(data.permohonan.tarikh_permohonan);
             $("#formModalEdit input[name=tarikhAkhirKerja]").val(data.permohonan.tarikh_akhir_kerja);

@@ -39,7 +39,7 @@
                                 <div class="form-group mb-5">
                                     <label class="form-control-label">{{ __('Tarikh Kerja') }}</label>
                                     <input class="form-control" name="tarikhAkhirKerja" id="semakan-modal-tarikhAkhirKerja" type="text" placeholder="Default input">
-
+ 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="form-group mb-2">
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
+                        <button type="button" data-dismiss="modal" onclick="kemaskiniModal()" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
                         <button type="submit" class="btn btn-primary mt-4">{{ __('Tutup') }}</button>
                     </div>  
                 </div>
