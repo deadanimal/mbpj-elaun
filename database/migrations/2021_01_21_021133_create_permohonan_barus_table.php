@@ -15,7 +15,7 @@ class CreatePermohonanBarusTable extends Migration
     {
         Schema::create('permohonan_barus', function (Blueprint $table) {
             $table->bigIncrements('id_permohonan_baru');
-            $table->string('tarikh_permohonan');
+            $table->string('tarikh_mula_kerja');
             $table->string('tarikh_akhir_kerja');
             $table->string('masa_mula');
             $table->string('masa_akhir');
@@ -23,6 +23,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('hari');
             $table->string('waktu');
             $table->string('kadar_jam');
+            $table->string('lokasi')->default('-');
             $table->string('tujuan');
             $table->string('status');
             $table->string('progres')->default('Belum sah');

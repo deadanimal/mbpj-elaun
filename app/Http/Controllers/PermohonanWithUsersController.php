@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\permohonan_with_users;
-use Illuminate\Http\Request;
 
 class PermohonanWithUsersController extends Controller
 {
@@ -26,6 +25,8 @@ class PermohonanWithUsersController extends Controller
     {
         //
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
