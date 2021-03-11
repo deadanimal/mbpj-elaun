@@ -44,4 +44,16 @@ class PermohonanBaruController extends Controller
 
         event(new PermohonanStatusChangedEvent($permohonan, 1, 0, 0));
     }
+
+    public function rejectIndividually(Request $request, $id_permohonan_baru)
+    {
+        $idUser = $request->input('id_user');
+        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+
+        foreach ($permohonan->users as $user) {
+            if($user->id == $idUser) {
+                $permohonan->users()->updateExistingPivot($user, array('is_rejected_individually' => 1), false);
+            }
+        }
+    }
 }
