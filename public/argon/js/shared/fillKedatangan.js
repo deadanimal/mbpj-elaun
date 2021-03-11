@@ -1,4 +1,4 @@
-function fillInKedatangan(idKakitangan, jenisPermohonan) {  
+function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {  
 
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
@@ -29,6 +29,22 @@ function fillInKedatangan(idKakitangan, jenisPermohonan) {
                 $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val(data.ekedatangans.jumlah_OT_keseluruhan);
                 $("#formEkedatangan input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
             }
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+
+    $.ajax({
+        url: 'masa-sebenar/' + idKakitangan,
+        type: 'GET',
+        data: {
+            id_permohonan_baru : id_permohonan_baru
+        },
+        success: function(data) {
+            console.log(data);
+            $("#formModalEdit input[name=masaMulaSebenar]").val(data.masa_mula_sebenar); 
+            $("#formModalEdit input[name=masaAkhirSebenar]").val(data.masa_akhir_sebenar); 
         },
         error: function(data) {
             console.log(data);

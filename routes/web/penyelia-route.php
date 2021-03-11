@@ -76,6 +76,7 @@ Route::group([
 	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );
+	Route::get('/masa-sebenar/{id}', 'PermohonanBaruController@retrieveMasaSebenar');
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

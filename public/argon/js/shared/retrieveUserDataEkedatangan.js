@@ -4,6 +4,23 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
 
+    // Clear up Ekedatangan
+    $("#formEkedatangan input[name=tarikh]").val("");
+    $("#formEkedatangan input[name=waktuMasuk]").val("");
+    $("#formEkedatangan input[name=waktuKeluar]").val("");
+    $("#formEkedatangan input[name=jumlahWaktuKerja]").val("");
+    $("#formEkedatangan input[name=waktuMasukOT1]").val("");
+    $("#formEkedatangan input[name=waktuKeluarOT1]").val("");
+    $("#formEkedatangan input[name=jumlahOT1]").val("");
+    $("#formEkedatangan input[name=waktuMasukOT2]").val("");
+    $("#formEkedatangan input[name=waktuKeluarOT2]").val("");
+    $("#formEkedatangan input[name=jumlahOT2]").val("");
+    $("#formEkedatangan input[name=waktuMasukOT3]").val("");
+    $("#formEkedatangan input[name=waktuKeluarOT3]").val("");
+    $("#formEkedatangan input[name=jumlahOT3]").val("");
+    $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val("");
+    $("#formEkedatangan input[name=waktuAnjal]").val("");
+
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
         type: 'GET', 

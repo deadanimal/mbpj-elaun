@@ -17,6 +17,7 @@ class PermohonanBaruController extends Controller
     {
         $permohonan = PermohonanBaru::with('users')->find($idPermohananBaru);
         $tarikhPermohonan = $permohonan->created_at->format('Y-m-d');
+        // $tarikhPermohonan = $permohonan->created_at->format('d-m-Y');
 
         return response()->json([
                     'error' => false,
@@ -57,5 +58,25 @@ class PermohonanBaruController extends Controller
                 $permohonan->users()->updateExistingPivot($user, array('is_rejected_individually' => 1), false);
             }
         }
+    }
+
+    public function retrieveMasaSebenar(Request $request, $id_user)
+    {
+        $id_permohonan_baru = $request->input('id_permohonan_baru');
+        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+
+        foreach ($permohonan->users as $user) {
+            if($user->id == $id_user) {
+                $masa_mula_sebenar = $user->permohonan_with_users->masa_mula_sebenar;
+                $masa_akhir_sebenar = $user->permohonan_with_users->masa_akhir_sebenar;
+            }
+        }
+
+
+        return response()->json([
+            'error' => false,
+            'masa_mula_sebenar' => $masa_mula_sebenar,
+            'masa_akhir_sebenar' => $masa_akhir_sebenar
+        ], 200);
     }
 }
