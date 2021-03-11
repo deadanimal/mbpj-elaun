@@ -27,6 +27,7 @@ class UpdateStatusListener
      * 
      * is_renewedPermohonan can be 0 -> not a renewed pemohonan
      *                             1 -> renewed because it needs kemaskini OR KT sends for the next step
+     * 
      * is_renewedPermohonan is disregarded if is_terima == 0 (rejected)
      * 
      * @param  PermohonanStatusChangedEvent  $event
@@ -53,6 +54,7 @@ class UpdateStatusListener
 
         } elseif ($is_batal) {
             $event->permohonan->status = "BATAL";
+
         } else {
             $this->permohonanRejected($event);
 

@@ -17,6 +17,8 @@ class CreatePermohonanWithUsersTable extends Migration
             $table->bigIncrements('id_permohonan_with_users');
             $table->unsignedBigInteger('id_permohonan_baru');
             $table->unsignedInteger('id');
+            $table->string('masa_mula_sebenar')->default('-');
+            $table->string('masa_akhir_sebenar')->default('-');
             $table->integer('is_rejected_individually')->default('0');
         });
 

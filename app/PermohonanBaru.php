@@ -12,7 +12,8 @@ class PermohonanBaru extends Model
     protected $table = 'permohonan_barus';
     protected $primaryKey = 'id_permohonan_baru';
     protected $fillable = [
-        'tarikh_permohonan',
+        'tarikh_mula_kerja',
+        'tarikh_akhir_kerja',
         'masa_mula',
         'masa_akhir',
         'masa',
@@ -24,6 +25,7 @@ class PermohonanBaru extends Model
         'id_kerani_pemeriksa',
         'id_kerani_semakan',
         'tujuan',
+        'lokasi',
         'peg_sokong_approved',
         'jenis_permohonan_kakitangan',
         'status_akhir',
@@ -102,7 +104,7 @@ class PermohonanBaru extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
-                    ->withPivot('is_rejected_individually')
+                    ->withPivot('masa_mula_sebenar','masa_akhir_sebenar','is_rejected_individually')
                     ->as('permohonan_with_users');
     }
 

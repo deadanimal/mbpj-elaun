@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use DataTables;
 use App\DataTables\UsersDataTable;
 use App\DataTables\kakitangan\permohonanDataTable;
+use App\Events\PermohonanStatusChangedEvent;
 
 class permohonanController extends Controller
 {
@@ -201,10 +202,14 @@ class permohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idPermohonanBaru)
     {
         //
-        $permohonan = PermohonanBaru::find($id);
+
+        $reject = array($request->input('reject'));
+        // dd($reject);
+        $jenisPermohonan = $request->input('jenisPermohonan');
+        
         $validator = Validator::make($request->all(), [ 
                 
             'object.tarikh_permohonan' => 'required',
@@ -220,22 +225,54 @@ class permohonanController extends Controller
             foreach ($errors->all() as $message) {
                 dd($message);
             }
-        }else{
+            return response()->json([
+                
+            ],500);
+        }
+        if($jenisPermohonan == 'OT1'){
+            $permohonan = $this->findPermohonanWithIDKakitangan($jenisPermohonan,$idPermohonanBaru);
+            // dd($permohonan);
+            $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
+            $permohonan->masa_mula = $request->input('object.masa_mula');
+            $permohonan->masa_akhir = $request->input('object.masa_akhir');
+            $permohonan->status = $request->input('object.status');
+            $permohonan->progres = "Belum sah";
+            $permohonan->masa = $request->input('object.masa');
+            $permohonan->waktu = $request->input('object.waktu');
+            $permohonan->tujuan = $request->input('object.tujuan');
 
-        $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
-        $permohonan->masa_mula = $request->input('object.masa_mula');
-        $permohonan->masa_akhir = $request->input('object.masa_akhir');
-        $permohonan->status = $request->input('object.status');
-        $permohonan->progres = "Belum sah";
-        $permohonan->masa = $request->input('object.masa');
-        $permohonan->waktu = $request->input('object.waktu');
-        $permohonan->tujuan = $request->input('object.tujuan');
+            $permohonan->save();
+            $permohonan->refresh();
+            return response()->json([
+                'permohonan' => $permohonan
+            ],200);
+        }
+        else if($jenisPermohonan == "OT2"){
+            foreach($reject as $rejected){
+                // dd($rejected);
+                // dd($idPermohonanBaru);
+            $permohonan = $this->findPermohonanForReject($rejected,$idPermohonanBaru)->first();
+            // $permohonans = $this->findPermohonanUser($rejected,$idPermohonanBaru);
+                // dd($permohonan);
 
-        $permohonan->save();
-        $permohonan->refresh();
-        return response()->json([
-            'permohonan' => $permohonan
-        ],200);
+                // dd($permohonan);
+                event(new PermohonanStatusChangedEvent($permohonan, 0, 0, 1));
+            }
+            $permohonan = $this->findPermohonanUser($idPermohonanBaru);
+            $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
+            $permohonan->masa_mula = $request->input('object.masa_mula');
+            $permohonan->masa_akhir = $request->input('object.masa_akhir');
+            $permohonan->status = $request->input('object.status');
+            $permohonan->progres = "Belum sah";
+            $permohonan->masa = $request->input('object.masa');
+            $permohonan->waktu = $request->input('object.waktu');
+            $permohonan->tujuan = $request->input('object.tujuan');
+
+            $permohonan->save();
+            $permohonan->refresh();
+            return response()->json([
+                'permohonan' => $permohonan
+            ],200);
         }
     }
 

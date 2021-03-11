@@ -10,7 +10,7 @@ function approvedKelulusan(id_permohonan_baru, pilihan) {
                 'Permohonan Diluluskan',
                 'Sedang Diproses',
                 'success'
-              );
+            );
 
             showDatatable(pilihan);
         },
