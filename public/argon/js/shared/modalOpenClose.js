@@ -1,3 +1,5 @@
 function closeModal(modalId) {
-    $("#"+modalId + "").modal("hide");
+    $("#"+modalId + "").removeClass('fade').modal("hide");
+    $("#"+modalId + "").modal("dispose");
+
 }

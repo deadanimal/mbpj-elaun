@@ -34,6 +34,10 @@ Route::group([
 			'uses' => 'kakitangan\tuntutanController@update',
 			'as'   => 'tuntutan.update',
 		]);
+		Route::get('/kemaskini-tuntutan/{user_id}', [
+			'uses' => 'kakitangan\tuntutanController@show',
+			'as'   => 'tuntutan.show',
+		]);
 	});
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);

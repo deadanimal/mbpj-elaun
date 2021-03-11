@@ -72,13 +72,20 @@ function showDatatable(){
                 render: function(data,type,row){
                     if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                         if(data == "DITERIMA" && row['progres'] == 'Sah P2' && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS2") )){
-                            return '<div id="status" class=" text-center text-white bg-success btn-sm "  data-target=""  value="SS">SEMAK SEMULA</div>' 
-                        }else{
-                            return '<div id="status" class="text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                            data = "SEMAK SEMULA"
+                            return '<div id="status" class=" text-center text-white bg-warning btn-sm "  data-target=""  value="SS">'+data.toUpperCase()+'</div>' 
+                        }else if(data == "DITERIMA") {
+                            return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
+                        }else if(data == "DALAM PROSES") {
+                            return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                        }else if(data == "DITOLAK") {
+                            return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  value="DK">'+data.toUpperCase()+'</div>' 
+                        }else if(data == "PERLU KEMASKINI") {
+                            return '<div id="status" class="container text-white bg-warning btn-sm "  data-target=""  value="PK">'+data.toUpperCase()+'</div>' 
                         }
                     }else{
                         
-                        return '<div id="status" class=" text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                     }
                 }
             }, 
@@ -121,6 +128,19 @@ function showDatatable(){
                         // FOR STATUS DALAM PROSES
                         else if(row['status'] == "DALAM PROSES"){
                             var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var allButton = button1;
+                            return allButton;
+                        }
+                        // FOR STATUS DITOLAK
+                        else if(row['status'] == "DITOLAK"){
+                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var allButton = button1;
+                            return allButton;
+                        }
+                        // FOR STATUS PERLU KEMASKINI
+                        else if(row['status'] == "PERLU KEMASKINI"){
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                            // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-success btn-sm ni ni-check-bold"  onclick="hantarElaun('+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                             var allButton = button1;
                             return allButton;
                         }

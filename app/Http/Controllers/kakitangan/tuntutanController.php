@@ -59,9 +59,31 @@ class tuntutanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
+        $jenis_permohonan = $request->input('jenisPermohonan');
+        $currUserID = auth()->user()->id;
+        if($jenis_permohonan == 'EL1'){
+            $permohonan = User::find(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+            return response()->json([
+                        'error' => false,
+                        'permohonan'  => $permohonan,
+                    ], 200);
+
+        }
+        else if($jenis_permohonan == "EL2"){
+            $permohonanUsers = PermohonanBaru::find($id_permohonan_baru)->users()->get()->toArray();
+            $permohonan = PermohonanBaru::find($id_permohonan_baru);
+            return response()->json([
+                        'error' => false,
+                        'permohonanUsers' =>  $permohonanUsers,
+                        'permohonan'  => $permohonan,
+                        'userId' => $currUserID
+                    ], 200);
+
+        }
+
     }
 
     /**

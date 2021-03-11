@@ -73,7 +73,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 }
                 $(".pekerjasform").each(function(j){
                     var formlength = this.children.length
-                    var arr = []
+                    
                     for(var k = 0; k < data.permohonanUsers.length; k++){
                         if(data.permohonanUsers[k].id != data.userId){
                             arr.push(data.permohonanUsers[k].id)
@@ -88,7 +88,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 console.log(data.permohonanUsers.length)
                 // console.log(data.permohonan[1].id)
                 $("#permohonanbaruModal").modal("show");
-                $("#divbuttonAdd").hide();
+                // $("#divbuttonAdd").hide();
                 $("#jenisPermohonan").val("frmPermohonanBerkumpulan");
                 document.getElementById("jenisPermohonan").disabled = true;
                 document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-xl"
@@ -117,7 +117,7 @@ function hantarPermohonanBerkumpulan(){
     console.log(edit)
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
     var pegPelulusBK = document.querySelector("#pegawaiLulusBK").value;
-    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD/MM/YYYY").format("YYYY-MM-DD");
+    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD / MM / YYYY").format("YYYY-MM-DD");
     var masaMulaBK = document.querySelector("#masa-mulaBK").value;
     var masaAkhirBK = document.querySelector("#masa-akhirBK").value;
     var sebab = document.querySelector("#sebabBK").value;
@@ -194,19 +194,17 @@ function hantarPermohonanBerkumpulan(){
     });
     }else if(edit == 1){
     $.ajax({
-        url: 'permohonan-baru/kemaskini-permohonan',
+        url: 'permohonan-baru/kemaskini-permohonan/'+idPermohonan,
         type: 'put', 
         data:{
-            user_id:user_id,
+            reject:reject,
             object:object,
-            jenisPermohonan:jenis_permohonan
+            jenisPermohonan:jenis_permohonan,
+            idPermohonan:idPermohonan
         },
         success: function(data) {
-            // $(".modal").modal("hide");
             
-            $('#permohonanbaruModal').modal('hide');
-
-            // $("#permohonanbaruModal").modal("hide");
+            closeModal("permohonanbaruModal");
             successAlert();
             getBerkumpulanDT();
             console.log(data);
@@ -226,7 +224,8 @@ function hantarPermohonanIndividu(){
     var namaPekerjaID = document.querySelector("#namaPekerjaID").value;
     var pegPelulusID = document.querySelector("#pegawaiLulusID").value;
     var pegSokongID = document.querySelector("#pegawaiSokongID").value;
-    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD/MM/YYYY").format("YYYY-MM-DD");
+    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD / MM / YYYY").format("YYYY-MM-DD");
+    var tarikhAkhirKerjaID = moment(document.querySelector("#tarikh-akhir-kerjaID").value,"DD / MM / YYYY").format("YYYY-MM-DD");
     var masaMulaID = document.querySelector("#masa-mulaID").value;
     var masaAkhirID = document.querySelector("#masa-akhirID").value;
     var sebab = document.querySelector("#sebabID").value;
@@ -255,6 +254,11 @@ function hantarPermohonanIndividu(){
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
                     jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};
     console.log(object,individu);
+    var tarikhMula = moment(tarikhKerjaID).format("YYYY/MM/DD")
+    var masaMula = tarikhMula + " " + masaMulaID + ":00"
+    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("YYYY/MM/DD")
+    var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
+    console.log(masaMula,masaAkhir)
     if (edit != 1){
     $.ajax({
         url: 'permohonan-baru/hantar-permohonan',
