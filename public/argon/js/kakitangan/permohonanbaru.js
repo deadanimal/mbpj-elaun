@@ -1,17 +1,30 @@
 var rowNum = 0;
 var individu = "OT1";
 var berkumpulan = "OT2";
+var arr = []
 $('#total_chq').val(0);
 var edit = 0;
 var last_chq_no = 0;
 var div = document.getElementById("new_chq");
 var nodelist = div.getElementsByTagName("div");
 var idPermohonan = 0;
-if(nodelist.length == 0){
-    document.getElementById("remove").disabled = true
-}
+var reject = []
+// if(nodelist.length == 0){
+//     document.getElementById("remove").disabled = true
+// }
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
+$('#permohonanbaruModal').on('hide.bs.modal', function (e) {
+    for(i = 0; i < arr.length; i++){
+        remove()
+        console.log('test remove')
+    }
+    arr = []
+})
+// $('#permohonanbaruModal').on('show.bs.modal', function (e) {
+   
+// })
+
 
     $(function () {
 
@@ -38,20 +51,8 @@ $('#divPermohonanBerkumpulan').hide();
         });
     });
 
-    function editPermohonanForm(id){
-        console.log('permohonanform',id)
-    }
-
-    // function lulusPermohonanForm(id){
-    //     console.log('luluspermohonanform',id)
-    // }
-
-    function tolakPermohonanForm(id){
-        console.log('permohonanform',id)
-    }
-
 $('#add').on('click', add);
-$('#remove').on('click', remove);
+// $('#remove').on('click', remove);
 
 
 function add() {
@@ -59,7 +60,7 @@ function add() {
     var div = document.getElementById("new_chq");
     var nodelist = div.getElementsByTagName("div");
     if(nodelist.length >= 0){
-        document.getElementById("remove").disabled = false
+        // document.getElementById("remove").disabled = false
         rowNum++;
 
         // $("#total_chq").val(rowNum);
@@ -67,6 +68,8 @@ function add() {
         $("inputpekerja_"+rowNum).prop('class','inputpekerja');
         $("#buttonremove").attr("id","buttonremove_"+rowNum);
         $('#total_chq').val(rowNum);
+        $("#submitBtnBK").prop('disabled',false)
+
         
     }
     // if(nodelist.length == 20){
@@ -98,7 +101,7 @@ function remove() {
     if(nodelist.length == 0){
         rowNum = 0;
         $('#total_chq').val(0);
-        document.getElementById("remove").disabled = true
+        // document.getElementById("remove").disabled = true
         console.log("disable button buang")
     }
 }
@@ -108,26 +111,38 @@ function buang(elementid){
     console.log(elementid);
     var currNum = elementid.substring(13,14);
     console.log(currNum)
+    if(edit == 1){
+        reject.push($("#inputpekerja_"+ currNum).children()[0].children[0].children[1].value);
+    }
     $('#inputpekerja_' + currNum).remove();
     var before = last_chq_no - 1;
     rowNum--;
     $('#total_chq').val(before);
+    console.log(rowNum)
     console.log(before)
     if(nodelist.length == 0){
+    disableHantar();
+
         rowNum = 0;
         $('#total_chq').val(0);
-        document.getElementById("remove").disabled = true
+        // document.getElementById("remove").disabled = true
         console.log("disable button buang")
     }
+    console.log(reject);
 }
 
+function disableHantar(){
+    if ($('#new_chq').length != 0) {
+        console.log("check disable")
+        $("#submitBtnBK").prop('disabled',true)
+        } 
+}
 
 $(document).ready(function(){
 
     getIndividuDT();
     getBerkumpulanDT();
-
-
+    disableHantar();
 })
 
 function setEnableDropdown(){
@@ -344,11 +359,17 @@ function getBerkumpulanDT(){
             {
                 targets: 2,
                 render: function(data,type,row){
-                    if(row['is_rejected_individually'] == '0'){
-                        return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '1'){
+                    if(row['is_rejected_individually'] == '0' && data == 'DITERIMA'){
+                        return '<div id="status" class="container text-white text-center bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }else if(row['is_rejected_individually'] == '0' && data == 'DALAM PROSES'){
+                        return '<div id="status" class="container text-white text-center bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }else if(row['is_rejected_individually'] == '0' && data == "PERLU KEMASKINI"){
+                        return '<div id="status" class="container text-white text-center bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }else if(row['is_rejected_individually'] == '1' || data == "BATAL"){
+                        return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }else if(row['is_rejected_individually'] == '1' || data == 'DITOLAK'){
                         data = "DITOLAK"
-                        return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                 }
             },
@@ -364,11 +385,18 @@ function getBerkumpulanDT(){
                 {   
                     if(row['is_rejected_individually'] == "1"){
                         return '';
+                    
+                    }else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2'){
+                        var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="event.preventDefault();changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                        // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
+                        var allButton = button1 ;
+                        return allButton;
+                    
                     }else{
-                    var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
-                    var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
-                    var allButton = button1 + button2;
-                    return allButton;
+                        var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="event.preventDefault();changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                        var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
+                        var allButton = button1 + button2;
+                        return allButton;
                     }
                 }
             },
@@ -401,10 +429,16 @@ function getBerkumpulanDT(){
 $('.js-example-basic-single').select2();
 
 $('#tarikh-kerjaID').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd / mm / yy',
 });
 $('#tarikh-kerjaBK').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd / mm / yy',
+});
+$('#tarikh-akhir-kerjaID').datepicker({
+    dateFormat: 'dd / mm / yy',
+});
+$('#tarikh-akhir-kerjaBK').datepicker({
+    dateFormat: 'dd / mm / yy',
 });
 
 $('#masa-mulaBK').timepicker();

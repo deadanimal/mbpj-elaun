@@ -35,6 +35,14 @@ class Controller extends BaseController
                                                         ->isNotDeleted();
     }
 
+    public function findPermohonanUser($idPermohonanBaru){
+        return $permohonans = PermohonanBaru::find($idPermohonanBaru);
+    }
+
+    public function findPermohonanForReject($id,$idPermohonanBaru){
+        return $permohonans = PermohonanBaru::find($idPermohonanBaru)->users()->find($id);
+    }
+
     public function findAllPermohonanForTypes($jenisPermohonan){
 
         switch (Auth::user()->role_id) {

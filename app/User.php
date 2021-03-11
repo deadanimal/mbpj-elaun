@@ -118,7 +118,9 @@ class User extends Authenticatable
 
     public function permohonans()
     {
-        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'id', 'id_permohonan_baru');
+        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'id', 'id_permohonan_baru')
+                    ->withPivot('is_rejected_individually')
+                    ->as('permohonan_with_users');
     }
 
     public function permohonanss()
