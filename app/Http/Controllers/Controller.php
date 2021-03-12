@@ -19,8 +19,9 @@ class Controller extends BaseController
         return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan', $jenisPermohonan)
                                                            ->statusAkhirTidakDitolak();
 
-
     }
+
+    
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
 

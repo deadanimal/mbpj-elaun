@@ -45,7 +45,8 @@ class PermohonanBaru extends Model
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
         'status_akhir' => 2,
-        'tarikh_akhir_kerja' => '2021-01-01'
+        'tarikh_mula_kerja' => '',
+        'tarikh_akhir_kerja' => ''
     ];
 
     public function scopePermohonanPegawaiSokong($query)
