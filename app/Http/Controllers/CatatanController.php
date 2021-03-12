@@ -59,13 +59,8 @@ class CatatanController extends Controller
             array_push($array, $user->permohonan_with_users->is_rejected_individually);
         }   
 
-        
         event(new PermohonanStatusChangedEvent($permohonan, 0, 0, 0));
 
-        return response()->json([
-            'error' => false,
-            'array' => $array
-        ], 200);
     }
 
     /**

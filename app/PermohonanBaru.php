@@ -83,6 +83,11 @@ class PermohonanBaru extends Model
         return $query->where('is_deleted', 0);
     }
 
+    public function scopeIsNotRejectedIndividually($query)
+    {
+        return $query->where('is_rejected_individually', 0);
+    }
+
     public function scopeIsNotApproved($query)
     {
         return $query->where('peg_sokong_approved', 0);

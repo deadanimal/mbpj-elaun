@@ -24,7 +24,6 @@ function saveCatatan() {
         },
         success: function(data) {
             console.log("Catatan saved");
-            console.log(data);
             showDatatable(jenisPermohonan);
 
             
