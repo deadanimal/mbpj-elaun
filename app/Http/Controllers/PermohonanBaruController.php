@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\PermohonanBaru;
 use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\permohonan_with_users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -19,12 +19,20 @@ class PermohonanBaruController extends Controller
         $tarikhPermohonan = $permohonan->created_at->format('Y-m-d');
         // $tarikhPermohonan = $permohonan->created_at->format('d-m-Y');
 
+        $senaraiKakitangan = array();
+
+        foreach ($permohonan->users as $user) {
+            if ($user->permohonan_with_users->is_rejected_individually != 1) {
+                array_push($senaraiKakitangan, $user);
+            }
+        }
+
         return response()->json([
                     'error' => false,
                     'permohonan'  => $permohonan,
                     'tarikh_permohonan' => $tarikhPermohonan,
                     'arrayKelulusan' => $this->getKelulusanWithData($permohonan),
-                    'senaraiKakitangan' => $permohonan->users
+                    'senaraiKakitangan' =>$senaraiKakitangan
                 ], 200);
     }
 

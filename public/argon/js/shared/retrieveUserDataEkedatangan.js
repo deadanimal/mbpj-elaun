@@ -74,6 +74,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
             var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
 
+            console.log(data.senaraiKakitangan);
+
             switch (jenisPermohonan) {
                 case "OT1":
                     block_ekedatanganIndividu.style.display = "none";
