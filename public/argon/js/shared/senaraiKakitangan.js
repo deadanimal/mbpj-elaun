@@ -52,6 +52,4 @@ function rejectIndividually(id_permohonan_baru, id_user, name_user) {
             Swal.fire('', '', 'info')
           }        
       })
-
-  
 }
