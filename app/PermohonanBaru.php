@@ -55,7 +55,7 @@ class PermohonanBaru extends Model
                                  ->isNotApproved()
                                  ->isNotDitolakOrPerluKemaskini()
                                  ->notSahP2()
-                                 ->isNotDeleted();
+                                 ->statusAkhirTidakDitolak();
         });
     } 
 
@@ -66,7 +66,7 @@ class PermohonanBaru extends Model
                                      ->isApproved()
                                      ->isNotDitolakOrPerluKemaskini()
                                      ->notSahP2()
-                                     ->isNotDeleted();
+                                     ->statusAkhirTidakDitolak();
         });
     }
 
@@ -78,14 +78,10 @@ class PermohonanBaru extends Model
                     })->notSahP2();
     }
 
-    public function scopeIsNotDeleted($query)
-    {
-        return $query->where('is_deleted', 0);
-    }
 
-    public function scopeIsNotRejectedIndividually($query)
+    public function scopeStatusAkhirTidakDitolak($query)
     {
-        return $query->where('is_rejected_individually', 0);
+        return $query->where('status_akhir', 2);
     }
 
     public function scopeIsNotApproved($query)
