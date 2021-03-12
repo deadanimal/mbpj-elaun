@@ -36,20 +36,20 @@
                                 </div>
                                 <div class="form-group mb-5">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
-                                    <input class="form-control" name="tarikhMohon" id="semakan-modal-tarikhMohon" type="text" placeholder="">
+                                    <input class="form-control" name="tarikhMohon-individu" id="semakan-modal-individu-tarikhMohon" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="row">
                                     <div class="col form-group mb-2">
                                         <label class="form-control-label">{{ __('Tarikh Mula Kerja') }}</label>
-                                        <input class="form-control" name="tarikhMulaKerja" id="semakan-modal-tarikhMulaKerja" type="text" placeholder="Default input">
+                                        <input class="form-control" name="tarikhMulaKerja-individu" id="semakan-modal-individu-tarikhMulaKerja" type="text" placeholder="Default input">
      
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                     <div class="col form-group mb-2">
                                         <label class="form-control-label">{{ __('Masa Mula') }}</label>
-                                        <input class="form-control" name="masaMula" id="semakan-modal-masaMula" type="text" placeholder="">
+                                        <input class="form-control" name="masaMula-individu" id="semakan-modal-individu-masaMula" type="text" placeholder="">
                                         
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -57,40 +57,43 @@
                                 <div class="row">
                                     <div class="col form-group mb-2">
                                         <label class="form-control-label">{{ __('Tarikh Akhir Kerja') }}</label>
-                                        <input class="form-control" name="tarikhAkhirKerja" id="semakan-modal-tarikhAkhirKerja" type="text" placeholder="Default input">
+                                        <input class="form-control" name="tarikhAkhirKerja-individu" id="semakan-modal-individu-tarikhAkhirKerja" type="text" placeholder="Default input">
      
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                     <div class="col form-group mb-2">
                                         <label class="form-control-label">{{ __('Masa Akhir') }}</label>
-                                        <input class="form-control" name="masaAkhir" id="semakan-modal-masaAkhir" type="text" placeholder="">
+                                        <input class="form-control" name="masaAkhir-individu" id="semakan-modal-individu-masaAkhir" type="text" placeholder="">
     
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div>
-                                <div class="row mb-5">
+                                <div class="row mb-2">
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
-                                        <input class="form-control" name="masaMulaSebenar" id="semakan-modal-masaMulaSebenar" type="text" placeholder="">
+                                        <input class="form-control" name="masaMulaSebenar-individu" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
      
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
-                                        <input class="form-control" name="masaAkhirSebenar" id="semakan-modal-masaAkhirSebenar" type="text" placeholder="">
+                                        <input class="form-control" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="">
     
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div>
+                                <div class="form-group mb-5">
+                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-control-label">{{ __('Lokasi') }}</label>
-                                    <input class="form-control" name="lokasi" id="semakan-modal-lokasi" type="text" placeholder="">
+                                    <input class="form-control" name="lokasi-individu" id="semakan-modal-individu-lokasi" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
-                                    <textarea class="form-control" name="tujuan" id="semakan-modal-tujuan" rows="3"></textarea>
+                                    <textarea class="form-control" name="tujuan-individu" id="semakan-modal-individu-tujuan" rows="3"></textarea>
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
@@ -111,7 +114,7 @@
                         
                     </div>
                     <div class="text-center mb-3">
-                        <button type="submit" data-dismiss="modal" onclick="event.preventDefault()" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
+                        <button type="button" data-dismiss="modal" onclick="" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
                         <button type="submit" class="btn btn-primary mt-4">{{ __('Tutup') }}</button>
                     </div>  
                 </div>

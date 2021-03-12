@@ -55,7 +55,7 @@ class PermohonanBaruController extends Controller
 
         foreach ($permohonan->users as $user) {
             if($user->id == $idUser) {
-                $permohonan->users()->updateExistingPivot($user, array('is_rejected_individually' => 1), false);
+                $permohonan->users()->updateExistingPivot($idUser, array('is_rejected_individually' => 1), false);
             }
         }
     }
@@ -77,5 +77,22 @@ class PermohonanBaruController extends Controller
             'masa_mula_sebenar' => $masa_mula_sebenar,
             'masa_akhir_sebenar' => $masa_akhir_sebenar
         ], 200);
+    }
+
+    public function kemaskiniModal(Request $request, $id_permohonan_baru)
+    {
+        $idUser = $request->input('id_user');
+        $masa_mula_sebenar = $request->input('masa_mula_sebenar');
+        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+
+        foreach ($permohonan->users as $user) {
+            if($user->id == $idUser) {
+                $permohonan->users()
+                            ->updateExistingPivot($idUser, array(
+                                    'masa_mula_sebenar' => $request->input('masa_mula_sebenar'),
+                                    'masa_akhir_sebenar' => $request->input('masa_akhir_sebenar')
+                                ));
+            }
+        }
     }
 }

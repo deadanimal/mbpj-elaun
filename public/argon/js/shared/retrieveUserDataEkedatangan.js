@@ -1,5 +1,7 @@
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 
+    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
+
     // Clear up name and no pekerja for Elaun
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
@@ -21,9 +23,18 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val("");
     $("#formEkedatangan input[name=waktuAnjal]").val("");
 
-    // Clear masa sebenar
-    $("#formModalEdit input[name=masaMulaSebenar]").val(""); 
-    $("#formModalEdit input[name=masaAkhirSebenar]").val(""); 
+    // Clear up detail permohonan
+    $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val("");
+    $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val("");
+    $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val("");
+    $('#formModalEdit input[name=masaMula-'+is_individu+']').val("");
+    $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val("");
+    $('#formModalEdit input[name=tujuan-'+is_individu+']').val("");
+    $('#formModalEdit input[name=lokasi-'+is_individu+']').val(""); 
+
+    // Clear up masa sebenar
+    $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(""); 
+    $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(""); 
 
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
@@ -42,13 +53,13 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         success: function(data) {
-            $("#formModalEdit input[name=tarikhMohon]").val(data.tarikh_permohonan);
-            $("#formModalEdit input[name=tarikhMulaKerja]").val(data.permohonan.tarikh_mula_kerja);
-            $("#formModalEdit input[name=tarikhAkhirKerja]").val(data.permohonan.tarikh_akhir_kerja);
-            $("#formModalEdit input[name=masaMula]").val(data.permohonan.masa_mula);
-            $("#formModalEdit input[name=masaAkhir]").val(data.permohonan.masa_akhir);
-            $("#formModalEdit input[name=tujuan]").val(data.permohonan.tujuan);
-            $("#formModalEdit input[name=lokasi]").val(data.permohonan.lokasi); 
+            $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
+            $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(data.permohonan.tarikh_mula_kerja);
+            $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
+            $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
+            $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
+            $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
+            $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
 
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];

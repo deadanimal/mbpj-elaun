@@ -16,6 +16,8 @@ class PermohonanBaru extends Model
         'tarikh_akhir_kerja',
         'masa_mula',
         'masa_akhir',
+        'masa_mula_sebenar',
+        'masa_akhir_sebenar',
         'masa',
         'hari',
         'waktu',

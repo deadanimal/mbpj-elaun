@@ -94,6 +94,7 @@
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
