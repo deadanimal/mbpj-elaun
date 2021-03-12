@@ -6,11 +6,6 @@ function kemaskiniModal(jenisPermohonan) {
     var id_user = document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').getAttribute("value");
     var id_permohonan_baru = document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').getAttribute("value");
 
-    console.log('masa_mula_sebenar ' + masa_mula_sebenar);
-    console.log('masa_akhir_sebenar ' + masa_akhir_sebenar);
-    console.log('id_user ' + id_user);
-    console.log('id_permohonan_baru ' + id_permohonan_baru);
-
     $.ajax({
         url: 'permohonan-baru/kemaskini/' + id_permohonan_baru,
         type: 'PUT', 
