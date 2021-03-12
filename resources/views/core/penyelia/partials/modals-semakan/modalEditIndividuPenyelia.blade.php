@@ -114,7 +114,6 @@
                         
                     </div>
                     <div class="text-center mb-3">
-                        <button type="button" data-dismiss="modal" onclick="" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
                         <button type="submit" class="btn btn-primary mt-4">{{ __('Tutup') }}</button>
                     </div>  
                 </div>
