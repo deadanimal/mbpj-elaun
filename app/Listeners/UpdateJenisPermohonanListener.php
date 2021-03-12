@@ -54,10 +54,18 @@ class UpdateJenisPermohonanListener
             case 'DITOLAK':
                 $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
                 $event->permohonan->status_akhir = 0;
+
+                foreach ($event->permohonan->users as $user) {
+                    $event->permohonan
+                          ->users()
+                          ->updateExistingPivot($user->id, array(
+                                                    'is_rejected_individually' => 1
+                                                ));
+                }
                 break;
             case 'BATAL':
                 $event->permohonan->status_akhir = 0;
-                $event->permohonan->id_deleted = 1;
+
                 break;
             default: 
                 # code...

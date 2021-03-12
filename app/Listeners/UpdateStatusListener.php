@@ -90,7 +90,6 @@ class UpdateStatusListener
 
         } else {
             $event->permohonan->status = "DITOLAK";
-
         }
     }
 }
