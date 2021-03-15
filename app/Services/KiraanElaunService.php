@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
+use App\User;
 use App\PermohonanBaru;
 
-class KiraanGajiService {
+class KiraanElaunService {
 
     protected const SETAHUN = 12;
     protected const HARI_BERKERJA = 313;
@@ -26,7 +27,7 @@ class KiraanGajiService {
     {
         $this->id_user = $id_user;
         $this->permohonan = $permohonan;
-        $this->gaji = $permohonan->gaji;
+        $this->gaji = User::find($id_user)->gaji;
         $this->jumlahMasaBekerja = $permohonan->masa;
         $this->kadarPerJam = $permohonan->kadar_jam;
         $this->jumlahTuntutanRounded = 0;
@@ -50,13 +51,9 @@ class KiraanGajiService {
         return $this->jumlahTuntutanRounded = round($jumlahTuntutan, 2);
     }
 
-    public function jenisTuntutanElaun()
+    public function tuntutanLebihSebulanGaji()
     {
-        if ($this->jumlahTuntutanRounded >= $this->gaji) {
-            return 'LEBIH SEBULAN';
-        } else {
-            return 'TUNTUTAN BIASA';
-        }
+        return $this->jumlahTuntutanRounded >= $this->gaji ? TRUE : FALSE;
     }
 }
 

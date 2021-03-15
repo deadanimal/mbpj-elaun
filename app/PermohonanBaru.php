@@ -68,26 +68,31 @@ class PermohonanBaru extends Model
                                      ->isNotDitolakOrPerluKemaskini()
                                      ->notSahP2()
                                      ->statusAkhirTidakDitolak();
-        });
+                        });
     }
 
-    
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
         return $query->permohonanPegawaiSokong()
-        ->orWhere(function (Builder $q) {
-            return $q->permohonanPegawaiPelulus();
-        })->notSahP2();
+                     ->orWhere(function (Builder $q) {
+                            return $q->permohonanPegawaiPelulus(); })
+                     ->notSahP2();
     }
     
     public function scopePermohonanKeraniPemeriksa($query)
     {
-        return $query->where('jenis_permohonan', 'like', 'KPA%');
+        return $query->where(function (Builder $q) {
+                        return $q->where('jenis_permohonan', 'like', 'KPA%')
+                                 ->statusAkhirTidakDitolak();
+                        });
     }
 
     public function scopePermohonanKeraniSemakan($query)
     {
-        return $query->where('jenis_permohonan', 'like', 'KSA%');
+        return $query->where(function (Builder $q) {
+                        return $q->where('jenis_permohonan', 'like', 'KSA%')
+                                ->statusAkhirTidakDitolak();
+                        });
     }
 
     public function scopeStatusAkhirTidakDitolak($query)

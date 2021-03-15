@@ -21,8 +21,6 @@ class Controller extends BaseController
 
     }
 
-
-
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
 
         return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan_kakitangan', $jenisPermohonan)
@@ -44,6 +42,11 @@ class Controller extends BaseController
         return $permohonans = PermohonanBaru::find($idPermohonanBaru)->users()->find($id);
     }
 
+    public function findPermohonanForKP($idPermohonanBaru)
+    {
+        // return $permohonans = PermohonanBaru::find($idPermohonanBaru)->permohonanKeraniPemeriksa()->get();
+    }
+
     public function findAllPermohonanForTypes($jenisPermohonan){
 
         switch (Auth::user()->role_id) {
@@ -61,10 +64,6 @@ class Controller extends BaseController
                 return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
                                                                    ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
                                                                    ->get();
-                break;
-            case '7':
-                return $permohonans = PermohonanBaru::with("users")->permohonanKeraniPemeriksa()
-                                                                   ->get();                                   
                 break;
             
             default:

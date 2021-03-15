@@ -52,8 +52,13 @@ class PermohonanBaruController extends Controller
     public function approvedKelulusan($idPermohonanBaru)
     {
         $permohonan = PermohonanBaru::find($idPermohonanBaru);
-
+        
         event(new PermohonanStatusChangedEvent($permohonan, 1, 0, 0));
+
+        // if ($permohohan->jenis_permohonan[] ) {
+        //     # code...
+        // }
+
     }
 
     public function rejectIndividually(Request $request, $id_permohonan_baru)

@@ -50,7 +50,7 @@ function checkUser(){
             alert('Sila pilih jenis permohonan');
             break;
     }
-
+    
     showDatatable(pilihan);
 }
 
