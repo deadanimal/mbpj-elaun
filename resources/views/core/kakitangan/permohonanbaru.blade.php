@@ -13,21 +13,15 @@
 
         @endcomponent -->
     <!-- <div class="container-fluid my-auto"> -->
-        <div class="row">
-            <div class="col-xl-12 mt-4 py-2">
-                <h2 class="mb-2" style="color:white;">
-                    Permohonan Kerja Lebih Masa
-                </h2>
-            </div>
-        </div>
+
     <!-- </div> -->
 @endcomponent
 
     <div class="container-fluid mt--6">
         <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-secondary">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0">{{ __('Permohonan Baru Kerja Lebih Masa') }}</h3>
@@ -44,8 +38,8 @@
                             <div class="col">
                                 <div class="col-sm-6 ml--3">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="input-name">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="noPekerja" id="noPekerja" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+                                        <label class="form-control-label -sm" for="input-name">{{ __('No Pekerja') }}</label>
+                                        <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -124,44 +118,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4">
-                <div class="card">
-                <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="mb-0">{{ __('Nota Permohanan Kerja Lebih Masa') }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        
-                        <div class="col">
-                        
-                            <div class="row">
-                            <h4 class="heading-medium ">{{ __('Langkah 1') }}</h4>
-                                <div class="col ml--3">
-                                    <p><b style="color:black">Borang A1 / A2</b> Borang kelulusan</p>
-                                </div>
-                            </div>
-
-                            
-                            <div class="row"> 
-                            <h4 class="heading-medium mt-3">{{ __('Langkah 2') }}</h4>
-                                <div class="col ml--3">
-                                    <p><b style="color:black">Borang B1 -</b> Borang kelulusan</p>
-                                </div>
-                            </div>
-                            <div class="row"> 
-                                <div class="col ml--3">
-                                    <p><b style="color:black">Borang A1 -</b> Borang kelulusan</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-
         
             <div class="col">
                 <div class="row">
@@ -177,18 +133,72 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-individu" role="tabpanel" aria-labelledby="pills-home-tab">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header bg-secondary">
                                         <div class="row align-items-center">
                                             <div class="col-12">
                                                 <h3 class="mb-0">{{ __('Permohonan Individu') }}</h3>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="col-lg-12">
-                                            <div class="table-responsive">
-                                                <table class="table " id="individuDT">
-                                                    <thead class="thead-light">
+                                    <div class="card-body px-0">
+                                        <div class="table-responsive">
+                                            <table class="table " id="individuDT">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Tarikh Permohonan</th>
+                                                    <th>Status</th>
+                                                    <th>Progres</th>
+                                                    <th>Masa Mula</th>
+                                                    <th>Masa Akhir</th>
+                                                    <th>Masa</th>
+                                                    <th>Hari</th>
+                                                    <th>Waktu</th>
+                                                    <th>Kadar Jam</th>
+                                                    <th>Tujuan</th>
+                                                    <th></th>
+                                                    <th>id user</th>
+                                                    <th hidden>Status</th>
+                                                    <th hidden></th>
+                                                    <th hidden></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+                
+                                        </div>
+                                        <div class="col-12 my-4">
+                                        
+                                            <form class="form-inline" style="display: flex; justify-content: flex-end">
+                                                
+                                                    <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
+                                                    <input type="text" class="form-control form-control-sm column_filter" id="filterIndividu0" placeholder="" autocomplete="off" data-column="0">
+
+                                                    <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
+                                                    <input type="text" class="form-control form-control-sm column_filter" id="filterIndividu4" placeholder="" autocomplete="off" data-column="4">
+                                                                
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-berkumpulan" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="card">
+                                    <div class="card-header bg-secondary">
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <h3 class="mb-0">{{ __('Permohonan Berkumpulan') }}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body px-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-flush" id="berkumpulanDT">
+                                                <thead class="thead-light">
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Tarikh Permohonan</th>
@@ -207,83 +217,25 @@
                                                         <th hidden></th>
                                                         <th hidden></th>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        
-                                                        
-                                                    </tbody>
-                                                </table>
-                    
-                                            </div>
-                                            <div class="col-12 my-4">
-                                            
-                                                <form class="form-inline" style="display: flex; justify-content: flex-end">
+                                                </thead>
+                                                <tbody>
                                                     
-                                                        <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
-                                                        <input type="text" class="form-control form-control-sm column_filter" id="filterIndividu0" placeholder="" autocomplete="off" data-column="0">
-
-                                                        <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
-                                                        <input type="text" class="form-control form-control-sm column_filter" id="filterIndividu4" placeholder="" autocomplete="off" data-column="4">
-                                                                    
-                                                </form>
+                                                </tbody>
+                                            </table>
+                
+                                        </div>
+                                        <div class="col-12 my-4">
+                                        
+                                            <form class="form-inline" style="display: flex; justify-content: flex-end">
                                                 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-berkumpulan" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="row align-items-center">
-                                            <div class="col-12">
-                                                <h3 class="mb-0">{{ __('Permohonan Berkumpulan') }}</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="col-12">
-                                            <div class="table-responsive">
-                                                <table class="table table-flush" id="berkumpulanDT">
-                                                    <thead class="thead-light">
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Tarikh Permohonan</th>
-                                                            <th>Status</th>
-                                                            <th>Progres</th>
-                                                            <th>Masa Mula</th>
-                                                            <th>Masa Akhir</th>
-                                                            <th>Masa</th>
-                                                            <th>Hari</th>
-                                                            <th>Waktu</th>
-                                                            <th>Kadar Jam</th>
-                                                            <th>Tujuan</th>
-                                                            <th></th>
-                                                            <th>id user</th>
-                                                            <th hidden>Status</th>
-                                                            <th hidden></th>
-                                                            <th hidden></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                       
-                                                    </tbody>
-                                                </table>
-                    
-                                            </div>
-                                            <div class="col-12 my-4">
+                                                    <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
+                                                    <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan0" placeholder="" autocomplete="off" data-column="0">
+
+                                                    <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
+                                                    <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan4" placeholder="" autocomplete="off" data-column="4">
+                                                                
+                                            </form>
                                             
-                                                <form class="form-inline" style="display: flex; justify-content: flex-end">
-                                                    
-                                                        <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
-                                                        <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan0" placeholder="" autocomplete="off" data-column="0">
-
-                                                        <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
-                                                        <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan4" placeholder="" autocomplete="off" data-column="4">
-                                                                    
-                                                </form>
-                                                
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -51,7 +51,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
         success: function(data) {
            
             if( jenis_permohonan == 'OT1'){
-                var tarikhKerjaID = moment(data.permohonan.tarikh_permohonan,"YYYY-MM-DD").format("DD/MM/YYYY")
+                var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
                 $("#permohonanbaruModal").modal("show");
                 $("#jenisPermohonan").val("frmPermohonanIndividu");
                 document.getElementById("jenisPermohonan").disabled = true;
@@ -64,7 +64,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $("#permohonanbaruModal").modal("show");
                 console.log('ot1',jenis_permohonan)
             }else if(jenis_permohonan == 'OT2'){
-                var tarikhKerjaBK = moment(data.permohonan.tarikh_permohonan,"YYYY-MM-DD").format("DD/MM/YYYY")
+                var tarikhKerjaBK = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
                 console.log(data);
                 for(i = 0;i<data.permohonanUsers.length;i++){
                     if(data.permohonanUsers[i].id != data.userId){
@@ -236,6 +236,15 @@ function hantarPermohonanIndividu(){
     var hour = masaMulaID.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = individu;
+    var tarikhMula = moment(tarikhKerjaID).format("YYYY/MM/DD")
+    var masaMula = tarikhMula + " " + masaMulaID + ":00"
+    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("YYYY/MM/DD")
+    var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
+    console.log(masaMula,masaAkhir)
+    console.log('difference',timeDiffCalc(new Date(masaMula),new Date(masaAkhir)));
+    
+    totalhours = totalhours.toFixed(2)
+    console.log("hours",totalhours)
     // var catatan = "-"
     if(hour >= 6 && hour < 12)
     {
@@ -251,14 +260,9 @@ function hantarPermohonanIndividu(){
     console.log("hari",hari,"masa",masa,"waktu",waktu);
     var user_id = namaPekerjaID;
     var object = {tarikh_akhir_kerja:'2020-01-01',id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
-                    masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:masa,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
+                    masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
                     jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};
     console.log(object,individu);
-    var tarikhMula = moment(tarikhKerjaID).format("YYYY/MM/DD")
-    var masaMula = tarikhMula + " " + masaMulaID + ":00"
-    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("YYYY/MM/DD")
-    var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
-    console.log(masaMula,masaAkhir)
     if (edit != 1){
     $.ajax({
         url: 'permohonan-baru/hantar-permohonan',
@@ -291,7 +295,7 @@ function hantarPermohonanIndividu(){
             tarikh_permohonan:tarikhKerjaID,
             masa_mula:masaMulaID,
             masa_akhir:masaAkhirID,
-            masa:masa,
+            masa:totalhours,
             hari:hari,
             waktu:waktu,
             status:status,
@@ -346,4 +350,38 @@ function timeStringToMins(s) {
   
     // Format difference as hh:mm and return
     return   z(diff/60 | 0) + ':' + z(diff % 60); 
+  }
+
+  function timeDiffCalc(dateFuture, dateNow) {
+    let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
+
+    // calculate days
+    const days = Math.floor(diffInMilliSeconds / 86400);
+    diffInMilliSeconds -= days * 86400;
+    console.log('calculated days', days);
+
+    // calculate hours
+    const hours = Math.floor(diffInMilliSeconds / 3600) % 24;
+    diffInMilliSeconds -= hours * 3600;
+    console.log('calculated hours', hours);
+
+    // calculate minutes
+    const minutes = Math.floor(diffInMilliSeconds / 60) % 60;
+    diffInMilliSeconds -= minutes * 60;
+    console.log('minutes', minutes);
+
+    let difference = '';
+    if (days > 0) {
+      difference += (days === 1) ? `${days} day, ` : `${days} days, `;
+    }
+
+    difference += (hours === 0 || hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
+
+    difference += (minutes === 0 || hours === 1) ? `${minutes} minutes` : `${minutes} minutes`; 
+
+    var minuteToHours = minutes / 60
+    console.log("convert", minuteToHours.toFixed(2))
+    totalhours = (24 * days) + (hours) + minuteToHours
+
+    return difference;
   }

@@ -30,7 +30,7 @@ function showDatatable(){
             columns: [
     
                 {data: null},
-                {data: 'tarikh_permohonan'},
+                {data: 'tarikh_mula_kerja'},
                 {data: 'status'},
                 {data: 'progres'},
                 {data: 'masa_mula'},
