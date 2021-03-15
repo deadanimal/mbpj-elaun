@@ -21,7 +21,7 @@ class Controller extends BaseController
 
     }
 
-    
+
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
 
@@ -61,6 +61,10 @@ class Controller extends BaseController
                 return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
                                                                    ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
                                                                    ->get();
+                break;
+            case '7':
+                return $permohonans = PermohonanBaru::with("users")->permohonanKeraniPemeriksa()
+                                                                   ->get();                                   
                 break;
             
             default:

@@ -53,13 +53,13 @@
                         
 
                             {{-- Form semakan --}}
-                                @include('core.ketua_pemeriksa.partials.formOT&EL')
+                                @include('core.kerani_pemeriksa.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
 
                     {{-- Datatables --}}
-                    @include('core.ketua_pemeriksa.partials.dataTablesKetuaPemeriksa')
+                    @include('core.kerani_pemeriksa.partials.dataTablesKeraniPemeriksa')
     
             </div>
         </div>
@@ -68,10 +68,10 @@
     </div>
 
 {{-- Modal --}}
-@include('core.ketua_pemeriksa.partials.modals-semakan.modalEditIndividuKetuaPemeriksa')
-@include('core.ketua_pemeriksa.partials.modals-semakan.modalEditBerkumpulanKetuaPemeriksa')
-@include('core.ketua_pemeriksa.partials.modals-semakan.modalValidateKetuaPemeriksa')
-@include('core.ketua_pemeriksa.partials.modals-semakan.modalRejectKetuaPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalEditIndividuKeraniPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalEditBerkumpulanKeraniPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalValidateKeraniPemeriksa')
+@include('core.kerani_pemeriksa.partials.modals-semakan.modalRejectKeraniPemeriksa')
 @endsection
 
 @push('css')
@@ -89,8 +89,8 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-pemeriksa/jenisPermohonan.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-pemeriksa/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/kerani-pemeriksa/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/kerani-pemeriksa/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>

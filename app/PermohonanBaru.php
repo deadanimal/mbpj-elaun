@@ -71,14 +71,24 @@ class PermohonanBaru extends Model
         });
     }
 
+    
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
         return $query->permohonanPegawaiSokong()
-                     ->orWhere(function (Builder $q) {
-                            return $q->permohonanPegawaiPelulus();
-                    })->notSahP2();
+        ->orWhere(function (Builder $q) {
+            return $q->permohonanPegawaiPelulus();
+        })->notSahP2();
+    }
+    
+    public function scopePermohonanKeraniPemeriksa($query)
+    {
+        return $query->where('jenis_permohonan', 'like', 'KPA%');
     }
 
+    public function scopePermohonanKeraniSemakan($query)
+    {
+        return $query->where('jenis_permohonan', 'like', 'KSA%');
+    }
 
     public function scopeStatusAkhirTidakDitolak($query)
     {

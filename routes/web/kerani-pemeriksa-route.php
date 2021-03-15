@@ -1,6 +1,6 @@
 <?php
 Route::group([
-	'prefix' => 'kerani-pemeriksaan',
+	'prefix' => 'kerani-pemeriksa',
 	'middleware' => [
 	'auth',
 	'role:7'

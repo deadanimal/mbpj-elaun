@@ -61,8 +61,6 @@ class semakanController extends Controller
         } else {
             return datatables()->of($this->findAllPermohonanForTypes($pilihan))->make(true);
         }
-        
-        
     }
 
     /**
