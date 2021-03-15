@@ -16,6 +16,8 @@ class PermohonanBaru extends Model
         'tarikh_akhir_kerja',
         'masa_mula',
         'masa_akhir',
+        'masa_mula_sebenar',
+        'masa_akhir_sebenar',
         'masa',
         'hari',
         'waktu',
@@ -43,7 +45,8 @@ class PermohonanBaru extends Model
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
         'status_akhir' => 2,
-        'tarikh_akhir_kerja' => '2021-01-01'
+        'tarikh_mula_kerja' => '',
+        'tarikh_akhir_kerja' => ''
     ];
 
     public function scopePermohonanPegawaiSokong($query)
@@ -53,7 +56,7 @@ class PermohonanBaru extends Model
                                  ->isNotApproved()
                                  ->isNotDitolakOrPerluKemaskini()
                                  ->notSahP2()
-                                 ->isNotDeleted();
+                                 ->statusAkhirTidakDitolak();
         });
     } 
 
@@ -64,21 +67,32 @@ class PermohonanBaru extends Model
                                      ->isApproved()
                                      ->isNotDitolakOrPerluKemaskini()
                                      ->notSahP2()
-                                     ->isNotDeleted();
+                                     ->statusAkhirTidakDitolak();
         });
     }
 
+    
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
         return $query->permohonanPegawaiSokong()
-                     ->orWhere(function (Builder $q) {
-                            return $q->permohonanPegawaiPelulus();
-                    })->notSahP2();
+        ->orWhere(function (Builder $q) {
+            return $q->permohonanPegawaiPelulus();
+        })->notSahP2();
+    }
+    
+    public function scopePermohonanKeraniPemeriksa($query)
+    {
+        return $query->where('jenis_permohonan', 'like', 'KPA%');
     }
 
-    public function scopeIsNotDeleted($query)
+    public function scopePermohonanKeraniSemakan($query)
     {
-        return $query->where('is_deleted', 0);
+        return $query->where('jenis_permohonan', 'like', 'KSA%');
+    }
+
+    public function scopeStatusAkhirTidakDitolak($query)
+    {
+        return $query->where('status_akhir', 2);
     }
 
     public function scopeIsNotApproved($query)

@@ -49,7 +49,7 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * 
+     *  
      */
     public function show(Request $request, $id)
     { 
@@ -61,8 +61,6 @@ class semakanController extends Controller
         } else {
             return datatables()->of($this->findAllPermohonanForTypes($pilihan))->make(true);
         }
-        
-        
     }
 
     /**

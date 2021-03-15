@@ -34,7 +34,6 @@ class CreatePermohonanBarusTable extends Migration
             $table->unsignedInteger('id_kerani_pemeriksa')->default('0');
             $table->unsignedInteger('id_kerani_semakan')->default('0');
             $table->unsignedInteger('peg_sokong_approved')->default('0');
-            $table->unsignedInteger('is_deleted')->default('0');
             $table->unsignedInteger('status_akhir');
             $table->timestamps();
         }); 

@@ -22,9 +22,10 @@ function saveCatatan() {
             jenis_permohonan : jenisPermohonan,
             is_kemaskini : is_kemaskini
         },
-        success: function() {
+        success: function(data) {
             console.log("Catatan saved");
             showDatatable(jenisPermohonan);
+
             
         },
         error: function() {

@@ -8,21 +8,16 @@
     @if(Auth::user()->role_id != '1'  )
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
-                {{ __('Default') }} 
+                {{ __('Dashboard') }} 
             @endslot
 
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
         @include('layouts.headers.cards') 
     @elseif(Auth::user()->role_id == '1'  )
     @component('layouts.headers.breadcrumbs')
             @slot('title') 
-                {{ __('Default') }} 
+                {{ __('Dashboard') }} 
             @endslot
-
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
         @include('layouts.headers.cards') 
     @endif
@@ -33,7 +28,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-                    <div class="card-header ">
+                    <div class="card-header bg-secondary">
                         <div class="row align-items-center">
                             <div class="col">
                                 <h3 class="mb-0">Pengurusan Sistem Elaun</h3>

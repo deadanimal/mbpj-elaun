@@ -29,7 +29,7 @@ class UpdateJenisPermohonanListener
     public function handle(PermohonanStatusChangedEvent $event)
     {
         $event->permohonan->refresh();
-        $array = array(0 =>'OT', 1 => 'PS', 2 => 'EL', 4 => 'KPA', 5 => 'KSA', 6 => 'PC');
+        $array = array(0 =>'OT', 1 => 'PS', 2 => 'EL', 3 => 'KPA', 4 => 'KSA', 5 => 'PC');
 
         $jenis_permohonan = $event->permohonan->jenis_permohonan;
         $level_permohonan = substr($jenis_permohonan, 0, -1);
@@ -54,10 +54,18 @@ class UpdateJenisPermohonanListener
             case 'DITOLAK':
                 $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
                 $event->permohonan->status_akhir = 0;
+
+                foreach ($event->permohonan->users as $user) {
+                    $event->permohonan
+                          ->users()
+                          ->updateExistingPivot($user->id, array(
+                                                    'is_rejected_individually' => 1
+                                                ));
+                }
                 break;
             case 'BATAL':
                 $event->permohonan->status_akhir = 0;
-                $event->permohonan->id_deleted = 1;
+
                 break;
             default: 
                 # code...

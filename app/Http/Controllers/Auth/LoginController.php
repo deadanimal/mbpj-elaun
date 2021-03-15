@@ -52,7 +52,7 @@ class LoginController extends Controller
                     return 'kerani-semakan/dashboard';
                 break; 
             case '7':
-                    return 'kerani-pemeriksaan/dashboard';
+                    return 'kerani-pemeriksa/dashboard';
                 break; 
             case '8':
                     return 'kakitangan/dashboard';

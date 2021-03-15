@@ -23,46 +23,74 @@
                                 </ul>
                             </div> 
 
-                            <form method="post" action="{{ route('profile.update') }}" id="formModalEdit" autocomplete="off" enctype="multipart/form-data">
+                            <form method="post" action="" id="formModalEdit" autocomplete="off" enctype="multipart/form-data">
                                 @csrf
                                 @method('put')
     
                                 @include('alerts.success')
                                 @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
     
-                                <div class="form-group mb-2">
+                                <div class="form-group mb-5">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
-                                    <input class="form-control" name="tarikhMohon" id="semakan-modal-tarikhMohon" type="text" placeholder="">
+                                    <input class="form-control" name="tarikhMohon-berkumpulan" id="semakan-modal-berkumpulan-tarikhMohon" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Tarikh Mula Kerja') }}</label>
+                                        <input class="form-control" name="tarikhMulaKerja-berkumpulan" id="semakan-modal-berkumpulan-tarikhMulaKerja" type="text" placeholder="">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Tarikh Akhir Kerja') }}</label>
+                                        <input class="form-control" name="tarikhAkhirKerja-berkumpulan" id="semakan-modal-berkumpulan-tarikhAkhirKerja" type="text" placeholder="">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Masa Mula') }}</label>
+                                        <input class="form-control" name="masaMula-berkumpulan" id="semakan-modal-berkumpulan-masaMula" type="text" placeholder="">
+                                        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group mb-2">
+                                        <label class="form-control-label">{{ __('Masa Akhir') }}</label>
+                                        <input class="form-control" name="masaAkhir-berkumpulan" id="semakan-modal-berkumpulan-masaAkhir" type="text" placeholder="">
+    
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {{-- VALUE IS USED TO STORE ID USER --}}
+                                    <div class="col form-group">
+                                        <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
+                                        <input class="form-control" name="masaMulaSebenar-berkumpulan" value="" id="semakan-modal-berkumpulan-masaMulaSebenar" type="text" placeholder="">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group">
+                                        <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
+                                        <input class="form-control" name="masaAkhirSebenar-berkumpulan" value="" id="semakan-modal-berkumpulan-masaAkhirSebenar" type="text" placeholder="">
+    
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
                                 </div>
                                 <div class="form-group mb-5">
-                                    <label class="form-control-label">{{ __('Tarikh Kerja') }}</label>
-                                    <input class="form-control" name="tarikhAkhirKerja" id="semakan-modal-tarikhAkhirKerja" type="text" placeholder="Default input">
-
-                                    @include('alerts.feedback', ['field' => 'name'])
+                                    <button type="button" onclick="kemaskiniModal('berkumpulan')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label">{{ __('Masa Mula') }}</label>
-                                    <input class="form-control" name="masaMula" id="semakan-modal-masaMula" type="text" placeholder="">
-                                    
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label">{{ __('Masa Akhir') }}</label>
-                                    <input class="form-control" name="masaAkhir" id="semakan-modal-masaAkhir" type="text" placeholder="">
+                                <div class="form-group">
+                                    <label class="form-control-label">{{ __('Lokasi') }}</label>
+                                    <input class="form-control" name="lokasi-berkumpulan" id="semakan-modal-berkumpulan-lokasi" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
-                                    <textarea class="form-control" name="tujuan" id="semakan-modal-tujuan" rows="3"></textarea>
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Lokasi') }}</label>
-                                    <textarea class="form-control" name="lokasi" id="semakan-modal-lokasi" rows="3" resize="none"></textarea>
+                                    <textarea class="form-control" name="tujuan-berkumpulan" id="semakan-modal-berkumpulan-tujuan" rows="3"></textarea>
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
