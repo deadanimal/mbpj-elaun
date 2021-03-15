@@ -71,7 +71,7 @@ class permohonanController extends Controller
             $permohonanbaru = new PermohonanBaru([
                 'id_peg_pelulus'    => $data['id_peg_pelulus'],
                 'id_peg_sokong' => $data['id_peg_sokong'],
-                'tarikh_permohonan' => $data['tarikh_permohonan'],
+                'tarikh_mula_kerja' => $data['tarikh_permohonan'],
                 'masa_mula' => $data['masa_mula'],
                 'masa_akhir'    => $data['masa_akhir'],
                 'tujuan'    => $data['tujuan'],
@@ -122,7 +122,7 @@ class permohonanController extends Controller
                 $permohonanbaru = new PermohonanBaru([
                     'id_peg_pelulus'    => $data['id_peg_pelulus'],
                     'id_peg_sokong' => $data['id_peg_sokong'],
-                    'tarikh_permohonan' => $data['tarikh_permohonan'],
+                    'tarikh_mula_kerja' => $data['tarikh_permohonan'],
                     'masa_mula' => $data['masa_mula'],
                     'masa_akhir'    => $data['masa_akhir'],
                     'tujuan'    => $data['tujuan'],

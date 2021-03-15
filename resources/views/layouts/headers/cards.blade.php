@@ -14,10 +14,6 @@
                     </div> 
                 </div>
             </div>
-            <p class="mt-3 mb-0 text-sm">
-                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                <span class="text-nowrap">Since last month</span>
-            </p>
         </div>
     </div>
 </div>
@@ -36,10 +32,6 @@
                     </div>
                 </div>
             </div>
-            <p class="mt-3 mb-0 text-sm">
-                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                <span class="text-nowrap">Since last month</span>
-            </p>
         </div>
     </div>
 </div>
@@ -58,10 +50,6 @@
                     </div>
                 </div>
             </div>
-            <p class="mt-3 mb-0 text-sm">
-                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                <span class="text-nowrap">Since last month</span>
-            </p>
         </div>
     </div>
 </div>
@@ -74,16 +62,12 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tahun Semasa</h5>
                         <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasa }}</span>
                     </div>
-                <div class="col-auto">
-                    <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-chart-bar-32"></i>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                            <i class="ni ni-chart-bar-32"></i>
+                        </div>
                     </div>
                 </div>
-                </div>
-                <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                </p>
             </div>
         </div>
     </div>

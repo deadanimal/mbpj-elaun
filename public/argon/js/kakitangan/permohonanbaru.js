@@ -9,6 +9,7 @@ var div = document.getElementById("new_chq");
 var nodelist = div.getElementsByTagName("div");
 var idPermohonan = 0;
 var reject = []
+var totalhours= 0;
 // if(nodelist.length == 0){
 //     document.getElementById("remove").disabled = true
 // }
@@ -199,7 +200,7 @@ function getIndividuDT(){
         columns: [
 
             {data: null},
-            {data: 'tarikh_permohonan'},
+            {data: 'tarikh_mula_kerja'},
             {data: 'status'},
             {data: 'progres'},
             {data: 'masa_mula'},
@@ -326,7 +327,7 @@ function getBerkumpulanDT(){
         columns: [
 
             {data: null, name: null},
-            {data: 'tarikh_permohonan'},
+            {data: 'tarikh_mula_kerja'},
             {data: 'status'},
             {data: 'progres'},
             {data: 'masa_mula'},
