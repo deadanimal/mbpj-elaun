@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class permohonan_with_users extends Model
 {
-    protected static function booted()
-    {
-        static::addGlobalScope('reject', function (Builder $builder) {
-            $builder->where('is_rejected_individually', 1);
-        });
-    }
     protected $table = 'permohonan_with_users';
     protected $fillable = [
         'is_rejected_individually',
@@ -22,4 +16,9 @@ class permohonan_with_users extends Model
     protected $attributes = [
         'is_rejected_individually' => 0,
     ];
+
+    public function scopeIsNotRejectedIndividually($query)
+    {
+        return $query->where('is_rejected_individually', 0);
+    }
 }

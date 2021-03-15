@@ -1,7 +1,9 @@
-function fillInKedatangan(idKakitangan, jenisPermohonan) {  
+function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {  
 
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
+
+    fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan);
 
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
@@ -28,7 +30,31 @@ function fillInKedatangan(idKakitangan, jenisPermohonan) {
                 $("#formEkedatangan input[name=jumlahOT3]").val(data.ekedatangans.jumlah_OT_3);
                 $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val(data.ekedatangans.jumlah_OT_keseluruhan);
                 $("#formEkedatangan input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
-            }
+            }  
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+}
+
+function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
+
+    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
+
+    $.ajax({
+        url: 'masa-sebenar/' + idKakitangan,
+        type: 'GET',
+        data: {
+            id_permohonan_baru : id_permohonan_baru
+        },
+        success: function(data) {
+            $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(data.masa_mula_sebenar); 
+            $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(data.masa_akhir_sebenar);
+
+            // VALUE STORES THE ID OF USER FOR KEMASKINI
+            document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').setAttribute("value", idKakitangan);
+            document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').setAttribute("value", id_permohonan_baru);
         },
         error: function(data) {
             console.log(data);

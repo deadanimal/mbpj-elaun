@@ -61,8 +61,8 @@ class RolesTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'id' => 7,
-            'name' => 'Kerani Pemeriksaan',
-            'description' => 'This is the Kerani Pemeriksaan role',
+            'name' => 'Kerani Pemeriksa',
+            'description' => 'This is the Kerani Pemeriksa role',
             'created_at' => now(),
             'updated_at' => now()
         ]);

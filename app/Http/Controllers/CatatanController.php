@@ -52,8 +52,15 @@ class CatatanController extends Controller
         ]);
 
         $permohonan->catatans()->save($catatan);
-        
+
+        $array = array();
+
+        foreach ($permohonan->users as $user) {
+            array_push($array, $user->permohonan_with_users->is_rejected_individually);
+        }   
+
         event(new PermohonanStatusChangedEvent($permohonan, 0, 0, 0));
+
     }
 
     /**
