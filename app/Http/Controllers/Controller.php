@@ -42,9 +42,10 @@ class Controller extends BaseController
         return $permohonans = PermohonanBaru::find($idPermohonanBaru)->users()->find($id);
     }
 
-    public function findPermohonanForKP($idPermohonanBaru)
+    public function findPermohonanForKP()
     {
-        // return $permohonans = PermohonanBaru::find($idPermohonanBaru)->permohonanKeraniPemeriksa()->get();
+        return $permohonans = PermohonanBaru::with("users")->permohonanKeraniPemeriksa()
+                                                           ->get();
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){

@@ -16,11 +16,11 @@ class PermohonanBaruController extends Controller
 {
     public function findPermohonan($idPermohananBaru)
     {
+        $senaraiKakitangan = array();
+
         $permohonan = PermohonanBaru::with('users')->find($idPermohananBaru);
         $tarikhPermohonan = $permohonan->created_at->format('Y-m-d');
         // $tarikhPermohonan = $permohonan->created_at->format('d-m-Y');
-
-        $senaraiKakitangan = array();
 
         foreach ($permohonan->users as $user) {
             if ($user->permohonan_with_users->is_rejected_individually != 1) {
@@ -56,34 +56,42 @@ class PermohonanBaruController extends Controller
         
         event(new PermohonanStatusChangedEvent($permohonan, 1, 0, 0));
 
-        $jenisPermohonan = array('KP', 'KS');
+        $jenisPermohonan = array('EL1', 'EL2');
+        $sahP1 = $permohonan->progres == 'Sah P1' ? TRUE : FALSE;
 
-        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan)) {
-            // loop/map
+        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP1) {
+            $this->saveElaun($permohonan);
+        };
+    }
 
-            $tuntutan = ($permohonan->users)->filter(function($user) {
-                return $user->permohonan_with_users
-                        ->is_rejected_individually != 1; 
-            })->each(function($user) use ($permohonan) {
-                $permohonan->users()
-                            ->updateExistingPivot($user->id, array('elaun' => $jumlahTuntuan->jumlahTuntutanRounded), false);
-            })->map(function ($user) {
-                $user->permohonan_with_users
-                        ->jumlah_tuntutan_elaun != 1;
-            });
+    public function saveElaun(PermohonanBaru $permohonan)
+    {
+        $tuntutan = ($permohonan->users)->filter(function($user) {
+            return $user->permohonan_with_users->is_rejected_individually != 1;
+            
+        })->each(function($user) use ($permohonan) {
+            $elaun = new KiraanElaunService($permohonan, $user->id);
+            $permohonan->users()
+                        ->updateExistingPivot($user->id, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
 
-            // foreach ($permohonan->users as $user) {
-            //     $jumlahTuntuan = new KiraanElaunService($permohonan, $user->id);
+            var_dump('saveElaun '.$elaun->jumlahTuntutanRounded());
+        })->map(function ($user) {
+            return $user->permohonan_with_users
+                    ->jumlah_tuntutan_elaun;
+        });
 
-            //     $notRejected = $user->permohonan_with_users->is_rejected_individually != 1;
+        
 
-            //     if($notRejected) {
-            //         $permohonan->users()
-            //                    ->updateExistingPivot($user->id, array('elaun' => $jumlahTuntuan->jumlahTuntutanRounded), false);
-            //     }
-            // }
-        }
+        // foreach ($permohonan->users as $user) {
+        //     $jumlahTuntuan = new KiraanElaunService($permohonan, $user->id);
 
+        //     $notRejected = $user->permohonan_with_users->is_rejected_individually != 1;
+
+        //     if($notRejected) {
+        //         $permohonan->users()
+        //                    ->updateExistingPivot($user->id, array('elaun' => $jumlahTuntuan->jumlahTuntutanRounded), false);
+        //     }
+        // }
     }
 
     public function rejectIndividually(Request $request, $id_permohonan_baru)

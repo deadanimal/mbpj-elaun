@@ -4,7 +4,7 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <h2 class="mb-2" id="titleTable"></h2>
+                        <h2 class="mb-2" id="titleTable">Tuntutn Elaun Lebih Masa</h2>
                     </div>
                 </div>
             </div>

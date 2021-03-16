@@ -123,7 +123,13 @@ class PermohonanBaru extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
-                    ->withPivot('masa_mula_sebenar','masa_akhir_sebenar','is_rejected_individually')
+                    ->withPivot(
+                                'masa_mula_sebenar',
+                                 'masa_akhir_sebenar',
+                                 'is_rejected_individually',
+                                 'masa_sebenar',
+                                 'jumlah_tuntutan_elaun'
+                                 )
                     ->as('permohonan_with_users');
     }
 
