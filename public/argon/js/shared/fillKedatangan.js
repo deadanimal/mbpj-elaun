@@ -9,11 +9,13 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
         success: function(data) {
-            let array =  ["EL1", "EL2", "PS1", "PS2"];
+            let array =  ['PS', 'EL', 'KP', 'KS'];
+            let jenisPermohonanShortened = jenisPermohonan.substr(0,2);
+      
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
             $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
 
-            if (array.includes(jenisPermohonan)) {
+            if (array.includes(jenisPermohonanShortened)) {
                 // eKedatangan
                 $("#formEkedatangan input[name=tarikh]").val(data.ekedatangans.tarikh);
                 $("#formEkedatangan input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);

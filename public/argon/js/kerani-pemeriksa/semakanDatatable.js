@@ -18,28 +18,35 @@ $("#padamCarian").click(function(){
 function showUser() {
     var id = document.querySelector("#noPekerja").value;
     var pilihan = document.getElementById('selectJenisPermohonan').value;
+    
 
         $.ajax({
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
                 $("#formOTEL input[name=nama]").val(data.users.name);
-
+                console.log(pilihan)
                 switch (pilihan) {
                     case 'individu':
                         pilihan = 'KP1';
-                        $('#semakanKPDT').DataTable().search(       
+                        $('#semakanKPDT').DataTable().columns(11).search(     
+                            id
+                        )
+                        $('#semakanKPDT').DataTable().columns(10).search(      
                             pilihan
                         ).draw();
                         break;
                     case 'berkumpulan':
                         pilihan = 'KP2';
-                        $('#semakanKPDT').DataTable().search(       
+                        $('#semakanKPDT').DataTable().columns(11).search(     
+                            id
+                        )
+                        $('#semakanKPDT').DataTable().columns(10).search(      
                             pilihan
                         ).draw();
                         break;
                     default:
-                        showDatatable(tabPilihan);
+                        showDatatable();
                         break;
                 }
 
@@ -81,6 +88,7 @@ function showDatatable(){
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
+                    {data: 'users[*].id'}
 
                 ],  
                 columnDefs: [
@@ -117,7 +125,12 @@ function showDatatable(){
                         targets: 10,
                         visible: false,
                         searchable: true
-                    }
+                    },
+                    {
+                        targets: 11,
+                        visible: false,
+                        searchable: true
+                    },
                 ], 
                 
             });

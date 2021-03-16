@@ -103,6 +103,26 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                     block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
+                
+                case "KP1":
+                    block_ekedatanganIndividu.style.display = "block";
+                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
+                    break;
+
+                case "KP2":
+                    block_ekedatanganBerkumpulan.style.display = "block";
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                    break;
+
+                case "KS1":
+                    block_ekedatanganIndividu.style.display = "block";
+                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
+                    break;
+
+                case "KS2":
+                    block_ekedatanganBerkumpulan.style.display = "block";
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                    break;
             
                 default:
                     break;
