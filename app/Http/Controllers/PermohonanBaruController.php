@@ -74,7 +74,6 @@ class PermohonanBaruController extends Controller
             $permohonan->users()
                         ->updateExistingPivot($user->id, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
 
-            var_dump('saveElaun '.$elaun->jumlahTuntutanRounded());
         })->map(function ($user) {
             return $user->permohonan_with_users
                     ->jumlah_tuntutan_elaun;

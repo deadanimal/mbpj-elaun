@@ -53,7 +53,7 @@ class semakanController extends Controller
      */
     public function show(Request $request, $id)
     { 
-        $pilihan = $request->input('pilihan');
+        // $pilihan = $request->input('pilihan');
         // $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
         
         // if (strlen($pilihan) == 3){

@@ -15,7 +15,6 @@ class KiraanElaunService {
     public $jumlahMasaBekerja;
     public float $gaji;
     public float $kadarPerJam;
-    // public float $jumlahTuntutan;
 
     /**
      * Create a new event instance.
@@ -29,7 +28,6 @@ class KiraanElaunService {
         $this->permohonan = $permohonan;
         $this->gaji = User::find($id_user)->gaji;
         $this->kadarPerJam = floatval($permohonan->kadar_jam);
-        // $this->jumlahTuntutan = 0;
 
         foreach ($permohonan->users as $user) {
             if ($user->id == $id_user) {
@@ -52,7 +50,7 @@ class KiraanElaunService {
     {
         $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
         $jumlahTuntutan = $bayaranPerJam * $this->jumlahMasaBekerja;
-        
+
         return round($jumlahTuntutan, 2);
     }
 
