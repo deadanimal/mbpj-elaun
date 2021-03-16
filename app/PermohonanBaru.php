@@ -82,7 +82,7 @@ class PermohonanBaru extends Model
     public function scopePermohonanKeraniPemeriksa($query)
     {
         return $query->where(function (Builder $q) {
-                        return $q->where('jenis_permohonan', 'like', 'KPA%')
+                        return $q->where('jenis_permohonan', 'like', 'KP%')
                                  ->statusAkhirTidakDitolak();
                         });
     }
@@ -90,7 +90,7 @@ class PermohonanBaru extends Model
     public function scopePermohonanKeraniSemakan($query)
     {
         return $query->where(function (Builder $q) {
-                        return $q->where('jenis_permohonan', 'like', 'KSA%')
+                        return $q->where('jenis_permohonan', 'like', 'KS%')
                                 ->statusAkhirTidakDitolak();
                         });
     }

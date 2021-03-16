@@ -7,6 +7,7 @@ use App\PermohonanBaru;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request; 
 use App\permohonan_with_users;
+use App\Services\KiraanElaunService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Events\PermohonanStatusChangedEvent;
@@ -55,9 +56,33 @@ class PermohonanBaruController extends Controller
         
         event(new PermohonanStatusChangedEvent($permohonan, 1, 0, 0));
 
-        // if ($permohohan->jenis_permohonan[] ) {
-        //     # code...
-        // }
+        $jenisPermohonan = array('KP', 'KS');
+
+        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan)) {
+            // loop/map
+
+            $tuntutan = ($permohonan->users)->filter(function($user) {
+                return $user->permohonan_with_users
+                        ->is_rejected_individually != 1; 
+            })->each(function($user) use ($permohonan) {
+                $permohonan->users()
+                            ->updateExistingPivot($user->id, array('elaun' => $jumlahTuntuan->jumlahTuntutanRounded), false);
+            })->map(function ($user) {
+                $user->permohonan_with_users
+                        ->jumlah_tuntutan_elaun != 1;
+            });
+
+            // foreach ($permohonan->users as $user) {
+            //     $jumlahTuntuan = new KiraanElaunService($permohonan, $user->id);
+
+            //     $notRejected = $user->permohonan_with_users->is_rejected_individually != 1;
+
+            //     if($notRejected) {
+            //         $permohonan->users()
+            //                    ->updateExistingPivot($user->id, array('elaun' => $jumlahTuntuan->jumlahTuntutanRounded), false);
+            //     }
+            // }
+        }
 
     }
 

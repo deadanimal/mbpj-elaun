@@ -12,6 +12,8 @@ class permohonan_with_users extends Model
         'is_rejected_individually',
         'masa_mula_sebenar',
         'masa_akhir_sebenar',
+        'masa_sebenar',
+        'jumlah_tuntutan_elaun'
     ];
     protected $attributes = [
         'is_rejected_individually' => 0,
