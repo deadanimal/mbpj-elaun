@@ -21,7 +21,7 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img src="{{ auth()->user()->profilePicture() }}" class="rounded-circle">
+                                    <img src="{{ asset('argon') }}/img/icons/profile/silhouette.jpg" class="border border-dark rounded-circle">
                                 </a>
                             </div>
                         </div>

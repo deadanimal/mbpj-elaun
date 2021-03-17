@@ -18,7 +18,7 @@ class penyeliaController extends Controller
      */
     public function index(UsersDataTable $dataTable)
     {
-        return $dataTable->render('core.penyelia.dashboard');
+        return view('core.penyelia.dashboard');
     }
     
     
@@ -50,9 +50,11 @@ class penyeliaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
         //
+
+        return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->get())->make(true); 
     }
 
     /**

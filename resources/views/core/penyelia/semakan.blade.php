@@ -8,7 +8,7 @@
 @section('content')
     @include('forms.header', [
          'title' => __('Selamat Datang ke Modul Penyelia') . ' ',
-        'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
+        'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
         'class' => 'col-lg-7'
     ])
 

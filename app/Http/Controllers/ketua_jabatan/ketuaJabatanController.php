@@ -15,9 +15,9 @@ class ketuaJabatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.ketua_jabatan.dashboard');
+        return view('core.ketua_jabatan.dashboard');
     }
     
     
@@ -52,6 +52,8 @@ class ketuaJabatanController extends Controller
     public function show($id)
     {
         //
+        return datatables()->of($this->findPermohonanUser($id)->where('id_peg_pelulus',$id)->get())->make(true); 
+
     }
 
     /**
