@@ -17,21 +17,21 @@ class Controller extends BaseController
 
     public function findPermohonanWithID($jenisPermohonan, $id){
         return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan', $jenisPermohonan)
-                                                           ->statusAkhirTidakDitolak();
+                                                           ->statusAkhirBelomDiterima();
 
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
 
         return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan_kakitangan', $jenisPermohonan)
-                                                           ->statusAkhirTidakDitolak();
+                                                           ->statusAkhirBelomDiterima();
 
     }
 
     public function findPermohonanWithIDSemakan($jenisPermohonan,$jenisPermohonanKT,$id){
         return $permohonans = User::find($id)->permohonans()->whereIn('jenis_permohonan',$jenisPermohonan)
                                                         ->whereIn('jenis_permohonan_kakitangan',$jenisPermohonanKT)
-                                                        ->statusAkhirTidakDitolak();
+                                                        ->statusAkhirBelomDiterima();
     }
 
     public function findPermohonanUser($idPermohonanBaru){

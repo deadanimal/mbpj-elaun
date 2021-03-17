@@ -14,8 +14,6 @@ function saveCatatan() {
         is_kemaskini = 1;
     }  
 
-    console.log({catatan});
-
     $.ajax({
         url: "catatan/" + id_permohonan,
         type: 'POST',
@@ -28,7 +26,6 @@ function saveCatatan() {
             console.log("Catatan saved");
             showDatatable(jenisPermohonan);
 
-            
         },
         error: function() {
             console.log('Catatan failed');

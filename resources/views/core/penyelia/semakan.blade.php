@@ -70,7 +70,6 @@
 {{-- Modal --}}
 @include('core.penyelia.partials.modals-semakan.modalEditIndividuPenyelia')
 @include('core.penyelia.partials.modals-semakan.modalEditBerkumpulanPenyelia')
-@include('core.penyelia.partials.modals-semakan.modalValidatePenyelia')
 @include('core.penyelia.partials.modals-semakan.modalRejectPenyelia')
 @endsection
 

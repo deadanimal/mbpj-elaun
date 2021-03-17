@@ -39,7 +39,6 @@
 {{-- Modal --}}
 @include('core.kerani_semakan.partials.modals-semakan.modalEditIndividuKeraniSemakan')
 @include('core.kerani_semakan.partials.modals-semakan.modalEditBerkumpulanKeraniSemakan')
-@include('core.kerani_semakan.partials.modals-semakan.modalValidateKeraniSemakan')
 @include('core.kerani_semakan.partials.modals-semakan.modalRejectKeraniSemakan')
 @endsection
 

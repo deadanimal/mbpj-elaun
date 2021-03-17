@@ -56,7 +56,7 @@ class PermohonanBaru extends Model
                                  ->isNotApproved()
                                  ->isNotDitolakOrPerluKemaskini()
                                  ->notSahP2()
-                                 ->statusAkhirTidakDitolak();
+                                 ->statusAkhirBelomDiterima();
         });
     } 
 
@@ -67,7 +67,7 @@ class PermohonanBaru extends Model
                                      ->isApproved()
                                      ->isNotDitolakOrPerluKemaskini()
                                      ->notSahP2()
-                                     ->statusAkhirTidakDitolak();
+                                     ->statusAkhirBelomDiterima();
                         });
     }
 
@@ -83,7 +83,7 @@ class PermohonanBaru extends Model
     {
         return $query->where(function (Builder $q) {
                         return $q->where('jenis_permohonan', 'like', 'KP%')
-                                 ->statusAkhirTidakDitolak();
+                                 ->statusAkhirBelomDiterima();
                         });
     }
 
@@ -91,11 +91,11 @@ class PermohonanBaru extends Model
     {
         return $query->where(function (Builder $q) {
                         return $q->where('jenis_permohonan', 'like', 'KS%')
-                                ->statusAkhirTidakDitolak();
+                                ->statusAkhirBelomDiterima();
                         });
     }
 
-    public function scopeStatusAkhirTidakDitolak($query)
+    public function scopeStatusAkhirBelomDiterima($query)
     {
         return $query->where('status_akhir', 2);
     }
