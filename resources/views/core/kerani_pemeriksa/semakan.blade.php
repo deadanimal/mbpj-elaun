@@ -17,7 +17,7 @@
             <div class="col-xl-12">
 
                 {{-- Tab options --}}
-                    <div class="nav-wrapper">
+                    {{-- <div class="nav-wrapper">
                         <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
@@ -44,7 +44,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                 
                 <div class="card shadow">

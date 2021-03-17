@@ -16,10 +16,10 @@ class ketuaBahagianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
         
-        return $dataTable->render('core.ketua_bahagian.dashboard');
+        return view('core.ketua_bahagian.dashboard');
     }
     
     
@@ -54,6 +54,8 @@ class ketuaBahagianController extends Controller
     public function show($id)
     {
         //
+        return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->orWhere('id_peg_pelulus',$id)->get())->make(true); 
+
     }
 
     /**

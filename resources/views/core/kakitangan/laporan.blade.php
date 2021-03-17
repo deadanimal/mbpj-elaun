@@ -7,7 +7,7 @@
 @section('content')
     @component('layouts.headers.auth') 
         <div class="row">
-             <h1 class="my-4" style="color:white">{{ __('Laporan') }} </h1>
+             <h1 class="my-4 text-dark">{{ __('Laporan') }} </h1>
         </div> 
     @endcomponent
 

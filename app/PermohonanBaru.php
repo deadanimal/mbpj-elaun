@@ -68,26 +68,31 @@ class PermohonanBaru extends Model
                                      ->isNotDitolakOrPerluKemaskini()
                                      ->notSahP2()
                                      ->statusAkhirTidakDitolak();
-        });
+                        });
     }
 
-    
     public function scopePermohonanPegawaiSokongAtauPelulus($query)
     {
         return $query->permohonanPegawaiSokong()
-        ->orWhere(function (Builder $q) {
-            return $q->permohonanPegawaiPelulus();
-        })->notSahP2();
+                     ->orWhere(function (Builder $q) {
+                            return $q->permohonanPegawaiPelulus(); })
+                     ->notSahP2();
     }
     
     public function scopePermohonanKeraniPemeriksa($query)
     {
-        return $query->where('jenis_permohonan', 'like', 'KPA%');
+        return $query->where(function (Builder $q) {
+                        return $q->where('jenis_permohonan', 'like', 'KP%')
+                                 ->statusAkhirTidakDitolak();
+                        });
     }
 
     public function scopePermohonanKeraniSemakan($query)
     {
-        return $query->where('jenis_permohonan', 'like', 'KSA%');
+        return $query->where(function (Builder $q) {
+                        return $q->where('jenis_permohonan', 'like', 'KS%')
+                                ->statusAkhirTidakDitolak();
+                        });
     }
 
     public function scopeStatusAkhirTidakDitolak($query)
@@ -118,7 +123,13 @@ class PermohonanBaru extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
-                    ->withPivot('masa_mula_sebenar','masa_akhir_sebenar','is_rejected_individually')
+                    ->withPivot(
+                                'masa_mula_sebenar',
+                                 'masa_akhir_sebenar',
+                                 'is_rejected_individually',
+                                 'masa_sebenar',
+                                 'jumlah_tuntutan_elaun'
+                                 )
                     ->as('permohonan_with_users');
     }
 

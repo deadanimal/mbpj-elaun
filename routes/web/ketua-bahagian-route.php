@@ -50,7 +50,7 @@ Route::group([
 			'as' => 'permohonan-baru.store',
 		]);
 	}); 
-	Route::resource('ketua-bahagian-dashboard','ketua_bahagian\ketuaBahagianController',['except' => ['show','destroy']]);
+	Route::resource('ketua-bahagian-dashboard','ketua_bahagian\ketuaBahagianController',['except' => ['destroy']]);
 	Route::resource('ketua-bahagian-semakan','ketua_bahagian\semakanController',['except' => ['destroy']]);
 	Route::resource('ketua-bahagian-laporan','ketua_bahagian\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-bahagian-bantuan','ketua_bahagian\bantuanController',['except' => ['show','destroy']]);
