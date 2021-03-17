@@ -1,5 +1,4 @@
 function approvedKelulusan(id_permohonan_baru, pilihan) {
-    console.log({id_permohonan_baru, pilihan});
     Swal.fire({
         icon: 'info',
         title: 'Luluskan Permohonan?',
@@ -12,7 +11,7 @@ function approvedKelulusan(id_permohonan_baru, pilihan) {
             'Batal'
     }).then((result) => {
         if (result.isConfirmed) {
-
+            
             $.ajax({
                 url: "permohonan-baru/semakan-kelulusan/" + id_permohonan_baru,
                 type: 'POST',
@@ -23,22 +22,12 @@ function approvedKelulusan(id_permohonan_baru, pilihan) {
                         'Sedang Diproses',
                         'success'
                     ); 
-        
-                    // if (pilihan == 'KP' || 'KS') {
-                    //     showDatatable();
-                    // } else {
-                        showDatatable(pilihan);
-                    // }
-                    
+                    showDatatable(pilihan);                    
                 },
                 error: function() {
                     console.log('failed');
                 } 
             });
-
-            
-          } else if (result.isDenied) {
-            Swal.fire('', '', 'info')
-          }        
+          } else if (result.isDenied) { Swal.fire('', '', 'info') }        
     })
 }

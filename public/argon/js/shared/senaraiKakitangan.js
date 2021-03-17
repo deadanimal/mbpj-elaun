@@ -17,17 +17,14 @@ function fillInSenaraiKakitangan(senaraiKakitangan, jenisPermohonan) {
 }
 
 function rejectIndividually(id_permohonan_baru, id_user, name_user) {
-
     Swal.fire({
         icon: 'info',
         title: 'Tolak Permohonan ' + name_user + '?',
         text: '',
         showCloseButton: true,
         showCancelButton: true,
-        confirmButtonText:
-            'Tolak',
-        cancelButtonText:
-            'Tutup'
+        confirmButtonText: 'Tolak',
+        cancelButtonText: 'Tutup'
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire('Permohonan Ditolak', '', 'success');
@@ -40,16 +37,9 @@ function rejectIndividually(id_permohonan_baru, id_user, name_user) {
                 },
                 success: function() {
                     document.getElementById(id_user).setAttribute("class", "nav-link disabled");
-    
                 },
-                error: function(data) {
-                    console.log(data);
-                    console.log('FAIL REJECT');
-                } 
+                error: function() { console.log('FAIL REJECT'); } 
             });
-
-          } else if (result.isDenied) {
-            Swal.fire('', '', 'info')
-          }        
+          } else if (result.isDenied) { Swal.fire('', '', 'info') }        
       })
 }

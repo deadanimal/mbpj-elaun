@@ -42,7 +42,6 @@ class KiraanElaunService {
     {
         $gajiSetahun = $this->gaji * self::SETAHUN;
         (float) $jamBekerja = self::HARI_BEKERJA * self::JAM_BEKERJA;
-
         $kadarBayaranSejam = $gajiSetahun/$jamBekerja;
 
         return round($kadarBayaranSejam, 2);
@@ -52,20 +51,19 @@ class KiraanElaunService {
     {
         $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
         $jumlahTuntutan = round($bayaranPerJam, 2) * $this->jumlahMasaBekerja;
-        
-        $this->tuntutanLebihSebulanGaji();
+        $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
 
-        return $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
+        if ($this->jumlahTuntutanAkhir >= $this->gaji) {
+            $this->tuntutanLebihSebulanGaji();
+        }
+
+        return $this->jumlahTuntutanAkhir;
     }
 
     public function tuntutanLebihSebulanGaji()
     {
-        if ($this->jumlahTuntutanAkhir >= $this->gaji) {
-            $this->permohonan->is_for_datuk_bandar = 1;
-        }
-
+        $this->permohonan->is_for_datuk_bandar = 1;
         $this->permohonan->save();
-
     }
 }
 

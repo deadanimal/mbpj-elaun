@@ -38,7 +38,6 @@ class UpdateStatusListener
         $event->permohonan->refresh();
 
         $id_peg_sokong =  $event->permohonan->id_peg_sokong;
-
         $is_batal = $event->is_batal;
         $is_terima = $event->is_terima;
         $is_renewedPermohonan = $event->is_renewedPermohonan;
@@ -73,11 +72,9 @@ class UpdateStatusListener
                 $event->permohonan->progres = 'Sah KS';
                 $event->permohonan->status_akhir = 1;
                 break;
-
             case 'DB':
                 $event->permohonan->progres = 'Sah DB';
                 break;
-            
             default:
                 if ($is_peg_sokong) {
                     $event->permohonan->peg_sokong_approved = 1;
@@ -94,7 +91,6 @@ class UpdateStatusListener
     public function permohonanRejected(PermohonanStatusChangedEvent $event)
     {
         $event->permohonan->peg_sokong_approved = 0;
-
         $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
 
         if ($is_kemaskini) {

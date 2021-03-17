@@ -1,10 +1,11 @@
 function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {  
+    let is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
 
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
 
-    fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan);
-    fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan);
+    fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu);
+    fillInGaji(idKakitangan, id_permohonan_baru, is_individu);
 
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
@@ -16,8 +17,8 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
             $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
 
+            // eKedatangan
             if (array.includes(jenisPermohonanShortened)) {
-                // eKedatangan
                 $("#formEkedatangan input[name=tarikh]").val(data.ekedatangans.tarikh);
                 $("#formEkedatangan input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);
                 $("#formEkedatangan input[name=waktuKeluar]").val(data.ekedatangans.jumlah_waktu_kerja);
@@ -35,16 +36,11 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
                 $("#formEkedatangan input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
             }  
         },
-        error: function(data) {
-            console.log(data);
-        }
+        error: function(data) { console.log(data); }
     });
 }
 
-function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
-
-    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-
+function fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu) {
     $.ajax({
         url: 'masa-sebenar/' + idKakitangan,
         type: 'GET',
@@ -61,16 +57,11 @@ function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').setAttribute("value", idKakitangan);
             document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').setAttribute("value", id_permohonan_baru);
         },
-        error: function(data) {
-            console.log(data);
-        }
+        error: function(data) { console.log(data); }
     });
 }
 
-function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
-
-    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-
+function fillInGaji(idKakitangan, id_permohonan_baru, is_individu) {
     $.ajax({
         url: 'tuntutan-elaun/' + idKakitangan,
         type: 'GET',
@@ -83,9 +74,7 @@ function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
             $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
         },
-        error: function(data) {
-            console.log(data);
-        }
+        error: function(data) { console.log(data); }
     });
     
 }
