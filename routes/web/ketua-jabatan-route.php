@@ -51,7 +51,7 @@ Route::group([
 			'as' => 'permohonan-baru.store',
 		]);
 	});
-	Route::resource('ketua-jabatan-dashboard','ketua_jabatan\ketuaJabatanController',['except' => ['show','destroy']]);
+	Route::resource('ketua-jabatan-dashboard','ketua_jabatan\ketuaJabatanController',['except' => ['destroy']]);
 	Route::resource('ketua-jabatan-semakan','ketua_jabatan\semakanController',['except' => ['destroy']]);
 	Route::resource('ketua-jabatan-laporan','ketua_jabatan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('ketua-jabatan-bantuan','ketua_jabatan\bantuanController',['except' => ['show','destroy']]);

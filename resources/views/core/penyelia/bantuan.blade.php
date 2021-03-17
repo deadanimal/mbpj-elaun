@@ -10,24 +10,26 @@
 
     <div class="container-fluid mt--6">
         
-        <div class="row">
+        <div class="row mt-6">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h2 class="mb-2">{{ __('Manual Pengguna') }}</h2>
-                            </div>
+                        <div class="col-8">
+                            <h3 class="pt-2">{{ __('Manual Pengguna') }}</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-6 ml-5">
-                            <strong>
-                                Panduan ini akan membimbing anda melalui asas menggunakan
-                                Sistem Pengurusan Elaun Lebih Masa termasuk cara mendaftar, 
-                                log masuk ke laman web dan mengisi borang
-                            </strong>
-                            <div class="mt-4">
+                        <div class="row">
+                            <div class="col-12 mx-4">
+                                <strong>
+                                    Panduan ini akan membimbing anda melalui asas menggunakan
+                                    Sistem Pengurusan Elaun Lebih Masa termasuk cara mendaftar, 
+                                    log masuk ke laman web dan mengisi borang
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mt-4 mx-4">
                                 <span class="text-blue ni ni-folder-17"></span>
                                 <a href="">Muat turun manual pengguna</a>
                             </div>
@@ -41,24 +43,26 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h2 class="mb-2">{{ __('Versi Sistem') }}</h2>
-                            </div>
+                        <div class="col">
+                            <h3 class="pt-2">{{ __('Versi Sistem') }}</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-6 ml-5">
-                            <strong>
-                                Versi Sistem Elaun Lebih Masa
-                            </strong>
-                            <div class="mt-4">
+                        <div class="row">
+                            <div class="col-6 mx-4">
+                                <strong>
+                                    Versi Sistem Elaun Lebih Masa
+                                </strong>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mx-4 mt-4">
                                 <span class="text-blue ni ni-settings">
                                     <strong>
                                         Versi 2020 1.0
                                     </strong> 
                                 </span>
-                                
                             </div>
                         </div>
                     </div>
@@ -70,10 +74,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h2 class="mb-2">{{ __('Maklumat Aduan') }}</h2>
-                            </div>
+                        <div class="col-8">
+                            <h3 class="pt-2">{{ __('Maklumat Aduan') }}</h3>
                         </div>
                     </div>
                     <div class="card-body">
