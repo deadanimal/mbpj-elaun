@@ -14,6 +14,8 @@ function saveCatatan() {
         is_kemaskini = 1;
     }  
 
+    console.log({catatan});
+
     $.ajax({
         url: "catatan/" + id_permohonan,
         type: 'POST',

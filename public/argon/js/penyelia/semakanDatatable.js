@@ -148,14 +148,11 @@ function showDatatable(pilihan){
                 
             });
             if(id_user != ''){
-            $('#semakanPYDT').DataTable().search(
-                $("#noPekerja").val(),
-                pilihan
-            ).draw();
-            }else
-            {
-                
-            }
+                $('#semakanPYDT').DataTable().search(
+                    $("#noPekerja").val(),
+                    pilihan
+                ).draw();
+            } else {}
 }
 
 $("#selectJenisPermohonan").on("change",function(){

@@ -82,7 +82,6 @@ function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
 
             $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
             $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
-
         },
         error: function(data) {
             console.log(data);

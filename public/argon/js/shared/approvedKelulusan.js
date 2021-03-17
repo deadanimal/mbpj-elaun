@@ -1,5 +1,5 @@
 function approvedKelulusan(id_permohonan_baru, pilihan) {
-    
+    console.log({id_permohonan_baru, pilihan});
     Swal.fire({
         icon: 'info',
         title: 'Luluskan Permohonan?',
@@ -24,7 +24,11 @@ function approvedKelulusan(id_permohonan_baru, pilihan) {
                         'success'
                     ); 
         
-                    showDatatable(pilihan);
+                    // if (pilihan == 'KP' || 'KS') {
+                    //     showDatatable();
+                    // } else {
+                        showDatatable(pilihan);
+                    // }
                     
                 },
                 error: function() {
