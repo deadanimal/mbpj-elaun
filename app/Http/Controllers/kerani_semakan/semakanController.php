@@ -53,18 +53,7 @@ class semakanController extends Controller
      */
     public function show(Request $request, $id)
     { 
-        // $pilihan = $request->input('pilihan');
-        // $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
-        
-        // if(strlen($pilihan) == 3){
-        //     return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
-        // }else
-        // {
-        //     return datatables()->of($this->findAllPermohonanForTypes($pilihan))
-        //     ->make(true);
-        // }
-        
-        return datatables()->of($this->findPermohonanForKP())->make(true);
+        return datatables()->of($this->findPermohonanForKS())->make(true);
     }
 
     /**

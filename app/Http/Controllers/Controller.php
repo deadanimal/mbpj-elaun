@@ -48,6 +48,12 @@ class Controller extends BaseController
                                                            ->get();
     }
 
+    public function findPermohonanForKS()
+    {
+        return $permohonans = PermohonanBaru::with("users")->permohonanKeraniSemakan()
+                                                           ->get();
+    }
+
     public function findAllPermohonanForTypes($jenisPermohonan){
 
         switch (Auth::user()->role_id) {
