@@ -4,7 +4,7 @@ $("#modal-default").modal("dispose");
 // set default title of modal to Permohonan Kerja Lebih Masa
 document.getElementById("modal-title-individu-title").innerHTML = "Permohonan Kerja Lebih Masa";
 document.getElementById("modal-title-berkumpulan-title").innerHTML = "Permohonan Kerja Lebih Masa";
-document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
+// document.getElementById("titleTable").innerHTML = "Permohonan Baru Kerja Lebih Masa";
 
 function retrieveTabPilihan(id) {
     // console.log(id);
