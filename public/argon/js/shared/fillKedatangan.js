@@ -76,12 +76,20 @@ function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            const {error, gaji, jumlah_tuntutan_elaun} = data;
+            // let {error, gaji, jumlah_tuntutan_elaun} = data;
+            // let temp = JSON.stringify(jumlah_tuntutan_elaun[1]);
+            // let temp = jumlah_tuntutan_elaun[1];
+            // console.log({gaji, temp});
+            // console.log(jumlah_tuntutan_elaun);
+            console.log(data.jumlah_tuntutan_elaun);
+            console.log(JSON.stringify(data.jumlah_tuntutan_elaun));
 
-            console.log({gaji, jumlah_tuntutan_elaun});
+            $('input[name=gaji-'+is_individu+']').val('RM '+data.gaji); 
+            // $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
+            // $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
+            $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+data.jumlah_tuntutan_elaun);
+            // $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+JSON.stringify(jumlah_tuntutan_elaun));
 
-            $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
-            $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
         },
         error: function(data) {
             console.log(data);

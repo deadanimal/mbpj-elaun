@@ -84,14 +84,14 @@ class PermohonanBaruController extends Controller
     {
         $id_permohonan_baru = $request->input('id_permohonan_baru');
 
-        $permohonan = PermohonanBaru::with('users')->find($id_permohonan_baru);
+        $permohonan = PermohonanBaru::find($id_permohonan_baru);
         $gaji = User::find($id_user)->gaji;
 
-        $jumlah_tuntutan_elaun = $permohonan->users->filter(function ($user) use ($id_user){
-            if ($user->id == $id_user){ return $user; }
-        })->map(function ($user) {
-            return $user->permohonan_with_users->jumlah_tuntutan_elaun;
-        });
+        foreach ($permohonan->users as $user) {
+            if ($user->id == $id_user){ 
+                $jumlah_tuntutan_elaun = $user->permohonan_with_users->jumlah_tuntutan_elaun;
+            }
+        };
 
         return response()->json([
             'error' => false,
