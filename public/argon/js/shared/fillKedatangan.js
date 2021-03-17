@@ -52,8 +52,10 @@ function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(data.masa_mula_sebenar); 
-            $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(data.masa_akhir_sebenar);
+            let {error, masa_mula_sebenar, masa_akhir_sebenar} = data;
+
+            $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(masa_mula_sebenar); 
+            $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(masa_akhir_sebenar);
 
             // VALUE STORES THE ID OF USER FOR KEMASKINI
             document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').setAttribute("value", idKakitangan);
@@ -76,19 +78,10 @@ function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            // let {error, gaji, jumlah_tuntutan_elaun} = data;
-            // let temp = JSON.stringify(jumlah_tuntutan_elaun[1]);
-            // let temp = jumlah_tuntutan_elaun[1];
-            // console.log({gaji, temp});
-            // console.log(jumlah_tuntutan_elaun);
-            console.log(data.jumlah_tuntutan_elaun);
-            console.log(JSON.stringify(data.jumlah_tuntutan_elaun));
+            let {error, gaji, jumlah_tuntutan_elaun} = data;
 
-            $('input[name=gaji-'+is_individu+']').val('RM '+data.gaji); 
-            // $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
-            // $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
-            $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+data.jumlah_tuntutan_elaun);
-            // $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+JSON.stringify(jumlah_tuntutan_elaun));
+            $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
+            $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
 
         },
         error: function(data) {
