@@ -15,6 +15,7 @@ class KiraanElaunService {
     public $jumlahMasaBekerja;
     public float $gaji;
     public float $kadarPerJam;
+    public float $jumlahTuntutanAkhir;
 
     /**
      * Create a new event instance.
@@ -28,6 +29,7 @@ class KiraanElaunService {
         $this->permohonan = $permohonan;
         $this->gaji = User::find($id_user)->gaji;
         $this->kadarPerJam = floatval($permohonan->kadar_jam);
+        $this->jumlahTuntutanAkhir = 0;
 
         foreach ($permohonan->users as $user) {
             if ($user->id == $id_user) {
@@ -49,14 +51,21 @@ class KiraanElaunService {
     public function jumlahTuntutanRounded()
     {
         $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
-        $jumlahTuntutan = $bayaranPerJam * $this->jumlahMasaBekerja;
+        $jumlahTuntutan = round($bayaranPerJam, 2) * $this->jumlahMasaBekerja;
+        
+        $this->tuntutanLebihSebulanGaji();
 
-        return round($jumlahTuntutan, 2);
+        return $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
     }
 
     public function tuntutanLebihSebulanGaji()
     {
-        return $this->jumlahTuntutanRounded >= $this->gaji ? TRUE : FALSE;
+        if ($this->jumlahTuntutanAkhir >= $this->gaji) {
+            $this->permohonan->is_for_datuk_bandar = 1;
+        }
+
+        $this->permohonan->save();
+
     }
 }
 

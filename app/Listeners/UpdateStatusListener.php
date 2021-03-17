@@ -73,6 +73,10 @@ class UpdateStatusListener
                 $event->permohonan->progres = 'Sah KS';
                 $event->permohonan->status_akhir = 1;
                 break;
+
+            case 'DB':
+                $event->permohonan->progres = 'Sah DB';
+                break;
             
             default:
                 if ($is_peg_sokong) {
