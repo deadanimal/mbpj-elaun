@@ -4,6 +4,7 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
 
     fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan);
+    fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan);
 
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
@@ -62,4 +63,29 @@ function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             console.log(data);
         }
     });
+}
+
+function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
+
+    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
+
+    $.ajax({
+        url: 'tuntutan-elaun/' + idKakitangan,
+        type: 'GET',
+        data: {
+            id_permohonan_baru : id_permohonan_baru
+        },
+        success: function(data) {
+            const {error, gaji, jumlah_tuntutan_elaun} = data;
+
+            console.log({gaji, jumlah_tuntutan_elaun});
+
+            $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
+            $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
+        },
+        error: function(data) {
+            console.log(data);
+        }
+    });
+    
 }

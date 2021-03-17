@@ -78,19 +78,27 @@ class PermohonanBaruController extends Controller
             return $user->permohonan_with_users
                     ->jumlah_tuntutan_elaun;
         });
+    }
 
-        
+    public function findGajiElaun(Request $request, $id_user)
+    {
+        $id_permohonan_baru = $request->input('id_permohonan_baru');
 
-        // foreach ($permohonan->users as $user) {
-        //     $jumlahTuntuan = new KiraanElaunService($permohonan, $user->id);
+        $permohonan = PermohonanBaru::with('users')->find($id_permohonan_baru);
+        $gaji = User::find($id_user)->gaji;
 
-        //     $notRejected = $user->permohonan_with_users->is_rejected_individually != 1;
+        $jumlah_tuntutan_elaun = $permohonan->users->filter(function ($user) use ($id_user){
+            if ($user->id == $id_user){ return $user; }
+        })->map(function ($user) {
+            return $user->permohonan_with_users->jumlah_tuntutan_elaun;
+        });
 
-        //     if($notRejected) {
-        //         $permohonan->users()
-        //                    ->updateExistingPivot($user->id, array('elaun' => $jumlahTuntuan->jumlahTuntutanRounded), false);
-        //     }
-        // }
+        return response()->json([
+            'error' => false,
+            'gaji'  => $gaji,
+            'jumlah_tuntutan_elaun' => $jumlah_tuntutan_elaun
+        ], 200);
+
     }
 
     public function rejectIndividually(Request $request, $id_permohonan_baru)

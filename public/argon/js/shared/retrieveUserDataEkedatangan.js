@@ -36,6 +36,10 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(""); 
     $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(""); 
 
+    // Clear up gaji
+    $('input[name=gaji-'+is_individu+']').val(''); 
+    $('input[name=tuntutanElaun-'+is_individu+']').val('');
+
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
         type: 'GET', 
