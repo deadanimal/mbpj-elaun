@@ -1,69 +1,54 @@
-var jenisPilihan = 'OT';
-var tabPilihan = 'OT';
-
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    showDatatable(jenisPilihan);
+
+    showDatatable();
 }) 
-
-$("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
-    jenisPilihan = 'OT';
-    $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
-});
-
-$("#tabPilihanTuntutanElaunLebihMasa").click(function(){
-    jenisPilihan = 'EL';
-    $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
-});
-
-$("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
-    jenisPilihan = 'PS';
-    $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
-});
 
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
+    showDatatable();
 });
-
-function checkUser(){
-    var id = document.querySelector("#noPekerja").value;
-    var pilihan = document.getElementById('selectJenisPermohonan').value;
-
-    switch (pilihan) {
-        case 'individu':
-            pilihan = tabPilihan + '1';
-            break;
-        case 'berkumpulan':
-            pilihan = tabPilihan + '2';
-            break;
-        default:
-            alert('Sila pilih jenis permohonan');
-            break;
-    }
-
-    showDatatable(pilihan);
-}
 
 function showUser() {
     var id = document.querySelector("#noPekerja").value;
     var pilihan = document.getElementById('selectJenisPermohonan').value;
+    
 
-    if(id != '' || pilihan != 'out'){
         $.ajax({
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
                 $("#formOTEL input[name=nama]").val(data.users.name);
+                console.log(pilihan)
+                switch (pilihan) {
+                    case 'individu':
+                        pilihan = 'KS1';
+                        $('#semakanKSDT').DataTable().columns(11).search(     
+                            id
+                        )
+                        $('#semakanKSDT').DataTable().columns(10).search(      
+                            pilihan
+                        ).draw();
+                        break;
+                    case 'berkumpulan':
+                        pilihan = 'KS2';
+                        $('#semakanKSDT').DataTable().columns(11).search(     
+                            id
+                        )
+                        $('#semakanKSDT').DataTable().columns(10).search(      
+                            pilihan
+                        ).draw();
+                        break;
+                    default:
+                        showDatatable();
+                        break;
+                }
 
                 $('input').css('color', 'black')
             },
@@ -71,27 +56,23 @@ function showUser() {
                 console.log(data);
             }
         });
-    }
 }
 
-function showDatatable(pilihan){
+function showDatatable(){
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
     }
-                table = $('#semakanKSDT').dataTable({
-                dom: 'lrtip',
-                destroy: true,
-                processing: true,
-                serverSide: false,
+        table = $('#semakanKSDT').dataTable({
+        dom: 'lrtip',
+        destroy: true,
+        processing: true,
+        serverSide: false,
             ajax: {
                 url: "kerani-semakan-semakan/"+id_user,
                 type: 'GET',
-                data: {
-                    pilihan: id_user != '' ? pilihan : jenisPilihan
-                }
             },
 
                 columns: [
@@ -107,6 +88,7 @@ function showDatatable(pilihan){
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
+                    {data: 'users[*].id'}
 
                 ],  
                 columnDefs: [
@@ -124,7 +106,7 @@ function showDatatable(pilihan){
                             if(id_user != "noID"){
                                 counter++;
                                 var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
-                                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+"'"+pilihan+"'"+');" value=""></i>' 
+                                var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
                                 var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                                 var allButton = button1 + button2 + button3;
                                 return allButton;
@@ -132,7 +114,7 @@ function showDatatable(pilihan){
                             else {
                                 counter++;
                                 var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].id+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
-                                var button2 = '<i id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+"'"+pilihan+"'"+');" value=""></i>' 
+                                var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
                                 var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                                 var allButton = button1 + button2 + button3;
                                 return allButton;
@@ -143,41 +125,22 @@ function showDatatable(pilihan){
                         targets: 10,
                         visible: false,
                         searchable: true
-                    }
+                    },
+                    {
+                        targets: 11,
+                        visible: false,
+                        searchable: true
+                    },
                 ], 
                 
             });
             if(id_user != ''){
-            $('#semakanKSDT').DataTable().search(
-                $("#noPekerja").val(),
-                pilihan
-            ).draw();
-            }else
-            {
-                
-            }
+                $('#semakanKSDT').DataTable().search(
+                    $("#noPekerja").val(),
+                ).draw();
+            } else{}
 }
 
-$("#selectJenisPermohonan").on("change",function(){
-    var pilihan = document.getElementById('selectJenisPermohonan').value;
-    switch (pilihan) {
-        case 'individu':
-            pilihan = tabPilihan + '1';
-            $('#semakanKSDT').DataTable().search(       
-                pilihan
-            ).draw();
-            break;
-        case 'berkumpulan':
-            pilihan = tabPilihan + '2';
-            $('#semakanKSDT').DataTable().search(       
-                pilihan
-            ).draw();
-            break;
-        default:
-            showDatatable(tabPilihan);
-            break;
-    }
-});
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
@@ -217,7 +180,6 @@ $.fn.dataTable.ext.search.push(
 });
 
 $("#semakKeraniSemakan").click(function () {
-    checkUser();
     showUser();    
 });
 
