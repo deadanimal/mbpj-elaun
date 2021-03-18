@@ -18,9 +18,4 @@ class permohonan_with_users extends Model
     protected $attributes = [
         'is_rejected_individually' => 0,
     ];
-
-    public function scopeIsNotRejectedIndividually($query)
-    {
-        return $query->where('is_rejected_individually', 0);
-    }
 }

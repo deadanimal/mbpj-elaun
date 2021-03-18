@@ -19,15 +19,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // $user = Auth::user();
+
         Item::observe(ItemObserver::class);
         User::observe(UserObserver::class);
 
-        View::composer('layouts.navbars.partials.2ndsidebar', 'App\Http\View\Composers\SideBarComposer');
-        View::composer('layouts.headers.cards', 'App\Http\View\Composers\DashboardCardsComposer');
-        View::composer('layouts.navbars.navs.auth', 'App\Http\View\Composers\SideBarComposer');
-        View::composer('layouts.headers.breadcrumbs', 'App\Http\View\Composers\SideBarComposer');
-        View::composer('layouts.navbars.sidebar', 'App\Http\View\Composers\SideBarComposer');
+        View::composer(
+            ['layouts.navbars.partials.2ndsidebar', 'layouts.navbars.navs.auth', 'layouts.headers.breadcrumbs', 'layouts.navbars.sidebar'],
+         'App\Http\View\Composers\SideBarComposer');
 
+        View::composer('layouts.headers.cards', 'App\Http\View\Composers\DashboardCardsComposer');
     }
 
     /**

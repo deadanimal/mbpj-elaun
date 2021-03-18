@@ -44,6 +44,7 @@ class UpdateJenisPermohonanListener
         switch ($event->permohonan->status) {
             case 'DITERIMA':
                 if ($is_not_approved_peg_sokong) {
+                    // jenis_permohonan_kakitangan stagnant after EL
                     if ($level_permohonan_kakitangan != 'EL') {
                         $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
                     }
