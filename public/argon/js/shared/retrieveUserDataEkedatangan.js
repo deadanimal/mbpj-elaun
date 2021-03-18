@@ -36,8 +36,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(""); 
 
     // Clear up gaji
-    $('input[name=gaji-'+is_individu+']').val(''); 
-    $('input[name=tuntutanElaun-'+is_individu+']').val('');
+    $('input[name=gaji-'+is_individu+']').val(""); 
+    $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
@@ -77,9 +77,11 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
             $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
 
+
             switch (jenisPermohonan) {
                 case "OT1":
                     block_ekedatanganIndividu.style.display = "none";
+                    fillInGaji(id_user, id_permohonan_baru, is_individu);
                     break;
                 case "OT2":
                     block_ekedatanganBerkumpulan.style.display = "none";
