@@ -5,32 +5,24 @@ function counterBuffer(counter) {
 }
 
 function saveCatatan() {
-    var catatan = document.getElementById('semakan-catatan').value;
-    var id_permohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('value');
-    var jenisPermohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('data-value');
     var is_kemaskini = 0;
+    var id_permohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('value');
 
-    if (document.getElementById('perluKemaskini').checked) {
-        is_kemaskini = 1;
-    }  
+    if (document.getElementById('perluKemaskini').checked) { is_kemaskini = 1; }  
 
     $.ajax({
         url: "catatan/" + id_permohonan,
         type: 'POST',
         data: {
-            catatan : catatan,
-            jenis_permohonan : jenisPermohonan,
+            catatan : document.getElementById('semakan-catatan').value,
+            jenis_permohonan : document.getElementById('tolakBtn'+counterPermohonan).getAttribute('data-value'),
             is_kemaskini : is_kemaskini
         },
-        success: function(data) {
+        success: function() {
             console.log("Catatan saved");
             showDatatable(jenisPermohonan);
-
-            
         },
-        error: function() {
-            console.log('Catatan failed');
-        }
+        error: function() { console.log('Catatan failed'); }
     });
 }
 

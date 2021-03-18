@@ -61,6 +61,7 @@ Route::group([
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );
+	Route::get('/tuntutan-elaun/{id}', 'PermohonanBaruController@findGajiElaun' );
 	Route::put('/permohonan-baru/kemaskini/{id}', 'PermohonanBaruController@kemaskiniModal' );
 	Route::get('/masa-sebenar/{id}', 'PermohonanBaruController@retrieveMasaSebenar');
 

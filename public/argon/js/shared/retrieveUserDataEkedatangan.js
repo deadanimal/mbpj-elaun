@@ -1,5 +1,4 @@
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
-
     var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
 
     // Clear up name and no pekerja for Elaun
@@ -37,8 +36,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(""); 
 
     // Clear up gaji
-    $('input[name=gaji-'+is_individu+']').val(''); 
-    $('input[name=tuntutanElaun-'+is_individu+']').val('');
+    $('input[name=gaji-'+is_individu+']').val(""); 
+    $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
@@ -57,13 +56,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         success: function(data) {
-            $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
-            $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(data.permohonan.tarikh_mula_kerja);
-            $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
-            $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
-            $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
-            $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
-            $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
+            var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
+            var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
 
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
@@ -75,65 +69,60 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                 $("#formKelulusan input[name="+key+"]").val(value.name);
             }
 
-            var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
-            var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
+            $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
+            $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(data.permohonan.tarikh_mula_kerja);
+            $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
+            $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
+            $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
+            $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
+            $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
+
 
             switch (jenisPermohonan) {
                 case "OT1":
                     block_ekedatanganIndividu.style.display = "none";
+                    fillInGaji(id_user, id_permohonan_baru, is_individu);
                     break;
-
                 case "OT2":
                     block_ekedatanganBerkumpulan.style.display = "none";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
                     break;
-
                 case "EL1":
                     block_ekedatanganIndividu.style.display = "block";
                     fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
                     break;
-
                 case "EL2":
                     block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-
                 case "PS1":
                     block_ekedatanganIndividu.style.display = "block";
                     fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
                     break;
-
                 case "PS2":
                     block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-                
                 case "KP1":
                     block_ekedatanganIndividu.style.display = "block";
                     fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
                     break;
-
                 case "KP2":
                     block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-
                 case "KS1":
                     block_ekedatanganIndividu.style.display = "block";
                     fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
                     break;
-
                 case "KS2":
                     block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-            
                 default:
                     break;
             }
         },
-        error: function(data) {
-            console.log(data);
-        }
+        error: function(data) { console.log(data); }
     });
 }

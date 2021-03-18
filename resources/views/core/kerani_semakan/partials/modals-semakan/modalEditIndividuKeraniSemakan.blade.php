@@ -101,7 +101,24 @@
                         </div>
                         
                         <div class="col-md-7">
-
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ __('Gaji') }}</label>
+                                        <input class="form-control" name="gaji-individu" id="semakan-modal-individu-gaji" type="text" placeholder="">
+        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-2">
+                                        <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Jumlah Tuntutan Elaun') }}</label>
+                                        <input class="form-control" name="tuntutanElaun-individu" id="semakan-modal-individu-tuntutanElaun" type="text" placeholder="">
+        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                            </div>
                             <div id="eKedatanganIndividu">
                                 {{-- eKedatangan --}}
                                 @include('core.kerani_semakan.partials.modals-semakan.ekedatangan')

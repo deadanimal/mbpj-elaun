@@ -1,10 +1,16 @@
 function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {  
+    let is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
 
+    // Clear up gaji
+    $('input[name=gaji-'+is_individu+']').val(""); 
+    $('input[name=tuntutanElaun-'+is_individu+']').val("");
+
+    // Clear up ekedatangan nama and no. pekerja
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
 
-    fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan);
-    fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan);
+    fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu);
+    fillInGaji(idKakitangan, id_permohonan_baru, is_individu);
 
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
@@ -16,8 +22,8 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
             $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
 
+            // eKedatangan
             if (array.includes(jenisPermohonanShortened)) {
-                // eKedatangan
                 $("#formEkedatangan input[name=tarikh]").val(data.ekedatangans.tarikh);
                 $("#formEkedatangan input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);
                 $("#formEkedatangan input[name=waktuKeluar]").val(data.ekedatangans.jumlah_waktu_kerja);
@@ -35,16 +41,11 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
                 $("#formEkedatangan input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
             }  
         },
-        error: function(data) {
-            console.log(data);
-        }
+        error: function(data) { console.log(data); }
     });
 }
 
-function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
-
-    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-
+function fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu) {
     $.ajax({
         url: 'masa-sebenar/' + idKakitangan,
         type: 'GET',
@@ -52,40 +53,15 @@ function fillInMasaSebenar(idKakitangan, id_permohonan_baru, jenisPermohonan) {
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(data.masa_mula_sebenar); 
-            $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(data.masa_akhir_sebenar);
+            let {error, masa_mula_sebenar, masa_akhir_sebenar} = data;
+
+            $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(masa_mula_sebenar); 
+            $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(masa_akhir_sebenar);
 
             // VALUE STORES THE ID OF USER FOR KEMASKINI
             document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').setAttribute("value", idKakitangan);
             document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').setAttribute("value", id_permohonan_baru);
         },
-        error: function(data) {
-            console.log(data);
-        }
+        error: function(data) { console.log(data); }
     });
-}
-
-function fillInGaji(idKakitangan, id_permohonan_baru, jenisPermohonan) {
-
-    var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-
-    $.ajax({
-        url: 'tuntutan-elaun/' + idKakitangan,
-        type: 'GET',
-        data: {
-            id_permohonan_baru : id_permohonan_baru
-        },
-        success: function(data) {
-            const {error, gaji, jumlah_tuntutan_elaun} = data;
-
-            console.log({gaji, jumlah_tuntutan_elaun});
-
-            $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 
-            $('input[name=tuntutanElaun-'+is_individu+']').val('RM '+jumlah_tuntutan_elaun);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-    
 }

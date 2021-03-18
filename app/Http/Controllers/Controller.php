@@ -16,22 +16,22 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function findPermohonanWithID($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan', $jenisPermohonan)
-                                                           ->statusAkhirTidakDitolak();
-
+        return $permohonans = User::find($id)->permohonans()
+                                ->where('jenis_permohonan', $jenisPermohonan)
+                                ->statusAkhirBelomDiterima();
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
-
-        return $permohonans = User::find($id)->permohonans()->where('jenis_permohonan_kakitangan', $jenisPermohonan)
-                                                           ->statusAkhirTidakDitolak();
-
+        return $permohonans = User::find($id)->permohonans()
+                                ->where('jenis_permohonan_kakitangan', $jenisPermohonan)
+                                ->statusAkhirBelomDiterima();
     }
 
     public function findPermohonanWithIDSemakan($jenisPermohonan,$jenisPermohonanKT,$id){
-        return $permohonans = User::find($id)->permohonans()->whereIn('jenis_permohonan',$jenisPermohonan)
-                                                        ->whereIn('jenis_permohonan_kakitangan',$jenisPermohonanKT)
-                                                        ->statusAkhirTidakDitolak();
+        return $permohonans = User::find($id)->permohonans()
+                                ->whereIn('jenis_permohonan',$jenisPermohonan)
+                                ->whereIn('jenis_permohonan_kakitangan',$jenisPermohonanKT)
+                                ->statusAkhirBelomDiterima();
     }
 
     public function findAllPermohonan(){
@@ -43,34 +43,46 @@ class Controller extends BaseController
     }
 
     public function findPermohonanForReject($id,$idPermohonanBaru){
-        return $permohonans = PermohonanBaru::find($idPermohonanBaru)->users()->find($id);
+        return $permohonans = PermohonanBaru::find($idPermohonanBaru)
+                                ->users()
+                                ->find($id);
     }
 
     public function findPermohonanForKP()
     {
-        return $permohonans = PermohonanBaru::with("users")->permohonanKeraniPemeriksa()
-                                                           ->get();
+        return $permohonans = PermohonanBaru::with("users")
+                                ->permohonanKeraniPemeriksa()
+                                ->get();
+    }
+
+    public function findPermohonanForKS()
+    {
+        return $permohonans = PermohonanBaru::with("users")
+                                ->permohonanKeraniSemakan()
+                                ->get();
     }
 
     public function findAllPermohonanForTypes($jenisPermohonan){
 
         switch (Auth::user()->role_id) {
             case '2':
-                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokong()
-                                                               ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
-                                                               ->get();
+                return $permohonans = PermohonanBaru::with("users")
+                                        ->permohonanPegawaiSokong()
+                                        ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                        ->get();
                 break;
             case '4':
-                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiSokongAtauPelulus()
-                                                                   ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
-                                                                   ->get();
+                return $permohonans = PermohonanBaru::with("users")
+                                        ->permohonanPegawaiSokongAtauPelulus()
+                                        ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                        ->get();
                 break;
             case '5':
-                return $permohonans = PermohonanBaru::with("users")->permohonanPegawaiPelulus()
-                                                                   ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
-                                                                   ->get();
+                return $permohonans = PermohonanBaru::with("users")
+                                        ->permohonanPegawaiPelulus()
+                                        ->where('jenis_permohonan', 'like', $jenisPermohonan.'%')
+                                        ->get();
                 break;
-            
             default:
                 return 404;
                 break;

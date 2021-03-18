@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-sm-7">
                             <div class="row" id="waktuKerjaBerkumpulan">
-                                <form method="post" id="ekedatanganModalEL" action="" autocomplete="off" enctype="multipart/form-data">
+                                <form method="post" id="ekedatanganModalEL" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
         
@@ -130,6 +130,24 @@
                                 </form>
                             </div>
                             <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ __('Gaji') }}</label>
+                                        <input class="form-control" name="gaji-berkumpulan" id="semakan-modal-berkumpulan-gaji" type="text" placeholder="">
+        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-2">
+                                        <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Jumlah Tuntutan Elaun') }}</label>
+                                        <input class="form-control" name="tuntutanElaun-berkumpulan" id="semakan-modal-berkumpulan-tuntutanElaun" type="text" placeholder="">
+        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div id="eKedatanganBerkumpulan">
                                     {{-- eKedatangan --}}
                                     @include('core.penyelia.partials.modals-semakan.ekedatangan')
@@ -141,8 +159,8 @@
                         </div>
                     </div>
                     <div class="text-center mb-3">
-                        {{-- <button type="button" data-dismiss="modal" onclick="kemaskiniModal()" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button> --}}
-                        <button type="button" data-dismiss="modal" class="btn btn-primary mt-4">{{ __('Tutup') }}</button>
+                        <button type="submit" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
+                        <button type="submit" class="btn btn-primary mt-4">{{ __('Tutup') }}</button>
                     </div>  
                 </div>
             </div>
