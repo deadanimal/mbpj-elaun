@@ -15,9 +15,9 @@ class keraniPemeriksaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.kerani_pemeriksa.dashboard');
+        return view('core.kerani_pemeriksa.dashboard');
     }
     
     
@@ -52,6 +52,8 @@ class keraniPemeriksaController extends Controller
     public function show($id)
     {
         //
+        return datatables()->of($this->findPermohonanUser($id)->where('id_kerani_pemeriksa',$id)->where('jenis_permohonan','like','KP'.'%')->get())->make(true); 
+
     }
 
     /**

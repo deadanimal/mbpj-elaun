@@ -7,8 +7,8 @@
  
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Ketua Semakan') . ' ',
-        'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
+        'title' => __('Selamat Datang ke Modul Kerani Semakan') . ' ',
+        'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
         'class' => 'col-lg-7'
     ])
 
@@ -53,13 +53,13 @@
                         
 
                             {{-- Form semakan --}}
-                                @include('core.ketua_semakan.partials.formOT&EL')
+                                @include('core.kerani_semakan.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
 
                     {{-- Datatables --}}
-                    @include('core.ketua_semakan.partials.dataTablesKetuaSemakan')
+                    @include('core.kerani_semakan.partials.dataTablesKeraniSemakan')
     
             </div>
         </div>
@@ -68,10 +68,10 @@
     </div>
 
 {{-- Modal --}}
-@include('core.ketua_semakan.partials.modals-semakan.modalEditIndividuKetuaSemakan')
-@include('core.ketua_semakan.partials.modals-semakan.modalEditBerkumpulanKetuaSemakan')
-@include('core.ketua_semakan.partials.modals-semakan.modalValidateKetuaSemakan')
-@include('core.ketua_semakan.partials.modals-semakan.modalRejectKetuaSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalEditIndividuKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalEditBerkumpulanKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalValidateKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalRejectKeraniSemakan')
 @endsection
 
 @push('css')
@@ -89,8 +89,8 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-semakan/jenisPermohonan.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-semakan/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/kerani-semakan/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/kerani-semakan/semakanDatatable.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>

@@ -45,6 +45,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
+                                        <th>ID Permohonan</th>
                                         <th>Tarikh Permohonan</th>
                                         <th>Masa Mula</th>
                                         <th>Masa Akhir</th>

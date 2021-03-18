@@ -34,6 +34,10 @@ class Controller extends BaseController
                                                         ->statusAkhirTidakDitolak();
     }
 
+    public function findAllPermohonan(){
+        return $permohonans = PermohonanBaru::select('*')->users();
+    }
+
     public function findPermohonanUser($idPermohonanBaru){
         return $permohonans = PermohonanBaru::find($idPermohonanBaru);
     }

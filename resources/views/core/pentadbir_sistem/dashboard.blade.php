@@ -53,9 +53,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header pt-1 pb-0">
                         <div class="row align-items-center">
-                            <div class="col-5">
+                            <div class="col-4">
                                 <h2>Audit Trail</h2>
                             </div>
                             <div class="col-6" >
@@ -79,13 +79,13 @@
                                 </form>
                                                                     
                             </div>
-                            <div class="col-1 text-right">
+                            <div class="col-2 text-right">
                                 <span id="printButton" onclick="printTuntutan()" style="cursor: pointer"><i class="fa fa-print fa-3x" ></i></span>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="col-12">
+                    <div class="card-body px-0">
+                        
                             <div class="table-responsive">
                                 <table class="table table-flush" id="adminDT">
                                     <thead class="thead-light">
@@ -115,7 +115,7 @@
                                 </table>
 
                             </div>
-                        </div>
+                        
                     </div>
                      
                 </div>

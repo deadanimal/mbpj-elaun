@@ -17,7 +17,7 @@
 
     <div class="container-fluid mt--6">
         <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-8 d-flex align-items-stretch">
                 <div class="card">
                     <div class="card-header bg-secondary">
                         <div class="row align-items-center">
@@ -45,6 +45,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
+                                        <th>ID Permohonan</th>
                                         <th>Tarikh Permohonan</th>
                                         <th>Masa Mula</th>
                                         <th>Masa Akhir</th>
@@ -66,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4">
+            <div class="col-xl-4 d-flex align-items-stretch">
                 <div class="card">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
