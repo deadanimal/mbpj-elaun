@@ -161,6 +161,8 @@
                 </div>
             </div>
         </div>
+    <input id="userID" value="{{auth()->user()->id}}" hidden>
+
         <!-- Footer -->
         {{-- @include('layouts.footers.auth') --}}
     </div>

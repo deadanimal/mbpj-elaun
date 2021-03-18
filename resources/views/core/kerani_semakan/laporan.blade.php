@@ -7,7 +7,7 @@
 @section('content')
     @component('layouts.headers.auth') 
         <div class="row">
-             <h1 class="my-4" style="color:white">{{ __('Laporan') }} </h1>
+             <h1 class="my-4 text-dark">{{ __('Laporan') }} </h1>
         </div> 
     @endcomponent
 
@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col">
                                 <h2 class="mb-2">{{ __('Jumlah Permohonan Kerja Lebih Masa') }}</h2>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col">
                                 <h2 class="mb-2">{{ __('Jumlah Permohonan Diluluskan') }}</h2>
                             
                             </div>
@@ -57,7 +57,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col">
                                 <h2 class="mb-2">{{ __('Jumlah Permohonan Elaun Kerja Lebih Masa') }}</h2>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-8">
+                            <div class="col">
                                 <h2 class="mb-2">{{ __('Jumlah tuntutan Elaun Tahun Semasa') }}</h2>
                             
                             </div>
@@ -111,5 +111,4 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    {!! $dataTable->scripts() !!}
 @endpush

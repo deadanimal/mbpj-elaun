@@ -52,27 +52,22 @@
                             </div>     
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="col-lg-12">
-                            <div class="table-responsive py-2">
-                                <table class="table " id="aduanDT">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th class="text-center">No</th>
-                                        <th class="text-center">Tarikh Aduan</th>
-                                        <th class="text-center">Aduan</th>
-                                        <th class="text-center">Catatan Pentadbir</th>
-                                        <th class="text-center">Status</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        
-                                    </tbody>
-                                </table>
-    
-                            </div>
+                    <div class="card-body px-0">
+                        <div class="table-responsive">
+                            <table class="table " id="aduanDT">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Tarikh Aduan</th>
+                                    <th class="text-center">Aduan</th>
+                                    <th class="text-center">Catatan Pentadbir</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
