@@ -15,9 +15,9 @@ class dashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.kakitangan.dashboard');
+        return view('core.kakitangan.dashboard');
     }
 
     /**
@@ -47,9 +47,15 @@ class dashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
         //
+        // dd($this->findPermohonanUser($id)->users()->get());
+        // if($pilihan == 'permohonan')
+        // {
+            // dd($this->findPermohonanUser($id));
+            return datatables($this->findPermohonanUser($id)->get())->make(true);
+        // };
     }
 
     /**

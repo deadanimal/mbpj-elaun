@@ -7,20 +7,21 @@ $(document).ready(function(){
 
 function showDatatable(){
     var id_user = $('#userID').val()
-                table = $('#dashboardPYDT').dataTable({
+                var dashboardPYDT = $('#dashboardPYDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],
                 pagingType: "full_numbers",
-                processing: true,
-                serverSide: false,
+                processing: false,
+                serverSide: true,
             ajax: {
                 url: "penyelia-dashboard/"+id_user,
                 type: 'GET',
             },
 
                 columns: [
-            
+                    
+                    {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'tarikh_mula_kerja'},
                     {data: 'masa_mula'},
@@ -38,7 +39,17 @@ function showDatatable(){
                 ],  
                 columnDefs: [
                     {
-                        targets: [1],
+                        searchable: false,
+                        orderable: false,
+                        targets: 0
+                    },
+                    {
+                        targets:1,
+                        visible: false,
+                        searchable:true
+                    },
+                    {
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -46,7 +57,7 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 9,
+                        targets: 10,
                         mRender: function(data,type,row){
 
                             // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
@@ -60,19 +71,25 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 11,
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 11,
+                        targets: 12,
                         visible: false,
                         searchable: true
                     }
                 ], 
-                
+                order: [ 1, 'asc' ]
             });
- 
+            
+            dashboardPYDT.on('draw.dt', function () {
+                var info = dashboardPYDT.page.info();
+                dashboardPYDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+            });
 }
 
 

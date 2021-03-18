@@ -1,13 +1,12 @@
 $(document).ready(function(){
 
     showDatatable();
-    $('#dashboardKJDT_paginate').addClass('mb-4');
-
+    $('#dashboardKPDT_paginate').addClass('mb-4');
 })
 
 function showDatatable(){
     var id_user = $('#userID').val()
-                table = $('#dashboardKJDT').DataTable({
+                var dashboardKPDT = $('#dashboardKPDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],
@@ -15,8 +14,9 @@ function showDatatable(){
                 processing: true,
                 serverSide: true,
             ajax: {
-                url: "ketua-jabatan-dashboard/"+id_user,
+                url: "kerani-pemeriksa-dashboard/"+id_user,
                 type: 'GET',
+                                
             },
 
             columns: [
@@ -84,9 +84,9 @@ function showDatatable(){
             order: [ 1, 'asc' ]
         });
         
-        dashboardKJDT.on('draw.dt', function () {
-            var info = dashboardKJDT.page.info();
-            dashboardKJDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+        dashboardKPDT.on('draw.dt', function () {
+            var info = dashboardKPDT.page.info();
+            dashboardKPDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
                 cell.innerHTML = i + 1 + info.start;
             });
         });
@@ -96,19 +96,19 @@ $("#selectJenisPermohonan").on('change',function(){
 
     var statusPilihan = $("#selectJenisPermohonan").val()
     if(statusPilihan == "lulus"){
-        $('#dashboardKJDT').DataTable().columns(11).search(
+        $('#dashboardKPDT').DataTable().columns(11).search(
             "0"
         ).draw();
     }else if(statusPilihan == "tolak"){
-        $('#dashboardKJDT').DataTable().columns(11).search(
+        $('#dashboardKPDT').DataTable().columns(11).search(
             "1"
         ).draw();
     }else if(statusPilihan == "dp"){
-        $('#dashboardKJDT').DataTable().columns(11).search(
+        $('#dashboardKPDT').DataTable().columns(11).search(
             "2"
         ).draw();
     }else{
-        $('#dashboardKJDT').DataTable().columns(11).search(
+        $('#dashboardKPDT').DataTable().columns(11).search(
             ""
         ).draw();
     }

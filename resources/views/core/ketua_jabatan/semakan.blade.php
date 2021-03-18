@@ -70,7 +70,6 @@
 {{-- Modal --}}
 @include('core.ketua_jabatan.partials.modals-semakan.modalEditIndividuKetuaJabatan')
 @include('core.ketua_jabatan.partials.modals-semakan.modalEditBerkumpulanKetuaJabatan')
-@include('core.ketua_jabatan.partials.modals-semakan.modalValidateKetuaJabatan')
 @include('core.ketua_jabatan.partials.modals-semakan.modalRejectKetuaJabatan')
 @endsection
 
@@ -89,9 +88,11 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-jabatan/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-jabatan/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/retrieveGaji.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/rejectIndividually.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>

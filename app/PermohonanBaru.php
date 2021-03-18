@@ -32,7 +32,8 @@ class PermohonanBaru extends Model
         'jenis_permohonan_kakitangan',
         'status_akhir',
         'jenis_permohonan',
-        'tarikh_akhir_kerja'
+        'tarikh_akhir_kerja',
+        'is_for_datuk_bandar'
     ];
 
     // Default value
@@ -46,7 +47,8 @@ class PermohonanBaru extends Model
         'jenis_permohonan' => '',
         'status_akhir' => 2,
         'tarikh_mula_kerja' => '',
-        'tarikh_akhir_kerja' => ''
+        'tarikh_akhir_kerja' => '',
+        'is_for_datuk_bandar' => 0
     ];
 
     public function scopePermohonanPegawaiSokong($query)
@@ -56,7 +58,7 @@ class PermohonanBaru extends Model
                                  ->isNotApproved()
                                  ->isNotDitolakOrPerluKemaskini()
                                  ->notSahP2()
-                                 ->statusAkhirTidakDitolak();
+                                 ->statusAkhirBelomDiterima();
         });
     } 
 
@@ -67,7 +69,8 @@ class PermohonanBaru extends Model
                                      ->isApproved()
                                      ->isNotDitolakOrPerluKemaskini()
                                      ->notSahP2()
-                                     ->statusAkhirTidakDitolak();
+                                     ->notForDatukBandar()
+                                     ->statusAkhirBelomDiterima();
                         });
     }
 
@@ -76,14 +79,15 @@ class PermohonanBaru extends Model
         return $query->permohonanPegawaiSokong()
                      ->orWhere(function (Builder $q) {
                             return $q->permohonanPegawaiPelulus(); })
-                     ->notSahP2();
+                     ->notSahP2()
+                     ->notForDatukBandar();
     }
     
     public function scopePermohonanKeraniPemeriksa($query)
     {
         return $query->where(function (Builder $q) {
                         return $q->where('jenis_permohonan', 'like', 'KP%')
-                                 ->statusAkhirTidakDitolak();
+                                 ->statusAkhirBelomDiterima();
                         });
     }
 
@@ -91,13 +95,18 @@ class PermohonanBaru extends Model
     {
         return $query->where(function (Builder $q) {
                         return $q->where('jenis_permohonan', 'like', 'KS%')
-                                ->statusAkhirTidakDitolak();
+                                ->statusAkhirBelomDiterima();
                         });
     }
 
-    public function scopeStatusAkhirTidakDitolak($query)
+    public function scopeStatusAkhirBelomDiterima($query)
     {
         return $query->where('status_akhir', 2);
+    }
+
+    public function scopeNotForDatukBandar($query)
+    {
+        return $query->where('is_for_datuk_bandar', 0);
     }
 
     public function scopeIsNotApproved($query)

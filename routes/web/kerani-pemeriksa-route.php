@@ -50,7 +50,7 @@ Route::group([
 			'as' => 'permohonan-baru.store',
 		]);
 	});
-	Route::resource('kerani-pemeriksa-dashboard','kerani_pemeriksa\keraniPemeriksaController',['except' => ['show','destroy']]);
+	Route::resource('kerani-pemeriksa-dashboard','kerani_pemeriksa\keraniPemeriksaController',['except' => ['destroy']]);
 	Route::resource('kerani-pemeriksa-semakan','kerani_pemeriksa\semakanController',['except' => ['destroy']]);
 	Route::resource('kerani-pemeriksa-laporan','kerani_pemeriksa\laporanController',['except' => ['show','destroy']]);
 	Route::resource('kerani-pemeriksa-bantuan','kerani_pemeriksa\bantuanController',['except' => ['show','destroy']]);

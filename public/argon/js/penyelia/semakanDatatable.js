@@ -36,7 +36,6 @@ $("#padamCarian").click(function(){
 });
 
 function checkUser(){
-    // var id = document.querySelector("#noPekerja").value;
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
     switch (pilihan) {
@@ -50,7 +49,6 @@ function checkUser(){
             alert('Sila pilih jenis permohonan');
             break;
     }
-
     showDatatable(pilihan);
 }
 
@@ -64,12 +62,9 @@ function showUser() {
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
                 $("#formOTEL input[name=nama]").val(data.users.name);
-
                 $('input').css('color', 'black')
             },
-            error: function(data) {
-                console.log(data);
-            }
+            error: function(data) { console.log(data); }
         });
     }
 }
@@ -93,9 +88,7 @@ function showDatatable(pilihan){
                     pilihan: id_user != '' ? pilihan : jenisPilihan
                 }
             },
-
                 columns: [
-            
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'tarikh_permohonan'},
                     {data: 'masa_mula'},
@@ -107,7 +100,6 @@ function showDatatable(pilihan){
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
-
                 ],  
                 columnDefs: [
                     {
@@ -145,17 +137,13 @@ function showDatatable(pilihan){
                         searchable: true
                     }
                 ], 
-                
             });
             if(id_user != ''){
-            $('#semakanPYDT').DataTable().search(
-                $("#noPekerja").val(),
-                pilihan
-            ).draw();
-            }else
-            {
-                
-            }
+                $('#semakanPYDT').DataTable().search(
+                    $("#noPekerja").val(),
+                    pilihan
+                ).draw();
+            } else {}
 }
 
 $("#selectJenisPermohonan").on("change",function(){
@@ -181,7 +169,6 @@ $("#selectJenisPermohonan").on("change",function(){
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
-
         var valid = true;
         var min = moment($("#min").val(),"DD/MM/YYYY");
         if (!min.isValid()) { min = null; }
@@ -193,12 +180,9 @@ $.fn.dataTable.ext.search.push(
             valid = true;
         }
         else {
-
             $.each(settings.aoColumns, function (i, col) {
-              
                 if (col.type == "date") {
                     var cDate = moment(data[i],'DD/MM/YYYY');
-                
                     if (cDate.isValid()) {
                         if (max !== null && max.isBefore(cDate)) {
                             valid = false;
@@ -207,9 +191,7 @@ $.fn.dataTable.ext.search.push(
                             valid = false;
                         }
                     }
-                    else {
-                        valid = false;
-                    }
+                    else { valid = false; }
                 }
             });
         }

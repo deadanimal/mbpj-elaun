@@ -8,7 +8,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-2">
+            <div class="card-body px-0">
                 <div class="table-responsive py-4">
                     <table class="table" id="semakanKSDT">
                         <thead class="thead-light">

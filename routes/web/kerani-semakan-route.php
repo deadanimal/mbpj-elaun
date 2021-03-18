@@ -6,7 +6,7 @@ Route::group([
 	'auth',
 	'role:6'
 	]], function () {
-	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['show','destroy']]);
+	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
 	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
 	Route::resource('/tag', 'TagController', ['except' => ['show']]);
 	Route::resource('/item', 'ItemController', ['except' => ['show']]);
@@ -51,7 +51,7 @@ Route::group([
 			'as' => 'permohonan-baru.store',
 		]);
 	});
-	Route::resource('kerani-semakan-dashboard','kerani_semakan\keraniSemakanController',['except' => ['show','destroy']]);
+	Route::resource('kerani-semakan-dashboard','kerani_semakan\keraniSemakanController',['except' => ['destroy']]);
 	Route::resource('kerani-semakan-semakan','kerani_semakan\semakanController',['except' => ['destroy']]);
 	Route::resource('kerani-semakan-laporan','kerani_semakan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('kerani-semakan-bantuan','kerani_semakan\bantuanController',['except' => ['show','destroy']]);
@@ -62,6 +62,7 @@ Route::group([
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );
+	Route::get('/tuntutan-elaun/{id}', 'PermohonanBaruController@findGajiElaun' );
 	Route::put('/permohonan-baru/kemaskini/{id}', 'PermohonanBaruController@kemaskiniModal' );
 	Route::get('/masa-sebenar/{id}', 'PermohonanBaruController@retrieveMasaSebenar');
 

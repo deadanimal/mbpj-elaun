@@ -43,27 +43,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                <table class="table table-flush" id="pengurusanDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Tarikh Daftar</th>
-                                            <th>Jenis</th>
-                                            <th>Emel</th>
-                                            <th>Status</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-
-                            </div>
+                    <div class="card-body px-0">
+                        <div class="table-responsive">
+                            <table class="table table-flush" id="pengurusanDT">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Tarikh Daftar</th>
+                                        <th>Jenis</th>
+                                        <th>Emel</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
+                        
                     </div>
                      
                 </div>

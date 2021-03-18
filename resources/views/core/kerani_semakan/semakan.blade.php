@@ -7,45 +7,14 @@
  
 @section('content')
     @include('forms.header', [
-        'title' => __('Selamat Datang ke Modul Ketua Semakan') . ' ',
-        'description' => __('" Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya"'),
+        'title' => __('Selamat Datang ke Modul Kerani Semakan') . ' ',
+        'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
         'class' => 'col-lg-7'
     ])
 
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col-xl-12">
-
-                {{-- Tab options --}}
-                    <div class="nav-wrapper">
-                        <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-1" value="OT"
-                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa');">
-                                    <i class="ni ni-time-alarm"></i>
-                                    Permohonan Kerja Lebih Masa
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanPengesahanKerjaLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-2" value="PS"
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa');">
-                                    <i class="ni ni-money-coins"></i>
-                                    Pengesahan Kerja Lebih Masa
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
-                                    href="#" role="tab" aria-controls="tabs-icons-text-3" value="EL"
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa');">
-                                    <i class="ni ni-money-coins"></i>
-                                    Tuntuan Elaun Lebih Masa
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
                 
                 <div class="card shadow">
                     <div class="card-body">
@@ -53,13 +22,13 @@
                         
 
                             {{-- Form semakan --}}
-                                @include('core.ketua_semakan.partials.formOT&EL')
+                                @include('core.kerani_semakan.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
 
                     {{-- Datatables --}}
-                    @include('core.ketua_semakan.partials.dataTablesKetuaSemakan')
+                    @include('core.kerani_semakan.partials.dataTablesKeraniSemakan')
     
             </div>
         </div>
@@ -68,10 +37,9 @@
     </div>
 
 {{-- Modal --}}
-@include('core.ketua_semakan.partials.modals-semakan.modalEditIndividuKetuaSemakan')
-@include('core.ketua_semakan.partials.modals-semakan.modalEditBerkumpulanKetuaSemakan')
-@include('core.ketua_semakan.partials.modals-semakan.modalValidateKetuaSemakan')
-@include('core.ketua_semakan.partials.modals-semakan.modalRejectKetuaSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalEditIndividuKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalEditBerkumpulanKeraniSemakan')
+@include('core.kerani_semakan.partials.modals-semakan.modalRejectKeraniSemakan')
 @endsection
 
 @push('css')
@@ -89,9 +57,11 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-semakan/jenisPermohonan.js"></script>
-    <script src="{{ asset('argon') }}/js/ketua-semakan/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/kerani-semakan/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/retrieveGaji.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/rejectIndividually.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>
