@@ -130,6 +130,24 @@
                                 </form>
                             </div>
                             <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label">{{ __('Gaji') }}</label>
+                                        <input class="form-control" name="gaji-berkumpulan" id="semakan-modal-berkumpulan-gaji" type="text" placeholder="">
+        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-2">
+                                        <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Jumlah Tuntutan Elaun') }}</label>
+                                        <input class="form-control" name="tuntutanElaun-berkumpulan" id="semakan-modal-berkumpulan-tuntutanElaun" type="text" placeholder="">
+        
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div id="eKedatanganBerkumpulan">
                                     {{-- eKedatangan --}}
                                     @include('core.ketua_bahagian.partials.modals-semakan.ekedatangan')
