@@ -2,6 +2,7 @@
 
 namespace App\Http\View\Composers;
 
+use App\User;
 use App\PermohonanBaru;
 use Illuminate\View\View;
 use App\permohonan_with_users;
@@ -21,7 +22,15 @@ class DashboardCardsKakitanganComposer
      */
     public function compose(View $view)
     {  
-        $jumlahTuntutanTahunSemasa = permohonan_with_users::
+        // $permohonans
+        $user_permohonans = User::find(Auth::id())->with('permohonans')->get();
+        // $jumlahTuntutanTahunSemasa = $user_permohonans->permohonans
+        //                                 ->filter(function ($permohonan){
+        //                                     return $permohonan->created_at == now()->year;
+        //                                 })->count();
+
+        
+        // $jumlahTuntutanTahunSemasa = 
 
         $view->with('jumlahTuntutanTahunSemasa', $jumlahTuntutanTahunSemasa)
              ->with('jumlahTuntutanKerjaLebihMasa', $jumlahTuntutanKerjaLebihMasa)
