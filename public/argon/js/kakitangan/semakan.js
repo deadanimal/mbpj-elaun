@@ -1,12 +1,14 @@
 var pilihanKT = ['OT1','OT2','PS1','PS2'];
 var pilihanReal = ['PS1','PS2','EL1','EL2'];
 $(document).ready(function(){
+    console.log('sebelum')
     
-    showDatatable()
-
+    showSemakanDatatableKT()
+    console.log('test');
 })
 
-function showDatatable(){
+function showSemakanDatatableKT(){
+    console.log('showDatatable')
     var nopekerja = document.querySelector("#nopekerja").value;
     var permohonanDT = $('#permohonanDT').DataTable({
         dom: "lrtip",
@@ -15,8 +17,8 @@ function showDatatable(){
         lengthMenu: [ 5, 10, 25, 50 ],
         responsive: false,
         autoWidth:true,
-        // processing: true,
-        // serverSide: true,
+        processing: true,
+        serverSide: true,
         ajax: {
             url: "semakan/"+nopekerja,
             type: 'GET',
