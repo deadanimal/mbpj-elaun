@@ -59,7 +59,7 @@ function deletePermohonan(id_permohonan_baru){
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            showDatatable();
+            showSemakanDatatableKT();
             console.log(data.permohonan);
 
         },
@@ -106,7 +106,7 @@ function hantarPengesahan(){
                 'Klik butang dibawah untuk tutup!',
                 'success'
                 )
-            showDatatable();
+            showSemakanDatatableKT();
             console.log(data.permohonan);
 
         },

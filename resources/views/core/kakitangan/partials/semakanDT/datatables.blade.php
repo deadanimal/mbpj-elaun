@@ -6,49 +6,47 @@
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="col-12 mt-2">
-            <div class="table-responsive py-4">
-                <table class="table table-flush" id="permohonanDT">
-                    <thead class="thead-light">
-                    <tr>
-                        <th>No</th>
-                        <th>Tarikh Permohonan</th>
-                        <th>Status</th>
-                        <th>Progres</th>
-                        <th>Masa Mula</th>
-                        <th>Masa Akhir</th>
-                        <th>Masa</th>
-                        <th>Hari</th>
-                        <th>Waktu</th>
-                        <th>Kadar Jam</th>
-                        <th>Tujuan</th>
-                        <th></th>
-                        <th hidden>Status</th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th ></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        
-                        
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="col-12 my-4">
-            
-                <form class="form-inline" style="display: flex; justify-content: flex-end">
+    <div class="card-body px-0">
+        <div class="table-responsive py-4">
+            <table class="table table-flush" id="permohonanDT">
+                <thead class="thead-light">
+                <tr>
+                    <th>No</th>
+                    <th>Tarikh Permohonan</th>
+                    <th>Status</th>
+                    <th>Progres</th>
+                    <th>Masa Mula</th>
+                    <th>Masa Akhir</th>
+                    <th>Masa</th>
+                    <th>Hari</th>
+                    <th>Waktu</th>
+                    <th>Kadar Jam</th>
+                    <th>Tujuan</th>
+                    <th></th>
+                    <th hidden>Status</th>
+                    <th hidden></th>
+                    <th hidden></th>
+                    <th ></th>
+                </tr>
+                </thead>
+                <tbody>
                     
-                        <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam: </label>
-                        <input type="text" class="form-control form-control-sm column_filter" id="col0_filter" placeholder="" data-column="0">
+                    
+                </tbody>
+            </table>
 
-                        <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa: </label>
-                        <input type="text" class="form-control form-control-sm column_filter" id="col4_filter" placeholder="" data-column="4">
-                                    
-                </form>
-            </div>
+        </div>
+        <div class="col-12 my-4">
+        
+            <form class="form-inline" style="display: flex; justify-content: flex-end">
+                
+                    <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam: </label>
+                    <input type="text" class="form-control form-control-sm column_filter" id="col0_filter" placeholder="" data-column="0">
+
+                    <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa: </label>
+                    <input type="text" class="form-control form-control-sm column_filter" id="col4_filter" placeholder="" data-column="4">
+                                
+            </form>
         </div>
     </div>
 </div>

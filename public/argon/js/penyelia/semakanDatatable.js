@@ -7,32 +7,32 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    showDatatable(jenisPilihan);
+    showDatatablePY(jenisPilihan);
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
     jenisPilihan = 'OT';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
+    showDatatablePY(jenisPilihan);
 });
 
 $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
+    showDatatablePY(jenisPilihan);
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
     jenisPilihan = 'PS';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
+    showDatatablePY(jenisPilihan);
 });
 
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable(jenisPilihan);
+    showDatatablePY(jenisPilihan);
 });
 
 function checkUser(){
@@ -49,7 +49,7 @@ function checkUser(){
             alert('Sila pilih jenis permohonan');
             break;
     }
-    showDatatable(pilihan);
+    showDatatablePY(pilihan);
 }
 
 function showUser() {
@@ -69,14 +69,14 @@ function showUser() {
     }
 }
 
-function showDatatable(pilihan){
+function showDatatablePY(pilihan){
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
     }
-                table = $('#semakanPYDT').dataTable({
+                table = $('#semakanPYDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
@@ -162,7 +162,7 @@ $("#selectJenisPermohonan").on("change",function(){
             ).draw();
             break;
         default:
-            showDatatable(tabPilihan);
+            showDatatablePY(tabPilihan);
             break;
     }
 });
