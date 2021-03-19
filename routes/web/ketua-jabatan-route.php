@@ -6,7 +6,7 @@ Route::group([
 	'auth',
 	'role:5'
 	]], function () {
-	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['show','destroy']]);
+	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
 	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
 	Route::resource('/tag', 'TagController', ['except' => ['show']]);
 	Route::resource('/item', 'ItemController', ['except' => ['show']]);

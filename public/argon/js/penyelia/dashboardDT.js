@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-    showDatatable();
+    showDatatablePY();
     $('#dashboardPYDT_paginate').addClass('mb-4');
 
 })
 
-function showDatatable(){
+function showDatatablePY(){
     var id_user = $('#userID').val()
                 var dashboardPYDT = $('#dashboardPYDT').DataTable({
                 dom: 'lrtip',

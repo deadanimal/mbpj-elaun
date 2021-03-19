@@ -18,7 +18,7 @@ function hantarElaun(id_permohonan_baru){
                 'Klik butang dibawah untuk tutup!',
                 'success'
                 )
-            showDatatable();
+            showTuntutanDatatableKT();
             
             console.log(data.permohonan);
 
@@ -38,7 +38,7 @@ function deletePermohonan(id_permohonan_baru){
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            showDatatable();
+            showTuntutanDatatableKT();
             console.log(data.permohonan);
 
         },

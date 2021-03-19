@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 function showDatatable(){
     var id_user = $('#userID').val()
-                table = $('#dashboardKJDT').DataTable({
+                dashboardKJDT = $('#dashboardKJDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],

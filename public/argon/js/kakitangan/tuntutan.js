@@ -3,11 +3,11 @@ var pilihanReal = ['EL1','EL2'];
 
 $(document).ready(function(){
 
-    showDatatable();
+    showTuntutanDatatableKT();
 });
 
 
-function showDatatable(){
+function showTuntutanDatatableKT(){
     var nopekerja = $("#idpekerja").val();
     var tuntutansDT = $('#tuntutansDT').DataTable({
         dom: "lrtip",
