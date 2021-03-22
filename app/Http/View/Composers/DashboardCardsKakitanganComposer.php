@@ -33,13 +33,11 @@ class DashboardCardsKakitanganComposer
                                             ->whereYear('created_at', now()->year)
                                             ->get()
                                             ->count();
-        $jumlahTuntutanDiluluskanKT = $this->kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, 1);
-        $jumlahTuntutanTidakDiluluskanKT = $this->kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, 0);
 
         $view->with('jumlahTuntutanTahunSemasaKT', $jumlahTuntutanTahunSemasaKT)
              ->with('jumlahTuntutanKerjaLebihMasaKT', $jumlahTuntutanKerjaLebihMasaKT)
-             ->with('jumlahTuntutanDiluluskanKT', $jumlahTuntutanDiluluskanKT)
-             ->with('jumlahTuntutanTidakDiluluskanKT', $jumlahTuntutanTidakDiluluskanKT);
+             ->with('jumlahTuntutanDiluluskanKT', $this->kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, 1))
+             ->with('jumlahTuntutanTidakDiluluskanKT', $this->kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, 0));
     }
 
     public function kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, $status_akhir)
