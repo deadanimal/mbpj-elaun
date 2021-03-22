@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             ['layouts.navbars.partials.2ndsidebar', 'layouts.navbars.navs.auth', 'layouts.headers.breadcrumbs', 'layouts.navbars.sidebar'],
          'App\Http\View\Composers\SideBarComposer');
         View::composer('layouts.headers.cards', 'App\Http\View\Composers\DashboardCardsComposer');
+        View::composer('core.kakitangan.cardsKakitangan', 'App\Http\View\Composers\DashboardCardsKakitanganComposer');
     }
 
     /**

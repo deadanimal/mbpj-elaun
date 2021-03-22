@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Kerja Lebih Masa</h5>
-                        <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasa }}</span>
+                        <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanKerjaLebihMasaKT }}</span>
                     </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Diluluskan</h5>
-                    <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanDiluluskan }}</span>
+                    <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanDiluluskanKT }}</span>
                 </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tidak Diluluskan</h5>
-                    <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTidakDiluluskan }}</span>
+                    <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTidakDiluluskanKT }}</span>
                 </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tahun Semasa</h5>
-                        <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasa }}</span>
+                        <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasaKT }}</span>
                     </div>
                     <div class="col-auto">
                         <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">

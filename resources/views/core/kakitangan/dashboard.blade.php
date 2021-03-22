@@ -12,8 +12,7 @@
             @endslot
 
         @endcomponent
-        @include('layouts.headers.cards') 
-        {{-- @include('core.kakitangan.cardsKakitangan')  --}}
+        @include('core.kakitangan.cardsKakitangan') 
     @elseif(Auth::user()->role_id == '1'  )
     @component('layouts.headers.breadcrumbs')
             @slot('title') 

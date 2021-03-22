@@ -22,19 +22,38 @@ class DashboardCardsKakitanganComposer
      */
     public function compose(View $view)
     {  
-        // $permohonans
-        $user_permohonans = User::find(Auth::id())->with('permohonans')->get();
-        // $jumlahTuntutanTahunSemasa = $user_permohonans->permohonans
-        //                                 ->filter(function ($permohonan){
-        //                                     return $permohonan->created_at == now()->year;
-        //                                 })->count();
+        $permohonans_users = PermohonanBaru::with('users')->get();                        
 
-        
-        // $jumlahTuntutanTahunSemasa = 
+        $jumlahTuntutanKerjaLebihMasaKT = permohonan_with_users::select('id')
+                                            ->where('id', Auth::id())
+                                            ->get()
+                                            ->count();
+        $jumlahTuntutanTahunSemasaKT = permohonan_with_users::select('id')
+                                            ->where('id', Auth::id())
+                                            ->whereYear('created_at', now()->year)
+                                            ->get()
+                                            ->count();
+        $jumlahTuntutanDiluluskanKT = $this->kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, 1);
+        $jumlahTuntutanTidakDiluluskanKT = $this->kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, 0);
 
-        $view->with('jumlahTuntutanTahunSemasa', $jumlahTuntutanTahunSemasa)
-             ->with('jumlahTuntutanKerjaLebihMasa', $jumlahTuntutanKerjaLebihMasa)
-             ->with('jumlahTuntutanDiluluskan', $jumlahTuntutanDiluluskan)
-             ->with('jumlahTuntutanTidakDiluluskan', $jumlahTuntutanTidakDiluluskan);
+        $view->with('jumlahTuntutanTahunSemasaKT', $jumlahTuntutanTahunSemasaKT)
+             ->with('jumlahTuntutanKerjaLebihMasaKT', $jumlahTuntutanKerjaLebihMasaKT)
+             ->with('jumlahTuntutanDiluluskanKT', $jumlahTuntutanDiluluskanKT)
+             ->with('jumlahTuntutanTidakDiluluskanKT', $jumlahTuntutanTidakDiluluskanKT);
+    }
+
+    public function kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, $status_akhir)
+    {
+        $tuntutanDiluluskanKT = $permohonans_users->filter(function ($permohonan) use ($status_akhir){
+            if ($permohonan->status_akhir ==  $status_akhir) return $permohonan; 
+        });
+
+        return $jumlahTuntutanDiluluskanKT = $tuntutanDiluluskanKT->map(function ($permohonan) {
+                                                foreach ($permohonan->users as $user) {
+                                                    if ($user->id == Auth::id()) {
+                                                        return $permohonan;
+                                                    }
+                                                }
+                                            })->count();  
     }
 }

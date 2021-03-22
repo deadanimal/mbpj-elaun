@@ -156,6 +156,7 @@ class PermohonanBaru extends Model
                                  'masa_sebenar',
                                  'jumlah_tuntutan_elaun'
                                  )
+                    ->withTimestamps()
                     ->as('permohonan_with_users');
     }
 

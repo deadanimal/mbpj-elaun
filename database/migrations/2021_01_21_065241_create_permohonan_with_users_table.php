@@ -22,6 +22,7 @@ class CreatePermohonanWithUsersTable extends Migration
             $table->string('masa_sebenar')->default('5.5');
             $table->float('jumlah_tuntutan_elaun', 8,2)->default(0.00);
             $table->integer('is_rejected_individually')->default('0');
+            $table->timestamps();
         });
 
         Schema::table('permohonan_with_users', function($table) {

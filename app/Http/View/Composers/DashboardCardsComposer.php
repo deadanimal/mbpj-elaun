@@ -23,16 +23,16 @@ class DashboardCardsComposer
         switch (Auth::user()->role_id) {
             case '2':
                 $jumlahTuntutanTahunSemasa = PermohonanBaru::pegawaiSokong()
-                                                ->whereYear('created_at', now()->year)
-                                                ->get()
-                                                ->count();
+                                                    ->whereYear('created_at', now()->year)
+                                                    ->get()
+                                                    ->count();
                 $jumlahTuntutanKerjaLebihMasa = PermohonanBaru::pegawaiSokong()
                                                     ->get()
                                                     ->count();
                 $jumlahTuntutanDiluluskan = PermohonanBaru::pegawaiSokong()
-                                                ->where('status_akhir', 1)
-                                                ->get()
-                                                ->count();
+                                                    ->where('status_akhir', 1)
+                                                    ->get()
+                                                    ->count();
                 $jumlahTuntutanTidakDiluluskan = PermohonanBaru::pegawaiSokong()
                                                     ->where('status_akhir', 0)
                                                     ->get()
@@ -40,16 +40,16 @@ class DashboardCardsComposer
                 break;
             case '4':
                 $jumlahTuntutanTahunSemasa = PermohonanBaru::pegawaiSokongAtauPelulus()
-                                                ->whereYear('created_at', now()->year)
-                                                ->get()
-                                                ->count();
+                                                    ->whereYear('created_at', now()->year)
+                                                    ->get()
+                                                    ->count();
                 $jumlahTuntutanKerjaLebihMasa = PermohonanBaru::pegawaiSokongAtauPelulus()
                                                     ->get()
                                                     ->count();
                 $jumlahTuntutanDiluluskan = PermohonanBaru::pegawaiSokongAtauPelulus()
-                                                ->where('status_akhir', 1)
-                                                ->get()
-                                                ->count();
+                                                    ->where('status_akhir', 1)
+                                                    ->get()
+                                                    ->count();
                 $jumlahTuntutanTidakDiluluskan = PermohonanBaru::pegawaiSokongAtauPelulus()
                                                     ->where('status_akhir', 0)
                                                     ->get()
@@ -57,23 +57,20 @@ class DashboardCardsComposer
                 break;
             case '5':
                 $jumlahTuntutanTahunSemasa = PermohonanBaru::pegawaiPelulus()
-                                                ->whereYear('created_at', now()->year)
-                                                ->get()
-                                                ->count();
+                                                    ->whereYear('created_at', now()->year)
+                                                    ->get()
+                                                    ->count();
                 $jumlahTuntutanKerjaLebihMasa = PermohonanBaru::pegawaiPelulus()
                                                     ->get()
                                                     ->count();
                 $jumlahTuntutanDiluluskan = PermohonanBaru::pegawaiPelulus()
-                                                ->where('status_akhir', 1)
-                                                ->get()
-                                                ->count();
+                                                    ->where('status_akhir', 1)
+                                                    ->get()
+                                                    ->count();
                 $jumlahTuntutanTidakDiluluskan = PermohonanBaru::pegawaiPelulus()
                                                     ->where('status_akhir', 0)
                                                     ->get()
                                                     ->count();
-                break;
-            default:
-                # code...
                 break;
         }
 
