@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\kakitangan;
 
-use App\Http\Controllers\Controller;
+use App\User;
+use DataTables;
+use Carbon\Carbon;
+use App\PermohonanBaru;
 use Illuminate\Http\Request;
+use App\permohonan_with_users;
+use App\DataTables\UsersDataTable;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use App\User;
-use App\PermohonanBaru;
-use App\permohonan_with_users;
-use Carbon\Carbon;
-use DataTables;
-use App\DataTables\UsersDataTable;
-use App\DataTables\kakitangan\permohonanDataTable;
 use App\Events\PermohonanStatusChangedEvent;
+use App\DataTables\kakitangan\permohonanDataTable;
+use App\Notifications\CreatedNewPermohonanNotification;
 
 class permohonanController extends Controller
 {
@@ -36,6 +37,12 @@ class permohonanController extends Controller
     public function create()
     {
         //
+    }
+
+    public function sendEmailNotificationToPegawaiSokong(PermohonanBaru $permohonan)
+    {
+        $pegawai_sokong = User::find($permohonan->id_peg_sokong);
+        $pegawai_sokong->notify(new CreatedNewPermohonanNotification($pegawai_sokong));  
     }
 
     /**
@@ -93,7 +100,8 @@ class permohonanController extends Controller
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
                 $users = Auth::user()->id;
                 $permohonans->users()->attach($users);
-                
+
+                $this->sendEmailNotificationToPegawaiSokong($permohonans);
             }
 
             return response()->json(
@@ -151,7 +159,7 @@ class permohonanController extends Controller
                         $permohonans->users()->attach($users);
                     }
                     
-                    
+                    $this->sendEmailNotificationToPegawaiSokong($permohonans);
                 }
     
                 return response()->json(
@@ -243,6 +251,9 @@ class permohonanController extends Controller
 
             $permohonan->save();
             $permohonan->refresh();
+
+            $this->sendEmailNotificationToPegawaiSokong($permohonan);
+
             return response()->json([
                 'permohonan' => $permohonan
             ],200);
@@ -270,6 +281,9 @@ class permohonanController extends Controller
 
             $permohonan->save();
             $permohonan->refresh();
+
+            $this->sendEmailNotificationToPegawaiSokong($permohonan);
+
             return response()->json([
                 'permohonan' => $permohonan
             ],200);

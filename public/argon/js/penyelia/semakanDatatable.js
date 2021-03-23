@@ -7,32 +7,32 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
     jenisPilihan = 'OT';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
     jenisPilihan = 'PS';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 function checkUser(){
@@ -49,7 +49,7 @@ function checkUser(){
             alert('Sila pilih jenis permohonan');
             break;
     }
-    showDatatablePY(pilihan);
+    showDatatable(pilihan);
 }
 
 function showUser() {
@@ -69,7 +69,7 @@ function showUser() {
     }
 }
 
-function showDatatablePY(pilihan){
+function showDatatable(pilihan){
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
@@ -162,7 +162,7 @@ $("#selectJenisPermohonan").on("change",function(){
             ).draw();
             break;
         default:
-            showDatatablePY(tabPilihan);
+            showDatatable(tabPilihan);
             break;
     }
 });

@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\PermohonanStatusChangedEvent;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\PermohonanStatusChangedEvent;
 
 class UpdateJenisPermohonanListener
 {
@@ -49,7 +49,7 @@ class UpdateJenisPermohonanListener
                         $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
                     }
                     $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
-                }
+                } 
                 break;
             case 'PERLU KEMASKINI': 
             case 'DALAM PROSES':
@@ -69,7 +69,6 @@ class UpdateJenisPermohonanListener
                 break;
             case 'BATAL':
                 $event->permohonan->status_akhir = 0;
-
                 break;
             default: 
                 # code...

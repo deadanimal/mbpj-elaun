@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Events\PermohonanStatusChangedEvent;
+use App\Notifications\CreatedNewPermohonanNotification;
 
 class UpdateStatusListener
 {
@@ -26,7 +28,7 @@ class UpdateStatusListener
      *                  1 -> approved
      * 
      * is_renewedPermohonan can be 0 -> not a renewed pemohonan
-     *                             1 -> renewed because it needs kemaskini OR KT sends for the next step
+     *                             1 -> renewed because it needs kemaskini OR KT 'approves' for the next step
      * 
      * is_renewedPermohonan is disregarded if is_terima == 0 (rejected)
      * 
@@ -49,6 +51,7 @@ class UpdateStatusListener
         } elseif ($is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
             $event->permohonan->progres = 'Belum disahkan';
+            $this->sendEmailNotificationToPegawaiSokong($event);
 
         } elseif ($is_batal) {
             $event->permohonan->status = "BATAL";
@@ -58,6 +61,18 @@ class UpdateStatusListener
 
         $event->permohonan->save();
         $event->permohonan->refresh();
+    }
+
+    public function sendEmailNotificationToPegawaiPelulus(PermohonanStatusChangedEvent $event)
+    {
+        $pegawai_pelulus = User::find($event->permohonan->id_peg_pelulus);
+        $pegawai_pelulus->notify(new CreatedNewPermohonanNotification($pegawai_pelulus));  
+    }
+    
+    public function sendEmailNotificationToPegawaiSokong(PermohonanStatusChangedEvent $event)
+    {
+        $pegawai_sokong = User::find($event->permohonan->id_peg_sokong);
+        $pegawai_sokong->notify(new CreatedNewPermohonanNotification($pegawai_sokong));  
     }
 
     public function permohonanApproved(PermohonanStatusChangedEvent $event, $is_peg_sokong)
@@ -79,6 +94,8 @@ class UpdateStatusListener
                 if ($is_peg_sokong) {
                     $event->permohonan->peg_sokong_approved = 1;
                     $event->permohonan->progres = 'Sah P1';
+
+                    $this->sendEmailNotificationToPegawaiPelulus($event);
                 } else {
                     $event->permohonan->peg_sokong_approved = 0;
                     $event->permohonan->status = "DITERIMA";
@@ -87,6 +104,7 @@ class UpdateStatusListener
                 break;
         }
     }
+
 
     public function permohonanRejected(PermohonanStatusChangedEvent $event)
     {
