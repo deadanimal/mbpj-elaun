@@ -72,6 +72,7 @@ function showDashboardDatatableKT(){
             {data: null},
             {data: 'created_at'},
             {data: 'tarikh_mula_kerja'},
+            {data: 'updated_at'},
             {data: 'jenis_permohonan'},
             {data: 'users[*].jumlah_tuntutan_elaun'},
             {data: 'status'}
@@ -93,6 +94,14 @@ function showDashboardDatatableKT(){
             },
             {
                 targets: [2],
+                type: "date",
+                render: function(data,type,row){
+                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    return formattedDate;
+                }
+            },
+            {
+                targets: [3],
                 type: "date",
                 render: function(data,type,row){
                     formattedDate = moment(data).format("DD/MM/YYYY")

@@ -8,12 +8,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-2">
+            <div class="card-body px-0">
                 <div class="table-responsive py-4">
                     <table class="table" id="semakanKJDT">
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
+                                <th ></th>
                                 <th>Tarikh Permohonan</th>
                                 <th>Masa Mula</th>
                                 <th>Masa Akhir</th>
@@ -22,6 +23,7 @@
                                 <th>Waktu</th>
                                 <th>Kadar Jam</th>
                                 <th>Tujuan</th>
+                                <th></th>
                                 <th></th>
                                 <th hidden>Status</th>
                                 <th hidden></th>
