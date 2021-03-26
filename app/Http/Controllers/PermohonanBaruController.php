@@ -11,6 +11,7 @@ use App\Services\KiraanElaunService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Events\PermohonanStatusChangedEvent;
+use App\Notifications\PermohonanRejectedEmailNotification;
 
 class PermohonanBaruController extends Controller
 {
@@ -104,6 +105,7 @@ class PermohonanBaruController extends Controller
         foreach ($permohonan->users as $user) {
             if($user->id == $idUser) {
                 $permohonan->users()->updateExistingPivot($idUser, array('is_rejected_individually' => 1), false);
+                $user->notify(new PermohonanRejectedEmailNotification($user));
             }
         }
     }

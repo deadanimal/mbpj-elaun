@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Events\PermohonanStatusChangedEvent;
-use App\Notifications\CreatedNewPermohonanNotification;
+use App\Notifications\PermohonanBerjayaNotification;
+use App\Notifications\PermohonanRejectedEmailNotification;
+use App\Notifications\PegawaiSokongApprovedEmailNotification;
+use App\Notifications\PegawaiPelulusApprovedEmailNotification;
+use App\Notifications\PermohonanNeedApprovalEmailNotification;
+use App\Notifications\PermohonanNeedKemaskiniEmailNotification;
 
 class UpdateStatusListener
 {
@@ -63,29 +68,20 @@ class UpdateStatusListener
         $event->permohonan->refresh();
     }
 
-    public function sendEmailNotificationToPegawaiPelulus(PermohonanStatusChangedEvent $event)
-    {
-        $pegawai_pelulus = User::find($event->permohonan->id_peg_pelulus);
-        $pegawai_pelulus->notify(new CreatedNewPermohonanNotification($pegawai_pelulus));  
-    }
     
-    public function sendEmailNotificationToPegawaiSokong(PermohonanStatusChangedEvent $event)
-    {
-        $pegawai_sokong = User::find($event->permohonan->id_peg_sokong);
-        $pegawai_sokong->notify(new CreatedNewPermohonanNotification($pegawai_sokong));  
-    }
-
     public function permohonanApproved(PermohonanStatusChangedEvent $event, $is_peg_sokong)
     {
         $jenis_permohonan = substr($event->permohonan->jenis_permohonan, 0, -1);
-
+        
         switch ($jenis_permohonan) {
             case 'KP':
                 $event->permohonan->progres = 'Sah KP';
+                $this->sendEmailToKTPermohonanApproved($event, 'PP');
                 break;
             case 'KS':
                 $event->permohonan->progres = 'Sah KS';
                 $event->permohonan->status_akhir = 1;
+                $this->sendEmailToKTPermohonanBerjaya($event);
                 break;
             case 'DB':
                 $event->permohonan->progres = 'Sah DB';
@@ -94,28 +90,99 @@ class UpdateStatusListener
                 if ($is_peg_sokong) {
                     $event->permohonan->peg_sokong_approved = 1;
                     $event->permohonan->progres = 'Sah P1';
-
-                    $this->sendEmailNotificationToPegawaiPelulus($event);
+                    
+                    $this->sendEmailToKTPermohonanApproved($event, 'PS');
+                    $this->sendEmailNotificationToPegawaiAtasan($event, 'PP');
                 } else {
                     $event->permohonan->peg_sokong_approved = 0;
                     $event->permohonan->status = "DITERIMA";
                     $event->permohonan->progres = 'Sah P2';
+
+                    $this->sendEmailToKTPermohonanApproved($event, 'PP');
                 }
                 break;
         }
     }
-
-
+            
     public function permohonanRejected(PermohonanStatusChangedEvent $event)
     {
         $event->permohonan->peg_sokong_approved = 0;
         $is_kemaskini = $event->permohonan->catatans()->orderBy('created_at','desc')->first()->is_kemaskini;
-
+        
         if ($is_kemaskini) {
             $event->permohonan->status = "PERLU KEMASKINI";
             $event->permohonan->progres = 'Belum disahkan';
         } else {
             $event->permohonan->status = "DITOLAK";
+        }
+    }
+
+    public function sendEmailNotificationToPegawaiAtasan(PermohonanStatusChangedEvent $event, $peringkat)
+    {
+        switch ($peringkat) {
+            case 'PS':
+                $pegawai_sokong = User::find($event->permohonan->id_peg_sokong);
+                $pegawai_sokong->notify(new PermohonanNeedApprovalEmailNotification($pegawai_sokong));  
+                break;
+            case 'PP':
+                $pegawai_pelulus = User::find($event->permohonan->id_peg_pelulus);
+                $pegawai_pelulus->notify(new PermohonanNeedApprovalEmailNotification($pegawai_pelulus)); 
+                break;
+            case 'KP':
+                $pegawai_pelulus = User::find($event->permohonan->id_peg_pelulus);
+                $pegawai_pelulus->notify(new PermohonanNeedApprovalEmailNotification($pegawai_pelulus)); 
+                break;
+            case 'KS':
+                $pegawai_pelulus = User::find($event->permohonan->id_peg_pelulus);
+                $pegawai_pelulus->notify(new PermohonanNeedApprovalEmailNotification($pegawai_pelulus)); 
+                break;
+        }
+    }
+
+    public function sendEmailToKTPermohonanApproved(PermohonanStatusChangedEvent $event, $peringkat)
+    {
+        switch ($peringkat) {
+            case 'PS':
+                foreach ($event->permohonan->users as $user) {
+                    $user->notify(new PegawaiSokongApprovedEmailNotification($user));
+                }
+                break;
+            case 'PP':
+                foreach ($event->permohonan->users as $user) {
+                    $user->notify(new PegawaiPelulusApprovedEmailNotification($user));
+                }
+                break;
+            case 'KP':
+                foreach ($event->permohonan->users as $user) {
+                    $user->notify(new PegawaiPelulusApprovedEmailNotification($user));
+                }
+                break;
+            case 'KS':
+                foreach ($event->permohonan->users as $user) {
+                    $user->notify(new PegawaiPelulusApprovedEmailNotification($user));
+                }
+                break;
+        }
+    }
+
+    public function sendEmailToKTRejected(PermohonanStatusChangedEvent $event)
+    {
+        foreach ($event->permohonan->users as $user) {
+            $user->notify(new PermohonanRejectedEmailNotification($user));
+        }
+    }
+
+    public function sendEmailToKTPerluKemaskini(PermohonanStatusChangedEvent $event)
+    {
+        foreach ($event->permohonan->users as $user) {
+            $user->notify(new PermohonanNeedKemaskiniEmailNotification($user));
+        }
+    }
+
+    public function sendEmailToKTPermohonanBerjaya(PermohonanStatusChangedEvent $event)
+    {
+        foreach ($event->permohonan->users as $user) {
+            $user->notify(new PermohonanBerjayaNotification($user));
         }
     }
 }

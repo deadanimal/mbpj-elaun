@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Events\PermohonanStatusChangedEvent;
 use App\DataTables\kakitangan\permohonanDataTable;
-use App\Notifications\CreatedNewPermohonanNotification;
+use App\Notifications\PermohonanNeedApprovalEmailNotification;
 
 class permohonanController extends Controller
 {
@@ -42,7 +42,7 @@ class permohonanController extends Controller
     public function sendEmailNotificationToPegawaiSokong(PermohonanBaru $permohonan)
     {
         $pegawai_sokong = User::find($permohonan->id_peg_sokong);
-        $pegawai_sokong->notify(new CreatedNewPermohonanNotification($pegawai_sokong));  
+        $pegawai_sokong->notify(new PermohonanNeedApprovalEmailNotification($pegawai_sokong));  
     }
 
     /**

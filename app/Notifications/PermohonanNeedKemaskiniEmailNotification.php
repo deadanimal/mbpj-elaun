@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CreatedNewPermohonanNotification extends Notification
+class PermohonanNeedKemaskiniEmailNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -44,12 +44,12 @@ class CreatedNewPermohonanNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->from('spelm@mbpj.gov.my', 'SPELM')
-                    ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                    ->subject('SPELM : Permohonan Baru')
-                    ->line('Anda mempunyai permohonan baru untuk disemak.')
-                    ->action('Klik disini', url('/'))
-                    ->salutation('Terima kasih.');
+                ->from('spelm@mbpj.gov.my', 'SPELM')
+                ->subject('SPELM : Permohonan Perlu Kemaskini')
+                ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
+                ->line('Permohonan anda perlu dikemaskini.')
+                ->action('Klik disini', url('/'))
+                ->salutation('Terima kasih.');
     }
 
     /**
