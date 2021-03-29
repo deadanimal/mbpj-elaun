@@ -47,7 +47,7 @@ class PegawaiSokongApprovedEmailNotification extends Notification implements Sho
                 ->from('spelm@mbpj.gov.my', 'SPELM')
                 ->subject('SPELM : Permohonan Disahkan')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                ->line('Permohonan anda telah diterima oleh Pegawai Sokong.')
+                ->line('Permohonan anda telah disahkan oleh Pegawai Sokong.')
                 ->line('Sila semak untuk peringkat seterusnya.')
                 ->action('Klik disini', url('/'))
                 ->salutation('Terima kasih.');

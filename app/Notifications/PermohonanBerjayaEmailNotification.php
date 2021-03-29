@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class PermohonanBerjayaNotification extends Notification implements ShouldQueue
+class PermohonanBerjayaEmailNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -47,7 +47,7 @@ class PermohonanBerjayaNotification extends Notification implements ShouldQueue
                 ->from('spelm@mbpj.gov.my', 'SPELM')
                 ->subject('SPELM : Permohonan Diterima')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                ->line('Permohonan anda teah diterima.')
+                ->line('Permohonan anda telah diterima.')
                 ->action('Klik disini', url('/'))
                 ->salutation('Terima kasih.');
     }

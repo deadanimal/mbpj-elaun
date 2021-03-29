@@ -47,7 +47,7 @@ class PegawaiPelulusApprovedEmailNotification extends Notification implements Sh
                 ->from('spelm@mbpj.gov.my', 'SPELM')
                 ->subject('SPELM : Permohonan Disahkan')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                ->line('Permohonan anda telah diterima oleh Pegawai Pelulus.')
+                ->line('Permohonan anda telah disahkan oleh Pegawai Pelulus.')
                 ->line('Sila semak untuk peringkat seterusnya.')
                 ->line('Sekiranya permohonan dibuat secara berkumpulan, hanya seorang sahaja diperlukan untuk luluskan ke peringkat seterusnya.')
                 ->action('Klik disini', url('/'))
