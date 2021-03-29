@@ -14,7 +14,8 @@ class PermohonanRejectedEmailNotification extends Notification implements Should
     use Queueable;
 
     public $name;
-    public $catatans;
+    public $catatan_latest;
+    public $penulis_catatan;
 
     /**
      * Create a new notification instance.
@@ -24,7 +25,13 @@ class PermohonanRejectedEmailNotification extends Notification implements Should
     public function __construct(User $user, PermohonanBaru $permohonan)
     {
         $this->name = $user->name;
-        $this->catatans = $permohonan->catatans;
+        
+        foreach ($permohonan->catatans as $catatan) {
+            $this->catatan_latest = $catatan->catatan;
+            $user = User::find($catatan->id_user);
+            $this->penulis_catatan = $user->name;
+            break;
+        }
     }
 
     /**
@@ -46,20 +53,14 @@ class PermohonanRejectedEmailNotification extends Notification implements Should
      */
     public function toMail($notifiable)
     {
-        // foreach ($this->catatans as $catatan) {
-        //     $catatan_latest = $catatan->catatan;
-        //     break;
-        // }
-
         return (new MailMessage)
                 ->from('spelm@mbpj.gov.my', 'SPELM')
                 ->subject('SPELM : Permohonan Ditolak')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                // ->line('Permohonan anda telah ditolak.')
-                // ->line('Catatan: '. $catatan_latest)
-                // ->line('Catatan: ')
-                // ->line('Sila buat permohonan baru jika perlu atau berhubung dengan Penyelia anda.')
-                ->action('Klik disini', url('/'))
+                ->line('Permohonan anda telah ditolak.')
+                ->line('Sila buat permohonan baru jika perlu atau berhubung dengan Penyelia anda.')
+                ->line('Catatan: '.$this->catatan_latest)
+                ->line('Ditulis oleh: '.$this->penulis_catatan)
                 ->salutation('Terima kasih.');
     }
 

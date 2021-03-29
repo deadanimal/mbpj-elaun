@@ -2,8 +2,6 @@ var counterPermohonan = 0;
 
 function counterBuffer(counter) {
     counterPermohonan = counter;
-
-    console.log('Counter buffer');
 }
 
 function saveCatatan() {
@@ -12,8 +10,6 @@ function saveCatatan() {
     var jenis_permohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('data-value');
 
     if (document.getElementById('perluKemaskini').checked) { is_kemaskini = 1; } 
-
-    console.log('saveCatatan()');
 
     $.ajax({
         url: "catatan/" + id_permohonan,

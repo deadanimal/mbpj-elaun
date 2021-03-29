@@ -175,7 +175,7 @@ class UpdateStatusListener
     public function sendEmailToKTPerluKemaskini(PermohonanStatusChangedEvent $event)
     {
         foreach ($event->permohonan->users as $user) {
-            $user->notify(new PermohonanNeedKemaskiniEmailNotification($user));
+            $user->notify(new PermohonanNeedKemaskiniEmailNotification($user, $event->permohonan));
         }
     }
 
