@@ -193,7 +193,6 @@ $("#selectJenisPermohonan").on("change",function(){
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
-
         var valid = true;
         var min = moment($("#min").val(),"DD/MM/YYYY");
         if (!min.isValid()) { min = null; }

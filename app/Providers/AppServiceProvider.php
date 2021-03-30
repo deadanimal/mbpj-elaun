@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
 
         View::composer(
+
             ['layouts.navbars.partials.2ndsidebar', 'layouts.navbars.navs.auth', 'layouts.headers.breadcrumbs', 
             'layouts.navbars.sidebar', 'core.kakitangan.dashboard' ],
          'App\Http\View\Composers\SideBarComposer');

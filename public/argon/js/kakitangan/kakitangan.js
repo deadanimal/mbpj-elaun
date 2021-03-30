@@ -2,11 +2,6 @@ var id_user = $("#userID").val()
 var pilihan = $('#jenisTable').val()
 var type = $("#type").val()
 
-$(document).ready(function(){
-    showDashboardDatatableKT();
-})
-
-
     $(function () {
 
         $("#jenisTable").change(function () {
@@ -40,7 +35,13 @@ $(document).ready(function(){
         });
     });
 
-function showDashboardDatatableKT(){
+
+$(document).ready(function(){
+    showDatatableKT();
+
+})
+
+function showDatatableKT(){
 
     var permohonanDT = $("#datatable1").DataTable({
         dom: "lrtip",

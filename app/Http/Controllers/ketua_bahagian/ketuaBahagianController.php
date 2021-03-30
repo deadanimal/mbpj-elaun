@@ -18,12 +18,9 @@ class ketuaBahagianController extends Controller
      */
     public function index()
     {
-        
         return view('core.ketua_bahagian.dashboard');
     }
     
-    
-
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +52,6 @@ class ketuaBahagianController extends Controller
     {
         //
         return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->orWhere('id_peg_pelulus',$id)->get())->make(true); 
-
     }
 
     /**

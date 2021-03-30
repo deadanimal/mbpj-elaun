@@ -96,7 +96,7 @@ function showDatatable(pilihan){
             },
 
                 columns: [
-            
+
                     {data: null},
                     {data: 'created_at'},
                     {data: 'masa_mula'},

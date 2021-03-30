@@ -11,6 +11,7 @@
         'class' => 'col-lg-8 mb--6'
     ])
 
+    @include('core.ketua_jabatan.partials.cardBudget') 
     @include('layouts.headers.cards') 
     @endcomponent
 
