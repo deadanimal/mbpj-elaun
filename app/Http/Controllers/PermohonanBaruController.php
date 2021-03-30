@@ -59,18 +59,17 @@ class PermohonanBaruController extends Controller
 
     public function saveElaun(PermohonanBaru $permohonan)
     {
-        $jenisPermohonan = array('EL1', 'EL2');
+        // $jenisPermohonan = array('EL1', 'EL2');
+        $jenisPermohonan = array('PS1', 'PS2');
         $sahP1 = $permohonan->progres == 'Sah P1' ? TRUE : FALSE;
 
         if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP1) {
             $tuntutan = ($permohonan->users)->filter(function($user) {
                 return $user->permohonan_with_users->is_rejected_individually != 1;
-                
             })->each(function($user) use ($permohonan) {
                 $elaun = new KiraanElaunService($permohonan, $user->id);
                 $permohonan->users()
                             ->updateExistingPivot($user->id, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
-
             })->map(function ($user) {
                 return $user->permohonan_with_users
                             ->jumlah_tuntutan_elaun;
