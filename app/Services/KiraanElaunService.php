@@ -8,11 +8,14 @@ use App\PermohonanBaru;
 class KiraanElaunService {
 
     const SETAHUN = 12;
-    const HARI_BEKERJA = 313;
     const JAM_BEKERJA = 8.0;
-    public $permohonan;
+    const HARI_BEKERJA = 313;
     public $id_user;
-    public $jumlahMasaBekerja;
+    public $permohonan;
+    // public float $jumlahMasaBekerjaSiang;
+    // public float $jumlahMasaBekerjaMalam;
+    public $jumlahMasaBekerjaSiang;
+    public $jumlahMasaBekerjaMalam;
     public float $gaji;
     public float $kadarPerJam;
     public float $jumlahTuntutanAkhir;
@@ -22,18 +25,18 @@ class KiraanElaunService {
      *
      * @return void
      */
-
     public function __construct(PermohonanBaru $permohonan, $id_user)
     {
         $this->id_user = $id_user;
+        $this->jumlahTuntutanAkhir = 0;
         $this->permohonan = $permohonan;
         $this->gaji = User::find($id_user)->gaji;
         $this->kadarPerJam = floatval($permohonan->kadar_jam);
-        $this->jumlahTuntutanAkhir = 0;
 
         foreach ($permohonan->users as $user) {
             if ($user->id == $id_user) {
-                $this->jumlahMasaBekerja = floatval($user->permohonan_with_users->masa_sebenar);
+                $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
+                $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
             }
         }
     }
@@ -50,12 +53,14 @@ class KiraanElaunService {
     public function jumlahTuntutanRounded()
     {
         $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
-        $jumlahTuntutan = round($bayaranPerJam, 2) * $this->jumlahMasaBekerja;
+        (float) $jumlahTuntutanSiang = round($bayaranPerJam, 2) * $this->jumlahMasaBekerjaSiang;
+        (float) $jumlahTuntutanMalam = round($bayaranPerJam, 2) * $this->jumlahMasaBekerjaMalam;
+        (float) $jumlahTuntutan = round($jumlahTuntutanSiang, 2) + round($jumlahTuntutanMalam, 2);
+        
         $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
-
-        if ($this->jumlahTuntutanAkhir >= $this->gaji) {
-            $this->tuntutanLebihSebulanGaji();
-        }
+        
+        // assign this permohonan to DB
+        if ($this->jumlahTuntutanAkhir >= $this->gaji) $this->tuntutanLebihSebulanGaji();
 
         return $this->jumlahTuntutanAkhir;
     }

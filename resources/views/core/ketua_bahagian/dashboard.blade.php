@@ -12,10 +12,10 @@
         'class' => 'col-lg-8 mb--6'
     ])
 
+    @include('core.ketua_bahagian.partials.cardBudget') 
     @include('layouts.headers.cards') 
     @endcomponent
 
-    
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col-xl-8 d-flex align-items-stretch">
@@ -100,6 +100,4 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <script src="{{ asset('argon') }}/js/ketua-bahagian/dashboardDT.js"></script>
-    
-
 @endpush

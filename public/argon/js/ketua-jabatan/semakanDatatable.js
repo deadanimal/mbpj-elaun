@@ -75,17 +75,18 @@ function showUser() {
 }
 
 function showDatatable(pilihan){
+    $('#semakanKJDT').DataTable().destroy()
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
     }
-                table = $('#semakanKJDT').dataTable({
+                var semakanKJDT = $('#semakanKJDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
-                serverSide: false,
+                serverSide: true,
             ajax: {
                 url: "ketua-jabatan-semakan/"+id_user,
                 type: 'GET',
@@ -95,9 +96,9 @@ function showDatatable(pilihan){
             },
 
                 columns: [
-            
-                    {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                    {data: 'tarikh_permohonan'},
+
+                    {data: null},
+                    {data: 'created_at'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
@@ -107,9 +108,15 @@ function showDatatable(pilihan){
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
+                    {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
 
                 ],  
                 columnDefs: [
+                    {
+                        targets:0,
+                        orderable:false,
+                        searchable:false,
+                    },
                     {
                         targets: [1],
                         type: "date",
@@ -143,11 +150,22 @@ function showDatatable(pilihan){
                         targets: 10,
                         visible: false,
                         searchable: true
+                    },
+                    {
+                        targets: 11,
+                        visible: false,
+                        searchable: true
                     }
                 ], 
                 
             });
-            if(id_user != ''){
+            semakanKJDT.on('draw.dt', function () {
+                var info = semakanKJDT.page.info();
+                semakanKJDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+            });
+            if(id_user != 'noID'){
             $('#semakanKJDT').DataTable().search(
                 $("#noPekerja").val(),
                 pilihan

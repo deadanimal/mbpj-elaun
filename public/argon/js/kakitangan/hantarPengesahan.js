@@ -7,7 +7,7 @@ $.ajaxSetup({
 function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
 
     $.ajax({
-        url: 'semakan/semak-permohonan/' + id_permohonan_baru,
+        url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         data:{
             id_permohonan_baru : id_permohonan_baru,
@@ -15,7 +15,8 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             jenisPermohonan : jenisPermohonan
         },
         success: function(data) {
-            $("#borangB1Modal input[name=tarikhKerjaMula]").val(data.permohonan.tarikh_permohonan);
+            $("#borangB1Modal input[name=tarikhKerjaMula]").val(data.permohonan.tarikh_mula_kerja);
+            $("#borangB1Modal input[name=tarikhKerjaMula]").val(data.permohonan.tarikh_mula_kerja);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
             $("#borangB1Modal input[name=masaAkhir]").val(data.permohonan.masa_akhir);
             $("#borangB1Modal input[name=jenisPermohonanKT]").val(data.permohonan.jenis_permohonan_kakitangan);

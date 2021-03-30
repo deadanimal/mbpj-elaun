@@ -42,11 +42,15 @@ Route::group([
 			'uses' => 'kakitangan\tuntutanController@destroy',
 			'as' => 'tuntutan.destroy',
 		]);
+		Route::post('/statistics',[
+			'uses' => 'kakitangan\tuntutanController@getStatistics',
+			'as' => 'tuntutan.statistics',
+		]);
 	});
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
-	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store']]);
+	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['show','store']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
-		Route::get('/{user_id}', [
+		Route::get('/show/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
@@ -58,9 +62,17 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@store',
 			'as' => 'permohonan-baru.store',
 		]);
+		Route::put('/kemaskini-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@update',
+			'as' => 'permohonan-baru.update',
+		]);
 		Route::put('/delete-permohonan/{id}',[
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as' => 'permohonan-baru.destroy',
+		]);
+		Route::get('/pegawai',[
+			'uses' 	=> 'kakitangan\permohonanController@pegawai',
+			'as'	=> 'permohonan-baru.pegawai',
 		]);
 	});
 

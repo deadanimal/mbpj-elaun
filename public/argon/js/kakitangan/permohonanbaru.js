@@ -10,6 +10,9 @@ var nodelist = div.getElementsByTagName("div");
 var idPermohonan = 0;
 var reject = []
 var totalhours= 0;
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+var pegawai = []
+var pegawaiID = []
 // if(nodelist.length == 0){
 //     document.getElementById("remove").disabled = true
 // }
@@ -141,6 +144,7 @@ function disableHantar(){
 
 $(document).ready(function(){
 
+    getPegawai();
     getIndividuDT();
     getBerkumpulanDT();
     disableHantar();
@@ -189,7 +193,7 @@ function getIndividuDT(){
         // responsive:true,
         // autoWidth:false,
     ajax: {
-        url: "permohonan-baru/"+id_user,
+        url: "permohonan-baru/show/"+id_user,
         type: 'GET',
         data:
         {
@@ -316,7 +320,7 @@ function getBerkumpulanDT(){
         // responsive:true,
         // autoWidth:false,
     ajax: {
-        url: "permohonan-baru/"+id_user,
+        url: "permohonan-baru/show/"+id_user,
         type: 'GET',
         data:
         {
@@ -427,7 +431,47 @@ function getBerkumpulanDT(){
     } ).draw();
 }
 
-$('.js-example-basic-single').select2();
+function getPegawai(){
+    var pegawaiDiv = document.getElementsByName('pegawaiSokongID')
+    console.log(pegawaiDiv)
+    $.ajax({
+        url: 'permohonan-baru/pegawai/',
+        type:'get',
+        dataType: 'json',
+        success: function(data){
+            console.log(data.pegawaiSokong)
+            var pegawaiSokong = data.pegawaiSokong
+            var pegawaiLulus = data.pegawaiLulus
+            pegawaiSokong.forEach((element,index) => {
+                var option = "<option value='"+element.id+"'>"+element.name+"</option>"
+                $('#pegawaiSokongID').append(option)
+                $('#pegawaiSokongBK').append(option)
+            })
+            pegawaiLulus.forEach((element,index) => {
+                var option = "<option value='"+element.id+"'>"+element.name+"</option>"
+                $('#pegawaiLulusID').append(option)
+                $('#pegawaiLulusBK').append(option)
+            })
+        }
+      })
+}
+
+$("#pegawaiSokongID").change(function(){
+    console.log(this.value);
+})
+$("#pegawaiSokongBK").change(function(){
+    console.log(this.value);
+})
+$("#pegawaiLulusID").change(function(){
+    console.log(this.value);
+})
+$("#pegawaiLulusBK").change(function(){
+    console.log(this.value);
+})
+// $('.js-example-basic-single').select2({
+   
+    
+// });
 
 $('#tarikh-kerjaID').datepicker({
     dateFormat: 'dd / mm / yy',

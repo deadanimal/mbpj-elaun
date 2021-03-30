@@ -115,6 +115,53 @@ class tuntutanController extends Controller
         
     }
 
+    public function getStatistics(){
+        
+        $userID = auth()->user()->id;
+        $lulus = $this->findAllPermohonan($userID)->whereYear('created_at',date('Y'))->where('status_akhir',1)->get()->groupBy(function($d) {
+            return Carbon::parse($d->created_at)->format('m');
+        });
+        $gagal = $this->findAllPermohonan($userID)->whereYear('created_at',date('Y'))->where('status_akhir',0)->get()->groupBy(function($d) {
+            return Carbon::parse($d->created_at)->format('m');
+        });
+
+        $lulusmcount = [];
+        $lulusArr = [];
+        $gagalmcount = [];
+        $gagalArr = [];
+
+        foreach ($lulus as $key => $value) {
+            $lulusmcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($lulusmcount[$i])){
+                $lulusArr[$i] = $lulusmcount[$i];    
+            }else{
+                $lulusArr[$i] = 0;    
+            }
+        }
+
+        foreach ($gagal as $key => $value) {
+            $gagalmcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($gagalmcount[$i])){
+                $gagalArr[$i] = $gagalmcount[$i];    
+            }else{
+                $gagalArr[$i] = 0;    
+            }
+        }
+        // dd($lulus);
+        // dd('lulus',$lulusArr,$lulusmcount,'gagal',$gagalArr,$gagalmcount);
+        return response()->json([
+            'lulus' => $lulusArr,
+            'gagal' => $gagalArr
+        ],200);
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *

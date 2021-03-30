@@ -121,7 +121,7 @@ class semakanController extends Controller
             }
         }else{
 
-        $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
+        $permohonan->tarikh_mula_kerja = $request->input('object.tarikh_permohonan');
         $permohonan->masa_mula = $request->input('object.masa_mula');
         $permohonan->masa_akhir = $request->input('object.masa_akhir');
         $permohonan->masa = $request->input('object.masa');
@@ -130,7 +130,7 @@ class semakanController extends Controller
 
         $permohonan->save();
         $permohonan->refresh();
-        event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));
+        event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));        
         return response()->json([
             'permohonan' => $permohonan
         ],200);

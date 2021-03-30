@@ -7,32 +7,32 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
     jenisPilihan = 'OT';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
     jenisPilihan = 'PS';
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatablePY(jenisPilihan);
+    showDatatable(jenisPilihan);
 });
 
 function checkUser(){
@@ -49,7 +49,7 @@ function checkUser(){
             alert('Sila pilih jenis permohonan');
             break;
     }
-    showDatatablePY(pilihan);
+    showDatatable(pilihan);
 }
 
 function showUser() {
@@ -69,18 +69,18 @@ function showUser() {
     }
 }
 
-function showDatatablePY(pilihan){
+function showDatatable(pilihan){
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
     }
-                table = $('#semakanPYDT').DataTable({
+                var semakanPYDT = $('#semakanPYDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
-                serverSide: false,
+                serverSide: true,
             ajax: {
                 url: "penyelia-semakan/"+id_user,
                 type: 'GET',
@@ -89,8 +89,10 @@ function showDatatablePY(pilihan){
                 }
             },
                 columns: [
+
+                    {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                    {data: 'tarikh_permohonan'},
+                    {data: 'created_at'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
@@ -103,7 +105,17 @@ function showDatatablePY(pilihan){
                 ],  
                 columnDefs: [
                     {
-                        targets: [1],
+                        searchable: false,
+                        orderable: false,
+                        targets: 0
+                    },
+                    {
+                        targets: 1,
+                        visible: false,
+                        searchable: true
+                    },
+                    {
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -111,7 +123,7 @@ function showDatatablePY(pilihan){
                         }
                     },
                     {
-                        targets: 9,
+                        targets: 10,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -132,14 +144,20 @@ function showDatatablePY(pilihan){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 11,
                         visible: false,
                         searchable: true
                     }
                 ], 
             });
+            semakanPYDT.on('draw.dt', function () {
+                var info = semakanPYDT.page.info();
+                semakanPYDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+            });
             if(id_user != ''){
-                $('#semakanPYDT').DataTable().search(
+                semakanPYDT.search(
                     $("#noPekerja").val(),
                     pilihan
                 ).draw();
@@ -162,7 +180,7 @@ $("#selectJenisPermohonan").on("change",function(){
             ).draw();
             break;
         default:
-            showDatatablePY(tabPilihan);
+            showDatatable(tabPilihan);
             break;
     }
 });

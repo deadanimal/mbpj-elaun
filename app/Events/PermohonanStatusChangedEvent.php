@@ -33,7 +33,6 @@ class PermohonanStatusChangedEvent
         $this->is_terima = $is_terima;
         $this->is_renewedPermohonan = $is_renewedPermohonan;
         $this->is_batal = $is_batal;
-
     }
 
     /**

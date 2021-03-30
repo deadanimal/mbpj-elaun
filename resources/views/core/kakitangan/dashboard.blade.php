@@ -12,7 +12,7 @@
             @endslot
 
         @endcomponent
-        @include('layouts.headers.cards') 
+        @include('core.kakitangan.cardsKakitangan') 
     @elseif(Auth::user()->role_id == '1'  )
     @component('layouts.headers.breadcrumbs')
             @slot('title') 
@@ -34,8 +34,8 @@
                                 <h3 class="mb-0">Pengurusan Sistem Elaun</h3>
                             </div>
                             <div class="col-3 text-right">
-                                <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" >
-                                    <option value="permohonanan" selected="selected">Permohonan</option>
+                                <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" autocomplete="off">
+                                    <option value="permohonan" selected>Permohonan</option>
                                     <option value="tuntutan">Tuntutan</option>
                                     <option value="lulus">Lulus</option>
                                     <option value="tolak">Tolak</option>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     
-                    <div id="permohonan" class="row">
+                    <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive py-4">
                                 <table class="table" id="datatable1">
@@ -64,97 +64,8 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            @if(Auth::user()->role_id == '2' )
                             <div class="col-12 py-2 my-4 text-center">
-                                <a href="/penyelia/semakan">Lihat selanjutnya di semakan permohonan</a>
-                            </div>
-                            @elseif(Auth::user()->role_id == '8' )
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="/kakitangan/semakan">Lihat selanjutnya di semakan permohonan</a>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-                            
-
-                    <div id="tuntutan" class="row">
-                    <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="tuntutanDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan tuntutan</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="lulus" class="row">
-                    <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="lulusDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan permohonan</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="tolak" class="row">
-                    <div class="col-lg-12">
-                            <div class="table-responsive py-4">
-                                <table class="table" id="tolakDT">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Tarikh Permohonan</th>
-                                            <th>Tarikh Transaksi</th>
-                                            <th>Tarikh Kelulusan</th>
-                                            <th>Kategori</th>
-                                            <th>Jumlah</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-12 py-2 my-4 text-center">
-                                <a href="">Lihat selanjutnya di semakan permohonan</a>
+                                <a id="footerDT" href="/{{$temp}}/semakan">Lihat selanjutnya di semakan permohonan</a>
                             </div>
                         </div>
                     </div>
@@ -162,6 +73,8 @@
             </div>
         </div>
     <input id="userID" value="{{auth()->user()->id}}" hidden>
+    <input id="type" value="{{$temp}}" hidden>
+
 
         <!-- Footer -->
         {{-- @include('layouts.footers.auth') --}}

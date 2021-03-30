@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\penyelia;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use DataTables;
+use App\PermohonanBaru;
+use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class penyeliaController extends Controller
 {
@@ -16,12 +17,10 @@ class penyeliaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
         return view('core.penyelia.dashboard');
     }
-    
-    
 
     /**
      * Show the form for creating a new resource.
