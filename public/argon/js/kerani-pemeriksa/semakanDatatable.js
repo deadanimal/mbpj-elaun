@@ -64,7 +64,7 @@ function showDatatable(){
     if(id_user == ''){
         id_user = 'noID';
     }
-        table = $('#semakanKPDT').dataTable({
+    semakanKPDT = $('#semakanKPDT').DataTable({
         dom: 'lrtip',
         destroy: true,
         processing: true,
@@ -76,6 +76,7 @@ function showDatatable(){
 
                 columns: [
             
+                    {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'created_at'},
                     {data: 'masa_mula'},
@@ -92,7 +93,18 @@ function showDatatable(){
                 ],  
                 columnDefs: [
                     {
-                        targets: [1],
+                        targets: 0,
+                        orderable:false,
+                        searchable: false
+                    },
+                    {
+                        targets: 1,
+                        visible: false,
+                        searchable: false,
+                        orderable:false
+                    },
+                    {
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -100,7 +112,7 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 9,
+                        targets: 10,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -121,17 +133,23 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 11,
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 11,
+                        targets: 12,
                         visible: false,
                         searchable: true
                     },
                 ], 
                 
+            });
+            semakanKPDT.on('draw.dt', function () {
+                var info = semakanKPDT.page.info();
+                semakanKPDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
             });
             if(id_user != ''){
                 $('#semakanKPDT').DataTable().search(

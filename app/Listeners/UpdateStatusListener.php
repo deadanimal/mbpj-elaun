@@ -51,7 +51,7 @@ class UpdateStatusListener
         } elseif ($event->is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
             $event->permohonan->progres = 'Belum disahkan';
-            $this->sendEmailNotificationToPegawaiSokong($event);
+            $this->sendEmailNotificationToPegawaiAtasan($event, 'PS');
         } elseif ($event->is_batal) {
             $event->permohonan->status = "BATAL";
         } else {
@@ -66,6 +66,7 @@ class UpdateStatusListener
     public function permohonanApproved(PermohonanStatusChangedEvent $event, $is_peg_sokong)
     {
         $jenis_permohonan = substr($event->permohonan->jenis_permohonan, 0, -1);
+        $jenis_permohonan_KT = substr($event->permohonan->jenis_permohonan_kakitangan, 0, -1);
         
         switch ($jenis_permohonan) {
             case 'KP':
@@ -90,6 +91,11 @@ class UpdateStatusListener
                     $event->permohonan->peg_sokong_approved = 0;
                     $event->permohonan->status = "DITERIMA";
                     $event->permohonan->progres = 'Sah P2';
+
+                    if ($jenis_permohonan_KT == 'EL') {
+                        $event->permohonan->tarikh_pengesahan = now()->format('d-m-Y');
+                    }
+
                     $this->sendEmailToKTPermohonanApproved($event, 'PP');
                 }
                 break;

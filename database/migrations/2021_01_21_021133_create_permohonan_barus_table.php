@@ -17,6 +17,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->bigIncrements('id_permohonan_baru');
             $table->string('tarikh_mula_kerja');
             $table->string('tarikh_akhir_kerja');
+            $table->string('tarikh_pengesahan');
             $table->string('masa_mula');
             $table->string('masa_akhir');
             $table->string('masa');

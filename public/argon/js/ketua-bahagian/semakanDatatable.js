@@ -81,7 +81,7 @@ function showDatatable(pilihan){
     if(id_user == ''){
         id_user = 'noID';
     }
-                table = $('#semakanKBDT').dataTable({
+                semakanKBDT = $('#semakanKBDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
@@ -115,6 +115,12 @@ function showDatatable(pilihan){
                         targets:0,
                         orderable:false,
                         searchable:false,
+                    },
+                    {
+                        targets:1,
+                        orderable:false,
+                        searchable:false,
+                        visible: false
                     },
                     {
                         targets: [2],

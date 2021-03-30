@@ -14,6 +14,7 @@ class PermohonanBaru extends Model
     protected $fillable = [
         'tarikh_mula_kerja',
         'tarikh_akhir_kerja',
+        'tarikh_pengesahan',
         'masa_mula',
         'masa_akhir',
         'masa_mula_sebenar',
@@ -48,6 +49,7 @@ class PermohonanBaru extends Model
         'status_akhir' => 2,
         'tarikh_mula_kerja' => '',
         'tarikh_akhir_kerja' => '',
+        'tarikh_pengesahan' => '',
         'is_for_datuk_bandar' => 0
     ];
 

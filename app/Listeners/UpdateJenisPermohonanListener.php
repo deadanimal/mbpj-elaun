@@ -42,7 +42,7 @@ class UpdateJenisPermohonanListener
 
         switch ($event->permohonan->status) {
             case 'DITERIMA':
-                // if ($event->permohonan->peg_sokong_approved) break;
+                if ($event->permohonan->peg_sokong_approved) break;
 
                 // change jenis_permohonan to KP when DB approves
                 if ($event->permohonan->is_for_datuk_bandar) {
