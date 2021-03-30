@@ -34,8 +34,8 @@ class Controller extends BaseController
                                 ->statusAkhirBelomDiterima();
     }
 
-    public function findAllPermohonan(){
-        return $permohonans = PermohonanBaru::select('*')->users();
+    public function findAllPermohonan($id){
+        return $permohonans = User::find($id)->permohonans();
     }
 
     public function findPermohonanUser($idPermohonanBaru){
@@ -46,6 +46,18 @@ class Controller extends BaseController
         return $permohonans = PermohonanBaru::find($idPermohonanBaru)
                                 ->users()
                                 ->find($id);
+    }
+
+    public function findPegawaiSokong(){
+
+        return $permohonans = User::select('*')->whereIn('role_id',['2','4']);
+
+    }
+
+    public function findPegawaiLulus(){
+
+        return $permohonans = User::select('*')->whereIn('role_id',['4','5']);
+
     }
 
     public function findPermohonanForKP()

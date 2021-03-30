@@ -40,6 +40,12 @@ Route::group([
 		]);
 	});
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
+	Route::group(['prefix' => 'laporan'], function () {
+		Route::post('/statistics',[
+			'uses' => 'kakitangan\laporanController@getStatistics',
+			'as' => 'laporan.getStatistics'
+		]);
+	});
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
 		// Route::get('/get-permohonan/{user_id}', [
@@ -61,6 +67,10 @@ Route::group([
 		Route::post('/hantar-permohonan',[
 			'uses' => 'kakitangan\permohonanController@store',
 			'as' => 'permohonan-baru.store',
+		]);
+		Route::post('/pegawai',[
+			'uses' 	=> 'kakitangan\permohonanController@pegawai',
+			'as'	=> 'permohonan-baru.pegawai',
 		]);
 	});
 
