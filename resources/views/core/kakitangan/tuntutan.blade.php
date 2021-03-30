@@ -16,7 +16,8 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h2 class="mb-2">{{ __('Analisa Tuntutan Elaun Lulus/Gagal') }}</h2>
+                                <h2 class="mb-2">{{ __('Analisa Tuntutan Elaun Lulus/Gagal Tahun Semasa') }}</h2>
+                                <input type="button" value="Save as PDF" onclick="savePDF();" />
                             </div>
                         </div>
                     </div>
@@ -146,7 +147,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="{{ asset('argon') }}/js/amchart.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/charts.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/tuntutan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarElaun.js"></script>
 

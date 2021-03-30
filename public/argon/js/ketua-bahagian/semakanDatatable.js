@@ -96,6 +96,7 @@ function showDatatable(pilihan){
 
                 columns: [
             
+                    {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'created_at'},
                     {data: 'masa_mula'},
@@ -111,7 +112,12 @@ function showDatatable(pilihan){
                 ],  
                 columnDefs: [
                     {
-                        targets: [1],
+                        targets:0,
+                        orderable:false,
+                        searchable:false,
+                    },
+                    {
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -119,7 +125,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 9,
+                        targets: 10,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -140,12 +146,18 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 11,
                         visible: false,
                         searchable: true
                     }
                 ], 
                 
+            });
+            semakanKBDT.on('draw.dt', function () {
+                var info = semakanKBDT.page.info();
+                semakanKBDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
             });
             if(id_user != ''){
             $('#semakanKBDT').DataTable().search(

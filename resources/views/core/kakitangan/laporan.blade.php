@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <div class="chart">
                             <!-- Chart wrapper -->
-                            <canvas id="chart-sales" class="chart-canvas"></canvas>
+                            <div id="chart1" style="width:100%;height:100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="card-body">
                         <div class="chart">
                             <!-- Chart wrapper -->
-                            <canvas id="chart-bars" class="chart-canvas"></canvas>
+                            <div id="chart2" style="width:100%;height:100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="card-body">
                         <div class="chart">
                             <!-- Chart wrapper -->
-                            <canvas id="chart-points" class="chart-canvas"></canvas>
+                            <div id="chart3" style="width:100%;height:100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     <div class="card-body">
                         <div class="chart">
                             <!-- Chart wrapper -->
-                            <canvas id="chart-doughnut" class="chart-canvas"></canvas>
+                            <div id="chart4" style="width:100%;height:100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -111,5 +111,5 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    {!! $dataTable->scripts() !!}
+    <script src="{{ asset('argon') }}/js/kakitangan/chartLaporan.js"></script>
 @endpush

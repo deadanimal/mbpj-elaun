@@ -335,4 +335,15 @@ class permohonanController extends Controller
         }
 
     }
+
+    public function pegawai(){
+
+        $pegawaiSokong = $this->findPegawaiSokong()->get();
+        $pegawaiLulus = $this->findPegawaiLulus()->get();
+        return response()->json([
+            'pegawaiSokong' => $pegawaiSokong,
+            'pegawaiLulus' => $pegawaiLulus
+        ],200);
+
+    }
 }

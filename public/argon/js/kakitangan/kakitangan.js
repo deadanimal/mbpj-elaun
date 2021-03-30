@@ -1,48 +1,40 @@
-$(document).ready(function(){
-    $('#permohonan').show();
-    $('#tuntutan').hide();
-    $('#lulus').hide();
-    $('#tolak').hide();
-})
-
+var id_user = $("#userID").val()
+var pilihan = $('#jenisTable').val()
+var type = $("#type").val()
 
     $(function () {
 
         $("#jenisTable").change(function () {
-            if ($(this).val() == "permohonanan") {
-                $('#permohonan').show();
-                $("#tuntutan").hide();
-                $('#lulus').hide();
-                $('#tolak').hide();
+            if ($(this).val() == "permohonan") {
+                pilihan = $('#jenisTable').val()
+                showDashboardDatatableKT();
+                $("#footerDT").html('Lihat selanjutnya di semakan permohonan');
+                $("#footerDT").attr("href", "/"+type+"/semakan");
             }
             else if ($(this).val() == "tuntutan") {
-                $('#permohonan').hide();
-                $("#tuntutan").show();
-                $('#lulus').hide();
-                $('#tolak').hide();
+                pilihan = $('#jenisTable').val()
+                showDashboardDatatableKT();
+                $("#footerDT").html('Lihat selanjutnya di tuntutan permohonan');
+                $("#footerDT").attr("href", "/"+type+"/tuntutan");
 
             }else if ($(this).val() == "lulus") {
-                $('#permohonan').hide();
-                $("#tuntutan").hide();
-                $('#lulus').show();
-                $('#tolak').hide();
+                pilihan = $('#jenisTable').val()
+                showDashboardDatatableKT();
+                $("#footerDT").html('Lihat selanjutnya di semakan permohonan');
+                $("#footerDT").attr("href", "/"+type+"/semakan");
 
             }else if ($(this).val() == "tolak") {
-                $('#permohonan').hide();
-                $("#tuntutan").hide();
-                $('#lulus').hide();
-                $('#tolak').show();
+                pilihan = $('#jenisTable').val()
+                showDashboardDatatableKT();
+                $("#footerDT").html('Lihat selanjutnya di semakan permohonan');
+                $("#footerDT").attr("href", "/"+type+"/semakan");
 
             }else{
-            $('#datatable').hide();
-            $('#datatable2').hide();
-            $('#lulus').hide();
-            $('#tolak').hide(); 
-    
             }
     
         });
     });
+
 
 $(document).ready(function(){
     showDatatableKT();
@@ -50,15 +42,22 @@ $(document).ready(function(){
 })
 
 function showDatatableKT(){
-    var id_user = $("#userID").val()
-    var pilihan = $('#jenisTable').val()
+
     var permohonanDT = $("#datatable1").DataTable({
         dom: "lrtip",
-        scrollX: false,
+        scrollX: true,
         destroy: true,
         lengthMenu: [ 5, 10, 25, 50 ],
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            }
+        },
         processing: true,
         serverSide: true,
+        responsive:true,
+        autoWidth:false,
         ajax:{
             url:'dashboard/'+id_user,
             type:'GET',
@@ -71,6 +70,7 @@ function showDatatableKT(){
             {data: null},
             {data: 'created_at'},
             {data: 'tarikh_mula_kerja'},
+            {data: 'updated_at'},
             {data: 'jenis_permohonan'},
             {data: 'users[*].jumlah_tuntutan_elaun'},
             {data: 'status'}
@@ -98,6 +98,14 @@ function showDatatableKT(){
                     return formattedDate;
                 }
             },
+            {
+                targets: [3],
+                type: "date",
+                render: function(data,type,row){
+                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    return formattedDate;
+                }
+            },
         ],
         order: [ 1, 'asc' ]
         });
@@ -109,32 +117,5 @@ function showDatatableKT(){
             });
         });
         
-
-    var tuntutanDT = $("#tuntutanDT").DataTable({
-        dom: "lrtip",
-        scrollX: false,
-        destroy: true,
-        lengthMenu: [ 5, 10, 25, 50 ],
-        // processing: true,
-        // serverSide: true,
-    })   
-
-    var lulusDT = $("#lulusDT").DataTable({
-        dom: "lrtip",
-        scrollX: false,
-        destroy: true,
-        lengthMenu: [ 5, 10, 25, 50 ],
-        // processing: true,
-        // serverSide: true,
-    })   
-
-    var tolakDT = $("#tolakDT").DataTable({
-        dom: "lrtip",
-        scrollX: false,
-        destroy: true,
-        lengthMenu: [ 5, 10, 25, 50 ],
-        // processing: true,
-        // serverSide: true,
-    })   
 
 }

@@ -49,13 +49,31 @@ class dashboardController extends Controller
      */
     public function show(Request $request,$id)
     {
-        //
-        // dd($this->findPermohonanUser($id)->users()->get());
-        // if($pilihan == 'permohonan')
-        // {
-            // dd($this->findPermohonanUser($id));
-            return datatables($this->findPermohonanUser($id)->get())->make(true);
-        // };
+       
+        $pilihan = $request->input('pilihan');
+        switch($pilihan){
+            case "permohonan":
+                return datatables($this->findPermohonanUser($id)->whereIn('jenis_permohonan_kakitangan',['OT1','OT2'])->get())->make(true);
+                break;
+
+            case 'tuntutan':
+                return datatables($this->findPermohonanUser($id)->whereIn('jenis_permohonan_kakitangan',['EL1','EL2'])->get())->make(true);
+                break;
+            
+            case 'lulus':
+                return datatables($this->findPermohonanUser($id)->where('status_akhir','1')->get())->make(true);
+                break;
+
+            case 'tolak':
+                return datatables($this->findPermohonanUser($id)->where('status_akhir','0')->get())->make(true);
+                break;
+
+            default:
+                return datatables($this->findPermohonanUser($id)->get())->make(true);
+                break;
+        }
+            
+       
     }
 
     /**
