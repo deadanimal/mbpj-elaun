@@ -97,7 +97,7 @@ function showDatatable(pilihan){
                 columns: [
             
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                    {data: 'tarikh_permohonan'},
+                    {data: 'created_at'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
@@ -181,7 +181,6 @@ $("#selectJenisPermohonan").on("change",function(){
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
-
         var valid = true;
         var min = moment($("#min").val(),"DD/MM/YYYY");
         if (!min.isValid()) { min = null; }

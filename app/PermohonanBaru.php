@@ -129,6 +129,23 @@ class PermohonanBaru extends Model
         return $query->where('progres', '!=', 'Sah P2');
     }
 
+    public function scopePegawaiSokong($query)
+    {
+        return $query->where('id_peg_sokong', Auth::id());
+    }
+
+    public function scopePegawaiPelulus($query)
+    {
+        return $query->where('id_peg_pelulus', Auth::id());
+    }
+
+    public function scopePegawaiSokongAtauPelulus($query)
+    {
+        return $query->pegawaiSokong()
+                    ->orWhere(function (Builder $q) {
+                        return $q->pegawaiPelulus(); });
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
@@ -136,9 +153,11 @@ class PermohonanBaru extends Model
                                 'masa_mula_sebenar',
                                  'masa_akhir_sebenar',
                                  'is_rejected_individually',
-                                 'masa_sebenar',
+                                 'masa_sebenar_siang',
+                                 'masa_sebenar_malam',
                                  'jumlah_tuntutan_elaun'
                                  )
+                    ->withTimestamps()
                     ->as('permohonan_with_users');
     }
 

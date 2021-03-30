@@ -58,6 +58,10 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@store',
 			'as' => 'permohonan-baru.store',
 		]);
+		Route::put('/kemaskini-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@update',
+			'as' => 'permohonan-baru.update',
+		]);
 		Route::put('/delete-permohonan/{id}',[
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as' => 'permohonan-baru.destroy',

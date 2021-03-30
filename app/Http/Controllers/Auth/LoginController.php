@@ -26,13 +26,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public function redirectTo(){
+    public function redirectTo()
+    {
          
-        // User role
-        $role = Auth::user()->role_id; 
-        
         // Check user role
-        switch ($role) {
+        switch (Auth::user()->role_id) {
             case '1':
                     return 'pentadbir-sistem/dashboard';
                 break;

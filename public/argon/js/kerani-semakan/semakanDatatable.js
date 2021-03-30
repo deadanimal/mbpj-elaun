@@ -78,7 +78,7 @@ function showDatatable(){
                 columns: [
             
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                    {data: 'tarikh_permohonan'},
+                    {data: 'created_at'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},

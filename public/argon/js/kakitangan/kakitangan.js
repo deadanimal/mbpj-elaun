@@ -45,12 +45,11 @@ $(document).ready(function(){
     });
 
 $(document).ready(function(){
-
-    showDashboardDatatableKT();
+    showDatatableKT();
 
 })
 
-function showDashboardDatatableKT(){
+function showDatatableKT(){
     var id_user = $("#userID").val()
     var pilihan = $('#jenisTable').val()
     var permohonanDT = $("#datatable1").DataTable({

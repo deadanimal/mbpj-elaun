@@ -128,9 +128,11 @@ class User extends Authenticatable
                         'masa_mula_sebenar',
                         'masa_akhir_sebenar',
                         'is_rejected_individually',
-                        'masa_sebenar',
+                        'masa_sebenar_siang',
+                        'masa_sebenar_malam',
                         'jumlah_tuntutan_elaun'
                         )
+                    ->withTimestamps()
                     ->as('permohonan_with_users');
     }
 
@@ -144,15 +146,6 @@ class User extends Authenticatable
         return $this->hasMany(Catatan::class, 'id_user', 'id');
     }
 
-    /**
-     * Get all of the aduans for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    // public function aduans(): HasMany
-    // {
-    //     return $this->hasMany(Aduan::class, 'id_user', 'id');
-    // }
     public function aduans()
     {
         return $this->hasMany(Aduan::class, 'id_user', 'id');

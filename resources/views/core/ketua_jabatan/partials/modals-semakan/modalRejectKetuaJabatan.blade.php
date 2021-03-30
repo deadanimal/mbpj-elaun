@@ -34,7 +34,7 @@
                         <button type="button" data-dismiss="modal" class="btn btn-danger mt-4">{{ __('Batal') }}</button>
                     </div>  
                 </form>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
