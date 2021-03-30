@@ -44,21 +44,15 @@ class UpdateStatusListener
     {
         $event->permohonan->refresh();
 
-        $id_peg_sokong =  $event->permohonan->id_peg_sokong;
-        $is_batal = $event->is_batal;
-        $is_terima = $event->is_terima;
-        $is_renewedPermohonan = $event->is_renewedPermohonan;
-        $is_peg_sokong = Auth::id() == $id_peg_sokong ? 1 : 0;
+        $is_peg_sokong = Auth::id() == $event->permohonan->id_peg_sokong ? 1 : 0;
 
-        if ($is_terima) {
+        if ($event->is_terima) {
             $this->permohonanApproved($event, $is_peg_sokong);
-
-        } elseif ($is_renewedPermohonan){
+        } elseif ($event->is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
             $event->permohonan->progres = 'Belum disahkan';
             $this->sendEmailNotificationToPegawaiSokong($event);
-
-        } elseif ($is_batal) {
+        } elseif ($event->is_batal) {
             $event->permohonan->status = "BATAL";
         } else {
             $this->permohonanRejected($event);
@@ -79,7 +73,7 @@ class UpdateStatusListener
                 $this->sendEmailToKTPermohonanApproved($event, 'PP');
                 break;
             case 'KS':
-                $event->permohonan->progres = 'Sah KS';
+                $event->permohonan->progres = 'Tuntutan Diterima';
                 $event->permohonan->status_akhir = 1;
                 $this->sendEmailToKTPermohonanBerjaya($event);
                 break;

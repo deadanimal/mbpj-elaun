@@ -37,19 +37,25 @@ class UpdateJenisPermohonanListener
         $level_permohonan_kakitangan = substr($jenis_permohonan_kakitangan, 0, -1);
 
         $is_individu = $jenis_permohonan[2] == "1" ? 1 : 0;
-        $is_not_approved_peg_sokong = $event->permohonan->peg_sokong_approved == 0 ? 1 : 0;
 
         $key = array_search($level_permohonan, $array); 
 
         switch ($event->permohonan->status) {
             case 'DITERIMA':
-                if ($is_not_approved_peg_sokong) {
-                    // jenis_permohonan_kakitangan stagnant after EL
-                    if ($level_permohonan_kakitangan != 'EL') {
-                        $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
-                    }
-                    $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
-                } 
+                // if ($event->permohonan->peg_sokong_approved) break;
+
+                // change jenis_permohonan to KP when DB approves
+                if ($event->permohonan->is_for_datuk_bandar) {
+                    $event->permohonan->jenis_permohonan = 'KP';
+                    break;
+                }
+
+                // jenis_permohonan_kakitangan stagnant after EL
+                if ($level_permohonan_kakitangan != 'EL') {
+                    $event->permohonan->jenis_permohonan_kakitangan = $event->permohonan->jenis_permohonan;
+                }
+
+                $event->permohonan->jenis_permohonan = $array[$key+1].($is_individu ? 1 : 2);
                 break;
             case 'PERLU KEMASKINI': 
             case 'DALAM PROSES':

@@ -49,7 +49,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
         },
         dataType:"JSON",
         success: function(data) {
-           
+           console.log(data.permohonan.permohonan_with_users.id)
             if( jenis_permohonan == 'OT1'){
                 var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
                 $("#permohonanbaruModal").modal("show");
@@ -59,7 +59,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 document.getElementById('selectpermohonan').className = "col-sm-12"
                 $('#divPermohonanIndividu').show();
                 $("#divPermohonanBerkumpulan").hide();
-                $("#permohonanbaruModal input[name=namaPekerjaID]").val(data.permohonan);
+                $("#permohonanbaruModal input[name=namaPekerjaID]").val(data.permohonan.permohonan_with_users.id);
                 $("#permohonanbaruModal input[name=tarikh-kerjaID]").val(tarikhKerjaID);
                 $("#permohonanbaruModal").modal("show");
                 console.log('ot1',jenis_permohonan)

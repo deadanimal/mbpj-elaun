@@ -240,7 +240,7 @@ class permohonanController extends Controller
         if($jenisPermohonan == 'OT1'){
             $permohonan = $this->findPermohonanWithIDKakitangan($jenisPermohonan,$idPermohonanBaru);
             // dd($permohonan);
-            $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
+            $permohonan->tarikh_mula_kerja = $request->input('object.tarikh_permohonan');
             $permohonan->masa_mula = $request->input('object.masa_mula');
             $permohonan->masa_akhir = $request->input('object.masa_akhir');
             $permohonan->status = $request->input('object.status');
