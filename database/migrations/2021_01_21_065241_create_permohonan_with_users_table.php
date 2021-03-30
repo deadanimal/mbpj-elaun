@@ -19,7 +19,8 @@ class CreatePermohonanWithUsersTable extends Migration
             $table->unsignedInteger('id');
             $table->string('masa_mula_sebenar')->default('-');
             $table->string('masa_akhir_sebenar')->default('-');
-            $table->string('masa_sebenar')->default('5.5');
+            $table->string('masa_sebenar_siang')->default('2.0');
+            $table->string('masa_sebenar_malam')->default('2.0');
             $table->float('jumlah_tuntutan_elaun', 8,2)->default(0.00);
             $table->integer('is_rejected_individually')->default('0');
             $table->timestamps();

@@ -153,7 +153,8 @@ class PermohonanBaru extends Model
                                 'masa_mula_sebenar',
                                  'masa_akhir_sebenar',
                                  'is_rejected_individually',
-                                 'masa_sebenar',
+                                 'masa_sebenar_siang',
+                                 'masa_sebenar_malam',
                                  'jumlah_tuntutan_elaun'
                                  )
                     ->withTimestamps()

@@ -12,7 +12,8 @@ class KiraanElaunService {
     const HARI_BEKERJA = 313;
     public $id_user;
     public $permohonan;
-    public $jumlahMasaBekerja;
+    public $jumlahMasaBekerjaSiang;
+    public $jumlahMasaBekerjaMalam;
     public float $gaji;
     public float $kadarPerJam;
     public float $jumlahTuntutanAkhir;
@@ -22,7 +23,6 @@ class KiraanElaunService {
      *
      * @return void
      */
-
     public function __construct(PermohonanBaru $permohonan, $id_user)
     {
         $this->id_user = $id_user;
@@ -33,7 +33,8 @@ class KiraanElaunService {
 
         foreach ($permohonan->users as $user) {
             if ($user->id == $id_user) {
-                $this->jumlahMasaBekerja = floatval($user->permohonan_with_users->masa_sebenar);
+                $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
+                $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
             }
         }
     }
@@ -50,10 +51,18 @@ class KiraanElaunService {
     public function jumlahTuntutanRounded()
     {
         $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
-        $jumlahTuntutan = round($bayaranPerJam, 2) * $this->jumlahMasaBekerja;
+
+        if ($this->jumlahMasaBekerjaSiang) $jumlahTuntutanSiang = round($bayaranPerJam, 2) * $this->jumlahMasaBekerjaSiang;
+        else $jumlahTuntutanSiang = 0;
+
+        if ($this->jumlahMasaBekerjaMalam) $jumlahTuntutanMalam = round($bayaranPerJam, 2) * $this->jumlahMasaBekerjaMalam;
+        else $jumlahTuntutanMalam = 0;
+
+        $jumlahTuntutan = $jumlahTuntutanSiang + $jumlahTuntutanMalam;
         $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
         
-        if ($this->jumlahTuntutanAkhir >= $this->gaji) { $this->tuntutanLebihSebulanGaji(); }
+        // assign this permohonan to DB
+        if ($this->jumlahTuntutanAkhir >= $this->gaji) $this->tuntutanLebihSebulanGaji();
 
         return $this->jumlahTuntutanAkhir;
     }

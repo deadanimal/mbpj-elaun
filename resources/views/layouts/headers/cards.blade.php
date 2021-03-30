@@ -8,15 +8,15 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Kerja Lebih Masa</h5>
                         <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanKerjaLebihMasa }}</span>
                     </div>
-                <div class="col-auto">
-                    <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-active-40"></i>
-                    </div> 
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                            <i class="ni ni-active-40"></i>
+                        </div> 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <div class="col-xl-3 col-md-6">
     <div class="card card-stats">
         <!-- Card body -->
