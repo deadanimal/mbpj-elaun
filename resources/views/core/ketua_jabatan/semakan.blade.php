@@ -7,9 +7,9 @@
  
 @section('content')
     @include('forms.header', [
-         'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
+        'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
         'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
-        'class' => 'col-lg-7'
+        'class' => 'col-lg-12'
     ])
 
     <div class="container-fluid mt--6">
