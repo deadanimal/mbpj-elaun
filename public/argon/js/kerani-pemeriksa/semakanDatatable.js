@@ -88,9 +88,6 @@ function showDatatable(){
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
-                    {data: 'hari'},
-                    {data: 'waktu'},
-                    {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
@@ -118,7 +115,7 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 7,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -139,12 +136,12 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 11,
+                        targets: 8,
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 12,
+                        targets: 9,
                         visible: false,
                         searchable: true
                     },
