@@ -86,6 +86,12 @@ function showDatatable(pilihan){
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    }
+                },
                 serverSide: true,
             ajax: {
                 url: "ketua-jabatan-semakan/"+id_user,

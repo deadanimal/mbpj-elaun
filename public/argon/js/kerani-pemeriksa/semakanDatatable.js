@@ -68,6 +68,12 @@ function showDatatable(){
         dom: 'lrtip',
         destroy: true,
         processing: true,
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            }
+        },
         serverSide: false,
             ajax: {
                 url: "kerani-pemeriksa-semakan/"+id_user,
