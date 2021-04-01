@@ -13,7 +13,7 @@
             <div class="col">
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-name">{{ __('Pegawai Sokong') }}</label>
-                    <input type="text" name="peg_sokong" id="kelulusan-peg-sokong" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="">
+                    <input type="text" name="peg_sokong" id="kelulusan-peg-sokong" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="">
         
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
@@ -21,7 +21,7 @@
             <div class="col">
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-name">{{ __('Jawatan') }}</label>
-                    <input type="text" name="jawatan_peg_sokong" id="kelulusan-jawatan-peg-sokong" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="">
+                    <input type="text" name="jawatan_peg_sokong" id="kelulusan-jawatan-peg-sokong" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="">
         
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
@@ -31,7 +31,7 @@
             <div class="col">
                 <div class="form-group">
                     <label class="form-control-label">{{ __('Pegawai Pelulus') }}</label>
-                    <input class="form-control" name="peg_pelulus" id="kelulusan-peg-pelulus" type="text" placeholder="">
+                    <input class="form-control form-control-sm" name="peg_pelulus" id="kelulusan-peg-pelulus" type="text" placeholder="">
         
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
@@ -39,7 +39,7 @@
             <div class="col">
                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                     <label class="form-control-label" for="input-name">{{ __('Jawatan') }}</label>
-                    <input type="text" name="jawatan_peg_pelulus" id="kelulusan-jawatan-peg-pelulus" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="" value="">
+                    <input type="text" name="jawatan_peg_pelulus" id="kelulusan-jawatan-peg-pelulus" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="">
         
                     @include('alerts.feedback', ['field' => 'name'])
                 </div>
@@ -47,13 +47,13 @@
         </div>
         <div class="form-group">
             <label class="form-control-label">{{ __('Kerani Pemeriksa') }}</label>
-            <input class="form-control" name="keraniPemeriksa" id="kelulusan-keraniPemeriksa" type="text" placeholder="">
+            <input class="form-control form-control-sm" name="keraniPemeriksa" id="kelulusan-keraniPemeriksa" type="text" placeholder="">
 
             @include('alerts.feedback', ['field' => 'name'])
         </div>
         <div class="form-group">
             <label class="form-control-label">{{ __('Kerani Semakan') }}</label>
-            <input class="form-control" name="keraniSemakan" id="kelulusan-keraniSemakan" type="text" placeholder="">
+            <input class="form-control form-control-sm" name="keraniSemakan" id="kelulusan-keraniSemakan" type="text" placeholder="">
 
             @include('alerts.feedback', ['field' => 'name'])
         </div>

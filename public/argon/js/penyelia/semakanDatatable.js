@@ -80,6 +80,7 @@ function showDatatable(pilihan){
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
+                autoWidth: true,
                 language: {
                     paginate: {
                         previous: "<",
@@ -118,7 +119,7 @@ function showDatatable(pilihan){
                         searchable: true
                     },
                     {
-                        targets: [2],
+                        targets: 2,
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
