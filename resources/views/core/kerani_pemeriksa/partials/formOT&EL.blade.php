@@ -8,10 +8,14 @@
                 <div class="col-5">
                     <div class="form-group">
                         <h6 class="heading-small text-muted">{{ __('Maklumat Peribadi') }}</h6>
-                        <select id="selectJenisPermohonan" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
-                            <option selected value="out">Pilih Jenis Permohonan</option>
-                            <option value="individu">Permohonan Individu</option>
-                            <option value="berkumpulan">Permohonan Berkumpulan</option>
+                        <select id="selectJabatan" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
+                            <option selected value="out">Pilih Jabatan</option>
+                            @foreach ( $jabatans as $jabatan)
+                                {{-- exclude Datuk Bandar --}}
+                                @if ($jabatan->ge_keterangan_jabatan != 'DATUK BANDAR')
+                                    <option value="$jabatan->ge_kod_jabatan">{{ $jabatan->ge_keterangan_jabatan }}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -72,7 +76,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
+                                <label class="form-control-label" for="input-email">{{ __('Unit') }}</label>
                                 <input type="email" name="bahagian" id="bahagian-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="" disabled>
             
                                 @include('alerts.feedback', ['field' => 'email'])
@@ -80,7 +84,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-email">{{ __('Jabatan') }}</label>
+                                <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
                                 <input type="email" name="jabatan" id="jabatan-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="" disabled>
             
                                 @include('alerts.feedback', ['field' => 'email'])

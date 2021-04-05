@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedInteger('role_id');
+            $table->string('ge_kod_jabatan');
             $table->float('gaji');
             $table->rememberToken();
             $table->timestamps();

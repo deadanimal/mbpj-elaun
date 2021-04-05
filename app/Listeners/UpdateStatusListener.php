@@ -71,12 +71,13 @@ class UpdateStatusListener
         switch ($jenis_permohonan) {
             case 'KP':
                 $event->permohonan->progres = 'Sah KP';
+                $event->permohonan->kerani_pemeriksa_approved = 1;
                 $this->sendEmailToKTPermohonanApproved($event, 'PP');
                 break;
             case 'KS':
                 $event->permohonan->progres = 'Tuntutan Diterima';
-                $event->permohonan->status_akhir = 1;
-                $this->sendEmailToKTPermohonanBerjaya($event);
+                // SET A NOTIFICATION FOR TUNTUTAN ACCEPTED BY KS
+                // $this->sendEmailToKTPermohonanBerjaya($event);
                 break;
             case 'DB':
                 $event->permohonan->progres = 'Sah DB';
@@ -94,6 +95,8 @@ class UpdateStatusListener
 
                     if ($jenis_permohonan_KT == 'EL') {
                         $event->permohonan->tarikh_pengesahan = now()->format('d-m-Y');
+                        $event->permohonan->status_akhir = 1;
+                        $this->sendEmailToKTPermohonanBerjaya($event);
                     }
 
                     $this->sendEmailToKTPermohonanApproved($event, 'PP');

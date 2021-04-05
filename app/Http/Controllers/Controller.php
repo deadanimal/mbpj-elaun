@@ -60,20 +60,6 @@ class Controller extends BaseController
 
     }
 
-    public function findPermohonanForKP()
-    {
-        return $permohonans = PermohonanBaru::with("users")
-                                ->permohonanKeraniPemeriksa()
-                                ->get();
-    }
-
-    public function findPermohonanForKS()
-    {
-        return $permohonans = PermohonanBaru::with("users")
-                                ->permohonanKeraniSemakan()
-                                ->get();
-    }
-
     public function findAllPermohonanForTypes($jenisPermohonan){
 
         switch (Auth::user()->role_id) {

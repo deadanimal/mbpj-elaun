@@ -25,11 +25,10 @@ class PermohonanBaru extends Model
         'kadar_jam',
         'id_peg_sokong',
         'id_peg_pelulus',
-        'id_kerani_pemeriksa',
-        'id_kerani_semakan',
         'tujuan',
         'lokasi',
         'peg_sokong_approved',
+        'kerani_pemeriksa_approved',
         'jenis_permohonan_kakitangan',
         'status_akhir',
         'jenis_permohonan',
@@ -41,8 +40,6 @@ class PermohonanBaru extends Model
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'id_kerani_semakan' => 6,
-        'id_kerani_pemeriksa' => 7,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
@@ -83,22 +80,6 @@ class PermohonanBaru extends Model
                             return $q->permohonanPegawaiPelulus(); })
                      ->notSahP2()
                      ->notForDatukBandar();
-    }
-    
-    public function scopePermohonanKeraniPemeriksa($query)
-    {
-        return $query->where(function (Builder $q) {
-                        return $q->where('jenis_permohonan', 'like', 'KP%')
-                                 ->statusAkhirBelomDiterima();
-                        });
-    }
-
-    public function scopePermohonanKeraniSemakan($query)
-    {
-        return $query->where(function (Builder $q) {
-                        return $q->where('jenis_permohonan', 'like', 'KS%')
-                                ->statusAkhirBelomDiterima();
-                        });
     }
 
     public function scopeStatusAkhirBelomDiterima($query)

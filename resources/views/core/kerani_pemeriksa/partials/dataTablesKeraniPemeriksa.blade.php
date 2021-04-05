@@ -4,7 +4,7 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <h2 class="mb-2" id="titleTable">Tuntutan Elaun Lebih Masa</h2>
+                        <h2 class="mb-2">Senarai Tuntutan Elaun Lebih Masa</h2>
                     </div>
                 </div>
             </div>
@@ -21,6 +21,7 @@
                                 <th>Masa</th>
                                 <th>Tujuan</th>
                                 <th>Tindakan</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>

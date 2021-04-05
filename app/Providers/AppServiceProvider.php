@@ -23,13 +23,24 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
 
         View::composer(
-
-            ['layouts.navbars.partials.2ndsidebar', 'layouts.navbars.navs.auth', 'layouts.headers.breadcrumbs', 
-            'layouts.navbars.sidebar', 'core.kakitangan.dashboard' ],
-         'App\Http\View\Composers\SideBarComposer');
-        View::composer('layouts.headers.cards', 'App\Http\View\Composers\DashboardCardsComposer');
-        View::composer('core.kakitangan.cardsKakitangan', 'App\Http\View\Composers\DashboardCardsKakitanganComposer');
-
+            'layouts.headers.cards', 
+            'App\Http\View\Composers\DashboardCardsComposer');
+        View::composer(
+            'core.kakitangan.cardsKakitangan',
+            'App\Http\View\Composers\DashboardCardsKakitanganComposer');
+        View::composer([
+            'layouts.navbars.partials.2ndsidebar', 
+            'layouts.navbars.navs.auth', 
+            'layouts.headers.breadcrumbs', 
+            'layouts.navbars.sidebar', 
+            'core.kakitangan.dashboard' 
+        ],
+            'App\Http\View\Composers\SideBarComposer');
+        View::composer([
+            'core.kerani_pemeriksa.partials.formOT&EL',
+            'core.kerani_semakan.partials.formOT&EL'
+        ],
+            'App\Http\View\Composers\SenaraiJabatanComposer');
     }
 
     /**
