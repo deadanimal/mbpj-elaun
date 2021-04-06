@@ -2,8 +2,7 @@
 
 namespace App\Http\View\Composers;
 
-use App\GE_Jabatan;
-use App\PermohonanBaru;
+use App\Jabatan;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +17,7 @@ class SenaraiJabatanComposer
      */
     public function compose(View $view)
     {  
-        $jabatans = GE_Jabatan::all('ge_kod_jabatan', 'ge_keterangan_jabatan');
+        $jabatans = Jabatan::all('GE_KOD_JABATAN', 'GE_KETERANGAN_JABATAN');
 
         $view->with('jabatans', $jabatans);
     }

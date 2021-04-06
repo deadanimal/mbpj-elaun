@@ -22,6 +22,7 @@
                                 <th>Tujuan</th>
                                 <th>Tindakan</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

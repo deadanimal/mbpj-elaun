@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Jabatan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -148,4 +149,16 @@ class PermohonanBaru extends Model
     {
         return $this->hasMany(Catatan::class, 'id_permohonan_baru', 'id_permohonan_baru');
     }
+
+    // public function userInJabatan()
+    // {
+    //     return $this->hasOneThrough(
+    //         Jabatan::class,
+    //         User::class,
+    //         'GE_KOD_JABATAN', // Foreign key on cars table...
+    //         'GE_KOD_JABATAN', // Foreign key on owners table...
+    //         'id', // Local key on mechanics table...
+    //         'id' // Local key on cars table...
+    //     );
+    // }
 }

@@ -5,10 +5,11 @@ namespace App;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class GE_Jabatan extends Model
+class Jabatan extends Model
 {
-    protected $table = 'GE_JABATAN';
+    protected $table = 'jabatans';
     protected $primaryKey = 'GE_KOD_JABATAN';
+    public $incrementing = false;
 
     public function users()
     {

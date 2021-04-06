@@ -15,40 +15,15 @@ $("#padamCarian").click(function(){
     showDatatable();
 });
 
-function showUser() {
-    var id = document.querySelector("#noPekerja").value;
-    var pilihan = document.getElementById('selectJenisPermohonan').value;
-    
-
+function showUser(id, jabatan) {
         $.ajax({
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
                 $("#formOTEL input[name=nama]").val(data.users.name);
-                console.log(pilihan)
-                switch (pilihan) {
-                    case 'individu':
-                        pilihan = 'KS1';
-                        $('#semakanKSDT').DataTable().columns(11).search(     
-                            id
-                        )
-                        $('#semakanKSDT').DataTable().columns(10).search(      
-                            pilihan
-                        ).draw();
-                        break;
-                    case 'berkumpulan':
-                        pilihan = 'KS2';
-                        $('#semakanKSDT').DataTable().columns(11).search(     
-                            id
-                        )
-                        $('#semakanKSDT').DataTable().columns(10).search(      
-                            pilihan
-                        ).draw();
-                        break;
-                    default:
-                        showDatatable();
-                        break;
-                }
+                $('#semakanKSDT').DataTable().columns(9).search(     
+                    id
+                )
 
                 $('input').css('color', 'black')
             },
@@ -92,8 +67,8 @@ function showDatatable(){
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
-                    {data: 'users[*].id'}
-
+                    {data: 'users[*].id'},
+                    {data: 'users[*].GE_KOD_JABATAN'}
                 ],  
                 columnDefs: [
                     {
@@ -143,6 +118,11 @@ function showDatatable(){
                     },
                     {
                         targets: 9,
+                        visible: false,
+                        searchable: true
+                    },
+                    {
+                        targets: 10,
                         visible: false,
                         searchable: true
                     },
@@ -201,7 +181,16 @@ $.fn.dataTable.ext.search.push(
 });
 
 $("#semakKeraniSemakan").click(function () {
-    showUser();    
+    var id = document.querySelector("#noPekerja").value;
+    var jabatan = document.getElementById('selectJabatan').value;
+    
+    if(id) { showUser(id, jabatan); }
+
+    // filter search result by jabatan
+    $('#semakanKPDT').DataTable().columns(10).search(      
+    jabatan
+    ).draw();
+      
 });
 
 $('#min').datepicker({
@@ -210,9 +199,4 @@ $('#min').datepicker({
 
 $('#max').datepicker({
     dateFormat: 'dd/mm/yy',
-});
-
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var target = $(e.target).attr("value")
-    tabPilihan = target;
 });

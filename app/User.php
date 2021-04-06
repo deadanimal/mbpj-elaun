@@ -4,7 +4,7 @@ namespace App;
 
 use App\Aduan;
 use App\Catatan;
-use App\GE_Jabatan;
+use App\Jabatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
 use Illuminate\Notifications\Notifiable;
@@ -27,7 +27,7 @@ class User extends Authenticatable
         'gaji',
         'picture',
         'role_id',
-        'ge_kod_jabatan'
+        'GE_KOD_JABATAN'
     ];
 
     /**
@@ -153,8 +153,8 @@ class User extends Authenticatable
         return $this->hasMany(Aduan::class, 'id_user', 'id');
     }
 
-    // public function jabatan()
-    // {
-    //     return $this->belongsTo(GE_Jabatan::class, 'kod_ge_jabatan', 'kod_ge_jabatan');
-    // }
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'GE_KOD_JABATAN', 'GE_KOD_JABATAN');
+    }
 }

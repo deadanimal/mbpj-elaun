@@ -12,8 +12,8 @@
                             <option selected value="out">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
                                 {{-- exclude Datuk Bandar --}}
-                                @if ($jabatan->ge_keterangan_jabatan != 'DATUK BANDAR')
-                                    <option value="$jabatan->ge_kod_jabatan">{{ $jabatan->ge_keterangan_jabatan }}</option>
+                                @if ($jabatan->GE_KETERANGAN_JABATAN != 'DATUK BANDAR')
+                                    <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -98,7 +98,7 @@
                     <button type="button" onclick="event.preventDefault();" id="padamCarian" class="btn btn-sm btn-md btn-danger">{{ __('Padam Carian') }}</button>
                 </div>
                 <div class="col-md-auto">
-                    <button type="button" onclick="event.preventDefault();checkUser();showUser();" id="semakKeraniSemakan" class="btn btn-success mt-4">{{ __('Semak') }}</button>
+                    <button type="button" onclick="event.preventDefault();" id="semakKeraniSemakan" class="btn btn-success mt-4">{{ __('Semak') }}</button>
                 </div>
             </div>    
         </div> 
