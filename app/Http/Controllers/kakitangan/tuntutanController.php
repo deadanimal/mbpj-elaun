@@ -118,10 +118,10 @@ class tuntutanController extends Controller
     public function getStatistics(){
         
         $userID = auth()->user()->id;
-        $lulus = $this->findAllPermohonan($userID)->whereYear('created_at',date('Y'))->where('status_akhir',1)->get()->groupBy(function($d) {
+        $lulus = $this->findAllPermohonan($userID)->whereYear('permohonan_barus.created_at',date('Y'))->where('status_akhir',1)->get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('m');
         });
-        $gagal = $this->findAllPermohonan($userID)->whereYear('created_at',date('Y'))->where('status_akhir',0)->get()->groupBy(function($d) {
+        $gagal = $this->findAllPermohonan($userID)->whereYear('permohonan_barus.created_at',date('Y'))->where('status_akhir',0)->get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('m');
         });
 

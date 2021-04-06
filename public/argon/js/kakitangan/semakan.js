@@ -57,7 +57,7 @@ function showSemakanDatatableKT(){
                     targets: [1],
                     type: "date",
                     render: function(data,type,row){
-                        formattedDate = moment(data).format("DD/MM/YYYY")
+                        formattedDate = moment(data,"DD / MM / YYYY").format("DD/MM/YYYY")
                         return formattedDate;
                     }
                 },
@@ -247,3 +247,14 @@ $('#min').datepicker({
 $('#max').datepicker({
     dateFormat: 'dd/mm/yy',
 });
+
+$('#tarikhKerjaAkhir').datepicker({
+    dateFormat: 'dd / mm / yy',
+});
+$('#tarikhKerjaMula').datepicker({
+    dateFormat: 'dd / mm / yy',
+});
+
+$('#masaMula').timepicker();
+
+$('#masaAkhir').timepicker();

@@ -259,7 +259,7 @@ function hantarPermohonanIndividu(){
 
     console.log("hari",hari,"masa",masa,"waktu",waktu);
     var user_id = namaPekerjaID;
-    var object = {tarikh_akhir_kerja:'2020-01-01',id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
+    var object = {tarikh_akhir_kerja:tarikhAkhirKerjaID,id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
                     jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};
     console.log(object,individu);
@@ -289,7 +289,7 @@ function hantarPermohonanIndividu(){
     });
     }else if(edit == 1){
         var objectUpdate = {
-            tarikh_akhir_kerja:'2020-01-01',
+            tarikh_akhir_kerja:tarikhAkhirKerjaID,
             id_peg_pelulus:pegPelulusID,
             id_peg_sokong:pegSokongID,
             tarikh_permohonan:tarikhKerjaID,
