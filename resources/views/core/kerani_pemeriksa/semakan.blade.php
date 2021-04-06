@@ -9,7 +9,7 @@
     @include('forms.header', [
         'title' => __('Selamat Datang ke Modul Kerani Pemeriksa') . ' ',
         'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
-        'class' => 'col-lg-7'
+        'class' => 'col-lg-12'
     ])
 
     <div class="container-fluid mt--6">
@@ -61,11 +61,11 @@
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveGaji.js"></script>
     <script src="{{ asset('argon') }}/js/shared/rejectIndividually.js"></script>
-    <script src="{{ asset('argon') }}/js/shared/jenisPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/changeDataTarget.js"></script>
     <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

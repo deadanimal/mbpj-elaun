@@ -63,7 +63,7 @@ function showTuntutanDatatableKT(){
                 targets: [1],
                 type: "date",
                 render: function(data,type,row){
-                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    formattedDate = moment(data,'DD / MM / YYYY').format("DD/MM/YYYY")
                     return formattedDate;
                 }
             },

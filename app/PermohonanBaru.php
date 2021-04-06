@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Jabatan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,6 +15,7 @@ class PermohonanBaru extends Model
     protected $fillable = [
         'tarikh_mula_kerja',
         'tarikh_akhir_kerja',
+        'tarikh_pengesahan',
         'masa_mula',
         'masa_akhir',
         'masa_mula_sebenar',
@@ -24,11 +26,10 @@ class PermohonanBaru extends Model
         'kadar_jam',
         'id_peg_sokong',
         'id_peg_pelulus',
-        'id_kerani_pemeriksa',
-        'id_kerani_semakan',
         'tujuan',
         'lokasi',
         'peg_sokong_approved',
+        'kerani_pemeriksa_approved',
         'jenis_permohonan_kakitangan',
         'status_akhir',
         'jenis_permohonan',
@@ -40,14 +41,13 @@ class PermohonanBaru extends Model
     protected $attributes = [
         'id_peg_sokong' => 0,
         'id_peg_pelulus' => 0,
-        'id_kerani_semakan' => 6,
-        'id_kerani_pemeriksa' => 7,
         'status' => 'DALAM PROSES',
         'jenis_permohonan_kakitangan' => '',
         'jenis_permohonan' => '',
         'status_akhir' => 2,
         'tarikh_mula_kerja' => '',
         'tarikh_akhir_kerja' => '',
+        'tarikh_pengesahan' => '',
         'is_for_datuk_bandar' => 0
     ];
 
@@ -81,22 +81,6 @@ class PermohonanBaru extends Model
                             return $q->permohonanPegawaiPelulus(); })
                      ->notSahP2()
                      ->notForDatukBandar();
-    }
-    
-    public function scopePermohonanKeraniPemeriksa($query)
-    {
-        return $query->where(function (Builder $q) {
-                        return $q->where('jenis_permohonan', 'like', 'KP%')
-                                 ->statusAkhirBelomDiterima();
-                        });
-    }
-
-    public function scopePermohonanKeraniSemakan($query)
-    {
-        return $query->where(function (Builder $q) {
-                        return $q->where('jenis_permohonan', 'like', 'KS%')
-                                ->statusAkhirBelomDiterima();
-                        });
     }
 
     public function scopeStatusAkhirBelomDiterima($query)
@@ -165,4 +149,16 @@ class PermohonanBaru extends Model
     {
         return $this->hasMany(Catatan::class, 'id_permohonan_baru', 'id_permohonan_baru');
     }
+
+    // public function userInJabatan()
+    // {
+    //     return $this->hasOneThrough(
+    //         Jabatan::class,
+    //         User::class,
+    //         'GE_KOD_JABATAN', // Foreign key on cars table...
+    //         'GE_KOD_JABATAN', // Foreign key on owners table...
+    //         'id', // Local key on mechanics table...
+    //         'id' // Local key on cars table...
+    //     );
+    // }
 }

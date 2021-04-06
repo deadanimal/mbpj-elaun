@@ -5,9 +5,9 @@ $.ajaxSetup({
 });
 
 function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
-
+    var id_user = document.querySelector("#nopekerja").value;
     $.ajax({
-        url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
+        url: 'semakan/semak-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         data:{
             id_permohonan_baru : id_permohonan_baru,
@@ -15,8 +15,10 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             jenisPermohonan : jenisPermohonan
         },
         success: function(data) {
-            $("#borangB1Modal input[name=tarikhKerjaMula]").val(data.permohonan.tarikh_mula_kerja);
-            $("#borangB1Modal input[name=tarikhKerjaMula]").val(data.permohonan.tarikh_mula_kerja);
+            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'YYYY-MM-DD').format('DD / MM / YYYY')
+            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'YYYY-MM-DD').format('DD / MM / YYYY')
+            $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
+            $("#borangB1Modal input[name=tarikhKerjaAkhir]").val(tarikhAkhir);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
             $("#borangB1Modal input[name=masaAkhir]").val(data.permohonan.masa_akhir);
             $("#borangB1Modal input[name=jenisPermohonanKT]").val(data.permohonan.jenis_permohonan_kakitangan);
@@ -40,7 +42,9 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
                 $("#borangB1Modal input[id=inlineRadiobox3]").prop("checked",true);
 
             }
+            fillInKedatangan(id_user)
             $("#borangB1Modal").modal("show");
+            
             
             // console.log(data.permohonan);
 
@@ -72,6 +76,7 @@ function deletePermohonan(id_permohonan_baru){
 
 function hantarPengesahan(){
     var tarikhMula = $("#borangB1Modal input[name=tarikhKerjaMula]").val();
+    var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
     var masaAkhir = $("#borangB1Modal input[name=masaAkhir]").val();
     var jenisPermohonanKT = $("#borangB1Modal input[name=jenisPermohonanKT]").val();
@@ -85,13 +90,15 @@ function hantarPengesahan(){
     
     var object = {
         tarikh_permohonan:tarikhMula,
+        tarikh_akhir_kerja:tarikhAkhir,
         masa_mula:masaMula,
         masa_akhir:masaAkhir,
         waktu:waktu,
         masa:masa,
         tujuan:tujuan,
         jenis_permohonan_kakitangan:jenisPermohonanKT,
-        jenis_permohonan:jenisPermohonanReal  
+        jenis_permohonan:jenisPermohonanReal,
+        
     }
     $.ajax({
         url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
@@ -99,6 +106,8 @@ function hantarPengesahan(){
         data:{
             id_permohonan_baru : id_permohonan_baru,
             object : object,
+            totalShiftSiang:totalShiftSiang,
+            totalShiftMalam:totalShiftMalam
         },
         success: function(data) {
             $("#borangB1Modal").modal("hide");
