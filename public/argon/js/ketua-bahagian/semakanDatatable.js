@@ -81,10 +81,16 @@ function showDatatable(pilihan){
     if(id_user == ''){
         id_user = 'noID';
     }
-                table = $('#semakanKBDT').dataTable({
+                semakanKBDT = $('#semakanKBDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    }
+                },
                 serverSide: false,
             ajax: {
                 url: "ketua-bahagian-semakan/"+id_user,
@@ -102,9 +108,6 @@ function showDatatable(pilihan){
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
-                    {data: 'hari'},
-                    {data: 'waktu'},
-                    {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
@@ -117,6 +120,12 @@ function showDatatable(pilihan){
                         searchable:false,
                     },
                     {
+                        targets:1,
+                        orderable:false,
+                        searchable:false,
+                        visible: false
+                    },
+                    {
                         targets: [2],
                         type: "date",
                         render: function(data,type,row){
@@ -125,7 +134,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 7,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -146,7 +155,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 11,
+                        targets: 8,
                         visible: false,
                         searchable: true
                     }

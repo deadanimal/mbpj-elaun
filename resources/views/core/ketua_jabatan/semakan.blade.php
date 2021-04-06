@@ -7,9 +7,9 @@
  
 @section('content')
     @include('forms.header', [
-         'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
+        'title' => __('Selamat Datang ke Modul Ketua Jabatan') . ' ',
         'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
-        'class' => 'col-lg-7'
+        'class' => 'col-lg-12'
     ])
 
     <div class="container-fluid mt--6">
@@ -22,7 +22,7 @@
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0 active" id="tabPilihanPermohonanKerjaLebihMasa" data-toggle="tab" 
                                     href="#" role="tab" aria-controls="tabs-icons-text-1" value="OT"
-                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa');">
+                                    aria-selected="true" onclick="retrieveTabPilihan('tabPilihanPermohonanKerjaLebihMasa')">
                                     <i class="ni ni-time-alarm"></i>
                                     Permohonan Kerja Lebih Masa
                                 </a>
@@ -30,7 +30,7 @@
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanPengesahanKerjaLebihMasa" data-toggle="tab" 
                                     href="#" role="tab" aria-controls="tabs-icons-text-2" value="PS"
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa');">
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanPengesahanKerjaLebihMasa')">
                                     <i class="ni ni-money-coins"></i>
                                     Pengesahan Kerja Lebih Masa
                                 </a>
@@ -38,7 +38,7 @@
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" id="tabPilihanTuntutanElaunLebihMasa" data-toggle="tab" 
                                     href="#" role="tab" aria-controls="tabs-icons-text-3" value="EL"
-                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa');">
+                                    aria-selected="false" onclick="retrieveTabPilihan('tabPilihanTuntutanElaunLebihMasa')">
                                     <i class="ni ni-money-coins"></i>
                                     Tuntuan Elaun Lebih Masa
                                 </a>
@@ -93,6 +93,7 @@
     <script src="{{ asset('argon') }}/js/shared/retrieveGaji.js"></script>
     <script src="{{ asset('argon') }}/js/shared/rejectIndividually.js"></script>
     <script src="{{ asset('argon') }}/js/shared/jenisPermohonan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/changeDataTarget.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>

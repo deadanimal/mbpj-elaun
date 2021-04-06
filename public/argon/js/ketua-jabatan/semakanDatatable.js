@@ -86,6 +86,12 @@ function showDatatable(pilihan){
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    }
+                },
                 serverSide: true,
             ajax: {
                 url: "ketua-jabatan-semakan/"+id_user,
@@ -102,9 +108,6 @@ function showDatatable(pilihan){
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
-                    {data: 'hari'},
-                    {data: 'waktu'},
-                    {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
@@ -126,7 +129,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 9,
+                        targets: 6,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -147,12 +150,12 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 7,
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 11,
+                        targets: 8,
                         visible: false,
                         searchable: true
                     }

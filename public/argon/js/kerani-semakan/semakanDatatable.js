@@ -15,40 +15,15 @@ $("#padamCarian").click(function(){
     showDatatable();
 });
 
-function showUser() {
-    var id = document.querySelector("#noPekerja").value;
-    var pilihan = document.getElementById('selectJenisPermohonan').value;
-    
-
+function showUser(id, jabatan) {
         $.ajax({
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
                 $("#formOTEL input[name=nama]").val(data.users.name);
-                console.log(pilihan)
-                switch (pilihan) {
-                    case 'individu':
-                        pilihan = 'KS1';
-                        $('#semakanKSDT').DataTable().columns(11).search(     
-                            id
-                        )
-                        $('#semakanKSDT').DataTable().columns(10).search(      
-                            pilihan
-                        ).draw();
-                        break;
-                    case 'berkumpulan':
-                        pilihan = 'KS2';
-                        $('#semakanKSDT').DataTable().columns(11).search(     
-                            id
-                        )
-                        $('#semakanKSDT').DataTable().columns(10).search(      
-                            pilihan
-                        ).draw();
-                        break;
-                    default:
-                        showDatatable();
-                        break;
-                }
+                $('#semakanKSDT').DataTable().columns(9).search(     
+                    id
+                )
 
                 $('input').css('color', 'black')
             },
@@ -65,10 +40,16 @@ function showDatatable(){
     if(id_user == ''){
         id_user = 'noID';
     }
-        table = $('#semakanKSDT').dataTable({
+        semakanKSDT = $('#semakanKSDT').DataTable({
         dom: 'lrtip',
         destroy: true,
         processing: true,
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            }
+        },
         serverSide: false,
             ajax: {
                 url: "kerani-semakan-semakan/"+id_user,
@@ -77,23 +58,32 @@ function showDatatable(){
 
                 columns: [
             
+                    {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'created_at'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
-                    {data: 'hari'},
-                    {data: 'waktu'},
-                    {data: 'kadar_jam'},
                     {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
-                    {data: 'users[*].id'}
-
+                    {data: 'users[*].id'},
+                    {data: 'users[*].GE_KOD_JABATAN'}
                 ],  
                 columnDefs: [
                     {
-                        targets: [1],
+                        targets:0,
+                        orderable:false,
+                        searchable:false,
+                    },
+                    {
+                        targets:1,
+                        orderable:false,
+                        searchable:false,
+                        visible:false
+                    },
+                    {
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -101,7 +91,7 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 9,
+                        targets: 7,
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -122,17 +112,28 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 8,
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 11,
+                        targets: 9,
+                        visible: false,
+                        searchable: true
+                    },
+                    {
+                        targets: 10,
                         visible: false,
                         searchable: true
                     },
                 ], 
                 
+            });
+            semakanKSDT.on('draw.dt', function () {
+                var info = semakanKSDT.page.info();
+                semakanKSDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
             });
             if(id_user != ''){
                 $('#semakanKSDT').DataTable().search(
@@ -180,7 +181,16 @@ $.fn.dataTable.ext.search.push(
 });
 
 $("#semakKeraniSemakan").click(function () {
-    showUser();    
+    var id = document.querySelector("#noPekerja").value;
+    var jabatan = document.getElementById('selectJabatan').value;
+    
+    if(id) { showUser(id, jabatan); }
+
+    // filter search result by jabatan
+    $('#semakanKPDT').DataTable().columns(10).search(      
+    jabatan
+    ).draw();
+      
 });
 
 $('#min').datepicker({
@@ -189,9 +199,4 @@ $('#min').datepicker({
 
 $('#max').datepicker({
     dateFormat: 'dd/mm/yy',
-});
-
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var target = $(e.target).attr("value")
-    tabPilihan = target;
 });

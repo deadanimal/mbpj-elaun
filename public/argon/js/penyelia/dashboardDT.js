@@ -13,6 +13,12 @@ function showDatatable(){
                 lengthMenu: [ 5, 10, 25, 50 ],
                 pagingType: "full_numbers",
                 processing: false,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    }
+                },
                 serverSide: true,
             ajax: {
                 url: "penyelia-dashboard/"+id_user,

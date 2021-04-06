@@ -4,6 +4,7 @@ namespace App;
 
 use App\Aduan;
 use App\Catatan;
+use App\Jabatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
 use Illuminate\Notifications\Notifiable;
@@ -25,7 +26,8 @@ class User extends Authenticatable
         'password', 
         'gaji',
         'picture',
-        'role_id'
+        'role_id',
+        'GE_KOD_JABATAN'
     ];
 
     /**
@@ -149,5 +151,10 @@ class User extends Authenticatable
     public function aduans()
     {
         return $this->hasMany(Aduan::class, 'id_user', 'id');
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'GE_KOD_JABATAN', 'GE_KOD_JABATAN');
     }
 }

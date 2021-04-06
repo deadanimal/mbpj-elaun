@@ -30,7 +30,9 @@ class semakanController extends Controller
      * 
      */
     public function show(Request $request, $id)
-    {     
-        return datatables()->of($this->findPermohonanForKP())->make(true);
+    {   
+        $permohonans = PermohonanBaru::with('users')->where('status_akhir', 1)->get();
+
+        return datatables()->of($permohonans)->make(true);
     }
 }

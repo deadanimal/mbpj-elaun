@@ -32,6 +32,6 @@ class semakanController extends Controller
      */
     public function show(Request $request, $id)
     { 
-        return datatables()->of($this->findPermohonanForKS())->make(true);
+        return datatables()->of($this->findAllPermohonanForKPKS())->make(true);
     }
 }

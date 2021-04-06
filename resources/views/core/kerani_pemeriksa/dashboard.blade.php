@@ -10,7 +10,7 @@
     @include('forms.header', [
          'title' => __('Selamat Datang ke Modul Kerani Pemeriksa') . ' ',
         'description' => __('Sistem Elaun Lebih Masa Majlis Bandaraya Petaling Jaya'),
-        'class' => 'col-lg-8 mb--6'
+        'class' => 'col-lg-12 mb--6'
     ])
 
     @include('layouts.headers.cards') 
