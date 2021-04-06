@@ -123,4 +123,6 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/semakan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarPengesahan.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/eKedatangan.js"></script>
+
 @endpush

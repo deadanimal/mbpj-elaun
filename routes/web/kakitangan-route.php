@@ -74,6 +74,7 @@ Route::group([
 		]);
 	});
 
+	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){
 		return view('profile.index',['link'=>$link]);
