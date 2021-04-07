@@ -33,16 +33,16 @@ class PermohonanBaruController extends Controller
                     'permohonan'  => $permohonan,
                     'tarikh_permohonan' => $tarikhPermohonan,
                     'arrayKelulusan' => $this->getKelulusanWithData($permohonan),
-                    'senaraiKakitangan' =>$senaraiKakitangan
+                    'senaraiKakitangan' => $senaraiKakitangan
                 ], 200);
     }
 
     public function getKelulusanWithData($permohonan)
     {
         $arrayKelulusan = array();
-        $pegSokong = User::find($permohonan->id_peg_sokong); 
+        $pegSokong = User::with('role')->find($permohonan->id_peg_sokong); 
         $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegSokong, 'peg_sokong');
-        $pegPelulus = User::find($permohonan->id_peg_pelulus);
+        $pegPelulus = User::with('role')->find($permohonan->id_peg_pelulus);
         $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegPelulus, 'peg_pelulus');
         
         return $arrayKelulusan;

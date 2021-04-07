@@ -67,6 +67,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
  
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
                 $("#formKelulusan input[name="+key+"]").val(value.name);
+                $("#formKelulusan input[name=jawatan_"+key+"]").val(value.role.name);
             }
 
             $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
@@ -76,7 +77,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
             $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
-
 
             switch (jenisPermohonan) {
                 case "OT1":

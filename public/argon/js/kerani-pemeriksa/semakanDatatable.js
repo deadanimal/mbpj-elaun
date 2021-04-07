@@ -191,9 +191,8 @@ $("#semakKeraniPemeriksa").click(function () {
 
     // filter search result by jabatan
     $('#semakanKPDT').DataTable().columns(10).search(      
-    jabatan
+        jabatan
     ).draw();
-
 });
 
 $('#min').datepicker({

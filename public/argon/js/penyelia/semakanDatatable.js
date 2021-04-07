@@ -73,10 +73,9 @@ function showDatatable(pilihan){
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
-    if(id_user == ''){
-        id_user = 'noID';
-    }
-                var semakanPYDT = $('#semakanPYDT').DataTable({
+    if(id_user == ''){ id_user = 'noID'; }
+
+    var semakanPYDT = $('#semakanPYDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
@@ -96,7 +95,6 @@ function showDatatable(pilihan){
                 }
             },
                 columns: [
-
                     {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'created_at'},
@@ -109,17 +107,17 @@ function showDatatable(pilihan){
                 ],  
                 columnDefs: [
                     {
+                        targets: [0],
                         searchable: false,
-                        orderable: false,
-                        targets: 0
+                        orderable: false
                     },
                     {
-                        targets: 1,
+                        targets: [1],
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 2,
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -127,7 +125,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 7,
+                        targets: [7],
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -148,7 +146,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 8,
+                        targets: [8],
                         visible: false,
                         searchable: true
                     }

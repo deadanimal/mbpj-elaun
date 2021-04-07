@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Events\PermohonanStatusChangedEvent;
+use App\Notifications\TuntutanBerjayaNotification;
 use App\Notifications\PermohonanBerjayaEmailNotification;
 use App\Notifications\PermohonanRejectedEmailNotification;
 use App\Notifications\PegawaiSokongApprovedEmailNotification;
@@ -72,12 +73,12 @@ class UpdateStatusListener
             case 'KP':
                 $event->permohonan->progres = 'Sah KP';
                 $event->permohonan->kerani_pemeriksa_approved = 1;
+                $this->sendEmailNotificationToPegawaiAtasan($event, 'KS');
                 $this->sendEmailToKTPermohonanApproved($event, 'PP');
                 break;
             case 'KS':
                 $event->permohonan->progres = 'Tuntutan Diterima';
-                // SET A NOTIFICATION FOR TUNTUTAN ACCEPTED BY KS
-                // $this->sendEmailToKTPermohonanBerjaya($event);
+                $this->sendEmailToKTTuntutanBerjaya($event);
                 break;
             case 'DB':
                 $event->permohonan->progres = 'Sah DB';
@@ -186,6 +187,13 @@ class UpdateStatusListener
     {
         foreach ($event->permohonan->users as $user) {
             $user->notify(new PermohonanBerjayaEmailNotification($user));
+        }
+    }
+
+    public function sendEmailToKTTuntutanBerjaya(PermohonanStatusChangedEvent $event)
+    {
+        foreach ($event->permohonan->users as $user) {
+            $user->notify(new TuntutanBerjayaNotification($user));
         }
     }
 }

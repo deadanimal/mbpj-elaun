@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use App\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class PermohonanBerjayaEmailNotification extends Notification implements ShouldQueue
+class TuntutanBerjayaNotification extends Notification
 {
     use Queueable;
 
@@ -45,10 +44,10 @@ class PermohonanBerjayaEmailNotification extends Notification implements ShouldQ
     {
         return (new MailMessage)       
                 ->from('spelm@mbpj.gov.my', 'SPELM')
-                ->subject('SPELM : Permohonan Diterima')
+                ->subject('SPELM : Tuntutan Berjaya')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                ->line('Permohonan anda telah diterima.')
-                ->line('Tuntutan elaun lebih masa anda sedang diproses diperingkat Jabatan Perbendaharaan.')
+                ->line('Tuntutan anda telah diterima.')
+                ->line('Jumlah tuntutan akan dimasukan bersama dengan gaji bulan semasa.')
                 ->action('Klik disini', url('/'))
                 ->salutation('Terima kasih.');
     }
