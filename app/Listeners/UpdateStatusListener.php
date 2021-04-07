@@ -74,11 +74,11 @@ class UpdateStatusListener
                 $event->permohonan->progres = 'Sah KP';
                 $event->permohonan->kerani_pemeriksa_approved = 1;
                 $this->sendEmailNotificationToPegawaiAtasan($event, 'KS');
-                $this->sendEmailToKTPermohonanApproved($event, 'PP');
+                $this->sendEmailToKTPermohonanApproved($event, 'KP');
                 break;
             case 'KS':
                 $event->permohonan->progres = 'Tuntutan Diterima';
-                $this->sendEmailToKTTuntutanBerjaya($event);
+                $this->sendEmailToKTPermohonanApproved($event, 'KS');
                 break;
             case 'DB':
                 $event->permohonan->progres = 'Sah DB';
@@ -98,6 +98,7 @@ class UpdateStatusListener
                         $event->permohonan->tarikh_pengesahan = now()->format('d-m-Y');
                         $event->permohonan->status_akhir = 1;
                         $this->sendEmailToKTPermohonanBerjaya($event);
+                        $this->sendEmailNotificationToPegawaiAtasan($event, 'KP');
                     }
 
                     $this->sendEmailToKTPermohonanApproved($event, 'PP');
@@ -163,7 +164,7 @@ class UpdateStatusListener
                 break;
             case 'KS':
                 foreach ($event->permohonan->users as $user) {
-                    $user->notify(new PegawaiPelulusApprovedEmailNotification($user));
+                     $user->notify(new TuntutanBerjayaNotification($user));
                 }
                 break;
         }
@@ -187,13 +188,6 @@ class UpdateStatusListener
     {
         foreach ($event->permohonan->users as $user) {
             $user->notify(new PermohonanBerjayaEmailNotification($user));
-        }
-    }
-
-    public function sendEmailToKTTuntutanBerjaya(PermohonanStatusChangedEvent $event)
-    {
-        foreach ($event->permohonan->users as $user) {
-            $user->notify(new TuntutanBerjayaNotification($user));
         }
     }
 }
