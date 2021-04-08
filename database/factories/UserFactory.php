@@ -17,6 +17,6 @@
 
 // $factory->define(App\User::class, function (Faker $faker) {
 //     return [
-//         'kod_ge_jabatan' => $faker->randomElement($array = array ('05','06', '07')),
+//         'role_id' => $faker->randomElement($array = array ('2','4', '5', '6', '7', '8', '9')),
 //     ];
 // });

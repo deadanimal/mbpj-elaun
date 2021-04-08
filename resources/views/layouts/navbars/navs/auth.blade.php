@@ -28,7 +28,7 @@
                                 <img alt="Image placeholder" src="{{ asset('argon') }}/img/icons/profile/silhouette.ico">
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
-                                <span class="mb-0 text-sm text-white font-weight-bold">{{ auth()->user()->name }}</span>
+                                <span class="mb-0 text-sm text-white font-weight-bold">{{ auth()->user()->NAME }}</span>
                             </div>
                         </div>
                     </a>

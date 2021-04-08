@@ -15,7 +15,7 @@ class Catatan extends Model
         'is_kemaskini',
         'jenis_permohonan',
         'masa',
-        'id_user'
+        'USERID'
     ];
 
     protected $attribute = [
@@ -24,7 +24,7 @@ class Catatan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'USERID', 'USERID');
     }
 
     public function permohonan()

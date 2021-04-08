@@ -24,12 +24,12 @@ class DashboardCardsKakitanganComposer
     {  
         $permohonans_users = PermohonanBaru::with('users')->get();                        
 
-        $jumlahTuntutanKerjaLebihMasaKT = permohonan_with_users::select('id')
-                                            ->where('id', Auth::id())
+        $jumlahTuntutanKerjaLebihMasaKT = permohonan_with_users::select('USERID')
+                                            ->where('USERID', Auth::id())
                                             ->get()
                                             ->count();
-        $jumlahTuntutanTahunSemasaKT = permohonan_with_users::select('id')
-                                            ->where('id', Auth::id())
+        $jumlahTuntutanTahunSemasaKT = permohonan_with_users::select('USERID')
+                                            ->where('USERID', Auth::id())
                                             ->whereYear('created_at', now()->year)
                                             ->get()
                                             ->count();
@@ -48,7 +48,7 @@ class DashboardCardsKakitanganComposer
 
         return $jumlahTuntutanDiluluskanKT = $tuntutanDiluluskanKT->map(function ($permohonan) {
                                                 foreach ($permohonan->users as $user) {
-                                                    if ($user->id == Auth::id()) {
+                                                    if ($user->USERID == Auth::id()) {
                                                         return $permohonan;
                                                     }
                                                 }

@@ -43,7 +43,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'user/semakan-pekerja/' + id_user,
         type: 'GET', 
         success: function(data) {
-            $("#formModalEdit input[name=nama]").val(data.users.name);
+            $("#formModalEdit input[name=nama]").val(data.users.NAME);
 
             $('input').css('color', 'black')
         },
@@ -66,7 +66,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             });
  
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
-                $("#formKelulusan input[name="+key+"]").val(value.name);
+                $("#formKelulusan input[name="+key+"]").val(value.NAME);
                 $("#formKelulusan input[name=jawatan_"+key+"]").val(value.role.name);
             }
 

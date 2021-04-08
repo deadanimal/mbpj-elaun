@@ -21,7 +21,7 @@ class PermohonanBerjayaEmailNotification extends Notification implements ShouldQ
      */
     public function __construct(User $user)
     {
-        $this->name = $user->name;
+        $this->name = $user->NAME;
     }
 
     /**

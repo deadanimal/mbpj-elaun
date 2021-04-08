@@ -51,7 +51,7 @@ class UserPolicy
      * @return boolean
      */
     public function delete(User $user, User $model)    {
-        return $user->isAdmin() && $user->id != $model->id;
+        return $user->isAdmin() && $user->USERID != $model->id;
     }
 
     /**

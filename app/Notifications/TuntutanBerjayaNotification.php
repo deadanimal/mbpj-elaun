@@ -20,7 +20,7 @@ class TuntutanBerjayaNotification extends Notification implements ShouldQueue
      */
     public function __construct(User $user)
     {
-        $this->name = $user->name;
+        $this->name = $user->NAME;
     }
 
     /**
@@ -46,7 +46,7 @@ class TuntutanBerjayaNotification extends Notification implements ShouldQueue
                 ->from('spelm@mbpj.gov.my', 'SPELM')
                 ->subject('SPELM : Tuntutan Berjaya')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
-                ->line('Tuntutan anda telah diterima.')
+                ->line('Tuntutan anda telah diterima!')
                 ->line('Jumlah tuntutan akan dimasukan bersama dengan gaji bulan semasa.')
                 ->action('Klik disini', url('/'))
                 ->salutation('Terima kasih.');

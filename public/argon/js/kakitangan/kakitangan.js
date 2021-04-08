@@ -66,7 +66,6 @@ function showDatatableKT(){
             }
         },
         columns:[
-            
             {data: null},
             {data: 'created_at'},
             {data: 'tarikh_mula_kerja'},
@@ -74,7 +73,6 @@ function showDatatableKT(){
             {data: 'jenis_permohonan'},
             {data: 'users[*].jumlah_tuntutan_elaun'},
             {data: 'status'}
-        
         ],
         columnDefs:[
             {

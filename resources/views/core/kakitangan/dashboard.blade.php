@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-    <input id="userID" value="{{auth()->user()->id}}" hidden>
+    <input id="userID" value="{{auth()->user()->USERID}}" hidden>
     <input id="type" value="{{$temp}}" hidden>
 
 

@@ -15,7 +15,7 @@ class SideBarComposer
      */
     public function compose(View $view)
     {
-        $name = Auth::user()->role->name;
+        $name = Auth::user()->role->NAME;
         $temp = strtolower($name);
         $temp = str_replace(" ","-",$temp);
     

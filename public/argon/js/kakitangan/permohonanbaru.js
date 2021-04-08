@@ -193,7 +193,7 @@ function getIndividuDT(){
         // responsive:true,
         // autoWidth:false,
     ajax: {
-        url: "permohonan-baru/show/"+id_user,
+        url: "permohonan-baru/get-permohonan/"+id_user,
         type: 'GET',
         data:
         {
@@ -320,7 +320,7 @@ function getBerkumpulanDT(){
         // responsive:true,
         // autoWidth:false,
     ajax: {
-        url: "permohonan-baru/show/"+id_user,
+        url: "permohonan-baru/get-permohonan/"+id_user,
         type: 'GET',
         data:
         {
@@ -436,7 +436,7 @@ function getPegawai(){
     console.log(pegawaiDiv)
     $.ajax({
         url: 'permohonan-baru/pegawai/',
-        type:'get',
+        type:'post',
         dataType: 'json',
         success: function(data){
             console.log(data.pegawaiSokong)

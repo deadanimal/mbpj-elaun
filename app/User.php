@@ -15,19 +15,24 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'USERID';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 
-        'email', 
-        'password', 
-        'gaji',
-        'picture',
+        'USERNAME', 
+        'DEPARTMENTCODE', 
+        'NIRC', 
+        'NAME',
+        'MOBILE_PHONE',
+        'GAJI',
+        'email',
         'role_id',
-        'GE_KOD_JABATAN'
+        'password'
     ];
 
     /**
@@ -125,13 +130,14 @@ class User extends Authenticatable
 
     public function permohonans()
     {
-        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'id', 'id_permohonan_baru')
+        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'USERID', 'id_permohonan_baru')
                     ->withPivot(
                         'masa_mula_sebenar',
                         'masa_akhir_sebenar',
                         'is_rejected_individually',
                         'masa_sebenar_siang',
                         'masa_sebenar_malam',
+                        'no_kumpulan',
                         'jumlah_tuntutan_elaun'
                         )
                     ->withTimestamps()
@@ -140,17 +146,17 @@ class User extends Authenticatable
 
     public function ekedatangan()
     {
-        return $this->hasOne(eKedatangan::class, 'id_user', 'id');
+        return $this->hasOne(eKedatangan::class, 'USERID', 'USERID');
     }
 
     public function catatans()
     {
-        return $this->hasMany(Catatan::class, 'id_user', 'id');
+        return $this->hasMany(Catatan::class, 'USERID', 'USERID');
     }
 
     public function aduans()
     {
-        return $this->hasMany(Aduan::class, 'id_user', 'id');
+        return $this->hasMany(Aduan::class, 'USERID', 'USERID');
     }
 
     public function jabatan()

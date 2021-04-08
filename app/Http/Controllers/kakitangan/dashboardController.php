@@ -47,30 +47,31 @@ class dashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request,$idUser)
     {
-       
         $pilihan = $request->input('pilihan');
-        switch($pilihan){
-            case "permohonan":
-                return datatables($this->findPermohonanUser($id)->whereIn('jenis_permohonan_kakitangan',['OT1','OT2'])->get())->make(true);
-                break;
+        $permohonan = $this->findPermohonanUser($idUser);
 
-            case 'tuntutan':
-                return datatables($this->findPermohonanUser($id)->whereIn('jenis_permohonan_kakitangan',['EL1','EL2'])->get())->make(true);
-                break;
-            
-            case 'lulus':
-                return datatables($this->findPermohonanUser($id)->where('status_akhir','1')->get())->make(true);
-                break;
-
-            case 'tolak':
-                return datatables($this->findPermohonanUser($id)->where('status_akhir','0')->get())->make(true);
-                break;
-
-            default:
-                return datatables($this->findPermohonanUser($id)->get())->make(true);
-                break;
+        if ($permohonan->count() > 0) {
+            switch($pilihan){
+                case "permohonan":
+                    return datatables($permohonan->whereIn('jenis_permohonan_kakitangan',['OT1','OT2'])->get())->make(true);
+                    break;
+                case 'tuntutan':
+                    return datatables($this->findPermohonanUser($idUser)->whereIn('jenis_permohonan_kakitangan',['EL1','EL2'])->get())->make(true);
+                    break;
+                case 'lulus':
+                    return datatables($this->findPermohonanUser($idUser)->where('status_akhir','1')->get())->make(true);
+                    break;
+                case 'tolak':
+                    return datatables($this->findPermohonanUser($idUser)->where('status_akhir','0')->get())->make(true);
+                    break;
+                default:
+                    return datatables($this->findPermohonanUser($idUser)->get())->make(true);
+                    break;
+            }
+        } else {
+            return datatables(array())->make(true);
         }
             
        

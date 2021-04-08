@@ -178,7 +178,7 @@ class permohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $idUser)
     {
         //
         $pilihan = $request->input('pilihan');
@@ -186,9 +186,8 @@ class permohonanController extends Controller
         // dd(substr($pilihan,0,2));
 
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
-        
         if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$id))->make(true); 
+            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$idUser))->make(true); 
         }
     }
 
