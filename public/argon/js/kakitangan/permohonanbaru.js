@@ -13,9 +13,7 @@ var totalhours= 0;
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var pegawai = []
 var pegawaiID = []
-// if(nodelist.length == 0){
-//     document.getElementById("remove").disabled = true
-// }
+
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
@@ -25,20 +23,14 @@ $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
     }
     arr = []
 })
-// $('#permohonanbaruModal').on('show.bs.modal', function (e) {
-   
-// })
-
 
     $(function () {
-
         $("#jenisPermohonan").change(function () {
             if ($(this).val() == "frmPermohonanIndividu") {
                 document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
                 document.getElementById('selectpermohonan').className = "col-sm-12"
                 $('#divPermohonanIndividu').show();
                 $("#divPermohonanBerkumpulan").hide();
-
             }
             else if ($(this).val() == "frmPermohonanBerkumpulan") {
                 document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-xl"
@@ -47,9 +39,8 @@ $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
                 $("#divPermohonanBerkumpulan").show();
 
             } else{
-            $('#divPermohonanIndividu').hide();
-            $('#divPermohonanBerkumpulan').hide();
-    
+                $('#divPermohonanIndividu').hide();
+                $('#divPermohonanBerkumpulan').hide();
             }
     
         });
@@ -204,7 +195,7 @@ function getIndividuDT(){
         columns: [
 
             {data: null},
-            {data: 'tarikh_mula_kerja'},
+            {data: 'created_at'},
             {data: 'status'},
             {data: 'progres'},
             {data: 'masa_mula'},
@@ -217,7 +208,7 @@ function getIndividuDT(){
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'},
-            {data: 'is_rejected_individually'}
+            {data: 'permohonan_with_users[*].is_rejected_individually'}
         ],
         columnDefs: [
             {
@@ -229,7 +220,7 @@ function getIndividuDT(){
                 targets: [1],
                 type: "date",
                 render: function(data,type,row){
-                    formattedDate = moment(data,"DD / MM / YYYY").format("DD/MM/YYYY")
+                    formattedDate = moment(data,"YYYY-MM-DD").format("DD-MM-YYYY")
                     return formattedDate;
                 }
             },
@@ -443,12 +434,12 @@ function getPegawai(){
             var pegawaiSokong = data.pegawaiSokong
             var pegawaiLulus = data.pegawaiLulus
             pegawaiSokong.forEach((element,index) => {
-                var option = "<option value='"+element.id+"'>"+element.name+"</option>"
+                var option = "<option value='"+element.USERID+"'>"+element.NAME+"</option>"
                 $('#pegawaiSokongID').append(option)
                 $('#pegawaiSokongBK').append(option)
             })
             pegawaiLulus.forEach((element,index) => {
-                var option = "<option value='"+element.id+"'>"+element.name+"</option>"
+                var option = "<option value='"+element.USERID+"'>"+element.NAME+"</option>"
                 $('#pegawaiLulusID').append(option)
                 $('#pegawaiLulusBK').append(option)
             })

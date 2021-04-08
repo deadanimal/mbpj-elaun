@@ -98,7 +98,7 @@ class permohonanController extends Controller
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
-                $users = Auth::user()->id;
+                $users = Auth::user()->USERID;
                 $permohonans->users()->attach($users);
 
                 $this->sendEmailNotificationToPegawaiSokong($permohonans);
@@ -187,6 +187,7 @@ class permohonanController extends Controller
 
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
         if(request()->ajax()){
+            // dd($this->findPermohonanWithIDKakitangan($pilihan,$idUser));
             return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$idUser))->make(true); 
         }
     }

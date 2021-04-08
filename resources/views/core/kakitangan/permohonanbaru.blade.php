@@ -40,7 +40,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="input-name">{{ __('No Pekerja') }}</label>
-                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{  auth()->user()->USERID}}" required autofocus>
+                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{  auth()->user()->USERID }}" required autofocus>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -52,7 +52,7 @@
                                    <div class="col-md-8">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="input-email">{{ __('Nama') }}</label>
-                                            <input type="email" name="name" id="input-name" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Sarip Dol') }}" value="Sarip Dol" disabled>
+                                            <input type="email" name="name" id="input-name" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Sarip Dol') }}" value="{{ auth()->user()->NAME }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
