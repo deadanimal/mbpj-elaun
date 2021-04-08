@@ -15,10 +15,10 @@ class SideBarComposer
      */
     public function compose(View $view)
     {
-        $name = Auth::user()->role->NAME;
-        $temp = strtolower($name);
-        $temp = str_replace(" ","-",$temp);
+        $name = Auth::user()->role->name;
+        $role = strtolower($name);
+        $role = str_replace(" ","-",$role);
     
-        $view->with('temp', $temp);
+        $view->with('role', $role);
     }
 }

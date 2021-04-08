@@ -36,7 +36,7 @@
                         <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">{{ __('Selamat Datang!') }}</h6>
                         </div>
-                        <a href="/{{$temp}}/profile" class="dropdown-item">
+                        <a href="/{{$role}}/profile" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>{{ __('My profile') }}</span>
                         </a>
