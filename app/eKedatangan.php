@@ -10,7 +10,7 @@ class eKedatangan extends Model
     protected $table = 'e_kedatangans';
     protected $primaryKey = 'id_ekedatangan';
     protected $fillable = [
-        'USERID',
+        'CUSTOMERID',
         'tarikh',
         'waktu_masuk',
         'waktu_keluar',
@@ -33,6 +33,6 @@ class eKedatangan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'USERID','USERID');
+        return $this->belongsTo(User::class, 'CUSTOMERID','CUSTOMERID');
     }
 }

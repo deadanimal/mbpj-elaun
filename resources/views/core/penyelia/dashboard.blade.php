@@ -85,7 +85,7 @@
                 </div>
             </div>
         </div>
-    <input id="userID" value="{{auth()->user()->id}}" hidden>
+    <input id="userID" value="{{auth()->user()->CUSTOMERID}}" hidden>
         
         <!-- Footer -->
         @include('layouts.footers.auth')

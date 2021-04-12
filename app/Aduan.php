@@ -16,7 +16,7 @@ class Aduan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'USERID', 'USERID');
+        return $this->belongsTo(User::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
 

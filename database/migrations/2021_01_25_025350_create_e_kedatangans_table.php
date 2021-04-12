@@ -15,7 +15,7 @@ class CreateEKedatangansTable extends Migration
     {
         Schema::create('e_kedatangans', function (Blueprint $table) {
             $table->bigIncrements('id_ekedatangan');
-            $table->unsignedInteger('USERID');
+            $table->unsignedInteger('CUSTOMERID');
             $table->string('tarikh');
             $table->string('waktu_masuk');
             $table->string('waktu_keluar');
@@ -35,7 +35,7 @@ class CreateEKedatangansTable extends Migration
         });
 
         Schema::table('e_kedatangans', function($table) {
-            $table->foreign('USERID')->references('USERID')->on('users');
+            $table->foreign('CUSTOMERID')->references('CUSTOMERID')->on('users');
         });
     }  
 

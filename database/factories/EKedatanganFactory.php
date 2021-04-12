@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(eKedatangan::class, function (Faker $faker) {
     return [
-        'USERID' => $faker->unique()->numberBetween($min = 1, $max = 11),
+        'CUSTOMERID' => $faker->unique()->numberBetween($min = 1, $max = 11),
         'tarikh' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'waktu_masuk' => $faker->time($format = 'H:i',$max = 'now'),
         'waktu_keluar' => $faker->time($format = 'H:i', $max = 'now'),

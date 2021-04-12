@@ -40,8 +40,8 @@ class CreatePermohonanBarusTable extends Migration
         }); 
 
         Schema::table('permohonan_barus', function($table) {
-            $table->foreign('id_peg_sokong')->references('USERID')->on('users');
-            $table->foreign('id_peg_pelulus')->references('USERID')->on('users');
+            $table->foreign('id_peg_sokong')->references('CUSTOMERID')->on('users');
+            $table->foreign('id_peg_pelulus')->references('CUSTOMERID')->on('users');
         });
     }
 

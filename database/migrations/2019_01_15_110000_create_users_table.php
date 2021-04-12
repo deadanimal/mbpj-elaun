@@ -14,7 +14,8 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('USERID');
+            $table->increments('CUSTOMERID');
+            $table->string('USERID');
             $table->string('USERNAME');
             $table->string('DEPARTMENTCODE')->default('-');
             $table->string('NIRC');
@@ -24,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->unsignedInteger('role_id')->default(8);
             $table->unsignedInteger('GE_KOD_JABATAN')->default(1);
+            $table->unsignedInteger('is_oncall')->default(0);
             $table->rememberToken();
             $table->string('password')->default(Hash::make('secret'));
             $table->string('status',2)->default('01');

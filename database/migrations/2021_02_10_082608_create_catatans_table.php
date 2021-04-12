@@ -19,13 +19,13 @@ class CreateCatatansTable extends Migration
             $table->string('jenis_permohonan');
             $table->unsignedInteger('is_kemaskini');
             $table->time('masa');
-            $table->unsignedInteger('USERID');
+            $table->unsignedInteger('CUSTOMERID');
             $table->unsignedBigInteger('id_permohonan_baru');
             $table->timestamps();
         });
 
         Schema::table('catatans', function($table) {
-            $table->foreign('USERID')->references('USERID')->on('users');
+            $table->foreign('CUSTOMERID')->references('CUSTOMERID')->on('users');
             $table->foreign('id_permohonan_baru')->references('id_permohonan_baru')->on('permohonan_barus');
         });
     }

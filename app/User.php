@@ -15,7 +15,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $primaryKey = 'USERID';
+    protected $primaryKey = 'CUSTOMERID';
     public $incrementing = false;
 
     /**
@@ -24,6 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'USERID',
         'USERNAME', 
         'DEPARTMENTCODE', 
         'NIRC', 
@@ -33,6 +34,7 @@ class User extends Authenticatable
         'email',
         'role_id',
         'GE_KOD_JABATAN',
+        'is_oncall',
         'password'
     ];
 
@@ -131,7 +133,7 @@ class User extends Authenticatable
 
     public function permohonans()
     {
-        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'USERID', 'id_permohonan_baru')
+        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'CUSTOMERID', 'id_permohonan_baru')
                     ->withPivot(
                         'masa_mula_sebenar',
                         'masa_akhir_sebenar',
@@ -147,17 +149,17 @@ class User extends Authenticatable
 
     public function ekedatangan()
     {
-        return $this->hasOne(eKedatangan::class, 'USERID', 'USERID');
+        return $this->hasOne(eKedatangan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
     public function catatans()
     {
-        return $this->hasMany(Catatan::class, 'USERID', 'USERID');
+        return $this->hasMany(Catatan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
     public function aduans()
     {
-        return $this->hasMany(Aduan::class, 'USERID', 'USERID');
+        return $this->hasMany(Aduan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
     public function jabatan()

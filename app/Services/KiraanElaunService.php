@@ -33,7 +33,7 @@ class KiraanElaunService {
         $this->kadarPerJam = floatval($permohonan->kadar_jam);
 
         foreach ($permohonan->users as $user) {
-            if ($user->USERID == $id_user) {
+            if ($user->CUSTOMERID == $id_user) {
                 $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
                 $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
             }

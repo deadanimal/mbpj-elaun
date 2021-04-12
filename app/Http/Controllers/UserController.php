@@ -27,6 +27,20 @@ class UserController extends Controller
         return view('users.index', ['users' => $model->with('role')->get()]);
     }
 
+    public function addToOnCall($id)
+    {
+        $user = User::find($id);
+        $user->is_oncall = 1;
+        $user->save();
+    }
+
+    public function removeFromOnCall($id)
+    {
+        $user = User::find($id);
+        $user->is_oncall = 0;
+        $user->save();
+    }
+
     /**
      * Show the form for creating a new user
      *

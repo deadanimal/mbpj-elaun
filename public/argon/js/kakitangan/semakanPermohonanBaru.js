@@ -59,7 +59,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 document.getElementById('selectpermohonan').className = "col-sm-12"
                 $('#divPermohonanIndividu').show();
                 $("#divPermohonanBerkumpulan").hide();
-                $("#permohonanbaruModal input[name=namaPekerjaID]").val(data.permohonan.permohonan_with_users.USERID);
+                $("#permohonanbaruModal input[name=namaPekerjaID]").val(data.permohonan.permohonan_with_users.CUSTOMERID);
                 $("#permohonanbaruModal input[name=tarikh-kerjaID]").val(tarikhKerjaID);
                 $("#permohonanbaruModal").modal("show");
                 console.log('ot1',jenis_permohonan)

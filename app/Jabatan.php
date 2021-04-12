@@ -13,6 +13,6 @@ class Jabatan extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'USERID', 'USERID');
+        return $this->hasMany(User::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 }

@@ -68,7 +68,7 @@ class UpdateJenisPermohonanListener
                 foreach ($event->permohonan->users as $user) {
                     $event->permohonan
                           ->users()
-                          ->updateExistingPivot($user->USERID, array(
+                          ->updateExistingPivot($user->CUSTOMERID, array(
                                                     'is_rejected_individually' => 1
                                                 ));
                 }

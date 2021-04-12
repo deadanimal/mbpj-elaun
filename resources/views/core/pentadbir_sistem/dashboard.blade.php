@@ -101,7 +101,7 @@
                                         
                                         @foreach($Users as $user)
                                         <tr>
-                                            <td>{{$user->USERID}}</td>
+                                            <td>{{$user->CUSTOMERID}}</td>
                                             <td>{{$user->NAME}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->created_at}}</td>

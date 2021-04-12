@@ -67,9 +67,9 @@ class PermohonanBaruController extends Controller
             $tuntutan = ($permohonan->users)->filter(function($user) {
                 return $user->permohonan_with_users->is_rejected_individually != 1;
             })->each(function($user) use ($permohonan) {
-                $elaun = new KiraanElaunService($permohonan, $user->USERID);
+                $elaun = new KiraanElaunService($permohonan, $user->CUSTOMERID);
                 $permohonan->users()
-                            ->updateExistingPivot($user->USERID, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
+                            ->updateExistingPivot($user->CUSTOMERID, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
             })->map(function ($user) {
                 return $user->permohonan_with_users
                             ->jumlah_tuntutan_elaun;
@@ -83,7 +83,7 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if ($user->USERID == $id_user){ 
+            if ($user->CUSTOMERID == $id_user){ 
                 $jumlah_tuntutan_elaun = $user->permohonan_with_users->jumlah_tuntutan_elaun;
             }
         };
@@ -102,7 +102,7 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if($user->USERID == $idUser) {
+            if($user->CUSTOMERID == $idUser) {
                 $permohonan->users()->updateExistingPivot($idUser, array('is_rejected_individually' => 1), false);
                 $user->notify(new PermohonanRejectedEmailNotification($user));
             }
@@ -115,7 +115,7 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if($user->USERID == $id_user) {
+            if($user->CUSTOMERID == $id_user) {
                 $masa_mula_sebenar = $user->permohonan_with_users->masa_mula_sebenar;
                 $masa_akhir_sebenar = $user->permohonan_with_users->masa_akhir_sebenar;
             }
@@ -134,7 +134,7 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if($user->USERID == $idUser) {
+            if($user->CUSTOMERID == $idUser) {
                 $permohonan->users()
                             ->updateExistingPivot($idUser, array(
                                     'masa_mula_sebenar' => $request->input('masa_mula_sebenar'),

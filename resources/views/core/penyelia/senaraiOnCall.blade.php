@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col-12">
-                        <h3 class="pt-2">{{ __('Senarai Kakitangan Jabatan') }}</h3>
+                        <h3 class="pt-2">SENARAI KAKITANGAN {{ auth()->user()->jabatan->GE_KETERANGAN_JABATAN }}</h3>
                     </div>
                 </div>
                 <div class="table-responsive py-3">
@@ -24,6 +24,7 @@
                             <tr>
                                 <th scope="col">Bilangan</th>
                                 <th scope="col">No. Pekerja</th>
+                                <th scope="col">No. Kad Pengenalan</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Peranan</th>
                                 <th scope="col">Tindakan</th>
@@ -44,4 +45,6 @@
 
 @push('js')
     <script src="{{ asset('argon') }}/js/penyelia/senaraiOnCall.js"></script>
+    <script src="{{ asset('argon') }}/js/penyelia/tambahOncall.js"></script>
+    <script src="{{ asset('argon') }}/js/penyelia/batalOnCall.js"></script>
 @endpush

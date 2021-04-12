@@ -434,12 +434,12 @@ function getPegawai(){
             var pegawaiSokong = data.pegawaiSokong
             var pegawaiLulus = data.pegawaiLulus
             pegawaiSokong.forEach((element,index) => {
-                var option = "<option value='"+element.USERID+"'>"+element.NAME+"</option>"
+                var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
                 $('#pegawaiSokongID').append(option)
                 $('#pegawaiSokongBK').append(option)
             })
             pegawaiLulus.forEach((element,index) => {
-                var option = "<option value='"+element.USERID+"'>"+element.NAME+"</option>"
+                var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
                 $('#pegawaiLulusID').append(option)
                 $('#pegawaiLulusBK').append(option)
             })

@@ -16,7 +16,7 @@ class CreatePermohonanWithUsersTable extends Migration
         Schema::create('permohonan_with_users', function (Blueprint $table) {
             $table->bigIncrements('id_permohonan_with_users');
             $table->unsignedBigInteger('id_permohonan_baru');
-            $table->unsignedInteger('USERID');
+            $table->unsignedInteger('CUSTOMERID');
             $table->string('no_kumpulan')->default('');
             $table->string('masa_mula_sebenar')->default('-');
             $table->string('masa_akhir_sebenar')->default('-');
@@ -28,7 +28,7 @@ class CreatePermohonanWithUsersTable extends Migration
         });
 
         Schema::table('permohonan_with_users', function($table) {
-            $table->foreign('USERID')->references('USERID')->on('users');
+            $table->foreign('CUSTOMERID')->references('CUSTOMERID')->on('users');
             $table->foreign('id_permohonan_baru')->references('id_permohonan_baru')->on('permohonan_barus');
         });
     }

@@ -92,13 +92,12 @@ class permohonanController extends Controller
                 'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
 
             ]);
-            // $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
             $permohonanbaru->save();
             $permohonanbaru->refresh();
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
-                $users = Auth::user()->USERID;
+                $users = Auth::user()->CUSTOMERID;
                 $permohonans->users()->attach($users);
 
                 $this->sendEmailNotificationToPegawaiSokong($permohonans);
@@ -313,9 +312,9 @@ class permohonanController extends Controller
 
     $id_permohonan_baru = $request->input('id_permohonan_baru');
     $jenis_permohonan = $request->input('jenis_permohonan');
-    $currUserID = auth()->user()->id;
+    $currUserID = auth()->user()->CUSTOMERID;
         if($jenis_permohonan == 'OT1'){
-            $permohonan = User::find(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+            $permohonan = User::find(auth()->user()->CUSTOMERID)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
                         'error' => false,
                         'permohonan'  => $permohonan,
