@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
-            <a class="nav-link " href="{{$role}}-senaraiOnCall" >
+            <a class="nav-link " href="{{$role}}-on-call" >
                 <i class="fab fa-laravel" style="color: #f4645f;"></i>
                 <span class="nav-link-text" >{{ __('Senarai On Call') }}</span>
             </a>

@@ -32,6 +32,7 @@ class User extends Authenticatable
         'GAJI',
         'email',
         'role_id',
+        'GE_KOD_JABATAN',
         'password'
     ];
 

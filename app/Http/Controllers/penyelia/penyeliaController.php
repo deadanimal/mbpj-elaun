@@ -51,8 +51,6 @@ class penyeliaController extends Controller
      */
     public function show(Request $request,$id)
     {
-        //
-
         return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->get())->make(true); 
     }
 

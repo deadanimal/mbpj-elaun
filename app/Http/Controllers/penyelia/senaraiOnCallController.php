@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\penyelia;
 
 use App\User;
+use DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +17,7 @@ class senaraiOnCallController extends Controller
      */
     public function index()
     {
-        $users = User::with('role')->get();
-        $counter = 1;
-        return view('core.penyelia.senaraiOnCall')->with('users',$users)
-                                                  ->with('counter', $counter);
+        return view('core.penyelia.senaraiOnCall');
     }
 
     /**
@@ -51,6 +49,11 @@ class senaraiOnCallController extends Controller
      */
     public function show(Request $request,$id)
     {
+        $authUser = User::find(Auth::id());
+        $users = User::with('role')
+                        ->where('GE_KOD_JABATAN', $authUser->GE_KOD_JABATAN)
+                        ->get();
+        return datatables()->of($users)->make(true); 
     }
 
     /**

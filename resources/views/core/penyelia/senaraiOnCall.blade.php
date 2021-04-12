@@ -9,7 +9,7 @@
 @component('layouts.headers.auth') 
 @endcomponent
 
-<div class="container-fluid mt--6">
+<div class="container-fluid mt--8">
     <div class="row mt-6">
         <div class="col-12">
             <div class="card">
@@ -18,8 +18,8 @@
                         <h3 class="pt-2">{{ __('Senarai Kakitangan Jabatan') }}</h3>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center">
+                <div class="table-responsive py-3">
+                    <table class="table align-items-center" id="senaraiOnCallDT">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Bilangan</th>
@@ -30,15 +30,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
-                            <tr>
-                                <th scope="col">{{ $counter++ }}</th>
-                                <th scope="col">{{ $user->USERID }}</th>
-                                <th scope="col">{{ $user->NAME }}</th>
-                                <th scope="col">{{ $user->role->name }}</th>
-                                <th scope="col">Tambah</th>
-                            </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -46,5 +37,11 @@
         </div>
     </div>
 </div>
-
 @endsection
+
+@push('css')
+@endpush
+
+@push('js')
+    <script src="{{ asset('argon') }}/js/penyelia/senaraiOnCall.js"></script>
+@endpush

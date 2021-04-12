@@ -14,9 +14,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
         foreach (User::all() as $user) {
             $user->role_id = rand(1,9);
+            $user->GE_KOD_JABATAN = rand(1,17);
             $user->save();
         }
         // DB::table('users')->insert([
