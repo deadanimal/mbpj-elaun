@@ -10,7 +10,6 @@ function showDatatable(){
                 dom: 'lrtip',
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],
-                pagingType: "simple_numbers",
                 processing: true,
                 serverSide: true,
             ajax: {
@@ -19,22 +18,15 @@ function showDatatable(){
             },
 
             columns: [
-                    
                 {data: null},
                 {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                {data: 'tarikh_mula_kerja'},
+                {data: 'created_at'},
                 {data: 'masa_mula'},
                 {data: 'masa_akhir'},
                 {data: 'masa'},
-                {data: 'hari'},
-                {data: 'waktu'},
-                {data: 'kadar_jam'},
-                {data: 'tujuan'},
                 {data: null},
                 {data: 'jenis_permohonan'},
                 {data: 'status_akhir'}
-
-
             ],  
             columnDefs: [
                 {

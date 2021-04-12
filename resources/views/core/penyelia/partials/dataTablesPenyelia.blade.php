@@ -21,7 +21,7 @@
                             <th>Tujuan</th>
                             <th>Tindakan</th>
                             <th></th>
-                            {{-- 2 extra th Had to be add cause they cause prob  --}}
+                            {{-- 2 extra th Had to be added cause they cause prob  --}}
                             <th hidden></th>
                             <th hidden></th>
                         </tr>

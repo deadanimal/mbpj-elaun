@@ -11,7 +11,6 @@ function showDatatable(){
                 dom: 'lrtip',
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],
-                pagingType: "full_numbers",
                 processing: false,
                 language: {
                     paginate: {
@@ -26,22 +25,15 @@ function showDatatable(){
             },
 
                 columns: [
-                    
                     {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                    {data: 'tarikh_mula_kerja'},
+                    {data: 'created_at'},
                     {data: 'masa_mula'},
                     {data: 'masa_akhir'},
                     {data: 'masa'},
-                    {data: 'hari'},
-                    {data: 'waktu'},
-                    {data: 'kadar_jam'},
-                    {data: 'tujuan'},
                     {data: null},
                     {data: 'jenis_permohonan'},
                     {data: 'status_akhir'}
-
-
                 ],  
                 columnDefs: [
                     {
@@ -63,7 +55,7 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 10,
+                        targets: 6,
                         mRender: function(data,type,row){
 
                             // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
@@ -77,12 +69,12 @@ function showDatatable(){
                         }
                     },
                     {
-                        targets: 11,
+                        targets: 7,
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 12,
+                        targets: 8,
                         visible: false,
                         searchable: true
                     }
