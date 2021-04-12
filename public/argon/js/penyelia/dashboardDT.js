@@ -23,7 +23,6 @@ function showDatatable(){
                 url: "penyelia-dashboard/"+id_user,
                 type: 'GET',
             },
-
                 columns: [
                     {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
@@ -64,8 +63,6 @@ function showDatatable(){
                             // var allButton = button1 + button2 + button3;
                             // return allButton;
                             return '';
-                            
-                            
                         }
                     },
                     {

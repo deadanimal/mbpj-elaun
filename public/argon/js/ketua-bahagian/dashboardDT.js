@@ -48,7 +48,7 @@ function showDatatable(){
                     }
                 },
                 {
-                    targets: 10,
+                    targets: 6,
                     mRender: function(data,type,row){
 
                         // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
@@ -57,17 +57,15 @@ function showDatatable(){
                         // var allButton = button1 + button2 + button3;
                         // return allButton;
                         return '';
-                        
-                        
                     }
                 },
                 {
-                    targets: 11,
+                    targets: 7,
                     visible: false,
                     searchable: true
                 },
                 {
-                    targets: 12,
+                    targets: 8,
                     visible: false,
                     searchable: true
                 }
