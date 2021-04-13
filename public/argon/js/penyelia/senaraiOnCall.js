@@ -10,7 +10,7 @@ $(document).ready(function(){
 function showAllUser(){
     var id_user = $('#userID').val()
     var senaraiOnCallDT = $('#senaraiOnCallDT').DataTable({
-                dom: 'lrtip',
+                dom: 'flrtip',
                 destroy: true,
                 processing: true,
                 autoWidth: true,
@@ -18,7 +18,9 @@ function showAllUser(){
                     paginate: {
                         previous: "<",
                         next: ">"
-                    }
+                    },
+                    lengthMenu:     "Tunjuk _MENU_ rekod",
+                    search: "Carian:",
                 },
                 serverSide: true,
             ajax: {

@@ -16,7 +16,9 @@ function showDatatable(){
                     paginate: {
                         previous: "<",
                         next: ">"
-                    }
+                    },
+                    lengthMenu:     "Tunjuk _MENU_ rekod",
+                    search: "Carian:",
                 },
                 serverSide: true,
             ajax: {

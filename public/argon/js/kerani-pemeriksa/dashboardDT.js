@@ -12,6 +12,13 @@ function showDatatable(){
                 lengthMenu: [ 5, 10, 25, 50 ],
                 pagingType: "simple_numbers",
                 processing: true,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    },
+                    lengthMenu:     "Tunjuk _MENU_ rekod",
+                },
                 serverSide: true,
             ajax: {
                 url: "kerani-pemeriksa-dashboard/"+id_user,

@@ -12,6 +12,13 @@ function showDatatable(){
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],
                 processing: true,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    },
+                    lengthMenu:     "Tunjuk _MENU_ rekod",
+                },
                 serverSide: true,
             ajax: {
                 url: "ketua-jabatan-dashboard/"+id_user,

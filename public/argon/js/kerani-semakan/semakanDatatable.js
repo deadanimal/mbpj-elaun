@@ -48,7 +48,8 @@ function showDatatable(){
             paginate: {
                 previous: "<",
                 next: ">"
-            }
+            },
+            lengthMenu:     "Tunjuk _MENU_ rekod",
         },
         serverSide: false,
             ajax: {
