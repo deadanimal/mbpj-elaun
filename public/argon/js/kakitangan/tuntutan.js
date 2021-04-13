@@ -27,6 +27,7 @@ function showTuntutanDatatableKT(){
             info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
             infoEmpty:      "0 ke 0 daripada 0 rekod",
             infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+            processing:     "Dalam proses...",
         },
         autoWidth:true,
         // processing: true,
