@@ -50,7 +50,7 @@ Route::group([
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['show','store']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
-		Route::get('/show/{user_id}', [
+		Route::get('/get-permohonan/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
@@ -70,7 +70,7 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as' => 'permohonan-baru.destroy',
 		]);
-		Route::get('/pegawai',[
+		Route::post('/pegawai',[
 			'uses' 	=> 'kakitangan\permohonanController@pegawai',
 			'as'	=> 'permohonan-baru.pegawai',
 		]);

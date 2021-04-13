@@ -12,18 +12,30 @@ Route::group([
 	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['destroy']]);
-	Route::group(['prefix' => 'semakan'], function () {
-		Route::get('/{user_id}', [
-			'uses' => 'kakitangan\semakanController@show',
-			'as'   => 'semakan.show',
+	Route::group(['prefix' => 'permohonan-baru'], function () {
+		Route::get('/get-permohonan/{user_id}', [
+			'uses' => 'kakitangan\permohonanController@show',
+			'as'   => 'permohonan-baru.show',
 		]);
-		Route::get('/semak-permohonan/{user_id}', [
-			'uses' => 'kakitangan\semakanController@showModal',
-			'as'   => 'semakan.showModal',
+		Route::get('/semak-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@findPermohonan',
+			'as' => 'permohonan-baru.findPermohonan',
 		]);
-		Route::put('/hantar-permohonan/{user_id}', [
-			'uses' => 'kakitangan\semakanController@update',
-			'as'   => 'semakan.update',
+		Route::post('/hantar-permohonan',[
+			'uses' => 'kakitangan\permohonanController@store',
+			'as' => 'permohonan-baru.store',
+		]);
+		Route::put('/kemaskini-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@update',
+			'as' => 'permohonan-baru.update',
+		]);
+		Route::put('/delete-permohonan/{id}',[
+			'uses' => 'kakitangan\permohonanController@destroy',
+			'as' => 'permohonan-baru.destroy',
+		]);
+		Route::post('/pegawai',[
+			'uses' 	=> 'kakitangan\permohonanController@pegawai',
+			'as'	=> 'permohonan-baru.pegawai',
 		]);
 	});
 	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);

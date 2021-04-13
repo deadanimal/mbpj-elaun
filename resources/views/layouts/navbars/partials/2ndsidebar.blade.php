@@ -13,12 +13,14 @@
                 <span class="nav-link-text" >{{ __('Semakan') }}</span>
             </a>
         </li>
+        @if (auth()->user()->role_id == 2)
         <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
             <a class="nav-link " href="{{$role}}-on-call" >
                 <i class="fab fa-laravel" style="color: #f4645f;"></i>
                 <span class="nav-link-text" >{{ __('Senarai On Call') }}</span>
             </a>
         </li>
+        @endif
         <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
             <a class="nav-link" href="{{$role}}-bantuan" >
                 <i class="ni ni-collection text-yellow"></i>
