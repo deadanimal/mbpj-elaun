@@ -27,7 +27,6 @@ function showDatatable(){
             },
 
             columns: [
-                    
                 {data: null},
                 {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                 {data: 'tarikh_mula_kerja'},
@@ -41,8 +40,6 @@ function showDatatable(){
                 {data: null},
                 {data: 'jenis_permohonan'},
                 {data: 'status_akhir'}
-
-
             ],  
             columnDefs: [
                 {

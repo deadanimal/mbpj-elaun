@@ -15,6 +15,19 @@ function showTuntutanDatatableKT(){
         destroy: true,
         lengthMenu: [ 5, 10, 25, 50 ],
         responsive: false,
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            },
+            lengthMenu:     "Tunjuk _MENU_ rekod",
+            search: "Carian:",
+            zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+            emptyTable:     "Tiada rekod",
+            info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+            infoEmpty:      "0 ke 0 daripada 0 rekod",
+            infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+        },
         autoWidth:true,
         // processing: true,
         // serverSide: true,
