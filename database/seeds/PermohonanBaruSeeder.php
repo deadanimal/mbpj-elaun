@@ -13,24 +13,24 @@ class PermohonanBaruSeeder extends Seeder
      */
     public function run()
     {
-        // factory(PermohonanBaru::class, 10)->create();
+        factory(PermohonanBaru::class, 50)->create();
 
-        // foreach (PermohonanBaru::all() as $permohonan) {
-            
-        //     $individu = ['OT1', 'EL1', 'PS1'];
-        //     $kumpulan = ['OT2', 'EL2', 'PS2'];
+        foreach (PermohonanBaru::all() as $permohonan) {
+            $individu = ['OT1', 'EL1', 'PS1'];
+            $kumpulan = ['OT2', 'EL2', 'PS2'];
 
-        //     if (in_array($permohonan->jenis_permohonan, $individu)) {
-        //         $users = User::inRandomOrder()->pluck('USERID');
-        //         foreach ($users as $user) {
-        //             $permohonan->users()->attach($user);
-        //             break;
-        //         }
-        //     }
-        //     if (in_array($permohonan->jenis_permohonan, $kumpulan)) {
-        //         $users = User::inRandomOrder()->take(rand(2,3))->pluck('USERID');
-        //         $permohonan->users()->attach($users);
-        //     }
-        // }
+            // if (in_array($permohonan->jenis_permohonan, $individu)) {
+                $users = User::inRandomOrder()->pluck('CUSTOMERID');
+                foreach ($users as $user) {
+                    $permohonan->users()->attach($user);
+                    break;
+                }
+            // }
+            // if (in_array($permohonan->jenis_permohonan, $kumpulan)) {
+            //     $users = User::inRandomOrder()->take(rand(2,3))->pluck('CUSTOMERID');
+            //     $permohonan->users()->attach($users);
+            // }
+        }
+
     }
 }

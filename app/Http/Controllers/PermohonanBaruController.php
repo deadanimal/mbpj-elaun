@@ -90,7 +90,7 @@ class PermohonanBaruController extends Controller
 
         return response()->json([
             'error' => false,
-            'gaji'  => User::find($id_user)->gaji,
+            'gaji'  => User::find($id_user)->GAJI,
             'jumlah_tuntutan_elaun' => $jumlah_tuntutan_elaun
         ], 200);
 

@@ -29,7 +29,7 @@ class KiraanElaunService {
         $this->id_user = $id_user;
         $this->jumlahTuntutanAkhir = 0;
         $this->permohonan = $permohonan;
-        $this->gaji = User::find($id_user)->gaji;
+        $this->gaji = User::find($id_user)->GAJI;
         $this->kadarPerJam = floatval($permohonan->kadar_jam);
 
         foreach ($permohonan->users as $user) {

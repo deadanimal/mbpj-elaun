@@ -383,19 +383,33 @@ function getBerkumpulanDT(){
             {
                 targets: 2,
                 render: function(data,type,row){
-                    if(row['is_rejected_individually'] == '0' && data == 'DITERIMA'){
-                        return '<div id="status" class="container text-white text-center bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '0' && data == 'DALAM PROSES'){
-                        return '<div id="status" class="container text-white text-center bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '0' && data == "PERLU KEMASKINI"){
-                        return '<div id="status" class="container text-white text-center bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '1' || data == "BATAL"){
-                        return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '1' || data == 'DITOLAK'){
-                        data = "DITOLAK"
-                        return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    if(data == "DITERIMA"){
+                        return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "DITOLAK"){
+                        return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "DALAM PROSES"){
+                        return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "PERLU KEMASKINI"){
+                        return '<div id="status" class="container text-white bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                 }
+                // {
+                //     if(row['is_rejected_individually'] == '0' && data == 'DITERIMA'){
+                //         return '<div id="status" class="container text-white text-center bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '0' && data == 'DALAM PROSES'){
+                //         return '<div id="status" class="container text-white text-center bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '0' && data == "PERLU KEMASKINI"){
+                //         return '<div id="status" class="container text-white text-center bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '1' || data == "BATAL"){
+                //         return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '1' || data == 'DITOLAK'){
+                //         data = "DITOLAK"
+                //         return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }
+                // }
             },
             {
                 targets: 3,
@@ -407,7 +421,7 @@ function getBerkumpulanDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {   
-                    if(row['is_rejected_individually'] == "1"){
+                    if(row['permohonan_with_users[*].is_rejected_individually'] == "1"){
                         return '';
                     
                     }else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2'){
