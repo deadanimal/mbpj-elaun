@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Jawatan;
 use App\PermohonanBaru;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request; 
 use App\permohonan_with_users;
-use App\Services\KiraanElaunService;
 use App\Services\KiraanMasaService;
+use App\Services\KiraanElaunService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Events\PermohonanStatusChangedEvent;
@@ -20,8 +21,7 @@ class PermohonanBaruController extends Controller
     {
         $senaraiKakitangan = array();
         $permohonan = PermohonanBaru::with('users')->find($idPermohananBaru);
-        $tarikhPermohonan = $permohonan->created_at->format('Y-m-d');
-        // $tarikhPermohonan = $permohonan->created_at->format('d-m-Y');
+        $tarikhPermohonan = $permohonan->created_at->format('d/m/Y');
 
         foreach ($permohonan->users as $user) {
             if ($user->permohonan_with_users->is_rejected_individually != 1) {
@@ -41,10 +41,18 @@ class PermohonanBaruController extends Controller
     public function getKelulusanWithData($permohonan)
     {
         $arrayKelulusan = array();
-        $pegSokong = User::with('role')->find($permohonan->id_peg_sokong); 
-        $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegSokong, 'peg_sokong');
-        $pegPelulus = User::with('role')->find($permohonan->id_peg_pelulus);
-        $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegPelulus, 'peg_pelulus');
+
+        $pegSokong = User::with('maklumat_pekerjaan')->find($permohonan->id_peg_sokong); 
+        $namaJawatanpegSokong = Jawatan::where('HR_KOD_JAWATAN', $pegSokong->maklumat_pekerjaan->HR_JAWATAN)
+                                    ->first()
+                                    ->HR_NAMA_JAWATAN;
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, [$pegSokong, $namaJawatanpegSokong], 'peg_sokong');
+
+        $pegPelulus = User::with('maklumat_pekerjaan')->find($permohonan->id_peg_pelulus);
+        $namaJawatanpegPelulus = Jawatan::where('HR_KOD_JAWATAN', $pegPelulus->maklumat_pekerjaan->HR_JAWATAN)
+                                    ->first()
+                                    ->HR_NAMA_JAWATAN;
+        $arrayKelulusan = Arr::prepend($arrayKelulusan, [$pegPelulus, $namaJawatanpegPelulus], 'peg_pelulus');
         
         return $arrayKelulusan;
     }
@@ -90,12 +98,9 @@ class PermohonanBaruController extends Controller
         };
 
         $user = User::with('maklumat_pekerjaan')->find($id_user);
-        dd($user->maklumat_pekerjaan->HR_GAJI_POKOK);
-        dd($user);
 
         return response()->json([
             'error' => false,
-            // 'gaji'  => User::find($id_user)->maklumat_pekerjaan->HR_GAJI_POKOK,
             'gaji' => $user->maklumat_pekerjaan->HR_GAJI_POKOK,
             'jumlah_tuntutan_elaun' => $jumlah_tuntutan_elaun
         ], 200);

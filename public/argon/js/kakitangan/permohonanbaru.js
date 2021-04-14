@@ -135,6 +135,7 @@ function disableHantar(){
 
 $(document).ready(function(){
 
+    fillForm();
     getPegawai();
     getIndividuDT();
     getBerkumpulanDT();
@@ -487,6 +488,33 @@ function getPegawai(){
             })
         }
       })
+}
+
+function fillForm(){
+
+    $departmentCode = $("#depcode").val();
+    if($departmentCode.length == 6){
+        console.log($departmentCode.length);
+        $departmentCode.toString()
+        $department = $departmentCode.substring(0,1);
+        $bahagian = $departmentCode.substring(2,4);
+        $unit = $departmentCode.substring(5,6);
+        $unit = ($unit < 10 ? '0' : '') + $unit
+        console.log('6')
+    }else{
+        $departmentCode.toString()
+        $department = $departmentCode.substring(0,1);
+        $bahagian = $departmentCode.substring(1,3);
+        $unit = $departmentCode.substring(4,6);
+        $unit = ($unit < 10 ? '0' : '') + $unit
+        console.log('5')
+
+    }
+
+    $("#bahagian").val($bahagian);
+    
+    console.log($department,$bahagian,$unit)
+
 }
 
 $("#pegawaiSokongID").change(function(){

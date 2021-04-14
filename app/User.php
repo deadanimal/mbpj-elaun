@@ -4,7 +4,6 @@ namespace App;
 
 use App\Aduan;
 use App\Catatan;
-use App\Jabatan;
 use App\Jawatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
@@ -162,12 +161,8 @@ class User extends Authenticatable
         return $this->hasMany(Aduan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
-    // public function maklumat_pekerjaan()
-    // {
-    //     return $this->hasOne(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
-    // }
     public function maklumat_pekerjaan()
     {
-        return $this->belongsTo(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
+        return $this->hasOne(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
     }
 }

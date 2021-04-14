@@ -44,7 +44,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 
         type: 'GET', 
         success: function(data) {
-            console.log(data);
             $("#formModalEdit input[name=nama]").val(data.users.NAME);
             $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
 
@@ -69,8 +68,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             });
  
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
-                $("#formKelulusan input[name="+key+"]").val(value.NAME);
-                $("#formKelulusan input[name=jawatan_"+key+"]").val(value.role.name);
+                $("#formKelulusan input[name="+key+"]").val(value[0].NAME);
+                $("#formKelulusan input[name=jawatan_"+key+"]").val(value[1]);
             }
 
             $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
@@ -92,7 +91,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                     break;
                 case "EL1":
                     block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
+                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
                     break;
                 case "EL2":
                     block_ekedatanganBerkumpulan.style.display = "block";
@@ -100,7 +99,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                     break;
                 case "PS1":
                     block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
+                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
                     break;
                 case "PS2":
                     block_ekedatanganBerkumpulan.style.display = "block";
@@ -108,7 +107,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                     break;
                 case "KP1":
                     block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
+                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
                     break;
                 case "KP2":
                     block_ekedatanganBerkumpulan.style.display = "block";

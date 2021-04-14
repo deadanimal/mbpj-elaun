@@ -14,8 +14,6 @@ class CreateMaklumatPekerjaansTable extends Migration
     public function up()
     {
         Schema::create('maklumat_pekerjaans', function (Blueprint $table) {
-            // $table->increments('id_maklumat_pekerjaan');
-            // $table->unsignedInteger('HR_NO_PEKERJA')->primary();
             $table->increments('HR_NO_PEKERJA');
             $table->unsignedInteger('HR_JABATAN')->nullable();
             $table->unsignedInteger('HR_BAHAGIAN');

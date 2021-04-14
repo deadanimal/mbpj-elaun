@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class MaklumatPekerjaan extends Model
 {
     protected $table = 'maklumat_pekerjaans';
-    // protected $primaryKey = 'id_maklumat_pekerjaan';
     protected $primaryKey = 'HR_NO_PEKERJA';
     protected $fillable = [
         'HR_NO_PEKERJA', 
@@ -21,14 +20,9 @@ class MaklumatPekerjaan extends Model
         'HR_MATRIKS_GAJI'
     ];
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'CUSTOMERID', 'HR_NO_PEKERJA');
-    // }
-
     public function user()
     {
-        return $this->hasOne(User::class, 'CUSTOMERID', 'HR_NO_PEKERJA');
+        return $this->belongsTo(User::class, 'CUSTOMERID', 'HR_NO_PEKERJA');
     }
 
     public function jawatan()
