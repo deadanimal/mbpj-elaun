@@ -263,10 +263,10 @@ $('#max').datepicker({
 });
 
 $('#tarikhKerjaAkhir').datepicker({
-    dateFormat: 'dd / mm / yy',
+    dateFormat: 'dd/mm/yy',
 });
 $('#tarikhKerjaMula').datepicker({
-    dateFormat: 'dd / mm / yy',
+    dateFormat: 'dd/mm/yy',
 });
 
 $('#masaMula').timepicker();

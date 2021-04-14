@@ -15,8 +15,9 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             jenisPermohonan : jenisPermohonan
         },
         success: function(data) {
-            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'YYYY-MM-DD').format('DD / MM / YYYY')
-            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'YYYY-MM-DD').format('DD / MM / YYYY')
+            console.log(data.permohonan.tarikh_mula_kerja);
+            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'DD / MM / YYYY').format('DD / MM / YYYY')
+            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'DD / MM / YYYY').format('DD / MM / YYYY')
             $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
             $("#borangB1Modal input[name=tarikhKerjaAkhir]").val(tarikhAkhir);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
@@ -75,7 +76,8 @@ function deletePermohonan(id_permohonan_baru){
 }
 
 function hantarPengesahan(){
-    var tarikhMula = $("#borangB1Modal input[name=tarikhKerjaMula]").val();
+    var id_user = document.querySelector("#nopekerja").value;
+    var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"D/M/YYYY").format("D/M/YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
     var masaAkhir = $("#borangB1Modal input[name=masaAkhir]").val();
@@ -84,9 +86,9 @@ function hantarPengesahan(){
     var waktu = $("#borangB1Modal input[name=radioWaktu]").val();
     var tujuan = $("#borangB1Modal textarea[name=tujuan]").val();
     var id_permohonan_baru = $("#borangB1Modal input[name=idPermohonan]").val();
+    console.log(tarikhMula);
     console.log(jenisPermohonanKT)
     console.log(id_permohonan_baru)
-    var masa = getTimeDifference(masaMula,masaAkhir);
     
     var object = {
         tarikh_permohonan:tarikhMula,
@@ -94,28 +96,28 @@ function hantarPengesahan(){
         masa_mula:masaMula,
         masa_akhir:masaAkhir,
         waktu:waktu,
-        masa:masa,
         tujuan:tujuan,
         jenis_permohonan_kakitangan:jenisPermohonanKT,
         jenis_permohonan:jenisPermohonanReal,
         
     }
+    
     $.ajax({
         url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
         type: 'put', 
         data:{
             id_permohonan_baru : id_permohonan_baru,
             object : object,
-            totalShiftSiang:totalShiftSiang,
-            totalShiftMalam:totalShiftMalam
         },
         success: function(data) {
+            saveMasa(id_user,id_permohonan_baru);
             $("#borangB1Modal").modal("hide");
             Swal.fire(  
                 'Dihantar untuk Pengesahan!',
                 'Klik butang dibawah untuk tutup!',
                 'success'
                 )
+                
             showSemakanDatatableKT();
             console.log(data.permohonan);
 
@@ -131,7 +133,7 @@ function timeStringToMins(s) {
     s = s.split(':');
     s[0] = /m$/i.test(s[1]) && s[0] == 12? 0 : s[0];
     return s[0]*60 + parseInt(s[1]) + (/pm$/i.test(s[1])? 720 : 0);
-  }
+    }
 
   function getTimeDifference(t0, t1) {
 
@@ -143,4 +145,29 @@ function timeStringToMins(s) {
   
     // Format difference as hh:mm and return
     return   z(diff/60 | 0) + z(diff % 60); 
-  }
+}
+
+function saveMasa(id_user,id_permohonan_baru){
+    var waktuMasuk = $("#borangB1Modal input[name=tarikhKerjaMula]").val()
+    var waktuKeluar = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val()
+    var mulaKerja = $("#borangB1Modal input[name=masaMula]").val()
+    var akhirKerja = $("#borangB1Modal input[name=masaAkhir]").val()
+    $.ajax({
+        url:'semakan/masa-sebenar/' + id_user,
+        type:'put',
+        data:{
+            id_permohonan_baru:id_permohonan_baru,
+            waktuMasuk:waktuMasuk,
+            waktuKeluar:waktuKeluar,
+            mulaKerja:mulaKerja,
+            akhirKerja:akhirKerja
+        }, success: function(data) {
+            console.log('dasdsadsa');
+           console.log(data);
+
+        },
+        error: function(data) {
+            console.log(data);
+        } 
+    })
+}
