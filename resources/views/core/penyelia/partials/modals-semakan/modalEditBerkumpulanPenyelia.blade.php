@@ -159,7 +159,6 @@
                         </div>
                     </div>
                     <div class="text-center mb-3">
-                        {{-- <button type="submit" class="btn btn-sm btn-success mt-4">{{ __('Kemaskini') }}</button> --}}
                         <button type="button" data-dismiss="modal" class="btn btn-sm btn-primary mt-4">{{ __('Tutup') }}</button>
                     </div>  
                 </div>

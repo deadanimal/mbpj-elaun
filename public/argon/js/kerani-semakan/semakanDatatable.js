@@ -20,7 +20,9 @@ function showUser(id, jabatan) {
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.name);
+                $("#formOTEL input[name=nama]").val(data.users.NAME);
+                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
                 $('#semakanKSDT').DataTable().columns(9).search(     
                     id
                 )
@@ -76,7 +78,7 @@ function showDatatable(){
                     {data: null},
                     {data: 'jenis_permohonan'},
                     {data: 'users[*].id'},
-                    {data: 'users[*].GE_KOD_JABATAN'}
+                    {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
                 ],  
                 columnDefs: [
                     {

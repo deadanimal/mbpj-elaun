@@ -103,7 +103,8 @@ class UserController extends Controller
 
     public function findUser($id)
     {
-        $users = User::find($id);
+        // $users = User::with('jabatan')->find($id);
+        $users = User::with('maklumat_pekerjaan')->find($id);
 
         return response()->json([
                     'error' => false,

@@ -61,7 +61,9 @@ function showUser() {
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.name);
+                $("#formOTEL input[name=nama]").val(data.users.NAME);
+                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
                 $('input').css('color', 'black')
             },
             error: function(data) { console.log(data); }

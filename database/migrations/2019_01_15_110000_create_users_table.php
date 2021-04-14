@@ -21,10 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('NIRC');
             $table->string('NAME');
             $table->string('MOBILE_PHONE');
-            $table->float('GAJI')->default(1000.00);
             $table->string('email')->unique();
             $table->unsignedInteger('role_id')->default(8);
-            $table->unsignedInteger('GE_KOD_JABATAN')->default(1);
             $table->unsignedInteger('is_oncall')->default(0);
             $table->rememberToken();
             $table->string('password')->default(Hash::make('secret'));
@@ -32,7 +30,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('GE_KOD_JABATAN')->references('GE_KOD_JABATAN')->on('jabatans');
         });
     }
 

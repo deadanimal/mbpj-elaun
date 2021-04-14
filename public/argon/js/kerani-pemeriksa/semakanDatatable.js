@@ -19,8 +19,9 @@ function showUser(id, jabatan) {
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.name);
-
+                $("#formOTEL input[name=nama]").val(data.users.NAME);
+                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
                 $('#semakanKPDT').DataTable().columns(9).search(     
                     id
                 )
@@ -79,7 +80,7 @@ function showDatatable(){
                     {data: null},
                     {data: 'jenis_permohonan'},
                     {data: 'users[*].id'},
-                    {data: 'users[*].GE_KOD_JABATAN'}
+                    {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
                 ],  
                 columnDefs: [
                     {
@@ -195,7 +196,9 @@ $("#semakKeraniPemeriksa").click(function () {
     var id = document.querySelector("#noPekerja").value;
     var jabatan = document.querySelector("#selectJabatan").value;
 
-    if (id) { showUser(id, jabatan); }   
+    if (id) { 
+        showUser(id, jabatan); 
+    }   
 
     // filter search result by jabatan
     $('#semakanKPDT').DataTable().columns(10).search(      

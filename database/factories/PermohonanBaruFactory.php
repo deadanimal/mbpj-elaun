@@ -8,7 +8,6 @@ use Faker\Generator as Faker;
 
 $factory->define(PermohonanBaru::class, function (Faker $faker) {
     return [
-
         'tarikh_mula_kerja' => $faker->date,
         'tarikh_akhir_kerja' => $faker->date,
         'masa_mula' => $faker->time($format = 'H:i', $max = 'now'),

@@ -88,9 +88,14 @@ class PermohonanBaruController extends Controller
             }
         };
 
+        $user = User::with('maklumat_pekerjaan')->find($id_user);
+        dd($user->maklumat_pekerjaan->HR_GAJI_POKOK);
+        dd($user);
+
         return response()->json([
             'error' => false,
-            'gaji'  => User::find($id_user)->GAJI,
+            // 'gaji'  => User::find($id_user)->maklumat_pekerjaan->HR_GAJI_POKOK,
+            'gaji' => $user->maklumat_pekerjaan->HR_GAJI_POKOK,
             'jumlah_tuntutan_elaun' => $jumlah_tuntutan_elaun
         ], 200);
 
@@ -113,6 +118,8 @@ class PermohonanBaruController extends Controller
     {
         $id_permohonan_baru = $request->input('id_permohonan_baru');
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
+        $masa_mula_sebenar = 0.0;
+        $masa_akhir_sebenar = 0.0;
 
         foreach ($permohonan->users as $user) {
             if($user->CUSTOMERID == $id_user) {

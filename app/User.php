@@ -5,8 +5,10 @@ namespace App;
 use App\Aduan;
 use App\Catatan;
 use App\Jabatan;
+use App\Jawatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
+use App\MaklumatPekerjaan;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,10 +32,8 @@ class User extends Authenticatable
         'NIRC', 
         'NAME',
         'MOBILE_PHONE',
-        'GAJI',
         'email',
         'role_id',
-        'GE_KOD_JABATAN',
         'is_oncall',
         'password'
     ];
@@ -162,8 +162,12 @@ class User extends Authenticatable
         return $this->hasMany(Aduan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
-    public function jabatan()
+    // public function maklumat_pekerjaan()
+    // {
+    //     return $this->hasOne(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
+    // }
+    public function maklumat_pekerjaan()
     {
-        return $this->belongsTo(Jabatan::class, 'GE_KOD_JABATAN', 'GE_KOD_JABATAN');
+        return $this->belongsTo(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
     }
 }
