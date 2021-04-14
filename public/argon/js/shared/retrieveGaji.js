@@ -6,7 +6,6 @@ function fillInGaji(idKakitangan, id_permohonan_baru, is_individu) {
             id_permohonan_baru : id_permohonan_baru
         },
         success: function(data) {
-            console.log(data);
             let {error, gaji, jumlah_tuntutan_elaun} = data;
 
             $('input[name=gaji-'+is_individu+']').val('RM '+gaji); 

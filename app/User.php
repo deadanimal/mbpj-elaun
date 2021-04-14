@@ -4,7 +4,6 @@ namespace App;
 
 use App\Aduan;
 use App\Catatan;
-use App\Jabatan;
 use App\Jawatan;
 use App\eKedatangan;
 use App\PermohonanBaru;

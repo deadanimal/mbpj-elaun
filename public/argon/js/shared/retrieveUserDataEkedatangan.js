@@ -68,8 +68,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             });
  
             for (const [key, value] of Object.entries(data.arrayKelulusan)) {
-                $("#formKelulusan input[name="+key+"]").val(value.NAME);
-                $("#formKelulusan input[name=jawatan_"+key+"]").val(value.role.name);
+                $("#formKelulusan input[name="+key+"]").val(value[0].NAME);
+                $("#formKelulusan input[name=jawatan_"+key+"]").val(value[1]);
             }
 
             $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);

@@ -18,7 +18,6 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
         success: function(data) {
             let array =  ['PS', 'EL', 'KP', 'KS'];
             let jenisPermohonanShortened = jenisPermohonan.substr(0,2);
-
             $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
             $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
 
