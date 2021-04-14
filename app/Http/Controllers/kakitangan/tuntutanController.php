@@ -63,7 +63,7 @@ class tuntutanController extends Controller
     {
         //
         $jenis_permohonan = $request->input('jenisPermohonan');
-        $currUserID = auth()->user()->id;
+        $currUserID = auth()->user()->CUSTOMERID;
         if($jenis_permohonan == 'EL1'){
             $permohonan = User::find(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
@@ -117,7 +117,7 @@ class tuntutanController extends Controller
 
     public function getStatistics(){
         
-        $userID = auth()->user()->id;
+        $userID = auth()->user()->CUSTOMERID;
         $lulus = $this->findAllPermohonan($userID)->whereYear('permohonan_barus.created_at',date('Y'))->where('status_akhir',1)->get()->groupBy(function($d) {
             return Carbon::parse($d->created_at)->format('m');
         });

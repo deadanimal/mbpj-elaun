@@ -24,7 +24,7 @@ class PermohonanNeedKemaskiniEmailNotification extends Notification implements S
      */
     public function __construct(User $user, PermohonanBaru $permohonan)
     {
-        $this->name = $user->name;
+        $this->name = $user->NAME;
 
         foreach ($permohonan->catatans as $catatan) {
             $this->catatan_latest = $catatan->catatan;

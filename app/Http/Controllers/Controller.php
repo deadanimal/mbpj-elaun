@@ -21,10 +21,11 @@ class Controller extends BaseController
                                 ->statusAkhirBelomDiterima();
     }
 
-    public function findPermohonanWithIDKakitangan($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans()
+    public function findPermohonanWithIDKakitangan($jenisPermohonan, $idUser){
+        return User::find($idUser)->permohonans()
                                 ->where('jenis_permohonan_kakitangan', $jenisPermohonan)
-                                ->statusAkhirBelomDiterima();
+                                ->statusAkhirBelomDiterima()
+                                ->get();
     }
 
     public function findPermohonanWithIDSemakan($jenisPermohonan,$jenisPermohonanKT,$id){
@@ -38,8 +39,8 @@ class Controller extends BaseController
         return $permohonans = User::find($id)->permohonans();
     }
 
-    public function findPermohonanUser($idPermohonanBaru){
-        return $permohonans = PermohonanBaru::find($idPermohonanBaru);
+    public function findPermohonanUser($idUser){
+        return User::find($idUser)->permohonans;
     }
 
     public function findPermohonanForReject($id,$idPermohonanBaru){

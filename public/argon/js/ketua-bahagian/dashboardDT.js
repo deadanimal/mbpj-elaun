@@ -10,8 +10,21 @@ function showDatatable(){
                 dom: 'lrtip',
                 destroy: true,
                 lengthMenu: [ 5, 10, 25, 50 ],
-                pagingType: "simple_numbers",
                 processing: true,
+                language: {
+                    paginate: {
+                        previous: "<",
+                        next: ">"
+                    },
+                    lengthMenu:     "Tunjuk _MENU_ rekod",
+                    search: "Carian:",
+                    zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+                    emptyTable:     "Tiada rekod",
+                    info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+                    infoEmpty:      "0 ke 0 daripada 0 rekod",
+                    infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+                    processing:     "Dalam proses...",
+                },
                 serverSide: true,
             ajax: {
                 url: "ketua-bahagian-dashboard/"+id_user,
@@ -19,22 +32,15 @@ function showDatatable(){
             },
 
             columns: [
-                    
                 {data: null},
                 {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                {data: 'tarikh_mula_kerja'},
+                {data: 'created_at'},
                 {data: 'masa_mula'},
                 {data: 'masa_akhir'},
                 {data: 'masa'},
-                {data: 'hari'},
-                {data: 'waktu'},
-                {data: 'kadar_jam'},
-                {data: 'tujuan'},
                 {data: null},
                 {data: 'jenis_permohonan'},
                 {data: 'status_akhir'}
-
-
             ],  
             columnDefs: [
                 {
@@ -56,7 +62,7 @@ function showDatatable(){
                     }
                 },
                 {
-                    targets: 10,
+                    targets: 6,
                     mRender: function(data,type,row){
 
                         // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
@@ -65,17 +71,15 @@ function showDatatable(){
                         // var allButton = button1 + button2 + button3;
                         // return allButton;
                         return '';
-                        
-                        
                     }
                 },
                 {
-                    targets: 11,
+                    targets: 7,
                     visible: false,
                     searchable: true
                 },
                 {
-                    targets: 12,
+                    targets: 8,
                     visible: false,
                     searchable: true
                 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request; 
 use App\permohonan_with_users;
 use App\Services\KiraanElaunService;
+use App\Services\KiraanMasaService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Events\PermohonanStatusChangedEvent;
@@ -33,16 +34,16 @@ class PermohonanBaruController extends Controller
                     'permohonan'  => $permohonan,
                     'tarikh_permohonan' => $tarikhPermohonan,
                     'arrayKelulusan' => $this->getKelulusanWithData($permohonan),
-                    'senaraiKakitangan' =>$senaraiKakitangan
+                    'senaraiKakitangan' => $senaraiKakitangan
                 ], 200);
     }
 
     public function getKelulusanWithData($permohonan)
     {
         $arrayKelulusan = array();
-        $pegSokong = User::find($permohonan->id_peg_sokong); 
+        $pegSokong = User::with('role')->find($permohonan->id_peg_sokong); 
         $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegSokong, 'peg_sokong');
-        $pegPelulus = User::find($permohonan->id_peg_pelulus);
+        $pegPelulus = User::with('role')->find($permohonan->id_peg_pelulus);
         $arrayKelulusan = Arr::prepend($arrayKelulusan, $pegPelulus, 'peg_pelulus');
         
         return $arrayKelulusan;
@@ -67,9 +68,9 @@ class PermohonanBaruController extends Controller
             $tuntutan = ($permohonan->users)->filter(function($user) {
                 return $user->permohonan_with_users->is_rejected_individually != 1;
             })->each(function($user) use ($permohonan) {
-                $elaun = new KiraanElaunService($permohonan, $user->id);
+                $elaun = new KiraanElaunService($permohonan, $user->CUSTOMERID);
                 $permohonan->users()
-                            ->updateExistingPivot($user->id, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
+                            ->updateExistingPivot($user->CUSTOMERID, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
             })->map(function ($user) {
                 return $user->permohonan_with_users
                             ->jumlah_tuntutan_elaun;
@@ -83,14 +84,19 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if ($user->id == $id_user){ 
+            if ($user->CUSTOMERID == $id_user){ 
                 $jumlah_tuntutan_elaun = $user->permohonan_with_users->jumlah_tuntutan_elaun;
             }
         };
 
+        $user = User::with('maklumat_pekerjaan')->find($id_user);
+        dd($user->maklumat_pekerjaan->HR_GAJI_POKOK);
+        dd($user);
+
         return response()->json([
             'error' => false,
-            'gaji'  => User::find($id_user)->gaji,
+            // 'gaji'  => User::find($id_user)->maklumat_pekerjaan->HR_GAJI_POKOK,
+            'gaji' => $user->maklumat_pekerjaan->HR_GAJI_POKOK,
             'jumlah_tuntutan_elaun' => $jumlah_tuntutan_elaun
         ], 200);
 
@@ -102,7 +108,7 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if($user->id == $idUser) {
+            if($user->CUSTOMERID == $idUser) {
                 $permohonan->users()->updateExistingPivot($idUser, array('is_rejected_individually' => 1), false);
                 $user->notify(new PermohonanRejectedEmailNotification($user));
             }
@@ -113,9 +119,11 @@ class PermohonanBaruController extends Controller
     {
         $id_permohonan_baru = $request->input('id_permohonan_baru');
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
+        $masa_mula_sebenar = 0.0;
+        $masa_akhir_sebenar = 0.0;
 
         foreach ($permohonan->users as $user) {
-            if($user->id == $id_user) {
+            if($user->CUSTOMERID == $id_user) {
                 $masa_mula_sebenar = $user->permohonan_with_users->masa_mula_sebenar;
                 $masa_akhir_sebenar = $user->permohonan_with_users->masa_akhir_sebenar;
             }
@@ -134,7 +142,7 @@ class PermohonanBaruController extends Controller
         $permohonan = PermohonanBaru::find($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
-            if($user->id == $idUser) {
+            if($user->CUSTOMERID == $idUser) {
                 $permohonan->users()
                             ->updateExistingPivot($idUser, array(
                                     'masa_mula_sebenar' => $request->input('masa_mula_sebenar'),
@@ -142,5 +150,39 @@ class PermohonanBaruController extends Controller
                                 ));
             }
         }
+    }
+
+    public function saveMasaSebenar(Request $request){
+        // $masaSebenar;
+        $jenisPermohonan = array('PS1', 'PS2');
+        $idPermohananBaru = $request->input('id_permohonan_baru');
+        $waktuKeluar = $request->input('waktuKeluar');
+        $waktuMasuk = $request->input('waktuMasuk');
+        $mulaKerja = $request->input('mulaKerja');
+        $akhirKerja = $request->input('akhirKerja');
+        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $sahP2 = $permohonan->progres == 'Sah P2' ? TRUE : FALSE;
+
+        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP2) {
+            $tuntutan = ($permohonan->users)->filter(function($user) {
+                return $user->permohonan_with_users->is_rejected_individually != 1;
+            })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
+                
+                // dd($permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
+                $masa = new KiraanMasaService($permohonan, $user->id,$permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
+                $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
+                print_r($masaSebenar);
+                $permohonan->update(['masa' => $masaSebenar["masa"]]);
+                $permohonan->users()
+                            ->updateExistingPivot($user->id, array(
+                                'masa_sebenar_siang' => $masaSebenar["Siang"],
+                                'masa_sebenar_malam' => $masaSebenar["Malam"]),
+                                false);
+            })->map(function ($user)  use ($permohonan){
+                return $user->permohonan_with_users
+                            ->masa_sebenar_siang;
+            });
+        }
+
     }
 }

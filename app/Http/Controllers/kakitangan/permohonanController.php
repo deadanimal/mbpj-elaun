@@ -92,13 +92,12 @@ class permohonanController extends Controller
                 'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
 
             ]);
-            // $permohonans = PermohonanBaru::orderBy('id_permohonan_baru','desc')->first(); 
             $permohonanbaru->save();
             $permohonanbaru->refresh();
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
-                $users = Auth::user()->id;
+                $users = Auth::user()->CUSTOMERID;
                 $permohonans->users()->attach($users);
 
                 $this->sendEmailNotificationToPegawaiSokong($permohonans);
@@ -178,7 +177,7 @@ class permohonanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $idUser)
     {
         //
         $pilihan = $request->input('pilihan');
@@ -186,9 +185,9 @@ class permohonanController extends Controller
         // dd(substr($pilihan,0,2));
 
         // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
-        
         if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$id))->make(true); 
+            // dd($this->findPermohonanWithIDKakitangan($pilihan,$idUser));
+            return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$idUser))->make(true); 
         }
     }
 
@@ -313,9 +312,9 @@ class permohonanController extends Controller
 
     $id_permohonan_baru = $request->input('id_permohonan_baru');
     $jenis_permohonan = $request->input('jenis_permohonan');
-    $currUserID = auth()->user()->id;
+    $currUserID = auth()->user()->CUSTOMERID;
         if($jenis_permohonan == 'OT1'){
-            $permohonan = User::find(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+            $permohonan = User::find(auth()->user()->CUSTOMERID)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
                         'error' => false,
                         'permohonan'  => $permohonan,

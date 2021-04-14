@@ -13,9 +13,7 @@ var totalhours= 0;
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var pegawai = []
 var pegawaiID = []
-// if(nodelist.length == 0){
-//     document.getElementById("remove").disabled = true
-// }
+
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
@@ -25,20 +23,14 @@ $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
     }
     arr = []
 })
-// $('#permohonanbaruModal').on('show.bs.modal', function (e) {
-   
-// })
-
 
     $(function () {
-
         $("#jenisPermohonan").change(function () {
             if ($(this).val() == "frmPermohonanIndividu") {
                 document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
                 document.getElementById('selectpermohonan').className = "col-sm-12"
                 $('#divPermohonanIndividu').show();
                 $("#divPermohonanBerkumpulan").hide();
-
             }
             else if ($(this).val() == "frmPermohonanBerkumpulan") {
                 document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-xl"
@@ -47,9 +39,8 @@ $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
                 $("#divPermohonanBerkumpulan").show();
 
             } else{
-            $('#divPermohonanIndividu').hide();
-            $('#divPermohonanBerkumpulan').hide();
-    
+                $('#divPermohonanIndividu').hide();
+                $('#divPermohonanBerkumpulan').hide();
             }
     
         });
@@ -189,11 +180,25 @@ function getIndividuDT(){
         destroy: true,
         "lengthMenu": [ 5, 10, 25, 50 ],
         processing: false,
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            },
+            lengthMenu:     "Tunjuk _MENU_ rekod",
+            search: "Carian:",
+            zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+            emptyTable:     "Tiada rekod",
+            info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+            infoEmpty:      "0 ke 0 daripada 0 rekod",
+            infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+            processing:     "Dalam proses...",
+        },
         serverSide: true,
         // responsive:true,
         // autoWidth:false,
     ajax: {
-        url: "permohonan-baru/show/"+id_user,
+        url: "permohonan-baru/get-permohonan/"+id_user,
         type: 'GET',
         data:
         {
@@ -204,7 +209,7 @@ function getIndividuDT(){
         columns: [
 
             {data: null},
-            {data: 'tarikh_mula_kerja'},
+            {data: 'created_at'},
             {data: 'status'},
             {data: 'progres'},
             {data: 'masa_mula'},
@@ -217,7 +222,7 @@ function getIndividuDT(){
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'},
-            {data: 'is_rejected_individually'}
+            {data: 'permohonan_with_users[*].is_rejected_individually'}
         ],
         columnDefs: [
             {
@@ -229,7 +234,7 @@ function getIndividuDT(){
                 targets: [1],
                 type: "date",
                 render: function(data,type,row){
-                    formattedDate = moment(data,"DD / MM / YYYY").format("DD/MM/YYYY")
+                    formattedDate = moment(data,"YYYY-MM-DD").format("DD-MM-YYYY")
                     return formattedDate;
                 }
             },
@@ -316,11 +321,25 @@ function getBerkumpulanDT(){
         destroy: true,
         "lengthMenu": [ 5, 10, 25, 50 ],
         processing: false,
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            },
+            lengthMenu:     "Tunjuk _MENU_ rekod",
+            search: "Carian:",
+            zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+            emptyTable:     "Tiada rekod",
+            info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+            infoEmpty:      "0 ke 0 daripada 0 rekod",
+            infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+            processing:     "Dalam proses...",
+        },
         serverSide: true,
         // responsive:true,
         // autoWidth:false,
     ajax: {
-        url: "permohonan-baru/show/"+id_user,
+        url: "permohonan-baru/get-permohonan/"+id_user,
         type: 'GET',
         data:
         {
@@ -364,19 +383,33 @@ function getBerkumpulanDT(){
             {
                 targets: 2,
                 render: function(data,type,row){
-                    if(row['is_rejected_individually'] == '0' && data == 'DITERIMA'){
-                        return '<div id="status" class="container text-white text-center bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '0' && data == 'DALAM PROSES'){
-                        return '<div id="status" class="container text-white text-center bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '0' && data == "PERLU KEMASKINI"){
-                        return '<div id="status" class="container text-white text-center bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '1' || data == "BATAL"){
-                        return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
-                    }else if(row['is_rejected_individually'] == '1' || data == 'DITOLAK'){
-                        data = "DITOLAK"
-                        return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    if(data == "DITERIMA"){
+                        return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "DITOLAK"){
+                        return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "DALAM PROSES"){
+                        return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    }
+                    else if(data == "PERLU KEMASKINI"){
+                        return '<div id="status" class="container text-white bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                 }
+                // {
+                //     if(row['is_rejected_individually'] == '0' && data == 'DITERIMA'){
+                //         return '<div id="status" class="container text-white text-center bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '0' && data == 'DALAM PROSES'){
+                //         return '<div id="status" class="container text-white text-center bg-info btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '0' && data == "PERLU KEMASKINI"){
+                //         return '<div id="status" class="container text-white text-center bg-warning btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '1' || data == "BATAL"){
+                //         return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }else if(row['is_rejected_individually'] == '1' || data == 'DITOLAK'){
+                //         data = "DITOLAK"
+                //         return '<div id="status" class="container text-white text-center bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
+                //     }
+                // }
             },
             {
                 targets: 3,
@@ -388,7 +421,7 @@ function getBerkumpulanDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {   
-                    if(row['is_rejected_individually'] == "1"){
+                    if(row['permohonan_with_users[*].is_rejected_individually'] == "1"){
                         return '';
                     
                     }else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2'){
@@ -436,19 +469,19 @@ function getPegawai(){
     console.log(pegawaiDiv)
     $.ajax({
         url: 'permohonan-baru/pegawai/',
-        type:'get',
+        type:'post',
         dataType: 'json',
         success: function(data){
             console.log(data.pegawaiSokong)
             var pegawaiSokong = data.pegawaiSokong
             var pegawaiLulus = data.pegawaiLulus
             pegawaiSokong.forEach((element,index) => {
-                var option = "<option value='"+element.id+"'>"+element.name+"</option>"
+                var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
                 $('#pegawaiSokongID').append(option)
                 $('#pegawaiSokongBK').append(option)
             })
             pegawaiLulus.forEach((element,index) => {
-                var option = "<option value='"+element.id+"'>"+element.name+"</option>"
+                var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
                 $('#pegawaiLulusID').append(option)
                 $('#pegawaiLulusBK').append(option)
             })

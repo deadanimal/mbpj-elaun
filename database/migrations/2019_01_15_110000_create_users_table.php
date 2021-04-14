@@ -14,20 +14,22 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
+            $table->increments('CUSTOMERID');
+            $table->string('USERID');
+            $table->string('USERNAME');
+            $table->string('DEPARTMENTCODE')->default('-');
+            $table->string('NIRC');
+            $table->string('NAME');
+            $table->string('MOBILE_PHONE');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->unsignedInteger('role_id');
-            $table->unsignedInteger('GE_KOD_JABATAN');
-            $table->float('gaji');
+            $table->unsignedInteger('role_id')->default(8);
+            $table->unsignedInteger('is_oncall')->default(0);
             $table->rememberToken();
-            $table->timestamps();
+            $table->string('password')->default(Hash::make('secret'));
             $table->string('status',2)->default('01');
+            $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('GE_KOD_JABATAN')->references('GE_KOD_JABATAN')->on('jabatans');
         });
     }
 

@@ -21,7 +21,7 @@ class PermohonanBerjayaEmailNotification extends Notification implements ShouldQ
      */
     public function __construct(User $user)
     {
-        $this->name = $user->name;
+        $this->name = $user->NAME;
     }
 
     /**
@@ -48,6 +48,7 @@ class PermohonanBerjayaEmailNotification extends Notification implements ShouldQ
                 ->subject('SPELM : Permohonan Diterima')
                 ->greeting('Selamat Sejahtera Tuan/Puan '.$this->name.',')
                 ->line('Permohonan anda telah diterima.')
+                ->line('Tuntutan elaun lebih masa anda sedang diproses diperingkat Jabatan Perbendaharaan.')
                 ->action('Klik disini', url('/'))
                 ->salutation('Terima kasih.');
     }

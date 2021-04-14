@@ -17,12 +17,12 @@ class CreateAduansTable extends Migration
             $table->id('id_aduan');
             $table->string('tajuk')->nullable();
             $table->string('keterangan')->nullable();
-            $table->unsignedInteger('id_user');
+            $table->unsignedInteger('CUSTOMERID');
             $table->timestamps();
         });
 
         Schema::table('aduans', function($table) {
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('CUSTOMERID')->references('CUSTOMERID')->on('users');
         });
     }
 

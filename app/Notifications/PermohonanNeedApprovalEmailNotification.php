@@ -21,7 +21,7 @@ class PermohonanNeedApprovalEmailNotification extends Notification implements Sh
      */
     public function __construct(User $user)
     {
-        $this->name = $user->name;
+        $this->name = $user->NAME;
     }
 
     /**

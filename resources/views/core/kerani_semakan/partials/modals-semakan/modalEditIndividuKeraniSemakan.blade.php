@@ -125,7 +125,7 @@
                             </div>
 
                             {{-- Kelulusan --}}
-                            @include('core.semakan.partials.modals-semakan.kelulusan')
+                            @include('core.kerani_semakan.partials.modals-semakan.kelulusan')
 
                         </div>
                         

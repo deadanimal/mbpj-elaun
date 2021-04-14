@@ -48,10 +48,11 @@ Route::group([
 	});
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['store','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
-		// Route::get('/get-permohonan/{user_id}', [
-		// 	'uses' => 'kakitangan\permohonanController@show',
-		// 	'as'   => 'permohonan-baru.show',
-		// ]);
+
+		Route::get('/get-permohonan/{idUser}', [
+			'uses' => 'kakitangan\permohonanController@show',
+			'as'   => 'permohonan-baru.show',
+		]);
 		Route::get('/semak-permohonan/{id}',[
 			'uses' => 'kakitangan\permohonanController@findPermohonan',
 			'as' => 'permohonan-baru.findPermohonan',

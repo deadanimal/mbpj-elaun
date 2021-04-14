@@ -28,10 +28,14 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      * 
-     * 
      */
     public function show(Request $request, $id)
-    { 
-        return datatables()->of($this->findAllPermohonanForKPKS())->make(true);
+    {   
+        $permohonans = PermohonanBaru::with('users')
+                            ->where('status_akhir', 1)
+                            ->where('kerani_pemeriksa_approved', 1)
+                            ->get();
+
+        return datatables()->of($permohonans)->make(true);
     }
 }
