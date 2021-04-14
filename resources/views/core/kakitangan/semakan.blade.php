@@ -8,7 +8,7 @@
     @component('layouts.headers.auth') 
         
     @endcomponent
-    <input type="text" id="nopekerja" value="{{Auth::user()->id }}" hidden>
+    <input type="text" id="nopekerja" value="{{Auth::user()->CUSTOMERID }}" hidden>
     <div class="container-fluid mt--6">
         <div class="row mt-5">
             <div class="col-6">

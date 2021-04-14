@@ -62,7 +62,7 @@ class semakanController extends Controller
     {
         $pilihanKT = $request->input('pilihanKT');
         $pilihanReal = $request->input('pilihanReal');
-
+        // dd("nkj");
         if(request()->ajax()){
                 
                 return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
