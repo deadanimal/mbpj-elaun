@@ -15,7 +15,7 @@ class EKedatanganController extends Controller
         return response()->json([
                     'error' => false,
                     'ekedatangans'  => $user_ekedatangan->ekedatangan,
-                    'user_name' => $user_ekedatangan->name
+                    'user_name' => $user_ekedatangan->NAME
                 ], 200);
     }
 }

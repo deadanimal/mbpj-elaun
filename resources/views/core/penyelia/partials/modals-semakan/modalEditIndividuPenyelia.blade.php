@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="form-control-label">{{ __('No. K/P Baru') }}</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="">
+                                    <input class="form-control form-control-sm" name="noKP" id="semakan-modal-noKP" type="text" placeholder="">
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>

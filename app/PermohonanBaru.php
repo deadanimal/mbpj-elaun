@@ -132,13 +132,14 @@ class PermohonanBaru extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'id')
+        return $this->belongsToMany(User::class, 'permohonan_with_users', 'id_permohonan_baru', 'CUSTOMERID')
                     ->withPivot(
                                 'masa_mula_sebenar',
                                  'masa_akhir_sebenar',
                                  'is_rejected_individually',
                                  'masa_sebenar_siang',
                                  'masa_sebenar_malam',
+                                 'no_kumpulan',
                                  'jumlah_tuntutan_elaun'
                                  )
                     ->withTimestamps()
@@ -149,16 +150,4 @@ class PermohonanBaru extends Model
     {
         return $this->hasMany(Catatan::class, 'id_permohonan_baru', 'id_permohonan_baru');
     }
-
-    // public function userInJabatan()
-    // {
-    //     return $this->hasOneThrough(
-    //         Jabatan::class,
-    //         User::class,
-    //         'GE_KOD_JABATAN', // Foreign key on cars table...
-    //         'GE_KOD_JABATAN', // Foreign key on owners table...
-    //         'id', // Local key on mechanics table...
-    //         'id' // Local key on cars table...
-    //     );
-    // }
 }

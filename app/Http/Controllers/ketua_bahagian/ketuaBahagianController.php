@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\ketua_bahagian;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use DataTables;
+use App\PermohonanBaru;
+use Illuminate\Http\Request;
 use App\DataTables\UsersDataTable;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ketuaBahagianController extends Controller
 {
@@ -50,8 +51,12 @@ class ketuaBahagianController extends Controller
      */
     public function show($id)
     {
-        //
-        return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->orWhere('id_peg_pelulus',$id)->get())->make(true); 
+        $permohonans = PermohonanBaru::with('users')
+                            ->where('id_peg_pelulus',$id)
+                            ->orWhere('id_peg_sokong',$id)
+                            ->get();
+        // return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->orWhere('id_peg_pelulus',$id)->get())->make(true); 
+        return datatables()->of($permohonans)->make(true); 
     }
 
     /**

@@ -46,17 +46,15 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>ID Permohonan</th>
+                                        <th></th>
                                         <th>Tarikh Permohonan</th>
                                         <th>Masa Mula</th>
                                         <th>Masa Akhir</th>
                                         <th>Masa</th>
-                                        <th>Hari</th>
-                                        <th>Waktu</th>
-                                        <th>Kadar Jam</th>
                                         <th>Tujuan</th>
+                                        <th>Tindakan</th>
                                         <th></th>
-                                        <th hidden>Status</th>
+                                        {{-- 2 extra th Had to be addded cause they cause prob  --}}
                                         <th hidden></th>
                                         <th hidden></th>
                                     </tr>
@@ -87,7 +85,7 @@
                 </div>
             </div>
         </div>
-    <input id="userID" value="{{auth()->user()->id}}" hidden>
+    <input id="userID" value="{{auth()->user()->CUSTOMERID}}" hidden>
         
         <!-- Footer -->
         @include('layouts.footers.auth')

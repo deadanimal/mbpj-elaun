@@ -51,9 +51,11 @@ class penyeliaController extends Controller
      */
     public function show(Request $request,$id)
     {
-        //
-
-        return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->get())->make(true); 
+        $permohonans = PermohonanBaru::with('users')
+                            ->where('id_peg_sokong',$id)
+                            ->get();
+        // return datatables()->of($this->findPermohonanUser($id)->where('id_peg_sokong',$id)->get())->make(true); 
+        return datatables()->of($permohonans)->make(true); 
     }
 
     /**

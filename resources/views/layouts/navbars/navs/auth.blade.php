@@ -28,7 +28,7 @@
                                 <img alt="Image placeholder" src="{{ asset('argon') }}/img/icons/profile/silhouette.ico">
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
-                                <span class="mb-0 text-sm text-white font-weight-bold">{{ auth()->user()->name }}</span>
+                                <span class="mb-0 text-sm text-white font-weight-bold">{{ auth()->user()->NAME }}</span>
                             </div>
                         </div>
                     </a>
@@ -36,7 +36,7 @@
                         <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">{{ __('Selamat Datang!') }}</h6>
                         </div>
-                        <a href="/{{$temp}}/profile" class="dropdown-item">
+                        <a href="/{{$role}}/profile" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>{{ __('My profile') }}</span>
                         </a>

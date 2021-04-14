@@ -14,6 +14,7 @@ class permohonan_with_users extends Model
         'masa_akhir_sebenar',
         'masa_sebenar_siang',
         'masa_sebenar_malam',
+        'no_kumpulan',
         'jumlah_tuntutan_elaun'
     ];
     protected $attributes = [

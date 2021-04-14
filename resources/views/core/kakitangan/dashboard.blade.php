@@ -65,15 +65,15 @@
                                 </table>
                             </div>
                             <div class="col-12 py-2 my-4 text-center">
-                                <a id="footerDT" href="/{{$temp}}/semakan">Lihat selanjutnya di semakan permohonan</a>
+                                <a id="footerDT" href="/{{$role}}/semakan">Lihat selanjutnya di semakan permohonan</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    <input id="userID" value="{{auth()->user()->id}}" hidden>
-    <input id="type" value="{{$temp}}" hidden>
+    <input id="userID" value="{{auth()->user()->CUSTOMERID}}" hidden>
+    <input id="type" value="{{$role}}" hidden>
 
 
         <!-- Footer -->

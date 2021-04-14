@@ -29,18 +29,9 @@
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-email">{{ __('Jawatan') }}</label>
-                                <input type="email" name="jawatan" id="jawatan-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="" disabled>
-            
-                                @include('alerts.feedback', ['field' => 'email'])
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-
             <div class="row"> 
                 <div class="col-5">
                     <div class="row">
@@ -51,18 +42,6 @@
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
                     </div>
-                    <div class="row">           
-                        <div class="form-row justify-content-end align-items-end">
-                            <div class="col-sm-6">
-                                <label class="form-control-label" for="min">Dari</label>
-                                <input id="min" class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-control-label" for="max">Ke</label>
-                                <input id="max" class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
-                            </div>
-                        </div>         
-                    </div>  
                 </div>
                 <div class="col-7">
                     <div class="row">
@@ -76,7 +55,33 @@
                         </div>
                         <div class="col">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-email">{{ __('Unit') }}</label>
+                                <label class="form-control-label" for="input-email">{{ __('Jawatan') }}</label>
+                                <input type="email" name="jawatan" id="jawatan-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="" disabled>
+            
+                                @include('alerts.feedback', ['field' => 'email'])
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="form-row justify-content-end align-items-end">
+                        <div class="col">
+                            <label class="form-control-label" for="min">Dari</label>
+                            <input id="min" class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                        </div>
+                        <div class="col">
+                            <label class="form-control-label" for="max">Ke</label>
+                            <input id="max" class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                        </div>
+                    </div>         
+                </div>
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
                                 <input type="email" name="bahagian" id="bahagian-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="" disabled>
             
                                 @include('alerts.feedback', ['field' => 'email'])
@@ -84,7 +89,7 @@
                         </div>
                         <div class="col">
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
+                                <label class="form-control-label" for="input-email">{{ __('Jabatan') }}</label>
                                 <input type="email" name="jabatan" id="jabatan-semakan" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" placeholder="" value="" disabled>
             
                                 @include('alerts.feedback', ['field' => 'email'])

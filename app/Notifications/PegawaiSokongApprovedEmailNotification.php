@@ -21,7 +21,7 @@ class PegawaiSokongApprovedEmailNotification extends Notification implements Sho
      */
     public function __construct(User $user)
     {
-        $this->name = $user->name;
+        $this->name = $user->NAME;
     }
 
     /**
