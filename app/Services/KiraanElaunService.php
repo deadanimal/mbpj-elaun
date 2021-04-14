@@ -29,11 +29,11 @@ class KiraanElaunService {
         $this->id_user = $id_user;
         $this->jumlahTuntutanAkhir = 0;
         $this->permohonan = $permohonan;
-        $this->gaji = User::find($id_user)->gaji;
+        $this->gaji = User::find($id_user)->maklumat_pekerjaan->HR_GAJI_POKOK;
         $this->kadarPerJam = floatval($permohonan->kadar_jam);
 
         foreach ($permohonan->users as $user) {
-            if ($user->id == $id_user) {
+            if ($user->CUSTOMERID == $id_user) {
                 $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
                 $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
             }

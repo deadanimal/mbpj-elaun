@@ -77,7 +77,7 @@
                                                             <i class="fas fa-ellipsis-v"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                            @if ($user->id != auth()->id())
+                                                            @if ($user->CUSTOMERID != auth()->id())
                                                                 @can('update', $user)
                                                                     <a class="dropdown-item" href="{{ route('user.edit', $user) }}">{{ __('Edit') }}</a>
                                                                 @endcan

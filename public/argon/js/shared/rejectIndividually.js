@@ -22,6 +22,7 @@ function rejectIndividually(id_permohonan_baru, id_user, name_user) {
                 },
                 error: function() { console.log('FAIL REJECT'); } 
             });
+            
           } else if (result.isDenied) { Swal.fire('', '', 'info') }        
       })
 }

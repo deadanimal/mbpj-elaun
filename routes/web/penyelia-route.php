@@ -80,10 +80,13 @@ Route::group([
 	Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['destroy']]);
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
 	Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
+	Route::resource('penyelia-on-call','penyelia\senaraiOnCallController', ['except' => ['destroy']]);
 
 	Route::resource('/bantuan/aduan', 'AduanController' );
 	
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
+	Route::post('/tambah-on-call/{id}', 'UserController@addToOnCall' );
+	Route::post('/batal-on-call/{id}', 'UserController@removeFromOnCall' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
 	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );

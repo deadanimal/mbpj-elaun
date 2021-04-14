@@ -61,7 +61,9 @@ function showUser() {
             type: 'GET',
             url: 'user/semakan-pekerja/' + id,
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.name);
+                $("#formOTEL input[name=nama]").val(data.users.NAME);
+                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
                 $('input').css('color', 'black')
             },
             error: function(data) { console.log(data); }
@@ -73,10 +75,9 @@ function showDatatable(pilihan){
     var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
-    if(id_user == ''){
-        id_user = 'noID';
-    }
-                var semakanPYDT = $('#semakanPYDT').DataTable({
+    if(id_user == ''){ id_user = 'noID'; }
+
+    var semakanPYDT = $('#semakanPYDT').DataTable({
                 dom: 'lrtip',
                 destroy: true,
                 processing: true,
@@ -85,7 +86,15 @@ function showDatatable(pilihan){
                     paginate: {
                         previous: "<",
                         next: ">"
-                    }
+                    },
+                    lengthMenu:     "Tunjuk _MENU_ rekod",
+                    search: "Carian:",
+                    zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+                    emptyTable:     "Tiada rekod",
+                    info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+                    infoEmpty:      "0 ke 0 daripada 0 rekod",
+                    infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+                    processing:     "Dalam proses...",
                 },
                 serverSide: true,
             ajax: {
@@ -96,7 +105,6 @@ function showDatatable(pilihan){
                 }
             },
                 columns: [
-
                     {data: null},
                     {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                     {data: 'created_at'},
@@ -109,17 +117,17 @@ function showDatatable(pilihan){
                 ],  
                 columnDefs: [
                     {
+                        targets: [0],
                         searchable: false,
-                        orderable: false,
-                        targets: 0
+                        orderable: false
                     },
                     {
-                        targets: 1,
+                        targets: [1],
                         visible: false,
                         searchable: true
                     },
                     {
-                        targets: 2,
+                        targets: [2],
                         type: "date",
                         render: function(data,type,row){
                             formattedDate = moment(data).format("DD/MM/YYYY")
@@ -127,7 +135,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 7,
+                        targets: [7],
                         mRender: function(data,type,row){
                             if(id_user != "noID"){
                                 counter++;
@@ -139,7 +147,7 @@ function showDatatable(pilihan){
                             } 
                             else {
                                 counter++;
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].id+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                                 var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+"'"+pilihan+"'"+');" value=""></i>' 
                                 var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                                 var allButton = button1 + button2 + button3;
@@ -148,7 +156,7 @@ function showDatatable(pilihan){
                         }
                     },
                     {
-                        targets: 8,
+                        targets: [8],
                         visible: false,
                         searchable: true
                     }

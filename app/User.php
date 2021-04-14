@@ -5,8 +5,10 @@ namespace App;
 use App\Aduan;
 use App\Catatan;
 use App\Jabatan;
+use App\Jawatan;
 use App\eKedatangan;
 use App\PermohonanBaru;
+use App\MaklumatPekerjaan;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,19 +17,25 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'CUSTOMERID';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 
-        'email', 
-        'password', 
-        'gaji',
-        'picture',
+        'USERID',
+        'USERNAME', 
+        'DEPARTMENTCODE', 
+        'NIRC', 
+        'NAME',
+        'MOBILE_PHONE',
+        'email',
         'role_id',
-        'GE_KOD_JABATAN'
+        'is_oncall',
+        'password'
     ];
 
     /**
@@ -125,13 +133,14 @@ class User extends Authenticatable
 
     public function permohonans()
     {
-        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'id', 'id_permohonan_baru')
+        return $this->belongsToMany(PermohonanBaru::class, 'permohonan_with_users', 'CUSTOMERID', 'id_permohonan_baru')
                     ->withPivot(
                         'masa_mula_sebenar',
                         'masa_akhir_sebenar',
                         'is_rejected_individually',
                         'masa_sebenar_siang',
                         'masa_sebenar_malam',
+                        'no_kumpulan',
                         'jumlah_tuntutan_elaun'
                         )
                     ->withTimestamps()
@@ -140,21 +149,25 @@ class User extends Authenticatable
 
     public function ekedatangan()
     {
-        return $this->hasOne(eKedatangan::class, 'id_user', 'id');
+        return $this->hasOne(eKedatangan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
     public function catatans()
     {
-        return $this->hasMany(Catatan::class, 'id_user', 'id');
+        return $this->hasMany(Catatan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
     public function aduans()
     {
-        return $this->hasMany(Aduan::class, 'id_user', 'id');
+        return $this->hasMany(Aduan::class, 'CUSTOMERID', 'CUSTOMERID');
     }
 
-    public function jabatan()
+    // public function maklumat_pekerjaan()
+    // {
+    //     return $this->hasOne(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
+    // }
+    public function maklumat_pekerjaan()
     {
-        return $this->belongsTo(Jabatan::class, 'GE_KOD_JABATAN', 'GE_KOD_JABATAN');
+        return $this->belongsTo(MaklumatPekerjaan::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
     }
 }
