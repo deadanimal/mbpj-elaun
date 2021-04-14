@@ -90,8 +90,6 @@ class PermohonanBaruController extends Controller
         };
 
         $user = User::with('maklumat_pekerjaan')->find($id_user);
-        dd($user->maklumat_pekerjaan->HR_GAJI_POKOK);
-        dd($user);
 
         return response()->json([
             'error' => false,
