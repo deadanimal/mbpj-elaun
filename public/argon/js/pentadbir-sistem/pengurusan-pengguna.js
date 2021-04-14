@@ -16,47 +16,54 @@ var selectRole = [
 ];
 
  
-var table = $('#pengurusanDT').DataTable({
-    dom: 'lrtip',
-    responsive:true,
+var pengurusanDT = $('#pengurusanDT').DataTable({
+    dom: 'flrtip',
+    responsive:false,
     autoWidth:false,
-    processing: true,
-    serverSide: false,
-    lengthMenu: [ 5, 10, 25, 50 ],
-
+    processing: false,
+    serverSide: true,
+    lengthMenu: [ 20, 50, 100 ],
+    language: {
+        paginate: {
+            previous: "<",
+            next: ">"
+        },
+        lengthMenu:     "Tunjuk _MENU_ rekod",
+        search: "Carian:",
+        zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+        emptyTable:     "Tiada rekod",
+        info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+        infoEmpty:      "0 ke 0 daripada 0 rekod",
+        infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+        processing:     "Dalam proses...",
+    },
     ajax: {
         url: "pengurusan-pengguna",
         type: 'GET',
         },
 
     columns: [
-
-        {data: 'id', name: 'id'},
-
-        {data: 'name', name: 'name'},
-
-        {data: 'created_at', name: 'created_at'},
-        
-        {data: 'role_id', name: 'role_id'},
-        
-        {data: 'email', name: 'email'},
-        
-        {data: 'status', name: 'status'},
-
         {data: null, name: null},
-
-       
+        {data: 'CUSTOMERID', name: 'CUSTOMERID'},
+        {data: 'NAME', name: 'NAME'},
+        // {data: 'created_at', name: 'created_at'},
+        {data: 'role_id', name: 'role_id'},
+        {data: 'email', name: 'email'},
+        {data: 'status', name: 'status'},
+        {data: null, name: null},
     ],
     columnDefs:[
         
+        // {
+        //     targets:3, 
+        //     render:function(data){
+        //         return moment(data).format('DD/MM/YYYY');
+        //     }
+        // },
         {
-        targets:2, render:function(data){
-            console.log(data)
-            return moment(data).format('DD/MM/YYYY');
-        }},
-        {
-        type: "html-input",
-        targets:3, render:function(data,type,row){
+            type: "html-input",
+            targets: 3, 
+            render:function(data,type,row){
             var role;
             if(type == 'display' || row != null){
                 if(data == 1){
@@ -102,15 +109,14 @@ var table = $('#pengurusanDT').DataTable({
                 }
                 $select.append($option);
             });
-            console.log(role)
             return $select.prop("outerHTML");
 
         }},
-        {
-        targets: 4, render:function(data,type,row){
-            return "<span class='text-primary'>"+data+"</span>";
-        }
-        },
+            // {
+            // targets: 5, render:function(data,type,row){
+            //     return "<span class='text-primary'>"+data+"</span>";
+            // }
+            // },
         {
         type: "html-input",
         targets:5, render:function(data,type,row){
@@ -159,27 +165,34 @@ var table = $('#pengurusanDT').DataTable({
         {
         targets: 6,
             render: function(data,type,row){
-            console.log(data.id);
-            var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="editKemaskiniForm('+data.id+')" data-target=""  >Kemaskini</button>' 
+            var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="editKemaskiniForm('+data.CUSTOMERID+')" data-target=""  >Kemaskini</button>' 
             return button1;
         }}
     ],
 
 });
 
+
+pengurusanDT.on('draw.dt', function () {
+    var info = pengurusanDT.page.info();
+    pengurusanDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+        cell.innerHTML = i + 1 + info.start;
+    });
+});
+
 $.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
     return $(value).val();
 };
 
-$('#carianPengguna').on( 'keyup click', function () {
-    filter();
-} );
+// $('#carianPengguna').on( 'keyup click', function () {
+//     filter();
+// } );
 
-function filter() {
-    $('#pengurusanDT').DataTable().search(
-        $('#carianPengguna').val()
-    ).draw();
-}
+// function filter() {
+//     $('#pengurusanDT').DataTable().search(
+//         $('#carianPengguna').val()
+//     ).draw();
+// }
 
 // $("#datatable td select").on('change', function() {
 //     var $td = $(this).parent();

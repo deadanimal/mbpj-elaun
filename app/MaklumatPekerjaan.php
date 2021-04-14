@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Jawatan;
 use Illuminate\Database\Eloquent\Model;
+use App\Jabatan;
 
 class MaklumatPekerjaan extends Model
 {
@@ -28,5 +29,10 @@ class MaklumatPekerjaan extends Model
     public function jawatan()
     {
         return $this->belongsTo(Jawatan::class, 'HR_KOD_JAWATAN', 'HR_JAWATAN');
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class, 'HR_JABATAN', 'GE_KOD_JABATAN');
     }
 }

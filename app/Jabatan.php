@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\MaklumatPekerjaan;
 use Illuminate\Database\Eloquent\Model;
 
 class Jabatan extends Model
@@ -14,5 +15,10 @@ class Jabatan extends Model
     public function users()
     {
         return $this->hasMany(User::class, 'CUSTOMERID', 'CUSTOMERID');
+    }
+
+    public function maklumatUsers()
+    {
+        return $this->hasMany(MaklumatPekerjaan::class, 'HR_JABATAN', 'GE_KOD_JABATAN');
     }
 }

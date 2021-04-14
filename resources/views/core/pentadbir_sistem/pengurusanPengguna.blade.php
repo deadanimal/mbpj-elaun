@@ -5,7 +5,6 @@
 
 @section('content') 
     @component('layouts.headers.auth') 
-    @if(Auth::user()->role_id != '1'  )
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
                 {{ __('Default') }} 
@@ -14,18 +13,7 @@
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
-        @include('layouts.headers.cards') 
-    @elseif(Auth::user()->role_id == '1'  )
-    @component('layouts.headers.breadcrumbs')
-            @slot('title') 
-                {{ __('Default') }} 
-            @endslot
-
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
-        @endcomponent
-        @include('layouts.headers.cards') 
-    @endif
+        {{-- @include('layouts.headers.cards')  --}}
     @endcomponent
 
     
@@ -38,23 +26,33 @@
                             <div class="col-6">
                                 <h2>Pengurusan Pengguna</h2>
                             </div>
-                            <div class="col-6 content-end">
+                            {{-- <div class="col-6 content-end">
                                 <input type="text" class="form-control form-control-sm rounded-pill" id="carianPengguna" placeholder="Carian">
-                            </div>
+                            </div> --}}
                         </div>
+                        <select id="selectJabatan" class="form-select form-select-sm col-4" aria-label=".form-select-sm example">
+                            <option selected value="out">Pilih Jabatan</option>
+                            @foreach ( $jabatans as $jabatan)
+                                {{-- exclude Datuk Bandar --}}
+                                @if ($jabatan->GE_KETERANGAN_JABATAN != 'DATUK BANDAR')
+                                    <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table class="table table-flush" id="pengurusanDT">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No.</th>
+                                        <th>No. Pekerja</th>
                                         <th>Name</th>
-                                        <th>Tarikh Daftar</th>
-                                        <th>Jenis</th>
+                                        {{-- <th>Tarikh Daftar</th> --}}
+                                        <th>Peranan</th>
                                         <th>Emel</th>
                                         <th>Status</th>
-                                        <th></th>
+                                        <th>Tindakan</th>
                                     </tr>
                                 </thead>
                                 <tbody>

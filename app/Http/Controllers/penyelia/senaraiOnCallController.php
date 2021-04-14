@@ -4,6 +4,7 @@ namespace App\Http\Controllers\penyelia;
 
 use App\User;
 use DataTables;
+use App\MaklumatPekerjaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,10 @@ class senaraiOnCallController extends Controller
      */
     public function index()
     {
-        return view('core.penyelia.senaraiOnCall');
+        $maklumatUser = MaklumatPekerjaan::find(Auth::id());
+        $jabatan = $maklumatUser->jabatan->GE_KETERANGAN_JABATAN;
+
+        return view('core.penyelia.senaraiOnCall')->with('jabatan', $jabatan);
     }
 
     /**

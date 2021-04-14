@@ -16,13 +16,8 @@ class pengurusanPenggunaController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return datatables()->of(User::select('*'))
-
-            ->make(true);
+            return datatables()->of(User::all())->make(true);
         }
-        
-        //
-        // $User = User::orderBy('id','asc')->get();
 
         return view('core.pentadbir_sistem.pengurusanPengguna');
     }
