@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request; 
 use App\permohonan_with_users;
 use App\Services\KiraanElaunService;
+use App\Services\KiraanMasaService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Events\PermohonanStatusChangedEvent;
@@ -142,5 +143,39 @@ class PermohonanBaruController extends Controller
                                 ));
             }
         }
+    }
+
+    public function saveMasaSebenar(Request $request){
+        // $masaSebenar;
+        $jenisPermohonan = array('PS1', 'PS2');
+        $idPermohananBaru = $request->input('id_permohonan_baru');
+        $waktuKeluar = $request->input('waktuKeluar');
+        $waktuMasuk = $request->input('waktuMasuk');
+        $mulaKerja = $request->input('mulaKerja');
+        $akhirKerja = $request->input('akhirKerja');
+        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $sahP2 = $permohonan->progres == 'Sah P2' ? TRUE : FALSE;
+
+        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP2) {
+            $tuntutan = ($permohonan->users)->filter(function($user) {
+                return $user->permohonan_with_users->is_rejected_individually != 1;
+            })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
+                
+                // dd($permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
+                $masa = new KiraanMasaService($permohonan, $user->id,$permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
+                $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
+                print_r($masaSebenar);
+                $permohonan->update(['masa' => $masaSebenar["masa"]]);
+                $permohonan->users()
+                            ->updateExistingPivot($user->id, array(
+                                'masa_sebenar_siang' => $masaSebenar["Siang"],
+                                'masa_sebenar_malam' => $masaSebenar["Malam"]),
+                                false);
+            })->map(function ($user)  use ($permohonan){
+                return $user->permohonan_with_users
+                            ->masa_sebenar_siang;
+            });
+        }
+
     }
 }

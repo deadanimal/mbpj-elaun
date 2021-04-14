@@ -102,18 +102,12 @@ class semakanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        // totalShiftSiang for shiftSiang
-        // totalShiftMalam for shiftMalam
-
-        dd(request()->input('totalShiftMalam')," and ",request()->input('totalShiftSiang'));
         $permohonan = PermohonanBaru::find($id);
         $validator = Validator::make($request->all(), [ 
                 
             'object.tarikh_permohonan' => 'required',
             'object.masa_mula' => 'required',
             'object.masa_akhir' => 'required',
-            'object.masa'   => 'required',
             'object.waktu'  => 'required',
             'object.tujuan' => 'required',
 
@@ -129,7 +123,6 @@ class semakanController extends Controller
         $permohonan->tarikh_akhir_kerja = $request->input('object.tarikh_akhir_kerja');
         $permohonan->masa_mula = $request->input('object.masa_mula');
         $permohonan->masa_akhir = $request->input('object.masa_akhir');
-        $permohonan->masa = $request->input('object.masa');
         $permohonan->waktu = $request->input('object.waktu');
         $permohonan->tujuan = $request->input('object.tujuan');
 

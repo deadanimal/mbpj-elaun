@@ -50,7 +50,7 @@ Route::group([
 	Route::resource('/laporan','kakitangan\laporanController',['except' => ['show','destroy']]);
 	Route::resource('/permohonan-baru','kakitangan\permohonanController',['except' => ['show','store']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
-		Route::get('/show/{user_id}', [
+		Route::get('/get-permohonan/{user_id}', [
 			'uses' => 'kakitangan\permohonanController@show',
 			'as'   => 'permohonan-baru.show',
 		]);
@@ -70,7 +70,7 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as' => 'permohonan-baru.destroy',
 		]);
-		Route::get('/pegawai',[
+		Route::post('/pegawai',[
 			'uses' 	=> 'kakitangan\permohonanController@pegawai',
 			'as'	=> 'permohonan-baru.pegawai',
 		]);
@@ -89,6 +89,7 @@ Route::group([
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );
+	Route::put('/semakan/masa-sebenar/{id}', 'PermohonanBaruController@saveMasaSebenar' );
 	Route::get('/tuntutan-elaun/{id}', 'PermohonanBaruController@findGajiElaun' );
 	Route::put('/permohonan-baru/kemaskini/{id}', 'PermohonanBaruController@kemaskiniModal' );
 	Route::get('/masa-sebenar/{id}', 'PermohonanBaruController@retrieveMasaSebenar');
