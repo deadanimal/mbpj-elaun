@@ -1,8 +1,6 @@
 function kemaskiniPengguna(userID ,name,  counter) {
     var role = $('#role'+counter).val();
     var is_active = $('#is_active'+counter).val();
-    console.log({role});
-    console.log({is_active});
     
     Swal.fire({
         icon: 'info',

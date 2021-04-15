@@ -7,13 +7,13 @@
     @component('layouts.headers.auth') 
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
-                {{ __('Default') }} 
+                {{-- {{ __('Default') }}  --}}
+                {{ __('Pengurusan Pengguna') }} 
             @endslot
 
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
-        {{-- @include('layouts.headers.cards')  --}}
     @endcomponent
 
     
@@ -23,11 +23,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row ">
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <h2>Pengurusan Pengguna</h2>
-                            </div>
+                            </div> --}}
                         </div>
-                        <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-4" aria-label=".form-select-sm example">
+                        <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-5" aria-label=".form-select-sm example">
                             <option selected value="out">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
                                 <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
