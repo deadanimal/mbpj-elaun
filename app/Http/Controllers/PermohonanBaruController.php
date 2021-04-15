@@ -174,12 +174,12 @@ class PermohonanBaruController extends Controller
             })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
                 
                 // dd($permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
-                $masa = new KiraanMasaService($permohonan, $user->id,$permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
+                $masa = new KiraanMasaService($permohonan, $user->CUSTOMERID,$permohonan->users->find($user->CUSTOMERID)->permohonan_with_users->id_permohonan_baru);
                 $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
-                print_r($masaSebenar);
+                // print_r($masaSebenar);
                 $permohonan->update(['masa' => $masaSebenar["masa"]]);
                 $permohonan->users()
-                            ->updateExistingPivot($user->id, array(
+                            ->updateExistingPivot($user->CUSTOMERID, array(
                                 'masa_sebenar_siang' => $masaSebenar["Siang"],
                                 'masa_sebenar_malam' => $masaSebenar["Malam"]),
                                 false);

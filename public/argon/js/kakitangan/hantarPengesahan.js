@@ -16,8 +16,8 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
         },
         success: function(data) {
             console.log(data.permohonan.tarikh_mula_kerja);
-            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'DD / MM / YYYY').format('DD / MM / YYYY')
-            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'DD / MM / YYYY').format('DD / MM / YYYY')
+            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'YYYY-MM-DD').format('DD/MM/YYYY')
+            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'YYYY-MM-DD').format('DD/MM/YYYY')
             $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
             $("#borangB1Modal input[name=tarikhKerjaAkhir]").val(tarikhAkhir);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
@@ -77,7 +77,7 @@ function deletePermohonan(id_permohonan_baru){
 
 function hantarPengesahan(){
     var id_user = document.querySelector("#nopekerja").value;
-    var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"D/M/YYYY").format("D/M/YYYY",true);
+    var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD/MM/YYYY").format("DD/MM/YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
     var masaAkhir = $("#borangB1Modal input[name=masaAkhir]").val();
@@ -101,7 +101,7 @@ function hantarPengesahan(){
         jenis_permohonan:jenisPermohonanReal,
         
     }
-    
+    saveMasa(id_user,id_permohonan_baru);
     $.ajax({
         url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
         type: 'put', 
@@ -110,7 +110,7 @@ function hantarPengesahan(){
             object : object,
         },
         success: function(data) {
-            saveMasa(id_user,id_permohonan_baru);
+            
             $("#borangB1Modal").modal("hide");
             Swal.fire(  
                 'Dihantar untuk Pengesahan!',
@@ -168,6 +168,7 @@ function saveMasa(id_user,id_permohonan_baru){
         },
         error: function(data) {
             console.log(data);
+            return 0;
         } 
     })
 }
