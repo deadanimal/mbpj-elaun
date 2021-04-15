@@ -23,10 +23,8 @@ Route::group([
 			'as'   => 'permohonan-baru.show',
 		]);
 	});
-	// Route::resource('penyelia-dashboard','penyelia\penyeliaController',['except' => ['show','destroy']]);
-	// Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['show','destroy']]);
-	// Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
-	// Route::resource('penyelia-bantuan','penyelia\bantuanController',['except' => ['show','destroy']]);
+
+	Route::put('/kemaskini-pengguna/{id}', 'UserController@kemaskiniPenggunaAdmin' );
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::get('profile/{link}',function(){

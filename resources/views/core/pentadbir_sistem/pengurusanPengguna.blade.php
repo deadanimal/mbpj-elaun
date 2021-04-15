@@ -26,9 +26,6 @@
                             <div class="col-6">
                                 <h2>Pengurusan Pengguna</h2>
                             </div>
-                            {{-- <div class="col-6 content-end">
-                                <input type="text" class="form-control form-control-sm rounded-pill" id="carianPengguna" placeholder="Carian">
-                            </div> --}}
                         </div>
                         <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-4" aria-label=".form-select-sm example">
                             <option selected value="out">Pilih Jabatan</option>
@@ -87,5 +84,5 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <script src="{{ asset('argon') }}/js/pentadbir-sistem/pengurusan-pengguna.js"></script>
-
+    <script src="{{ asset('argon') }}/js/pentadbir-sistem/kemaskini-pengguna.js"></script>
 @endpush

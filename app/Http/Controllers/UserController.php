@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,6 +26,19 @@ class UserController extends Controller
         $this->authorize('manage-users', User::class);
 
         return view('users.index', ['users' => $model->with('role')->get()]);
+    }
+
+    public function kemaskiniPenggunaAdmin(Request $request, $userId)
+    {
+        $role = $request->input('role');
+        $is_active = $request->input('is_active');
+
+        $user = User::find($userId);
+        $user->role_id = $role;
+        $user->is_active = $is_active;
+
+        $user->save();
+        $user->refresh();
     }
 
     public function addToOnCall($id)
