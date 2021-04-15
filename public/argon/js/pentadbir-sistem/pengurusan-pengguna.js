@@ -15,7 +15,6 @@ var selectRole = [
     "Pelulus Pindaan"
 ];
 
- 
 var pengurusanDT = $('#pengurusanDT').DataTable({
     dom: 'flrtip',
     responsive:false,
@@ -41,16 +40,16 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
         url: "pengurusan-pengguna",
         type: 'GET',
         },
-
     columns: [
         {data: null, name: null},
         {data: 'CUSTOMERID', name: 'CUSTOMERID'},
         {data: 'NAME', name: 'NAME'},
         // {data: 'created_at', name: 'created_at'},
         {data: 'role_id', name: 'role_id'},
-        {data: 'email', name: 'email'},
+        // {data: 'email', name: 'email'},
         {data: 'status', name: 'status'},
         {data: null, name: null},
+        {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
     ],
     columnDefs:[
         
@@ -61,7 +60,8 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
         //     }
         // },
         {
-            targets: [2],
+            type: "html-input",
+            targets: [1],
             mRender: function(data,type,row){
                 return data.toString().padStart(5, "0");
             } 
@@ -101,7 +101,7 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
 
                 }
             }
-            var $select = $("<select></select>", {
+            var $select = $("<select class='form-select form-select-sm'></select>", {
                 "id": row[0]+"start",
                 "value": role
             });
@@ -125,12 +125,12 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
             // },
         {
         type: "html-input",
-        targets:5, render:function(data,type,row){
+        targets: 4, render:function(data,type,row){
             var status;
             if(type == 'display' || row != null){
                 if(data == 01){
                     status = 'Enabled';
-                    var $select = $("<select></select>", {
+                    var $select = $("<select class='form-select form-select-sm'></select>", {
                     	"id": row[0]+"start",
                         "value": status
                     });
@@ -148,7 +148,7 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
 
                 }else if(data == 00){
                     status = 'Disabled';
-                    var $select = $("<select></select>", {
+                    var $select = $("<select class='form-select form-select-sm'></select>", {
                     	"id": row[0]+"start",
                         "value": status
                     });
@@ -169,15 +169,19 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
 
         }},
         {
-        targets: 6,
+        targets: 5,
             render: function(data,type,row){
-            var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="editKemaskiniForm('+data.CUSTOMERID+')" data-target=""  >Kemaskini</button>' 
+            var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="kemaskiniPengguna('+data.CUSTOMERID+')" data-target=""  >Kemaskini</button>' 
             return button1;
-        }}
+        }},
+        {
+            targets: 6,
+            visible: false,
+            searchable: true
+        }
     ],
 
 });
-
 
 pengurusanDT.on('draw.dt', function () {
     var info = pengurusanDT.page.info();
@@ -186,19 +190,46 @@ pengurusanDT.on('draw.dt', function () {
     });
 });
 
+
+
+
+$.fn.dataTable.ext.search.push(
+    function (settings, data, dataIndex) {
+        $.each(settings.aoColumns, function (i, col) {
+            if (col.type == "CUSTOMERID") {
+                return data[i]; 
+            }
+        });
+});
+
 $.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
-    return $(value).val();
+        return $(value).val();
 };
 
-// $('#carianPengguna').on( 'keyup click', function () {
-//     filter();
-// } );
+function filter() {
+    $('#pengurusanDT').DataTable().search(
+        $('#carianPengguna').val()
+    ).draw();
+}
 
-// function filter() {
-//     $('#pengurusanDT').DataTable().search(
-//         $('#carianPengguna').val()
-//     ).draw();
-// }
+$('#carianPengguna').on( 'keyup click', function () {
+    filter();
+});
+
+function filter() {
+    $('#pengurusanDT').DataTable().search(
+        $('#carianPengguna').val()
+    ).draw();
+}
+
+function optionJabatan() {
+    var jabatan = document.querySelector("#selectJabatan").value; 
+    
+    // filter search result by jabatan
+    $('#pengurusanDT').DataTable().columns(1).search(    
+        jabatan 
+    ).draw();
+}
 
 // $("#datatable td select").on('change', function() {
 //     var $td = $(this).parent();

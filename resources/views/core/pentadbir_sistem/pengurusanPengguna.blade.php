@@ -30,13 +30,10 @@
                                 <input type="text" class="form-control form-control-sm rounded-pill" id="carianPengguna" placeholder="Carian">
                             </div> --}}
                         </div>
-                        <select id="selectJabatan" class="form-select form-select-sm col-4" aria-label=".form-select-sm example">
+                        <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-4" aria-label=".form-select-sm example">
                             <option selected value="out">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
-                                {{-- exclude Datuk Bandar --}}
-                                @if ($jabatan->GE_KETERANGAN_JABATAN != 'DATUK BANDAR')
-                                    <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
-                                @endif
+                                <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -50,7 +47,7 @@
                                         <th>Name</th>
                                         {{-- <th>Tarikh Daftar</th> --}}
                                         <th>Peranan</th>
-                                        <th>Emel</th>
+                                        {{-- <th>Emel</th> --}}
                                         <th>Status</th>
                                         <th>Tindakan</th>
                                     </tr>

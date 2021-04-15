@@ -16,7 +16,7 @@ class pengurusanPenggunaController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            return datatables()->of(User::all())->make(true);
+            return datatables()->of(User::with('maklumat_pekerjaan')->get())->make(true);
         }
 
         return view('core.pentadbir_sistem.pengurusanPengguna');
