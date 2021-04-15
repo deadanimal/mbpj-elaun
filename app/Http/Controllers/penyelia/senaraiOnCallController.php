@@ -18,10 +18,8 @@ class senaraiOnCallController extends Controller
      */
     public function index()
     {
-        $maklumatUser = MaklumatPekerjaan::find(Auth::id());
-        $jabatan = $maklumatUser->jabatan->GE_KETERANGAN_JABATAN;
-
-        return view('core.penyelia.senaraiOnCall')->with('jabatan', $jabatan);
+        return view('core.penyelia.senaraiOnCall')
+                    ->with('jabatan', MaklumatPekerjaan::find(Auth::id())->jabatan->GE_KETERANGAN_JABATAN);
     }
 
     /**
@@ -53,11 +51,19 @@ class senaraiOnCallController extends Controller
      */
     public function show(Request $request,$id)
     {
-        $authUser = User::find(Auth::id());
-        $users = User::with('role')
-                        ->where('GE_KOD_JABATAN', $authUser->GE_KOD_JABATAN)
-                        ->get();
-        return datatables()->of($users)->make(true); 
+        $arrayUsers = array();
+        $jabatanAuthUser = MaklumatPekerjaan::find(Auth::id())->HR_JABATAN;
+
+        $users = User::with(['role', 'maklumat_pekerjaan'])->get();
+
+        $usersInJabatan = $users->filter(function ($user) use ($jabatanAuthUser) {
+                            $jabatanUser = $user->maklumat_pekerjaan->HR_JABATAN;
+                            if ($jabatanUser == $jabatanAuthUser) {
+                                return $user;
+                            }
+                        });
+
+        return datatables()->of($usersInJabatan->all())->make(true); 
     }
 
     /**

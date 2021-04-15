@@ -23,7 +23,7 @@ class MaklumatPekerjaan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'CUSTOMERID', 'HR_NO_PEKERJA');
+        return $this->belongsTo(User::class, 'HR_NO_PEKERJA', 'CUSTOMERID');
     }
 
     public function jawatan()

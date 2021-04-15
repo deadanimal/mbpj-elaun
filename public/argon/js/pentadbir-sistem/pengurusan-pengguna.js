@@ -61,6 +61,12 @@ var pengurusanDT = $('#pengurusanDT').DataTable({
         //     }
         // },
         {
+            targets: [2],
+            mRender: function(data,type,row){
+                return data.toString().padStart(5, "0");
+            } 
+        },
+        {
             type: "html-input",
             targets: 3, 
             render:function(data,type,row){

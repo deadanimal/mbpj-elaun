@@ -12,12 +12,7 @@ class Jabatan extends Model
     protected $primaryKey = 'GE_KOD_JABATAN';
     public $incrementing = false;
 
-    public function users()
-    {
-        return $this->hasMany(User::class, 'CUSTOMERID', 'CUSTOMERID');
-    }
-
-    public function maklumatUsers()
+    public function maklumatPekerjaans()
     {
         return $this->hasMany(MaklumatPekerjaan::class, 'HR_JABATAN', 'GE_KOD_JABATAN');
     }

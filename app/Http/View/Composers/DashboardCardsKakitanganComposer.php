@@ -43,7 +43,9 @@ class DashboardCardsKakitanganComposer
     public function kiraJumlahTuntutanMengikutStatusAkhir($permohonans_users, $status_akhir)
     {
         $tuntutanDiluluskanKT = $permohonans_users->filter(function ($permohonan) use ($status_akhir){
-            if ($permohonan->status_akhir ==  $status_akhir) return $permohonan; 
+            if ($permohonan->status_akhir ==  $status_akhir) {
+                return $permohonan; 
+            }
         });
 
         return $jumlahTuntutanDiluluskanKT = $tuntutanDiluluskanKT->map(function ($permohonan) {
