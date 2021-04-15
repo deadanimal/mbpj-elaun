@@ -15,8 +15,13 @@ class pengurusanPenggunaController extends Controller
      */
     public function index()
     {
+        $users = User::with('maklumat_pekerjaan')->get();
+        $userWithPaddedCustomerID = $users->map(function($user) {
+                                            $user->CUSTOMERID = sprintf('%05d', $user->CUSTOMERID);
+                                            return $user;
+                                        });
         if(request()->ajax()) {
-            return datatables()->of(User::with('maklumat_pekerjaan')->get())->make(true);
+            return datatables()->of($userWithPaddedCustomerID)->make(true);
         }
 
         return view('core.pentadbir_sistem.pengurusanPengguna');

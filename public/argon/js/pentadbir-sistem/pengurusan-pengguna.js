@@ -61,13 +61,13 @@ function showPengurusanPengguna(){
             {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
         ],
         columnDefs:[
-            {
-                type: "html-input",
-                targets: 1,
-                mRender: function(data,type,row){
-                    return data.toString().padStart(5, "0");
-                } 
-            },
+            // {
+            //     type: "html-input",
+            //     targets: 1,
+            //     mRender: function(data,type,row){
+            //         return data.toString().padStart(5, "0");
+            //     } 
+            // },
             {
                 type: "html-input",
                 targets: 3, 
@@ -212,12 +212,12 @@ function optionJabatan() {
     }
 }
 
-// $("#datatable td select").on('change', function() {
-//     var $td = $(this).parent();
-//     var value = this.value;
-//     $td.find('option').each(function(i, o) {
-//       $(o).removeAttr('selected');
-//       if ($(o).val() == value) $(o).attr('selected', true);
-//     })
-//     table.cell($td).invalidate().draw();
-// });    
+$("#datatable td select").on('change', function() {
+    var $td = $(this).parent();
+    var value = this.value;
+    $td.find('option').each(function(i, o) {
+      $(o).removeAttr('selected');
+      if ($(o).val() == value) $(o).attr('selected', true);
+    })
+    table.cell($td).invalidate().draw();
+});    
