@@ -61,6 +61,9 @@ class senaraiOnCallController extends Controller
                             if ($jabatanUser == $jabatanAuthUser) {
                                 return $user;
                             }
+                        })->map(function ($user) {
+                            $user->CUSTOMERID = sprintf('%05d', $user->CUSTOMERID);
+                            return $user;
                         });
 
         return datatables()->of($usersInJabatan->all())->make(true); 
