@@ -8,7 +8,7 @@ $(document).ready(function(){
 }) 
 
 function showAllUser(){
-    var id_user = $('#userID').val()
+    var id_user = $('#userID').val();
     var senaraiOnCallDT = $('#senaraiOnCallDT').DataTable({
                 dom: 'flrtip',
                 destroy: true,
@@ -44,12 +44,6 @@ function showAllUser(){
                     {data: null},
                 ],  
                 columnDefs: [
-                    // {
-                    //     targets: [1],
-                    //     mRender: function(data,type,row){
-                    //         return data.toString().padStart(5, "0");
-                    //     } 
-                    // },
                     {
                         targets: [5],
                         mRender: function(data,type,row){

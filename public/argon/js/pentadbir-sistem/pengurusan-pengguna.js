@@ -61,13 +61,6 @@ function showPengurusanPengguna(){
             {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
         ],
         columnDefs:[
-            // {
-            //     type: "html-input",
-            //     targets: 1,
-            //     mRender: function(data,type,row){
-            //         return data.toString().padStart(5, "0");
-            //     } 
-            // },
             {
                 type: "html-input",
                 targets: 3, 
@@ -179,26 +172,6 @@ function showPengurusanPengguna(){
     });
 }
 
-$.fn.dataTableExt.ofnSearch['html-input'] = function(value) {
-        return $(value).val();
-};
-
-function filter() {
-    $('#pengurusanDT').DataTable().search(
-        $('#carianPengguna').val()
-    ).draw();
-}
-
-$('#carianPengguna').on( 'keyup click', function () {
-    filter();
-});
-
-function filter() {
-    $('#pengurusanDT').DataTable().search(
-        $('#carianPengguna').val()
-    ).draw();
-}
-
 function optionJabatan() {
     var jabatan = document.querySelector("#selectJabatan").value; 
     
@@ -211,13 +184,4 @@ function optionJabatan() {
         ).draw();
     }
 }
-
-$("#datatable td select").on('change', function() {
-    var $td = $(this).parent();
-    var value = this.value;
-    $td.find('option').each(function(i, o) {
-      $(o).removeAttr('selected');
-      if ($(o).val() == value) $(o).attr('selected', true);
-    })
-    table.cell($td).invalidate().draw();
-});    
+   

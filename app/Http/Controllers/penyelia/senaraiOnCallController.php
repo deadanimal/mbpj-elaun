@@ -53,7 +53,6 @@ class senaraiOnCallController extends Controller
     {
         $arrayUsers = array();
         $jabatanAuthUser = MaklumatPekerjaan::find(Auth::id())->HR_JABATAN;
-
         $users = User::with(['role', 'maklumat_pekerjaan'])->get();
 
         $usersInJabatan = $users->filter(function ($user) use ($jabatanAuthUser) {
