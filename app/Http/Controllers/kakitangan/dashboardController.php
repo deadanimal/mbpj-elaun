@@ -55,19 +55,20 @@ class dashboardController extends Controller
         if ($permohonan->count() > 0) {
             switch($pilihan){
                 case "permohonan":
-                    return datatables($permohonan->whereIn('jenis_permohonan_kakitangan',['OT1','OT2'])->get())->make(true);
+                    // dd($permohonan->whereIn('jenis_permohonan_kakitangan',['OT1','OT2']));
+                    return datatables($permohonan->whereIn('jenis_permohonan_kakitangan',['OT1','OT2']))->make(true);
                     break;
                 case 'tuntutan':
-                    return datatables($this->findPermohonanUser($idUser)->whereIn('jenis_permohonan_kakitangan',['EL1','EL2'])->get())->make(true);
+                    return datatables($this->findPermohonanUser($idUser)->whereIn('jenis_permohonan_kakitangan',['EL1','EL2']))->make(true);
                     break;
                 case 'lulus':
-                    return datatables($this->findPermohonanUser($idUser)->where('status_akhir','1')->get())->make(true);
+                    return datatables($this->findPermohonanUser($idUser)->where('status_akhir','1'))->make(true);
                     break;
                 case 'tolak':
-                    return datatables($this->findPermohonanUser($idUser)->where('status_akhir','0')->get())->make(true);
+                    return datatables($this->findPermohonanUser($idUser)->where('status_akhir','0'))->make(true);
                     break;
                 default:
-                    return datatables($this->findPermohonanUser($idUser)->get())->make(true);
+                    return datatables($this->findPermohonanUser($idUser))->make(true);
                     break;
             }
         } else {
