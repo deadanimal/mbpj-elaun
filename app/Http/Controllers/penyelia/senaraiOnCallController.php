@@ -4,6 +4,7 @@ namespace App\Http\Controllers\penyelia;
 
 use App\User;
 use DataTables;
+use App\MaklumatPekerjaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class senaraiOnCallController extends Controller
      */
     public function index()
     {
-        return view('core.penyelia.senaraiOnCall');
+        return view('core.penyelia.senaraiOnCall')
+                    ->with('jabatan', MaklumatPekerjaan::find(Auth::id())->jabatan->GE_KETERANGAN_JABATAN);
     }
 
     /**
@@ -49,11 +51,22 @@ class senaraiOnCallController extends Controller
      */
     public function show(Request $request,$id)
     {
-        $authUser = User::find(Auth::id());
-        $users = User::with('role')
-                        ->where('GE_KOD_JABATAN', $authUser->GE_KOD_JABATAN)
-                        ->get();
-        return datatables()->of($users)->make(true); 
+        $arrayUsers = array();
+        $jabatanAuthUser = MaklumatPekerjaan::find(Auth::id())->HR_JABATAN;
+        $users = User::with(['role', 'maklumat_pekerjaan'])->get();
+
+        $usersInJabatan = $users->filter(function ($user) use ($jabatanAuthUser) {
+                            $jabatanUser = $user->maklumat_pekerjaan->HR_JABATAN;
+                            if ($jabatanUser == $jabatanAuthUser) {
+                                return $user;
+                            }
+                        })->map(function ($user) {
+                            // pad zero to the left of CUSTOMERID
+                            $user->CUSTOMERID = sprintf('%05d', $user->CUSTOMERID);
+                            return $user;
+                        });
+
+        return datatables()->of($usersInJabatan->all())->make(true); 
     }
 
     /**

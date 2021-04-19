@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="col-12">
-                        <h3 class="pt-2">SENARAI KAKITANGAN {{ auth()->user()->jabatan->GE_KETERANGAN_JABATAN }}</h3>
+                        <h3 class="pt-2">SENARAI KAKITANGAN {{ $jabatan }}</h3>
                     </div>
                 </div>
                 <div class="table-responsive py-3">

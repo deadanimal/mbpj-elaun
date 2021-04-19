@@ -5,27 +5,15 @@
 
 @section('content') 
     @component('layouts.headers.auth') 
-    @if(Auth::user()->role_id != '1'  )
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
-                {{ __('Default') }} 
+                {{-- {{ __('Default') }}  --}}
+                {{ __('Pengurusan Pengguna') }} 
             @endslot
 
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
-        @include('layouts.headers.cards') 
-    @elseif(Auth::user()->role_id == '1'  )
-    @component('layouts.headers.breadcrumbs')
-            @slot('title') 
-                {{ __('Default') }} 
-            @endslot
-
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
-        @endcomponent
-        @include('layouts.headers.cards') 
-    @endif
     @endcomponent
 
     
@@ -35,26 +23,30 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row ">
-                            <div class="col-6">
+                            {{-- <div class="col-6">
                                 <h2>Pengurusan Pengguna</h2>
-                            </div>
-                            <div class="col-6 content-end">
-                                <input type="text" class="form-control form-control-sm rounded-pill" id="carianPengguna" placeholder="Carian">
-                            </div>
+                            </div> --}}
                         </div>
+                        <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-5" aria-label=".form-select-sm example">
+                            <option selected value="out">Pilih Jabatan</option>
+                            @foreach ( $jabatans as $jabatan)
+                                <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
                             <table class="table table-flush" id="pengurusanDT">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No.</th>
+                                        <th>No. Pekerja</th>
                                         <th>Name</th>
-                                        <th>Tarikh Daftar</th>
-                                        <th>Jenis</th>
-                                        <th>Emel</th>
+                                        {{-- <th>Tarikh Daftar</th> --}}
+                                        <th>Peranan</th>
+                                        {{-- <th>Emel</th> --}}
                                         <th>Status</th>
-                                        <th></th>
+                                        <th>Tindakan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,5 +84,5 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <script src="{{ asset('argon') }}/js/pentadbir-sistem/pengurusan-pengguna.js"></script>
-
+    <script src="{{ asset('argon') }}/js/pentadbir-sistem/kemaskini-pengguna.js"></script>
 @endpush

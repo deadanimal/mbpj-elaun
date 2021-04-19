@@ -8,7 +8,7 @@ $(document).ready(function(){
 }) 
 
 function showAllUser(){
-    var id_user = $('#userID').val()
+    var id_user = $('#userID').val();
     var senaraiOnCallDT = $('#senaraiOnCallDT').DataTable({
                 dom: 'flrtip',
                 destroy: true,
@@ -48,9 +48,9 @@ function showAllUser(){
                         targets: [5],
                         mRender: function(data,type,row){
                             if (!data.is_oncall) {
-                                var button = '<button type="button" onclick="tambahOnCall('+data.CUSTOMERID+')" class="btn btn-sm btn-outline-primary"> Tambah On Call</button>' 
+                                var button = '<button type="button" onclick="tambahOnCall('+parseInt(data.CUSTOMERID)+')" class="btn btn-sm btn-outline-primary"> Tambah On Call</button>' 
                             } else {
-                                var button = '<button type="button" onclick="batalOnCall('+data.CUSTOMERID+')" class="btn btn-sm btn-outline-success"> On Call</button>' 
+                                var button = '<button type="button" onclick="batalOnCall('+parseInt(data.CUSTOMERID)+')" class="btn btn-sm btn-outline-success"> On Call</button>' 
                             }
                             return button;
                         } 

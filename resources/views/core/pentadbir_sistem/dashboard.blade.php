@@ -5,27 +5,15 @@
 
 @section('content') 
     @component('layouts.headers.auth') 
-    @if(Auth::user()->role_id != '1'  )
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
-                {{ __('Default') }} 
+                {{ __('Dashboard') }} 
             @endslot
 
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
+            {{-- <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li> --}}
         @endcomponent
-        @include('layouts.headers.cards') 
-    @elseif(Auth::user()->role_id == '1'  )
-    @component('layouts.headers.breadcrumbs')
-            @slot('title') 
-                {{ __('Default') }} 
-            @endslot
-
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
-        @endcomponent
-        @include('layouts.headers.cards') 
-    @endif
+        {{-- @include('layouts.headers.cards')  --}}
     @endcomponent
 
     

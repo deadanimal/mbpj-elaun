@@ -44,9 +44,9 @@ function showDatatable(){
                 ],  
                 columnDefs: [
                     {
+                        targets: 0,
                         searchable: false,
-                        orderable: false,
-                        targets: 0
+                        orderable: false
                     },
                     {
                         targets:1,
