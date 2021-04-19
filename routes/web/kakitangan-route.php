@@ -69,6 +69,10 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@store',
 			'as' => 'permohonan-baru.store',
 		]);
+		Route::post('/init-date',[
+			'uses' => 'kakitangan\permohonanController@getOncall',
+			'as' => 'permohonan-baru.getOncall',
+		]);
 		Route::post('/pegawai',[
 			'uses' 	=> 'kakitangan\permohonanController@pegawai',
 			'as'	=> 'permohonan-baru.pegawai',

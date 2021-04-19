@@ -71,7 +71,7 @@ function showSemakanDatatableKT(){
                     targets: [1],
                     type: "date",
                     render: function(data,type,row){
-                        formattedDate = moment(data,"DD / MM / YYYY").format("DD/MM/YYYY")
+                        formattedDate = moment(data,"YYYY-MM-DD").format("DD/MM/YYYY")
                         return formattedDate;
                     }
                 },
