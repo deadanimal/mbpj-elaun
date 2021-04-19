@@ -38,7 +38,8 @@ class AppServiceProvider extends ServiceProvider
             'App\Http\View\Composers\SideBarComposer');
         View::composer([
             'core.kerani_pemeriksa.partials.formOT&EL',
-            'core.kerani_semakan.partials.formOT&EL'
+            'core.kerani_semakan.partials.formOT&EL',
+            'core.pentadbir_sistem.pengurusanPengguna',
         ],
             'App\Http\View\Composers\SenaraiJabatanComposer');
     }

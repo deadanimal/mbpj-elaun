@@ -13,6 +13,9 @@ var totalhours= 0;
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var pegawai = []
 var pegawaiID = []
+var oncall;
+var date = new Date(); 
+var fulldate;
 
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
@@ -139,6 +142,7 @@ $(document).ready(function(){
     getPegawai();
     getIndividuDT();
     getBerkumpulanDT();
+    datePickerInit();
     disableHantar();
 })
 
@@ -223,7 +227,7 @@ function getIndividuDT(){
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'},
-            {data: 'permohonan_with_users[*].is_rejected_individually'}
+            {data: 'permohonan_with_users.is_rejected_individually'}
         ],
         columnDefs: [
             {
@@ -266,7 +270,7 @@ function getIndividuDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {
-                    if(row['progres'] == "Belum sah" || row['status'] == "PERLU KEMASKINI"){
+                    if(row['progres'] == "Belum sah" ||row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
                         console.log(data.id_permohonan_baru);
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
@@ -299,7 +303,7 @@ function getIndividuDT(){
             },
             {
                 targets: 14,
-                visible: true,
+                visible: false,
                 searchable: true
             }
         ],
@@ -451,7 +455,7 @@ function getBerkumpulanDT(){
             },
             {
                 targets: 14,
-                visible: true,
+                visible: false,
                 searchable: true
             }
         ],
@@ -466,19 +470,39 @@ function getBerkumpulanDT(){
 }
 
 function getPegawai(){
+    var id_user = document.querySelector("#noPekerja").value;
     var pegawaiDiv = document.getElementsByName('pegawaiSokongID')
     console.log(pegawaiDiv)
     $.ajax({
         url: 'permohonan-baru/pegawai/',
         type:'post',
+        data:{ id_user:id_user },
         dataType: 'json',
         success: function(data){
+            console.log(data.jabatans)
             console.log(data.pegawaiSokong)
             var pegawaiSokong = data.pegawaiSokong
             var pegawaiLulus = data.pegawaiLulus
+            var kodJabatan = {};
+            
             pegawaiSokong.forEach((element,index) => {
+                // var kod = element.DEPARTMENTCODE
+                // var jabatan;
+                // if(kod.length > 5){
+                //     jabatan = kod.substring(0,2)
+                // }else{
+                //     jabatan = kod.substring(0,1)
+                // }  
+                // if(jabatan)
+                // if(data.jabatans[index].GE_KOD_JABATAN == jabatan)
+                // if(index != 0){
+                //     if(pegawaiSokong[index].DEPARTMENTCODE != pegawaiSokong[index-1].DEPARTMENTCODE){
+                        
+                //         // var optgroup = "<optgroup label='"+data.jabatans[index].GE_KOD_JABATAN+"'></optgroup>"
+                //     }
+                // }
                 var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
-                $('#pegawaiSokongID').append(option)
+                $('#pegawaiSokongID').append(optgroup,option)
                 $('#pegawaiSokongBK').append(option)
             })
             pegawaiLulus.forEach((element,index) => {
@@ -517,6 +541,74 @@ function fillForm(){
 
 }
 
+function datePickerInit(){
+    var id_user = document.querySelector("#noPekerja").value;
+    var year = date.getFullYear()
+    var month = date.getMonth()
+    var day = date.getDate()
+
+    $.ajax({
+
+        url: 'permohonan-baru/init-date',
+        method: "POST",
+        data:{ id_user:id_user },
+        success: function(data) {
+            console.log(data)
+            if(data.user.is_oncall == 1){
+                console.log('sadsa',year,month,day);
+                $('#tarikh-kerjaID').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    // minDate: new Date(2021,3,19),
+                    minDate: new Date(year,month,day),
+                });
+                $('#tarikh-kerjaBK').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    minDate: new Date(year,month,day),
+
+                });
+                $('#tarikh-akhir-kerjaID').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    minDate: new Date(year,month,day),
+
+                });
+                $('#tarikh-akhir-kerjaBK').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    minDate: new Date(year,month,day),
+
+                });
+            }else {
+            console.log('dasd')
+                day +=  7;
+                console.log('sadsa',year,month,day);
+                $('#tarikh-kerjaID').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    // minDate: new Date(2021,3,19),
+                    minDate: new Date(year,month,day),
+                });
+                $('#tarikh-kerjaBK').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    minDate: new Date(year,month,day),
+
+                });
+                $('#tarikh-akhir-kerjaID').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    minDate: new Date(year,month,day),
+
+                });
+                $('#tarikh-akhir-kerjaBK').datepicker({
+                    dateFormat: 'dd / mm / yy',
+                    minDate: new Date(year,month,day),
+
+                });
+            }
+        }
+    })
+    
+
+  
+
+}
+
 $("#pegawaiSokongID").change(function(){
     console.log(this.value);
 })
@@ -534,18 +626,6 @@ $("#pegawaiLulusBK").change(function(){
     
 // });
 
-$('#tarikh-kerjaID').datepicker({
-    dateFormat: 'dd / mm / yy',
-});
-$('#tarikh-kerjaBK').datepicker({
-    dateFormat: 'dd / mm / yy',
-});
-$('#tarikh-akhir-kerjaID').datepicker({
-    dateFormat: 'dd / mm / yy',
-});
-$('#tarikh-akhir-kerjaBK').datepicker({
-    dateFormat: 'dd / mm / yy',
-});
 
 $('#masa-mulaBK').timepicker();
 

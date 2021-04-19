@@ -31,7 +31,6 @@ class semakanController extends Controller
     public function show(Request $request, $id)
     { 
         $pilihan = $request->input('pilihan');
-        // $permohonan = $this->findAllPermohonanForTypes($pilihan)->first();
         
         if (strlen($pilihan) == 3){
             return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 

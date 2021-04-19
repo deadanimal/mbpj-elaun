@@ -4,9 +4,23 @@ table = $('#aduanDT').DataTable({
     destroy: true,
     "lengthMenu": [ 5, 10, 25, 50 ],
     // processing: true,
-    // serverSide: true,
+    serverSide: true,
     responsive:true,
     autoWidth:false,
+    language: {
+        paginate: {
+            previous: "<",
+            next: ">"
+        },
+        lengthMenu:     "Tunjuk _MENU_ rekod",
+        search: "Carian:",
+        zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+        emptyTable:     "Tiada rekod",
+        info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+        infoEmpty:      "0 ke 0 daripada 0 rekod",
+        infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+        processing:     "Dalam proses...",
+    },
 ajax: {
     url: "modul-aduan/",
     type: 'GET',

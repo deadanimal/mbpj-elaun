@@ -70,6 +70,10 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as' => 'permohonan-baru.destroy',
 		]);
+		Route::post('/init-date',[
+			'uses' => 'kakitangan\permohonanController@getOncall',
+			'as' => 'permohonan-baru.getOncall',
+		]);
 		Route::post('/pegawai',[
 			'uses' 	=> 'kakitangan\permohonanController@pegawai',
 			'as'	=> 'permohonan-baru.pegawai',
@@ -85,8 +89,8 @@ Route::group([
 	Route::resource('/bantuan/aduan', 'AduanController' );
 	
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
-	Route::post('/tambah-on-call/{id}', 'UserController@addToOnCall' );
-	Route::post('/batal-on-call/{id}', 'UserController@removeFromOnCall' );
+	Route::put('/tambah-on-call/{id}', 'UserController@addToOnCall' );
+	Route::put('/batal-on-call/{id}', 'UserController@removeFromOnCall' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
 	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );

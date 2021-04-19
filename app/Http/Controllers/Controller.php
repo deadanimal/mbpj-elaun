@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\PermohonanBaru;
+use App\Jabatan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -58,6 +59,12 @@ class Controller extends BaseController
     public function findPegawaiLulus(){
 
         return $permohonans = User::select('*')->whereIn('role_id',['4','5']);
+
+    }
+
+    public function findJabatans(){
+
+        return $permohonans = Jabatan::select('*')->where('GE_KOD_JABATAN','!=','99');
 
     }
 

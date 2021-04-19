@@ -6,21 +6,21 @@
 
 @section('content')
 @component('layouts.headers.auth') 
-    <!-- @component('layouts.headers.breadcrumbs')
+    {{-- <!-- @component('layouts.headers.breadcrumbs')
             @slot('title') 
                 {{ __('Permohonan Kerja Lebih Masa') }} 
             @endslot
 
-        @endcomponent -->
+        @endcomponent --> --}}
     <!-- <div class="container-fluid my-auto"> -->
         <div class="row">
             <div class="col-xl-12 mt-4 py-2">
-                <h2 class="mb-2" style="color:white;">
+                <h2 class="mb-2">
                     Senarai Maklum Balas
                 </h2>
             </div>
         </div>
-        @include('layouts.headers.cardAduan') 
+        {{-- @include('layouts.headers.cardAduan')  --}}
     <!-- </div> -->
 @endcomponent
 

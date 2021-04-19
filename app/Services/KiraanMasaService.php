@@ -56,7 +56,7 @@ public $totalShiftMalam;
         $this->masaMula = PermohonanBaru::find($id_permohonan)->masa_akhir;
 
         foreach ($permohonan->users as $user) {
-            if ($user->id == $id_user) {
+            if ($user->CUSTOMERID == $id_user) {
                 $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
                 $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
             }
@@ -148,13 +148,21 @@ public $totalShiftMalam;
                     // Add Shift Siang based on days to Total Shift Siang
                     $trueSiang = $this->totalShiftSiang + $this->siang;
                     $this->shiftTime["Siang"] = $trueSiang;
+                }else{
+                    $trueSiang = $this->totalShiftSiang;
+                    $this->shiftTime["Siang"] = $trueSiang;
                 }
                 if(isset($this->malam)){
                     // Add Shift Malam based on days to Total Shift Malam
                     $trueMalam = $this->totalShiftMalam + $this->malam;
                     $this->shiftTime["Malam"] = $trueMalam;
 
+                }else{
+                    $trueMalam = $this->totalShiftMalam;
+                    $this->shiftTime["Malam"] = $trueMalam;
                 }
+
+                // dd($shiftSiang);
                 if(array_key_exists("Siang",$this->shiftTime) && array_key_exists("Malam",$this->shiftTime)){
                     $this->shiftTime["masa"] = $trueSiang + $trueMalam;
                 }else if(array_key_exists("Siang",$this->shiftTime) && !array_key_exists("Malam",$this->shiftTime)){
@@ -162,7 +170,7 @@ public $totalShiftMalam;
                 }else if(!array_key_exists("Siang",$this->shiftTime) && array_key_exists("Malam",$this->shiftTime)){
                     $this->shiftTime["masa"] = $trueMalam ;
                 }
-
+                // dd($this->shiftTime);
                 return $this->shiftTime;
     }
 

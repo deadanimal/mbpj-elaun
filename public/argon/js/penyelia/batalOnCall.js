@@ -13,11 +13,11 @@ function batalOnCall(idUser) {
 
             $.ajax({
                 url: 'batal-on-call/' + idUser,
-                type: 'POST', 
+                type: 'put', 
                 success: function() {
                     showAllUser();
                 },
-                error: function() { console.log('FAIL ONCALL'); } 
+                error: function() { console.log('FAIL BATAL ONCALL'); } 
             });
             
         } else if (result.isDenied) { Swal.fire('', '', 'info') }        

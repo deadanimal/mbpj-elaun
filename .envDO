@@ -1,17 +1,17 @@
-APP_NAME=SPELM
+APP_NAME=MBPJElaunStg
 APP_ENV=local
 APP_DEBUG=true
-APP_KEY=base64:u5BoLJxTVonD57zzpuF9bA/cSQauz51vlbg9dWtMaUU=
-APP_URL=https://argonpro.dev
+APP_KEY=base64:dpyXqcXg/8ts/JxG373BerLJtbdRlVhGgvGmilOxcRc=
+APP_URL=https://elaun-stg.herokuapp.com
 
 LOG_CHANNEL=daily
 
 DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=mbpj
-DB_USERNAME=root
-DB_PASSWORD=
+DB_HOST=project-mysql-do-user-812878-0.b.db.ondigitalocean.com
+DB_PORT=25060
+DB_DATABASE=mbpj-elaun-stg
+DB_USERNAME=user
+DB_PASSWORD=tjrua4zrp9mrpsqw
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file

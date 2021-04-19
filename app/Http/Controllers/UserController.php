@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,18 +28,33 @@ class UserController extends Controller
         return view('users.index', ['users' => $model->with('role')->get()]);
     }
 
+    public function kemaskiniPenggunaAdmin(Request $request, $userId)
+    {
+        $role = $request->input('role');
+        $is_active = $request->input('is_active');
+
+        $user = User::find($userId);
+        $user->role_id = $role;
+        $user->is_active = $is_active;
+
+        $user->save();
+        $user->refresh();
+    }
+
     public function addToOnCall($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->is_oncall = 1;
         $user->save();
+        $user->refresh();
     }
 
     public function removeFromOnCall($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->is_oncall = 0;
         $user->save();
+        $user->refresh();
     }
 
     /**
@@ -103,12 +119,9 @@ class UserController extends Controller
 
     public function findUser($id)
     {
-        // $users = User::with('jabatan')->find($id);
-        $users = User::with('maklumat_pekerjaan')->find($id);
-
         return response()->json([
                     'error' => false,
-                    'users'  => $users,
+                    'users'  => User::with('maklumat_pekerjaan')->find($id),
                 ], 200);
     }
 

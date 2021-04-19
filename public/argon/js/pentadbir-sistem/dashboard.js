@@ -1,8 +1,26 @@
 var table = $('#adminDT').DataTable({
     dom:'lrtip',
-    responsive:true,
-    autoWidth:false,
-    "lengthMenu": [ 5, 10, 25, 50 ],
+    // responsive:true,
+    // autoWidth:false,
+    // lengthMenu: [ 5, 10, 25, 50 ],
+    destroy: true,
+    lengthMenu: [ 5, 10, 25, 50 ],
+    processing: false,
+    serverSide: true,
+    language: {
+        paginate: {
+            previous: "<",
+            next: ">"
+        },
+        lengthMenu:     "Tunjuk _MENU_ rekod",
+        search: "Carian:",
+        zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+        emptyTable:     "Tiada rekod",
+        info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+        infoEmpty:      "0 ke 0 daripada 0 rekod",
+        infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+        processing:     "Dalam proses...",
+    },
     buttons:[
       {
         extend: 'pdfHtml5',

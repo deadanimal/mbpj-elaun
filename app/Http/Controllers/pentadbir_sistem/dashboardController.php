@@ -16,7 +16,7 @@ class dashboardController extends Controller
     public function index()
     {
         //
-        $User = User::orderBy('id','asc')->get();
+        $User = User::orderBy('CUSTOMERID','asc')->get();
         
         return view('core.pentadbir_sistem.dashboard')->with('Users',$User);
     }

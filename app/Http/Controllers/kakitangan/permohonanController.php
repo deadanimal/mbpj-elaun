@@ -335,13 +335,26 @@ class permohonanController extends Controller
 
     }
 
-    public function pegawai(){
+    public function pegawai(Request $request){
 
-        $pegawaiSokong = $this->findPegawaiSokong()->get();
-        $pegawaiLulus = $this->findPegawaiLulus()->get();
+        $userID = $request->input('id_user'); 
+        $jabatans = $this->findJabatans()->get();
+        $pegawaiSokong = $this->findPegawaiSokong()->where('CUSTOMERID','!=',$userID)->get();
+        $pegawaiLulus = $this->findPegawaiLulus()->where('CUSTOMERID','!=',$userID)->get();
         return response()->json([
+            'jabatans' => $jabatans,
             'pegawaiSokong' => $pegawaiSokong,
             'pegawaiLulus' => $pegawaiLulus
+        ],200);
+
+    }
+
+    public function getOncall(Request $request){
+
+        $id = $request->input('id_user');
+        $user = User::find($id);
+        return response()->json([
+            'user' => $user
         ],200);
 
     }

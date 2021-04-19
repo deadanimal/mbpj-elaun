@@ -7,25 +7,25 @@ var type = $("#type").val()
         $("#jenisTable").change(function () {
             if ($(this).val() == "permohonan") {
                 pilihan = $('#jenisTable').val()
-                showDashboardDatatableKT();
+                showDatatableKT();
                 $("#footerDT").html('Lihat selanjutnya di semakan permohonan');
                 $("#footerDT").attr("href", "/"+type+"/semakan");
             }
             else if ($(this).val() == "tuntutan") {
                 pilihan = $('#jenisTable').val()
-                showDashboardDatatableKT();
+                showDatatableKT();
                 $("#footerDT").html('Lihat selanjutnya di tuntutan permohonan');
                 $("#footerDT").attr("href", "/"+type+"/tuntutan");
 
             }else if ($(this).val() == "lulus") {
                 pilihan = $('#jenisTable').val()
-                showDashboardDatatableKT();
+                showDatatableKT();
                 $("#footerDT").html('Lihat selanjutnya di semakan permohonan');
                 $("#footerDT").attr("href", "/"+type+"/semakan");
 
             }else if ($(this).val() == "tolak") {
                 pilihan = $('#jenisTable').val()
-                showDashboardDatatableKT();
+                showDatatableKT();
                 $("#footerDT").html('Lihat selanjutnya di semakan permohonan');
                 $("#footerDT").attr("href", "/"+type+"/semakan");
 
@@ -79,7 +79,7 @@ function showDatatableKT(){
             {data: 'tarikh_mula_kerja'},
             {data: 'updated_at'},
             {data: 'jenis_permohonan'},
-            {data: 'users[*].jumlah_tuntutan_elaun'},
+            {data: 'permohonan_with_users.jumlah_tuntutan_elaun'},
             {data: 'status'}
         ],
         columnDefs:[
@@ -100,7 +100,7 @@ function showDatatableKT(){
                 targets: [2],
                 type: "date",
                 render: function(data,type,row){
-                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    formattedDate = moment(data,"DD/MM/YYYY").format("DD/MM/YYYY")
                     return formattedDate;
                 }
             },
@@ -110,6 +110,13 @@ function showDatatableKT(){
                 render: function(data,type,row){
                     formattedDate = moment(data).format("DD/MM/YYYY")
                     return formattedDate;
+                }
+            },
+            {
+                targets: 5,
+                render: function(data,type,row){
+                    console.log(data);
+                    return data;
                 }
             },
         ],

@@ -67,78 +67,77 @@ function showDatatable(){
                 url: "kerani-pemeriksa-semakan/"+id_user,
                 type: 'GET',
             },
-
-                columns: [
-            
-                    {data: null},
-                    {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
-                    {data: 'created_at'},
-                    {data: 'masa_mula'},
-                    {data: 'masa_akhir'},
-                    {data: 'masa'},
-                    {data: 'tujuan'},
-                    {data: null},
-                    {data: 'jenis_permohonan'},
-                    {data: 'users[*].id'},
-                    {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
-                ],  
-                columnDefs: [
-                    {
-                        targets: 0,
-                        orderable:false,
-                        searchable: false
-                    },
-                    {
-                        targets: 1,
-                        visible: false,
-                        searchable: false,
-                        orderable:false
-                    },
-                    {
-                        targets: [2],
-                        type: "date",
-                        render: function(data,type,row){
-                            formattedDate = moment(data).format("DD/MM/YYYY")
-                            return formattedDate;
+            columns: [
+        
+                {data: null},
+                {data: 'created_at'},
+                {data: 'masa_mula'},
+                {data: 'masa_akhir'},
+                {data: 'masa'},
+                {data: 'tujuan'},
+                {data: null},
+                {data: 'jenis_permohonan'},
+                {data: 'users[*].id'},
+                {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'},
+                {data: 'id_permohonan_baru', name:'id_permohonan_baru'}
+            ],  
+            columnDefs: [
+                {
+                    targets:0,
+                    orderable:false,
+                    searchable:false,
+                },
+                {
+                    targets: 1,
+                    type: "date",
+                    render: function(data,type,row){
+                        formattedDate = moment(data).format("DD/MM/YYYY")
+                        return formattedDate;
+                    }
+                },
+                {
+                    targets: 6,
+                    mRender: function(data,type,row){
+                        if(id_user != "noID"){
+                            counter++;
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
+                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var allButton = button1 + button2 + button3;
+                            return allButton;
+                        } 
+                        else {
+                            counter++;
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
+                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var allButton = button1 + button2 + button3;
+                            return allButton;
                         }
-                    },
-                    {
-                        targets: 7,
-                        mRender: function(data,type,row){
-                            if(id_user != "noID"){
-                                counter++;
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
-                                var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
-                                var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
-                                var allButton = button1 + button2 + button3;
-                                return allButton;
-                            } 
-                            else {
-                                counter++;
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
-                                var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
-                                var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
-                                var allButton = button1 + button2 + button3;
-                                return allButton;
-                            }
-                        }
-                    },
-                    {
-                        targets: 8,
-                        visible: false,
-                        searchable: true
-                    },
-                    {
-                        targets: 9,
-                        visible: false,
-                        searchable: true
-                    },
-                    {
-                        targets: 10,
-                        visible: false,
-                        searchable: true
-                    },
-                ], 
+                    }
+                },
+                {
+                    targets: 7,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 8,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 9,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets:10,
+                    orderable:false,
+                    searchable:false,
+                    visible:false
+                },
+            ], 
                 
             });
             semakanKPDT.on('draw.dt', function () {

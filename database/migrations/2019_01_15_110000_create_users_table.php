@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('is_oncall')->default(0);
             $table->rememberToken();
             $table->string('password')->default(Hash::make('secret'));
-            $table->string('status',2)->default('01');
+            $table->unsignedInteger('is_active')->default(0);
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('roles');
