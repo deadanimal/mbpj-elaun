@@ -8,10 +8,8 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-12 mt-3 text-right"> --}}
             <div class="row">
                 <div class="col-4 ml-4 mt-2 text-left">
-                    {{-- <input type="checkbox" onClick="toggleCheckboxSemakan(this)" /> Pilih Semua  --}}
                     <button type="button" onclick="terimaSemuaPermohonan()" class="btn btn-sm btn btn-outline-primary">{{ __('Hantar semua') }}</button>
                 </div>
             </div>
@@ -21,7 +19,6 @@
                         <tr>
                             <th>No</th>
                             <th><input type="checkbox" onClick="toggleCheckboxSemakan(this)" /></th>
-                            <th></th>
                             <th>Tarikh Permohonan</th>
                             <th>Masa Mula</th>
                             <th>Masa Akhir</th>

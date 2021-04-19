@@ -107,7 +107,6 @@ function showDatatable(pilihan){
             columns: [
                 {data: null},
                 {data: null},
-                {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
                 {data: 'created_at'},
                 {data: 'masa_mula'},
                 {data: 'masa_akhir'},
@@ -115,6 +114,7 @@ function showDatatable(pilihan){
                 {data: 'tujuan'},
                 {data: null},
                 {data: 'jenis_permohonan'},
+                {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
             ],  
             columnDefs: [
                 {
@@ -131,11 +131,6 @@ function showDatatable(pilihan){
                 },
                 {
                     targets: [2],
-                    visible: false,
-                    searchable: true
-                },
-                {
-                    targets: [3],
                     type: "date",
                     render: function(data,type,row){
                         formattedDate = moment(data).format("DD/MM/YYYY");
@@ -143,7 +138,7 @@ function showDatatable(pilihan){
                     }
                 },
                 {
-                    targets: [8],
+                    targets: [7],
                     mRender: function(data,type,row){
                         if(id_user != "noID"){
                             counterPermohonan++;
@@ -164,10 +159,15 @@ function showDatatable(pilihan){
                     }
                 },
                 {
-                    targets: [9],
+                    targets: [8],
                     visible: false,
                     searchable: true,
-                }
+                },
+                {
+                    targets: [9],
+                    visible: false,
+                    searchable: true
+                },
             ]
     });
 
