@@ -43,16 +43,18 @@ class UserController extends Controller
 
     public function addToOnCall($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->is_oncall = 1;
         $user->save();
+        $user->refresh();
     }
 
     public function removeFromOnCall($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->is_oncall = 0;
         $user->save();
+        $user->refresh();
     }
 
     /**

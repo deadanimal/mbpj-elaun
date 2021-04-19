@@ -1,4 +1,5 @@
 function tambahOnCall(idUser) {
+    
     Swal.fire({
         icon: 'info',
         title: 'Tambah ke On Call?',
@@ -10,10 +11,11 @@ function tambahOnCall(idUser) {
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire('Kakitangan DiTambah ke On Call', '', 'success');
+            console.log({idUser});
 
             $.ajax({
                 url: 'tambah-on-call/' + idUser,
-                type: 'POST', 
+                type: 'put', 
                 success: function() {
                     showAllUser();
                 },

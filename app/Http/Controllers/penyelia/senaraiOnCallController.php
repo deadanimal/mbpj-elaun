@@ -61,6 +61,7 @@ class senaraiOnCallController extends Controller
                                 return $user;
                             }
                         })->map(function ($user) {
+                            // pad zero to the left of CUSTOMERID
                             $user->CUSTOMERID = sprintf('%05d', $user->CUSTOMERID);
                             return $user;
                         });
