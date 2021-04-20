@@ -68,20 +68,22 @@ class PermohonanBaruController extends Controller
 
     public function saveElaun(PermohonanBaru $permohonan)
     {
-        // $jenisPermohonan = array('EL1', 'EL2');
         $jenisPermohonan = array('PS1', 'PS2');
         $sahP1 = $permohonan->progres == 'Sah P1' ? TRUE : FALSE;
 
         if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP1) {
             $tuntutan = ($permohonan->users)->filter(function($user) {
                 return $user->permohonan_with_users->is_rejected_individually != 1;
+
             })->each(function($user) use ($permohonan) {
                 $elaun = new KiraanElaunService($permohonan, $user->CUSTOMERID);
                 $permohonan->users()
                             ->updateExistingPivot($user->CUSTOMERID, array('jumlah_tuntutan_elaun' => $elaun->jumlahTuntutanRounded()), false);
+
             })->map(function ($user) {
                 return $user->permohonan_with_users
                             ->jumlah_tuntutan_elaun;
+
             });
         }
     }
@@ -158,7 +160,6 @@ class PermohonanBaruController extends Controller
     }
 
     public function saveMasaSebenar(Request $request){
-        // $masaSebenar;
         $jenisPermohonan = array('PS1', 'PS2');
         $idPermohananBaru = $request->input('id_permohonan_baru');
         $waktuKeluar = $request->input('waktuKeluar');
@@ -166,17 +167,15 @@ class PermohonanBaruController extends Controller
         $mulaKerja = $request->input('mulaKerja');
         $akhirKerja = $request->input('akhirKerja');
         $permohonan = PermohonanBaru::findOrFail($idPermohananBaru);
-        $sahP2 = $permohonan->progres == 'Sah P2' ? TRUE : FALSE;
+        // $sahP1 = $permohonan->progres == 'Sah P1' ? TRUE : FALSE;
 
-        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP2) {
+        // if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP1) {
+        if (in_array($permohonan->jenis_permohonan, $jenisPermohonan)) {
             $tuntutan = ($permohonan->users)->filter(function($user) {
                 return $user->permohonan_with_users->is_rejected_individually != 1;
             })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
-                
-                // dd($permohonan->users->findOrFail($user->id)->permohonan_with_users->id_permohonan_baru);
                 $masa = new KiraanMasaService($permohonan, $user->CUSTOMERID);
                 $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
-                // print_r($masaSebenar);
                 $permohonan->update(['masa' => $masaSebenar["masa"]]);
                 $permohonan->users()
                             ->updateExistingPivot($user->CUSTOMERID, array(

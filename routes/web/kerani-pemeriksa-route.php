@@ -6,10 +6,6 @@ Route::group([
 	'role:7'
 	]], function () {
 	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
-	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
-	Route::resource('/tag', 'TagController', ['except' => ['show']]);
-	Route::resource('/item', 'ItemController', ['except' => ['show']]);
-	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'permohonan-baru'], function () {
@@ -62,6 +58,9 @@ Route::group([
 			'as' => 'permohonan-baru.store',
 		]);
 	});
+
+	Route::put('/semakan/masa-sebenar/{id}', 'PermohonanBaruController@saveMasaSebenar');
+
 	Route::resource('kerani-pemeriksa-dashboard','kerani_pemeriksa\keraniPemeriksaController',['except' => ['destroy']]);
 	Route::resource('kerani-pemeriksa-semakan','kerani_pemeriksa\semakanController',['except' => ['destroy']]);
 	Route::resource('kerani-pemeriksa-laporan','kerani_pemeriksa\laporanController',['except' => ['show','destroy']]);
