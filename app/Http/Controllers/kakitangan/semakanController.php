@@ -74,7 +74,7 @@ class semakanController extends Controller
         $pilihanKT = $request->input('pilihanKT');
         $pilihanReal = $request->input('pilihanReal');
         // dd($id);
-        $permohonan = PermohonanBaru::find($id);
+        $permohonan = PermohonanBaru::findOrFail($id);
         return response()->json([
             'permohonan' => $permohonan,
             
@@ -102,7 +102,7 @@ class semakanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $permohonan = PermohonanBaru::find($id);
+        $permohonan = PermohonanBaru::findOrFail($id);
         $validator = Validator::make($request->all(), [ 
                 
             'object.tarikh_permohonan' => 'required',
@@ -145,7 +145,7 @@ class semakanController extends Controller
     public function destroy(Request $request,$id)
     {
         //
-        $permohonan = PermohonanBaru::find($id);
+        $permohonan = PermohonanBaru::findOrFail($id);
         $permohonan->is_deleted = 1;
         $permohonan->save();
         $permohonan->refresh();

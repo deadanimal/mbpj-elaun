@@ -126,19 +126,19 @@ class UpdateStatusListener
     {
         switch ($peringkat) {
             case 'PS':
-                $pegawai_sokong = User::find($event->permohonan->id_peg_sokong);
+                $pegawai_sokong = User::findOrFail($event->permohonan->id_peg_sokong);
                 $pegawai_sokong->notify(new PermohonanNeedApprovalEmailNotification($pegawai_sokong));  
                 break;
             case 'PP':
-                $pegawai_pelulus = User::find($event->permohonan->id_peg_pelulus);
+                $pegawai_pelulus = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $pegawai_pelulus->notify(new PermohonanNeedApprovalEmailNotification($pegawai_pelulus)); 
                 break;
             case 'KP':
-                $kerani_pemeriksa = User::find($event->permohonan->id_peg_pelulus);
+                $kerani_pemeriksa = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $kerani_pemeriksa->notify(new PermohonanNeedApprovalEmailNotification($kerani_pemeriksa)); 
                 break;
             case 'KS':
-                $kerani_semakan = User::find($event->permohonan->id_peg_pelulus);
+                $kerani_semakan = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $kerani_semakan->notify(new PermohonanNeedApprovalEmailNotification($kerani_semakan)); 
                 break;
         }

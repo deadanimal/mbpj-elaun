@@ -35,7 +35,7 @@ public $totalShiftMalam;
      *
      * @return void
      */
-    public function __construct(PermohonanBaru $permohonan, $id_user, $id_permohonan)
+    public function __construct(PermohonanBaru $permohonan, $id_user)
     {
 
         $this->siang;
@@ -52,8 +52,8 @@ public $totalShiftMalam;
         $this->totalShiftMalam = 0;
         $this->id_user = $id_user;
         $this->permohonan = $permohonan;
-        $this->masaMula = PermohonanBaru::find($id_permohonan)->masa_mula;
-        $this->masaMula = PermohonanBaru::find($id_permohonan)->masa_akhir;
+        $this->masaMula = $permohonan->masa_mula;
+        $this->masaMula = $permohonan->masa_akhir;
 
         foreach ($permohonan->users as $user) {
             if ($user->CUSTOMERID == $id_user) {

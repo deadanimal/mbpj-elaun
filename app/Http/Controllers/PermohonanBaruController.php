@@ -20,7 +20,7 @@ class PermohonanBaruController extends Controller
     public function findPermohonan($idPermohananBaru)
     {
         $senaraiKakitangan = array();
-        $permohonan = PermohonanBaru::with('users')->find($idPermohananBaru);
+        $permohonan = PermohonanBaru::with('users')->findOrFail($idPermohananBaru);
         $tarikhPermohonan = $permohonan->created_at->format('d/m/Y');
 
         foreach ($permohonan->users as $user) {
@@ -42,13 +42,13 @@ class PermohonanBaruController extends Controller
     {
         $arrayKelulusan = array();
 
-        $pegSokong = User::with('maklumat_pekerjaan')->find($permohonan->id_peg_sokong); 
+        $pegSokong = User::with('maklumat_pekerjaan')->findOrFail($permohonan->id_peg_sokong); 
         $namaJawatanpegSokong = Jawatan::where('HR_KOD_JAWATAN', $pegSokong->maklumat_pekerjaan->HR_JAWATAN)
                                     ->first()
                                     ->HR_NAMA_JAWATAN;
         $arrayKelulusan = Arr::prepend($arrayKelulusan, [$pegSokong, $namaJawatanpegSokong], 'peg_sokong');
 
-        $pegPelulus = User::with('maklumat_pekerjaan')->find($permohonan->id_peg_pelulus);
+        $pegPelulus = User::with('maklumat_pekerjaan')->findOrFail($permohonan->id_peg_pelulus);
         $namaJawatanpegPelulus = Jawatan::where('HR_KOD_JAWATAN', $pegPelulus->maklumat_pekerjaan->HR_JAWATAN)
                                     ->first()
                                     ->HR_NAMA_JAWATAN;
@@ -59,7 +59,7 @@ class PermohonanBaruController extends Controller
 
     public function approvedKelulusan($idPermohonanBaru)
     {
-        $permohonan = PermohonanBaru::find($idPermohonanBaru);
+        $permohonan = PermohonanBaru::findOrFail($idPermohonanBaru);
         
         event(new PermohonanStatusChangedEvent($permohonan, 1, 0, 0));
 
@@ -89,7 +89,7 @@ class PermohonanBaruController extends Controller
     public function findGajiElaun(Request $request, $id_user)
     {
         $id_permohonan_baru = $request->input('id_permohonan_baru');
-        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+        $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
             if ($user->CUSTOMERID == $id_user){ 
@@ -97,7 +97,7 @@ class PermohonanBaruController extends Controller
             }
         };
 
-        $user = User::with('maklumat_pekerjaan')->find($id_user);
+        $user = User::with('maklumat_pekerjaan')->findOrFail($id_user);
 
         return response()->json([
             'error' => false,
@@ -110,7 +110,7 @@ class PermohonanBaruController extends Controller
     public function rejectIndividually(Request $request, $id_permohonan_baru)
     {
         $idUser = $request->input('id_user');
-        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+        $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
             if($user->CUSTOMERID == $idUser) {
@@ -123,7 +123,7 @@ class PermohonanBaruController extends Controller
     public function retrieveMasaSebenar(Request $request, $id_user)
     {
         $id_permohonan_baru = $request->input('id_permohonan_baru');
-        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+        $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
         $masa_mula_sebenar = 0.0;
         $masa_akhir_sebenar = 0.0;
 
@@ -144,7 +144,7 @@ class PermohonanBaruController extends Controller
     public function kemaskiniModal(Request $request, $id_permohonan_baru)
     {
         $idUser = $request->input('id_user');
-        $permohonan = PermohonanBaru::find($id_permohonan_baru);
+        $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
 
         foreach ($permohonan->users as $user) {
             if($user->CUSTOMERID == $idUser) {
@@ -165,7 +165,7 @@ class PermohonanBaruController extends Controller
         $waktuMasuk = $request->input('waktuMasuk');
         $mulaKerja = $request->input('mulaKerja');
         $akhirKerja = $request->input('akhirKerja');
-        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $permohonan = PermohonanBaru::findOrFail($idPermohananBaru);
         $sahP2 = $permohonan->progres == 'Sah P2' ? TRUE : FALSE;
 
         if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP2) {
@@ -173,8 +173,8 @@ class PermohonanBaruController extends Controller
                 return $user->permohonan_with_users->is_rejected_individually != 1;
             })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
                 
-                // dd($permohonan->users->find($user->id)->permohonan_with_users->id_permohonan_baru);
-                $masa = new KiraanMasaService($permohonan, $user->CUSTOMERID,$permohonan->users->find($user->CUSTOMERID)->permohonan_with_users->id_permohonan_baru);
+                // dd($permohonan->users->findOrFail($user->id)->permohonan_with_users->id_permohonan_baru);
+                $masa = new KiraanMasaService($permohonan, $user->CUSTOMERID);
                 $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
                 // print_r($masaSebenar);
                 $permohonan->update(['masa' => $masaSebenar["masa"]]);
