@@ -1,10 +1,6 @@
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-    var jenisHariArrayCheckBox = new Array (
-                                                'hariBiasa',
-                                                'hariRehat',
-                                                'hariAm',
-                                            );
+    var jenisHariArrayCheckBox = new Array ('hariBiasa', 'hariRehat', 'hariAm');
     var kadarJamArrayCheckbox =  new Array (
                                                 'hariBiasa-siang',
                                                 'hariBiasa-malam',
@@ -13,36 +9,46 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                                                 'hariAm-siang',
                                                 'hariAm-malam'
                                             );
+    var ekedatanganAttributes = new Array (
+                                            'tarikh',
+                                            'waktuMasuk',
+                                            'waktuKeluar',
+                                            'jumlahWaktuKerja',
+                                            'waktuMasukOT1',
+                                            'waktuKeluarOT1',
+                                            'jumlahOT1',
+                                            'waktuMasukOT2',
+                                            'waktuKeluarOT2',
+                                            'jumlahOT2',
+                                            'waktuMasukOT3',
+                                            'waktuKeluarOT3',
+                                            'jumlahOT3',
+                                            'jumlahOTKeseluruhan',
+                                            'waktuAnjal'
+                                            );
+    var detailPermohonan = new Array (
+                                        'tarikhMohon',
+                                        'tarikhMulaKerja',
+                                        'tarikhAkhirKerja',
+                                        'masaMula',
+                                        'masaAkhir',
+                                        'tujuan',
+                                        'lokasi',
+                                        );
 
     // Clear up name and no pekerja for Elaun
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
 
     // Clear up Ekedatangan
-    $("#formEkedatangan input[name=tarikh]").val("");
-    $("#formEkedatangan input[name=waktuMasuk]").val("");
-    $("#formEkedatangan input[name=waktuKeluar]").val("");
-    $("#formEkedatangan input[name=jumlahWaktuKerja]").val("");
-    $("#formEkedatangan input[name=waktuMasukOT1]").val("");
-    $("#formEkedatangan input[name=waktuKeluarOT1]").val("");
-    $("#formEkedatangan input[name=jumlahOT1]").val("");
-    $("#formEkedatangan input[name=waktuMasukOT2]").val("");
-    $("#formEkedatangan input[name=waktuKeluarOT2]").val("");
-    $("#formEkedatangan input[name=jumlahOT2]").val("");
-    $("#formEkedatangan input[name=waktuMasukOT3]").val("");
-    $("#formEkedatangan input[name=waktuKeluarOT3]").val("");
-    $("#formEkedatangan input[name=jumlahOT3]").val("");
-    $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val("");
-    $("#formEkedatangan input[name=waktuAnjal]").val("");
+    ekedatanganAttributes.forEach(att => {
+        $("#formEkedatangan input[name="+att+"]").val("");
+    });
 
     // Clear up detail permohonan
-    $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val("");
-    $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val("");
-    $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val("");
-    $('#formModalEdit input[name=masaMula-'+is_individu+']').val("");
-    $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val("");
-    $('#formModalEdit input[name=tujuan-'+is_individu+']').val("");
-    $('#formModalEdit input[name=lokasi-'+is_individu+']').val(""); 
+    detailPermohonan.forEach(att => {
+        $('#formModalEdit input[name='+att+'-'+is_individu+']').val("");
+    });
 
     // Clear up masa sebenar
     $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(""); 
@@ -84,8 +90,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
             $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(data.permohonan.tarikh_mula_kerja);
             $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
-            $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
-            $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
             $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
             $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
