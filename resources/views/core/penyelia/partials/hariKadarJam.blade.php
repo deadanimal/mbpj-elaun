@@ -2,15 +2,15 @@
     <label class="form-control-label">{{ __('Kadar Jam') }}</label><br/>
     {{-- Radio button Jenis Hari--}}
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" onclick="showBlockKadarJam('hariBiasa')" name="jenisHariOptions" id="hariBiasa" value="option1">
+        <input class="form-check-input" type="radio" onclick="showBlockKadarJam('hariBiasa')" name="jenisHariOptions" id="hariBiasa" value="hariBiasa">
         <label class="form-check-label" for="hariBiasa">Hari Biasa</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" onclick="showBlockKadarJam('hariRehat')" name="jenisHariOptions" id="hariRehat" value="option2">
+        <input class="form-check-input" type="radio" onclick="showBlockKadarJam('hariRehat')" name="jenisHariOptions" id="hariRehat" value="hariRehat">
         <label class="form-check-label" for="hariRehat">Hari Rehat</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" onclick="showBlockKadarJam('hariAm')" name="jenisHariOptions" id="hariAm" value="option2">
+        <input class="form-check-input" type="radio" onclick="showBlockKadarJam('hariAm')" name="jenisHariOptions" id="hariAm" value="hariAm">
         <label class="form-check-label" for="hariAm">Hari Kelepasan Am</label>
     </div>
     <div class="mt-2">

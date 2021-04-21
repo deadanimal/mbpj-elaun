@@ -24,6 +24,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->string('hari');
             $table->string('waktu');
             $table->string('kadar_jam');
+            $table->string('jenis_hari')->default('hariBiasa');
             $table->string('lokasi')->default('-');
             $table->string('tujuan');
             $table->string('status');

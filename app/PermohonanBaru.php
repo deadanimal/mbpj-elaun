@@ -24,6 +24,7 @@ class PermohonanBaru extends Model
         'hari',
         'waktu',
         'kadar_jam',
+        'jenis_hari',
         'id_peg_sokong',
         'id_peg_pelulus',
         'tujuan',

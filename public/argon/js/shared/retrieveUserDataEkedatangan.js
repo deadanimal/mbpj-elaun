@@ -1,9 +1,11 @@
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-    var kadarJamArrayCheckbox =  new Array (
+    var jenisHariArrayCheckBox = new Array (
                                                 'hariBiasa',
                                                 'hariRehat',
                                                 'hariAm',
+                                            );
+    var kadarJamArrayCheckbox =  new Array (
                                                 'hariBiasa-siang',
                                                 'hariBiasa-malam',
                                                 'hariRehat-siang',
@@ -51,24 +53,15 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
     // Clear up kadar Jam
+    jenisHariArrayCheckBox.forEach(jenisKadar => {
+        document.getElementById(jenisKadar).checked = false;
+    });
+
     kadarJamArrayCheckbox.forEach(jenisKadar => {
         document.getElementById(jenisKadar).checked = false;
     });
 
-    $.ajax({
-        url: 'user/semakan-pekerja/' + id_user,
-
-        type: 'GET', 
-        success: function(data) {
-            $("#formModalEdit input[name=nama]").val(data.users.NAME);
-            $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
-
-            $('input').css('color', 'black')
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
+    fillInUserDetail(id_user);
    
     $.ajax({
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
@@ -97,6 +90,15 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
             $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
+
+            jenisHariArrayCheckBox.forEach(jenisHari => {
+                let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.kadar_jam ? '-siang' : '-malam';
+
+                if (document.getElementById(jenisHari).value != data.jenis_hari) { break; }
+
+                document.getElementById(jenisHari).checked = true;
+                document.getElementById(jenisHari+siangOrMalam).checked = true;
+            });
 
             switch (jenisPermohonan) {
                 case "OT1":
@@ -144,5 +146,22 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             }
         },
         error: function(data) { console.log(data); }
+    });
+}
+
+function fillInUserDetail(id_user) {
+    $.ajax({
+        url: 'user/semakan-pekerja/' + id_user,
+
+        type: 'GET', 
+        success: function(data) {
+            $("#formModalEdit input[name=nama]").val(data.users.NAME);
+            $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
+
+            $('input').css('color', 'black')
+        },
+        error: function(data) {
+            console.log(data);
+        } 
     });
 }
