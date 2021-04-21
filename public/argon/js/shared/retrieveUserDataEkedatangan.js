@@ -1,5 +1,16 @@
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
+    var kadarJamArrayCheckbox =  new Array (
+                                                'hariBiasa',
+                                                'hariRehat',
+                                                'hariAm',
+                                                'hariBiasa-siang',
+                                                'hariBiasa-malam',
+                                                'hariRehat-siang',
+                                                'hariRehat-malam',
+                                                'hariAm-siang',
+                                                'hariAm-malam'
+                                            );
 
     // Clear up name and no pekerja for Elaun
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
@@ -39,7 +50,10 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('input[name=gaji-'+is_individu+']').val(""); 
     $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
-    // Clear up kadar
+    // Clear up kadar Jam
+    kadarJamArrayCheckbox.forEach(jenisKadar => {
+        document.getElementById(jenisKadar).checked = false;
+    });
 
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,

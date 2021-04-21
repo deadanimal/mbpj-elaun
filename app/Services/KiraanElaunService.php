@@ -60,7 +60,9 @@ class KiraanElaunService {
         $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
         
         // assign this permohonan to DB
-        if ($this->jumlahTuntutanAkhir >= $this->gaji) $this->tuntutanLebihSebulanGaji();
+        if ($this->jumlahTuntutanAkhir >= $this->gaji) {
+            $this->tuntutanLebihSebulanGaji();
+        };
 
         return $this->jumlahTuntutanAkhir;
     }

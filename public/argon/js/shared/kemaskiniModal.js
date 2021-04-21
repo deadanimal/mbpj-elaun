@@ -21,7 +21,6 @@ function kemaskiniModal(jenisPermohonan) {
 function kemaskiniPermohonanAjax(jenisPermohonan) {
     var is_individu = jenisPermohonan == 'individu' ? 'individu' : 'berkumpulan';
     var id_permohonan_baru = document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').getAttribute("value");
-    console.log('semakan-modal-'+is_individu+'-masaAkhirSebenar');
 
     $.ajax({
         url: 'permohonan-baru/kemaskini/' + id_permohonan_baru,

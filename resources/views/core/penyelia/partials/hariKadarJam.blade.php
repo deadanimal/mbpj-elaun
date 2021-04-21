@@ -38,7 +38,7 @@
             </div>
         </div>
         
-        {{-- Radio button Kadar Biasa--}}
+        {{-- Radio button Kadar Kelepasan Am--}}
         <div id="hariAmBlock" style="display:none;">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="kadarJamAm" id="hariAm-siang" value="1.75">
