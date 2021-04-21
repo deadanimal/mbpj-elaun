@@ -16,7 +16,7 @@ $factory->define(PermohonanBaru::class, function (Faker $faker) {
         'hari' => $faker->dayOfWeek($max = 'now')  ,
         'waktu' => $faker->randomElement($array = array ('Pagi','Petang','Malam')),
         'kadar_jam' => 1.125,
-        'jenis_hari' => $faker->randomElement($array = array ('hariBiasa','hariRehat','hariAm')),
+        'jenis_hari' => 'hariBiasa',
         'tujuan' => $faker->sentence,
         'lokasi' => $faker->cityPrefix,
         'id_peg_sokong' => User::where('role_id', 2)

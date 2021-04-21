@@ -18,11 +18,11 @@
         <div id="hariBiasaBlock" style="display:none;">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="kadarJamBiasa" id="hariBiasa-siang" value="1.125">
-                <label class="form-check-label" for="hariBiasa-siang">1.125</label>
+                <label class="form-check-label" for="hariBiasa-siang">Siang - 1.125</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="hariBiasa" id="hariBiasa-malam" value="1.25">
-                <label class="form-check-label" for="hariBiasa-malam">1.25</label>
+                <label class="form-check-label" for="hariBiasa-malam">Malam - 1.25</label>
             </div>
         </div>
         
@@ -30,23 +30,23 @@
         <div id="hariRehatBlock" style="display:none;">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="hariRehat" id="hariRehat-siang" value="1.25">
-                <label class="form-check-label" for="hariRehat-siang">1.25</label>
+                <label class="form-check-label" for="hariRehat-siang">Siang - 1.25</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="hariRehat" id="hariRehat-malam" value="1.50">
-                <label class="form-check-label" for="hariRehat-malam">1.50</label>
+                <label class="form-check-label" for="hariRehat-malam">Malam - 1.50</label>
             </div>
         </div>
         
         {{-- Radio button Kadar Kelepasan Am--}}
         <div id="hariAmBlock" style="display:none;">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="kadarJamAm" id="hariAm-siang" value="1.75">
-                <label class="form-check-label" for="hariAm-siang">1.75</label>
+                <input class="form-check-input" type="radio" name="hariAm" id="hariAm-siang" value="1.75">
+                <label class="form-check-label" for="hariAm-siang">Siang - 1.75</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="hariAm" id="hariAm-malam" value="2.00">
-                <label class="form-check-label" for="hariAm-siang">2.00</label>
+                <label class="form-check-label" for="hariAm-siang">Malam - 2.00</label>
             </div>
         </div>
     </div>

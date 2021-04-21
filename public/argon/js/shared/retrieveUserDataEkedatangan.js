@@ -59,8 +59,9 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
     // Clear up kadar Jam
-    jenisHariArrayCheckBox.forEach(jenisKadar => {
-        document.getElementById(jenisKadar).checked = false;
+    jenisHariArrayCheckBox.forEach(jenisHari => {
+        document.getElementById(jenisHari).checked = false;
+        document.getElementById(jenisHari+'Block').style.display = "none";
     });
 
     kadarJamArrayCheckbox.forEach(jenisKadar => {
@@ -95,15 +96,21 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
             $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
 
-            jenisHariArrayCheckBox.slice(0, jenisHariArrayCheckBox
-                .findIndex(jenisHari => jenisHari == data.permohonan.jenis_hari))
-                .forEach(jenisHari => {
-                    let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.permohonan.kadar_jam ? '-siang' : '-malam';
+            jenisHariArrayCheckBox.forEach(jenisHari => {
+                let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.permohonan.kadar_jam ? '-siang' : '-malam';
 
+                if (jenisHari == data.permohonan.jenis_hari) {
                     document.getElementById(jenisHari).checked = true;
                     document.getElementById(jenisHari + siangOrMalam).checked = true;
                     document.getElementById(jenisHari+'Block').style.display = "block";
-                });
+                } else {
+                    document.getElementById(jenisHari).checked = false;
+                    document.getElementById(jenisHari + siangOrMalam).checked = false;
+                    document.getElementById(jenisHari+'Block').style.display = "none";
+                }
+            });
+
+
 
             switch (jenisPermohonan) {
                 case "OT1":
