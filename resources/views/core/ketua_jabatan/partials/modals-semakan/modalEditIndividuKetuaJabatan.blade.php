@@ -71,19 +71,23 @@
                                 <div class="row mb-2">
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
+                                        <input class="form-control form-control-sm" value="" name="masaMulaSebenar-individu" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
      
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="">
+                                        <input class="form-control form-control-sm" value="" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="">
     
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
                                 </div>
+
+                                {{-- Kadar Jam --}}
+                                @include('core.ketua_jabatan.partials.hariKadarJam')
+
                                 <div class="form-group mb-5">
-                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini Masa') }}</button>
+                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">{{ __('Lokasi') }}</label>
@@ -120,6 +124,7 @@
                                 </div>
                             </div>
                             <div id="eKedatanganIndividu">
+
                                 {{-- eKedatangan --}}
                                 @include('core.ketua_jabatan.partials.modals-semakan.ekedatangan')
                             </div>

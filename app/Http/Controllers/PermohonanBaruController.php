@@ -147,6 +147,7 @@ class PermohonanBaruController extends Controller
     {
         $idUser = $request->input('id_user');
         $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
+        $permohonan->kadar_jam = $request->input('kadar_jam');
 
         foreach ($permohonan->users as $user) {
             if($user->CUSTOMERID == $idUser) {
@@ -157,6 +158,8 @@ class PermohonanBaruController extends Controller
                                 ));
             }
         }
+
+        $permohonan->save();
     }
 
     public function saveMasaSebenar(Request $request){

@@ -39,6 +39,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('input[name=gaji-'+is_individu+']').val(""); 
     $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
+    // Clear up kadar
+
     $.ajax({
         url: 'user/semakan-pekerja/' + id_user,
 
@@ -75,6 +77,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
             $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(data.permohonan.tarikh_mula_kerja);
             $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
+            $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
+            $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
             $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
             $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
