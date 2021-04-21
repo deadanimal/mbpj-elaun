@@ -91,14 +91,15 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
             $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
 
-            jenisHariArrayCheckBox.forEach(jenisHari => {
-                let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.kadar_jam ? '-siang' : '-malam';
+            jenisHariArrayCheckBox.slice(0, jenisHariArrayCheckBox
+                .findIndex(jenisHari => jenisHari == data.permohonan.jenis_hari))
+                .forEach(jenisHari => {
+                    let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.permohonan.kadar_jam ? '-siang' : '-malam';
 
-                if (document.getElementById(jenisHari).value != data.jenis_hari) { break; }
-
-                document.getElementById(jenisHari).checked = true;
-                document.getElementById(jenisHari+siangOrMalam).checked = true;
-            });
+                    document.getElementById(jenisHari).checked = true;
+                    document.getElementById(jenisHari + siangOrMalam).checked = true;
+                    document.getElementById(jenisHari+'Block').style.display = "block";
+                });
 
             switch (jenisPermohonan) {
                 case "OT1":
