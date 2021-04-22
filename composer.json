@@ -12,6 +12,7 @@
         "doctrine/dbal": "2.12.1",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.4",
+        "harvesthq/chosen": "^1.8",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",

@@ -339,8 +339,8 @@ class permohonanController extends Controller
 
         $userID = $request->input('id_user'); 
         $jabatans = $this->findJabatans()->get();
-        $pegawaiSokong = $this->findPegawaiSokong()->where('CUSTOMERID','!=',$userID)->get();
-        $pegawaiLulus = $this->findPegawaiLulus()->where('CUSTOMERID','!=',$userID)->get();
+        $pegawaiSokong = $this->findPegawaiSokong()->where('CUSTOMERID','!=',$userID)->orderBy('NAME','asc')->get();
+        $pegawaiLulus = $this->findPegawaiLulus()->where('CUSTOMERID','!=',$userID)->orderBy('NAME','asc')->get();
         return response()->json([
             'jabatans' => $jabatans,
             'pegawaiSokong' => $pegawaiSokong,
