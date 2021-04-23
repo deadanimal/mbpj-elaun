@@ -65,7 +65,7 @@ class tuntutanController extends Controller
         $jenis_permohonan = $request->input('jenisPermohonan');
         $currUserID = auth()->user()->CUSTOMERID;
         if($jenis_permohonan == 'EL1'){
-            $permohonan = User::find(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+            $permohonan = User::findOrFail(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
                         'error' => false,
                         'permohonan'  => $permohonan,
@@ -73,8 +73,8 @@ class tuntutanController extends Controller
 
         }
         else if($jenis_permohonan == "EL2"){
-            $permohonanUsers = PermohonanBaru::find($id_permohonan_baru)->users()->get()->toArray();
-            $permohonan = PermohonanBaru::find($id_permohonan_baru);
+            $permohonanUsers = PermohonanBaru::findOrFail($id_permohonan_baru)->users()->get()->toArray();
+            $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
             return response()->json([
                         'error' => false,
                         'permohonanUsers' =>  $permohonanUsers,
@@ -107,7 +107,7 @@ class tuntutanController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $permohonan = PermohonanBaru::find($id);
+        $permohonan = PermohonanBaru::findOrFail($id);
         event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));
         return response()->json([
             'permohonan' => $permohonan
@@ -171,7 +171,7 @@ class tuntutanController extends Controller
     public function destroy(Request $request,$id)
     {
         //
-        $permohonan = PermohonanBaru::find($id);
+        $permohonan = PermohonanBaru::findOrFail($id);
         $permohonan->is_deleted = 1;
         $permohonan->save();
         $permohonan->refresh();

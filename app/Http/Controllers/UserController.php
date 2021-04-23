@@ -33,7 +33,7 @@ class UserController extends Controller
         $role = $request->input('role');
         $is_active = $request->input('is_active');
 
-        $user = User::find($userId);
+        $user = User::findOrFail($userId);
         $user->role_id = $role;
         $user->is_active = $is_active;
 
@@ -121,7 +121,7 @@ class UserController extends Controller
     {
         return response()->json([
                     'error' => false,
-                    'users'  => User::with('maklumat_pekerjaan')->find($id),
+                    'users'  => User::with('maklumat_pekerjaan')->findOrFail($id),
                 ], 200);
     }
 

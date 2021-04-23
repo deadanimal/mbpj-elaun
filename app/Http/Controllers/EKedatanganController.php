@@ -10,7 +10,7 @@ class EKedatanganController extends Controller
 {
     public function findEkedatangan($id_user)
     {
-        $user_ekedatangan = User::with('ekedatangan')->find($id_user);
+        $user_ekedatangan = User::with('ekedatangan')->findOrFail($id_user);
 
         return response()->json([
                     'error' => false,

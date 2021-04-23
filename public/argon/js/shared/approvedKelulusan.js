@@ -23,7 +23,6 @@ function approvedKelulusanAjax(id_permohonan_baru, pilihan) {
         url: "permohonan-baru/semakan-kelulusan/" + id_permohonan_baru,
         type: 'POST',
         success: function() {
-            console.log('Approved');
             Swal.fire(
                 'Permohonan Diluluskan',
                 'Sedang Diproses',
@@ -32,7 +31,7 @@ function approvedKelulusanAjax(id_permohonan_baru, pilihan) {
             showDatatable(pilihan);                    
         },
         error: function() {
-            console.log('failed');
+            console.log('approval failed');
         } 
     });
 }

@@ -19,7 +19,7 @@ class senaraiOnCallController extends Controller
     public function index()
     {
         return view('core.penyelia.senaraiOnCall')
-                    ->with('jabatan', MaklumatPekerjaan::find(Auth::id())->jabatan->GE_KETERANGAN_JABATAN);
+                    ->with('jabatan', MaklumatPekerjaan::findOrFail(Auth::id())->jabatan->GE_KETERANGAN_JABATAN);
     }
 
     /**
@@ -52,7 +52,7 @@ class senaraiOnCallController extends Controller
     public function show(Request $request,$id)
     {
         $arrayUsers = array();
-        $jabatanAuthUser = MaklumatPekerjaan::find(Auth::id())->HR_JABATAN;
+        $jabatanAuthUser = MaklumatPekerjaan::findOrFail(Auth::id())->HR_JABATAN;
         $users = User::with(['role', 'maklumat_pekerjaan'])->get();
 
         $usersInJabatan = $users->filter(function ($user) use ($jabatanAuthUser) {

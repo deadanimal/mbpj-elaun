@@ -17,37 +17,37 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function findPermohonanWithID($jenisPermohonan, $id){
-        return $permohonans = User::find($id)->permohonans()
+        return $permohonans = User::findOrFail($id)->permohonans()
                                 ->where('jenis_permohonan', $jenisPermohonan)
                                 ->statusAkhirBelomDiterima();
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $idUser){
-        return User::find($idUser)->permohonans()
+        return User::findOrFail($idUser)->permohonans()
                                 ->where('jenis_permohonan_kakitangan', $jenisPermohonan)
                                 ->statusAkhirBelomDiterima()
                                 ->get();
     }
 
     public function findPermohonanWithIDSemakan($jenisPermohonan,$jenisPermohonanKT,$id){
-        return $permohonans = User::find($id)->permohonans()
+        return $permohonans = User::findOrFail($id)->permohonans()
                                 ->whereIn('jenis_permohonan',$jenisPermohonan)
                                 ->whereIn('jenis_permohonan_kakitangan',$jenisPermohonanKT)
                                 ->statusAkhirBelomDiterima();
     }
 
     public function findAllPermohonan($id){
-        return $permohonans = User::find($id)->permohonans();
+        return $permohonans = User::findOrFail($id)->permohonans();
     }
 
     public function findPermohonanUser($idUser){
-        return User::find($idUser)->permohonans;
+        return User::findOrFail($idUser)->permohonans;
     }
 
     public function findPermohonanForReject($id,$idPermohonanBaru){
-        return $permohonans = PermohonanBaru::find($idPermohonanBaru)
+        return $permohonans = PermohonanBaru::findOrFail($idPermohonanBaru)
                                 ->users()
-                                ->find($id);
+                                ->findOrFail($id);
     }
 
     public function findPegawaiSokong(){

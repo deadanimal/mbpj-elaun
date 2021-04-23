@@ -7,10 +7,6 @@ Route::group([
 	'role:8'
 	]], function () {
 	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
-	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
-	Route::resource('/tag', 'TagController', ['except' => ['show']]);
-	Route::resource('/item', 'ItemController', ['except' => ['show']]);
-	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'semakan'], function () {

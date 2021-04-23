@@ -68,5 +68,6 @@
     <script src="{{ asset('argon') }}/js/shared/terimaSemuaPermohonan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/changeDataTarget.js"></script>
     <script src="{{ asset('argon') }}/js/shared/saveCatatan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/hariKadarJam.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
 @endpush

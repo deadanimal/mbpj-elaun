@@ -580,6 +580,7 @@ function getPegawai(){
                         }
                     
                 })
+
             })
         }
       })

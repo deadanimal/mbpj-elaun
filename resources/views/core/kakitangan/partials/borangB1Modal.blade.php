@@ -314,7 +314,7 @@
                 <input name="jenisPermohonanReal" value="" hidden>
                 <input name="idPermohonan" value="" hidden>
                 <button onclick="event.preventDefault();closeModal('borangB1Modal');" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button onclick="event.preventDefault();hantarPengesahan();" type="button" class="btn btn-primary">Hantar Untuk Pengesahan</button>
+                <button onclick="event.preventDefault();saveMasa();" type="button" class="btn btn-primary">Hantar Untuk Pengesahan</button>
             </div>
         </div>
     </div>
