@@ -114,47 +114,43 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 
             switch (jenisPermohonan) {
                 case "OT1":
-                    block_ekedatanganIndividu.style.display = "none";
                     fillInGaji(id_user, id_permohonan_baru, is_individu);
                     break;
                 case "OT2":
-                    block_ekedatanganBerkumpulan.style.display = "none";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
                     break;
                 case "EL1":
-                    block_ekedatanganIndividu.style.display = "block";
+                case "PS1":
+                case "KP1":
+                case "KS1":
                     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
                     break;
                 case "EL2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                    break;
-                case "PS1":
-                    block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                    break;
                 case "PS2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                    break;
-                case "KP1":
-                    block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                    break;
                 case "KP2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                    break;
-                case "KS1":
-                    block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
-                    break;
                 case "KS2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-                default:
-                    break;
+                // case "PS1":
+                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "PS2":
+                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KP1":
+                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KP2":
+                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KS1":
+                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KS2":
+                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // default:
+                //     break;
             }
         },
         error: function(data) { console.log(data); }
