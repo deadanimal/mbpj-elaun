@@ -28,7 +28,7 @@ class PermohonanNeedKemaskiniEmailNotification extends Notification implements S
 
         foreach ($permohonan->catatans as $catatan) {
             $this->catatan_latest = $catatan->catatan;
-            $user = User::find($catatan->id_user);
+            $user = User::findOrFail($catatan->id_user);
             $this->penulis_catatan = $user->name;
             break;
         }

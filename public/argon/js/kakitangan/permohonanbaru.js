@@ -502,7 +502,7 @@ function getPegawai(){
                 //     }
                 // }
                 var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
-                $('#pegawaiSokongID').append(optgroup,option)
+                $('#pegawaiSokongID').append(option)
                 $('#pegawaiSokongBK').append(option)
             })
             pegawaiLulus.forEach((element,index) => {

@@ -75,8 +75,8 @@ function deletePermohonan(id_permohonan_baru){
     });
 }
 
-function hantarPengesahan(){
-    var id_user = document.querySelector("#nopekerja").value;
+function hantarPengesahan(id_user,id_permohonan_baru){
+    
     var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD/MM/YYYY").format("DD/MM/YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
@@ -85,7 +85,7 @@ function hantarPengesahan(){
     var jenisPermohonanReal = $("#borangB1Modal input[name=jenisPermohonanReal]").val();
     var waktu = $("#borangB1Modal input[name=radioWaktu]").val();
     var tujuan = $("#borangB1Modal textarea[name=tujuan]").val();
-    var id_permohonan_baru = $("#borangB1Modal input[name=idPermohonan]").val();
+
     console.log(tarikhMula);
     console.log(jenisPermohonanKT)
     console.log(id_permohonan_baru)
@@ -101,7 +101,6 @@ function hantarPengesahan(){
         jenis_permohonan:jenisPermohonanReal,
         
     }
-    saveMasa(id_user,id_permohonan_baru);
     $.ajax({
         url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
         type: 'put', 
@@ -147,7 +146,9 @@ function timeStringToMins(s) {
     return   z(diff/60 | 0) + z(diff % 60); 
 }
 
-function saveMasa(id_user,id_permohonan_baru){
+function saveMasa(){
+    var id_user = document.querySelector("#nopekerja").value;
+    var id_permohonan_baru = $("#borangB1Modal input[name=idPermohonan]").val();
     var waktuMasuk = $("#borangB1Modal input[name=tarikhKerjaMula]").val()
     var waktuKeluar = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val()
     var mulaKerja = $("#borangB1Modal input[name=masaMula]").val()
@@ -162,6 +163,7 @@ function saveMasa(id_user,id_permohonan_baru){
             mulaKerja:mulaKerja,
             akhirKerja:akhirKerja
         }, success: function(data) {
+            hantarPengesahan(id_user,id_permohonan_baru)
             console.log('dasdsadsa');
            console.log(data);
 

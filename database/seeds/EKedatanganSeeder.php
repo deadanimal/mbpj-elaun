@@ -12,6 +12,6 @@ class EKedatanganSeeder extends Seeder
      */
     public function run()
     {
-        factory(eKedatangan::class, 60)->create();
+        factory(eKedatangan::class, 20)->create();
     }
 }

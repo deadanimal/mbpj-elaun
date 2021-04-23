@@ -57,7 +57,7 @@ function fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu) {
             $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(masa_mula_sebenar); 
             $('#formModalEdit input[name=masaAkhirSebenar-'+is_individu+']').val(masa_akhir_sebenar);
 
-            // VALUE STORES THE ID OF USER FOR KEMASKINI
+            // USER_ID AND ID_PERMOHONAN ARE STORED IN THE VALUE ATTRIBUTE
             document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').setAttribute("value", idKakitangan);
             document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').setAttribute("value", id_permohonan_baru);
         },

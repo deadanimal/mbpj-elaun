@@ -7,10 +7,6 @@ Route::group([
 	'role:2'
 	]], function () {
 	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
-	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
-	Route::resource('/tag', 'TagController', ['except' => ['show']]);
-	Route::resource('/item', 'ItemController', ['except' => ['show']]);
-	Route::resource('/role', 'RoleController', ['except' => ['show', 'destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'semakan'], function () {
@@ -80,6 +76,8 @@ Route::group([
 		]);
 	});
 
+	Route::put('/semakan/masa-sebenar/{id}', 'PermohonanBaruController@saveMasaSebenar');
+
 	Route::resource('penyelia-dashboard','penyelia\penyeliaController',['except' => ['destroy']]);
 	Route::resource('penyelia-semakan','penyelia\semakanController',['except' => ['destroy']]);
 	Route::resource('penyelia-laporan','penyelia\laporanController',['except' => ['show','destroy']]);
@@ -96,7 +94,6 @@ Route::group([
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );
-	Route::put('/semakan/masa-sebenar/{id}', 'PermohonanBaruController@saveMasaSebenar' );
 	Route::get('/tuntutan-elaun/{id}', 'PermohonanBaruController@findGajiElaun' );
 	Route::put('/permohonan-baru/kemaskini/{id}', 'PermohonanBaruController@kemaskiniModal' );
 	Route::get('/masa-sebenar/{id}', 'PermohonanBaruController@retrieveMasaSebenar');
