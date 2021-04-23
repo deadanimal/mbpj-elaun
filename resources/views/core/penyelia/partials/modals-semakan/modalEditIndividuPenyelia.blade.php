@@ -88,7 +88,7 @@
 
                                 <div class="form-group mb-5">
                                     <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
-                                </div>==
+                                </div>
                             </form>
                         </div>
                         <div class="col-md-6">
