@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-5">
-                                    <button type="button" onclick="kemaskiniModal('berkumpulan')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini Masa') }}</button>
+                                    <button type="button" onclick="kemaskiniModal('berkumpulan')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">{{ __('Lokasi') }}</label>

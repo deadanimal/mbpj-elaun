@@ -1,35 +1,54 @@
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
+    var jenisHariArrayCheckBox = new Array ('hariBiasa', 'hariRehat', 'hariAm');
+    var kadarJamArrayCheckbox =  new Array (
+                                                'hariBiasa-siang',
+                                                'hariBiasa-malam',
+                                                'hariRehat-siang',
+                                                'hariRehat-malam',
+                                                'hariAm-siang',
+                                                'hariAm-malam'
+                                            );
+    var ekedatanganAttributes = new Array (
+                                            'tarikh',
+                                            'waktuMasuk',
+                                            'waktuKeluar',
+                                            'jumlahWaktuKerja',
+                                            'waktuMasukOT1',
+                                            'waktuKeluarOT1',
+                                            'jumlahOT1',
+                                            'waktuMasukOT2',
+                                            'waktuKeluarOT2',
+                                            'jumlahOT2',
+                                            'waktuMasukOT3',
+                                            'waktuKeluarOT3',
+                                            'jumlahOT3',
+                                            'jumlahOTKeseluruhan',
+                                            'waktuAnjal'
+                                            );
+    var detailPermohonan = new Array (
+                                        'tarikhMohon',
+                                        'tarikhMulaKerja',
+                                        'tarikhAkhirKerja',
+                                        'masaMula',
+                                        'masaAkhir',
+                                        'tujuan',
+                                        'lokasi',
+                                        );
 
     // Clear up name and no pekerja for Elaun
     $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
     $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
 
     // Clear up Ekedatangan
-    $("#formEkedatangan input[name=tarikh]").val("");
-    $("#formEkedatangan input[name=waktuMasuk]").val("");
-    $("#formEkedatangan input[name=waktuKeluar]").val("");
-    $("#formEkedatangan input[name=jumlahWaktuKerja]").val("");
-    $("#formEkedatangan input[name=waktuMasukOT1]").val("");
-    $("#formEkedatangan input[name=waktuKeluarOT1]").val("");
-    $("#formEkedatangan input[name=jumlahOT1]").val("");
-    $("#formEkedatangan input[name=waktuMasukOT2]").val("");
-    $("#formEkedatangan input[name=waktuKeluarOT2]").val("");
-    $("#formEkedatangan input[name=jumlahOT2]").val("");
-    $("#formEkedatangan input[name=waktuMasukOT3]").val("");
-    $("#formEkedatangan input[name=waktuKeluarOT3]").val("");
-    $("#formEkedatangan input[name=jumlahOT3]").val("");
-    $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val("");
-    $("#formEkedatangan input[name=waktuAnjal]").val("");
+    ekedatanganAttributes.forEach(att => {
+        $("#formEkedatangan input[name="+att+"]").val("");
+    });
 
     // Clear up detail permohonan
-    $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val("");
-    $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val("");
-    $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val("");
-    $('#formModalEdit input[name=masaMula-'+is_individu+']').val("");
-    $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val("");
-    $('#formModalEdit input[name=tujuan-'+is_individu+']').val("");
-    $('#formModalEdit input[name=lokasi-'+is_individu+']').val(""); 
+    detailPermohonan.forEach(att => {
+        $('#formModalEdit input[name='+att+'-'+is_individu+']').val("");
+    });
 
     // Clear up masa sebenar
     $('#formModalEdit input[name=masaMulaSebenar-'+is_individu+']').val(""); 
@@ -39,20 +58,17 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     $('input[name=gaji-'+is_individu+']').val(""); 
     $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
-    $.ajax({
-        url: 'user/semakan-pekerja/' + id_user,
-
-        type: 'GET', 
-        success: function(data) {
-            $("#formModalEdit input[name=nama]").val(data.users.NAME);
-            $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
-
-            $('input').css('color', 'black')
-        },
-        error: function(data) {
-            console.log(data);
-        } 
+    // Clear up kadar Jam
+    jenisHariArrayCheckBox.forEach(jenisHari => {
+        document.getElementById(jenisHari).checked = false;
+        document.getElementById(jenisHari+'Block').style.display = "none";
     });
+
+    kadarJamArrayCheckbox.forEach(jenisKadar => {
+        document.getElementById(jenisKadar).checked = false;
+    });
+
+    fillInUserDetail(id_user);
    
     $.ajax({
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
@@ -77,54 +93,83 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
             $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
             $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
-            $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
-            $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
+            $('#detailPermohananAccordion input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
+            $('#detailPermohananAccordion input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
+
+            jenisHariArrayCheckBox.forEach(jenisHari => {
+                let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.permohonan.kadar_jam ? '-siang' : '-malam';
+
+                if (jenisHari == data.permohonan.jenis_hari) {
+                    document.getElementById(jenisHari).checked = true;
+                    document.getElementById(jenisHari + siangOrMalam).checked = true;
+                    document.getElementById(jenisHari+'Block').style.display = "block";
+                } else {
+                    document.getElementById(jenisHari).checked = false;
+                    document.getElementById(jenisHari + siangOrMalam).checked = false;
+                    document.getElementById(jenisHari+'Block').style.display = "none";
+                }
+            });
+
+
 
             switch (jenisPermohonan) {
                 case "OT1":
-                    block_ekedatanganIndividu.style.display = "none";
                     fillInGaji(id_user, id_permohonan_baru, is_individu);
                     break;
                 case "OT2":
-                    block_ekedatanganBerkumpulan.style.display = "none";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
                     break;
                 case "EL1":
-                    block_ekedatanganIndividu.style.display = "block";
+                case "PS1":
+                case "KP1":
+                case "KS1":
                     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
                     break;
                 case "EL2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                    break;
-                case "PS1":
-                    block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                    break;
                 case "PS2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                    break;
-                case "KP1":
-                    block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                    break;
                 case "KP2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
-                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                    break;
-                case "KS1":
-                    block_ekedatanganIndividu.style.display = "block";
-                    fillInKedatangan(data.senaraiKakitangan[0].id, jenisPermohonan, id_permohonan_baru);
-                    break;
                 case "KS2":
-                    block_ekedatanganBerkumpulan.style.display = "block";
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-                default:
-                    break;
+                // case "PS1":
+                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "PS2":
+                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KP1":
+                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KP2":
+                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KS1":
+                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // case "KS2":
+                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                //     break;
+                // default:
+                //     break;
             }
         },
         error: function(data) { console.log(data); }
+    });
+}
+
+function fillInUserDetail(id_user) {
+    $.ajax({
+        url: 'user/semakan-pekerja/' + id_user,
+
+        type: 'GET', 
+        success: function(data) {
+            $("#formModalEdit input[name=nama]").val(data.users.NAME);
+            $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
+
+            $('input').css('color', 'black')
+        },
+        error: function(data) {
+            console.log(data);
+        } 
     });
 }

@@ -41,7 +41,7 @@ class permohonanController extends Controller
 
     public function sendEmailNotificationToPegawaiSokong(PermohonanBaru $permohonan)
     {
-        $pegawai_sokong = User::find($permohonan->id_peg_sokong);
+        $pegawai_sokong = User::findOrFail($permohonan->id_peg_sokong);
         $pegawai_sokong->notify(new PermohonanNeedApprovalEmailNotification($pegawai_sokong));  
     }
 
@@ -152,7 +152,7 @@ class permohonanController extends Controller
                 if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
                     foreach($pekerja as $pekerjas){
                         // dd($pekerjas);
-                        $users = User::find($pekerjas)->pluck('id');
+                        $users = User::findOrFail($pekerjas)->pluck('id');
                         // dd($users);
                         // print_r($users);
                         $permohonans->users()->attach($users);
@@ -314,7 +314,7 @@ class permohonanController extends Controller
     $jenis_permohonan = $request->input('jenis_permohonan');
     $currUserID = auth()->user()->CUSTOMERID;
         if($jenis_permohonan == 'OT1'){
-            $permohonan = User::find(auth()->user()->CUSTOMERID)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+            $permohonan = User::findOrFail(auth()->user()->CUSTOMERID)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
                         'error' => false,
                         'permohonan'  => $permohonan,
@@ -322,8 +322,8 @@ class permohonanController extends Controller
 
         }
         else if($jenis_permohonan == "OT2"){
-            $permohonanUsers = PermohonanBaru::find($id_permohonan_baru)->users()->get()->toArray();
-            $permohonan = PermohonanBaru::find($id_permohonan_baru);
+            $permohonanUsers = PermohonanBaru::findOrFail($id_permohonan_baru)->users()->get()->toArray();
+            $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
             return response()->json([
                         'error' => false,
                         'permohonanUsers' =>  $permohonanUsers,
@@ -339,8 +339,8 @@ class permohonanController extends Controller
 
         $userID = $request->input('id_user'); 
         $jabatans = $this->findJabatans()->get();
-        $pegawaiSokong = $this->findPegawaiSokong()->where('CUSTOMERID','!=',$userID)->get();
-        $pegawaiLulus = $this->findPegawaiLulus()->where('CUSTOMERID','!=',$userID)->get();
+        $pegawaiSokong = $this->findPegawaiSokong()->where('CUSTOMERID','!=',$userID)->orderBy('NAME','asc')->get();
+        $pegawaiLulus = $this->findPegawaiLulus()->where('CUSTOMERID','!=',$userID)->orderBy('NAME','asc')->get();
         return response()->json([
             'jabatans' => $jabatans,
             'pegawaiSokong' => $pegawaiSokong,
@@ -352,7 +352,7 @@ class permohonanController extends Controller
     public function getOncall(Request $request){
 
         $id = $request->input('id_user');
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return response()->json([
             'user' => $user
         ],200);

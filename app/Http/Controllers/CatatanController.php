@@ -12,7 +12,7 @@ class CatatanController extends Controller
     public function saveCatatan(Request $request, $idPermohananBaru)
     {
         $array = array();
-        $permohonan = PermohonanBaru::find($idPermohananBaru);
+        $permohonan = PermohonanBaru::findOrFail($idPermohananBaru);
         $catatan = new Catatan([
             'catatan' => $request->input('catatan'),
             'jenis_permohonan' => $request->input('jenis_permohonan'),

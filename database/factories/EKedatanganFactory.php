@@ -2,13 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+
 use App\eKedatangan;
 use Faker\Generator as Faker;
+use App\permohonan_with_users;
 
 $factory->define(eKedatangan::class, function (Faker $faker) {
     return [
-        'CUSTOMERID' => User::all()->random()->CUSTOMERID,
+        'CUSTOMERID' => permohonan_with_users::all()->random()->CUSTOMERID,
         'tarikh' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'waktu_masuk' => $faker->time($format = 'H:i',$max = 'now'),
         'waktu_keluar' => $faker->time($format = 'H:i', $max = 'now'),
