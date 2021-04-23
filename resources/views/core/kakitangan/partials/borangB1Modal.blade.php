@@ -119,7 +119,24 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row mb-2">
+                                    <div class="col form-group">
+                                        <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
+                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
+     
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                    <div class="col form-group">
+                                        <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
+                                        <input class="form-control form-control-sm" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="">
+    
+                                        @include('alerts.feedback', ['field' => 'name'])
+                                    </div>
+                                </div>
+                                <div class="form-group mb-5">
+                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini Masa') }}</button>
+                                </div>
+                                <!-- <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('Hari') }}</label>
@@ -165,7 +182,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row"> 
                                     <div class="col-sm-12">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">

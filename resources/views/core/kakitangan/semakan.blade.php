@@ -124,5 +124,6 @@
     <script src="{{ asset('argon') }}/js/kakitangan/semakan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarPengesahan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/eKedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>
 
 @endpush

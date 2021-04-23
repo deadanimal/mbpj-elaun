@@ -137,22 +137,7 @@ function disableHantar(){
 }
 
 $(document).ready(function(){
-    $("#pegawaiSokongID").select2({
-        theme: 'bootstrap4',
-        placeholder: "Pilih Pegawai Sokong",
-    });
-    $("#pegawaiLulusID").select2({
-        theme: 'bootstrap4',
-        placeholder: "Pilih Pegawai Lulus",
-    });
-    $("#pegawaiSokongBK").select2({
-        theme: 'bootstrap4',
-        placeholder: "Pilih Pegawai Sokong",
-    });
-    $("#pegawaiLulusBK").select2({
-        theme: 'bootstrap4',
-        placeholder: "Pilih Pegawai Lulus",
-    });
+    initSelect();
     $('#pegawaiSokongID').change(function(e) {
         var selectVal = $('#pegawaiSokongID').val()
         console.log($('#pegawaiLulusID').find("option[value='"+selectVal+"']").text())
@@ -171,9 +156,25 @@ $(document).ready(function(){
         }
     
     });
-    $('#pegawaiSokongID').trigger('change');
-    $('#pegawaiSokongBK').trigger('change');
 
+    $('#pegawaiLulusID').change(function(e) {
+        var selectVal = $('#pegawaiLulusID').val()
+        console.log($('#pegawaiSokongID').find("option[value='"+selectVal+"']").text())
+        if ($('#pegawaiLulusID').find("option[value='"+selectVal+"']").text() == $('#pegawaiSokongID').find("option[value='"+selectVal+"']").text()){
+            $('#pegawaiSokongID option[disabled]').prop('disabled', false);
+            $('#pegawaiSokongID').find("option[value='"+selectVal+"']").prop('disabled',true)
+        }
+    
+    });
+    $('#pegawaiLulusBK').change(function(e) {
+        var selectVal = $('#pegawaiLulusBK').val()
+        console.log($('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text())
+        if ($('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text() == $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text()){
+            $('#pegawaiSokongBK option[disabled]').prop('disabled', false);
+            $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").prop('disabled',true)
+        }
+    
+    });
     fillForm();
     getPegawai();
     getIndividuDT();
@@ -182,7 +183,30 @@ $(document).ready(function(){
     disableHantar();
 })
 
+function initSelect(){
+    $("#pegawaiSokongID").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Sokong",
+    });
+    $("#pegawaiLulusID").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Lulus",
+    });
+    $("#pegawaiSokongBK").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Sokong",
+    });
+    $("#pegawaiLulusBK").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Lulus",
+    });
+    
+    $('#pegawaiSokongID').trigger('change');
+    $('#pegawaiSokongBK').trigger('change');
+    $('#pegawaiLulusID').trigger('change');
+    $('#pegawaiLulusBK').trigger('change');
 
+}
 
 function setEnableDropdown(){
     edit = 0;
