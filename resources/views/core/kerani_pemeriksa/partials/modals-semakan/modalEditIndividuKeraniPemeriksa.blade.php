@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-5 border-right">
+                        <div class="col-md-6 border-right">
                             <div class="text-left mb-4">
                                 <h5>* Jenis Permohonan</h5>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-sm" id="pilihanJenisPermohonanIndividuInModal" placeholder="" readonly>
@@ -88,56 +88,60 @@
 
                                 <div class="form-group mb-5">
                                     <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">{{ __('Lokasi') }}</label>
-                                    <input class="form-control form-control-sm" name="lokasi-individu" id="semakan-modal-individu-lokasi" type="text" placeholder="">
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
-                                    <textarea class="form-control form-control-sm" name="tujuan-individu" id="semakan-modal-individu-tujuan" rows="3"></textarea>
-
-                                    @include('alerts.feedback', ['field' => 'name'])
-                                </div>
+                                </div>==
                             </form>
                         </div>
-                        
-                        <div class="col-md-7">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label class="form-control-label">{{ __('Gaji') }}</label>
-                                        <input class="form-control form-control-sm" name="gaji-individu" id="semakan-modal-individu-gaji" type="text" placeholder="">
+                        <div class="col-md-6">
+                            <div class="accordion" id="detailPermohananAccordion">
+                                <div class="accordion-item">
+                                <h2 class="accordion-header" id="sebabLokasiHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sebabLokasiContent" aria-expanded="true" aria-controls="sebabLokasiContent">
+                                        Sebab & Lokasi
+                                    </button>
+                                </h2>
+                                <div id="sebabLokasiContent" class="accordion-collapse collapse" aria-labelledby="sebabLokasiHeading" data-bs-parent="#detailPermohananAccordion">
+                                    <div class="accordion-body">
+                                        <div class="form-group">
+                                            <label class="form-control-label">{{ __('Lokasi') }}</label>
+                                            <input class="form-control form-control-sm" name="lokasi-individu" id="semakan-modal-individu-lokasi" type="text" placeholder="">
         
-                                        @include('alerts.feedback', ['field' => 'name'])
+                                            @include('alerts.feedback', ['field' => 'name'])
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
+                                            <textarea class="form-control form-control-sm" name="tujuan-individu" id="semakan-modal-individu-tujuan" rows="3"></textarea>
+        
+                                            @include('alerts.feedback', ['field' => 'name'])
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="form-group mb-2">
-                                        <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Jumlah Tuntutan Elaun') }}</label>
-                                        <input class="form-control form-control-sm" name="tuntutanElaun-individu" id="semakan-modal-individu-tuntutanElaun" type="text" placeholder="">
-        
-                                        @include('alerts.feedback', ['field' => 'name'])
+                                </div>
+                                <div class="accordion-item">
+                                <h2 class="accordion-header" id="eKedatanganHeading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#eKedatanganContent" aria-expanded="false" aria-controls="eKedatanganContent">
+                                    eKedatangan
+                                    </button>
+                                </h2>
+                                <div id="eKedatanganContent" class="accordion-collapse collapse show" aria-labelledby="eKedatanganHeading" data-bs-parent="#detailPermohananAccordion">
+                                    <div class="accordion-body">
+                                        @include('core.kerani_pemeriksa.partials.modals-semakan.ekedatangan')
                                     </div>
                                 </div>
+                                </div>
+                                <div class="accordion-item">
+                                <h2 class="accordion-header" id="kelulusanHeading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kelulusanContent" aria-expanded="false" aria-controls="kelulusanContent">
+                                        Kelulusan
+                                    </button>
+                                </h2>
+                                <div id="kelulusanContent" class="accordion-collapse collapse" aria-labelledby="kelulusanHeading" data-bs-parent="#detailPermohananAccordion">
+                                    <div class="accordion-body">
+                                        @include('core.kerani_pemeriksa.partials.modals-semakan.kelulusan')
+                                    </div>
+                                </div>
+                                </div>
                             </div>
-                            <div id="eKedatanganIndividu">
-
-                                {{-- eKedatangan --}}
-                                @include('core.kerani_pemeriksa.partials.modals-semakan.ekedatangan')
-                            </div>
-
-                            {{-- Kelulusan --}}
-                            @include('core.kerani_pemeriksa.partials.modals-semakan.kelulusan')
-
                         </div>
-                        
-                    </div>
-                    <div class="text-center mb-3">
-                        <button type="submit" class="btn btn-sm btn-primary mt-4">{{ __('Tutup') }}</button>
-                    </div>  
                 </div>
             </div>
         </div>

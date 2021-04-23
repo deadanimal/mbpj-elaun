@@ -93,8 +93,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
             $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
             $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
-            $('#formModalEdit input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
-            $('#formModalEdit input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
+            $('#detailPermohananAccordion input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
+            $('#detailPermohananAccordion input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
 
             jenisHariArrayCheckBox.forEach(jenisHari => {
                 let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.permohonan.kadar_jam ? '-siang' : '-malam';
