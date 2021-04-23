@@ -6,8 +6,8 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
     $('input[name=tuntutanElaun-'+is_individu+']').val("");
 
     // Clear up ekedatangan nama and no. pekerja
-    $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
-    $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
+    // $("#ekedatanganModalEL input[name=ekedatanganNama]").val('');
+    // $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val('');
 
     fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu);
     fillInGaji(idKakitangan, id_permohonan_baru, is_individu);
@@ -18,8 +18,29 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
         success: function(data) {
             let array =  ['PS', 'EL', 'KP', 'KS'];
             let jenisPermohonanShortened = jenisPermohonan.substr(0,2);
-            $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
-            $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
+
+            // $("#ekedatanganModalEL input[name=ekedatanganNama]").val(data.user_name);
+            // $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(idKakitangan);
+
+            if (data.ekedatangans === null) {
+                $("#formEkedatangan input[name=tarikh]").val('N/A');
+                $("#formEkedatangan input[name=waktuMasuk]").val('N/A');
+                $("#formEkedatangan input[name=waktuKeluar]").val('N/A');
+                $("#formEkedatangan input[name=jumlahWaktuKerja]").val('N/A');
+                $("#formEkedatangan input[name=waktuMasukOT1]").val('N/A');
+                $("#formEkedatangan input[name=waktuKeluarOT1]").val('N/A');
+                $("#formEkedatangan input[name=jumlahOT1]").val('N/A');
+                $("#formEkedatangan input[name=waktuMasukOT2]").val('N/A');
+                $("#formEkedatangan input[name=waktuKeluarOT2]").val('N/A');
+                $("#formEkedatangan input[name=jumlahOT2]").val('N/A');
+                $("#formEkedatangan input[name=waktuMasukOT3]").val('N/A');
+                $("#formEkedatangan input[name=waktuKeluarOT3]").val('N/A');
+                $("#formEkedatangan input[name=jumlahOT3]").val('N/A');
+                $("#formEkedatangan input[name=jumlahOTKeseluruhan]").val('N/A');
+                $("#formEkedatangan input[name=waktuAnjal]").val('N/A');
+
+                return 0;
+            }
 
             // eKedatangan
             if (array.includes(jenisPermohonanShortened)) {

@@ -37,8 +37,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                                         );
 
     // Clear up name and no pekerja for Elaun
-    $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
-    $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
+    // $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
+    // $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
 
     // Clear up Ekedatangan
     ekedatanganAttributes.forEach(att => {
@@ -74,8 +74,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         success: function(data) {
-            var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
-            var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
+            // var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
+            // var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
 
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
@@ -110,8 +110,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                 }
             });
 
-
-
             switch (jenisPermohonan) {
                 case "OT1":
                     fillInGaji(id_user, id_permohonan_baru, is_individu);
@@ -120,37 +118,37 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan);
                     break;
                 case "EL1":
-                case "PS1":
-                case "KP1":
-                case "KS1":
+                // case "PS1":
+                // case "KP1":
+                // case "KS1":
                     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
                     break;
                 case "EL2":
+                // case "PS2":
+                // case "KP2":
+                // case "KS2":
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                    break;
+                case "PS1":
+                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                    break;
                 case "PS2":
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                    break;
+                case "KP1":
+                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                    break;
                 case "KP2":
+                    fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
+                    break;
+                case "KS1":
+                    fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
+                    break;
                 case "KS2":
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-                // case "PS1":
-                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "PS2":
-                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KP1":
-                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KP2":
-                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KS1":
-                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KS2":
-                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // default:
-                //     break;
+                default:
+                    break;
             }
         },
         error: function(data) { console.log(data); }
