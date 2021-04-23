@@ -137,7 +137,44 @@ function disableHantar(){
 }
 
 $(document).ready(function(){
+    initSelect();
+    $('#pegawaiSokongID').change(function(e) {
+        var selectVal = $('#pegawaiSokongID').val()
+        console.log($('#pegawaiLulusID').find("option[value='"+selectVal+"']").text())
+        if ($('#pegawaiSokongID').find("option[value='"+selectVal+"']").text() == $('#pegawaiLulusID').find("option[value='"+selectVal+"']").text()){
+            $('#pegawaiLulusID option[disabled]').prop('disabled', false);
+            $('#pegawaiLulusID').find("option[value='"+selectVal+"']").prop('disabled',true)
+        }
+    
+    });
+    $('#pegawaiSokongBK').change(function(e) {
+        var selectVal = $('#pegawaiSokongBK').val()
+        console.log($('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text())
+        if ($('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text() == $('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text()){
+            $('#pegawaiLulusBK option[disabled]').prop('disabled', false);
+            $('#pegawaiLulusBK').find("option[value='"+selectVal+"']").prop('disabled',true)
+        }
+    
+    });
 
+    $('#pegawaiLulusID').change(function(e) {
+        var selectVal = $('#pegawaiLulusID').val()
+        console.log($('#pegawaiSokongID').find("option[value='"+selectVal+"']").text())
+        if ($('#pegawaiLulusID').find("option[value='"+selectVal+"']").text() == $('#pegawaiSokongID').find("option[value='"+selectVal+"']").text()){
+            $('#pegawaiSokongID option[disabled]').prop('disabled', false);
+            $('#pegawaiSokongID').find("option[value='"+selectVal+"']").prop('disabled',true)
+        }
+    
+    });
+    $('#pegawaiLulusBK').change(function(e) {
+        var selectVal = $('#pegawaiLulusBK').val()
+        console.log($('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text())
+        if ($('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text() == $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text()){
+            $('#pegawaiSokongBK option[disabled]').prop('disabled', false);
+            $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").prop('disabled',true)
+        }
+    
+    });
     fillForm();
     getPegawai();
     getIndividuDT();
@@ -145,6 +182,31 @@ $(document).ready(function(){
     datePickerInit();
     disableHantar();
 })
+
+function initSelect(){
+    $("#pegawaiSokongID").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Sokong",
+    });
+    $("#pegawaiLulusID").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Lulus",
+    });
+    $("#pegawaiSokongBK").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Sokong",
+    });
+    $("#pegawaiLulusBK").select2({
+        theme: 'bootstrap4',
+        placeholder: "Pilih Pegawai Lulus",
+    });
+    
+    $('#pegawaiSokongID').trigger('change');
+    $('#pegawaiSokongBK').trigger('change');
+    $('#pegawaiLulusID').trigger('change');
+    $('#pegawaiLulusBK').trigger('change');
+
+}
 
 function setEnableDropdown(){
     edit = 0;
@@ -483,32 +545,42 @@ function getPegawai(){
             console.log(data.pegawaiSokong)
             var pegawaiSokong = data.pegawaiSokong
             var pegawaiLulus = data.pegawaiLulus
-            var kodJabatan = {};
-            
-            pegawaiSokong.forEach((element,index) => {
-                // var kod = element.DEPARTMENTCODE
-                // var jabatan;
-                // if(kod.length > 5){
-                //     jabatan = kod.substring(0,2)
-                // }else{
-                //     jabatan = kod.substring(0,1)
-                // }  
-                // if(jabatan)
-                // if(data.jabatans[index].GE_KOD_JABATAN == jabatan)
-                // if(index != 0){
-                //     if(pegawaiSokong[index].DEPARTMENTCODE != pegawaiSokong[index-1].DEPARTMENTCODE){
-                        
-                //         // var optgroup = "<optgroup label='"+data.jabatans[index].GE_KOD_JABATAN+"'></optgroup>"
-                //     }
-                // }
-                var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
-                $('#pegawaiSokongID').append(option)
-                $('#pegawaiSokongBK').append(option)
-            })
-            pegawaiLulus.forEach((element,index) => {
-                var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
-                $('#pegawaiLulusID').append(option)
-                $('#pegawaiLulusBK').append(option)
+            var jabatans = data.jabatans
+            var jabatan;
+            jabatans.forEach((element,index) => {
+                jabatan = element.GE_KOD_JABATAN;
+                var optgroup = "<optgroup label='"+element.GE_KETERANGAN_JABATAN+"'style='height:auto;'>"
+                $('#pegawaiSokongID').append(optgroup)
+                $('#pegawaiSokongBK').append(optgroup)
+                $('#pegawaiLulusID').append(optgroup)
+                $('#pegawaiLulusBK').append(optgroup)
+                    pegawaiSokong.forEach((element,index) => {
+                        if(element.DEPARTMENTCODE.length > 5 ){
+                            var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
+                        }else{
+                            var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
+                        }
+                        if(kodJabatan == jabatan){
+                            var option = "<option class='' value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
+                            $('#pegawaiSokongID').append(option)
+                            $('#pegawaiSokongBK').append(option)
+                        }
+                    
+                })
+                    pegawaiLulus.forEach((element,index) => {
+                        if(element.DEPARTMENTCODE.length > 5 ){
+                            var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
+                        }else{
+                            var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
+                        }
+                        if(kodJabatan == jabatan){
+                            var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
+                            $('#pegawaiLulusID').append(option)
+                            $('#pegawaiLulusBK').append(option)
+                        }
+                    
+                })
+
             })
         }
       })

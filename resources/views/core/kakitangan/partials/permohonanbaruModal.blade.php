@@ -59,7 +59,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="tarikh-kerjaID">{{ __('Tarikh Kerja') }}</label>
-                                        <input name="tarikh-kerjaID" id="tarikh-kerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}"  >
+                                        <input name="tarikh-kerjaID" id="tarikh-kerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" autocomplete="off">
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -81,7 +81,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="tarikh-akhir-kerjaID">{{ __('Tarikh Akhir Kerja') }}</label>
-                                        <input name="tarikh-akhir-kerjaID" id="tarikh-akhir-kerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}"  >
+                                        <input name="tarikh-akhir-kerjaID" id="tarikh-akhir-kerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}"  autocomplete="off">
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -127,7 +127,8 @@
                                 <div class="col-sm">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="pegawaiSokongID">{{ __('Pegawai Sokong') }}</label>
-                                        <select class="custom-select custom-select-sm" name="pegawaiSokongID" id="pegawaiSokongID">
+                                        <select name="pegawaiSokongID" id="pegawaiSokongID">
+                                            <option value=""></option>
                                         </select>
 
                                         @include('alerts.feedback', ['field' => 'name'])
@@ -138,7 +139,8 @@
                                 <div class="col-sm">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="pegawaiLulusID">{{ __('Pegawai Pelulus') }}</label>
-                                        <select class="custom-select custom-select-sm" name="pegawaiLulusID" id="pegawaiLulusID">
+                                        <select class="form-select form-select-sm" name="pegawaiLulusID" id="pegawaiLulusID">
+                                        <option value=""></option>
                                         </select>
 
                                         @include('alerts.feedback', ['field' => 'name'])
@@ -177,6 +179,7 @@
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="pegawaiSokongBK">{{ __('Pegawai Sokong') }}</label>
                                         <select class="custom-select custom-select-sm" name="pegawaiSokongBK" id="pegawaiSokongBK">
+                                        <option value=""></option>
                                         </select>
 
                                         @include('alerts.feedback', ['field' => 'name'])
@@ -186,6 +189,7 @@
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="pegawaiLulusBK">{{ __('Pegawai Pelulus') }}</label>
                                         <select class="custom-select custom-select-sm" name="pegawaiLulusBK" id="pegawaiLulusBK">
+                                        <option value=""></option>
                                         </select>
 
                                         @include('alerts.feedback', ['field' => 'name'])
