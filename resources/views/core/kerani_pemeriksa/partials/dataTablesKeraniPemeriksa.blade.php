@@ -8,11 +8,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4 ml-4 mt-2 text-left">
-                    <button type="button" onclick="terimaSemuaPermohonan()" class="btn btn-sm btn btn-outline-primary">{{ __('Hantar semua') }}</button>
-                </div>
-            </div>
             <div class="table-responsive py-4">
                 <table class="table" id="semakanKPDT">
                     <thead class="thead-light">
