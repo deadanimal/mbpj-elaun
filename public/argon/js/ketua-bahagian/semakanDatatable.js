@@ -138,7 +138,7 @@ function showDatatable(pilihan){
                     targets: [2],
                     type: "date",
                     render: function(data,type,row){
-                        formattedDate = moment(data).format("DD/MM/YYYY");
+                        formattedDate = moment(data).format("DD-MM-YYYY");
                         return formattedDate;
                     }
                 },
@@ -217,10 +217,10 @@ $("#selectJenisPermohonan").on("change",function(){
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
         var valid = true;
-        var min = moment($("#min").val(),"DD/MM/YYYY");
+        var min = moment($("#min").val(),"DD-MM-YYYY");
         if (!min.isValid()) { min = null; }
 
-        var max = moment($("#max").val(),"DD/MM/YYYY");
+        var max = moment($("#max").val(),"DD-MM-YYYY");
         if (!max.isValid()) { max = null; }
 
         if (min === null && max === null) {
@@ -231,7 +231,7 @@ $.fn.dataTable.ext.search.push(
             $.each(settings.aoColumns, function (i, col) {
               
                 if (col.type == "date") {
-                    var cDate = moment(data[i],'DD/MM/YYYY');
+                    var cDate = moment(data[i],'DD-MM-YYYY');
                 
                     if (cDate.isValid()) {
                         if (max !== null && max.isBefore(cDate)) {
@@ -256,11 +256,11 @@ $("#semakKetuaBahagian").click(function () {
 });
 
 $('#min').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 
 $('#max').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

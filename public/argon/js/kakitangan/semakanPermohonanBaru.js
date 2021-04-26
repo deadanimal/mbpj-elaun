@@ -51,7 +51,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
         success: function(data) {
         //    console.log(data.permohonan.permohonan_with_users.id)
             if( jenis_permohonan == 'OT1'){
-                var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
+                var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 $("#permohonanbaruModal").modal("show");
                 $("#jenisPermohonan").val("frmPermohonanIndividu");
                 document.getElementById("jenisPermohonan").disabled = true;
@@ -64,7 +64,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $("#permohonanbaruModal").modal("show");
                 console.log('ot1',jenis_permohonan)
             }else if(jenis_permohonan == 'OT2'){
-                var tarikhKerjaBK = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
+                var tarikhKerjaBK = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 console.log(data);
                 for(i = 0;i<data.permohonanUsers.length;i++){
                     if(data.permohonanUsers[i].id != data.userId){
@@ -117,7 +117,7 @@ function hantarPermohonanBerkumpulan(){
     console.log(edit)
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
     var pegPelulusBK = document.querySelector("#pegawaiLulusBK").value;
-    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD / MM / YYYY").format("YYYY-MM-DD");
+    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD-MM-YYYY").format("DD-MM-YYYY");
     var masaMulaBK = document.querySelector("#masa-mulaBK").value;
     var masaAkhirBK = document.querySelector("#masa-akhirBK").value;
     var sebab = document.querySelector("#sebabBK").value;
@@ -224,8 +224,8 @@ function hantarPermohonanIndividu(){
     var namaPekerjaID = document.querySelector("#namaPekerjaID").value;
     var pegPelulusID = document.querySelector("#pegawaiLulusID").value;
     var pegSokongID = document.querySelector("#pegawaiSokongID").value;
-    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD / MM / YYYY").format("YYYY-MM-DD");
-    var tarikhAkhirKerjaID = moment(document.querySelector("#tarikh-akhir-kerjaID").value,"DD / MM / YYYY").format("YYYY-MM-DD");
+    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD-MM-YYYY").format("DD-MM-YYYY");
+    var tarikhAkhirKerjaID = moment(document.querySelector("#tarikh-akhir-kerjaID").value,"DD-MM-YYYY").format("DD-MM-YYYY");
     var masaMulaID = document.querySelector("#masa-mulaID").value;
     var masaAkhirID = document.querySelector("#masa-akhirID").value;
     var sebab = document.querySelector("#sebabID").value;
@@ -236,9 +236,9 @@ function hantarPermohonanIndividu(){
     var hour = masaMulaID.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = individu;
-    var tarikhMula = moment(tarikhKerjaID).format("YYYY/MM/DD")
+    var tarikhMula = moment(tarikhKerjaID).format("DD-MM-YYYY")
     var masaMula = tarikhMula + " " + masaMulaID + ":00"
-    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("YYYY/MM/DD")
+    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("DD-MM-YYYY")
     var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
     console.log(masaMula,masaAkhir)
     console.log('difference',timeDiffCalc(new Date(masaMula),new Date(masaAkhir)));

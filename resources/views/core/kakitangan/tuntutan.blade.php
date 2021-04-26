@@ -47,12 +47,12 @@
                                                 <div class="col-sm-4">
                                                     <label class ="col-form-label col-form-label-sm" for="min">From</label>
                                                     <input id="min"
-                                                        class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                                        class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <label class ="col-form-label col-form-label-sm" for="max">To</label>
                                                     <input id="max"
-                                                        class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                                        class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" >
