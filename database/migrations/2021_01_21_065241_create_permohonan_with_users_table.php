@@ -20,8 +20,7 @@ class CreatePermohonanWithUsersTable extends Migration
             $table->string('no_kumpulan')->default('');
             $table->string('masa_mula_sebenar')->nullable();
             $table->string('masa_akhir_sebenar')->nullable();
-            $table->string('masa_sebenar_siang')->nullable();
-            $table->string('masa_sebenar_malam')->nullable();
+            $table->string('masa_sebenar')->nullable();
             $table->string('jumlah_tuntutan_elaun')->default('0.00');
             $table->integer('is_rejected_individually')->default('0');
             $table->timestamps();

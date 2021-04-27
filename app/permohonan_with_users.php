@@ -13,8 +13,7 @@ class permohonan_with_users extends Model
         'CUSTOMERID',
         'masa_mula_sebenar',
         'masa_akhir_sebenar',
-        'masa_sebenar_siang',
-        'masa_sebenar_malam',
+        'masa_sebenar',
         'no_kumpulan',
         'jumlah_tuntutan_elaun'
     ];

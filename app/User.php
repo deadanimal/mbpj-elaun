@@ -138,8 +138,7 @@ class User extends Authenticatable
                         'masa_mula_sebenar',
                         'masa_akhir_sebenar',
                         'is_rejected_individually',
-                        'masa_sebenar_siang',
-                        'masa_sebenar_malam',
+                        'masa_sebenar',
                         'no_kumpulan',
                         'jumlah_tuntutan_elaun'
                         )
