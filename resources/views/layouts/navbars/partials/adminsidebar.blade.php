@@ -20,10 +20,6 @@
                         <li class="nav-item {{ $elementName == 'profile' ? 'active' : '' }}">
                             <a href="pengurusan-pengguna" class="nav-link">{{ __('Pengurusan Pengguna') }}</a>
                         </li>
-                        <!-- <li class="nav-item  {{ $elementName == 'role-management' ? 'active' : '' }}">
-                            <a href="semakan" class="nav-link">{{ __('Semakan') }}</a>
-                        </li> -->
-                        
                     </ul>
                 </div>
             </li>

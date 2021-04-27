@@ -45,9 +45,17 @@ function showDatatable(){
         id_user = 'noID';
     }
     semakanKPDT = $('#semakanKPDT').DataTable({
-        dom: 'lrtip',
+        dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
+        buttons: [{
+            text: 'Hantar semua', 
+            className:'btn btn-sm btn-outline-primary text-right',
+            attr: {
+                id: 'sendAllPermohonanButton',
+                onclick: 'terimaSemuaPermohonan()'
+            }
+        }],
         language: {
             paginate: {
                 previous: "<",
