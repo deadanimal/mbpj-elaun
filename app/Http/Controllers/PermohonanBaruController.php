@@ -185,7 +185,7 @@ class PermohonanBaruController extends Controller
                                 false);
             })->map(function ($user)  use ($permohonan){
                 return $user->permohonan_with_users
-                            ->masa_sebenar_siang;
+                            ->masa_sebenar;
             });
         }
 

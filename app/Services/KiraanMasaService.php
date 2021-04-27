@@ -54,13 +54,6 @@ public $totalShiftMalam;
         $this->permohonan = $permohonan;
         $this->masaMula = $permohonan->masa_mula;
         $this->masaMula = $permohonan->masa_akhir;
-
-        foreach ($permohonan->users as $user) {
-            if ($user->CUSTOMERID == $id_user) {
-                $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
-                $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
-            }
-        }
     }
 
     public function kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar){
