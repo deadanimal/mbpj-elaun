@@ -148,6 +148,7 @@ class PermohonanBaruController extends Controller
         $idUser = $request->input('id_user');
         $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
         $permohonan->kadar_jam = $request->input('kadar_jam');
+        $permohonan->jenis_hari = $request->input('jenis_hari');
 
         foreach ($permohonan->users as $user) {
             if($user->CUSTOMERID == $idUser) {

@@ -11,6 +11,9 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
+        data: { 
+            id_permohonan_baru : id_permohonan_baru
+        },
         success: function(data) {
             let array =  ['PS', 'EL', 'KP', 'KS'];
             let jenisPermohonanShortened = jenisPermohonan.substr(0,2);
