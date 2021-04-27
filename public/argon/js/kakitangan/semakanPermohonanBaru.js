@@ -1,3 +1,7 @@
+var days;
+var minutes;
+var hours;
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -230,20 +234,22 @@ function hantarPermohonanIndividu(){
     var masaAkhirID = document.querySelector("#masa-akhirID").value;
     var sebab = document.querySelector("#sebabID").value;
     var lokasi = document.querySelector("#lokasiID").value;
-    var hari = moment(tarikhKerjaID).format("dddd");
+    var hari = moment(tarikhKerjaID,"DD-MM-YYYY").format("dddd");
     var masa = getTimeDifference(masaMulaID,masaAkhirID);
     var waktu = "";
     var hour = masaMulaID.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = individu;
-    var tarikhMula = moment(tarikhKerjaID).format("DD-MM-YYYY")
+    var tarikhMula = moment(tarikhKerjaID,"DD-MM-YYYY").format("YYYY-MM-DD")
     var masaMula = tarikhMula + " " + masaMulaID + ":00"
-    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("DD-MM-YYYY")
+    var tarikhAkhir = moment(tarikhAkhirKerjaID,"DD-MM-YYYY").format("YYYY-MM-DD")
     var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
     console.log(masaMula,masaAkhir)
     console.log('difference',timeDiffCalc(new Date(masaMula),new Date(masaAkhir)));
-    
+    var differences = timeDiffCalc(new Date(masaMula),new Date(masaAkhir));
+    console.log(differences);
     totalhours = totalhours.toFixed(2)
+    console.log(hours,' ni badskdmaklsm')
     console.log("hours",totalhours)
     // var catatan = "-"
     if(hour >= 6 && hour < 12)
@@ -257,7 +263,7 @@ function hantarPermohonanIndividu(){
         waktu = "Malam"
     }
 
-    console.log("hari",hari,"masa",masa,"waktu",waktu);
+    console.log("hari",hari,"masa",totalhours,"waktu",waktu);
     var user_id = namaPekerjaID;
     var object = {tarikh_akhir_kerja:tarikhAkhirKerjaID,id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
@@ -356,17 +362,17 @@ function timeStringToMins(s) {
     let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
 
     // calculate days
-    const days = Math.floor(diffInMilliSeconds / 86400);
+    days = Math.floor(diffInMilliSeconds / 86400);
     diffInMilliSeconds -= days * 86400;
     console.log('calculated days', days);
 
     // calculate hours
-    const hours = Math.floor(diffInMilliSeconds / 3600) % 24;
+    hours = Math.floor(diffInMilliSeconds / 3600) % 24;
     diffInMilliSeconds -= hours * 3600;
     console.log('calculated hours', hours);
 
     // calculate minutes
-    const minutes = Math.floor(diffInMilliSeconds / 60) % 60;
+    minutes = Math.floor(diffInMilliSeconds / 60) % 60;
     diffInMilliSeconds -= minutes * 60;
     console.log('minutes', minutes);
 
