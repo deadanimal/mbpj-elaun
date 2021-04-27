@@ -23,9 +23,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row ">
-                            {{-- <div class="col-6">
-                                <h2>Pengurusan Pengguna</h2>
-                            </div> --}}
                         </div>
                         <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-5" aria-label=".form-select-sm example">
                             <option selected value="out">Pilih Jabatan</option>
@@ -53,9 +50,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                     </div>
-                     
                 </div>
             </div>
         </div>

@@ -1,8 +1,5 @@
 var table = $('#adminDT').DataTable({
     dom:'lrtip',
-    // responsive:true,
-    // autoWidth:false,
-    // lengthMenu: [ 5, 10, 25, 50 ],
     destroy: true,
     lengthMenu: [ 5, 10, 25, 50 ],
     processing: false,

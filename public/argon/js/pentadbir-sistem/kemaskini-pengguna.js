@@ -1,11 +1,11 @@
-function kemaskiniPengguna(userID ,name,  counter) {
+function kemaskiniPengguna(userID , name,  counter) {
     var role = $('#role'+counter).val();
     var is_active = $('#is_active'+counter).val();
     
     Swal.fire({
         icon: 'info',
-        title: 'Kemaskini data pengguna?',
-        text: 'Mengemaskini data '+ name,
+        title: 'Kemaskini maklumat pengguna?',
+        text: 'Mengemaskini maklumat '+ name,
         showCloseButton: true,
         showCancelButton: true,
         confirmButtonText: 'Setuju',
@@ -22,7 +22,7 @@ function kemaskiniPengguna(userID ,name,  counter) {
                     is_active : is_active
                 },
                 success: function() {
-                    showPengurusanPengguna(); 
+                    // showPengurusanPengguna(); 
                 },
                 error: function() { console.log('FAIL Kemaskini Pengguna'); } 
             });

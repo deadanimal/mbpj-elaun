@@ -30,12 +30,10 @@ class UserController extends Controller
 
     public function kemaskiniPenggunaAdmin(Request $request, $userId)
     {
-        $role = $request->input('role');
-        $is_active = $request->input('is_active');
-
         $user = User::findOrFail($userId);
-        $user->role_id = $role;
-        $user->is_active = $is_active;
+        
+        $user->role_id = $request->input('role');
+        $user->is_active = $request->input('is_active');
 
         $user->save();
         $user->refresh();

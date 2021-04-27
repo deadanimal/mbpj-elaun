@@ -142,9 +142,11 @@ function showPengurusanPengguna(){
             {
             targets: 5,
                 render: function(data,type,row){
-                var button = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="kemaskiniPengguna('+data.CUSTOMERID+','+"'"+data.NAME+"'"+','+counter+')" data-target="">Kemaskini</button>' 
-                counter++;
-                return button;
+                    var CUSTOMERID = parseInt(data.CUSTOMERID, 10);
+
+                    var button = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="kemaskiniPengguna('+CUSTOMERID+','+"'"+data.NAME+"'"+','+counter+')" data-target="">Kemaskini</button>' 
+                    counter++;
+                    return button;
             }},
             {
                 targets: 6,

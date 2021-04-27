@@ -177,8 +177,8 @@ class PermohonanBaruController extends Controller
                 return $user->permohonan_with_users->is_rejected_individually != 1;
             })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
                 $masa = new KiraanMasaService($permohonan, $user->CUSTOMERID);
+                
                 $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
-                // $permohonan->update(['masa' => $masaSebenar["masa"]]);
                 $permohonan->users()
                             ->updateExistingPivot($user->CUSTOMERID, array(
                                 'masa_sebenar' => $masaSebenar["masa"]),
