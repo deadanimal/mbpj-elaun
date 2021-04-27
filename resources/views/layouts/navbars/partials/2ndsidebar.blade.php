@@ -9,27 +9,27 @@
         </li>
         <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
             <a class="nav-link " href="{{$role}}-semakan" >
-                <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                <i class="ni ni-briefcase-24 text-green"></i>
                 <span class="nav-link-text" >{{ __('Semakan') }}</span>
             </a>
         </li>
         @if (auth()->user()->role_id == 2)
         <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
             <a class="nav-link " href="{{$role}}-on-call" >
-                <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                <i class="ni ni-badge text-orange"></i>
                 <span class="nav-link-text" >{{ __('Senarai On Call') }}</span>
             </a>
         </li>
         @endif
         <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
             <a class="nav-link" href="{{$role}}-bantuan" >
-                <i class="ni ni-collection text-yellow"></i>
+                <i class="ni ni-ungroup text-yellow"></i>
                 <span class="nav-link-text">{{ __('Bantuan') }}</span>
             </a>
         </li>
         <li class="nav-item {{ $parentSection == 'laporan' ? 'active' : '' }}">
             <a class="nav-link" href="{{$role}}-laporan" >
-                <i class="ni ni-chart-pie-35"></i>
+                <i class="ni ni-single-copy-04 text-pink"></i>
                 <span class="nav-link-text">Laporan</span>
             </a>
         </li>

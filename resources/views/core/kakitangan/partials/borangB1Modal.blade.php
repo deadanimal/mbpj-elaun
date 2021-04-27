@@ -59,7 +59,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="kp">{{ __('Nama') }}</label>
-                                            <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{auth()->user()->NIRC }}" disabled>
+                                            <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{auth()->user()->NAME }}" disabled>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -70,7 +70,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">{{ __('No K/P Baru') }}</label>
-                                            <input type="text" name="name1" id="input-name1" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ auth()->user()->NAME }}" required disabled autofocus>
+                                            <input type="text" name="name1" id="input-name1" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ auth()->user()->NIRC }}" required disabled autofocus>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
@@ -122,7 +122,7 @@
                                 <div class="row mb-2">
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
+                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" value="{{auth()->user()->CUSTOMERID}}" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
      
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -314,7 +314,7 @@
                 <input name="jenisPermohonanReal" value="" hidden>
                 <input name="idPermohonan" value="" hidden>
                 <button onclick="event.preventDefault();closeModal('borangB1Modal');" type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                <button onclick="event.preventDefault();saveMasa();" type="button" class="btn btn-primary">Hantar Untuk Pengesahan</button>
+                <button onclick="event.preventDefault();hantarPengesahan();" type="button" class="btn btn-primary">Hantar Untuk Pengesahan</button>
             </div>
         </div>
     </div>

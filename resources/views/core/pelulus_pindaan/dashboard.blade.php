@@ -44,12 +44,12 @@
                                         <div class="form-group col-sm-5">
                                             <label class ="col-form-label col-form-label-sm" for="min">From</label>
                                             <input id="min"
-                                                class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                                class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                                         </div>
                                         <div class="form-group col-sm-5">
                                             <label class ="col-form-label col-form-label-sm" for="max">To</label>
                                             <input id="max"
-                                                class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                                class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                                         </div>
                                         <div class="form-group col-sm-2">
                                             <button class="form-control form-control-sm btn btn-sm btn-primary" id="btnGo" type="button">Search</button>

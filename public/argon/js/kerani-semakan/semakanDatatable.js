@@ -43,9 +43,17 @@ function showDatatable(){
         id_user = 'noID';
     }
         semakanKSDT = $('#semakanKSDT').DataTable({
-        dom: 'lrtip',
+        dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
+        buttons: [{
+            text: 'Hantar semua', 
+            className:'btn btn-sm btn-outline-primary text-right',
+            attr: {
+                id: 'sendAllPermohonanButton',
+                onclick: 'terimaSemuaPermohonan()'
+            }
+        }],
         language: {
             paginate: {
                 previous: "<",
@@ -89,7 +97,7 @@ function showDatatable(){
                     targets: 1,
                     type: "date",
                     render: function(data,type,row){
-                        formattedDate = moment(data).format("DD/MM/YYYY")
+                        formattedDate = moment(data).format("DD-MM-YYYY")
                         return formattedDate;
                     }
                 },
@@ -156,10 +164,10 @@ $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
 
         var valid = true;
-        var min = moment($("#min").val(),"DD/MM/YYYY");
+        var min = moment($("#min").val(),"DD-MM-YYYY");
         if (!min.isValid()) { min = null; }
 
-        var max = moment($("#max").val(),"DD/MM/YYYY");
+        var max = moment($("#max").val(),"DD-MM-YYYY");
         if (!max.isValid()) { max = null; }
 
         if (min === null && max === null) {
@@ -170,7 +178,7 @@ $.fn.dataTable.ext.search.push(
             $.each(settings.aoColumns, function (i, col) {
               
                 if (col.type == "date") {
-                    var cDate = moment(data[i],'DD/MM/YYYY');
+                    var cDate = moment(data[i],'DD-MM-YYYY');
                 
                     if (cDate.isValid()) {
                         if (max !== null && max.isBefore(cDate)) {
@@ -203,9 +211,9 @@ $("#semakKeraniSemakan").click(function () {
 });
 
 $('#min').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 
 $('#max').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });

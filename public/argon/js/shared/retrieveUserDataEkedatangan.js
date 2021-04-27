@@ -9,23 +9,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                                                 'hariAm-siang',
                                                 'hariAm-malam'
                                             );
-    var ekedatanganAttributes = new Array (
-                                            'tarikh',
-                                            'waktuMasuk',
-                                            'waktuKeluar',
-                                            'jumlahWaktuKerja',
-                                            'waktuMasukOT1',
-                                            'waktuKeluarOT1',
-                                            'jumlahOT1',
-                                            'waktuMasukOT2',
-                                            'waktuKeluarOT2',
-                                            'jumlahOT2',
-                                            'waktuMasukOT3',
-                                            'waktuKeluarOT3',
-                                            'jumlahOT3',
-                                            'jumlahOTKeseluruhan',
-                                            'waktuAnjal'
-                                            );
     var detailPermohonan = new Array (
                                         'tarikhMohon',
                                         'tarikhMulaKerja',
@@ -36,14 +19,8 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                                         'lokasi',
                                         );
 
-    // Clear up name and no pekerja for Elaun
-    $("#ekedatanganModalEL input[name=ekedatanganNama]").val("");
-    $("#ekedatanganModalEL input[name=ekedatanganNoPekerja]").val(""); 
-
     // Clear up Ekedatangan
-    ekedatanganAttributes.forEach(att => {
-        $("#formEkedatangan input[name="+att+"]").val("");
-    });
+    noEkedatanganWithDefaultValue();
 
     // Clear up detail permohonan
     detailPermohonan.forEach(att => {
@@ -74,9 +51,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         success: function(data) {
-            var block_ekedatanganIndividu = document.getElementById("eKedatanganIndividu");
-            var block_ekedatanganBerkumpulan = document.getElementById("eKedatanganBerkumpulan");
-
             // Kelulusan
             var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
             array.forEach(function(item) {
@@ -110,8 +84,6 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                 }
             });
 
-
-
             switch (jenisPermohonan) {
                 case "OT1":
                     fillInGaji(id_user, id_permohonan_baru, is_individu);
@@ -131,30 +103,35 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
                 case "KS2":
                     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
                     break;
-                // case "PS1":
-                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "PS2":
-                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KP1":
-                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KP2":
-                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KS1":
-                //     fillInKedatangan(data.senaraiKakitangan[0].CUSTOMERID, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // case "KS2":
-                //     fillInSenaraiKakitangan(data.senaraiKakitangan, jenisPermohonan, id_permohonan_baru);
-                //     break;
-                // default:
-                //     break;
             }
         },
         error: function(data) { console.log(data); }
     });
+}
+
+function noEkedatanganWithDefaultValue() {
+    var ekedatanganAttributes = new Array (
+        'tarikh',
+        'waktuMasuk',
+        'waktuKeluar',
+        'jumlahWaktuKerja',
+        'waktuMasukOT1',
+        'waktuKeluarOT1',
+        'jumlahOT1',
+        'waktuMasukOT2',
+        'waktuKeluarOT2',
+        'jumlahOT2',
+        'waktuMasukOT3',
+        'waktuKeluarOT3',
+        'jumlahOT3',
+        'jumlahOTKeseluruhan',
+        'waktuAnjal'
+    );
+
+    ekedatanganAttributes.forEach(att => {
+        $("#formEkedatangan input[name="+att+"]").val("N/A");
+    });
+
 }
 
 function fillInUserDetail(id_user) {
