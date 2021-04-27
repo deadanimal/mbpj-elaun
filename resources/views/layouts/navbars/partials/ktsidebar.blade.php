@@ -12,7 +12,7 @@
                     </li>
                     <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
                         <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="{{ $parentSection == 'permohonan' ? 'true' : '' }}" aria-controls="navbar-examples">
-                            <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                            <i class="ni ni-book-bookmark text-success"></i>
                             <span class="nav-link-text" >{{ __('Permohonan') }}</span>
                         </a>
                         <div class="collapse {{ $parentSection == 'permohonan' ? 'show' : '' }}" id="navbar-examples">
@@ -27,17 +27,17 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
-                        <a class="nav-link" href="bantuan" >
-                            <i class="ni ni-collection text-yellow"></i>
-                            <span class="nav-link-text">{{ __('Bantuan') }}</span>
+                    <li class="nav-item {{ $parentSection == 'tuntutan' ? 'active' : '' }}">
+                        <a class="nav-link" href="tuntutan" >
+                            <i class="ni ni-money-coins text-info"></i>
+                            <span class="nav-link-text">{{ __('Tuntutan Elaun') }}</span>
                         </a>
                         
                     </li>
-                    <li class="nav-item {{ $parentSection == 'tuntutan' ? 'active' : '' }}">
-                        <a class="nav-link" href="tuntutan" >
-                            <i class="ni ni-ui-04 text-info"></i>
-                            <span class="nav-link-text">{{ __('Tuntutan Elaun') }}</span>
+                    <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
+                        <a class="nav-link" href="bantuan" >
+                            <i class="ni ni-ungroup text-yellow"></i>
+                            <span class="nav-link-text">{{ __('Bantuan') }}</span>
                         </a>
                         
                     </li>
