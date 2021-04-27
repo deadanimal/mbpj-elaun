@@ -10,6 +10,7 @@ class permohonan_with_users extends Model
     protected $table = 'permohonan_with_users';
     protected $fillable = [
         'is_rejected_individually',
+        'CUSTOMERID',
         'masa_mula_sebenar',
         'masa_akhir_sebenar',
         'masa_sebenar_siang',

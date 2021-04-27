@@ -10,7 +10,6 @@ class eKedatangan extends Model
     protected $table = 'e_kedatangans';
     protected $primaryKey = 'id_ekedatangan';
     protected $fillable = [
-        'CUSTOMERID',
         'tarikh',
         'waktu_masuk',
         'waktu_keluar',
@@ -27,9 +26,6 @@ class eKedatangan extends Model
         'jumlah_OT_keseluruhan',
         'waktu_anjal'
     ];
-
-
-
 
     public function user()
     {
