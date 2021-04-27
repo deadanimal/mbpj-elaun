@@ -1,3 +1,7 @@
+var days;
+var minutes;
+var hours;
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -51,7 +55,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
         success: function(data) {
         //    console.log(data.permohonan.permohonan_with_users.id)
             if( jenis_permohonan == 'OT1'){
-                var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
+                var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 $("#permohonanbaruModal").modal("show");
                 $("#jenisPermohonan").val("frmPermohonanIndividu");
                 document.getElementById("jenisPermohonan").disabled = true;
@@ -64,7 +68,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $("#permohonanbaruModal").modal("show");
                 console.log('ot1',jenis_permohonan)
             }else if(jenis_permohonan == 'OT2'){
-                var tarikhKerjaBK = moment(data.permohonan.tarikh_mula_kerja,"YYYY-MM-DD").format("DD / MM / YYYY")
+                var tarikhKerjaBK = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 console.log(data);
                 for(i = 0;i<data.permohonanUsers.length;i++){
                     if(data.permohonanUsers[i].id != data.userId){
@@ -117,7 +121,7 @@ function hantarPermohonanBerkumpulan(){
     console.log(edit)
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
     var pegPelulusBK = document.querySelector("#pegawaiLulusBK").value;
-    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD / MM / YYYY").format("YYYY-MM-DD");
+    var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD-MM-YYYY").format("DD-MM-YYYY");
     var masaMulaBK = document.querySelector("#masa-mulaBK").value;
     var masaAkhirBK = document.querySelector("#masa-akhirBK").value;
     var sebab = document.querySelector("#sebabBK").value;
@@ -224,26 +228,28 @@ function hantarPermohonanIndividu(){
     var namaPekerjaID = document.querySelector("#namaPekerjaID").value;
     var pegPelulusID = document.querySelector("#pegawaiLulusID").value;
     var pegSokongID = document.querySelector("#pegawaiSokongID").value;
-    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD / MM / YYYY").format("YYYY-MM-DD");
-    var tarikhAkhirKerjaID = moment(document.querySelector("#tarikh-akhir-kerjaID").value,"DD / MM / YYYY").format("YYYY-MM-DD");
+    var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD-MM-YYYY").format("DD-MM-YYYY");
+    var tarikhAkhirKerjaID = moment(document.querySelector("#tarikh-akhir-kerjaID").value,"DD-MM-YYYY").format("DD-MM-YYYY");
     var masaMulaID = document.querySelector("#masa-mulaID").value;
     var masaAkhirID = document.querySelector("#masa-akhirID").value;
     var sebab = document.querySelector("#sebabID").value;
     var lokasi = document.querySelector("#lokasiID").value;
-    var hari = moment(tarikhKerjaID).format("dddd");
+    var hari = moment(tarikhKerjaID,"DD-MM-YYYY").format("dddd");
     var masa = getTimeDifference(masaMulaID,masaAkhirID);
     var waktu = "";
     var hour = masaMulaID.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = individu;
-    var tarikhMula = moment(tarikhKerjaID).format("YYYY/MM/DD")
+    var tarikhMula = moment(tarikhKerjaID,"DD-MM-YYYY").format("YYYY-MM-DD")
     var masaMula = tarikhMula + " " + masaMulaID + ":00"
-    var tarikhAkhir = moment(tarikhAkhirKerjaID).format("YYYY/MM/DD")
+    var tarikhAkhir = moment(tarikhAkhirKerjaID,"DD-MM-YYYY").format("YYYY-MM-DD")
     var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
     console.log(masaMula,masaAkhir)
     console.log('difference',timeDiffCalc(new Date(masaMula),new Date(masaAkhir)));
-    
+    var differences = timeDiffCalc(new Date(masaMula),new Date(masaAkhir));
+    console.log(differences);
     totalhours = totalhours.toFixed(2)
+    console.log(hours,' ni badskdmaklsm')
     console.log("hours",totalhours)
     // var catatan = "-"
     if(hour >= 6 && hour < 12)
@@ -257,7 +263,7 @@ function hantarPermohonanIndividu(){
         waktu = "Malam"
     }
 
-    console.log("hari",hari,"masa",masa,"waktu",waktu);
+    console.log("hari",hari,"masa",totalhours,"waktu",waktu);
     var user_id = namaPekerjaID;
     var object = {tarikh_akhir_kerja:tarikhAkhirKerjaID,id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
@@ -356,17 +362,17 @@ function timeStringToMins(s) {
     let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
 
     // calculate days
-    const days = Math.floor(diffInMilliSeconds / 86400);
+    days = Math.floor(diffInMilliSeconds / 86400);
     diffInMilliSeconds -= days * 86400;
     console.log('calculated days', days);
 
     // calculate hours
-    const hours = Math.floor(diffInMilliSeconds / 3600) % 24;
+    hours = Math.floor(diffInMilliSeconds / 3600) % 24;
     diffInMilliSeconds -= hours * 3600;
     console.log('calculated hours', hours);
 
     // calculate minutes
-    const minutes = Math.floor(diffInMilliSeconds / 60) % 60;
+    minutes = Math.floor(diffInMilliSeconds / 60) % 60;
     diffInMilliSeconds -= minutes * 60;
     console.log('minutes', minutes);
 

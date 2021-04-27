@@ -16,8 +16,8 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
         },
         success: function(data) {
             console.log(data.permohonan.tarikh_mula_kerja);
-            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'YYYY-MM-DD').format('DD/MM/YYYY')
-            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'YYYY-MM-DD').format('DD/MM/YYYY')
+            var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
+            var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
             $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
             $("#borangB1Modal input[name=tarikhKerjaAkhir]").val(tarikhAkhir);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
@@ -26,6 +26,9 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             $("#borangB1Modal input[name=jenisPermohonanReal]").val(data.permohonan.jenis_permohonan);
             $("#borangB1Modal textarea[id=tujuan]").val(data.permohonan.tujuan);
             $("#borangB1Modal input[name=idPermohonan]").val(data.permohonan.id_permohonan_baru);
+            $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
+            $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").val('');
+            $("#borangB1Modal input[id=semakan-modal-individu-masaMulaSebenar]").val('');
 
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
@@ -77,7 +80,7 @@ function deletePermohonan(id_permohonan_baru){
 
 function hantarPengesahan(id_user,id_permohonan_baru){
     
-    var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD/MM/YYYY").format("DD/MM/YYYY",true);
+    var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD-MM-YYYY").format("DD-MM-YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
     var masaAkhir = $("#borangB1Modal input[name=masaAkhir]").val();

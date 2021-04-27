@@ -57,7 +57,7 @@ function showDatatable(){
                     targets: [2],
                     type: "date",
                     render: function(data,type,row){
-                        formattedDate = moment(data).format("DD/MM/YYYY")
+                        formattedDate = moment(data).format("DD-MM-YYYY")
                         return formattedDate;
                     }
                 },

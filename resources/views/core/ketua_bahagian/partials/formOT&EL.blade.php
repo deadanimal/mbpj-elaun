@@ -65,11 +65,11 @@
                     <div class="form-row justify-content-end align-items-end">
                         <div class="col">
                             <label class="form-control-label" for="min">Dari</label>
-                            <input id="min" class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                            <input id="min" class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                         </div>
                         <div class="col">
                             <label class="form-control-label" for="max">Ke</label>
-                            <input id="max" class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                            <input id="max" class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                         </div>
                     </div>         
                 </div>

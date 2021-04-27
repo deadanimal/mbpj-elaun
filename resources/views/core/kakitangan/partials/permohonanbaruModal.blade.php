@@ -38,7 +38,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="namaPekerjaID">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="namaPekerjaID" id="namaPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+                                        <input type="text" name="namaPekerjaID" id="namaPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -48,7 +48,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="kpID">{{ __('No KP Baru') }}</label>
-                                        <input type="text" name="kpID" id="kpID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" disabled>
+                                        <input type="text" name="kpID" id="kpID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{auth()->user()->NIRC}}" disabled>
                                         
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -168,7 +168,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="namaPekerjaBK">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="namaPekerjaBK" id="namaPekerjaBK" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->id) }}" required autofocus>
+                                        <input type="text" name="namaPekerjaBK" id="namaPekerjaBK" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>

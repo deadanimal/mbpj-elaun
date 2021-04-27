@@ -71,7 +71,7 @@ function showSemakanDatatableKT(){
                     targets: [1],
                     type: "date",
                     render: function(data,type,row){
-                        formattedDate = moment(data,"YYYY-MM-DD").format("DD/MM/YYYY")
+                        formattedDate = moment(data,"DD-MM-YYYY").format("DD-MM-YYYY")
                         return formattedDate;
                     }
                 },
@@ -209,11 +209,11 @@ $.fn.dataTable.ext.search.push(
 
         console.log(data);
         var valid = true;
-        var min = moment($("#min").val(),"DD/MM/YYYY");
+        var min = moment($("#min").val(),"DD-MM-YYYY");
         if (!min.isValid()) { min = null; }
       console.log(min);
 
-        var max = moment($("#max").val(),"DD/MM/YYYY");
+        var max = moment($("#max").val(),"DD-MM-YYYY");
         if (!max.isValid()) { max = null; }
 
         if (min === null && max === null) {
@@ -225,7 +225,7 @@ $.fn.dataTable.ext.search.push(
             $.each(settings.aoColumns, function (i, col) {
               
                 if (col.type == "date") {
-                    var cDate = moment(data[i],'DD/MM/YYYY');
+                    var cDate = moment(data[i],'DD-MM-YYYY');
                   console.log(cDate);
                 
                     if (cDate.isValid()) {
@@ -255,18 +255,18 @@ $("#btnGo").click(function () {
 });
 
 $('#min').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 
 $('#max').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 
 $('#tarikhKerjaAkhir').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 $('#tarikhKerjaMula').datepicker({
-    dateFormat: 'dd/mm/yy',
+    dateFormat: 'dd-mm-yy',
 });
 
 $('#masaMula').timepicker();

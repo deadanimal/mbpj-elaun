@@ -64,12 +64,12 @@
                                                 <div class="col-sm-3">
                                                     <label class ="col-form-label col-form-label-sm" for="min">From</label>
                                                     <input id="min"
-                                                        class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                                        class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <label class ="col-form-label col-form-label-sm" for="max">To</label>
                                                     <input id="max"
-                                                        class="form-control form-control-sm" value="dd / mm / yyyy" autocomplete="off">
+                                                        class="form-control form-control-sm" value="DD-MM-YYYY" autocomplete="off">
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <select id="jenisTable" name="jenisTable" class="custom-select custom-select-sm" >
@@ -124,6 +124,6 @@
     <script src="{{ asset('argon') }}/js/kakitangan/semakan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarPengesahan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/eKedatangan.js"></script>
-    <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/kemaskiniModal.js"></script>
 
 @endpush

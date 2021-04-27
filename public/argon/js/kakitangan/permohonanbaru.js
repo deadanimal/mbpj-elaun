@@ -417,7 +417,7 @@ function getBerkumpulanDT(){
         columns: [
 
             {data: null, name: null},
-            {data: 'tarikh_mula_kerja'},
+            {data: 'created_at'},
             {data: 'status'},
             {data: 'progres'},
             {data: 'masa_mula'},
@@ -443,7 +443,7 @@ function getBerkumpulanDT(){
                 targets: [1],
                 type: "date",
                 render: function(data,type,row){
-                    formattedDate = moment(data).format("DD/MM/YYYY")
+                    formattedDate = moment(data,"YYYY-MM-DD").format("DD-MM-YYYY")
                     return formattedDate;
                 }
             },
@@ -629,22 +629,22 @@ function datePickerInit(){
             if(data.user.is_oncall == 1){
                 console.log('sadsa',year,month,day);
                 $('#tarikh-kerjaID').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     // minDate: new Date(2021,3,19),
                     minDate: new Date(year,month,day),
                 });
                 $('#tarikh-kerjaBK').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
 
                 });
                 $('#tarikh-akhir-kerjaID').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
 
                 });
                 $('#tarikh-akhir-kerjaBK').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
 
                 });
@@ -653,22 +653,22 @@ function datePickerInit(){
                 day +=  7;
                 console.log('sadsa',year,month,day);
                 $('#tarikh-kerjaID').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     // minDate: new Date(2021,3,19),
                     minDate: new Date(year,month,day),
                 });
                 $('#tarikh-kerjaBK').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
 
                 });
                 $('#tarikh-akhir-kerjaID').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
 
                 });
                 $('#tarikh-akhir-kerjaBK').datepicker({
-                    dateFormat: 'dd / mm / yy',
+                    dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
 
                 });
