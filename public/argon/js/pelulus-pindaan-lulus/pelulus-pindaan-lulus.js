@@ -1,95 +1,152 @@
-var pindaanDT = $("#pindaanDT").DataTable({
-    dom: 'lrtip',
-    scrollX: false,
-    destroy: true,
-    lengthMenu: [ 5, 10, 25, 50 ],
-    responsive: true,
-    processing: false,
-    language: {
-        paginate: {
-            previous: "<",
-            next: ">"
-        },
-        lengthMenu:     "Tunjuk _MENU_ rekod",
-        search: "Carian:",
-        zeroRecords:    "Tiada rekod yang sepadan dijumpai",
-        emptyTable:     "Tiada rekod",
-        info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
-        infoEmpty:      "0 ke 0 daripada 0 rekod",
-        infoFiltered:   "(ditapis daripada _MAX_ rekod)",
-        processing:     "Dalam proses...",
-    },
-    serverSide: true, 
-    ajax:{
-        url:'dashboard/',
-        type:'GET'
-    },
-    columns:[
-        {data:null,         name:null},
+var pindaanLulusDT;
 
-        {data:'name',       name:'name'},
-
-        {data:'created_at', name:'created_at'},
-
-        {data:'id',         name:'id'},
-
-        {data:null,         name:null,  searchable:false},
-
-        {data:null,         name:null,  searchable:false},
-
-        {data:'status',     name:'status'},
-
-        {data:null,         name:null,  searchable:false}
-    ],
-    columnDefs:[
-        {
-            targets:0,
-            searchable: false,
-            // "class": "index",
-            orderable: true,
-            mRender: function(data,type,row,meta){
-                return  meta.row + 1;
-            }
-        },
-        {
-            targets: 2,
-            type: 'date'
-        },
-        {
-            targets:4,
-            mRender: function(data,type,row){
-                return "<span>En. Sarip</span>"
-            }
-        },
-        {
-            targets:5,
-            mRender: function(data,type,row){
-                return "<span>Claim </span>"
-            }
-        },
-        {
-            targets:6,
-            mRender: function(data,type,row){
-                if(data == "01"){
-                    return '<div id="buttonEdit" class="container text-white bg-success btn-sm text-center"  data-target=""  >Lulus</div>' 
-                }else if(data =="00"){
-                    return '<div id="buttonEdit" class="container text-white bg-danger btn-sm text-center"  data-target=""  >Tolak</div>' 
-                }
-            }
-        },
-        {
-            targets:7,
-            mRender: function(data,type,row){
-                var allbutton;
-                var button2 = '<button id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-success btn-sm ni ni-check-bold" onclick="test('+data.id+')" value='+data.id+'></button>' 
-                var button3 = '<button id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="test('+data.id+')"  value='+data.id+'></button>' 
-                return allbutton = button2 + button3;
-            }
-        },
-    ],
-   
+$(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    showDatatablePindaanSah();
 }) 
 
+function showDatatablePindaanSah() {
+    var counter = 0;
+
+    pindaanLulusDT = $('#pindaanLulusDT').DataTable({
+        dom: "f<'row'<'col ml--4'l><'col text-right'B>>rtip",
+        destroy: true,
+        processing: true,
+        buttons: [
+            {
+                text: 'Hantar semua', 
+                className:'btn btn-sm btn-outline-primary text-right',
+                attr: {
+                    id: 'sendAllPermohonanButton',
+                    onclick: 'terimaSemuaPermohonan()'
+                }
+            },
+            {
+                text: 'Cetak', 
+                title: 'Permohonan Ditolak - Pelulus Pindaan Sah',
+                extend:'pdfHtml5',
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6]
+                },
+                className:'btn btn-sm btn-outline-info text-right',
+                attr: {
+                    id: 'cetakPermohonanPindaanSah',
+                }
+            },
+        ],
+        language: {
+            paginate: {
+                previous: "<",
+                next: ">"
+            },
+            lengthMenu:     "Tunjuk _MENU_ rekod",
+            search: "Carian:",
+            zeroRecords:    "Tiada rekod yang sepadan dijumpai",
+            emptyTable:     "Tiada rekod",
+            info:           "_START_ ke _END_ daripada _TOTAL_ rekod",
+            infoEmpty:      "0 ke 0 daripada 0 rekod",
+            infoFiltered:   "(ditapis daripada _MAX_ rekod)",
+            processing:     "Dalam proses...",
+        },
+        serverSide: true,
+            ajax: {
+                url: "dashboard/", 
+                type: 'GET',
+            },
+            columns: [
+        
+                {data: null},
+                {data: null},
+                {data: 'created_at'},
+                {data: 'masa_mula'},
+                {data: 'masa_akhir'},
+                {data: 'masa'},
+                {data: 'tujuan'},
+                {data: null},
+                {data: 'jenis_permohonan'},
+                {data: 'users[*].id'},
+                {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'},
+                {data: 'id_permohonan_baru', name:'id_permohonan_baru'}
+            ],  
+            columnDefs: [
+                {
+                    targets:0,
+                    orderable:false,
+                    searchable:false,
+                },
+                {
+                    targets:1,
+                    orderable: false,
+                    mRender: function(data,type,row) {
+                        return '<input type="checkbox" name="cboxSemakanPermohonan" value="'+data.id_permohonan_baru+'">';
+                    }
+                },
+                {
+                    targets: 2,
+                    type: "date",
+                    render: function(data,type,row){
+                        formattedDate = moment(data).format("DD-MM-YYYY")
+                        return formattedDate;
+                    }
+                },
+                {
+                    targets: 7,
+                    mRender: function(data,type,row){
+                        if(id_user != "noID"){
+                            counter++;
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
+                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var allButton = button1 + button2 + button3;
+                            return allButton;
+                        } 
+                        else {
+                            counter++;
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
+                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var allButton = button1 + button2 + button3;
+                            return allButton;
+                        }
+                    }
+                },
+                {
+                    targets: 8,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 9,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 10,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets:11,
+                    orderable:false,
+                    searchable:false,
+                    visible:false
+                },
+            ], 
+                    
+    });
+
+    pindaanLulusDT.on('draw.dt', function () {
+        var info = pindaanLulusDT.page.info();
+        pindaanLulusDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    });
+    
+}
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
@@ -98,7 +155,6 @@ $.fn.dataTable.ext.search.push(
         var valid = true;
         var min = moment($("#min").val(),'DD-MM-YYYY');
         if (!min.isValid()) { min = null; }
-      console.log(min);
 
         var max = moment($("#max").val(),'DD-MM-YYYY');
         if (!max.isValid()) { max = null; }
@@ -113,7 +169,6 @@ $.fn.dataTable.ext.search.push(
               
                 if (col.type == "date") {
                     var cDate = moment(data[i],'DD-MM-YYYY');
-                  console.log(cDate);
                 
                     if (cDate.isValid()) {
                         if (max !== null && max.isBefore(cDate)) {
@@ -133,7 +188,7 @@ $.fn.dataTable.ext.search.push(
 });
 
 $("#btnGo").click(function () {
-    $('#pindaanDT').DataTable().draw();
+    $('#pindaanLulusDT').DataTable().draw();
 });
 
 $('#min').datepicker({

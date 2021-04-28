@@ -1,16 +1,43 @@
+var pindaanSahDT;
 
-var pindaanSahDT = $('#pindaanSahDT').DataTable({
-        dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
+$(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    showDatatablePindaanSah();
+}) 
+
+function showDatatablePindaanSah() {
+    var counter = 0;
+
+    pindaanSahDT = $('#pindaanSahDT').DataTable({
+        dom: "f<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
-        buttons: [{
-            text: 'Hantar semua', 
-            className:'btn btn-sm btn-outline-primary text-right',
-            attr: {
-                id: 'sendAllPermohonanButton',
-                onclick: 'terimaSemuaPermohonan()'
-            }
-        }],
+        buttons: [
+            {
+                text: 'Hantar semua', 
+                className:'btn btn-sm btn-outline-primary text-right',
+                attr: {
+                    id: 'sendAllPermohonanButton',
+                    onclick: 'terimaSemuaPermohonan()'
+                }
+            },
+            {
+                text: 'Cetak', 
+                title: 'Permohonan Ditolak - Pelulus Pindaan Sah',
+                extend:'pdfHtml5',
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6]
+                },
+                className:'btn btn-sm btn-outline-info text-right',
+                attr: {
+                    id: 'cetakPermohonanPindaanSah',
+                }
+            },
+        ],
         language: {
             paginate: {
                 previous: "<",
@@ -25,13 +52,14 @@ var pindaanSahDT = $('#pindaanSahDT').DataTable({
             infoFiltered:   "(ditapis daripada _MAX_ rekod)",
             processing:     "Dalam proses...",
         },
-        serverSide: false,
+        serverSide: true,
             ajax: {
-                url: "kerani-pemeriksa-semakan/"+id_user,
+                url: "dashboard/", 
                 type: 'GET',
             },
             columns: [
         
+                {data: null},
                 {data: null},
                 {data: 'created_at'},
                 {data: 'masa_mula'},
@@ -51,7 +79,14 @@ var pindaanSahDT = $('#pindaanSahDT').DataTable({
                     searchable:false,
                 },
                 {
-                    targets: 1,
+                    targets:1,
+                    orderable: false,
+                    mRender: function(data,type,row) {
+                        return '<input type="checkbox" name="cboxSemakanPermohonan" value="'+data.id_permohonan_baru+'">';
+                    }
+                },
+                {
+                    targets: 2,
                     type: "date",
                     render: function(data,type,row){
                         formattedDate = moment(data).format("DD-MM-YYYY")
@@ -59,7 +94,7 @@ var pindaanSahDT = $('#pindaanSahDT').DataTable({
                     }
                 },
                 {
-                    targets: 6,
+                    targets: 7,
                     mRender: function(data,type,row){
                         if(id_user != "noID"){
                             counter++;
@@ -80,11 +115,6 @@ var pindaanSahDT = $('#pindaanSahDT').DataTable({
                     }
                 },
                 {
-                    targets: 7,
-                    visible: false,
-                    searchable: true
-                },
-                {
                     targets: 8,
                     visible: false,
                     searchable: true
@@ -95,26 +125,28 @@ var pindaanSahDT = $('#pindaanSahDT').DataTable({
                     searchable: true
                 },
                 {
-                    targets:10,
+                    targets: 10,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets:11,
                     orderable:false,
                     searchable:false,
                     visible:false
                 },
             ], 
-                
-            });
-            pindaanSahDT.on('draw.dt', function () {
-                var info = pindaanSahDT.page.info();
-                pindaanSahDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
-                    cell.innerHTML = i + 1 + info.start;
-                });
-            });
-            if(id_user != ''){
-                $('#pindaanSahDT').DataTable().search(
-                    $("#noPekerja").val(),
-                ).draw();
-            } else{}
+                    
+    });
 
+    pindaanSahDT.on('draw.dt', function () {
+        var info = pindaanSahDT.page.info();
+        pindaanSahDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    });
+    
+}
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
@@ -123,7 +155,6 @@ $.fn.dataTable.ext.search.push(
         var valid = true;
         var min = moment($("#min").val(),'DD-MM-YYYY');
         if (!min.isValid()) { min = null; }
-      console.log(min);
 
         var max = moment($("#max").val(),'DD-MM-YYYY');
         if (!max.isValid()) { max = null; }
@@ -138,7 +169,6 @@ $.fn.dataTable.ext.search.push(
               
                 if (col.type == "date") {
                     var cDate = moment(data[i],'DD-MM-YYYY');
-                  console.log(cDate);
                 
                     if (cDate.isValid()) {
                         if (max !== null && max.isBefore(cDate)) {

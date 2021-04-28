@@ -24,7 +24,7 @@ $(document).ready(function(){
 })
 
 function showPengurusanPengguna(){
-    var counter = 0;
+    var counterPermohonan = 0;
     var pengurusanDT = $('#pengurusanDT').DataTable({
         dom: 'flrtip',
         responsive:false,

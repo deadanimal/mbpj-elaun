@@ -36,24 +36,39 @@ function showUser(id, jabatan) {
 }
 
 function showDatatable(){
-    var counter = 0;
+    var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
     }
-        semakanKSDT = $('#semakanKSDT').DataTable({
+
+    semakanKSDT = $('#semakanKSDT').DataTable({
         dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
-        buttons: [{
+        buttons: [
+        {
             text: 'Hantar semua', 
             className:'btn btn-sm btn-outline-primary text-right',
             attr: {
                 id: 'sendAllPermohonanButton',
                 onclick: 'terimaSemuaPermohonan()'
             }
-        }],
+        },
+        {
+            text: 'Cetak', 
+            title: 'Permohonan - Kerani Semakan',
+            extend:'pdfHtml5',
+            exportOptions: {
+                columns: [2, 3, 4, 5, 6]
+            },
+            className:'btn btn-sm btn-outline-info text-right',
+            attr: {
+                id: 'cetakPermohonanKeraniSemakan',
+            }
+        },
+        ],
         language: {
             paginate: {
                 previous: "<",
@@ -68,7 +83,7 @@ function showDatatable(){
             infoFiltered:   "(ditapis daripada _MAX_ rekod)",
             processing:     "Dalam proses...",
         },
-        serverSide: false,
+        serverSide: true,
             ajax: {
                 url: "kerani-semakan-semakan/"+id_user,
                 type: 'GET',
@@ -105,18 +120,18 @@ function showDatatable(){
                     targets: 6,
                     mRender: function(data,type,row){
                         if(id_user != "noID"){
-                            counter++;
+                            counterPermohonan++;
                             var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
-                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
                         } 
                         else {
-                            counter++;
+                            counterPermohonan++;
                             var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
-                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
                         }
@@ -143,20 +158,21 @@ function showDatatable(){
                     searchable:false,
                     visible:false
                 },
-            ], 
-                
-            });
-            semakanKSDT.on('draw.dt', function () {
-                var info = semakanKSDT.page.info();
-                semakanKSDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
-                    cell.innerHTML = i + 1 + info.start;
-                });
-            });
-            if(id_user != ''){
-                $('#semakanKSDT').DataTable().search(
-                    $("#noPekerja").val(),
-                ).draw();
-            } else{}
+            ],  
+    });
+
+    semakanKSDT.on('draw.dt', function () {
+        var info = semakanKSDT.page.info();
+        semakanKSDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    });
+
+    if(id_user != ''){
+        $('#semakanKSDT').DataTable().search(
+            $("#noPekerja").val(),
+        ).draw();
+    } 
 }
 
 

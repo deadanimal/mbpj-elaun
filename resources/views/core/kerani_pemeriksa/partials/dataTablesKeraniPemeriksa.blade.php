@@ -1,13 +1,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                <div class="row align-items-center">
-                    <div class="col-8">
-                        <h2 class="mb-2" id="titleTable"></h2>
-                    </div>
-                </div>
-            </div>
             <div class="table-responsive py-4">
                 <table class="table" id="semakanKPDT">
                     <thead class="thead-light">
