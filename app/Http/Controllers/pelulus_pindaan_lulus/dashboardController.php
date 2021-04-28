@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pelulus_pindaan;
+namespace App\Http\Controllers\pelulus_pindaan_lulus;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

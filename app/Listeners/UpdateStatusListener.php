@@ -49,13 +49,17 @@ class UpdateStatusListener
 
         if ($event->is_terima) {
             $this->permohonanApproved($event, $is_peg_sokong);
+
         } elseif ($event->is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
             $event->permohonan->progres = 'Belum disahkan';
+
             $this->sendEmailNotificationToPegawaiAtasan($event, 'PS');
+
         } elseif ($event->is_batal) {
             $event->permohonan->status = "BATAL";
-        } else {
+
+
             $this->permohonanRejected($event);
         }
 

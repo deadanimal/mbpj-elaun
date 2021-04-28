@@ -101,7 +101,7 @@ class User extends Authenticatable
         return $this->role_id == 8;
     }
 
-    public function isPelulusPindaanSokong()
+    public function isPelulusPindaanSah()
     {
         return $this->role_id == 9;
     }
