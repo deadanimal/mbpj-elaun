@@ -31,7 +31,7 @@ class dashboardController extends Controller
         ->make(true);
         }
         
-        return view('core.pelulus_pindaan.dashboard');
+        return view('core.pelulus_pindaan_lulus.dashboard');
     }
 
     /**

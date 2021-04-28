@@ -14,7 +14,7 @@
             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
         @endcomponent
-        @include('layouts.headers.cards') 
+
     @elseif(Auth::user()->role_id == '1'  )
     @component('layouts.headers.breadcrumbs')
             @slot('title') 
@@ -100,7 +100,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive py-4">
-                                <table class="table" id="pindaanDT">
+                                <table class="table" id="pindaanSahDT">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>No</th>
@@ -135,7 +135,7 @@
     
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
-    <script src="{{ asset('argon') }}/js/pelulus-pindaan/pelulus-pindaan.js"></script>
+    <script src="{{ asset('argon') }}/js/pelulus-pindaan-sah/pelulus-pindaan-sah.js"></script>
     
 
 @endpush

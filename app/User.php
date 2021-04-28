@@ -106,7 +106,7 @@ class User extends Authenticatable
         return $this->role_id == 9;
     }
 
-    public function isPelulusPindaanPelulus()
+    public function isPelulusPindaanLulus()
     {
         return $this->role_id == 10;
     }
