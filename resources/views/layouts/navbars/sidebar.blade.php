@@ -32,6 +32,7 @@
 
             @case(3)
             @case(9)
+            @case(10)
                 @include('layouts.navbars.partials.dbppsidebar')
             @break
 
@@ -41,7 +42,6 @@
 
             @default
                 @include('layouts.navbars.partials.unauthenticatedsidebar')
-            
         @endswitch
 
             </div>

@@ -56,7 +56,10 @@ class LoginController extends Controller
                     return 'kakitangan/dashboard';
                 break; 
             case '9':
-                    return 'pelulus-pindaan/dashboard';
+                    return 'pelulus-pindaan-sokong/dashboard';
+                break; 
+            case '10':
+                    return 'pelulus-pindaan-pelulus/dashboard';
                 break; 
             default:
                     return '/login'; 

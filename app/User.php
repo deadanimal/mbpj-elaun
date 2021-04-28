@@ -47,21 +47,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * Get the role of the user
-     *
-     * @return \App\Role
-     */
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
 
-    /**
-     * Get the path to the profile picture
-     *
-     * @return string
-     */
     public function profilePicture()
     {
         if ($this->picture) {
@@ -71,31 +61,16 @@ class User extends Authenticatable
         return 'http://i.pravatar.cc/200';
     }
 
-    /**
-     * Check if the user has admin role
-     *
-     * @return boolean
-     */
     public function isAdmin()
     {
         return $this->role_id == 1;
     }
 
-    /**
-     * Check if the user has creator role
-     *
-     * @return boolean
-     */
     public function isCreator()
     {
         return $this->role_id == 2;
     }
 
-    /**
-     * Check if the user has user role
-     *
-     * @return boolean
-     */
     public function isMember()
     {
         return $this->role_id == 3;
@@ -126,9 +101,14 @@ class User extends Authenticatable
         return $this->role_id == 8;
     }
 
-    public function isPelulusPindaan()
+    public function isPelulusPindaanSokong()
     {
         return $this->role_id == 9;
+    }
+
+    public function isPelulusPindaanPelulus()
+    {
+        return $this->role_id == 10;
     }
 
     public function permohonans()
