@@ -65,7 +65,8 @@ function showUser() {
             success: function(data) {
                 $("#formOTEL input[name=nama]").val(data.users.NAME);
                 $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
+                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);HR_JABATAN);
 
                 $('input').css('color', 'black')
             },
