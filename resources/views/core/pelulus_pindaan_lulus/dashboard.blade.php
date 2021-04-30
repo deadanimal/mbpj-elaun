@@ -16,25 +16,11 @@
         @endcomponent
     @endcomponent
 
-    {{-- @elseif(Auth::user()->role_id == '1'  )
-    @component('layouts.headers.breadcrumbs')
-            @slot('title') 
-                {{ __('Default') }} 
-            @endslot
-
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">{{ __('Dashboards') }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ __('Default') }}</li>
-        @endcomponent
-        @include('layouts.headers.cards') 
-    @endif
-    @endcomponent --}}
-
-
     <div class="container-fluid mt--6">
         <div class="card shadow">
             <div class="card-body">
                 <div class="tab-content" id="myTabContent">
-                    @include('core.pelulus_pindaan_sah.formOT&EL')
+                    @include('core.pelulus_pindaan_lulus.partials.formOT&EL')
                 </div>
             </div>
         </div>
@@ -44,11 +30,7 @@
                     <div class="card-header pb-0">
                         <div class="row align-items-center">
                             <div class="col-5">
-                                <h2>Permohonan Pengesahan Pindaan</h2>
-                            </div>
-                            <div class="col-1 text-right">
-                                <span id="printButton" onclick="printTuntutan()" style="cursor: pointer"><i
-                                        class="fa fa-print fa-3x"></i></span>
+                                <h2 id="titleTable">Permohonan Pengesahan Pindaan</h2>
                             </div>
                         </div>
                     </div>
@@ -83,6 +65,12 @@
         <!-- Footer -->
         @include('layouts.footers.auth')
     </div>
+
+{{-- Modal --}}
+@include('core.pelulus_pindaan_lulus.partials.modals-semakan.modalEditIndividuPelulusPindaanLulus')
+@include('core.pelulus_pindaan_lulus.partials.modals-semakan.modalEditBerkumpulanPelulusPindaanLulus')
+@include('core.pelulus_pindaan_lulus.partials.modals-semakan.modalRejectPelulusPindaanLulus')
+
 @endsection
 
 
