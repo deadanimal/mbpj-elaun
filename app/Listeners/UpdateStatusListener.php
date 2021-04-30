@@ -44,6 +44,7 @@ class UpdateStatusListener
     public function handle(PermohonanStatusChangedEvent $event)
     {
         $event->permohonan->refresh();
+        $authRole = auth()->user()->role_id;
 
         $is_peg_sokong = Auth::id() == $event->permohonan->id_peg_sokong ? 1 : 0;
 
@@ -58,7 +59,7 @@ class UpdateStatusListener
 
         } elseif ($event->is_batal) {
             $event->permohonan->status = "BATAL";
-
+        } else {
 
             $this->permohonanRejected($event);
         }

@@ -104,7 +104,7 @@ function showDatatable(pilihan){
             exportOptions: {
                 columns: [2, 3, 4, 5, 6]
             },
-            className:'btn btn-sm btn-outline-info text-right',
+            className:'btn btn-sm btn-outline-warning text-right',
             attr: {
                 id: 'cetakPermohonanKetuaBahagian',
             }

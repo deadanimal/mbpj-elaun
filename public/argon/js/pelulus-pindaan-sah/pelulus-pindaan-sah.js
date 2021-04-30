@@ -27,12 +27,12 @@ function showDatatablePindaanSah() {
             },
             {
                 text: 'Cetak', 
-                title: 'Permohonan Ditolak - Pelulus Pindaan Sah',
                 extend:'pdfHtml5',
+                title: 'Permohonan Ditolak - Pelulus Pindaan Sah',
+                className:'btn btn-sm btn-outline-warning text-right',
                 exportOptions: {
                     columns: [2, 3, 4, 5, 6]
                 },
-                className:'btn btn-sm btn-outline-info text-right',
                 attr: {
                     id: 'cetakPermohonanPindaanSah',
                 }

@@ -35,7 +35,8 @@ class PermohonanBaru extends Model
         'status_akhir',
         'jenis_permohonan',
         'tarikh_akhir_kerja',
-        'is_for_datuk_bandar'
+        'is_for_datuk_bandar',
+        'is_for_pelulus_pindaan'
     ];
 
     // Default value
