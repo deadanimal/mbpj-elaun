@@ -119,7 +119,7 @@ class UserController extends Controller
     {
         return response()->json([
                     'error' => false,
-                    'users'  => User::with('maklumat_pekerjaan')->findOrFail($id),
+                    'users'  => User::with(['maklumat_pekerjaan.jabatan', 'maklumat_pekerjaan.jawatan'])->findOrFail($id),
                 ], 200);
     }
 
