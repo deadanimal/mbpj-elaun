@@ -99,7 +99,7 @@
                     <button type="button" onclick="event.preventDefault();" id="padamCarian" class="btn btn-sm btn-md btn-danger">{{ __('Padam Carian') }}</button>
                 </div>
                 <div class="col-md-auto">
-                    <button type="button" onclick="event.preventDefault();checkUser();showUser();" id="semakKetuaBahagian" class="btn btn-sm btn-success mt-4">{{ __('Semak') }}</button>
+                    <button type="button" onclick="checkUser()" id="semakKetuaBahagian" class="btn btn-sm btn-success mt-4">{{ __('Semak') }}</button>
                 </div>
             </div>    
         </div> 

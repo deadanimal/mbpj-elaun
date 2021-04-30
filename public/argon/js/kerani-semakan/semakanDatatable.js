@@ -15,27 +15,39 @@ $("#padamCarian").click(function(){
     showDatatable();
 });
 
-function showUser(id, jabatan) {
+function showUser() {
+    var id = document.querySelector("#noPekerja").value;
+
+    if (!id) {
+        Swal.fire(
+            'Sebentar...',
+            'Sila masukkan 5 digit nombor pekerja',
+            'info'
+          )
+    } else {
         $.ajax({
-            type: 'GET',
             url: 'user/semakan-pekerja/' + id,
+            type: 'GET',
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.NAME);
-                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
-                $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);HR_JABATAN);
-                $('#semakanKSDT').DataTable().columns(9).search(     
-                    id
-                )
+                if (!data.users) {
+                    Swal.fire(
+                        'Tiada rekod dijumpai',
+                        'Sila semak semula maklumat',
+                        'error'
+                        )
+                } else {
+                    $("#formOTEL input[name=nama]").val(data.users.NAME);
+                    $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                    $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                    $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
-                $('input').css('color', 'black')
+                    $('input').css('color', 'black')
+                }
             },
-            error: function(data) {
-                console.log(data);
-            }
+            error: function(data) { console.log(data); }
         });
+    }
 }
-
 function showDatatable(){
     var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;

@@ -25,7 +25,7 @@
                         <div class="row ">
                         </div>
                         <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-5" aria-label=".form-select-sm example">
-                            <option selected value="out">Pilih Jabatan</option>
+                            <option selected value="0">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
                                 <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
                             @endforeach

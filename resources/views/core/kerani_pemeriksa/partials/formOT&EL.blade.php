@@ -9,7 +9,7 @@
                     <div class="form-group">
                         <h6 class="heading-small text-muted">{{ __('Maklumat Peribadi') }}</h6>
                         <select id="selectJabatan" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
-                            <option selected value="out">Pilih Jabatan</option>
+                            <option selected value="0">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
                                 {{-- exclude Datuk Bandar --}}
                                 @if ($jabatan->GE_KETERANGAN_JABATAN != 'DATUK BANDAR')
@@ -103,7 +103,7 @@
                     <button type="button" onclick="event.preventDefault();" id="padamCarian" class="btn btn-sm btn-md btn-danger">{{ __('Padam Carian') }}</button>
                 </div>
                 <div class="col-md-auto">
-                    <button type="button" onclick="event.preventDefault();" id="semakKeraniPemeriksa" class="btn btn-sm btn-success mt-4">{{ __('Semak') }}</button>
+                    <button type="button" onclick="showUser()" id="semakKeraniPemeriksa" class="btn btn-sm btn-success mt-4">{{ __('Semak') }}</button>
                 </div>
             </div>    
         </div> 

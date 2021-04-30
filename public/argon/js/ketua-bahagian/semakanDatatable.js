@@ -36,7 +36,6 @@ $("#padamCarian").click(function(){
 });
 
 function checkUser(){
-    var id = document.querySelector("#noPekerja").value;
     var pilihan = document.getElementById('selectJenisPermohonan').value;
 
     switch (pilihan) {
@@ -47,32 +46,41 @@ function checkUser(){
             pilihan = tabPilihan + '2';
             break;
         default:
-            alert('Sila pilih jenis permohonan');
             break;
-    }
-
-    showDatatable(pilihan);
+        }
+        showUser();
 }
 
 function showUser() {
     var id = document.querySelector("#noPekerja").value;
-    var pilihan = document.getElementById('selectJenisPermohonan').value;
 
-    if(id != '' || pilihan != 'out'){
+    if (!id) {
+        Swal.fire(
+            'Sebentar...',
+            'Sila masukkan 5 digit nombor pekerja',
+            'info'
+          )
+    } else {
         $.ajax({
-            type: 'GET',
             url: 'user/semakan-pekerja/' + id,
+            type: 'GET',
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.NAME);
-                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
-                $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);HR_JABATAN);
+                if (!data.users) {
+                    Swal.fire(
+                        'Tiada rekod dijumpai',
+                        'Sila semak semula maklumat',
+                        'error'
+                        )
+                } else {
+                    $("#formOTEL input[name=nama]").val(data.users.NAME);
+                    $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                    $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                    $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
-                $('input').css('color', 'black')
+                    $('input').css('color', 'black')
+                }
             },
-            error: function(data) {
-                console.log(data);
-            }
+            error: function(data) { console.log(data); }
         });
     }
 }
@@ -218,6 +226,7 @@ function showDatatable(pilihan){
 
 $("#selectJenisPermohonan").on("change",function(){
     var pilihan = document.getElementById('selectJenisPermohonan').value;
+    
     switch (pilihan) {
         case 'individu':
             pilihan = tabPilihan + '1';
@@ -271,11 +280,6 @@ $.fn.dataTable.ext.search.push(
             });
         }
         return valid;
-});
-
-$("#semakKetuaBahagian").click(function () {
-    checkUser();
-    showUser();    
 });
 
 $('#min').datepicker({

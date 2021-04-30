@@ -119,7 +119,11 @@ class UserController extends Controller
     {
         return response()->json([
                     'error' => false,
-                    'users'  => User::with(['maklumat_pekerjaan.jabatan', 'maklumat_pekerjaan.jawatan'])->findOrFail($id),
+                    'users'  => User::with(['maklumat_pekerjaan.jabatan', 'maklumat_pekerjaan.jawatan'])
+                                        ->where('CUSTOMERID', $id)
+                                        ->firstOr(function () {
+                                            return 0;
+                                        }),
                 ], 200);
     }
 

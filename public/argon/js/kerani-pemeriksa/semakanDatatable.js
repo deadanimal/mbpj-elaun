@@ -14,28 +14,38 @@ $("#padamCarian").click(function(){
     showDatatable();
 });
 
-function showUser(id, jabatan) {
-        $.ajax({
-            type: 'GET',
-            url: 'user/semakan-pekerja/' + id,
-            success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.NAME);
-                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
-                $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);HR_JABATAN);
-                $('#semakanKPDT').DataTable().columns(9).search(     
-                    id
-                )
-                $('#semakanKPDT').DataTable().columns(10).search(      
-                    jabatan
-                ).draw();
+function showUser() {
+    var id = document.querySelector("#noPekerja").value;
 
-                $('input').css('color', 'black')
+    if (!id) {
+        Swal.fire(
+            'Sebentar...',
+            'Sila masukkan 5 digit nombor pekerja',
+            'info'
+          )
+    } else {
+        $.ajax({
+            url: 'user/semakan-pekerja/' + id,
+            type: 'GET',
+            success: function(data) {
+                if (!data.users) {
+                    Swal.fire(
+                        'Tiada rekod dijumpai',
+                        'Sila semak semula maklumat',
+                        'error'
+                        )
+                } else {
+                    $("#formOTEL input[name=nama]").val(data.users.NAME);
+                    $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
+                    $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                    $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
+
+                    $('input').css('color', 'black')
+                }
             },
-            error: function(data) {
-                console.log(data);
-            }
+            error: function(data) { console.log(data); }
         });
+    }
 }
 
 function showDatatable(){
@@ -222,18 +232,32 @@ $.fn.dataTable.ext.search.push(
         return valid;
 });
 
-$("#semakKeraniPemeriksa").click(function () {
-    var id = document.querySelector("#noPekerja").value;
-    var jabatan = document.querySelector("#selectJabatan").value;
+// $("#semakKeraniPemeriksa").click(function () {
+    // var id = document.querySelector("#noPekerja").value;
+    // var jabatan = document.querySelector("#selectJabatan").value;
 
-    if (id) { 
-        showUser(id, jabatan); 
-    }   
+    // if (id) { 
+        // showUser(id, jabatan); 
+        // showUser(id, jabatan); 
+    // }   
 
     // filter search result by jabatan
-    $('#semakanKPDT').DataTable().columns(10).search(      
-        jabatan
-    ).draw();
+//     $('#semakanKPDT').DataTable().columns(10).search(      
+//         jabatan
+//     ).draw();
+// });
+
+$("#selectJabatan").on("change",function(){
+    var jabatan = document.querySelector("#selectJabatan").value;
+
+    if (jabatan == 'out') {
+        showDatatable();
+    } else {
+        $('#semakanKPDT').DataTable().columns(10).search(      
+            jabatan
+        ).draw();
+    }
+
 });
 
 $('#min').datepicker({
