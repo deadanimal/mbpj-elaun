@@ -1,51 +1,24 @@
+var pindaanSahDT;
+
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    showDatatable();
+    showDatatablePindaanSah();
 }) 
 
-$("#padamCarian").click(function(){
-    $("#noPekerja").val("");
-    $("#nama-semakan").val("");
-    $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable();
-});
-
-function showUser(id, jabatan) {
-        $.ajax({
-            type: 'GET',
-            url: 'user/semakan-pekerja/' + id,
-            success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.NAME);
-                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
-                $('#semakanKPDT').DataTable().columns(9).search(     
-                    id
-                )
-                $('#semakanKPDT').DataTable().columns(10).search(      
-                    jabatan
-                ).draw();
-
-                $('input').css('color', 'black')
-            },
-            error: function(data) {
-                console.log(data);
-            }
-        });
-}
-
-function showDatatable(){
-    var counterPermohonan = 0;
+function showDatatablePindaanSah() {
+    var counter = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
     }
-    semakanKPDT = $('#semakanKPDT').DataTable({
-        dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
+
+    pindaanSahDT = $('#pindaanSahDT').DataTable({
+        dom: "f<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
         buttons: [
@@ -59,14 +32,14 @@ function showDatatable(){
             },
             {
                 text: 'Cetak', 
-                title: 'Permohonan - Kerani Pemeriksa',
                 extend:'pdfHtml5',
+                title: 'Permohonan Ditolak - Pelulus Pindaan Sah',
+                className:'btn btn-sm btn-outline-warning text-right',
                 exportOptions: {
                     columns: [2, 3, 4, 5, 6]
                 },
-                className:'btn btn-sm btn-outline-warning text-right',
                 attr: {
-                    id: 'cetakPermohonanKeraniPemeriksa',
+                    id: 'cetakPermohonanPindaanSah',
                 }
             },
         ],
@@ -86,7 +59,7 @@ function showDatatable(){
         },
         serverSide: true,
             ajax: {
-                url: "kerani-pemeriksa-semakan/"+id_user,
+                url: "dashboard/" + id_user, 
                 type: 'GET',
             },
             columns: [
@@ -111,7 +84,7 @@ function showDatatable(){
                     searchable:false,
                 },
                 {
-                    targets: 1,
+                    targets:1,
                     orderable: false,
                     mRender: function(data,type,row) {
                         return '<input type="checkbox" name="cboxSemakanPermohonan" value="'+data.id_permohonan_baru+'">';
@@ -128,20 +101,22 @@ function showDatatable(){
                 {
                     targets: 7,
                     mRender: function(data,type,row){
+                        console.log(data.users);
                         if(id_user != "noID"){
-                            counterPermohonan++;
+                            counter++;
                             var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
-                            var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
                         } 
                         else {
-                            counterPermohonan++;
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            counter++;
+                            // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
-                            var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
-                            var allButton = button1 + button2 + button3;
+                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            // var allButton = button1 + button2 + button3;
+                            var allButton = button2 + button3;
                             return allButton;
                         }
                     }
@@ -162,39 +137,43 @@ function showDatatable(){
                     searchable: true
                 },
                 {
-                    targets: 11,
+                    targets:11,
                     orderable:false,
                     searchable:false,
                     visible:false
                 },
             ], 
-                
-            });
-            semakanKPDT.on('draw.dt', function () {
-                var info = semakanKPDT.page.info();
-                semakanKPDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
-                    cell.innerHTML = i + 1 + info.start;
-                });
-            });
-            if(id_user != ''){
-                $('#semakanKPDT').DataTable().search(
-                    $("#noPekerja").val(),
-                ).draw();
-            } else{}
-}
+                    
+    });
 
+    pindaanSahDT.on('draw.dt', function () {
+        var info = pindaanSahDT.page.info();
+        pindaanSahDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    });
+
+    if(id_user != ''){
+        $('#semakPelulusPindaanSah').DataTable().search(
+            $("#noPekerja").val(),
+        ).draw();
+    } 
+    
+}
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
 
+          
         var valid = true;
-        var min = moment($("#min").val(),"DD-MM-YYYY");
+        var min = moment($("#min").val(),'DD-MM-YYYY');
         if (!min.isValid()) { min = null; }
 
-        var max = moment($("#max").val(),"DD-MM-YYYY");
+        var max = moment($("#max").val(),'DD-MM-YYYY');
         if (!max.isValid()) { max = null; }
 
         if (min === null && max === null) {
+            // no filter applied or no date columns
             valid = true;
         }
         else {
@@ -221,18 +200,8 @@ $.fn.dataTable.ext.search.push(
         return valid;
 });
 
-$("#semakKeraniPemeriksa").click(function () {
-    var id = document.querySelector("#noPekerja").value;
-    var jabatan = document.querySelector("#selectJabatan").value;
-
-    if (id) { 
-        showUser(id, jabatan); 
-    }   
-
-    // filter search result by jabatan
-    $('#semakanKPDT').DataTable().columns(10).search(      
-        jabatan
-    ).draw();
+$("#btnGo").click(function () {
+    $('#pindaanSahDT').DataTable().draw();
 });
 
 $('#min').datepicker({

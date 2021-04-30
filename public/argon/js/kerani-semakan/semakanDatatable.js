@@ -91,6 +91,7 @@ function showDatatable(){
             columns: [
         
                 {data: null},
+                {data: null},
                 {data: 'created_at'},
                 {data: 'masa_mula'},
                 {data: 'masa_akhir'},
@@ -110,6 +111,13 @@ function showDatatable(){
                 },
                 {
                     targets: 1,
+                    orderable: false,
+                    mRender: function(data,type,row) {
+                        return '<input type="checkbox" name="cboxSemakanPermohonan" value="'+data.id_permohonan_baru+'">';
+                    }
+                },
+                {
+                    targets: 2,
                     type: "date",
                     render: function(data,type,row){
                         formattedDate = moment(data).format("DD-MM-YYYY")
@@ -117,7 +125,7 @@ function showDatatable(){
                     }
                 },
                 {
-                    targets: 6,
+                    targets: 7,
                     mRender: function(data,type,row){
                         if(id_user != "noID"){
                             counterPermohonan++;
@@ -138,11 +146,6 @@ function showDatatable(){
                     }
                 },
                 {
-                    targets: 7,
-                    visible: false,
-                    searchable: true
-                },
-                {
                     targets: 8,
                     visible: false,
                     searchable: true
@@ -153,7 +156,12 @@ function showDatatable(){
                     searchable: true
                 },
                 {
-                    targets:10,
+                    targets: 10,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 11,
                     orderable:false,
                     searchable:false,
                     visible:false

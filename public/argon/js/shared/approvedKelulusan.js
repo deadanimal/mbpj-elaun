@@ -28,6 +28,7 @@ function approvedKelulusanAjax(id_permohonan_baru, pilihan) {
                 'Sedang Diproses',
                 'success'
             ); 
+
             showDatatable(pilihan);                    
         },
         error: function() {
