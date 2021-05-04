@@ -45,6 +45,10 @@ function showUser() {
             },
             error: function(data) { console.log(data); }
         });
+
+        $('#semakanKPDT').DataTable().search(
+            $("#noPekerja").val()
+        ).draw();
     }
 }
 
@@ -55,10 +59,12 @@ function showDatatable(){
     if(id_user == ''){
         id_user = 'noID';
     }
-    semakanKPDT = $('#semakanKPDT').DataTable({
-        dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
+
+    var semakanKPDT = $('#semakanKPDT').DataTable({
+        dom: "f<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
+        serverSide: true,
         buttons: [
             {
                 text: 'Hantar semua', 
@@ -95,7 +101,6 @@ function showDatatable(){
             infoFiltered:   "(ditapis daripada _MAX_ rekod)",
             processing:     "Dalam proses...",
         },
-        serverSide: true,
             ajax: {
                 url: "kerani-pemeriksa-semakan/"+id_user,
                 type: 'GET',
@@ -111,7 +116,7 @@ function showDatatable(){
                 {data: 'tujuan'},
                 {data: null},
                 {data: 'jenis_permohonan'},
-                {data: 'users[*].id'},
+                {data: 'users[*].CUSTOMERID'},
                 {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'},
                 {data: 'id_permohonan_baru', name:'id_permohonan_baru'}
             ],  
@@ -164,12 +169,14 @@ function showDatatable(){
                 },
                 {
                     targets: 9,
-                    visible: false,
+                    // visible: false,
+                    visible: true,
                     searchable: true
                 },
                 {
                     targets: 10,
                     visible: false,
+                    // visible: true,
                     searchable: true
                 },
                 {
@@ -181,19 +188,28 @@ function showDatatable(){
             ], 
                 
             });
+
             semakanKPDT.on('draw.dt', function () {
                 var info = semakanKPDT.page.info();
                 semakanKPDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
                     cell.innerHTML = i + 1 + info.start;
                 });
             });
-            if(id_user != ''){
-                $('#semakanKPDT').DataTable().search(
-                    $("#noPekerja").val(),
-                ).draw();
-            } else{}
-}
 
+            // if(id_user != ''){
+            //     $('#semakanKPDT').DataTable().search(
+            //         $("#noPekerja").val(),
+            //     ).draw();
+            // } 
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    $.each(settings.aoColumns, function (i, col) {
+                        if (col.type == "html-input") {
+                            return data[i]; 
+                        }
+                    });
+            });
+}
 
 $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
@@ -233,13 +249,12 @@ $.fn.dataTable.ext.search.push(
 });
 
 // $("#semakKeraniPemeriksa").click(function () {
-    // var id = document.querySelector("#noPekerja").value;
-    // var jabatan = document.querySelector("#selectJabatan").value;
+//     var id = document.querySelector("#noPekerja").value;
+//     var jabatan = document.querySelector("#selectJabatan").value;
 
-    // if (id) { 
-        // showUser(id, jabatan); 
-        // showUser(id, jabatan); 
-    // }   
+//     if (id) { 
+//         showUser(id, jabatan); 
+//     }   
 
     // filter search result by jabatan
 //     $('#semakanKPDT').DataTable().columns(10).search(      
@@ -247,18 +262,22 @@ $.fn.dataTable.ext.search.push(
 //     ).draw();
 // });
 
-$("#selectJabatan").on("change",function(){
+function selectJabatanOption() {
     var jabatan = document.querySelector("#selectJabatan").value;
+    //jabatan = parseInt(jabatan)
+    console.log(jabatan);
 
-    if (jabatan == 'out') {
+    if (jabatan == "0") {
+    // if (parseInt(jabatan)) {
+        console.log('draw');
         showDatatable();
     } else {
-        $('#semakanKPDT').DataTable().columns(10).search(      
+        console.log('search')
+        $('#semakanKPDT').DataTable().columns(10).search(
             jabatan
         ).draw();
     }
-
-});
+}
 
 $('#min').datepicker({
     dateFormat: 'dd-mm-yy',

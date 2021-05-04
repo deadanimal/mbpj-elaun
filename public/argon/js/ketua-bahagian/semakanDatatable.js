@@ -1,13 +1,21 @@
 var jenisPilihan = 'OT';
 var tabPilihan = 'OT';
-
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     showDatatable(jenisPilihan);
+
+    $('#min').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
+    $('#max').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
@@ -31,23 +39,37 @@ $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
+    $("#noKPBaru-semakan").val("");
+    $("#jawatan-semakan").val("");
+    $("#bahagian-semakan").val("");
+    $("#jabatan-semakan").val("");
+    $("#min").val("");
+    $("#max").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
     showDatatable(jenisPilihan);
 });
 
 function checkUser(){
     var pilihan = document.getElementById('selectJenisPermohonan').value;
-
+    
     switch (pilihan) {
         case 'individu':
-            pilihan = tabPilihan + '1';
+            jenisPilihan = tabPilihan + '1';
+            showDatatable(jenisPilihan);
             break;
         case 'berkumpulan':
-            pilihan = tabPilihan + '2';
+            jenisPilihan = tabPilihan + '2';
+            showDatatable(jenisPilihan);
             break;
         default:
+            Swal.fire(
+                'Sebentar...',
+                'Sila pilih jenis permohonan',
+                'info'
+              )
             break;
         }
+
         showUser();
 }
 
@@ -88,15 +110,18 @@ function showUser() {
 function showDatatable(pilihan){
     var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;
+    var minDate = moment(document.querySelector("#min").value,"DD-MM-YYYY").format("YYYY-MM-DD");
+    var maxDate = moment(document.querySelector("#max").value,"DD-MM-YYYY").format("YYYY-MM-DD");
 
     if(id_user == ''){
         id_user = 'noID';
     }
 
     semakanKBDT = $('#semakanKBDT').DataTable({
-    dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
+    dom: "f<'row'<'col ml--4'l><'col text-right'B>>rtip",
+    serverSide: true,
     destroy: true,
-    processing: true,
+    processing: false,
     buttons: [
         {
             text: 'Hantar semua', 
@@ -133,12 +158,13 @@ function showDatatable(pilihan){
         infoFiltered:   "(ditapis daripada _MAX_ rekod)",
         processing:     "Dalam proses...",
     },
-    serverSide: true,
     ajax: {
-        url: "ketua-bahagian-semakan/"+id_user,
+        url: "ketua-bahagian-semakan/" + id_user,
         type: 'GET',
         data: {
-            pilihan: id_user != '' ? pilihan : jenisPilihan
+            pilihan : id_user != '' ? pilihan : jenisPilihan,
+            minDate : minDate,
+            maxDate : maxDate
         }
     },
     columns: [
@@ -151,23 +177,24 @@ function showDatatable(pilihan){
         {data: 'tujuan'},
         {data: null},
         {data: 'jenis_permohonan'},
+        {data: 'users[0].CUSTOMERID'},
         {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
     ],  
     columnDefs: [
         {
-            targets: [0],
+            targets: 0,
             searchable: false,
             orderable: true
         },
         {
-            targets: [1],
+            targets: 1,
             orderable: false,
             mRender: function(data,type,row) {
                 return '<input type="checkbox" name="cboxSemakanPermohonan" value="'+data.id_permohonan_baru+'">';
             }
         },
         {
-            targets: [2],
+            targets: 2,
             type: "date",
             render: function(data,type,row){
                 formattedDate = moment(data,"YYYY-MM-DD").format("DD-MM-YYYY");
@@ -175,7 +202,7 @@ function showDatatable(pilihan){
             }
         },
         {
-            targets: [7],
+            targets: 7,
             mRender: function(data,type,row){
                 if(id_user != "noID"){
                     counterPermohonan++;
@@ -196,12 +223,17 @@ function showDatatable(pilihan){
             }
         },
         {
-            targets: [8],
+            targets: 8,
             visible: false,
             searchable: true,
         },
         {
-            targets: [9],
+            targets: 9,
+            visible: true,
+            searchable: true
+        },
+        {
+            targets: 10,
             visible: false,
             searchable: true
         },
@@ -209,19 +241,13 @@ function showDatatable(pilihan){
         
     });
     
+    //  increment numbering 
     semakanKBDT.on('draw.dt', function () {
         var info = semakanKBDT.page.info();
         semakanKBDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1 + info.start;
         });
     });
-
-    if(id_user != ''){
-        $('#semakanKBDT').DataTable().search(
-            $("#noPekerja").val(),
-            pilihan
-        ).draw();
-    }
 }
 
 $("#selectJenisPermohonan").on("change",function(){
@@ -244,50 +270,6 @@ $("#selectJenisPermohonan").on("change",function(){
             showDatatable(tabPilihan);
             break;
     }
-});
-
-$.fn.dataTable.ext.search.push(
-    function (settings, data, dataIndex) {
-        var valid = true;
-        var min = moment($("#min").val(),"DD-MM-YYYY");
-        if (!min.isValid()) { min = null; }
-
-        var max = moment($("#max").val(),"DD-MM-YYYY");
-        if (!max.isValid()) { max = null; }
-
-        if (min === null && max === null) {
-            valid = true;
-        }
-        else {
-
-            $.each(settings.aoColumns, function (i, col) {
-              
-                if (col.type == "date") {
-                    var cDate = moment(data[i],'DD-MM-YYYY');
-                
-                    if (cDate.isValid()) {
-                        if (max !== null && max.isBefore(cDate)) {
-                            valid = false;
-                        }
-                        if (min !== null && cDate.isBefore(min)) {
-                            valid = false;
-                        }
-                    }
-                    else {
-                        valid = false;
-                    }
-                }
-            });
-        }
-        return valid;
-});
-
-$('#min').datepicker({
-    dateFormat: 'dd-mm-yy',
-});
-
-$('#max').datepicker({
-    dateFormat: 'dd-mm-yy',
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

@@ -31,7 +31,7 @@ class semakanController extends Controller
      */
     public function show(Request $request, $id)
     {   
-        $permohonans = PermohonanBaru::with('users')
+        $permohonans = PermohonanBaru::with('users.maklumat_pekerjaan')
                                 ->where('status_akhir', 1)
                                 ->where('kerani_pemeriksa_approved', 0)
                                 ->get();

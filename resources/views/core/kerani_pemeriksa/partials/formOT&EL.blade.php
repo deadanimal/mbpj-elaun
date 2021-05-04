@@ -8,7 +8,7 @@
                 <div class="col-5">
                     <div class="form-group">
                         <h6 class="heading-small text-muted">{{ __('Maklumat Peribadi') }}</h6>
-                        <select id="selectJabatan" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
+                        <select id="selectJabatan" onchange="selectJabatanOption()" class="form-select form-select-sm col-8" aria-label=".form-select-sm example">
                             <option selected value="0">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
                                 {{-- exclude Datuk Bandar --}}

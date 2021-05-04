@@ -37,17 +37,25 @@ $("#padamCarian").click(function(){
 
 function checkUser(){
     var pilihan = document.getElementById('selectJenisPermohonan').value;
-
+    
     switch (pilihan) {
         case 'individu':
-            pilihan = tabPilihan + '1';
+            jenisPilihan = tabPilihan + '1';
+            showDatatable(jenisPilihan);
             break;
         case 'berkumpulan':
-            pilihan = tabPilihan + '2';
+            jenisPilihan = tabPilihan + '2';
+            showDatatable(jenisPilihan);
             break;
         default:
+            Swal.fire(
+                'Sebentar...',
+                'Sila pilih jenis permohonan',
+                'info'
+              )
             break;
         }
+
         showUser();
 }
 
@@ -88,6 +96,8 @@ function showUser() {
 function showDatatable(pilihan){
     var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;
+    var minDate = moment(document.querySelector("#min").value,"DD-MM-YYYY").format("YYYY-MM-DD");
+    var maxDate = moment(document.querySelector("#max").value,"DD-MM-YYYY").format("YYYY-MM-DD");
 
     if(id_user == ''){
         id_user = 'noID';
@@ -138,7 +148,9 @@ function showDatatable(pilihan){
         url: "penyelia-semakan/"+id_user,
         type: 'GET',
         data: {
-            pilihan: id_user != '' ? pilihan : jenisPilihan
+            pilihan: id_user != '' ? pilihan : jenisPilihan,
+            minDate : minDate,
+            maxDate : maxDate
         }
     },
     columns: [

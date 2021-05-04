@@ -22,7 +22,7 @@ function showUser(id, jabatan) {
                 $("#formOTEL input[name=nama]").val(data.users.NAME);
                 $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
                 $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
-                $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);HR_JABATAN);
+                $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
                 $('#pindaanLulusDT').DataTable().columns(9).search(     
                     id
                 )
@@ -231,7 +231,6 @@ $("#semakPelulusPindaanLulus").click(function () {
     $('#pindaanLulusDT').DataTable().columns(10).search(      
     jabatan
     ).draw();
-      
 });
 
 $('#min').datepicker({

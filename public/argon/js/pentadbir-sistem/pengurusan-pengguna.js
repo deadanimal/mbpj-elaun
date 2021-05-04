@@ -14,6 +14,7 @@ var selectRole = {
     "Kakitangan" : 8,
     "Pelulus Pindaan" : 9
 };
+
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -58,13 +59,14 @@ function showPengurusanPengguna(){
             {data: 'role_id', name: 'role_id'},
             {data: 'is_active', name: 'is_active'},
             {data: null, name: null},
-            {data: 'users[*].maklumat_pekerjaan.HR_JABATAN'}
+            {data: 'maklumat_pekerjaan.HR_JABATAN'},
         ],
         columnDefs:[
             {
-                type: "html-input",
                 targets: 3, 
-                render:function(data,type,row){
+                type: "html-input",
+                searchable: true, 
+                render: function(data,type,row){
                 var role;
                 if(type == 'display' || row != null){
                     if(data == 1){
@@ -97,7 +99,7 @@ function showPengurusanPengguna(){
                     }
                 }
 
-                var $select = $("<select id='role"+counter+"' class='form-select form-select-sm'></select>", {});
+                var $select = $("<select id='role"+counterPermohonan+"' class='form-select form-select-sm'></select>", {});
 
                 $.each(selectRole, function(key,value){
                     var $option = $("<option></option>", {
@@ -123,7 +125,7 @@ function showPengurusanPengguna(){
                             status = "Aktif";
                         }
 
-                        var $select = $("<select id='is_active"+counter+"' class='form-select form-select-sm'></select>", {});
+                        var $select = $("<select id='is_active"+counterPermohonan+"' class='form-select form-select-sm'></select>", {});
 
                         $.each(selectStatus, function(key,value){
                             var $option = $("<option></option>", {
@@ -143,9 +145,9 @@ function showPengurusanPengguna(){
             targets: 5,
                 render: function(data,type,row){
                     var CUSTOMERID = parseInt(data.CUSTOMERID, 10);
+                    var button = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="kemaskiniPengguna('+CUSTOMERID+','+"'"+data.NAME+"'"+','+counterPermohonan+')" data-target="">Kemaskini</button>' 
 
-                    var button = '<button data-toggle="modal" id="buttonEdit" class="btn btn-primary btn-sm align-center" onclick="kemaskiniPengguna('+CUSTOMERID+','+"'"+data.NAME+"'"+','+counter+')" data-target="">Kemaskini</button>' 
-                    counter++;
+                    counterPermohonan++;
                     return button;
             }},
             {
@@ -164,14 +166,14 @@ function showPengurusanPengguna(){
         });
     });
     
-    $.fn.dataTable.ext.search.push(
-        function (settings, data, dataIndex) {
-            $.each(settings.aoColumns, function (i, col) {
-                if (col.type == "CUSTOMERID") {
-                    return data[i]; 
-                }
-            });
-    });
+    // $.fn.dataTable.ext.search.push(
+    //     function (settings, data, dataIndex) {
+    //         $.each(settings.aoColumns, function (i, col) {
+    //             if (col.type == "CUSTOMERID") {
+    //                 return data[i]; 
+    //             }
+    //         });
+    // });
 }
 
 function optionJabatan() {
@@ -181,8 +183,9 @@ function optionJabatan() {
         showPengurusanPengguna();
     } else {
         // filter search result by jabatan
-        $('#pengurusanDT').DataTable().columns(1).search(    
-            jabatan 
+        var regex = '\\b'+ jabatan + '\\b';
+        $('#pengurusanDT').DataTable().columns(6).search(    
+            regex, true, false
         ).draw();
     }
 }

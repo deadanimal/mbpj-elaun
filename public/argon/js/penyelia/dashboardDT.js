@@ -97,21 +97,21 @@ function showDatatable(){
 
 
 $("#selectJenisPermohonan").on('change',function(){
+    var statusPilihan = $("#selectJenisPermohonan").val();
 
-    var statusPilihan = $("#selectJenisPermohonan").val()
     if(statusPilihan == "lulus"){
         $('#dashboardPYDT').DataTable().columns(11).search(
             "0"
         ).draw();
-    }else if(statusPilihan == "tolak"){
+    } else if(statusPilihan == "tolak"){
         $('#dashboardPYDT').DataTable().columns(11).search(
             "1"
         ).draw();
-    }else if(statusPilihan == "dp"){
+    } else if(statusPilihan == "dp"){
         $('#dashboardPYDT').DataTable().columns(11).search(
             "2"
         ).draw();
-    }else{
+    } else{
         $('#dashboardPYDT').DataTable().columns(11).search(
             ""
         ).draw();
