@@ -89,6 +89,8 @@ function  fillInDetailPermohonan(permohonan, tarikh_permohonan, is_individu) {
     $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(permohonan.masa_akhir);
     $('#detailPermohananAccordion input[name=tujuan-'+is_individu+']').val(permohonan.tujuan);
     $('#detailPermohananAccordion input[name=lokasi-'+is_individu+']').val(permohonan.lokasi); 
+
+    $('input').css('color', 'black');
 }
 
 function fillInKelulusan(arrayKelulusan) {
@@ -102,6 +104,8 @@ function fillInKelulusan(arrayKelulusan) {
         $("#formKelulusan input[name="+key+"]").val(value[0].NAME);
         $("#formKelulusan input[name=jawatan_"+key+"]").val(value[1]);
     }
+
+    $('input').css('color', 'black');
 }
 
 function fillInKadarJam(kadar_jam, saved_jenis_hari) {
