@@ -37,6 +37,8 @@ function showUser(id, jabatan) {
                     id
                 )
 
+                revealJumlahPersamaanJamMasa('EL');
+
                 $('input').css('color', 'black')
             },
             error: function(data) {

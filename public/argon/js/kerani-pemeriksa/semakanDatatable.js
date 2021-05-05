@@ -50,6 +50,8 @@ function showUser() {
                     $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
                     $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
+                    revealJumlahPersamaanJamMasa('EL');
+
                     $('input').css('color', 'black')
                 }
             },

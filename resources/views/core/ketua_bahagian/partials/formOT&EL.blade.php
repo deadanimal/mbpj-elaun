@@ -1,7 +1,5 @@
-<form  method="get" id="formOTEL" action="{{ route('ketua-bahagian-semakan.index')}}" autocomplete="off" enctype="multipart/form-data">
+<form  method="get" id="formOTEL" action="" autocomplete="off" enctype="multipart/form-data">
     @csrf
-        @include('alerts.success')
-        @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
 
         <div class="container-fluid">
             <div class="row">
@@ -21,8 +19,6 @@
                             <div class="form-group">
                                 <label class="form-control-label">{{ __('Nama') }}</label>
                                 <input type="email" name="nama" id="nama-semakan" class="form-control form-control-sm" value="" disabled>
-            
-                                @include('alerts.feedback', ['field' => 'name'])
                             </div>
                         </div>
                     </div>
@@ -34,8 +30,6 @@
                         <div class="form-group">
                             <label class="form-control-label"for="input-name">{{ __('No Pekerja') }}</label>
                             <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm" value="" required autofocus>
-
-                            @include('alerts.feedback', ['field' => 'name'])
                         </div>
                     </div>
                 </div>
@@ -45,16 +39,12 @@
                             <div class="form-group">
                                 <label class="form-control-label">{{ __('No. KP Baru') }}</label>
                                 <input type="email" name="noKPbaru" id="noKPBaru-semakan" class="form-control form-control-sm" value="" disabled>
-            
-                                @include('alerts.feedback', ['field' => 'name'])
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-control-label">{{ __('Jawatan') }}</label>
                                 <input type="email" name="jawatan" id="jawatan-semakan" class="form-control form-control-sm" value="" disabled>
-            
-                                
                             </div>
                         </div>
                     </div>

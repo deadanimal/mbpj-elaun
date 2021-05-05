@@ -30,7 +30,6 @@ $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
     showDatatable(jenisPilihan);
-    revealJumlahPersamaanJamMasa('EL');
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
@@ -101,6 +100,8 @@ function showUser() {
                     $("#formOTEL input[name=noKPbaru]").val(data.user.NIRC);
                     $("#formOTEL input[name=jabatan]").val(data.user.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
                     $("#formOTEL input[name=jawatan]").val(data.user.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
+
+                    revealJumlahPersamaanJamMasa('EL');
 
                     $('input').css('color', 'black')
                 }

@@ -31,7 +31,6 @@ $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     $("#selectJenisPermohonan").val("out").trigger("change")
 
     showDatatable(jenisPilihan);
-    revealJumlahPersamaanJamMasa('EL');
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
@@ -98,6 +97,8 @@ function showUser() {
                     $("#formOTEL input[name=jawatan]").val(data.user.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
                     $('input').css('color', 'black')
+
+                    revealJumlahPersamaanJamMasa('EL');
                 }
             },
             error: function(data) { console.log(data); }
