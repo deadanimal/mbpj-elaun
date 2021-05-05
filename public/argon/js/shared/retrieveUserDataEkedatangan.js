@@ -90,10 +90,11 @@ function  fillInDetailPermohonan(permohonan, tarikh_permohonan, is_individu) {
     $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(tarikh_akhir_kerja);
     $('#formModalEdit input[name=masaMula-'+is_individu+']').val(permohonan.masa_mula);
     $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(permohonan.masa_akhir);
-    $('#detailPermohananAccordion input[name=tujuan-'+is_individu+']').val(permohonan.tujuan);
     $('#detailPermohananAccordion input[name=lokasi-'+is_individu+']').val(permohonan.lokasi); 
+    document.getElementById('semakan-modal-individu-tujuan').value = permohonan.tujuan;
 
     $('input').css('color', 'black');
+    $('textarea').css('color', 'black');
 }
 
 function fillInKelulusan(arrayKelulusan) {

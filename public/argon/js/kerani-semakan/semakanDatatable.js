@@ -20,8 +20,15 @@ $(document).ready(function(){
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
+    $("#noKPBaru-semakan").val("");
+    $("#jawatan-semakan").val("");
+    $("#bahagian-semakan").val("");
+    $("#jabatan-semakan").val("");
+    $("#min").val("");
+    $("#max").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable();
+    
+    showDatatable(jenisPilihan);
 });
 
 function showUser() {
@@ -38,17 +45,17 @@ function showUser() {
             url: 'user/semakan-pekerja/' + id,
             type: 'GET',
             success: function(data) {
-                if (!data.users) {
+                if (!data.user) {
                     Swal.fire(
                         'Tiada rekod dijumpai',
                         'Sila semak semula maklumat',
                         'error'
                         )
                 } else {
-                    $("#formOTEL input[name=nama]").val(data.users.NAME);
-                    $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                    $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
-                    $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
+                    $("#formOTEL input[name=nama]").val(data.user.NAME);
+                    $("#formOTEL input[name=noKPbaru]").val(data.user.NIRC);
+                    $("#formOTEL input[name=jabatan]").val(data.user.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                    $("#formOTEL input[name=jawatan]").val(data.user.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
                     revealJumlahPersamaanJamMasa('EL');
 
@@ -65,6 +72,8 @@ function showDatatable(){
 
     if(id_user == ''){
         id_user = 'noID';
+    } else {
+        id_user = parseInt(id_user);
     }
 
     semakanKSDT = $('#semakanKSDT').DataTable({
@@ -153,7 +162,7 @@ function showDatatable(){
                     mRender: function(data,type,row){
                         if(id_user != "noID"){
                             counterPermohonan++;
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTargetAtasan('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
                             var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
@@ -161,7 +170,7 @@ function showDatatable(){
                         } 
                         else {
                             counterPermohonan++;
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTargetAtasan('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
                             var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
@@ -199,12 +208,6 @@ function showDatatable(){
             cell.innerHTML = i + 1 + info.start;
         });
     });
-
-    if(id_user != ''){
-        $('#semakanKSDT').DataTable().search(
-            $("#noPekerja").val(),
-        ).draw();
-    } 
 }
 
 

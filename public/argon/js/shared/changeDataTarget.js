@@ -1,4 +1,4 @@
-function changeDataTarget(status) {
+function changeDataTargetAtasan(status) {
     switch (status[2]) {
         case "1":
             document.getElementById("buttonEdit").setAttribute("data-target", "#modal-default");

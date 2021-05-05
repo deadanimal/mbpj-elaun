@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <h4 class="text-muted">Catatan</h4>
-                        <textarea class="form-control" name="catatan" id="semakan-catatan" rows="3"></textarea>
+                        <textarea class="form-control" name="catatan" id="semakan-catatan" rows="2"></textarea>
 
                         @include('alerts.feedback', ['field' => 'name'])
                     </div>

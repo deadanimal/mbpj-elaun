@@ -95,8 +95,8 @@
                                             <input class="form-control form-control-sm" disabled name="lokasi-individu" id="semakan-modal-individu-lokasi" type="text">
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
-                                            <textarea class="form-control form-control-sm" disabled name="tujuan-individu" id="semakan-modal-individu-tujuan" rows="3"></textarea>
+                                            <label class="form-control-label" >{{ __('Sebab-Sebab Lebih Masa') }}</label>
+                                            <textarea class="form-control form-control-sm" disabled name="tujuan-individu" id="semakan-modal-individu-tujuan" rows="2"></textarea>
                                         </div>
                                     </div>
                                 </div>

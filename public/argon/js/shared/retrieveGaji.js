@@ -1,4 +1,4 @@
-function fillInGaji(idKakitangan, id_permohonan_baru, is_individu) {
+function fillInGaji(idKakitangan, id_permohonan_baru, is_individu) {    
     $.ajax({
         url: 'tuntutan-elaun/' + idKakitangan,
         type: 'GET',
