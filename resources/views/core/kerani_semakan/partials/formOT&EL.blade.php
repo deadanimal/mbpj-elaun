@@ -22,7 +22,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">{{ __('Nama') }}</label>
-                                <input type="email" name="nama" id="nama-semakan" class="form-control form-control-sm" value="" disabled>
+                                <input type="text" name="nama" id="nama-semakan" class="form-control form-control-sm" value="" disabled>
                             </div>
                         </div>
                     </div>
@@ -42,13 +42,13 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">{{ __('No. KP Baru') }}</label>
-                                <input type="email" name="noKPbaru" id="noKPBaru-semakan" class="form-control form-control-sm" value="" disabled>
+                                <input type="text" name="noKPbaru" id="noKPBaru-semakan" class="form-control form-control-sm" value="" disabled>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">{{ __('Jawatan') }}</label>
-                                <input type="email" name="jawatan" id="jawatan-semakan" class="form-control form-control-sm" value="" disabled>
+                                <input type="text" name="jawatan" id="jawatan-semakan" class="form-control form-control-sm" value="" disabled>
                             </div>
                         </div>
                     </div>
@@ -72,13 +72,13 @@
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">{{ __('Bahagian') }}</label>
-                                <input type="email" name="bahagian" id="bahagian-semakan" class="form-control form-control-sm" value="" disabled>
+                                <input type="text" name="bahagian" id="bahagian-semakan" class="form-control form-control-sm" value="" disabled>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">{{ __('Jabatan') }}</label>
-                                <input type="email" name="jabatan" id="jabatan-semakan" class="form-control form-control-sm" value="" disabled>
+                                <input type="text" name="jabatan" id="jabatan-semakan" class="form-control form-control-sm" value="" disabled>
                             </div>
                         </div>
                     </div>
