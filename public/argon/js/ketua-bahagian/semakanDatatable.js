@@ -192,7 +192,6 @@ function showDatatable(pilihan){
         {data: 'tujuan'},
         {data: null},
         {data: 'jenis_permohonan'},
-        {data: 'users[0].CUSTOMERID'},
         {data: 'id_permohonan_baru', name:'id_permohonan_baru'},
     ],  
     columnDefs: [
@@ -244,11 +243,6 @@ function showDatatable(pilihan){
         },
         {
             targets: 9,
-            visible: false,
-            searchable: true
-        },
-        {
-            targets: 10,
             visible: false,
             searchable: true
         },
