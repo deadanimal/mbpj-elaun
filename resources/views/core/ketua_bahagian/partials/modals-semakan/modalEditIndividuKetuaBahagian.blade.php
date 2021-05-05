@@ -19,11 +19,11 @@
                                 @csrf
                                 @method('put')
     
-                                <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }} mb-2">
+                                <div class="form-group mb-2">
                                     <label class="form-control-label" for="input-name">{{ __('Nama') }}</label>
                                     <input type="text" name="nama" id="semakan-modal-nama" class="form-control form-control-sm" disabled value="" >
                                 </div>
-                                <div class="row">
+                                <div class="row mb-5">
                                     <div class="col">
                                         <div class="form-group mb-2">
                                             <label class="form-control-label">{{ __('No. K/P Baru') }}</label>
@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mb-5">
+                                <div class="form-group mb-2">
                                     <label class="form-control-label">{{ __('Tarikh Mohon') }}</label>
                                     <input class="form-control form-control-sm" disabled name="tarikhMohon-individu" id="semakan-modal-individu-tarikhMohon" type="text">
                                 </div>
@@ -76,7 +76,7 @@
                                 @include('core.ketua_bahagian.partials.hariKadarJam')
 
                                 <div class="form-group mb-5">
-                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-light btn-sm float-end">{{ __('Kemaskini') }}</button>
+                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-primary btn-sm float-end">{{ __('Kemaskini') }}</button>
                                 </div>
                             </form>
                         </div>

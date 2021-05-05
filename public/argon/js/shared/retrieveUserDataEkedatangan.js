@@ -82,9 +82,12 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 }
 
 function  fillInDetailPermohonan(permohonan, tarikh_permohonan, is_individu) {
+    let tarikh_mula_kerja = moment(permohonan.tarikh_mula_kerja, "YYYY-MM-DD").format("DD-MM-YYYY");
+    let tarikh_akhir_kerja = moment(permohonan.tarikh_akhir_kerja, "YYYY-MM-DD").format("DD-MM-YYYY");
+
     $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(tarikh_permohonan);
-    $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(permohonan.tarikh_mula_kerja);
-    $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(permohonan.tarikh_akhir_kerja);
+    $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(tarikh_mula_kerja);
+    $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(tarikh_akhir_kerja);
     $('#formModalEdit input[name=masaMula-'+is_individu+']').val(permohonan.masa_mula);
     $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(permohonan.masa_akhir);
     $('#detailPermohananAccordion input[name=tujuan-'+is_individu+']').val(permohonan.tujuan);

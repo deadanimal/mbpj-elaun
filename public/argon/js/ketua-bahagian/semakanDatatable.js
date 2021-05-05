@@ -132,7 +132,7 @@ function showDatatable(pilihan){
     }
 
     semakanKBDT = $('#semakanKBDT').DataTable({
-    dom: "f<'row'<'col ml--4'l><'col text-right'B>>rtip",
+    dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
     serverSide: true,
     destroy: true,
     processing: false,
@@ -244,7 +244,7 @@ function showDatatable(pilihan){
         },
         {
             targets: 9,
-            visible: true,
+            visible: false,
             searchable: true
         },
         {
