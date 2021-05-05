@@ -43,10 +43,12 @@ function checkUser(){
     switch (pilihan) {
         case 'individu':
             jenisPilihan = tabPilihan + '1';
+            showUser();
             showDatatable(jenisPilihan);
             break;
         case 'berkumpulan':
             jenisPilihan = tabPilihan + '2';
+            showUser();
             showDatatable(jenisPilihan);
             break;
         default:
@@ -57,8 +59,6 @@ function checkUser(){
               )
             break;
         }
-
-        showUser();
 }
 
 function showUser() {
@@ -96,10 +96,24 @@ function showUser() {
 }
 
 function showDatatable(pilihan){
+    var minDateReformatted;
+    var maxDateReformatted;
     var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;
-    var minDate = moment(document.querySelector("#min").value,"DD-MM-YYYY").format("YYYY-MM-DD");
-    var maxDate = moment(document.querySelector("#max").value,"DD-MM-YYYY").format("YYYY-MM-DD");
+    var minDate = document.querySelector("#min").value;
+    var maxDate = document.querySelector("#max").value;
+
+    if (minDate == '') {
+        minDateReformatted = 0;
+    } else {
+        minDateReformatted = moment(minDate, "DD-MM-YYYY").format("YYYY-MM-DD");
+    }
+
+    if (maxDate == '') {
+        maxDateReformatted = 0;
+    } else {
+        maxDateReformatted = moment(maxDate, "DD-MM-YYYY").format("YYYY-MM-DD");
+    }
 
     if(id_user == ''){
         id_user = 'noID';
@@ -150,9 +164,10 @@ function showDatatable(pilihan){
         url: "ketua-jabatan-semakan/"+id_user,
         type: 'GET',
         data: {
-            pilihan : id_user != '' ? pilihan : jenisPilihan,
-            minDate : minDate,
-            maxDate : maxDate
+            // pilihan : id_user != '' ? pilihan : jenisPilihan,
+            pilihan : pilihan,
+            minDate : minDateReformatted,
+            maxDate : maxDateReformatted
         }
     },
     columns: [

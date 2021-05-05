@@ -117,13 +117,17 @@ class UserController extends Controller
 
     public function findUser($id)
     {
+        $user = User::with(['maklumat_pekerjaan.jabatan', 'maklumat_pekerjaan.jawatan'])
+                    ->where('CUSTOMERID', $id)
+                    ->firstOr(function () {
+                        return 0;
+                    });
+        
+        $user->CUSTOMERID = sprintf('%05d', $user->CUSTOMERID);
+
         return response()->json([
                     'error' => false,
-                    'users'  => User::with(['maklumat_pekerjaan.jabatan', 'maklumat_pekerjaan.jawatan'])
-                                        ->where('CUSTOMERID', $id)
-                                        ->firstOr(function () {
-                                            return 0;
-                                        }),
+                    'user' => $user
                 ], 200);
     }
 

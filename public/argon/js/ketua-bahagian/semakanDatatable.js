@@ -54,23 +54,23 @@ function checkUser(){
     
     switch (pilihan) {
         case 'individu':
-            jenisPilihan = tabPilihan + '1';
-            showDatatable(jenisPilihan);
-            break;
+            pilihan = tabPilihan + '1';
+            showUser();
+            showDatatable(pilihan);
+        break;
         case 'berkumpulan':
-            jenisPilihan = tabPilihan + '2';
-            showDatatable(jenisPilihan);
-            break;
+            pilihan = tabPilihan + '2';
+            showUser();
+            showDatatable(pilihan);
+        break;
         default:
             Swal.fire(
                 'Sebentar...',
                 'Sila pilih jenis permohonan',
                 'info'
               )
-            break;
-        }
-
-        showUser();
+        break;
+    }
 }
 
 function showUser() {
@@ -87,17 +87,17 @@ function showUser() {
             url: 'user/semakan-pekerja/' + id,
             type: 'GET',
             success: function(data) {
-                if (!data.users) {
+                if (!data.user) {
                     Swal.fire(
                         'Tiada rekod dijumpai',
                         'Sila semak semula maklumat',
                         'error'
                         )
                 } else {
-                    $("#formOTEL input[name=nama]").val(data.users.NAME);
-                    $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                    $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
-                    $("#formOTEL input[name=jawatan]").val(data.users.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
+                    $("#formOTEL input[name=nama]").val(data.user.NAME);
+                    $("#formOTEL input[name=noKPbaru]").val(data.user.NIRC);
+                    $("#formOTEL input[name=jabatan]").val(data.user.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                    $("#formOTEL input[name=jawatan]").val(data.user.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
                     $('input').css('color', 'black')
                 }
@@ -108,10 +108,24 @@ function showUser() {
 }
 
 function showDatatable(pilihan){
+    var minDateReformatted;
+    var maxDateReformatted;
     var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;
-    var minDate = moment(document.querySelector("#min").value,"DD-MM-YYYY").format("YYYY-MM-DD");
-    var maxDate = moment(document.querySelector("#max").value,"DD-MM-YYYY").format("YYYY-MM-DD");
+    var minDate = document.querySelector("#min").value;
+    var maxDate = document.querySelector("#max").value;
+
+    if (minDate == '') {
+        minDateReformatted = 0;
+    } else {
+        minDateReformatted = moment(minDate, "DD-MM-YYYY").format("YYYY-MM-DD");
+    }
+
+    if (maxDate == '') {
+        maxDateReformatted = 0;
+    } else {
+        maxDateReformatted = moment(maxDate, "DD-MM-YYYY").format("YYYY-MM-DD");
+    }
 
     if(id_user == ''){
         id_user = 'noID';
@@ -162,9 +176,10 @@ function showDatatable(pilihan){
         url: "ketua-bahagian-semakan/" + id_user,
         type: 'GET',
         data: {
-            pilihan : id_user != '' ? pilihan : jenisPilihan,
-            minDate : minDate,
-            maxDate : maxDate
+            // pilihan : id_user != '' ? pilihan : jenisPilihan,
+            pilihan : pilihan,
+            minDate : minDateReformatted,
+            maxDate : maxDateReformatted
         }
     },
     columns: [

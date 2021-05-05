@@ -37,19 +37,21 @@ class semakanController extends Controller
         $maxDate = $request->input('maxDate');
 
         if (strlen($pilihan) == 3){
-            if ($minDate != '' && $maxDate == '') {
+            if ($minDate && !$maxDate) {
                 return datatables()->of($this->findPermohonanWithIDMin($pilihan, $id, $minDate))->make(true);
             }
     
-            if ($minDate == '' && $maxDate != '') {
+            if (!$minDate && $maxDate) {
                 return datatables()->of($this->findPermohonanWithIDMax($pilihan, $id, $maxDate))->make(true);
             }
     
-            if ($minDate != '' && $maxDate != '') {
+            if ($minDate && $maxDate) {
                 return datatables()->of($this->findPermohonanWithIDBetween($pilihan, $id, $minDate, $maxDate))->make(true); 
             }
 
-            return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
+            if (!$minDate && !$maxDate) {
+                return datatables()->of($this->findPermohonanWithID($pilihan, $id))->make(true); 
+            }
         } 
 
         return datatables()->of($this->findAllPermohonanForTypes($pilihan))->make(true);

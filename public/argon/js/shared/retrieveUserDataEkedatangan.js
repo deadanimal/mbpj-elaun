@@ -151,8 +151,9 @@ function fillInUserDetail(id_user) {
 
         type: 'GET', 
         success: function(data) {
-            $("#formModalEdit input[name=nama]").val(data.users.NAME);
-            $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
+            $("#formModalEdit input[name=nama]").val(data.user.NAME);
+            $("#formModalEdit input[name=noKP]").val(data.user.NIRC);
+            $("#formModalEdit input[name=noPekerja]").val(data.user.CUSTOMERID);
 
             $('input').css('color', 'black')
         },

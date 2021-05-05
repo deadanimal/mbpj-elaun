@@ -21,7 +21,7 @@ class PermohonanBaruController extends Controller
     {
         $senaraiKakitangan = array();
         $permohonan = PermohonanBaru::with('users')->findOrFail($idPermohananBaru);
-        $tarikhPermohonan = $permohonan->created_at->format('d/m/Y');
+        $tarikhPermohonan = $permohonan->created_at->format('d-m-Y');
 
         foreach ($permohonan->users as $user) {
             if ($user->permohonan_with_users->is_rejected_individually != 1) {
