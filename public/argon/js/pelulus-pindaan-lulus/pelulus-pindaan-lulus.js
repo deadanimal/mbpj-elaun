@@ -4,7 +4,17 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    showDatatable();
+
+    showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('OT');
+
+    $('#min').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
+    $('#max').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
 }) 
 
 $("#padamCarian").click(function(){
@@ -231,12 +241,4 @@ $("#semakPelulusPindaanLulus").click(function () {
     $('#pindaanLulusDT').DataTable().columns(10).search(      
     jabatan
     ).draw();
-});
-
-$('#min').datepicker({
-    dateFormat: 'dd-mm-yy',
-});
-
-$('#max').datepicker({
-    dateFormat: 'dd-mm-yy',
 });

@@ -63,6 +63,15 @@
                             </div>
                         </div>
                     </div>
+                    <div id="jumlahPersamaanJamMasaBlock" class="col-12 mb-2">
+                        <form class="form-inline text-right" style="display: flex; justify-content: flex-end">
+                            <label for="inlineFormJam" class="m-2">Jumlah Persamaan Jam:</label>
+                            <input type="text" class="form-control form-control-sm m-2" id="jam">
+        
+                            <label for="inlineFormMasa" class="m-2">Jumlah Tuntutan Lebih Masa:</label>
+                            <input type="text" class="form-control form-control-sm m-2" id="masa">
+                          </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,6 +93,7 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <script src="{{ asset('argon') }}/js/pelulus-pindaan-sah/pelulus-pindaan-sah.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/jumlahPersamaanJamMasa.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveGaji.js"></script>
     <script src="{{ asset('argon') }}/js/shared/rejectIndividually.js"></script>

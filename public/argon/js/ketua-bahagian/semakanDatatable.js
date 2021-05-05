@@ -1,5 +1,6 @@
 var jenisPilihan = 'OT';
 var tabPilihan = 'OT';
+
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -8,6 +9,7 @@ $(document).ready(function(){
     });
 
     showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('OT');
 
     $('#min').datepicker({
         dateFormat: 'dd-mm-yy',
@@ -28,6 +30,7 @@ $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
     showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('EL');
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){

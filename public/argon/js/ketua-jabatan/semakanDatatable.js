@@ -9,7 +9,17 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('OT');
+
+    $('#min').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
+    $('#max').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
@@ -310,14 +320,6 @@ $.fn.dataTable.ext.search.push(
             });
         }
         return valid;
-});
-
-$('#min').datepicker({
-    dateFormat: 'dd-mm-yy',
-});
-
-$('#max').datepicker({
-    dateFormat: 'dd-mm-yy',
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

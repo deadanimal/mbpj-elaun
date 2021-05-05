@@ -7,7 +7,17 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $('#min').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+    
+    $('#max').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
     showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('OT');
 }) 
 
 $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
@@ -19,7 +29,9 @@ $("#tabPilihanPermohonanKerjaLebihMasa").click(function(){
 $("#tabPilihanTuntutanElaunLebihMasa").click(function(){
     jenisPilihan = 'EL';
     $("#selectJenisPermohonan").val("out").trigger("change")
+
     showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('EL');
 });
 
 $("#tabPilihanPengesahanKerjaLebihMasa").click(function(){
@@ -301,14 +313,6 @@ $.fn.dataTable.ext.search.push(
             });
         }
         return valid;
-});
-
-$('#min').datepicker({
-    dateFormat: 'dd-mm-yy',
-});
-
-$('#max').datepicker({
-    dateFormat: 'dd-mm-yy',
 });
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

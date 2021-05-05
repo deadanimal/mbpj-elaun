@@ -32,14 +32,14 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-12 my-4">
-                <form class="form-inline" style="display: flex; justify-content: flex-end">
-                    <label for="jam">Jumlah Persamaan Jam:</label>
-                    <input type="text" class="form-control mx-sm-3" id="jam" placeholder="">
+            <div id="jumlahPersamaanJamMasaBlock" class="col-12 mb-2">
+                <form class="form-inline text-right" style="display: flex; justify-content: flex-end">
+                    <label for="inlineFormJam" class="m-2">Jumlah Persamaan Jam:</label>
+                    <input type="text" class="form-control form-control-sm m-2" id="jam">
 
-                    <label for="masa">Jumlah Tuntutan Lebih Masa:</label>
-                    <input type="text" class="form-control mx-sm-3" id="masa" placeholder="">   
-                </form>
+                    <label for="inlineFormMasa" class="m-2">Jumlah Tuntutan Lebih Masa:</label>
+                    <input type="text" class="form-control form-control-sm m-2" id="masa">
+                  </form>
             </div>
         </div>
     </div>

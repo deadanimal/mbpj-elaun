@@ -82,6 +82,7 @@ $("#btnGo").click(function () {
   console.log("searching")
   $('#adminDT').DataTable().draw();
 });
+
 function printTuntutan(){
   console.log("gfhj")
   table.button( '.buttons-pdf' ).trigger();

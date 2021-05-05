@@ -5,7 +5,16 @@ $(document).ready(function(){
         }
     });
 
-    showDatatable();
+    showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('OT');
+
+    $('#min').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
+    $('#max').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
 }) 
 
 $("#padamCarian").click(function(){
@@ -245,12 +254,4 @@ $("#semakKeraniSemakan").click(function () {
     jabatan
     ).draw();
       
-});
-
-$('#min').datepicker({
-    dateFormat: 'dd-mm-yy',
-});
-
-$('#max').datepicker({
-    dateFormat: 'dd-mm-yy',
 });
