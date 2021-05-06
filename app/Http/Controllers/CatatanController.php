@@ -12,7 +12,6 @@ class CatatanController extends Controller
 {
     public function saveCatatan(Request $request, $idPermohananBaru)
     {
-        $array = array();
         $permohonan = PermohonanBaru::findOrFail($idPermohananBaru);
         $catatan = new Catatan([
             'catatan' => $request->input('catatan'),
@@ -21,9 +20,9 @@ class CatatanController extends Controller
             'CUSTOMERID' => Auth::id(),
             'masa' => now()
         ]);
-
+        
         $permohonan->catatans()->save($catatan);
-
+        
         event(new PermohonanStatusChangedEvent($permohonan, 0, 0, 0));
     }
 }

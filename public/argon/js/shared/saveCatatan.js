@@ -9,15 +9,18 @@ function saveCatatan() {
     var id_permohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('value');
     var jenis_permohonan = document.getElementById('tolakBtn'+counterPermohonan).getAttribute('data-value');
 
-    if (document.getElementById('perluKemaskini').checked) { is_kemaskini = 1; } 
+    if (document.getElementById('perluKemaskini').checked) { 
+        is_kemaskini = 1; 
+    } 
 
     $.ajax({
         url: "catatan/" + id_permohonan,
-        type: 'POST',
+        // type: 'POST',
+        type: 'PUT',
         data: {
-            catatan : document.getElementById('semakan-catatan').value,
+            is_kemaskini : is_kemaskini,
             jenis_permohonan : jenis_permohonan,
-            is_kemaskini : is_kemaskini
+            catatan : document.getElementById('semakan-catatan').value,
         },
         success: function() {
             if (is_kemaskini) {

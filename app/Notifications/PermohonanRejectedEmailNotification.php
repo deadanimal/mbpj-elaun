@@ -28,7 +28,7 @@ class PermohonanRejectedEmailNotification extends Notification implements Should
         
         foreach ($permohonan->catatans as $catatan) {
             $this->catatan_latest = $catatan->catatan;
-            $user = User::findOrFail($catatan->id_user);
+            $user = User::findOrFail($catatan->CUSTOMERID);
             $this->penulis_catatan = $user->name;
             break;
         }

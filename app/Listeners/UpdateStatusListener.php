@@ -60,7 +60,6 @@ class UpdateStatusListener
         } elseif ($event->is_batal) {
             $event->permohonan->status = "BATAL";
         } else {
-
             $this->permohonanRejected($event);
         }
 
@@ -139,10 +138,12 @@ class UpdateStatusListener
                 $pegawai_pelulus->notify(new PermohonanNeedApprovalEmailNotification($pegawai_pelulus)); 
                 break;
             case 'KP':
+                // Need updates for kerani pemeriksa
                 $kerani_pemeriksa = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $kerani_pemeriksa->notify(new PermohonanNeedApprovalEmailNotification($kerani_pemeriksa)); 
                 break;
             case 'KS':
+                // Need updates for kerani semakan
                 $kerani_semakan = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $kerani_semakan->notify(new PermohonanNeedApprovalEmailNotification($kerani_semakan)); 
                 break;
