@@ -37,11 +37,15 @@
             @break
 
             @case(8)
-                @include('layouts.navbars.partials.ktsidebar')
+                @if (Auth::user()->is_active)
+                    @include('layouts.navbars.partials.ktsidebar')
+                @else
+                    {{-- @include('layouts.navbars.partials.unauthenticatedsidebar') --}}
+                @endif
             @break
 
             @default
-                @include('layouts.navbars.partials.unauthenticatedsidebar')
+            @break
         @endswitch
 
             </div>

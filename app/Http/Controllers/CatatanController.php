@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Catatan;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Events\PermohonanStatusChangedEvent;
 
 class CatatanController extends Controller
@@ -17,7 +18,7 @@ class CatatanController extends Controller
             'catatan' => $request->input('catatan'),
             'jenis_permohonan' => $request->input('jenis_permohonan'),
             'is_kemaskini' => $request->input('is_kemaskini'),
-            'id_user' => auth()->id(),
+            'CUSTOMERID' => Auth::id(),
             'masa' => now()
         ]);
 

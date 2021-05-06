@@ -18,6 +18,8 @@ Route::get('/', function () {
 	return view('auth.login');
 })->name('welcome');
 
+Route::view('inactive', 'inactive-page');
+
 Auth::routes();
 
 

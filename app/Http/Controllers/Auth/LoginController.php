@@ -28,6 +28,9 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
+        if (!Auth::user()->is_active) {
+            return 'inactive';
+        }
          
         // Check user role
         switch (Auth::user()->role_id) {
