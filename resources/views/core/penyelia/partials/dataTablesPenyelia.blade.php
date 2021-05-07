@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="table-responsive py-4">
-                <table class="table" id="semakanPYDT">
+                <table class="table" id="semakanPYDT" style="width:100%">
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>

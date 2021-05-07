@@ -22,7 +22,7 @@ function fillInKedatangan(idKakitangan, jenisPermohonan, id_permohonan_baru) {
                 noEkedatanganWithDefaultValue();
                 return 0;
             }
-
+            
             // eKedatangan
             if (array.includes(jenisPermohonanShortened)) {
                 $("#formEkedatangan input[name=tarikh]").val(data.ekedatangans.tarikh);
