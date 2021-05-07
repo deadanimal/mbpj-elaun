@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\pelulus_pindaan;
+namespace App\Http\Controllers\pelulus_pindaan_sah;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use DataTables;
 
-class dashboardController extends Controller
+class bantuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class dashboardController extends Controller
         ->make(true);
         }
         
-        return view('core.pelulus_pindaan.dashboard');
+        return view('core.pelulus_pindaan.bantuan');
     }
 
     /**
@@ -98,19 +98,5 @@ class dashboardController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getCustomFilterData(Request $request)
-    {
-        $users = DB::table('users')->select('*');
-
-        return Datatables::of($users)
-            ->filter(function ($query) use ($request) {
-                if ($request->has('created_at')) {
-                    $query->where('created_at', 'like', "%{$request->get('created_at')}%");
-                }
-
-            })
-            ->make(true);
     }
 }

@@ -61,14 +61,20 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::middleware('web')
             ->namespace($this->namespace)    
-            ->group(base_path('routes/web/pelulus-pindaan-route.php'));
+            ->group(base_path('routes/web/pelulus-pindaan-sah-route.php'));
+
+        Route::middleware('web')
+            ->namespace($this->namespace)    
+            ->group(base_path('routes/web/pelulus-pindaan-lulus-route.php'));
 
         Route::middleware('web')
             ->namespace($this->namespace)    
             ->group(base_path('routes/web/datuk-bandar-route.php'));
+
         Route::middleware('web')
             ->namespace($this->namespace)    
             ->group(base_path('routes/web/kakitangan-route.php'));
+            
         Route::middleware('web')
             ->namespace($this->namespace)    
             ->group(base_path('routes/web/pentadbir-sistem-route.php'));

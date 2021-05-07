@@ -74,6 +74,7 @@ class UpdateJenisPermohonanListener
                 }
                 break;
             case 'BATAL':
+                // Batal is when KT cancels permohonan
                 $event->permohonan->status_akhir = 0;
                 break;
             default: 

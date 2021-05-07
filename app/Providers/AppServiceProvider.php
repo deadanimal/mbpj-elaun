@@ -39,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         View::composer([
             'core.kerani_pemeriksa.partials.formOT&EL',
             'core.kerani_semakan.partials.formOT&EL',
+            'core.pelulus_pindaan_sah.partials.formOT&EL',
+            'core.pelulus_pindaan_lulus.partials.formOT&EL',
             'core.pentadbir_sistem.pengurusanPengguna',
         ],
             'App\Http\View\Composers\SenaraiJabatanComposer');

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\permohonan_with_users;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
+use App\Services\KiraanMasaService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -75,6 +76,8 @@ class permohonanController extends Controller
             if ($validator->fails()) {
                 dd('fail');
             }
+
+            
             $permohonanbaru = new PermohonanBaru([
                 'id_peg_pelulus'    => $data['id_peg_pelulus'],
                 'id_peg_sokong' => $data['id_peg_sokong'],
@@ -83,7 +86,7 @@ class permohonanController extends Controller
                 'masa_akhir'    => $data['masa_akhir'],
                 'tujuan'    => $data['tujuan'],
                 'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
-                'masa'  =>  $data['masa'],
+                'masa'  =>  00.00,
                 'waktu' =>  $data['waktu'],
                 'hari'  =>  $data['hari'],
                 'kadar_jam' =>  $data['kadar_jam'],
@@ -92,8 +95,19 @@ class permohonanController extends Controller
                 'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
 
             ]);
+
             $permohonanbaru->save();
             $permohonanbaru->refresh();
+
+            $masa = new KiraanMasaService($permohonanbaru, Auth::id());
+            $masaSebenar = $masa->kiraMasa(
+                                        $data['masa_mula'], 
+                                        $data['masa_akhir'],
+                                        $data['tarikh_permohonan'], 
+                                        $data['tarikh_akhir_kerja']
+                                    );
+            $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
+
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {

@@ -13,7 +13,7 @@
             <li class="nav-item {{ $parentSection == 'bantuan' ? 'active' : '' }}">
                 <a class="nav-link" href="bantuan" >
                     <i class="ni ni-collection text-yellow"></i>
-                    <span class="nav-link-text">{{ __('Modul Aduan') }}</span>
+                    <span class="nav-link-text">{{ __('Modul Bantuan') }}</span>
                 </a>
             </li>
         </ul>

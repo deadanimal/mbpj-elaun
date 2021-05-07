@@ -12,8 +12,7 @@ class KiraanElaunService {
     const HARI_BEKERJA = 313;
     public $id_user;
     public $permohonan;
-    public $jumlahMasaBekerjaSiang;
-    public $jumlahMasaBekerjaMalam;
+    public $jumlahMasaBekerja;
     public float $gaji;
     public float $bayaranPerJamSiang;
     public float $bayaranPerJamMalam;
@@ -34,8 +33,7 @@ class KiraanElaunService {
 
         foreach ($permohonan->users as $user) {
             if ($user->CUSTOMERID == $id_user) {
-                $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
-                $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
+                $this->jumlahMasaBekerja = floatval($user->permohonan_with_users->masa_sebenar);
             }
         }
     }
@@ -51,11 +49,11 @@ class KiraanElaunService {
 
     public function jumlahTuntutanRounded()
     {
-        $bayaranPerJamSiang = $this->kadarBayaranSejam() * $this->kadarPerJam;
-        $bayaranPerJamMalam = $this->kadarBayaranSejam() * 1.5;
-        (float) $jumlahTuntutanSiang = round($bayaranPerJamSiang, 2) * $this->jumlahMasaBekerjaSiang;
-        (float) $jumlahTuntutanMalam = round($bayaranPerJamMalam, 2) * $this->jumlahMasaBekerjaMalam;
-        (float) $jumlahTuntutan = round($jumlahTuntutanSiang, 2) + round($jumlahTuntutanMalam, 2);
+        $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
+        // $bayaranPerJamMalam = $this->kadarBayaranSejam() * 1.5;
+        (float) $jumlahTuntutan = round($bayaranPerJam, 2) * $this->jumlahMasaBekerja;
+        // (float) $jumlahTuntutanMalam = round($bayaranPerJamMalam, 2) * $this->jumlahMasaBekerjaMalam;
+        // (float) $jumlahTuntutan = round($jumlahTuntutan, 2) + round($jumlahTuntutan, 2);
         
         $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
         

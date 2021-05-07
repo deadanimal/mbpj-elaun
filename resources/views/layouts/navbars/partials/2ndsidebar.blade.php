@@ -16,7 +16,7 @@
         @if (auth()->user()->role_id == 2)
         <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
             <a class="nav-link " href="{{$role}}-on-call" >
-                <i class="ni ni-badge text-orange"></i>
+                <i class="ni ni-badge"></i>
                 <span class="nav-link-text" >{{ __('Senarai On Call') }}</span>
             </a>
         </li>

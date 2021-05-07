@@ -5,55 +5,103 @@ $(document).ready(function(){
         }
     });
 
-    showDatatable();
+    showDatatable(jenisPilihan);
+    revealJumlahPersamaanJamMasa('OT');
+
+    $('#min').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
+
+    $('#max').datepicker({
+        dateFormat: 'dd-mm-yy',
+    });
 }) 
 
 $("#padamCarian").click(function(){
     $("#noPekerja").val("");
     $("#nama-semakan").val("");
+    $("#noKPBaru-semakan").val("");
+    $("#jawatan-semakan").val("");
+    $("#bahagian-semakan").val("");
+    $("#jabatan-semakan").val("");
+    $("#min").val("");
+    $("#max").val("");
     $("#selectJenisPermohonan").val("out").trigger("change")
-    showDatatable();
+    
+    showDatatable(jenisPilihan);
 });
 
-function showUser(id, jabatan) {
+function showUser() {
+    var id = document.querySelector("#noPekerja").value;
+
+    if (!id) {
+        Swal.fire(
+            'Sebentar...',
+            'Sila masukkan 5 digit nombor pekerja',
+            'info'
+          )
+    } else {
         $.ajax({
-            type: 'GET',
             url: 'user/semakan-pekerja/' + id,
+            type: 'GET',
             success: function(data) {
-                $("#formOTEL input[name=nama]").val(data.users.NAME);
-                $("#formOTEL input[name=noKPbaru]").val(data.users.NIRC);
-                $("#formOTEL input[name=jabatan]").val(data.users.maklumat_pekerjaan.HR_JABATAN);
-                $('#semakanKSDT').DataTable().columns(9).search(     
-                    id
-                )
+                if (!data.user) {
+                    Swal.fire(
+                        'Tiada rekod dijumpai',
+                        'Sila semak semula maklumat',
+                        'error'
+                        )
+                } else {
+                    $("#formOTEL input[name=nama]").val(data.user.NAME);
+                    $("#formOTEL input[name=noKPbaru]").val(data.user.NIRC);
+                    $("#formOTEL input[name=jabatan]").val(data.user.maklumat_pekerjaan.jabatan.GE_KETERANGAN_JABATAN);
+                    $("#formOTEL input[name=jawatan]").val(data.user.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN);
 
-                $('input').css('color', 'black')
+                    revealJumlahPersamaanJamMasa('EL');
+
+                    $('input').css('color', 'black')
+                }
             },
-            error: function(data) {
-                console.log(data);
-            }
+            error: function(data) { console.log(data); }
         });
+    }
 }
-
 function showDatatable(){
-    var counter = 0;
+    var counterPermohonan = 0;
     var id_user = document.querySelector("#noPekerja").value;
 
     if(id_user == ''){
         id_user = 'noID';
+    } else {
+        id_user = parseInt(id_user);
     }
-        semakanKSDT = $('#semakanKSDT').DataTable({
+
+    semakanKSDT = $('#semakanKSDT').DataTable({
         dom: "<'row'<'col ml--4'l><'col text-right'B>>rtip",
         destroy: true,
         processing: true,
-        buttons: [{
+        buttons: [
+        {
             text: 'Hantar semua', 
             className:'btn btn-sm btn-outline-primary text-right',
             attr: {
                 id: 'sendAllPermohonanButton',
                 onclick: 'terimaSemuaPermohonan()'
             }
-        }],
+        },
+        {
+            text: 'Cetak', 
+            title: 'Permohonan - Kerani Semakan',
+            extend:'pdfHtml5',
+            exportOptions: {
+                columns: [2, 3, 4, 5, 6]
+            },
+            className:'btn btn-sm btn-outline-warning text-right',
+            attr: {
+                id: 'cetakPermohonanKeraniSemakan',
+            }
+        },
+        ],
         language: {
             paginate: {
                 previous: "<",
@@ -68,13 +116,14 @@ function showDatatable(){
             infoFiltered:   "(ditapis daripada _MAX_ rekod)",
             processing:     "Dalam proses...",
         },
-        serverSide: false,
+        serverSide: true,
             ajax: {
                 url: "kerani-semakan-semakan/"+id_user,
                 type: 'GET',
             },
             columns: [
         
+                {data: null},
                 {data: null},
                 {data: 'created_at'},
                 {data: 'masa_mula'},
@@ -95,6 +144,13 @@ function showDatatable(){
                 },
                 {
                     targets: 1,
+                    orderable: false,
+                    mRender: function(data,type,row) {
+                        return '<input type="checkbox" name="cboxSemakanPermohonan" value="'+data.id_permohonan_baru+'">';
+                    }
+                },
+                {
+                    targets: 2,
                     type: "date",
                     render: function(data,type,row){
                         formattedDate = moment(data).format("DD-MM-YYYY")
@@ -102,30 +158,25 @@ function showDatatable(){
                     }
                 },
                 {
-                    targets: 6,
+                    targets: 7,
                     mRender: function(data,type,row){
                         if(id_user != "noID"){
-                            counter++;
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            counterPermohonan++;
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTargetAtasan('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+id_user+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+')" value=""></i>' 
-                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
                         } 
                         else {
-                            counter++;
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
+                            counterPermohonan++;
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTargetAtasan('+"'"+data.jenis_permohonan+"'"+'); retrieveUserData('+data.users[0].CUSTOMERID+', '+data.id_permohonan_baru+', '+ "'"+data.jenis_permohonan+"'"+');"></i>' 
                             var button2 = '<i id="lulusBtn" class="btn btn-success btn-sm ni ni-check-bold" onclick="approvedKelulusan('+data.id_permohonan_baru+','+""+');" value=""></i>' 
-                            var button3 = '<i id="tolakBtn'+ counter +'" onclick="counterBuffer('+ counter +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
+                            var button3 = '<i id="tolakBtn'+ counterPermohonan +'" onclick="counterBuffer('+ counterPermohonan +')" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm ni ni-fat-remove" data-value="'+data.jenis_permohonan.substr(0, 2)+'" value="'+data.id_permohonan_baru+'"></i>' 
                             var allButton = button1 + button2 + button3;
                             return allButton;
                         }
                     }
-                },
-                {
-                    targets: 7,
-                    visible: false,
-                    searchable: true
                 },
                 {
                     targets: 8,
@@ -138,25 +189,25 @@ function showDatatable(){
                     searchable: true
                 },
                 {
-                    targets:10,
+                    targets: 10,
+                    visible: false,
+                    searchable: true
+                },
+                {
+                    targets: 11,
                     orderable:false,
                     searchable:false,
                     visible:false
                 },
-            ], 
-                
-            });
-            semakanKSDT.on('draw.dt', function () {
-                var info = semakanKSDT.page.info();
-                semakanKSDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
-                    cell.innerHTML = i + 1 + info.start;
-                });
-            });
-            if(id_user != ''){
-                $('#semakanKSDT').DataTable().search(
-                    $("#noPekerja").val(),
-                ).draw();
-            } else{}
+            ],  
+    });
+
+    semakanKSDT.on('draw.dt', function () {
+        var info = semakanKSDT.page.info();
+        semakanKSDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    });
 }
 
 
@@ -208,12 +259,4 @@ $("#semakKeraniSemakan").click(function () {
     jabatan
     ).draw();
       
-});
-
-$('#min').datepicker({
-    dateFormat: 'dd-mm-yy',
-});
-
-$('#max').datepicker({
-    dateFormat: 'dd-mm-yy',
 });

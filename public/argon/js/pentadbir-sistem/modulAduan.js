@@ -71,7 +71,7 @@ ajax: {
             targets: 5,
             render: function(data,type,row){
                 console.log(data.id);
-                var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-success btn-sm " onclick="changeDataTarget('+data.id+')" data-target=""  >Balas</button>' 
+                var button1 = '<button data-toggle="modal" id="buttonEdit" class="btn btn-success btn-sm " onclick="changeDataTargetAtasan('+data.id+')" data-target=""  >Balas</button>' 
                 var button2 = '<button id="lulusBtn" data-toggle="modal" data-target="#modal-notification" class="btn btn-primary btn-sm " onclick="test('+data.id+')" value='+data.id+'>Semak</button>' 
                 var button3 = '<button id="tolakBtn" data-toggle="modal" data-target="#modal-reject" class="btn btn-danger btn-sm" onclick="test('+data.id+')"  value='+data.id+'>Padam</button>' 
                 var allButton = button1 + button2 + button3;

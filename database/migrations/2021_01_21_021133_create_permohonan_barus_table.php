@@ -36,6 +36,7 @@ class CreatePermohonanBarusTable extends Migration
             $table->integer('is_for_datuk_bandar');
             $table->unsignedInteger('peg_sokong_approved')->default('0');
             $table->unsignedInteger('kerani_pemeriksa_approved')->default('0');
+            $table->unsignedInteger('is_for_pelulus_pindaan')->default('0');
             $table->unsignedInteger('status_akhir');
             $table->timestamps();
         }); 

@@ -19,7 +19,34 @@ class Controller extends BaseController
     public function findPermohonanWithID($jenisPermohonan, $id){
         return $permohonans = User::findOrFail($id)->permohonans()
                                 ->where('jenis_permohonan', $jenisPermohonan)
-                                ->statusAkhirBelomDiterima();
+                                ->statusAkhirBelomDiterima()
+                                ->get();
+
+    }
+
+    public function findPermohonanWithIDMin($jenisPermohonan, $id, $minDate){
+        return $permohonans = User::findOrFail($id)->permohonans()
+                                ->where('jenis_permohonan', $jenisPermohonan)
+                                ->where('permohonan_barus.created_at', '>=', $minDate)
+                                ->statusAkhirBelomDiterima()
+                                ->get();
+
+    }
+
+    public function findPermohonanWithIDMax($jenisPermohonan, $id, $maxDate){
+        return $permohonans = User::findOrFail($id)->permohonans()
+                                ->where('jenis_permohonan', $jenisPermohonan)
+                                ->where('permohonan_barus.created_at', '<=', $maxDate)
+                                ->statusAkhirBelomDiterima()
+                                ->get();
+    }
+
+    public function findPermohonanWithIDBetween($jenisPermohonan, $id, $minDate,  $maxDate){
+        return $permohonans = User::findOrFail($id)->permohonans()
+                                ->where('jenis_permohonan', $jenisPermohonan)
+                                ->whereBetween('permohonan_barus.created_at',[$minDate, $maxDate])
+                                ->statusAkhirBelomDiterima()
+                                ->get();
     }
 
     public function findPermohonanWithIDKakitangan($jenisPermohonan, $idUser){
