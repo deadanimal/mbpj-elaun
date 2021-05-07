@@ -16,19 +16,15 @@
         @endcomponent
     @endcomponent
 
-    
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="row ">
-                            {{-- <div class="col-6">
-                                <h2>Pengurusan Pengguna</h2>
-                            </div> --}}
                         </div>
                         <select id="selectJabatan" onchange="optionJabatan()" class="form-select form-select-sm col-5" aria-label=".form-select-sm example">
-                            <option selected value="out">Pilih Jabatan</option>
+                            <option selected value="0">Pilih Jabatan</option>
                             @foreach ( $jabatans as $jabatan)
                                 <option value="{{ $jabatan->GE_KOD_JABATAN }}">{{ $jabatan->GE_KETERANGAN_JABATAN }}</option>
                             @endforeach
@@ -53,9 +49,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                     </div>
-                     
                 </div>
             </div>
         </div>

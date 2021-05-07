@@ -104,8 +104,8 @@ function showDatatable(){
 }
 
 $("#selectJenisPermohonan").on('change',function(){
-
     var statusPilihan = $("#selectJenisPermohonan").val()
+    
     if(statusPilihan == "lulus"){
         $('#dashboardKPDT').DataTable().columns(11).search(
             "0"

@@ -1,8 +1,5 @@
 var table = $('#adminDT').DataTable({
     dom:'lrtip',
-    // responsive:true,
-    // autoWidth:false,
-    // lengthMenu: [ 5, 10, 25, 50 ],
     destroy: true,
     lengthMenu: [ 5, 10, 25, 50 ],
     processing: false,
@@ -85,6 +82,7 @@ $("#btnGo").click(function () {
   console.log("searching")
   $('#adminDT').DataTable().draw();
 });
+
 function printTuntutan(){
   console.log("gfhj")
   table.button( '.buttons-pdf' ).trigger();

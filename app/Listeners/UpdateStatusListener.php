@@ -44,15 +44,19 @@ class UpdateStatusListener
     public function handle(PermohonanStatusChangedEvent $event)
     {
         $event->permohonan->refresh();
+        $authRole = auth()->user()->role_id;
 
         $is_peg_sokong = Auth::id() == $event->permohonan->id_peg_sokong ? 1 : 0;
 
         if ($event->is_terima) {
             $this->permohonanApproved($event, $is_peg_sokong);
+
         } elseif ($event->is_renewedPermohonan){
             $event->permohonan->status = "DALAM PROSES";
             $event->permohonan->progres = 'Belum disahkan';
+
             $this->sendEmailNotificationToPegawaiAtasan($event, 'PS');
+
         } elseif ($event->is_batal) {
             $event->permohonan->status = "BATAL";
         } else {
@@ -134,10 +138,12 @@ class UpdateStatusListener
                 $pegawai_pelulus->notify(new PermohonanNeedApprovalEmailNotification($pegawai_pelulus)); 
                 break;
             case 'KP':
+                // Need updates for kerani pemeriksa
                 $kerani_pemeriksa = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $kerani_pemeriksa->notify(new PermohonanNeedApprovalEmailNotification($kerani_pemeriksa)); 
                 break;
             case 'KS':
+                // Need updates for kerani semakan
                 $kerani_semakan = User::findOrFail($event->permohonan->id_peg_pelulus);
                 $kerani_semakan->notify(new PermohonanNeedApprovalEmailNotification($kerani_semakan)); 
                 break;

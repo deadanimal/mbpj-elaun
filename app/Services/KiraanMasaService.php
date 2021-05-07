@@ -54,17 +54,10 @@ public $totalShiftMalam;
         $this->permohonan = $permohonan;
         $this->masaMula = $permohonan->masa_mula;
         $this->masaMula = $permohonan->masa_akhir;
-
-        foreach ($permohonan->users as $user) {
-            if ($user->CUSTOMERID == $id_user) {
-                $this->jumlahMasaBekerjaSiang = floatval($user->permohonan_with_users->masa_sebenar_siang);
-                $this->jumlahMasaBekerjaMalam = floatval($user->permohonan_with_users->masa_sebenar_malam);
-            }
-        }
     }
 
     public function kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar){
-        $hour = $this->timeDiffCalc(Carbon::createFromFormat('d / m / Y', $waktuKeluar)->toDateString(),Carbon::createFromFormat('d / m / Y', $waktuMasuk)->toDateString());
+        $hour = $this->timeDiffCalc(Carbon::createFromFormat('d-m-Y', $waktuKeluar)->toDateString(),Carbon::createFromFormat('d-m-Y', $waktuMasuk)->toDateString());
         $realhour = $this->diff($mulaKerja,$akhirKerja);
         $jamkerja = intval(substr($realhour,0,2));
         $hourMasuk = substr($mulaKerja,0,2);
@@ -73,41 +66,41 @@ public $totalShiftMalam;
         $hourKeluar = intval($hourKeluar);
 
                 if($this->day->d > 1 || $jamkerja >= 24){
-                    print_r('day\n');
+                    // print_r('day\n');
                     // Calculate shift siang dan malam based on hari
                     $this->siang = intval($this->day->d - 1) * 16;
                     $this->malam = intval($this->day->d - 1) * 8;
                 }
                 if(($jamkerja < 16 || $this->day->d <= 1) && ($hourMasuk >= 06 && $hourMasuk < 22) && ($hourKeluar < 22 && $hourKeluar >= 06 )){
                     // OT on shift siang
-                    print_r('siang\n');
+                    // print_r('siang\n');
 
                     $shiftSiang = $this->diff($mulaKerja,$akhirKerja);
                 }
                 if(($hourMasuk >= 06 && $hourMasuk < 22) && ($hourKeluar >=22 && $hourKeluar <=24 || $hourKeluar < 06)){
                     // OT on shift siang && Keluar malam
-                    print_r('siang malam\n');
+                    // print_r('siang malam\n');
 
                     $shiftSiang = $this->diff($mulaKerja,"22:00");
                     $shiftMalam = $this->diff("22:00",$akhirKerja);
-                    print_r($shiftMalam);
+                    // print_r($shiftMalam);
                 } 
                 if(($jamkerja < 8 && $this->day->d <= 1) && (($hourMasuk >= 22 && $hourMasuk <=24) || $hourMasuk < 06 ) && ($hourKeluar < 06 || ($hourKeluar >=22 && $hourKeluar <=24))){
                     // OT on shift malam && Keluar malam
-                    print_r('malam malam\n');
+                    // print_r('malam malam\n');
 
                     $shiftMalam = $this->diff($mulaKerja,$akhirKerja);
                 }
                 if(($hourMasuk >= 22 && $hourMasuk <=24 || $hourMasuk < 06 ) && (($hourKeluar >= 06 && $hourKeluar < 22))){
                     // OT on shift malam && Keluar siang 
-                    print_r('malam siang\n');
+                    // print_r('malam siang\n');
 
                     $shiftMalam = $this->diff($mulaKerja,"06:00");
                     $shiftSiang = $this->diff("06:00",$akhirKerja);
                 }
                 if(($jamkerja >= 16 && $this->day->d >= 1) && ($hourMasuk >= 06 && $hourMasuk < 22) && ($hourKeluar >= 06 && $hourKeluar < 22)){
                     // OT on shift siang && Keluar Siang && lebih sehari
-                    print_r('siang malam lebih hari\n');
+                    // print_r('siang malam lebih hari\n');
 
                     $shiftSiang = $this->diff($mulaKerja,"22:00");
                     $shiftMalam = $this->diff("22:00","06:00");
@@ -116,7 +109,7 @@ public $totalShiftMalam;
                 }
                 if(($jamkerja >= 8 || $this->day->d >=1) && (($hourMasuk >= 22 && $hourMasuk <= 24) || $hourMasuk < 06 ) && (($hourKeluar >= 22 && $hourKeluar <= 24) || ($hourKeluar < 06))){
                     // OT on shift malam && Keluar malam && lebih sehari
-                    print_r('malam malam lebih hari\n');
+                    // print_r('malam malam lebih hari\n');
 
                     $shiftMalam = $this->diff($mulaKerja,"06:00");
                     $shiftSiang = $this->diff("06:00","22:00");

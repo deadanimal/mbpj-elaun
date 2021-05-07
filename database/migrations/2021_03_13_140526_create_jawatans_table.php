@@ -14,7 +14,7 @@ class CreateJawatansTable extends Migration
     public function up()
     {
         Schema::create('jawatans', function (Blueprint $table) {
-            $table->increments('id_jawatan');
+            // $table->increments('id_jawatan');
             $table->string('HR_KOD_JAWATAN')->index();
             $table->text('HR_NAMA_JAWATAN');
             $table->string('HR_AKTIF_IND');

@@ -21,7 +21,7 @@ class PermohonanBaruController extends Controller
     {
         $senaraiKakitangan = array();
         $permohonan = PermohonanBaru::with('users')->findOrFail($idPermohananBaru);
-        $tarikhPermohonan = $permohonan->created_at->format('d/m/Y');
+        $tarikhPermohonan = $permohonan->created_at->format('d-m-Y');
 
         foreach ($permohonan->users as $user) {
             if ($user->permohonan_with_users->is_rejected_individually != 1) {
@@ -148,6 +148,7 @@ class PermohonanBaruController extends Controller
         $idUser = $request->input('id_user');
         $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
         $permohonan->kadar_jam = $request->input('kadar_jam');
+        $permohonan->jenis_hari = $request->input('jenis_hari');
 
         foreach ($permohonan->users as $user) {
             if($user->CUSTOMERID == $idUser) {
@@ -170,24 +171,21 @@ class PermohonanBaruController extends Controller
         $mulaKerja = $request->input('mulaKerja');
         $akhirKerja = $request->input('akhirKerja');
         $permohonan = PermohonanBaru::findOrFail($idPermohananBaru);
-        // $sahP1 = $permohonan->progres == 'Sah P1' ? TRUE : FALSE;
 
-        // if (in_array($permohonan->jenis_permohonan, $jenisPermohonan) && $sahP1) {
         if (in_array($permohonan->jenis_permohonan, $jenisPermohonan)) {
             $tuntutan = ($permohonan->users)->filter(function($user) {
                 return $user->permohonan_with_users->is_rejected_individually != 1;
             })->each(function($user) use ($permohonan,$mulaKerja,$akhirKerja,$waktuKeluar,$waktuMasuk) {
                 $masa = new KiraanMasaService($permohonan, $user->CUSTOMERID);
+                
                 $masaSebenar = $masa->kiraMasa($mulaKerja,$akhirKerja,$waktuMasuk,$waktuKeluar);
-                $permohonan->update(['masa' => $masaSebenar["masa"]]);
                 $permohonan->users()
                             ->updateExistingPivot($user->CUSTOMERID, array(
-                                'masa_sebenar_siang' => $masaSebenar["Siang"],
-                                'masa_sebenar_malam' => $masaSebenar["Malam"]),
+                                'masa_sebenar' => $masaSebenar["masa"]),
                                 false);
             })->map(function ($user)  use ($permohonan){
                 return $user->permohonan_with_users
-                            ->masa_sebenar_siang;
+                            ->masa_sebenar;
             });
         }
 

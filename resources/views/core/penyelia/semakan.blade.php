@@ -89,6 +89,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/penyelia/semakanDatatable.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/jumlahPersamaanJamMasa.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveUserDataEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/retrieveGaji.js"></script>
     <script src="{{ asset('argon') }}/js/shared/rejectIndividually.js"></script>

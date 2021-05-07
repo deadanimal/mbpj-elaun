@@ -57,6 +57,7 @@ function showAllUser(){
                     }
                 ], 
             });
+            
             senaraiOnCallDT.on('draw.dt', function () {
                 var info = senaraiOnCallDT.page.info();
                 senaraiOnCallDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {

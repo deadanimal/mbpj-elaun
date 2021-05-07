@@ -1,3 +1,5 @@
+var jenisHariSelected; 
+
 function kemaskiniModal(jenisPermohonan) {
     Swal.fire({
         icon: 'info',
@@ -29,7 +31,8 @@ function kemaskiniPermohonanAjax(jenisPermohonan) {
             id_user : document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').getAttribute("value"),
             masa_mula_sebenar : document.getElementById('semakan-modal-'+is_individu+'-masaMulaSebenar').value,
             masa_akhir_sebenar : document.getElementById('semakan-modal-'+is_individu+'-masaAkhirSebenar').value,
-            kadar_jam : retrieveKadarJam()
+            kadar_jam : retrieveKadarJam(),
+            jenis_hari : jenisHariSelected
         },
         success: function() {
             Swal.fire({
@@ -46,7 +49,6 @@ function kemaskiniPermohonanAjax(jenisPermohonan) {
 function retrieveKadarJam() {
     var jenisHariArray = ['hariBiasa', 'hariRehat', 'hariAm'];
     var kadarJam;
-    var jenisHariSelected; 
     
     jenisHariArray.forEach(hari => {
         if (document.getElementById(hari).checked) {

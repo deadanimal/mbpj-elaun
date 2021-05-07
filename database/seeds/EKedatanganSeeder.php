@@ -1,6 +1,7 @@
 <?php
 
 use App\eKedatangan;
+use App\permohonan_with_users;
 use Illuminate\Database\Seeder;
 
 class EKedatanganSeeder extends Seeder
@@ -13,5 +14,9 @@ class EKedatanganSeeder extends Seeder
     public function run()
     {
         factory(eKedatangan::class, 20)->create();
+
+        // foreach (eKedatangan::all() as $eKedatangan) {
+        //     $eKedatangan->CUSTOMERID = permohonan_with_users::pluck('CUSTOMERID')->all()->random();
+        // };
     }
 }

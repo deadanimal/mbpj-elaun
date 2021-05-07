@@ -1,6 +1,7 @@
+var jenisHariArrayCheckBox = new Array ('hariBiasa', 'hariRehat', 'hariAm');
+
 function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
     var is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
-    var jenisHariArrayCheckBox = new Array ('hariBiasa', 'hariRehat', 'hariAm');
     var kadarJamArrayCheckbox =  new Array (
                                                 'hariBiasa-siang',
                                                 'hariBiasa-malam',
@@ -51,38 +52,9 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
         url: 'permohonan-baru/semakan-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         success: function(data) {
-            // Kelulusan
-            var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
-            array.forEach(function(item) {
-                $("#formKelulusan input[name="+item+"]").val("-"); 
-            });
- 
-            for (const [key, value] of Object.entries(data.arrayKelulusan)) {
-                $("#formKelulusan input[name="+key+"]").val(value[0].NAME);
-                $("#formKelulusan input[name=jawatan_"+key+"]").val(value[1]);
-            }
-
-            $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(data.tarikh_permohonan);
-            $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(data.permohonan.tarikh_mula_kerja);
-            $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(data.permohonan.tarikh_akhir_kerja);
-            $('#formModalEdit input[name=masaMula-'+is_individu+']').val(data.permohonan.masa_mula);
-            $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(data.permohonan.masa_akhir);
-            $('#detailPermohananAccordion input[name=tujuan-'+is_individu+']').val(data.permohonan.tujuan);
-            $('#detailPermohananAccordion input[name=lokasi-'+is_individu+']').val(data.permohonan.lokasi); 
-
-            jenisHariArrayCheckBox.forEach(jenisHari => {
-                let siangOrMalam = document.getElementById(jenisHari+'-siang').value == data.permohonan.kadar_jam ? '-siang' : '-malam';
-
-                if (jenisHari == data.permohonan.jenis_hari) {
-                    document.getElementById(jenisHari).checked = true;
-                    document.getElementById(jenisHari + siangOrMalam).checked = true;
-                    document.getElementById(jenisHari+'Block').style.display = "block";
-                } else {
-                    document.getElementById(jenisHari).checked = false;
-                    document.getElementById(jenisHari + siangOrMalam).checked = false;
-                    document.getElementById(jenisHari+'Block').style.display = "none";
-                }
-            });
+            fillInKelulusan(data.arrayKelulusan);
+            fillInDetailPermohonan(data.permohonan, data.tarikh_permohonan, is_individu);
+            fillInKadarJam(data.permohonan.kadar_jam, data.permohonan.jenis_hari);
 
             switch (jenisPermohonan) {
                 case "OT1":
@@ -106,6 +78,54 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
             }
         },
         error: function(data) { console.log(data); }
+    });
+}
+
+function  fillInDetailPermohonan(permohonan, tarikh_permohonan, is_individu) {
+    // need to be removed becaus the format is already correct 
+    let tarikh_mula_kerja = moment(permohonan.tarikh_mula_kerja, "YYYY-MM-DD").format("DD-MM-YYYY");
+    let tarikh_akhir_kerja = moment(permohonan.tarikh_akhir_kerja, "YYYY-MM-DD").format("DD-MM-YYYY");
+
+    $('#formModalEdit input[name=tarikhMohon-'+is_individu+']').val(tarikh_permohonan);
+    $('#formModalEdit input[name=tarikhMulaKerja-'+is_individu+']').val(tarikh_mula_kerja);
+    $('#formModalEdit input[name=tarikhAkhirKerja-'+is_individu+']').val(tarikh_akhir_kerja);
+    $('#formModalEdit input[name=masaMula-'+is_individu+']').val(permohonan.masa_mula);
+    $('#formModalEdit input[name=masaAkhir-'+is_individu+']').val(permohonan.masa_akhir);
+    $('#detailPermohananAccordion input[name=lokasi-'+is_individu+']').val(permohonan.lokasi); 
+    document.getElementById('semakan-modal-individu-tujuan').value = permohonan.tujuan;
+
+    $('input').css('color', 'black');
+    $('textarea').css('color', 'black');
+}
+
+function fillInKelulusan(arrayKelulusan) {
+    var array = ['peg_sokong', 'peg_pelulus', 'keraniPemeriksa', 'keraniSemakan'];
+
+    array.forEach(function(item) {
+        $("#formKelulusan input[name="+item+"]").val("-"); 
+    });
+
+    for (const [key, value] of Object.entries(arrayKelulusan)) {
+        $("#formKelulusan input[name="+key+"]").val(value[0].NAME);
+        $("#formKelulusan input[name=jawatan_"+key+"]").val(value[1]);
+    }
+
+    $('input').css('color', 'black');
+}
+
+function fillInKadarJam(kadar_jam, saved_jenis_hari) {
+    jenisHariArrayCheckBox.forEach(jenisHari => {
+        let siangOrMalam = document.getElementById(jenisHari+'-siang').value == kadar_jam ? '-siang' : '-malam';
+
+        if (jenisHari == saved_jenis_hari) {
+            document.getElementById(jenisHari).checked = true;
+            document.getElementById(jenisHari + siangOrMalam).checked = true;
+            document.getElementById(jenisHari+'Block').style.display = "block";
+        } else {
+            document.getElementById(jenisHari).checked = false;
+            document.getElementById(jenisHari + siangOrMalam).checked = false;
+            document.getElementById(jenisHari+'Block').style.display = "none";
+        }
     });
 }
 
@@ -140,8 +160,9 @@ function fillInUserDetail(id_user) {
 
         type: 'GET', 
         success: function(data) {
-            $("#formModalEdit input[name=nama]").val(data.users.NAME);
-            $("#formModalEdit input[name=noKP]").val(data.users.NIRC);
+            $("#formModalEdit input[name=nama]").val(data.user.NAME);
+            $("#formModalEdit input[name=noKP]").val(data.user.NIRC);
+            $("#formModalEdit input[name=noPekerja]").val(data.user.CUSTOMERID);
 
             $('input').css('color', 'black')
         },

@@ -25,12 +25,10 @@
                     </div>
                     <div class="form-group">
                         <h4 class="text-muted">Catatan</h4>
-                        <textarea class="form-control" name="catatan" id="semakan-catatan" rows="3"></textarea>
-
-                        @include('alerts.feedback', ['field' => 'name'])
+                        <textarea class="form-control" name="catatan" id="semakan-catatan" rows="2"></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="button" onclick="saveCatatan();" data-dismiss="modal" class="btn btn-success mt-4">{{ __('Kemaskini') }}</button>
+                        <button type="button" onclick="saveCatatan()" data-dismiss="modal" class="btn btn-success mt-4">Hantar</button>
                         <button type="button" data-dismiss="modal" class="btn btn-danger mt-4">{{ __('Batal') }}</button>
                     </div>  
                 </form>

@@ -5,6 +5,13 @@ Route::group([
 	'auth',
 	'role:4'
 	]], function () {
+	Route::get('/', function () {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		return redirect('/'.$roleUser.'/dashboard');
+	});
+
 	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
 	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
 	Route::resource('/tag', 'TagController', ['except' => ['show']]);
@@ -69,7 +76,7 @@ Route::group([
 
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
-	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
+	Route::put('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );

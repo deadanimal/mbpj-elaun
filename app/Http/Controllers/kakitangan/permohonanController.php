@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\kakitangan;
 
 use App\User;
+use DateTime;
 use DataTables;
 use Carbon\Carbon;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
 use App\permohonan_with_users;
+use App\Services\PermohonanShiftService;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
+use App\Services\KiraanMasaService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -53,21 +56,101 @@ class permohonanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        /*
+         * Codes for Different Shifts 
+         * 
+         * Condition for > 1 day
+         * SS : Siang Start
+         * MS : Malam Start
+         * ST : Siang Tamat
+         * MT : Malam Tamat
+         * 
+         * Condition for < 1 day
+         * SSE : Siang Start End
+         * nomalam : No shift malam 
+         * MSE : Malam Start End
+         * nosiang : No shift siang
+         * SSTPE : Siang Start Tamat Pagi Esok
+         * LIMITS : Stop Siang after SSTPE
+         * MSTME : Malam Start Tamat Malam Esok
+         * LIMITM : Stop Malam after SSTME
+         * 
+         */
+
         $jenisPermohonan = $request->input('jenisPermohonan');
+        $id_user = $request->input('user_id');
         $data = $request->input('object');
-        // dd($request->input('pekerja'));
+        $masaMula = $request->input('masaMula');
+        $masaAkhir = $request->input('masaAkhir');
         $pekerja = array($request->input('pekerja'));
         $array = array($data);
+        $masa = new PermohonanShiftService($id_user);
+        $shiftSebenar = $masa->kiraMasa($masaMula,$masaAkhir);
+        // dd($shiftSebenar);
+        $dayCount = $shiftSebenar[0];
+        $shiftType = "";
+        // $shiftKerja = array($shiftSebenar);
+        // print_r($dayCount);
+        if($dayCount >= 1){
+            // dd('sahkdas');
+            if(in_array("ss",$shiftSebenar) && in_array("st",$shiftSebenar)){
+                $shiftType = 'ssst';
+            }else if(in_array("ss",$shiftSebenar) && in_array("mt",$shiftSebenar)){
+                $shiftType = 'ssmt';
+            }else if(in_array("ms",$shiftSebenar) && in_array("st",$shiftSebenar)){
+                $shiftType = 'msst';
+            }else if(in_array("ms",$shiftSebenar) && in_array("mt",$shiftSebenar)){
+                $shiftType = 'msmt';
+            }else{
+                dd('takde pun');
+            }        
 
-        if($jenisPermohonan == 'OT1' ){
+            // dd($shiftType);
+        }else {
+            // dd($shiftSebenar);
+            if("sse" == $shiftSebenar[1] && "nomalam" == $shiftSebenar[2]){
+                $shiftType = 'ssenom';
+            }else if("mse" == $shiftSebenar[1] && "nosiang" == $shiftSebenar[2]){
+                $shiftType = 'msenos';
+            }else if("ss" == $shiftSebenar[1] && "m" == $shiftSebenar[2]){
+                $shiftType = 'ssm';
+            }else if("ms" == $shiftSebenar[1] && "s" == $shiftSebenar[2]){
+                $shiftType = 'mss';
+            }else if("sstpe" == $shiftSebenar[1] && "limitS" == $shiftSebenar[2]){
+                $shiftType = 'sselims';
+            }else if("mstme" == $shiftSebenar[1] && "limitM" == $shiftSebenar[2]){
+                $shiftType = 'mselimm';
+            }
+
+        }
+        // dd($shiftType);
+
+        $newPermohonan = $masa->doPermohonanBaru($shiftType,$dayCount,$masaMula,$masaAkhir);
+        // dd($shiftType,$newPermohonan);
+
+        // ForEach Pekerja
+        foreach ($newPermohonan as $key => $value) {
+            // dd($key,$value);
+            $splitDate = explode(";",$key);
+            $splitTime = array();
+            $dateArray = array();
+            $timeArray = array();
+            foreach ($splitDate as $split) {
+                $splitTime = explode(" ",$split);
+                $date = new DateTime($splitTime[0]);
+                $time = DateTime::createFromFormat('H:i:s',$splitTime[1]);
+                array_push($dateArray,$date->format('d-m-Y'));
+                array_push($timeArray,$time->format('H:i'));
+            }
+            if($jenisPermohonan == 'OT1' ){
             $validator = Validator::make($data, array(
                 
                 'id_peg_pelulus' => 'required',
                 'id_peg_sokong' => 'required' ,
                 'tarikh_permohonan' => 'required',
-                // 'masa_mula' => 'required',
-                // 'masa_akhir' => 'required',
+                'masa_mula' => 'required',
+                'masa_akhir' => 'required',
                 'tujuan' => 'required',
                 // 'lokasi' => 'required',
                 
@@ -75,25 +158,38 @@ class permohonanController extends Controller
             if ($validator->fails()) {
                 dd('fail');
             }
+
+            
             $permohonanbaru = new PermohonanBaru([
                 'id_peg_pelulus'    => $data['id_peg_pelulus'],
                 'id_peg_sokong' => $data['id_peg_sokong'],
-                'tarikh_mula_kerja' => $data['tarikh_permohonan'],
-                'masa_mula' => $data['masa_mula'],
-                'masa_akhir'    => $data['masa_akhir'],
+                'tarikh_mula_kerja' => $dateArray[0],
+                'masa_mula' => $timeArray[0],
+                'masa_akhir'    => $timeArray[1],
                 'tujuan'    => $data['tujuan'],
                 'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
-                'masa'  =>  $data['masa'],
+                'masa'  =>  $value,
                 'waktu' =>  $data['waktu'],
                 'hari'  =>  $data['hari'],
                 'kadar_jam' =>  $data['kadar_jam'],
                 'status'    =>  $data['status'],
                 'jenis_permohonan'  =>  $data['jenis_permohonan'],
-                'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
+                'tarikh_akhir_kerja' => $dateArray[1]
 
             ]);
+            // dd($permohonanbaru);
             $permohonanbaru->save();
             $permohonanbaru->refresh();
+
+            $masa = new KiraanMasaService($permohonanbaru, Auth::id());
+            $masaSebenar = $masa->kiraMasa(
+                                        $data['masa_mula'], 
+                                        $data['masa_akhir'],
+                                        $data['tarikh_permohonan'], 
+                                        $data['tarikh_akhir_kerja']
+                                    );
+            $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
+
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
@@ -102,73 +198,77 @@ class permohonanController extends Controller
 
                 $this->sendEmailNotificationToPegawaiSokong($permohonans);
             }
-
+        }
+    }
             return response()->json(
                 [
                     'message' => 'success',
                 ],200);
 
-        }else if($jenisPermohonan == 'OT2'){
-            // dd($request->all());
-            $validator = Validator::make($request->all(), [ 
-                
-                'object.id_peg_pelulus' => 'required',
-                // 'id_peg_sokong' => 'required' ,
-                'object.tarikh_permohonan' => 'required',
-                'object.masa_mula' => 'required',
-                'object.masa_akhir' => 'required',
-                'object.tujuan' => 'required',
-                // 'object.lokasi' => 'required',
-                'pekerja.*' => 'required|distinct',
             
-            ]);
-            if ($validator->fails()) {
-                dd('fail',$request->all());
-            }else{
-                // dd($data);
-                $permohonanbaru = new PermohonanBaru([
-                    'id_peg_pelulus'    => $data['id_peg_pelulus'],
-                    'id_peg_sokong' => $data['id_peg_sokong'],
-                    'tarikh_mula_kerja' => $data['tarikh_permohonan'],
-                    'masa_mula' => $data['masa_mula'],
-                    'masa_akhir'    => $data['masa_akhir'],
-                    'tujuan'    => $data['tujuan'],
-                    'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
-                    'masa'  =>  $data['masa'],
-                    'waktu' =>  $data['waktu'],
-                    'hari'  =>  $data['hari'],
-                    'kadar_jam' =>  $data['kadar_jam'],
-                    'status'    =>  $data['status'],
-                    'jenis_permohonan'  =>  $data['jenis_permohonan'],
-                    'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
+        
+        
+        // else if($jenisPermohonan == 'OT2'){
+        //     // dd($request->all());
+        //     $validator = Validator::make($request->all(), [ 
+                
+        //         'object.id_peg_pelulus' => 'required',
+        //         // 'id_peg_sokong' => 'required' ,
+        //         'object.tarikh_permohonan' => 'required',
+        //         'object.masa_mula' => 'required',
+        //         'object.masa_akhir' => 'required',
+        //         'object.tujuan' => 'required',
+        //         // 'object.lokasi' => 'required',
+        //         'pekerja.*' => 'required|distinct',
+            
+        //     ]);
+        //     if ($validator->fails()) {
+        //         dd('fail',$request->all());
+        //     }else{
+        //         // dd($data);
+        //         $permohonanbaru = new PermohonanBaru([
+        //             'id_peg_pelulus'    => $data['id_peg_pelulus'],
+        //             'id_peg_sokong' => $data['id_peg_sokong'],
+        //             'tarikh_mula_kerja' => $data['tarikh_permohonan'],
+        //             'masa_mula' => $data['masa_mula'],
+        //             'masa_akhir'    => $data['masa_akhir'],
+        //             'tujuan'    => $data['tujuan'],
+        //             'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
+        //             'masa'  =>  $data['masa'],
+        //             'waktu' =>  $data['waktu'],
+        //             'hari'  =>  $data['hari'],
+        //             'kadar_jam' =>  $data['kadar_jam'],
+        //             'status'    =>  $data['status'],
+        //             'jenis_permohonan'  =>  $data['jenis_permohonan'],
+        //             'tarikh_akhir_kerja' => $data['tarikh_akhir_kerja']
                     
-                ]);
-                // 
-                $permohonanbaru->save();
-                $permohonanbaru->refresh();
-                $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
-                // dd($permohonans);
-                // dd($permohonanbaru->jenis_permohonan);
-                if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
-                    foreach($pekerja as $pekerjas){
-                        // dd($pekerjas);
-                        $users = User::findOrFail($pekerjas)->pluck('id');
-                        // dd($users);
-                        // print_r($users);
-                        $permohonans->users()->attach($users);
-                    }
+        //         ]);
+        //         // 
+        //         $permohonanbaru->save();
+        //         $permohonanbaru->refresh();
+        //         $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
+        //         // dd($permohonans);
+        //         // dd($permohonanbaru->jenis_permohonan);
+        //         if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
+        //             foreach($pekerja as $pekerjas){
+        //                 // dd($pekerjas);
+        //                 $users = User::findOrFail($pekerjas)->pluck('id');
+        //                 // dd($users);
+        //                 // print_r($users);
+        //                 $permohonans->users()->attach($users);
+        //             }
                     
-                    $this->sendEmailNotificationToPegawaiSokong($permohonans);
-                }
+        //             $this->sendEmailNotificationToPegawaiSokong($permohonans);
+        //         }
     
-                return response()->json(
-                    [
-                        'message' => 'success',
-                    ],200);
-            // dd("lepas validate",$request->input('pekerja'));
-            }
+        //         return response()->json(
+        //             [
+        //                 'message' => 'success',
+        //             ],200);
+        //     // dd("lepas validate",$request->input('pekerja'));
+        //     }
 
-        }
+        // }
     }
 
     /**

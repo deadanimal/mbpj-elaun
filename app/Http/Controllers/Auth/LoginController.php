@@ -28,6 +28,9 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
+        if (!Auth::user()->is_active) {
+            return 'inactive';
+        }
          
         // Check user role
         switch (Auth::user()->role_id) {
@@ -56,7 +59,10 @@ class LoginController extends Controller
                     return 'kakitangan/dashboard';
                 break; 
             case '9':
-                    return 'pelulus-pindaan/dashboard';
+                    return 'pelulus-pindaan-sah/dashboard';
+                break; 
+            case '10':
+                    return 'pelulus-pindaan-lulus/dashboard';
                 break; 
             default:
                     return '/login'; 
