@@ -13,7 +13,7 @@ class PermohonanBaruSeeder extends Seeder
      */
     public function run()
     {
-        factory(PermohonanBaru::class, 20)->create();
+        factory(PermohonanBaru::class, 30)->create();
 
         foreach (PermohonanBaru::all() as $permohonan) {
             $individu = ['OT1', 'EL1', 'PS1'];

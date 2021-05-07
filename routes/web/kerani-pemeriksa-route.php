@@ -68,7 +68,7 @@ Route::group([
 
 	Route::get('/user/semakan-pekerja/{id}', 'UserController@findUser' );
 	Route::get('/ekedatangan/semakan-ekedatangan/{id}', 'EKedatanganController@findEkedatangan' );
-	Route::post('/catatan/{id}', 'CatatanController@saveCatatan' ); 
+	Route::put('/catatan/{id}', 'CatatanController@saveCatatan' ); 
 	Route::get('/permohonan-baru/semakan-permohonan/{id}', 'PermohonanBaruController@findPermohonan' );
 	Route::post('/permohonan-baru/semakan-kelulusan/{id}', 'PermohonanBaruController@approvedKelulusan' );
 	Route::put('/permohonan-baru/tolak-kakitangan/{id}', 'PermohonanBaruController@rejectIndividually' );

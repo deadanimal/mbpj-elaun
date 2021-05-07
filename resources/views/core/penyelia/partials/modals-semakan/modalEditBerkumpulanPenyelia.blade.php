@@ -89,8 +89,8 @@
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
                                 <div class="form-group mb-2">
-                                    <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Sebab-Sebab Lebih Masa') }}</label>
-                                    <textarea class="form-control form-control-sm" name="tujuan-berkumpulan" id="semakan-modal-berkumpulan-tujuan" rows="3"></textarea>
+                                    <label class="form-control-label" >{{ __('Sebab-Sebab Lebih Masa') }}</label>
+                                    <textarea class="form-control form-control-sm" name="tujuan-berkumpulan" id="semakan-modal-berkumpulan-tujuan" rows="2"></textarea>
 
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group mb-2">
-                                        <label class="form-control-label" for="exampleFormControlTextarea1">{{ __('Jumlah Tuntutan Elaun') }}</label>
+                                        <label class="form-control-label" >{{ __('Jumlah Tuntutan Elaun') }}</label>
                                         <input class="form-control form-control-sm" name="tuntutanElaun-berkumpulan" id="semakan-modal-berkumpulan-tuntutanElaun" type="text" placeholder="">
         
                                         @include('alerts.feedback', ['field' => 'name'])

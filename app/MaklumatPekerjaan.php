@@ -28,7 +28,7 @@ class MaklumatPekerjaan extends Model
 
     public function jawatan()
     {
-        return $this->belongsTo(Jawatan::class, 'HR_KOD_JAWATAN', 'HR_JAWATAN');
+        return $this->belongsTo(Jawatan::class, 'HR_JAWATAN', 'HR_KOD_JAWATAN');
     }
 
     public function jabatan()

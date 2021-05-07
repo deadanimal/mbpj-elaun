@@ -35,7 +35,8 @@ class PermohonanBaru extends Model
         'status_akhir',
         'jenis_permohonan',
         'tarikh_akhir_kerja',
-        'is_for_datuk_bandar'
+        'is_for_datuk_bandar',
+        'is_for_pelulus_pindaan'
     ];
 
     // Default value
@@ -138,8 +139,7 @@ class PermohonanBaru extends Model
                                 'masa_mula_sebenar',
                                  'masa_akhir_sebenar',
                                  'is_rejected_individually',
-                                 'masa_sebenar_siang',
-                                 'masa_sebenar_malam',
+                                 'masa_sebenar',
                                  'no_kumpulan',
                                  'jumlah_tuntutan_elaun'
                                  )

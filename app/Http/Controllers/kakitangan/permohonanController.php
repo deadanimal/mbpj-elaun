@@ -12,6 +12,7 @@ use App\permohonan_with_users;
 use App\Services\PermohonanShiftService;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\DB;
+use App\Services\KiraanMasaService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -157,6 +158,8 @@ class permohonanController extends Controller
             if ($validator->fails()) {
                 dd('fail');
             }
+
+            
             $permohonanbaru = new PermohonanBaru([
                 'id_peg_pelulus'    => $data['id_peg_pelulus'],
                 'id_peg_sokong' => $data['id_peg_sokong'],
@@ -177,6 +180,16 @@ class permohonanController extends Controller
             // dd($permohonanbaru);
             $permohonanbaru->save();
             $permohonanbaru->refresh();
+
+            $masa = new KiraanMasaService($permohonanbaru, Auth::id());
+            $masaSebenar = $masa->kiraMasa(
+                                        $data['masa_mula'], 
+                                        $data['masa_akhir'],
+                                        $data['tarikh_permohonan'], 
+                                        $data['tarikh_akhir_kerja']
+                                    );
+            $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
+
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {

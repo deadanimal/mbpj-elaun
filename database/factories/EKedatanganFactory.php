@@ -9,8 +9,8 @@ use App\permohonan_with_users;
 
 $factory->define(eKedatangan::class, function (Faker $faker) {
     return [
-        'CUSTOMERID' => permohonan_with_users::all()->random()->CUSTOMERID,
-        'tarikh' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'CUSTOMERID' => permohonan_with_users::pluck('CUSTOMERID')->random(),
+        'tarikh' => now()->format('d-m-Y'),
         'waktu_masuk' => $faker->time($format = 'H:i',$max = 'now'),
         'waktu_keluar' => $faker->time($format = 'H:i', $max = 'now'),
         'jumlah_waktu_kerja' => $faker->randomDigitNotNull,

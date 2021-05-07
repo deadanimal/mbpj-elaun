@@ -288,7 +288,7 @@ function hantarPermohonanIndividu(){
             // $("#permohonanbaruModal").modal("hide");
             successAlert();
             getIndividuDT();
-            console.log(data);
+            // console.log(data);
 
         },
         error: function(data) {

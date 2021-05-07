@@ -1,6 +1,6 @@
 var pilihanKT = ['PS1','PS2','EL1','EL2'];
 var pilihanReal = ['EL1','EL2'];
-
+var tuntutansDT;
 $(document).ready(function(){
 
     showTuntutanDatatableKT();
@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 function showTuntutanDatatableKT(){
     var nopekerja = $("#idpekerja").val();
-    var tuntutansDT = $('#tuntutansDT').DataTable({
+    tuntutansDT = $('#tuntutansDT').DataTable({
         dom: "lrtip",
         scrollX: false,
         destroy: true,
@@ -192,9 +192,10 @@ function showTuntutanDatatableKT(){
         } );
     } ).draw();
 }
+
 function printTuntutan(){
 console.log("gfhj")
-table.button( '.buttons-pdf' ).trigger();
+tuntutansDT.button( '.buttons-pdf' ).trigger();
 }
 
 $.fn.dataTable.ext.search.push(
