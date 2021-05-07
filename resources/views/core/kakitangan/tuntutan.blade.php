@@ -95,7 +95,7 @@
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive py-4">
-                            <table class="table table-flush" id="tuntutansDT">
+                            <table class="table table-flush" id="tuntutansDT" style="width: 100%">
                                 <thead class="thead-light">
                                 <tr>
                                     <th>No</th>

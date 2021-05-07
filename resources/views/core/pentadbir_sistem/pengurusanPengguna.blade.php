@@ -32,7 +32,7 @@
                     </div>
                     <div class="card-body px-0">
                         <div class="table-responsive">
-                            <table class="table table-flush" id="pengurusanDT">
+                            <table class="table table-flush" id="pengurusanDT" style="width:100%">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No.</th>
