@@ -35,12 +35,10 @@ Route::get('/inactive', function () {
 		if (Auth::user()->is_active) {
 			return redirect('/'.$roleUser.'/dashboard');
 		} else {
-			return redirect('inactive');
+			return view('inactive-page');
 		}
 	} 
 });
-
-Route::view('inactive', 'inactive-page');
 
 Auth::routes();
 
