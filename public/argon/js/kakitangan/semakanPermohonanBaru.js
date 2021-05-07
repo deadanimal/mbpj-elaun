@@ -274,6 +274,8 @@ function hantarPermohonanIndividu(){
         url: 'permohonan-baru/hantar-permohonan',
         type: 'POST', 
         data:{
+            masaMula:masaMula,
+            masaAkhir:masaAkhir,
             user_id:user_id,
             object:object,
             jenisPermohonan:jenis_permohonan
