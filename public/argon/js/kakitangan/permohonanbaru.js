@@ -332,7 +332,13 @@ function getIndividuDT(){
                 targets: 11,
                 mRender: function(data,type,row)
                 {
-                    if(row['progres'] == "Belum sah" ||row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
+                    if(row['jenis_permohonan'] == 'PS1'){
+                        console.log(data.id_permohonan_baru);
+                        // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                        var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                        var allButton = button2;
+                        return allButton;
+                    }else if(row['progres'] == "Belum sah" ||row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
                         console.log(data.id_permohonan_baru);
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
@@ -491,7 +497,8 @@ function getBerkumpulanDT(){
                     if(row['permohonan_with_users[*].is_rejected_individually'] == "1"){
                         return '';
                     
-                    }else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2'){
+                    }else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2' || row['jenis_permohonan'] == 'PS1'){
+                        console.log(row['jenis_permohonan']);
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="event.preventDefault();changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
                         var allButton = button1 ;
