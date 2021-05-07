@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="jenisPermohonan"><font color="red">*</font> Jenis Permohonan</label>
                                     <select id="jenisPermohonan" name="jenisPermohonan" class="form-control custom-select" autocomplete="off">
-                                        <option disabled selected="true" value="pilihan"> -- pilih satu pilihan -- </option>
+                                        <option disabled selected="true" value="pilihan"> Pilih Jenis Permohonan Jenis Permohonan -- </option>
                                         <option value="frmPermohonanIndividu">Permohonan Individu</option>
                                         <option value="frmPermohonanBerkumpulan">Permohonan Berkumpulan</option>
                                     </select>                       

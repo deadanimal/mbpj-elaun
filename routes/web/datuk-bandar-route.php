@@ -5,10 +5,18 @@ Route::group(
 		'prefix' => 'datuk-bandar',
 		'middleware' => [
 							'auth',
+							'active',
 							'role:3'
 						]
 	], 
 	function () {
+		Route::get('/', function () {
+			$roleUserLower = strtolower(Auth::user()->role->name);
+			$roleUser = str_replace(" ","-", $roleUserLower);
+	
+			return redirect('/'.$roleUser.'/dashboard');
+		});
+		
 		Route::resource('/dashboard','datuk_bandar\dashboardController');
 		Route::resource('/bantuan','datuk_bandar\bantuanController');
 

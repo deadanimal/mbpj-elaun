@@ -2,13 +2,21 @@
 
 Route::group(
 	[
-		'prefix' => 'pelulus-pindaan-sah',
-		'middleware' => [
-						'auth',
-						'role:9'
-						]
-					], 
-					function () {
+	'prefix' => 'pelulus-pindaan-sah',
+	'middleware' => [
+		'auth',
+		'active',
+		'role:9'
+		]
+	], 
+	function () {
+	Route::get('/', function () {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		return redirect('/'.$roleUser.'/dashboard');
+	});
+
 	Route::resource('/dashboard','pelulus_pindaan_sah\dashboardController');
 	Route::resource('/bantuan','pelulus_pindaan_sah\bantuanController');
 

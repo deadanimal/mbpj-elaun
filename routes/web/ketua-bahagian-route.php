@@ -3,6 +3,7 @@ Route::group([
 	'prefix' => 'ketua-bahagian',
 	'middleware' => [
 	'auth',
+	'active',
 	'role:4'
 	]], function () {
 	Route::get('/', function () {
