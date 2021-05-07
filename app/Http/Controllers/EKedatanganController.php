@@ -12,12 +12,13 @@ class EKedatanganController extends Controller
     {
         $id_permohonan_baru = $request->input('id_permohonan_baru');
         $tarikh_mula_kerja = PermohonanBaru::findOrFail($id_permohonan_baru)->tarikh_mula_kerja;
-        dd($tarikh_mula_kerja);
-        $user_ekedatangan = User::with([
-                                        'ekedatangan' => function ($query) {
-                                            $query->where('tarikh', $tarikh_mula_kerja);
-                                }])->findOrFail($id_user);
-        dd($user_ekedatangan);
+
+        $user_ekedatangan = User::with('ekedatangan')->findOrFail($id_user);
+
+        // $ekedatangan = ($user_ekedatangan->ekedatangans)->map(function ($ekedatangan) use ($tarikh_mula_kerja) {
+        //                     if ($ekedatangan->tarikh == $tarikh_mula_kerja) {
+        //                         return $ekedatangan;
+        //                     };
                     
         return response()->json([
                     'error' => false,

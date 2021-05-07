@@ -1,4 +1,3 @@
-<!-- <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url(../argon/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;"> -->
 <div class="header pb-7  pt-lg-4 d-flex align-items-center" >
     <!-- Mask -->
     <span class="mask bg-secondary"></span>

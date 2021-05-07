@@ -82,6 +82,7 @@ function retrieveUserData(id_user, id_permohonan_baru, jenisPermohonan) {
 }
 
 function  fillInDetailPermohonan(permohonan, tarikh_permohonan, is_individu) {
+    // need to be removed becaus the format is already correct 
     let tarikh_mula_kerja = moment(permohonan.tarikh_mula_kerja, "YYYY-MM-DD").format("DD-MM-YYYY");
     let tarikh_akhir_kerja = moment(permohonan.tarikh_akhir_kerja, "YYYY-MM-DD").format("DD-MM-YYYY");
 

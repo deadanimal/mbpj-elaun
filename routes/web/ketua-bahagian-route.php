@@ -5,6 +5,13 @@ Route::group([
 	'auth',
 	'role:4'
 	]], function () {
+	Route::get('/', function () {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		return redirect('/'.$roleUser.'/dashboard');
+	});
+
 	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
 	Route::resource('/category', 'CategoryController', ['except' => ['show']]);
 	Route::resource('/tag', 'TagController', ['except' => ['show']]);

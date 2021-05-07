@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,16 @@
 | Refer app/Http/Providers/RouteServiceProvider.php
 |
 */
- 
+
 Route::get('/', function () {
-	return view('auth.login');
+	if (Auth::check()) {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		return redirect('/'.$roleUser.'/dashboard');
+	} else {
+		return view('auth.login');
+	}
 })->name('welcome');
 
 Route::view('inactive', 'inactive-page');
