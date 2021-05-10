@@ -60,9 +60,9 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="jawatan">{{ __('Jawatan') }}</label>
-                                            <input type="text" name="jawatan" id="jawatan" class="form-control form-control-sm" placeholder="{{ __('Pegawai') }}" value="Pegawai" disabled>
+                                            <input type="text" name="jawatan" id="jawatan" class="form-control form-control-sm" value="{{ auth()->user()->maklumat_pekerjaan->jawatan->HR_NAMA_JAWATAN }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                    <div class="col">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="nric">{{ __('No. KP Baru') }}</label>
-                                            <input type="text" name="nric" id="nric" class="form-control form-control-sm" placeholder="{{ __('Nama') }}" value="{{ auth()->user()->NIRC }}" disabled>
+                                            <input type="text" name="nric" id="nric" class="form-control form-control-sm" value="{{ auth()->user()->NIRC }}" disabled>
 
                                             
                                         </div>
@@ -79,26 +79,26 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="bahagian">{{ __('Bahagian') }}</label>
-                                            <input type="text" name="bahagian" id="bahagian" class="form-control form-control-sm" placeholder="{{ __('Nama') }}" value="Pengurusan" disabled>
+                                            <input type="text" name="bahagian" id="bahagian" class="form-control form-control-sm" value="Pengurusan" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="jabatan">{{ __('Jabatan') }}</label>
-                                            <input type="text" name="jabatan" id="jabatan" class="form-control form-control-sm" placeholder="{{ __('Nama') }}" value="Teknologi Maklumat" disabled>
+                                            <input type="text" name="jabatan" id="jabatan" class="form-control form-control-sm" value="{{ auth()->user()->maklumat_pekerjaan->jabatan->GE_KETERANGAN_JABATAN }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row"> 
+                                <div class="row">  
                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="gajiMatriks">{{ __('Gaji Matriks') }}</label>
-                                            <input type="text" name="gajiMatriks" id="gajiMatriks" class="form-control form-control-sm" placeholder="{{ __('Nama') }}" value="2,455" disabled>
+                                            <input type="text" name="gajiMatriks" id="gajiMatriks" class="form-control form-control-sm" value="RM{{ auth()->user()->maklumat_pekerjaan->HR_GAJI_POKOK }}" disabled>
 
                                             
                                         </div>
@@ -106,9 +106,9 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="gred">{{ __('Gred') }}</label>
-                                            <input type="text" name="gred" id="gred" class="form-control form-control-sm" placeholder="{{ __('Nama') }}" value="F41" disabled>
+                                            <input type="text" name="gred" id="gred" class="form-control form-control-sm" value="F41" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                 </div>
