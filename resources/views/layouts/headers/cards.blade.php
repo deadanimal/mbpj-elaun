@@ -5,7 +5,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Kerja Lebih Masa</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Permohonan Kerja Lebih Masa</h5>
                         <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanKerjaLebihMasa }}</span>
                     </div>
                     <div class="col-auto">
@@ -23,7 +23,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Diluluskan</h5>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Permohonan Diluluskan</h5>
                     <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanDiluluskan }}</span>
                 </div>
                 <div class="col-auto">
@@ -41,7 +41,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tidak Diluluskan</h5>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Permohonan Tidak Diluluskan</h5>
                     <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTidakDiluluskan }}</span>
                 </div>
                 <div class="col-auto">
@@ -59,7 +59,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Tuntutan Tahun Semasa</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Permohonan Tahun Semasa</h5>
                         <span class="h2 font-weight-bold mb-0">{{ $jumlahTuntutanTahunSemasa }}</span>
                     </div>
                     <div class="col-auto">
