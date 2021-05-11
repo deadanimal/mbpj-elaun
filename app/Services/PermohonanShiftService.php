@@ -71,7 +71,7 @@ public $timeAkhirMalam;
         $dateStartPagiKerja = $dateMulaKerja.' 06:00:00';
         $dateEndMalamKerja = $dateAkhirKerja.' 22:00:00';
         $dateEndPagiKerja = $dateAkhirKerja.' 06:00:00';
-        $dateStartBeforePagiKerja = new DateTime($dateStartMalamKerja.'-1 day');
+        $dateStartBeforeMalamKerja = new DateTime($dateStartMalamKerja.'-1 day');
         $dateStartNextMalamKerja = new DateTime($dateStartMalamKerja.'+1 day');
         $dateStartNextPagiKerja = new DateTime($dateStartPagiKerja.'+1 day');
         $dateNextEndMalamKerja = new DateTime($dateEndMalamKerja.'+1 day');
@@ -80,7 +80,7 @@ public $timeAkhirMalam;
         $dateLastKerja = new DateTime($dateEndMalamKerja.'+1 day');
         $dateLimitKerjaDay = new DateTime($mulaKerja.'+1 day');
 
-        $dateStartBeforePagiKerja = $dateStartBeforePagiKerja->format('Y-m-d H:i:s');
+        $dateStartBeforeMalamKerja = $dateStartBeforeMalamKerja->format('Y-m-d H:i:s');
         $dateStartNextPagiKerja = $dateStartNextPagiKerja->format('Y-m-d H:i:s');
         $dateStartNextMalamKerja = $dateStartNextMalamKerja->format('Y-m-d H:i:s');
         $dateBeforeMalamEndKerja = $dateBeforeMalamEndKerja->format('Y-m-d H:i:s');
@@ -97,7 +97,7 @@ public $timeAkhirMalam;
             if($dateStartPagiKerja <=  $formattedMulaKerja && $formattedMulaKerja < $dateStartMalamKerja ){
                 array_push($shiftArray,'ss');
                 // echo 'siang mula';
-            }else if(($dateStartBeforePagiKerja <= $formattedMulaKerja && $formattedMulaKerja < $dateStartPagiKerja) 
+            }else if(($dateStartBeforeMalamKerja <= $formattedMulaKerja && $formattedMulaKerja < $dateStartPagiKerja) 
                         || ($dateStartMalamKerja <= $formattedMulaKerja && $formattedMulaKerja < $dateStartNextPagiKerja)){
                 array_push($shiftArray,'ms');
                 // echo 'malam mula';
@@ -131,7 +131,10 @@ public $timeAkhirMalam;
                 array_push($shiftArray,'ms');
                 array_push($shiftArray,'s');
                 // echo 'mula malam dan habis siang ';
-            }else if($formattedMulaKerja >= $dateStartMalamKerja && $formattedAkhirKerja >= $dateStartNextMalamKerja && $formattedAkhirKerja <= $dateLimitKerjaDay){
+            }else if(
+                ($formattedMulaKerja <= $dateStartPagiKerja || $formattedMulaKerja >= $dateStartMalamKerja) 
+                && ($formattedAkhirKerja >= $dateStartMalamKerja || $formattedAkhirKerja <= $dateStartNextMalamKerja ) 
+                && $formattedAkhirKerja <= $dateLimitKerjaDay){
                 array_push($shiftArray,'mstme');
                 array_push($shiftArray,'limitM');
                 // echo 'mula malam dan habis shift malam esok ';

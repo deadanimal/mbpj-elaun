@@ -121,9 +121,15 @@ function hantarPermohonanBerkumpulan(){
     console.log(edit)
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
     var pegPelulusBK = document.querySelector("#pegawaiLulusBK").value;
+    var pegSokongBK = document.querySelector("#pegawaiSokongBK").value;
     var tarikhKerjaBK = moment(document.querySelector("#tarikh-kerjaBK").value,"DD-MM-YYYY").format("DD-MM-YYYY");
+    var tarikhAkhirKerjaBK = moment(document.querySelector("#tarikh-akhir-kerjaBK").value,"DD-MM-YYYY").format("DD-MM-YYYY");
     var masaMulaBK = document.querySelector("#masa-mulaBK").value;
     var masaAkhirBK = document.querySelector("#masa-akhirBK").value;
+    var tarikhMulaBK = moment(tarikhKerjaBK,"DD-MM-YYYY").format("YYYY-MM-DD")
+    var masaMula = tarikhMulaBK + " " + masaMulaBK + ":00"
+    var tarikhAkhirBK = moment(tarikhAkhirKerjaBK,"DD-MM-YYYY").format("YYYY-MM-DD")
+    var masaAkhir = tarikhAkhirBK + " " + masaAkhirBK + ":00"
     var sebab = document.querySelector("#sebabBK").value;
     var lokasi = document.querySelector("#lokasiBK").value;
     var hari = moment(tarikhKerjaBK).format("dddd");
@@ -158,9 +164,9 @@ function hantarPermohonanBerkumpulan(){
     })
     console.log(nopekerja);
     var object = {
-        tarikh_akhir_kerja:'2021-01-01',
+        tarikh_akhir_kerja:tarikhAkhirKerjaBK,
         id_peg_pelulus:pegPelulusBK,
-        id_peg_sokong:5,
+        id_peg_sokong:pegSokongBK,
         tarikh_permohonan:tarikhKerjaBK,
         masa_mula:masaMulaBK,
         masa_akhir:masaAkhirBK,
@@ -180,6 +186,8 @@ function hantarPermohonanBerkumpulan(){
         type: 'POST', 
         data:{
             object:object,
+            masaMula:masaMula,
+            masaAkhir:masaAkhir,
             jenisPermohonan:jenis_permohonan,
             pekerja:nopekerja
         },
@@ -264,6 +272,7 @@ function hantarPermohonanIndividu(){
     }
 
     console.log("hari",hari,"masa",totalhours,"waktu",waktu);
+    var nopekerja = [namaPekerjaID];
     var user_id = namaPekerjaID;
     var object = {tarikh_akhir_kerja:tarikhAkhirKerjaID,id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
@@ -277,6 +286,7 @@ function hantarPermohonanIndividu(){
             masaMula:masaMula,
             masaAkhir:masaAkhir,
             user_id:user_id,
+            pekerja:nopekerja,
             object:object,
             jenisPermohonan:jenis_permohonan
         },

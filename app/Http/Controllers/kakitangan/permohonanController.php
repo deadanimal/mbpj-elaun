@@ -5,6 +5,7 @@ namespace App\Http\Controllers\kakitangan;
 use App\User;
 use DateTime;
 use DataTables;
+use App\Jobs\PermohonanOT;
 use Carbon\Carbon;
 use App\PermohonanBaru;
 use Illuminate\Http\Request;
@@ -87,7 +88,6 @@ class permohonanController extends Controller
         $array = array($data);
         $masa = new PermohonanShiftService($id_user);
         $shiftSebenar = $masa->kiraMasa($masaMula,$masaAkhir);
-        // dd($shiftSebenar);
         $dayCount = $shiftSebenar[0];
         $shiftType = "";
         // $shiftKerja = array($shiftSebenar);
@@ -130,20 +130,31 @@ class permohonanController extends Controller
         // dd($shiftType,$newPermohonan);
 
         // ForEach Pekerja
+        foreach ($pekerja as $key => $pekerjas) {
         foreach ($newPermohonan as $key => $value) {
-            // dd($key,$value);
+            $masa = strval($value);
             $splitDate = explode(";",$key);
             $splitTime = array();
             $dateArray = array();
             $timeArray = array();
+            $day = '';
+            $kadar = '';
+            $shiftSiang = DateTime::createFromFormat('H:i','06:00');
+            $shiftMalam = DateTime::createFromFormat('H:i','22:00');
             foreach ($splitDate as $split) {
                 $splitTime = explode(" ",$split);
                 $date = new DateTime($splitTime[0]);
                 $time = DateTime::createFromFormat('H:i:s',$splitTime[1]);
                 array_push($dateArray,$date->format('d-m-Y'));
                 array_push($timeArray,$time->format('H:i'));
+                $day = $date->format('l');
+                if($time >= $shiftSiang && $time < $shiftMalam){
+                    $kadar = '1.125';
+                }else{
+                    $kadar = '1.225';
+                }
             }
-            if($jenisPermohonan == 'OT1' ){
+            
             $validator = Validator::make($data, array(
                 
                 'id_peg_pelulus' => 'required',
@@ -168,37 +179,52 @@ class permohonanController extends Controller
                 'masa_akhir'    => $timeArray[1],
                 'tujuan'    => $data['tujuan'],
                 'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
-                'masa'  =>  $value,
+                'masa'  =>  $masa,
                 'waktu' =>  $data['waktu'],
-                'hari'  =>  $data['hari'],
-                'kadar_jam' =>  $data['kadar_jam'],
+                'hari'  =>  $day,
+                'kadar_jam' =>  $kadar,
                 'status'    =>  $data['status'],
                 'jenis_permohonan'  =>  $data['jenis_permohonan'],
                 'tarikh_akhir_kerja' => $dateArray[1]
 
             ]);
-            // dd($permohonanbaru);
             $permohonanbaru->save();
             $permohonanbaru->refresh();
-
-            $masa = new KiraanMasaService($permohonanbaru, Auth::id());
-            $masaSebenar = $masa->kiraMasa(
-                                        $data['masa_mula'], 
-                                        $data['masa_akhir'],
-                                        $data['tarikh_permohonan'], 
-                                        $data['tarikh_akhir_kerja']
-                                    );
-            $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
+            
+            // $masa = new KiraanMasaService($permohonanbaru, Auth::id());
+            // $masaSebenar = $masa->kiraMasa(
+            //                             $data['masa_mula'], 
+            //                             $data['masa_akhir'],
+            //                             $data['tarikh_permohonan'], 
+            //                             $data['tarikh_akhir_kerja']
+            //                         );
+            // $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
 
             $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
 
             if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
-                $users = Auth::user()->CUSTOMERID;
-                $permohonans->users()->attach($users);
+                // $users = Auth::user()->CUSTOMERID;
+                $permohonans->users()->attach($pekerjas);
+                $kumpulanIncrement;
+                $prefixKumpulan = permohonan_with_users::select('created_at')->orderBy('created_at','desc')->first();
+                $prefixKumpulan = substr($prefixKumpulan->created_at,0,10);
+                $prefixKumpulan = str_replace('-','',$prefixKumpulan);
+                $noKumpulan = "K".$prefixKumpulan;
+                $kumpulanIncrement = permohonan_with_users::select('no_kumpulan')->where('no_kumpulan','like',$noKumpulan.'%')->get(); 
+                $temp = array();
+                foreach ($kumpulanIncrement as $key => $value) {
+                    // dd($value->no_kumpulan);
+                    $lastIndex = substr($value->no_kumpulan,9);
+                    array_push($temp,$lastIndex);
+                }
+                $highestIndex = max($temp);
+                
+                $permohonans->users()->update(['no_kumpulan' => $noKumpulan.str_pad($highestIndex+1,5,"0",STR_PAD_LEFT)]);
 
                 $this->sendEmailNotificationToPegawaiSokong($permohonans);
             }
         }
+        
     }
             return response()->json(
                 [
