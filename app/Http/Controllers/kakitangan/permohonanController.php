@@ -130,7 +130,7 @@ class permohonanController extends Controller
 
         // $createPermohonan = 
 
-        dispatch($masa->createPermohonan($pekerja,$newPermohonan,$data,$jenisPermohonan));
+        PermohonanOT::dispatch($masa->createPermohonan($pekerja,$newPermohonan,$data,$jenisPermohonan));
         
             return response()->json(
                 [

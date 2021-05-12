@@ -17,13 +17,13 @@
                 </a>
                 <div class="collapse {{ $parentSection == 'permohonan' ? 'show' : '' }}" id="navbar-examples">
                     <ul class="nav nav-sm flex-column">
-                        <li class="nav-item {{ $elementName == 'profile' ? 'active' : '' }}">
-                            <a href="permohonan-baru" class="nav-link">{{ __('Permohonan Baru') }}</a>
+                        <li class="nav-item {{ $elementName == 'mohon' ? 'active' : '' }}">
+                            <a href="permohonan-baru" class="nav-link">{{ __('Mohon Baru') }}</a>
                         </li>
-                        <li class="nav-item  {{ $elementName == 'role-management' ? 'active' : '' }}">
-                            <a href="semakan" class="nav-link">{{ __('Pengesahan Permohonan') }}</a>
+                        <li class="nav-item  {{ $elementName == 'pengesahan' ? 'active' : '' }}">
+                            <a href="semakan" class="nav-link">{{ __('Sah Permohonan') }}</a>
                         </li>
-                        <li class="nav-item {{ $parentSection == 'tuntutan' ? 'active' : '' }}">
+                        <li class="nav-item {{ $elementName == 'tuntutan' ? 'active' : '' }}">
                             <a href="tuntutan" class="nav-link">{{ __('Tuntutan Elaun') }}</a>
                         </li>
                     </ul>
