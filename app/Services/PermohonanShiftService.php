@@ -37,7 +37,6 @@ public $totalShiftMalam;
 public $timeAkhirPagi;
 public $timeAkhirMalam;
 
-
     /**
      * Create a new event instance.
      *
@@ -441,8 +440,11 @@ public $timeAkhirMalam;
         return $allShifts;
     }
 
-    public function createPermohonan($pekerja,$newPermohonan,$data,$jenisPermohonan){
-        foreach ($pekerja as $key => $pekerjas) {
+    public function createPermohonan($pekerjas,$newPermohonan,$data,$jenisPermohonan){
+        $jenis_permohonan = '';
+        $id_permohonan = array();
+        // dd($pekerjas);
+        
             foreach ($newPermohonan as $key => $value) {
                 $masa = strval($value);
                 $splitDate = explode(";",$key);
@@ -451,6 +453,7 @@ public $timeAkhirMalam;
                 $timeArray = array();
                 $day = '';
                 $kadar = '';
+                $waktu = '';
                 $shiftSiang = DateTime::createFromFormat('H:i','06:00');
                 $shiftMalam = DateTime::createFromFormat('H:i','22:00');
                 foreach ($splitDate as $split) {
@@ -460,13 +463,16 @@ public $timeAkhirMalam;
                     array_push($dateArray,$date->format('d-m-Y'));
                     array_push($timeArray,$time->format('H:i'));
                     $day = $date->format('l');
-                    if($time >= $shiftSiang && $time < $shiftMalam){
+                    if($time->format('H:i') >= $shiftSiang && $time->format('H:i') < $shiftMalam){
                         $kadar = '1.125';
+                        $waktu = 'Siang';
                     }else{
-                        $kadar = '1.225';
+                        $kadar = '1.250';
+                        $waktu = 'Malam';
                     }
                 }
-                
+            foreach ($pekerjas as $pekerja) {
+                $permohonanbaru = [];
                 $validator = Validator::make($data, array(
                     
                     'id_peg_pelulus' => 'required',
@@ -475,11 +481,11 @@ public $timeAkhirMalam;
                     'masa_mula' => 'required',
                     'masa_akhir' => 'required',
                     'tujuan' => 'required',
-                    // 'lokasi' => 'required',
+                    'lokasi' => 'required',
                     
                 ));
                 if ($validator->fails()) {
-                    dd('fail');
+                    dd($data);
                 }
     
                 
@@ -492,7 +498,8 @@ public $timeAkhirMalam;
                     'tujuan'    => $data['tujuan'],
                     'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
                     'masa'  =>  $masa,
-                    'waktu' =>  $data['waktu'],
+                    'waktu' =>  $waktu,
+                    'lokasi' => $data['lokasi'],
                     'hari'  =>  $day,
                     'kadar_jam' =>  $kadar,
                     'status'    =>  $data['status'],
@@ -500,51 +507,82 @@ public $timeAkhirMalam;
                     'tarikh_akhir_kerja' => $dateArray[1]
     
                 ]);
+                $jenis_permohonan = $permohonanbaru->jenis_permohonan;
                 $permohonanbaru->save();
+                $permohonanbaru->users()->attach($pekerja);
                 $permohonanbaru->refresh();
+                array_push($id_permohonan,$permohonanbaru->id_permohonan_baru);
+            }
+                // $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
+    
+                // if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
+                //     // $users = Auth::user()->CUSTOMERID;
+                //     $permohonans->users()->attach($pekerjas);
+                //     $kumpulanIncrement;
+                //     $prefixKumpulan = permohonan_with_users::select('created_at')->orderBy('created_at','desc')->first();
+                //     $prefixKumpulan = substr($prefixKumpulan->created_at,0,10);
+                //     $prefixKumpulan = str_replace('-','',$prefixKumpulan);
+                //     if($jenisPermohonan == 'OT2'){
+                //         $noKumpulan = "K".$prefixKumpulan;
+                //     }else{
+                //         $noKumpulan = "I".$prefixKumpulan;
+                //     }
+                //     $kumpulanIncrement = permohonan_with_users::select('no_kumpulan')->where('no_kumpulan','like',$noKumpulan.'%')->get(); 
+                //     $temp = array();
+                //     foreach ($kumpulanIncrement as $key => $value) {
+                //         // dd($value->no_kumpulan);
+                //         $lastIndex = substr($value->no_kumpulan,9);
+                //         array_push($temp,$lastIndex);
+                //     }
+                //     if(!empty($temp)){
+                //     $highestIndex = max($temp);
+                //     }else{
+                //         $highestIndex = 0;
+                //     }
+                //     $permohonans->users()->update(['no_kumpulan' => $noKumpulan.str_pad($highestIndex+1,5,"0",STR_PAD_LEFT)]);
+    
                 
-                // $masa = new KiraanMasaService($permohonanbaru, Auth::id());
-                // $masaSebenar = $masa->kiraMasa(
-                //                             $data['masa_mula'], 
-                //                             $data['masa_akhir'],
-                //                             $data['tarikh_permohonan'], 
-                //                             $data['tarikh_akhir_kerja']
-                //                         );
-                // $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
-    
-                $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
-    
-                if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
-                    // $users = Auth::user()->CUSTOMERID;
-                    $permohonans->users()->attach($pekerjas);
-                    $kumpulanIncrement;
-                    $prefixKumpulan = permohonan_with_users::select('created_at')->orderBy('created_at','desc')->first();
-                    $prefixKumpulan = substr($prefixKumpulan->created_at,0,10);
-                    $prefixKumpulan = str_replace('-','',$prefixKumpulan);
-                    if($jenisPermohonan == 'OT2'){
-                        $noKumpulan = "K".$prefixKumpulan;
-                    }else{
-                        $noKumpulan = "I".$prefixKumpulan;
-                    }
-                    $kumpulanIncrement = permohonan_with_users::select('no_kumpulan')->where('no_kumpulan','like',$noKumpulan.'%')->get(); 
-                    $temp = array();
-                    foreach ($kumpulanIncrement as $key => $value) {
-                        // dd($value->no_kumpulan);
-                        $lastIndex = substr($value->no_kumpulan,9);
-                        array_push($temp,$lastIndex);
-                    }
-                    if(!empty($temp)){
-                    $highestIndex = max($temp);
-                    }else{
-                        $highestIndex = 0;
-                    }
-                    $permohonans->users()->update(['no_kumpulan' => $noKumpulan.str_pad($highestIndex+1,5,"0",STR_PAD_LEFT)]);
-    
-                    $this->sendEmailNotificationToPegawaiSokong($permohonans);
-                }
             }
             
+        
+                dd($id_permohonan);
+
+        $temp = array();
+        $noKumpulan = '';
+        $kumpulanIncrement;
+        $prefixKumpulan = permohonan_with_users::select('created_at')->orderBy('created_at','desc')->first();
+        $prefixKumpulan = substr($prefixKumpulan->created_at,0,10);
+        $prefixKumpulan = str_replace('-','',$prefixKumpulan);
+        if($jenisPermohonan == 'OT2'){
+            $noKumpulan = "K".$prefixKumpulan;
+        }else{
+            $noKumpulan = "I".$prefixKumpulan;
         }
+        $kumpulanIncrement = permohonan_with_users::select('no_kumpulan')->where('no_kumpulan','like',$noKumpulan.'%')->get(); 
+        
+        foreach ($kumpulanIncrement as $key => $value) {
+            // dd($value->no_kumpulan);
+            $lastIndex = substr($value->no_kumpulan,9);
+            array_push($temp,$lastIndex);
+        }
+    
+        if(!empty($temp)){
+        $highestIndex = max($temp)+1;
+        }else{
+            $highestIndex = 1;
+        }
+        foreach ($id_permohonan as $key => $value) {
+
+            $permohonans = PermohonanBaru::find($value); 
+    
+                if ($jenis_permohonan == $jenisPermohonan) {
+                    // $users = Auth::user()->CUSTOMERID;
+            $permohonans->users()->update(['no_kumpulan' => $noKumpulan.str_pad($highestIndex
+            ,5,"0",STR_PAD_LEFT)]);
+            $this->sendEmailNotificationToPegawaiSokong($permohonans);
+
+        }
+    }
         return;
     }
 
