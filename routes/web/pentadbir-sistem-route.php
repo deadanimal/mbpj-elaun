@@ -4,8 +4,16 @@ Route::group([
 	'prefix' => 'pentadbir-sistem',
 	'middleware' => [
 	'auth',
+	'active',
 	'role:1'
 	]], function () {
+	Route::get('/', function () {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		return redirect('/'.$roleUser.'/dashboard');
+	});
+
 	Route::resource('/dashboard','pentadbir_sistem\dashboardController',['except' => ['show','destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);

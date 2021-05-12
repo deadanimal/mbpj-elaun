@@ -73,11 +73,12 @@ class semakanController extends Controller
     public function showModal(Request $request,$id){
         $pilihanKT = $request->input('pilihanKT');
         $pilihanReal = $request->input('pilihanReal');
-        // dd($id);
+
         $permohonan = PermohonanBaru::findOrFail($id);
+
         return response()->json([
             'permohonan' => $permohonan,
-            
+
         ],200);
         
     }

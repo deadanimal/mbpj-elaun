@@ -73,7 +73,7 @@
                     <div class="card-body px-0">
                         
                             <div class="table-responsive">
-                                <table class="table table-flush" id="adminDT">
+                                <table class="table table-flush" id="adminDT" style="width:100%">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>ID</th>

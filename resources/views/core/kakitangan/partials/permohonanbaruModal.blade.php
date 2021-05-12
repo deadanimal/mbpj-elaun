@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="jenisPermohonan"><font color="red">*</font> Jenis Permohonan</label>
                                     <select id="jenisPermohonan" name="jenisPermohonan" class="form-control custom-select" autocomplete="off">
-                                        <option disabled selected="true" value="pilihan"> -- pilih satu pilihan -- </option>
+                                        <option disabled selected="true" value="pilihan"> Pilih Jenis Permohonan Jenis Permohonan -- </option>
                                         <option value="frmPermohonanIndividu">Permohonan Individu</option>
                                         <option value="frmPermohonanBerkumpulan">Permohonan Berkumpulan</option>
                                     </select>                       
@@ -37,8 +37,9 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                        <label class="form-control-label" for="namaPekerjaID">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="namaPekerjaID" id="namaPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
+
+                                        <label class="form-control-label" for="noPekerjaID">{{ __('No Pekerja') }}</label>
+                                        <input type="text" name="noPekerjaID" id="noPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -168,7 +169,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="namaPekerjaBK">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="namaPekerjaBK" id="namaPekerjaBK" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
+                                        <input type="text" name="namaPekerjaBK" id="namaPekerjaBK" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus disabled>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>

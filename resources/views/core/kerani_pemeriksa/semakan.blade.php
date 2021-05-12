@@ -20,16 +20,13 @@
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">  
                         
-
                             {{-- Form semakan --}}
                                 @include('core.kerani_pemeriksa.partials.formOT&EL')
                         </div>
                     </div>
                 </div>
-
                     {{-- Datatables --}}
                     @include('core.kerani_pemeriksa.partials.dataTablesKeraniPemeriksa')
-    
             </div>
         </div>
 

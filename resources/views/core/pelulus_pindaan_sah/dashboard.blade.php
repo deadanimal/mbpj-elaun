@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive py-4">
-                                <table class="table" id="pindaanSahDT">
+                                <table class="table" id="pindaanSahDT" style="width:100%">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>No</th>
