@@ -39,7 +39,7 @@
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
 
                                         <label class="form-control-label" for="noPekerjaID">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="noPekerjaID" id="noPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
+                                        <input type="text" name="noPekerjaID" id="noPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ sprintf('%05d',auth()->user()->CUSTOMERID) }}" required autofocus>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>

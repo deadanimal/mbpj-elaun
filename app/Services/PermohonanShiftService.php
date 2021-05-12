@@ -204,14 +204,17 @@ public $timeAkhirMalam;
                             $pagiFull = $this->diff($datePagiIncrement,$dateMalamIncrement);
                             $malamFull = $this->diff($dateMalamIncrement,$dateEsokPagiIncrement);
                             if($j+1 <= $dayCount){
+                                // dd('1st');
                                 $allShifts[$datePagiIncrement->format('Y-m-d H:i:s').';'.$dateMalamIncrement->format('Y-m-d H:i:s')] = $pagiFull;
                                 $allShifts[$dateMalamIncrement->format('Y-m-d H:i:s').';'.$dateEsokPagiIncrement->format('Y-m-d H:i:s')] = $malamFull;
                             }else if($j+1 > $dayCount){
-                                $allShifts[$datePagiIncrement->format('Y-m-d H:i:s').';'.$dateMalamIncrement->format('Y-m-d H:i:s')] = $pagiFull;
+                                // $allShifts[$datePagiIncrement->format('Y-m-d H:i:s').';'.$dateMalamIncrement->format('Y-m-d H:i:s')] = $pagiFull;
                                 if($dateMalamIncrement->format('Y-m-d H:i:s') < $akhirKerja){
+                                    // dd('2nd');
                                     $allShifts[$dateMalamIncrement->format('Y-m-d H:i:s').';'.$dateEsokPagiIncrement->format('Y-m-d H:i:s')] = $malamFull;
                                 }
                             }elseif($j < $dayCount){
+                                // dd('3rd');
                                 $allShifts[$datePagiIncrement->format('Y-m-d H:i:s').';'.$dateMalamIncrement->format('Y-m-d H:i:s')] = $pagiFull;
                                 $allShifts[$dateMalamIncrement->format('Y-m-d H:i:s').';'.$dateEsokPagiIncrement->format('Y-m-d H:i:s')] = $malamFull;
                             }
@@ -356,7 +359,7 @@ public $timeAkhirMalam;
                             $allShifts[$dateMalamIncrement->format('Y-m-d H:i:s').';'.$dateEsokPagiIncrement->format('Y-m-d H:i:s')] = $malamFull;
                             $allShifts[$dateEsokPagiIncrement->format('Y-m-d H:i:s').';'.$dateEsokMalamIncrement->format('Y-m-d H:i:s')] = $pagiFull;
                         }else if($j+1 > $dayCount){
-                            $allShifts[$dateMalamIncrement->format('Y-m-d H:i:s').';'.$dateEsokPagiIncrement->format('Y-m-d H:i:s')] = $malamFull;
+                            // $allShifts[$dateMalamIncrement->format('Y-m-d H:i:s').';'.$dateEsokPagiIncrement->format('Y-m-d H:i:s')] = $malamFull;
                             if($dateEsokPagiIncrement->format('Y-m-d H:i:s') < $akhirKerja){
                                 $allShifts[$dateEsokPagiIncrement->format('Y-m-d H:i:s').';'.$dateEsokMalamIncrement->format('Y-m-d H:i:s')] = $pagiFull;
                             }

@@ -1,7 +1,7 @@
 @extends('layouts.app', [
     'title' => __('Role Management'),
-    'parentSection' => 'laravel',
-    'elementName' => 'role-management'
+    'parentSection' => 'permohonan',
+    'elementName' => 'tuntutan'
 ])
 
 @section('content')
