@@ -443,9 +443,9 @@ public $timeAkhirMalam;
     public function createPermohonan($pekerjas,$newPermohonan,$data,$jenisPermohonan){
         $jenis_permohonan = '';
         $id_permohonan = array();
-        // dd($pekerjas);
         
             foreach ($newPermohonan as $key => $value) {
+                echo 'permohonan-';
                 $masa = strval($value);
                 $splitDate = explode(";",$key);
                 $splitTime = array();
@@ -457,7 +457,7 @@ public $timeAkhirMalam;
                 $shiftSiang = DateTime::createFromFormat('H:i','06:00');
                 $shiftMalam = DateTime::createFromFormat('H:i','22:00');
                 foreach ($splitDate as $split) {
-                    $splitTime = explode(" ",$split);
+                    $splitTime = explode(" ", $split);
                     $date = new DateTime($splitTime[0]);
                     $time = DateTime::createFromFormat('H:i:s',$splitTime[1]);
                     array_push($dateArray,$date->format('d-m-Y'));
@@ -467,11 +467,12 @@ public $timeAkhirMalam;
                         $kadar = '1.125';
                         $waktu = 'Siang';
                     }else{
-                        $kadar = '1.250';
+                        $kadar = '1.25';
                         $waktu = 'Malam';
                     }
                 }
-            foreach ($pekerjas as $pekerja) {
+            foreach ($pekerjas[0] as $pekerja) {
+                echo 'pekerja';
                 $permohonanbaru = [];
                 $validator = Validator::make($data, array(
                     
