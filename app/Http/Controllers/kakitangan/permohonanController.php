@@ -127,10 +127,10 @@ class permohonanController extends Controller
         // dd($shiftType);
 
         $newPermohonan = $masa->doPermohonanBaru($shiftType,$dayCount,$masaMula,$masaAkhir);
-
+        dd($newPermohonan);
         // $createPermohonan = 
 
-        dispatch($masa->createPermohonan($pekerja,$newPermohonan,$data,$jenisPermohonan));
+        PermohonanOT::dispatch($masa->createPermohonan($pekerja,$newPermohonan,$data,$jenisPermohonan));
         
             return response()->json(
                 [
