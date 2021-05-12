@@ -69,6 +69,8 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $("#permohonanbaruModal input[name=tarikh-akhir-kerjaID]").val(data.permohonan.tarikh_akhir_kerja);
                 $("#permohonanbaruModal input[name=masa-mulaID]").val(data.permohonan.masa_mula);
                 $("#permohonanbaruModal input[name=masa-akhirID]").val(data.permohonan.masa_akhir);
+                $("#permohonanbaruModal input[name=]").val(data.permohonan.masa_mula);
+                $("#permohonanbaruModal input[name=masa-akhirID]").val(data.permohonan.masa_akhir);
                 document.getElementById('sebabID').value = data.permohonan.tujuan;
                 document.getElementById('lokasiID').value = data.permohonan.lokasi;
                 $("#permohonanbaruModal").modal("show");
@@ -179,6 +181,7 @@ function hantarPermohonanBerkumpulan(){
         masa:masa,
         hari:hari,
         waktu:waktu,
+        lokasi:lokasi,
         kadar_jam:"1.125",
         status:status,
         jenis_permohonan:jenis_permohonan,
@@ -282,7 +285,7 @@ function hantarPermohonanIndividu(){
     var nopekerja = [noPekerjaID];
     var user_id = noPekerjaID;
     var object = {tarikh_akhir_kerja:tarikhAkhirKerjaID,id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
-                    masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
+                    masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,lokasi:lokasi,kadar_jam:"1.125",status:status,
                     jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};
     console.log(object,individu);
     if (edit != 1){
