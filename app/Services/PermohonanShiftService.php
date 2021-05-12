@@ -4,8 +4,13 @@ namespace App\Services;
 
 use App\User;
 use App\PermohonanBaru;
-use Carbon\Carbon;
+use App\permohonan_with_users;
 use DateTime;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use App\Events\PermohonanStatusChangedEvent;
+use App\Services\PermohonanShiftService;
+use App\Notifications\PermohonanNeedApprovalEmailNotification;
 
 class PermohonanShiftService {
 
@@ -190,6 +195,7 @@ public $timeAkhirMalam;
                     }
 
                     if($dayCount > 1){
+                        // dd('asd');
                         for ($j = 1 ; $j <= $dayCount; $j++){
                             $nextDay = $j + 1;
                             $datePagiIncrement = new DateTime($dateStartPagiKerja."+".$j." day");
@@ -212,6 +218,7 @@ public $timeAkhirMalam;
                         }
 
                     }else if($dayCount < 2){
+                        // dd('asdax');
                         $datePagiIncrement = new DateTime($dateStartPagiKerja."+1 day");
                         $dateMalamIncrement = new DateTime($dateStartMalamKerja."+1 day");
                         $dateEsokPagiIncrement = new DateTime($dateStartPagiKerja."+2 day");
@@ -431,4 +438,117 @@ public $timeAkhirMalam;
         return $allShifts;
     }
 
+    public function createPermohonan($pekerja,$newPermohonan,$data,$jenisPermohonan){
+        foreach ($pekerja as $key => $pekerjas) {
+            foreach ($newPermohonan as $key => $value) {
+                $masa = strval($value);
+                $splitDate = explode(";",$key);
+                $splitTime = array();
+                $dateArray = array();
+                $timeArray = array();
+                $day = '';
+                $kadar = '';
+                $shiftSiang = DateTime::createFromFormat('H:i','06:00');
+                $shiftMalam = DateTime::createFromFormat('H:i','22:00');
+                foreach ($splitDate as $split) {
+                    $splitTime = explode(" ",$split);
+                    $date = new DateTime($splitTime[0]);
+                    $time = DateTime::createFromFormat('H:i:s',$splitTime[1]);
+                    array_push($dateArray,$date->format('d-m-Y'));
+                    array_push($timeArray,$time->format('H:i'));
+                    $day = $date->format('l');
+                    if($time >= $shiftSiang && $time < $shiftMalam){
+                        $kadar = '1.125';
+                    }else{
+                        $kadar = '1.225';
+                    }
+                }
+                
+                $validator = Validator::make($data, array(
+                    
+                    'id_peg_pelulus' => 'required',
+                    'id_peg_sokong' => 'required' ,
+                    'tarikh_permohonan' => 'required',
+                    'masa_mula' => 'required',
+                    'masa_akhir' => 'required',
+                    'tujuan' => 'required',
+                    // 'lokasi' => 'required',
+                    
+                ));
+                if ($validator->fails()) {
+                    dd('fail');
+                }
+    
+                
+                $permohonanbaru = new PermohonanBaru([
+                    'id_peg_pelulus'    => $data['id_peg_pelulus'],
+                    'id_peg_sokong' => $data['id_peg_sokong'],
+                    'tarikh_mula_kerja' => $dateArray[0],
+                    'masa_mula' => $timeArray[0],
+                    'masa_akhir'    => $timeArray[1],
+                    'tujuan'    => $data['tujuan'],
+                    'jenis_permohonan_kakitangan'   =>  $data['jenis_permohonan_kakitangan'],
+                    'masa'  =>  $masa,
+                    'waktu' =>  $data['waktu'],
+                    'hari'  =>  $day,
+                    'kadar_jam' =>  $kadar,
+                    'status'    =>  $data['status'],
+                    'jenis_permohonan'  =>  $data['jenis_permohonan'],
+                    'tarikh_akhir_kerja' => $dateArray[1]
+    
+                ]);
+                $permohonanbaru->save();
+                $permohonanbaru->refresh();
+                
+                // $masa = new KiraanMasaService($permohonanbaru, Auth::id());
+                // $masaSebenar = $masa->kiraMasa(
+                //                             $data['masa_mula'], 
+                //                             $data['masa_akhir'],
+                //                             $data['tarikh_permohonan'], 
+                //                             $data['tarikh_akhir_kerja']
+                //                         );
+                // $permohonanbaru->update(['masa' => $masaSebenar["masa"]]);
+    
+                $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
+    
+                if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
+                    // $users = Auth::user()->CUSTOMERID;
+                    $permohonans->users()->attach($pekerjas);
+                    $kumpulanIncrement;
+                    $prefixKumpulan = permohonan_with_users::select('created_at')->orderBy('created_at','desc')->first();
+                    $prefixKumpulan = substr($prefixKumpulan->created_at,0,10);
+                    $prefixKumpulan = str_replace('-','',$prefixKumpulan);
+                    if($jenisPermohonan == 'OT2'){
+                        $noKumpulan = "K".$prefixKumpulan;
+                    }else{
+                        $noKumpulan = "I".$prefixKumpulan;
+                    }
+                    $kumpulanIncrement = permohonan_with_users::select('no_kumpulan')->where('no_kumpulan','like',$noKumpulan.'%')->get(); 
+                    $temp = array();
+                    foreach ($kumpulanIncrement as $key => $value) {
+                        // dd($value->no_kumpulan);
+                        $lastIndex = substr($value->no_kumpulan,9);
+                        array_push($temp,$lastIndex);
+                    }
+                    if(!empty($temp)){
+                    $highestIndex = max($temp);
+                    }else{
+                        $highestIndex = 0;
+                    }
+                    $permohonans->users()->update(['no_kumpulan' => $noKumpulan.str_pad($highestIndex+1,5,"0",STR_PAD_LEFT)]);
+    
+                    $this->sendEmailNotificationToPegawaiSokong($permohonans);
+                }
+            }
+            
+        }
+        return;
+    }
+
+    public function sendEmailNotificationToPegawaiSokong(PermohonanBaru $permohonan)
+    {
+        $pegawai_sokong = User::findOrFail($permohonan->id_peg_sokong);
+        $pegawai_sokong->notify(new PermohonanNeedApprovalEmailNotification($pegawai_sokong));  
+    }
 }
+
