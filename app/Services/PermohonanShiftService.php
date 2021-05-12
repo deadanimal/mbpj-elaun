@@ -511,9 +511,9 @@ public $timeAkhirMalam;
                 $permohonanbaru->save();
                 $permohonanbaru->users()->attach($pekerja);
                 $permohonanbaru->refresh();
+
                 array_push($id_permohonan,$permohonanbaru->id_permohonan_baru);
             }
-                // $permohonans = PermohonanBaru::orderBy('created_at','desc')->first(); 
     
                 // if ($permohonanbaru->jenis_permohonan == $jenisPermohonan) {
                 //     // $users = Auth::user()->CUSTOMERID;
