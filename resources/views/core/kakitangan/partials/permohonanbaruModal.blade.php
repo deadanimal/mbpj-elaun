@@ -37,6 +37,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+
                                         <label class="form-control-label" for="noPekerjaID">{{ __('No Pekerja') }}</label>
                                         <input type="text" name="noPekerjaID" id="noPekerjaID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
 
@@ -168,7 +169,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="namaPekerjaBK">{{ __('No Pekerja') }}</label>
-                                        <input type="text" name="namaPekerjaBK" id="namaPekerjaBK" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus>
+                                        <input type="text" name="namaPekerjaBK" id="namaPekerjaBK" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name', auth()->user()->CUSTOMERID) }}" required autofocus disabled>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>

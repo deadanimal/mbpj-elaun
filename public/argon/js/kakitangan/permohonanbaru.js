@@ -20,6 +20,13 @@ var fulldate;
 $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
+    $(this)
+    .find("input,textarea,select").not("#namaPekerjaID").not("#kpID").not("#namaPekerjaBK")
+       .val('')
+       .end()
+    .find("input[type=checkbox], input[type=radio]")
+       .prop("checked", "")
+       .end();
     for(i = 0; i < arr.length; i++){
         remove()
         console.log('test remove')
@@ -380,11 +387,12 @@ function getIndividuDT(){
         order: [ 1, 'asc' ]
         
     });
-    individuDT.on( 'order.dt search.dt', function () {
-        individuDT.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    individuDT.on('draw.dt', function () {
+        var info = individuDT.page.info();
+        individuDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    }).draw();
     
 }
 
@@ -438,7 +446,7 @@ function getBerkumpulanDT(){
             {data: null},
             {data: 'jenis_permohonan'},
             {data: 'id_permohonan_baru'},
-            {data: 'is_rejected_individually'}
+            {data: 'permohonan_with_users.is_rejected_individually'}
         
         ],
         columnDefs: [
@@ -533,11 +541,12 @@ function getBerkumpulanDT(){
         order: [[ 1, 'asc' ]]
         
     });
-    berkumpulanDT.on( 'order.dt search.dt', function () {
-        berkumpulanDT.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+    berkumpulanDT.on('draw.dt', function () {
+        var info = berkumpulanDT.page.info();
+        berkumpulanDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
+    }).draw();
 }
 
 function getPegawai(){
@@ -663,8 +672,8 @@ function datePickerInit(){
                 console.log('sadsa',year,month,day);
                 $('#tarikh-kerjaID').datepicker({
                     dateFormat: 'dd-mm-yy',
-                    // minDate: new Date(2021,3,19),
                     minDate: new Date(year,month,day),
+                    
                 });
                 $('#tarikh-kerjaBK').datepicker({
                     dateFormat: 'dd-mm-yy',
@@ -684,9 +693,7 @@ function datePickerInit(){
             }
         }
     })
-    
-
-  
+    $.datepicker.setDefaults( $.datepicker.regional[ "ms" ] );
 
 }
 
@@ -707,11 +714,27 @@ $("#pegawaiLulusBK").change(function(){
     
 // });
 
+LocaleMS = {
+    timeOnlyTitle: 'Pilih Masa',
+	timeText: 'Masa',
+	hourText: 'Jam',
+	minuteText: 'Minit',
+	secondText: 'Saat',
+	currentText: 'Masa Kini',
+	closeText: 'Tutup'
+}
+$('#masa-mulaBK').timepicker(
+    LocaleMS
+);
 
-$('#masa-mulaBK').timepicker();
+$('#masa-akhirBK').timepicker(
+    LocaleMS
+);
 
-$('#masa-akhirBK').timepicker();
+$('#masa-mulaID').timepicker(
+    LocaleMS
+);
 
-$('#masa-mulaID').timepicker();
-
-$('#masa-akhirID').timepicker();
+$('#masa-akhirID').timepicker(
+    LocaleMS
+);

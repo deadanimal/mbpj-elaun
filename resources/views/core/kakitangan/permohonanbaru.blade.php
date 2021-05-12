@@ -40,7 +40,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="input-name">{{ __('No Pekerja') }}</label>
-                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm" placeholder="{{ __('Name') }}" value="{{  sprintf('%05d', auth()->user()->CUSTOMERID) }}" required autofocus>
+
+                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm" placeholder="{{ __('Name') }}" value="{{  sprintf('%05d', auth()->user()->CUSTOMERID) }}" required autofocus disabled>
 
                                             
                                         </div>
