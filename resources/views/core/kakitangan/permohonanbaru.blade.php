@@ -40,7 +40,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="input-name">{{ __('No Pekerja') }}</label>
-                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{  auth()->user()->CUSTOMERID }}" required autofocus>
+                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{  auth()->user()->CUSTOMERID }}" required autofocus disabled>
 
                                             @include('alerts.feedback', ['field' => 'name'])
                                         </div>
