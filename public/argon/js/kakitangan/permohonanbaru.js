@@ -21,7 +21,7 @@ $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
     $(this)
-    .find("input,textarea,select").not("#namaPekerjaID").not("#kpID").not("#namaPekerjaBK")
+    .find("input,textarea,select").not("#noPekerjaID").not("#kpID").not("#namaPekerjaBK")
        .val('')
        .end()
     .find("input[type=checkbox], input[type=radio]")
