@@ -316,11 +316,9 @@ function getIndividuDT(){
                 targets: 2,
                 render: function(data,type,row){
                     if(data == "DITERIMA"){
-                        // return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                         return '<div id="status" class="container text-white badge badge-pill badge-success"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DITOLAK"){
-                        // return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  >'+data.toUpperCase()+'</div>' 
                         return '<div id="status" class="container text-white badge badge-pill badge-danger"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DALAM PROSES"){
@@ -343,7 +341,6 @@ function getIndividuDT(){
                 {
                     if(row['jenis_permohonan'] == 'PS1'){
                         console.log(data.id_permohonan_baru);
-                        // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                         var allButton = button2;
                         return allButton;
@@ -429,7 +426,6 @@ function getBerkumpulanDT(){
             pilihan: berkumpulan
         }
         },
-        
         columns: [
 
             {data: null, name: null},
@@ -605,7 +601,6 @@ function getPegawai(){
 }
 
 function fillForm(){
-
     $departmentCode = $("#depcode").val();
     if($departmentCode.length == 6){
         console.log($departmentCode.length);
