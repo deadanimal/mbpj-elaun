@@ -5,7 +5,7 @@
 
 @section('content') 
     @component('layouts.headers.auth') 
-    @if(Auth::user()->role_id != '1'  )
+    {{-- @if(Auth::user()->role_id != '1'  ) --}}
         @component('layouts.headers.breadcrumbs')
             @slot('title') 
                 {{ __('Dashboard') }} 
@@ -13,14 +13,14 @@
 
         @endcomponent
         @include('core.kakitangan.cardsKakitangan') 
-    @elseif(Auth::user()->role_id == '1'  )
+    {{-- @elseif(Auth::user()->role_id == '1'  )
     @component('layouts.headers.breadcrumbs')
             @slot('title') 
                 {{ __('Dashboard') }} 
             @endslot
         @endcomponent
         @include('layouts.headers.cards') 
-    @endif
+    @endif --}}
     @endcomponent
 
     
@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive py-4">
-                                <table class="table" id="datatable1">
+                                <table class="table" id="datatable1" style="width:100%">
                                     <thead class="thead-light">
                                         <tr>
                                             <th>No</th>

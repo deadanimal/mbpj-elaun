@@ -4,8 +4,16 @@ Route::group([
 	'prefix' => 'kerani-semakan',
 	'middleware' => [
 	'auth',
+	'active',
 	'role:6'
 	]], function () {
+	Route::get('/', function () {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		return redirect('/'.$roleUser.'/dashboard');
+	});
+		
 	Route::resource('/dashboard','kakitangan\dashboardController',['except' => ['destroy']]);
 	Route::resource('/user', 'UserController', ['except' => ['show']]);
 	Route::resource('/semakan','kakitangan\semakanController',['except' => ['show','destroy']]);

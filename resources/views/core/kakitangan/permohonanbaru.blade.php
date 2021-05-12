@@ -38,11 +38,12 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="input-name">{{ __('No Pekerja') }}</label>
-                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{  auth()->user()->CUSTOMERID }}" required autofocus disabled>
 
-                                            @include('alerts.feedback', ['field' => 'name'])
+                                            <input type="text" name="noPekerja" id="noPekerja" class="form-control form-control-sm" placeholder="{{ __('Name') }}" value="{{  sprintf('%05d', auth()->user()->CUSTOMERID) }}" required autofocus disabled>
+
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -50,65 +51,65 @@
                                 
                                 <div class="row"> 
                                    <div class="col-md-8">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="name">{{ __('Nama') }}</label>
-                                            <input type="text" name="name" id="name" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Sarip Dol') }}" value="{{ auth()->user()->NAME }}" disabled>
+                                            <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="{{ __('Sarip Dol') }}" value="{{ auth()->user()->NAME }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'name'])
+                                            
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="jawatan">{{ __('Jawatan') }}</label>
-                                            <input type="text" name="jawatan" id="jawatan" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Pegawai') }}" value="Pegawai" disabled>
+                                            <input type="text" name="jawatan" id="jawatan" class="form-control form-control-sm" value="{{ auth()->user()->maklumat_pekerjaan->jawatan->HR_NAMA_JAWATAN }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row"> 
                                    <div class="col">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="nric">{{ __('No. KP Baru') }}</label>
-                                            <input type="text" name="nric" id="nric" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{ auth()->user()->NIRC }}" disabled>
+                                            <input type="text" name="nric" id="nric" class="form-control form-control-sm" value="{{ auth()->user()->NIRC }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'name'])
+                                            
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="bahagian">{{ __('Bahagian') }}</label>
-                                            <input type="text" name="bahagian" id="bahagian" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="Pengurusan" disabled>
+                                            <input type="text" name="bahagian" id="bahagian" class="form-control form-control-sm" value="Pengurusan" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="jabatan">{{ __('Jabatan') }}</label>
-                                            <input type="text" name="jabatan" id="jabatan" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="Teknologi Maklumat" disabled>
+                                            <input type="text" name="jabatan" id="jabatan" class="form-control form-control-sm" value="{{ auth()->user()->maklumat_pekerjaan->jabatan->GE_KETERANGAN_JABATAN }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row"> 
+                                <div class="row">  
                                    <div class="col-lg-4">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="gajiMatriks">{{ __('Gaji Matriks') }}</label>
-                                            <input type="text" name="gajiMatriks" id="gajiMatriks" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="2,455" disabled>
+                                            <input type="text" name="gajiMatriks" id="gajiMatriks" class="form-control form-control-sm" value="RM{{ auth()->user()->maklumat_pekerjaan->HR_GAJI_POKOK }}" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'name'])
+                                            
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
-                                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                        <div class="form-group">
                                             <label class="col-form-label col-form-label-sm font-weight-bold" for="gred">{{ __('Gred') }}</label>
-                                            <input type="text" name="gred" id="gred" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="F41" disabled>
+                                            <input type="text" name="gred" id="gred" class="form-control form-control-sm" value="F41" disabled>
 
-                                            @include('alerts.feedback', ['field' => 'email'])
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +146,7 @@
                                     </div>
                                     <div class="card-body px-0">
                                         <div class="table-responsive">
-                                            <table class="table " id="individuDT">
+                                            <table class="table " id="individuDT" style="width:100%">
                                                 <thead class="thead-light">
                                                 <tr>
                                                     <th>No</th>
@@ -199,7 +200,7 @@
                                     </div>
                                     <div class="card-body px-0">
                                         <div class="table-responsive">
-                                            <table class="table table-flush" id="berkumpulanDT">
+                                            <table class="table table-flush" id="berkumpulanDT" style="width:100%">
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>No</th>

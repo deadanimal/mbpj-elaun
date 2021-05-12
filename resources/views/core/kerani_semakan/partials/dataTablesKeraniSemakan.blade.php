@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="table-responsive py-4">
-                <table class="table" id="semakanKSDT">
+                <table class="table" id="semakanKSDT" style="width:100%">
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>

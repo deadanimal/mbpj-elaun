@@ -53,8 +53,9 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
         },
         dataType:"JSON",
         success: function(data) {
-        //    console.log(data.permohonan.permohonan_with_users.id)
             if( jenis_permohonan == 'OT1'){
+                var id_user = data.permohonan.permohonan_with_users.CUSTOMERID.toString();
+                var paddedUserID = id_user.padStart(5, '0');
                 var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 $("#permohonanbaruModal").modal("show");
                 $("#jenisPermohonan").val("frmPermohonanIndividu");
@@ -63,8 +64,13 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 document.getElementById('selectpermohonan').className = "col-sm-12"
                 $('#divPermohonanIndividu').show();
                 $("#divPermohonanBerkumpulan").hide();
-                $("#permohonanbaruModal input[name=namaPekerjaID]").val(data.permohonan.permohonan_with_users.CUSTOMERID);
+                $("#permohonanbaruModal input[name=noPekerjaID]").val(paddedUserID);
                 $("#permohonanbaruModal input[name=tarikh-kerjaID]").val(tarikhKerjaID);
+                $("#permohonanbaruModal input[name=tarikh-akhir-kerjaID]").val(data.permohonan.tarikh_akhir_kerja);
+                $("#permohonanbaruModal input[name=masa-mulaID]").val(data.permohonan.masa_mula);
+                $("#permohonanbaruModal input[name=masa-akhirID]").val(data.permohonan.masa_akhir);
+                document.getElementById('sebabID').value = data.permohonan.tujuan;
+                document.getElementById('lokasiID').value = data.permohonan.lokasi;
                 $("#permohonanbaruModal").modal("show");
                 console.log('ot1',jenis_permohonan)
             }else if(jenis_permohonan == 'OT2'){
@@ -233,7 +239,7 @@ function hantarPermohonanBerkumpulan(){
 function hantarPermohonanIndividu(){
     
     console.log(edit)
-    var namaPekerjaID = document.querySelector("#namaPekerjaID").value;
+    var noPekerjaID = document.querySelector("#noPekerjaID").value;
     var pegPelulusID = document.querySelector("#pegawaiLulusID").value;
     var pegSokongID = document.querySelector("#pegawaiSokongID").value;
     var tarikhKerjaID = moment(document.querySelector("#tarikh-kerjaID").value,"DD-MM-YYYY").format("DD-MM-YYYY");
@@ -272,8 +278,9 @@ function hantarPermohonanIndividu(){
     }
 
     console.log("hari",hari,"masa",totalhours,"waktu",waktu);
-    var nopekerja = [namaPekerjaID];
-    var user_id = namaPekerjaID;
+
+    var nopekerja = [noPekerjaID];
+    var user_id = noPekerjaID;
     var object = {tarikh_akhir_kerja:tarikhAkhirKerjaID,id_peg_pelulus:pegPelulusID,id_peg_sokong:pegSokongID,tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,masa_akhir:masaAkhirID,masa:totalhours,hari:hari,waktu:waktu,kadar_jam:"1.125",status:status,
                     jenis_permohonan:jenis_permohonan,tujuan:sebab,jenis_permohonan_kakitangan:individu};

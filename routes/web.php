@@ -27,7 +27,18 @@ Route::get('/', function () {
 	}
 })->name('welcome');
 
-Route::view('inactive', 'inactive-page');
+Route::get('/inactive', function () {
+	if (Auth::check()) {
+		$roleUserLower = strtolower(Auth::user()->role->name);
+		$roleUser = str_replace(" ","-", $roleUserLower);
+
+		if (Auth::user()->is_active) {
+			return redirect('/'.$roleUser.'/dashboard');
+		} else {
+			return view('inactive-page');
+		}
+	} 
+});
 
 Auth::routes();
 
