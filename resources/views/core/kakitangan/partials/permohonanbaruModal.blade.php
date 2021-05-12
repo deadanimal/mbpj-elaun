@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="jenisPermohonan"><font color="red">*</font> Jenis Permohonan</label>
                                     <select id="jenisPermohonan" name="jenisPermohonan" class="form-control custom-select" autocomplete="off">
-                                        <option disabled selected="true" value="pilihan"> Pilih Jenis Permohonan Jenis Permohonan -- </option>
+                                        <option disabled selected="true" value="pilihan"> Pilih Jenis Permohonan</option>
                                         <option value="frmPermohonanIndividu">Permohonan Individu</option>
                                         <option value="frmPermohonanBerkumpulan">Permohonan Berkumpulan</option>
                                     </select>                       
@@ -49,7 +49,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="kpID">{{ __('No KP Baru') }}</label>
-                                        <input type="text" name="kpID" id="kpID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="{{auth()->user()->NIRC}}" disabled>
+                                        <input type="text" name="kpID" id="kpID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{auth()->user()->NIRC}}" disabled>
                                         
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -104,7 +104,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="sebabID">{{ __('Sebab - Sebab Lebih Masa') }}</label>
-                                        <textarea type="text" name="sebabID" id="sebabID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="Catatan"></textarea>
+                                        <textarea type="text" name="sebabID" id="sebabID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" value=""></textarea>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -115,7 +115,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="lokasiID">{{ __('Lokasi') }}</label>
-                                        <textarea type="text" name="lokasiID" id="lokasiID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}"></textarea>
+                                        <textarea type="text" name="lokasiID" id="lokasiID" class="form-control form-control-sm {{ $errors->has('name') ? ' is-invalid' : '' }}" value=""></textarea>
 
                                         @include('alerts.feedback', ['field' => 'name'])
                                     </div>
@@ -296,7 +296,7 @@
         <div class="col-sm-6">
             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                 <label class="form-control-label" for="kp">{{ __('No KP Baru') }}</label>
-                <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Nama') }}" value="98121114234" >
+                <input type="text" name="name" id="kp" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  value="98121114234" >
 
                 @include('alerts.feedback', ['field' => 'name'])
             </div>
