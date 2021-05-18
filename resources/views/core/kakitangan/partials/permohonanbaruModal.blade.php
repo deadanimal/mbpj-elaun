@@ -19,7 +19,6 @@
                     <div class="row">
                         <div id="selectpermohonan" class="col-sm-12">
                             <div class="form-group">
-                                {{-- <label class="form-control-label" for="jenisPermohonan"><font color="red">*</font> Jenis Permohonan</label> --}}
                                 <select id="jenisPermohonan" name="jenisPermohonan" class="form-control custom-select" autocomplete="off">
                                     <option disabled selected="true" value="pilihan"> Pilih Jenis Permohonan</option>
                                     <option value="frmPermohonanIndividu">Permohonan Individu</option>

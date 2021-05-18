@@ -266,5 +266,4 @@
     <script src="{{ asset('argon') }}/js/kakitangan/deletePermohonanKT.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/semakanPermohonanBaru.js"></script>
     <script src="{{ asset('argon') }}/js/shared/modalOpenClose.js"></script>
-
 @endpush

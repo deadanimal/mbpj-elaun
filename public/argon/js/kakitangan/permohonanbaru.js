@@ -21,7 +21,7 @@ $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
     $(this)
-    .find("input,textarea,select").not("#noPekerjaID").not("#kpID").not("#namaPekerjaBK")
+    .find("input,textarea,select").not("#namaPekerjaID").not("#noPekerjaID").not("#kpID").not("#namaPekerjaBK")
        .val('')
        .end()
     .find("input[type=checkbox], input[type=radio]")
@@ -29,7 +29,6 @@ $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
        .end();
     for(i = 0; i < arr.length; i++){
         remove()
-        // console.log('test remove');
     }
     arr = []
 })
@@ -72,8 +71,6 @@ function add() {
         $('#total_chq').val(rowNum);
         $("#submitBtnBK").prop('disabled',false)
     }
-    // console.log(nodelist.length);
-    
 }
 
 // remove a pekerja => Permohonan Berkumpulan
@@ -93,8 +90,6 @@ function remove() {
     if(nodelist.length == 0){
         rowNum = 0;
         $('#total_chq').val(0);
-        // document.getElementById("remove").disabled = true
-        // console.log("disable button buang")
     }
 }
 
@@ -116,24 +111,20 @@ function buang(elementid){
 
         rowNum = 0;
         $('#total_chq').val(0);
-        // document.getElementById("remove").disabled = true
-        // console.log("disable button buang")
     }
-    // console.log(reject);
 }
 
 function disableHantar(){
     if ($('#new_chq').length != 0) {
-        // console.log("check disable")
         $("#submitBtnBK").prop('disabled',true)
-        } 
+    } 
 }
 
 $(document).ready(function(){
     initSelect();
     $('#pegawaiSokongID').change(function(e) {
         var selectVal = $('#pegawaiSokongID').val()
-        // console.log($('#pegawaiLulusID').find("option[value='"+selectVal+"']").text())
+
         if ($('#pegawaiSokongID').find("option[value='"+selectVal+"']").text() == $('#pegawaiLulusID').find("option[value='"+selectVal+"']").text()){
             $('#pegawaiLulusID option[disabled]').prop('disabled', false);
             $('#pegawaiLulusID').find("option[value='"+selectVal+"']").prop('disabled',true)
@@ -142,7 +133,7 @@ $(document).ready(function(){
     });
     $('#pegawaiSokongBK').change(function(e) {
         var selectVal = $('#pegawaiSokongBK').val()
-        // console.log($('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text())
+
         if ($('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text() == $('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text()){
             $('#pegawaiLulusBK option[disabled]').prop('disabled', false);
             $('#pegawaiLulusBK').find("option[value='"+selectVal+"']").prop('disabled',true)
@@ -152,7 +143,7 @@ $(document).ready(function(){
 
     $('#pegawaiLulusID').change(function(e) {
         var selectVal = $('#pegawaiLulusID').val()
-        // console.log($('#pegawaiSokongID').find("option[value='"+selectVal+"']").text())
+
         if ($('#pegawaiLulusID').find("option[value='"+selectVal+"']").text() == $('#pegawaiSokongID').find("option[value='"+selectVal+"']").text()){
             $('#pegawaiSokongID option[disabled]').prop('disabled', false);
             $('#pegawaiSokongID').find("option[value='"+selectVal+"']").prop('disabled',true)
@@ -161,7 +152,7 @@ $(document).ready(function(){
     });
     $('#pegawaiLulusBK').change(function(e) {
         var selectVal = $('#pegawaiLulusBK').val()
-        // console.log($('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text())
+
         if ($('#pegawaiLulusBK').find("option[value='"+selectVal+"']").text() == $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").text()){
             $('#pegawaiSokongBK option[disabled]').prop('disabled', false);
             $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").prop('disabled',true)
@@ -181,14 +172,17 @@ function initSelect(){
         theme: 'bootstrap4',
         placeholder: "Pilih Pegawai Sokong",
     });
+
     $("#pegawaiLulusID").select2({
         theme: 'bootstrap4',
         placeholder: "Pilih Pegawai Lulus",
     });
+
     $("#pegawaiSokongBK").select2({
         theme: 'bootstrap4',
         placeholder: "Pilih Pegawai Sokong",
     });
+
     $("#pegawaiLulusBK").select2({
         theme: 'bootstrap4',
         placeholder: "Pilih Pegawai Lulus",
@@ -203,7 +197,7 @@ function initSelect(){
 
 function setEnableDropdown(){
     edit = 0;
-    // console.log(edit);  
+
     document.getElementById("jenisPermohonan").disabled = false;
     $("#jenisPermohonan").val("pilihan")
     document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-lg"
@@ -328,22 +322,25 @@ function getIndividuDT(){
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
                         var allButton = button2;
                         return allButton;
-                    }else if(row['progres'] == "Belum sah" || row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
+
+                    } else if(row['progres'] == "Belum sah" || row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
                         var allButton = button1 + button2;
                         return allButton;
+
                     }
                     else if(row['status'] == "DITOLAK"){
                         var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
                         var allButton = button1 ;
                         return allButton;
+                        
                     }
                     else if(row['progres'] == "Sah P1" || row['progres'] == "Sah P2"){
-                        // console.log('nothing here');
                         var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
                         var allButton = button1 ;
                         return allButton;
+
                     }
                 }
                 
@@ -473,7 +470,6 @@ function getBerkumpulanDT(){
                         return '';
                     
                     } else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2' || row['jenis_permohonan'] == 'PS1'){
-                        // console.log(row['jenis_permohonan']);
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="event.preventDefault();changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
                         var allButton = button1 ;
@@ -506,6 +502,7 @@ function getBerkumpulanDT(){
         order: [[ 1, 'asc' ]]
         
     });
+
     berkumpulanDT.on('draw.dt', function () {
         var info = berkumpulanDT.page.info();
         berkumpulanDT.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
@@ -517,19 +514,18 @@ function getBerkumpulanDT(){
 function getPegawai(){
     var id_user = document.querySelector("#noPekerja").value;
     var pegawaiDiv = document.getElementsByName('pegawaiSokongID')
-    // console.log(pegawaiDiv)
+
     $.ajax({
         url: 'permohonan-baru/pegawai/',
         type:'post',
         data:{ id_user:id_user },
         dataType: 'json',
         success: function(data){
-            // console.log(data.jabatans)
-            // console.log(data.pegawaiSokong)
             var pegawaiSokong = data.pegawaiSokong
             var pegawaiLulus = data.pegawaiLulus
             var jabatans = data.jabatans
             var jabatan;
+
             jabatans.forEach((element,index) => {
                 jabatan = element.GE_KOD_JABATAN;
                 var optgroup = "<optgroup label='"+element.GE_KETERANGAN_JABATAN+"'style='height:auto;'>"
@@ -537,33 +533,32 @@ function getPegawai(){
                 $('#pegawaiSokongBK').append(optgroup)
                 $('#pegawaiLulusID').append(optgroup)
                 $('#pegawaiLulusBK').append(optgroup)
-                    pegawaiSokong.forEach((element,index) => {
-                        if(element.DEPARTMENTCODE.length > 5 ){
-                            var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
-                        }else{
-                            var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
-                        }
-                        if(kodJabatan == jabatan){
-                            var option = "<option class='' value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
-                            $('#pegawaiSokongID').append(option)
-                            $('#pegawaiSokongBK').append(option)
-                        }
-                    
-                })
-                    pegawaiLulus.forEach((element,index) => {
-                        if(element.DEPARTMENTCODE.length > 5 ){
-                            var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
-                        }else{
-                            var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
-                        }
-                        if(kodJabatan == jabatan){
-                            var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
-                            $('#pegawaiLulusID').append(option)
-                            $('#pegawaiLulusBK').append(option)
-                        }
-                    
+
+                pegawaiSokong.forEach((element,index) => {
+                    if(element.DEPARTMENTCODE.length > 5 ){
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
+                    }else{
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
+                    }
+                    if(kodJabatan == jabatan){
+                        var option = "<option class='' value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
+                        $('#pegawaiSokongID').append(option)
+                        $('#pegawaiSokongBK').append(option)
+                    }
                 })
 
+                pegawaiLulus.forEach((element,index) => {
+                    if(element.DEPARTMENTCODE.length > 5 ){
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
+                    }else{
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
+                    }
+                    if(kodJabatan == jabatan){
+                        var option = "<option value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
+                        $('#pegawaiLulusID').append(option)
+                        $('#pegawaiLulusBK').append(option)
+                    }
+                })
             })
         }
       })
@@ -571,28 +566,22 @@ function getPegawai(){
 
 function fillForm(){
     $departmentCode = $("#depcode").val();
-    if($departmentCode.length == 6){
-        // console.log($departmentCode.length);
+
+    if ($departmentCode.length == 6){
         $departmentCode.toString()
         $department = $departmentCode.substring(0,1);
         $bahagian = $departmentCode.substring(2,4);
         $unit = $departmentCode.substring(5,6);
         $unit = ($unit < 10 ? '0' : '') + $unit
-        // console.log('6')
-    }else{
+    } else{
         $departmentCode.toString()
         $department = $departmentCode.substring(0,1);
         $bahagian = $departmentCode.substring(1,3);
         $unit = $departmentCode.substring(4,6);
         $unit = ($unit < 10 ? '0' : '') + $unit
-        // console.log('5')
-
     }
 
     $("#bahagian").val($bahagian);
-    
-    // console.log($department,$bahagian,$unit)
-
 }
 
 function datePickerInit(){
@@ -602,81 +591,57 @@ function datePickerInit(){
     var day = date.getDate()
 
     $.ajax({
-
         url: 'permohonan-baru/init-date',
         method: "POST",
         data:{ id_user:id_user },
         success: function(data) {
-            // console.log(data)
             if(data.user.is_oncall == 1){
-                // console.log('sadsa',year,month,day);
                 $('#tarikh-kerjaID').datepicker({
                     dateFormat: 'dd-mm-yy',
-                    // minDate: new Date(2021,3,19),
                     minDate: new Date(year,month,day),
                 });
+
                 $('#tarikh-kerjaBK').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-
                 });
+
                 $('#tarikh-akhir-kerjaID').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-
                 });
+
                 $('#tarikh-akhir-kerjaBK').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-
                 });
-            }else {
-            // console.log('dasd')
+            } else {
                 day +=  7;
-                // console.log('sadsa',year,month,day);
+
                 $('#tarikh-kerjaID').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-                    
                 });
+
                 $('#tarikh-kerjaBK').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-
                 });
+
                 $('#tarikh-akhir-kerjaID').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-
                 });
+
                 $('#tarikh-akhir-kerjaBK').datepicker({
                     dateFormat: 'dd-mm-yy',
                     minDate: new Date(year,month,day),
-
                 });
             }
         }
     })
     $.datepicker.setDefaults( $.datepicker.regional[ "ms" ] );
-
 }
-
-// $("#pegawaiSokongID").change(function(){
-//     console.log(this.value);
-// })
-// $("#pegawaiSokongBK").change(function(){
-//     console.log(this.value);
-// })
-// $("#pegawaiLulusID").change(function(){
-//     console.log(this.value);
-// })
-// $("#pegawaiLulusBK").change(function(){
-//     console.log(this.value);
-// })
-// $('.js-example-basic-single').select2({
-   
-    
-// });
 
 LocaleMS = {
     timeOnlyTitle: 'Pilih Masa',
@@ -687,6 +652,7 @@ LocaleMS = {
 	currentText: 'Masa Kini',
 	closeText: 'Tutup'
 }
+ 
 $('#masa-mulaBK').timepicker(
     LocaleMS
 );
