@@ -89,9 +89,9 @@ function hantarPengesahan(id_user,id_permohonan_baru){
     var waktu = $("#borangB1Modal input[name=radioWaktu]").val();
     var tujuan = $("#borangB1Modal textarea[name=tujuan]").val();
 
-    console.log(tarikhMula);
-    console.log(jenisPermohonanKT)
-    console.log(id_permohonan_baru)
+    // console.log(tarikhMula);
+    // console.log(jenisPermohonanKT)
+    // console.log(id_permohonan_baru)
     
     var object = {
         tarikh_permohonan:tarikhMula,
@@ -121,7 +121,7 @@ function hantarPengesahan(id_user,id_permohonan_baru){
                 )
                 
             showSemakanDatatableKT();
-            console.log(data.permohonan);
+            // console.log(data.permohonan);
 
         },
         error: function(data) {
@@ -167,8 +167,8 @@ function saveMasa(){
             akhirKerja:akhirKerja
         }, success: function(data) {
             hantarPengesahan(id_user,id_permohonan_baru)
-            console.log('dasdsadsa');
-           console.log(data);
+        //     console.log('dasdsadsa');
+        //    console.log(data);
 
         },
         error: function(data) {

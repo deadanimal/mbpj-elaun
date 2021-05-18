@@ -265,9 +265,10 @@ class permohonanController extends Controller
     {
         //
         $permohonan = PermohonanBaru::find($id);
-        $permohonan->is_deleted = 1;
+        $permohonan->status_akhir = 0;
         $permohonan->save();
         $permohonan->refresh();
+
         return response()->json([
             'permohonan' => $permohonan
         ],200);

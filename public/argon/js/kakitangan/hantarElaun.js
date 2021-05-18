@@ -70,7 +70,7 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
 
-            }else if(data.permohonan.kadar_jam == '1.225'){
+            }else if(data.permohonan.kadar_jam == '1.25'){
                 $("#borangB1Modal input[id=inlineJamRadio2]").prop("checked",true);
 
             }

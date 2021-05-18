@@ -4,7 +4,7 @@ $(document).ready(function(){
     console.log('sebelum')
     
     showSemakanDatatableKT()
-    console.log('test');
+    // console.log('test');
 })
 
 function showSemakanDatatableKT(){
