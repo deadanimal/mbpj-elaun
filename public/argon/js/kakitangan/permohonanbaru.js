@@ -21,9 +21,14 @@ $('#divPermohonanIndividu').hide();
 $('#divPermohonanBerkumpulan').hide();
 $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
     $(this)
-    .find("input,textarea,select").not("#namaPekerjaID").not("#noPekerjaID").not("#kpID").not("#namaPekerjaBK")
-       .val('')
-       .end()
+    .find("input,textarea,select")
+        .not("#namaPekerjaID")
+        .not("#noPekerjaID")
+        .not("#kpID")
+        .not("#namaPekerjaBK")
+        .not("#noKPBK")
+        .val('')
+        .end()
     .find("input[type=checkbox], input[type=radio]")
        .prop("checked", "")
        .end();
@@ -85,7 +90,6 @@ function remove() {
             var before = last_chq_no - 1;
             $('#total_chq').val(before);
         }
-
     }
     if(nodelist.length == 0){
         rowNum = 0;
@@ -259,7 +263,6 @@ function getIndividuDT(){
         },
         
         columns: [
-
             {data: null},
             {data: 'created_at'},
             {data: 'status'},
@@ -362,7 +365,6 @@ function getIndividuDT(){
             }
         ],
         order: [ 1, 'asc' ]
-        
     });
     individuDT.on('draw.dt', function () {
         var info = individuDT.page.info();
@@ -370,7 +372,6 @@ function getIndividuDT(){
             cell.innerHTML = i + 1 + info.start;
         });
     }).draw();
-    
 }
 
 function getBerkumpulanDT(){
@@ -401,10 +402,9 @@ function getBerkumpulanDT(){
     ajax: {
         url: "permohonan-baru/get-permohonan/"+id_user,
         type: 'GET',
-        data:
-        {
-            pilihan: berkumpulan
-        }
+        data: {
+                pilihan: berkumpulan
+            }
         },
         columns: [
 
@@ -471,13 +471,12 @@ function getBerkumpulanDT(){
                     
                     } else if(row['progres'] == 'Sah P1' || row['progres'] == 'Sah P2' || row['jenis_permohonan'] == 'PS1'){
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="event.preventDefault();changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
-                        // var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+')"></i>' 
                         var allButton = button1 ;
                         return allButton;
                     
                     } else{
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="event.preventDefault();changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
-                        var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
+                        var button2 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruKumpulan'"+')"></i>' 
                         var allButton = button1 + button2;
                         return allButton;
                     }

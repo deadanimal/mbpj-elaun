@@ -3,7 +3,6 @@ am4core.useTheme(am4themes_animated);
 var monthNames = ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogos", "Sep", "Okt", "Nov", "Dis"];
 
 $(document).ready(function(){
-
     getStatistics()
 
 })

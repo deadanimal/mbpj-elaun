@@ -47,8 +47,6 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
         dataType:"JSON",
         success: function(data) {
             if( jenis_permohonan == 'OT1'){
-                // var id_user = data.permohonan.permohonan_with_users.CUSTOMERID.toString();
-                // var paddedUserID = id_user.padStart(5, '0');
                 var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 $("#permohonanbaruModal").modal("show");
                 $("#jenisPermohonan").val("frmPermohonanIndividu");
@@ -59,7 +57,6 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $('#divPermohonanIndividu').show();
                 $("#divPermohonanBerkumpulan").hide();
 
-                // $("#permohonanbaruModal input[name=noPekerjaID]").val(paddedUserID);
                 $("#permohonanbaruModal input[name=tarikh-kerjaID]").val(tarikhKerjaID);
                 $("#permohonanbaruModal input[name=tarikh-akhir-kerjaID]").val(data.permohonan.tarikh_akhir_kerja);
                 $("#permohonanbaruModal input[name=masa-mulaID]").val(data.permohonan.masa_mula);
@@ -70,7 +67,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
 
                 $("#permohonanbaruModal").modal("show");
 
-            }else if(jenis_permohonan == 'OT2'){
+            } else if(jenis_permohonan == 'OT2'){
                 var tarikhKerjaBK = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
 
                 for(i = 0;i<data.permohonanUsers.length;i++){
@@ -78,6 +75,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                         add();
                     }
                 }
+
                 $(".pekerjasform").each(function(j){
                     var formlength = this.children.length
                     
@@ -102,11 +100,15 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $('#divPermohonanIndividu').hide();
                 $('#divPermohonanBerkumpulan').show();
                 
-                $("#permohonanbaruModal input[name=namaPekerjaBK]").val(data.userId);
                 $("#permohonanbaruModal input[name=tarikh-kerjaBK]").val(tarikhKerjaBK);
+                $("#permohonanbaruModal input[name=tarikh-akhir-kerjaBK]").val(data.permohonan.tarikh_akhir_kerja);
+                $("#permohonanbaruModal input[name=masa-mulaBK]").val(data.permohonan.masa_mula);
+                $("#permohonanbaruModal input[name=masa-akhirBK]").val(data.permohonan.masa_akhir);
+
+                document.getElementById('sebabBK').value = data.permohonan.tujuan;
+                document.getElementById('lokasiBK').value = data.permohonan.lokasi;
 
                 $("#permohonanbaruModal").modal("show");
-
             }
         },
         error: function(data) {
@@ -180,46 +182,45 @@ function hantarPermohonanBerkumpulan(){
     };
 
     if(edit != 1){
-    $.ajax({
-        url: 'permohonan-baru/hantar-permohonan',
-        type: 'POST', 
-        data:{
-            object:object,
-            masaMula:masaMula,
-            masaAkhir:masaAkhir,
-            jenisPermohonan:jenis_permohonan,
-            pekerja:nopekerja
-        },
-        success: function(data) {
-            $('#permohonanbaruModal').modal('hide');
-            successAlert();
-            getBerkumpulanDT();
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
-    }else if(edit == 1){
-    $.ajax({
-        url: 'permohonan-baru/kemaskini-permohonan/'+idPermohonan,
-        type: 'put', 
-        data:{
-            reject:reject,
-            object:object,
-            jenisPermohonan:jenis_permohonan,
-            idPermohonan:idPermohonan
-        },
-        success: function(data) {
-            
-            closeModal("permohonanbaruModal");
-            successAlert();
-            getBerkumpulanDT();
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
-}
+        $.ajax({
+            url: 'permohonan-baru/hantar-permohonan',
+            type: 'POST', 
+            data:{
+                object:object,
+                masaMula:masaMula,
+                masaAkhir:masaAkhir,
+                jenisPermohonan:jenis_permohonan,
+                pekerja:nopekerja
+            },
+            success: function(data) {
+                $('#permohonanbaruModal').modal('hide');
+                successAlert();
+                getBerkumpulanDT();
+            },
+            error: function(data) {
+                console.log(data);
+            } 
+        });
+    } else if(edit == 1){
+        $.ajax({
+            url: 'permohonan-baru/kemaskini-permohonan/'+idPermohonan,
+            type: 'put', 
+            data:{
+                reject:reject,
+                object:object,
+                jenisPermohonan:jenis_permohonan,
+                idPermohonan:idPermohonan
+            },
+            success: function(data) {
+                closeModal("permohonanbaruModal");
+                successAlert();
+                getBerkumpulanDT();
+            },
+            error: function(data) {
+                console.log(data);
+            } 
+        });
+    }
 
 }
 
@@ -334,7 +335,7 @@ function successAlert(){
         'Permohonan anda telah dihantar dan akan diproses',
         'Klik butang dibawah untuk tutup!',
         'success'
-        )
+    )
 }
 function timeStringToMins(s) {
     s = s.split(':');

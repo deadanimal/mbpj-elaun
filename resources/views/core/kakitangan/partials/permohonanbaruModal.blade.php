@@ -81,7 +81,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row"> 
                                 <div class="col">
                                     <div class="form-group">
@@ -96,22 +95,22 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row"> 
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="pegawaiSokongID">{{ __('Pegawai Sokong') }}</label>
-                                    <select name="pegawaiSokongID" id="pegawaiSokongID">
-                                        <option value=""></option>
-                                    </select>
+                            <div class="row"> 
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="pegawaiSokongID">{{ __('Pegawai Sokong') }}</label>
+                                        <select name="pegawaiSokongID" id="pegawaiSokongID">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="pegawaiLulusID">{{ __('Pegawai Pelulus') }}</label>
-                                    <select class="form-select form-select-sm" name="pegawaiLulusID" id="pegawaiLulusID">
-                                        <option value=""></option>
-                                    </select>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="pegawaiLulusID">{{ __('Pegawai Pelulus') }}</label>
+                                        <select class="form-select form-select-sm" name="pegawaiLulusID" id="pegawaiLulusID">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

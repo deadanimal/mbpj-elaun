@@ -15,7 +15,6 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             jenisPermohonan : jenisPermohonan
         },
         success: function(data) {
-            console.log(data.permohonan.tarikh_mula_kerja);
             var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
             var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
             $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
