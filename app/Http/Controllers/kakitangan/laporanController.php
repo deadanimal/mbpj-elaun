@@ -5,8 +5,6 @@ namespace App\Http\Controllers\kakitangan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use DataTables;
-use App\DataTables\UsersDataTable;
 
 class laporanController extends Controller
 {
@@ -21,9 +19,9 @@ class laporanController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('core.kakitangan.laporan');
+        return view('core.kakitangan.laporan');
     }
 
     /**

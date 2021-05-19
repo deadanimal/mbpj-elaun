@@ -65,6 +65,8 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 document.getElementById('sebabID').value = data.permohonan.tujuan;
                 document.getElementById('lokasiID').value = data.permohonan.lokasi;
 
+                getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
+
                 $("#permohonanbaruModal").modal("show");
 
             } else if(jenis_permohonan == 'OT2'){
@@ -115,9 +117,76 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
             console.log(data);
         } 
     });
-
 }
 
+// function getPegawai(){
+function getPegawai(pegSokongID, pegLulusID){
+    var id_user = document.querySelector("#noPekerja").value;
+
+    $.ajax({
+        url: 'permohonan-baru/pegawai/',
+        type:'post',
+        data:{
+            id_user: id_user 
+        },
+        dataType: 'json',
+        success: function(data){
+            var pegawaiSokong = data.pegawaiSokong
+            var pegawaiLulus = data.pegawaiLulus
+            var jabatans = data.jabatans
+            var jabatan;
+
+            jabatans.forEach((element,index) => {
+                jabatan = element.GE_KOD_JABATAN;
+                var optgroup = "<optgroup label='"+element.GE_KETERANGAN_JABATAN+"'style='height:auto;'>"
+                $('#pegawaiSokongID').append(optgroup)
+                $('#pegawaiSokongBK').append(optgroup)
+                $('#pegawaiLulusID').append(optgroup)
+                $('#pegawaiLulusBK').append(optgroup)
+
+                pegawaiSokong.forEach((element,index) => {
+                    if(element.DEPARTMENTCODE.length > 5 ){
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
+                    } else{
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
+                    }
+
+                    if(kodJabatan == jabatan){
+                        var option = "<option id='peg-sokong-"+element.CUSTOMERID+"' value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
+
+                        if (pegSokongID == element.CUSTOMERID) {
+                            option = "<option id='peg-sokong-"+element.CUSTOMERID+"' value='"+element.CUSTOMERID+"' selected>"+element.NAME+"</option>"
+                        } 
+                        // else {
+                        // }
+                        
+                        $('#pegawaiSokongID').append(option)
+                        $('#pegawaiSokongBK').append(option)
+                    }
+                })
+
+                pegawaiLulus.forEach((element,index) => {
+                    if(element.DEPARTMENTCODE.length > 5 ){
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,2) 
+                    } else{
+                        var kodJabatan = element.DEPARTMENTCODE.substring(0,1) 
+                    }
+
+                    if(kodJabatan == jabatan){
+                        var option = "<option id='peg-lulus-"+element.CUSTOMERID+"' value='"+element.CUSTOMERID+"'>"+element.NAME+"</option>"
+
+                        if (pegLulusID == element.CUSTOMERID) {
+                            var option = "<option id='peg-lulus-"+element.CUSTOMERID+"' value='"+element.CUSTOMERID+"' selected>"+element.NAME+"</option>"
+                        } 
+
+                        $('#pegawaiLulusID').append(option)
+                        $('#pegawaiLulusBK').append(option)
+                    }
+                })
+            })
+        }
+    })
+}
 
 function hantarPermohonanBerkumpulan(){
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
@@ -139,6 +208,7 @@ function hantarPermohonanBerkumpulan(){
     var hour = masaMulaBK.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = berkumpulan;
+
     if(hour >= 6 && hour < 12)
     {
         waktu = "Pagi";

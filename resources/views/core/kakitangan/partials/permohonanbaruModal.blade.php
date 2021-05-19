@@ -112,7 +112,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </form>
                     <div id="footerID" class="modal-footer">

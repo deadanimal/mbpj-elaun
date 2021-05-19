@@ -13,8 +13,8 @@ for(var i = 6; i > 0; i -= 1) {
   console.log(year)
 //   year = year.substring(2,3)
   last6.push(month+" "+year)
-  console.log(last6);
 }
+
 var chart1 = am4core.create("chart1", am4charts.XYChart);
 chart1.paddingRight = 20;
 
@@ -186,8 +186,56 @@ am4core.ready(function() {
     var hoverState = bullet.states.create("hover");
     hoverState.properties.scale = 1.7;
 
+    // 4th CHART
+
+    var chart4 = am4core.create("chart4", am4charts.XYChart);
+
+    // Enable chart cursor
+    chart4.cursor = new am4charts.XYCursor();
+    chart4.cursor.lineX.disabled = true;
+    chart4.cursor.lineY.disabled = true;
+
+    var data3 = []
+    for (var i = 0; i < last6.length; i++) {
+        data3.push({ date: last6[i], value: 1 });
+    }
+    console.log('data3',data3)
+
+    // Add data
+    chart4.data = data3
+
+    // Create axes
+    var dateAxis = chart4.xAxes.push(new am4charts.DateAxis());
+    dateAxis.renderer.grid.template.location = 0.5;
+    // dateAxis.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+    dateAxis.renderer.minGridDistance = 40;
+    // dateAxis.tooltipDateFormat = "MMM dd, yyyy";
+    // dateAxis.dateFormats.setKey("day", "dd");
+
+    var valueAxis = chart4.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    var series = chart4.series.push(new am4charts.LineSeries());
+    series.tooltipText = "{date}\n[bold font-size: 17px]value: {valueY}[/]";
+    series.dataFields.valueY = "value";
+    series.dataFields.dateX = "date";
+    series.strokeDasharray = 3;
+    series.strokeWidth = 2
+    series.strokeOpacity = 0.3;
+    series.strokeDasharray = "3,3"
+
+    var bullet = series.bullets.push(new am4charts.CircleBullet());
+    bullet.strokeWidth = 2;
+    bullet.stroke = am4core.color("#fff");
+    bullet.setStateOnChildren = true;
+    bullet.propertyFields.fillOpacity = "opacity";
+    bullet.propertyFields.strokeOpacity = "opacity";
+
+    var hoverState = bullet.states.create("hover");
+    hoverState.properties.scale = 1.7;
 
     });
+
 
 
 $(document).ready(function(){

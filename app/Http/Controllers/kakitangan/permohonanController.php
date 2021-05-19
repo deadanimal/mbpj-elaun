@@ -276,19 +276,17 @@ class permohonanController extends Controller
     }
 
    public function findPermohonan(Request $request){
-
     $id_permohonan_baru = $request->input('id_permohonan_baru');
     $jenis_permohonan = $request->input('jenis_permohonan');
     $currUserID = auth()->user()->CUSTOMERID;
+
         if($jenis_permohonan == 'OT1'){
             $permohonan = User::findOrFail(auth()->user()->CUSTOMERID)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
                         'error' => false,
                         'permohonan'  => $permohonan,
                     ], 200);
-
-        }
-        else if($jenis_permohonan == "OT2"){
+        } else if($jenis_permohonan == "OT2"){
             $permohonanUsers = PermohonanBaru::findOrFail($id_permohonan_baru)->users()->get()->toArray();
             $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
             return response()->json([
@@ -297,7 +295,6 @@ class permohonanController extends Controller
                         'permohonan'  => $permohonan,
                         'userId' => $currUserID
                     ], 200);
-
         }
 
     }
