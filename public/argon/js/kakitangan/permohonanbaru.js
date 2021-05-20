@@ -29,6 +29,8 @@ $('#permohonanbaruModal').on('hide.bs.modal', function (e) {
         .not("#noKPBK")
         .not("#pegawaiSokongID")
         .not("#pegawaiLulusID")
+        .not("#pegawaiSokongBK")
+        .not("#pegawaiLulusBK")
         .val('')
         .end()
     .find("input[type=checkbox], input[type=radio]")
@@ -93,6 +95,7 @@ function remove() {
             $('#total_chq').val(before);
         }
     }
+
     if(nodelist.length == 0){
         rowNum = 0;
         $('#total_chq').val(0);
@@ -129,7 +132,6 @@ function disableHantar(){
 $(document).ready(function(){
     initSelect();
     $('#pegawaiSokongID').change(function(e) {
-        
         var selectVal = $('#pegawaiSokongID').val()
 
         if ($('#pegawaiSokongID').find("option[value='"+selectVal+"']").text() == $('#pegawaiLulusID').find("option[value='"+selectVal+"']").text()){
@@ -155,8 +157,8 @@ $(document).ready(function(){
             $('#pegawaiSokongID option[disabled]').prop('disabled', false);
             $('#pegawaiSokongID').find("option[value='"+selectVal+"']").prop('disabled',true)
         }
-    
     });
+
     $('#pegawaiLulusBK').change(function(e) {
         var selectVal = $('#pegawaiLulusBK').val()
 
@@ -164,8 +166,8 @@ $(document).ready(function(){
             $('#pegawaiSokongBK option[disabled]').prop('disabled', false);
             $('#pegawaiSokongBK').find("option[value='"+selectVal+"']").prop('disabled',true)
         }
-    
     });
+
     fillForm();
     getPegawai('', '');
     getIndividuDT();
@@ -199,7 +201,6 @@ function initSelect(){
     $('#pegawaiSokongBK').trigger('change');
     $('#pegawaiLulusID').trigger('change');
     $('#pegawaiLulusBK').trigger('change');
-
 }
 
 function setEnableDropdown(){

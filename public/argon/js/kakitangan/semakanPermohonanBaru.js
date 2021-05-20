@@ -156,9 +156,7 @@ function getPegawai(pegSokongID, pegLulusID){
 
                         if (pegSokongID == element.CUSTOMERID) {
                             option = "<option id='peg-sokong-"+element.CUSTOMERID+"' value='"+element.CUSTOMERID+"' selected>"+element.NAME+"</option>"
-                        } 
-                        // else {
-                        // }
+                        }
                         
                         $('#pegawaiSokongID').append(option)
                         $('#pegawaiSokongBK').append(option)
