@@ -7,44 +7,64 @@ var totalShiftMalam = "0"
 let difference = '';
 var siang;
 var malam;
-function fillInKedatangan(idKakitangan) {  
-    // let is_individu = jenisPermohonan[2] == 1 ? 'individu' : 'berkumpulan';
 
+function fillInEkedatanganKT(idKakitangan, id_permohonan_baru) {  
     // Clear up ekedatangan nama and no. pekerja
     $("#borangB1Modal input[name=ekedatanganNama]").val('');
     $("#borangB1Modal input[name=ekedatanganNoPekerja]").val('');
 
-    // fillInMasaSebenar(idKakitangan, id_permohonan_baru, is_individu);
-
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
-        success: function(data) {
-            let array =  ['PS', 'EL', 'KP', 'KS'];
-
-            // let jenisPermohonanShortened = jenisPermohonan.substr(0,2);
-      
+        data: { 
+            id_permohonan_baru : id_permohonan_baru
+        },
+        success: function(data) {      
             $("#borangB1Modal input[name=namaPekerja]").val(data.user_name);
-            // $("#borangB1Modal input[name=]").val(idKakitangan);
+
+            if (data.ekedatangans === null) {
+                noEkedatanganWithDefaultValue();
+                return 0;
+            }
 
             // eKedatangan
-            // if (array.includes(jenisPermohonanShortened)) {
-                $("#borangB1Modal input[name=tarikh]").val(data.ekedatangans.tarikh);
-                $("#borangB1Modal input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);
-                $("#borangB1Modal input[name=waktuKeluar]").val(data.ekedatangans.waktu_keluar);
-                $("#borangB1Modal input[name=jumlahMasa]").val(data.ekedatangans.jumlah_waktu_kerja);
-                $("#borangB1Modal input[name=mulaKerja]").val(data.ekedatangans.waktu_masuk_OT_1);
-                $("#borangB1Modal input[name=akhirKerja]").val(data.ekedatangans.waktu_keluar_OT_1);
-                $("#borangB1Modal input[name=jumlahKerja]").val(data.ekedatangans.jumlah_OT_1);
-                $("#borangB1Modal input[name=jumlahOTKeseluruhan]").val(data.ekedatangans.jumlah_OT_keseluruhan);
-                $("#borangB1Modal input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
-            // }  
+            $("#borangB1Modal input[name=tarikh]").val(data.ekedatangans.tarikh);
+            $("#borangB1Modal input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);
+            $("#borangB1Modal input[name=waktuKeluar]").val(data.ekedatangans.waktu_keluar);
+            $("#borangB1Modal input[name=jumlahMasa]").val(data.ekedatangans.jumlah_waktu_kerja);
+            $("#borangB1Modal input[name=mulaKerja]").val(data.ekedatangans.waktu_masuk_OT_1);
+            $("#borangB1Modal input[name=akhirKerja]").val(data.ekedatangans.waktu_keluar_OT_1);
+            $("#borangB1Modal input[name=jumlahKerja]").val(data.ekedatangans.jumlah_OT_1);
+            $("#borangB1Modal input[name=jumlahOTKeseluruhan]").val(data.ekedatangans.jumlah_OT_keseluruhan);
+            $("#borangB1Modal input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
                 
-                    },
-                error: function(data) { console.log(data); }
-            });
-                 
-        
+            },
+        error: function(data) { console.log(data); }
+    });
+}
+
+function noEkedatanganWithDefaultValue() {
+    var ekedatanganAttributes = new Array (
+        'tarikh',
+        'waktuMasuk',
+        'waktuKeluar',
+        'jumlahWaktuKerja',
+        'waktuMasukOT1',
+        'waktuKeluarOT1',
+        'jumlahOT1',
+        'waktuMasukOT2',
+        'waktuKeluarOT2',
+        'jumlahOT2',
+        'waktuMasukOT3',
+        'waktuKeluarOT3',
+        'jumlahOT3',
+        'jumlahOTKeseluruhan',
+        'waktuAnjal'
+    );
+
+    ekedatanganAttributes.forEach(att => {
+        $("#borangB1Modal input[name="+att+"]").val("N/A");
+    });
 }
 
 function diff(start, end) {
@@ -63,6 +83,7 @@ function diff(start, end) {
 
     return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
 }
+
 function timeDiffCalc(dateFuture, dateNow) {
     let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;
 

@@ -10,7 +10,7 @@
     @endcomponent
 
     <div class="container-fluid mt--6">
-        <div class="row mt-5">
+        {{-- <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -29,8 +29,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+        </div> --}}
+        <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -150,5 +150,5 @@
     <script src="{{ asset('argon') }}/js/kakitangan/charts.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/tuntutan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarElaun.js"></script>
-
+    <script src="{{ asset('argon') }}/js/kakitangan/eKedatangan.js"></script>
 @endpush

@@ -46,10 +46,10 @@ function showSemakanDatatableKT(){
                 {data: 'progres'},
                 {data: 'masa_mula'},
                 {data: 'masa_akhir'},
-                {data: 'masa'},
-                {data: 'hari'},
-                {data: 'waktu'},
-                {data: 'kadar_jam'},
+                // {data: 'masa'},
+                // {data: 'hari'},
+                // {data: 'waktu'},
+                // {data: 'kadar_jam'},
                 {data: 'tujuan'},
                 {data: null},
                 {data: 'jenis_permohonan'},
@@ -76,22 +76,22 @@ function showSemakanDatatableKT(){
                         if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                             if(data == "DITERIMA" && row['progres'] == 'Sah P2' && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2") )){
                                 data = "SEMAK SEMULA";
-                                return '<div id="status" class="container text-white bg-warning btn-sm "  data-target=""  value="SS">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="container text-black badge badge-pill badge-warning"  data-target=""  value="SS">'+data.toUpperCase()+'</div>' 
                             }else if(data == "DITERIMA") {
-                                return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
                             }else if(data == "DALAM PROSES") {
-                                return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="container text-black badge badge-pill badge-info"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                             }else if(data == "DITOLAK") {
-                                return '<div id="status" class="container text-white bg-danger btn-sm "  data-target=""  value="DK">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="container text-black badge badge-pill badge-danger"  data-target=""  value="DK">'+data.toUpperCase()+'</div>' 
                             }else if(data == "PERLU KEMASKINI" && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2"))) {
-                                return '<div id="status" class="container text-white bg-warning btn-sm "  data-target=""  value="PK">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="container text-black badge badge-pill badge-warning"  data-target=""  value="PK">'+data.toUpperCase()+'</div>' 
                             }else{
                                 data = "DITERIMA"
-                                return '<div id="status" class="container text-white bg-success btn-sm "  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
                             }
                         }else{
                             
-                            return '<div id="status" class="container text-white bg-info btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                            return '<div id="status" class="container text-black badge badge-pill badge-info"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                         }
                     }
                 },
@@ -99,33 +99,33 @@ function showSemakanDatatableKT(){
                     targets: 3,
                     render: function(data,type,row){
                         if(data == "Sah P2" && row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2"))){
-                            return '<div id="progres" class="container text-white bg-success btn-sm "  data-target=""  value="BSH" >BELUM DISAHKAN</div>' 
+                            return '<div id="progres" class="container text-black badge badge-pill badge-success"  data-target=""  value="BSH" >BELUM DISAHKAN</div>' 
                         } else if(row['status'] == "PERLU KEMASKINI" && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS1"))){
-                            return '<div id="progres" class="container text-white bg-success btn-sm "  data-target=""  value="SP2">Sah P2</div>' 
+                            return '<div id="progres" class="container text-black badge badge-pill badge-success"  data-target=""  value="SP2">Sah P2</div>' 
                         } else{
-                            return '<div id="progres" class="text-center text-white bg-success btn-sm "  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                            return '<div id="progres" class="text-center text-black badge badge-pill badge-success"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                         }
                     }
                 },
                 {
-                    targets: 11,
+                    targets: 7,
                     mRender: function(data,type,row)
                     {
                         if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                             if(row['status'] == "DITERIMA" && row['progres'] == "Sah P2" && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2"))){
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.id_permohonan_baru+"'"+','+"'"+data.jenis_permohonan+"'"+','+"'"+data.jenis_permohonan_kakitangan+"'"+');"></i>'  
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+"'"+data.id_permohonan_baru+"'"+','+"'"+data.jenis_permohonan+"'"+','+"'"+data.jenis_permohonan_kakitangan+"'"+');"></i>'  
                                 var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                                 var allButton = button1 ;
                                 return allButton;
 
                             } else if(row['status'] == 'DITOLAK'){
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                                 var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                                 var allButton = button2;
                                 return allButton;
                                 
                             } else if(row['status'] == 'PERLU KEMASKINI'){
-                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
+                                var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                                 var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                                 var allButton = button2;
                                 return allButton;
@@ -141,18 +141,18 @@ function showSemakanDatatableKT(){
                     }
                 },
                 {
-                    targets: 12,
+                    targets: 8,
                     visible: false,
                     searchable: true
                 },
                 {
-                    targets: 13,
+                    targets: 9,
                     visible: false,
                     searchable: true
                 },
                 {
-                    targets: 14,
-                    visible: true,
+                    targets: 10,
+                    visible: false,
                     searchable: true
                 }
             ],

@@ -21,8 +21,8 @@
                             <div class="form-group">
                                 <select id="jenisPermohonan" name="jenisPermohonan" class="form-control custom-select" autocomplete="off">
                                     <option disabled selected="true" value="pilihan"> Pilih Jenis Permohonan</option>
-                                    <option value="frmPermohonanIndividu">Permohonan Individu</option>
-                                    <option value="frmPermohonanBerkumpulan">Permohonan Berkumpulan</option>
+                                    <option value="frmPermohonanIndividu">Permohonan Individu / Borang A1</option>
+                                    <option value="frmPermohonanBerkumpulan">Permohonan Berkumpulan / Borang A2</option>
                                 </select>                       
                             </div>
                         </div>

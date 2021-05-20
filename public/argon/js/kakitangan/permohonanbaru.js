@@ -302,10 +302,10 @@ function getIndividuDT(){
                 targets: 2,
                 render: function(data,type,row){
                     if(data == "DITERIMA"){
-                        return '<div id="status" class="container text-white badge badge-pill badge-success"  data-target="">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DITOLAK"){
-                        return '<div id="status" class="container text-white badge badge-pill badge-danger"  data-target="">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="container text-black badge badge-pill badge-danger"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DALAM PROSES"){
                         return '<div id="status" class="container text-black font-weight-bold badge badge-pill badge-info"  data-target="">'+data.toUpperCase()+'</div>' 

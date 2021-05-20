@@ -95,6 +95,7 @@
     <script src="{{ asset('argon') }}/js/shared/changeDataTarget.js"></script>
     <script src="{{ asset('argon') }}/js/shared/senaraiKakitangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/fillKedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/shared/fillInEkedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/kemaskiniModal.js"></script>
     <script src="{{ asset('argon') }}/js/shared/approvedKelulusan.js"></script>
     <script src="{{ asset('argon') }}/js/shared/terimaSemuaPermohonan.js"></script>

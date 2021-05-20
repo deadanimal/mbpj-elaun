@@ -4,8 +4,9 @@ $.ajaxSetup({
     }
 });
 
-function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
+function changeDataTargetSemakan(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
     var id_user = document.querySelector("#nopekerja").value;
+
     $.ajax({
         url: 'semakan/semak-permohonan/' + id_permohonan_baru,
         type: 'GET', 
@@ -17,6 +18,7 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
         success: function(data) {
             var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
             var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
+
             $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
             $("#borangB1Modal input[name=tarikhKerjaAkhir]").val(tarikhAkhir);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
@@ -24,6 +26,7 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             $("#borangB1Modal input[name=jenisPermohonanKT]").val(data.permohonan.jenis_permohonan_kakitangan);
             $("#borangB1Modal input[name=jenisPermohonanReal]").val(data.permohonan.jenis_permohonan);
             $("#borangB1Modal textarea[id=tujuan]").val(data.permohonan.tujuan);
+            $("#borangB1Modal textarea[id=lokasiB1]").val(data.permohonan.lokasi);
             $("#borangB1Modal input[name=idPermohonan]").val(data.permohonan.id_permohonan_baru);
             $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
             $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").val('');
@@ -32,7 +35,7 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
 
-            }else if(data.permohonan.kadar_jam == '1.225'){
+            }else if(data.permohonan.kadar_jam == '1.25'){
                 $("#borangB1Modal input[id=inlineJamRadio2]").prop("checked",true);
 
             }
@@ -45,12 +48,13 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
                 $("#borangB1Modal input[id=inlineRadiobox3]").prop("checked",true);
 
             }
-            fillInKedatangan(id_user)
+
+            fillInEkedatanganKT(id_user , data.permohonan.id_permohonan_baru)
+
             $("#borangB1Modal").modal("show");
             
-            
-            // console.log(data.permohonan);
-
+            $('input').css('color', 'black');
+            $('textarea' ).css('color', 'black');
         },
         error: function(data) {
             console.log(data);

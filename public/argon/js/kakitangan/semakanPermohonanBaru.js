@@ -61,11 +61,14 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $("#permohonanbaruModal input[name=tarikh-akhir-kerjaID]").val(data.permohonan.tarikh_akhir_kerja);
                 $("#permohonanbaruModal input[name=masa-mulaID]").val(data.permohonan.masa_mula);
                 $("#permohonanbaruModal input[name=masa-akhirID]").val(data.permohonan.masa_akhir);
-
-                document.getElementById('sebabID').value = data.permohonan.tujuan;
-                document.getElementById('lokasiID').value = data.permohonan.lokasi;
+                $("#permohonanbaruModal textarea[name=sebabID]").val(data.permohonan.tujuan);
+                $("#permohonanbaruModal textarea[name=lokasiID]").val(data.permohonan.lokasi);
 
                 getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
+
+                
+                $('input').css('color', 'black');
+                $('textarea' ).css('color', 'black');
 
                 $("#permohonanbaruModal").modal("show");
 
@@ -110,8 +113,13 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 document.getElementById('sebabBK').value = data.permohonan.tujuan;
                 document.getElementById('lokasiBK').value = data.permohonan.lokasi;
 
+                getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
+                $('input').css('color', 'black');
+
                 $("#permohonanbaruModal").modal("show");
             }
+
+            
         },
         error: function(data) {
             console.log(data);
@@ -119,7 +127,6 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
     });
 }
 
-// function getPegawai(){
 function getPegawai(pegSokongID, pegLulusID){
     var id_user = document.querySelector("#noPekerja").value;
 
