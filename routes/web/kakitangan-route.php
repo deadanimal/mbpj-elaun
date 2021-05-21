@@ -35,6 +35,10 @@ Route::group([
 	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'tuntutan'], function () {
+		Route::get('/{user_id}', [
+			'uses' => 'kakitangan\tuntutanController@show',
+			'as'   => 'tuntutan.show',
+		]);
 		Route::put('/hantar-tuntutan/{user_id}', [
 			'uses' => 'kakitangan\tuntutanController@update',
 			'as'   => 'tuntutan.update',

@@ -76,22 +76,22 @@ function showSemakanDatatableKT(){
                         if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                             if(data == "DITERIMA" && row['progres'] == 'Sah P2' && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2") )){
                                 data = "SEMAK SEMULA";
-                                return '<div id="status" class="container text-black badge badge-pill badge-warning"  data-target=""  value="SS">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="text-black badge badge-pill badge-warning"  data-target=""  value="SS">'+data.toUpperCase()+'</div>' 
                             }else if(data == "DITERIMA") {
-                                return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="text-black badge badge-pill badge-success"  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
                             }else if(data == "DALAM PROSES") {
-                                return '<div id="status" class="container text-black badge badge-pill badge-info"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="text-black badge badge-pill badge-info"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                             }else if(data == "DITOLAK") {
-                                return '<div id="status" class="container text-black badge badge-pill badge-danger"  data-target=""  value="DK">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="text-black badge badge-pill badge-danger"  data-target=""  value="DK">'+data.toUpperCase()+'</div>' 
                             }else if(data == "PERLU KEMASKINI" && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2"))) {
-                                return '<div id="status" class="container text-black badge badge-pill badge-warning"  data-target=""  value="PK">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="text-black badge badge-pill badge-warning"  data-target=""  value="PK">'+data.toUpperCase()+'</div>' 
                             }else{
                                 data = "DITERIMA"
-                                return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
+                                return '<div id="status" class="text-black badge badge-pill badge-success"  data-target=""  value="DT">'+data.toUpperCase()+'</div>' 
                             }
                         }else{
                             
-                            return '<div id="status" class="container text-black badge badge-pill badge-info"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
+                            return '<div id="status" class="text-black badge badge-pill badge-info"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                         }
                     }
                 },
@@ -99,9 +99,9 @@ function showSemakanDatatableKT(){
                     targets: 3,
                     render: function(data,type,row){
                         if(data == "Sah P2" && row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("OT1" || "OT2"))){
-                            return '<div id="progres" class="container text-black badge badge-pill badge-success"  data-target=""  value="BSH" >BELUM DISAHKAN</div>' 
+                            return '<div id="progres" class="text-black badge badge-pill badge-success"  data-target=""  value="BSH" >BELUM DISAHKAN</div>' 
                         } else if(row['status'] == "PERLU KEMASKINI" && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS1"))){
-                            return '<div id="progres" class="container text-black badge badge-pill badge-success"  data-target=""  value="SP2">Sah P2</div>' 
+                            return '<div id="progres" class="text-black badge badge-pill badge-success"  data-target=""  value="SP2">Sah P2</div>' 
                         } else{
                             return '<div id="progres" class="text-center text-black badge badge-pill badge-success"  data-target=""  value="DP">'+data.toUpperCase()+'</div>' 
                         }
@@ -132,7 +132,7 @@ function showSemakanDatatableKT(){
 
                             } else if(row['status'] == "DALAM PROSES" && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS2"))){
                                 var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
-                                var allButton = button2;
+                                var allButton =  button2;
                                 return allButton;
                             } else{
                                 return '';
@@ -210,8 +210,6 @@ $.fn.dataTable.ext.search.push(
 });
 
 $("#btnGo").click(function () {
-    console.log("searching")
-    console.log($('#jenisTable').val())
     $('#permohonanDT').DataTable().column().search(
         $('#carian').val(),
         $('#jenisTable').val()

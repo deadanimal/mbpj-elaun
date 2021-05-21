@@ -302,23 +302,23 @@ function getIndividuDT(){
                 targets: 2,
                 render: function(data,type,row){
                     if(data == "DITERIMA"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target="">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-success"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DITOLAK"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-danger"  data-target="">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-danger"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DALAM PROSES"){
-                        return '<div id="status" class="container text-black font-weight-bold badge badge-pill badge-info"  data-target="">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black font-weight-bold badge badge-pill badge-info"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "PERLU KEMASKINI"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-warning"  data-target="">'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-warning"  data-target="">'+data.toUpperCase()+'</div>' 
                     }
                 }
             },
             {
                 targets: 3,
                 render: function(data,type,row){
-                    return '<div id="progres" class="container text-black badge badge-pill badge-success"  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    return '<div id="progres" class="text-black badge badge-pill badge-success"  data-target=""  >'+data.toUpperCase()+'</div>' 
                 }
             },
             {
@@ -447,23 +447,23 @@ function getBerkumpulanDT(){
                 targets: 2,
                 render: function(data,type,row){
                     if(data == "DITERIMA"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-success"  data-target=""  >'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-success"  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DITOLAK"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-dangers"  data-target=""  >'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-dangers"  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "DALAM PROSES"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-info"  data-target=""  >'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-info"  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                     else if(data == "PERLU KEMASKINI"){
-                        return '<div id="status" class="container text-black badge badge-pill badge-warning"  data-target=""  >'+data.toUpperCase()+'</div>' 
+                        return '<div id="status" class="text-black badge badge-pill badge-warning"  data-target=""  >'+data.toUpperCase()+'</div>' 
                     }
                 }
             },
             {
                 targets: 3,
                 render: function(data,type,row){
-                    return '<div id="progres" class="container text-black badge badge-pill badge-success"  data-target=""  >'+data.toUpperCase()+'</div>' 
+                    return '<div id="progres" class="text-black badge badge-pill badge-success"  data-target=""  >'+data.toUpperCase()+'</div>' 
                 }
             },
             {

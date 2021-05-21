@@ -25,9 +25,6 @@ class semakanController extends Controller
      */
     public function index()
     {
-        
-       
-        
         return view('core.kakitangan.semakan');
     }
 
@@ -62,11 +59,9 @@ class semakanController extends Controller
     {
         $pilihanKT = $request->input('pilihanKT');
         $pilihanReal = $request->input('pilihanReal');
-        // dd("nkj");
+
         if(request()->ajax()){
-                
-                return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
-            
+            return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
         }
     }
 
@@ -76,9 +71,15 @@ class semakanController extends Controller
 
         $permohonan = PermohonanBaru::findOrFail($id);
 
+        foreach ($permohonan->users as $user) {
+            $masa_mula_sebenar = $user->permohonan_with_users->masa_mula_sebenar;
+            $masa_akhir_sebenar = $user->permohonan_with_users->masa_akhir_sebenar;
+        }
+
         return response()->json([
             'permohonan' => $permohonan,
-
+            'masa_mula_sebenar' => $masa_mula_sebenar,
+            'masa_akhir_sebenar' => $masa_akhir_sebenar,
         ],200);
         
     }

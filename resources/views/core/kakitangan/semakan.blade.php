@@ -8,7 +8,7 @@
     @component('layouts.headers.auth') 
         
     @endcomponent
-    <input type="text" id="nopekerja" value="{{Auth::user()->CUSTOMERID }}" hidden>
+
     <div class="container-fluid mt--6">
         {{-- <div class="row mt-5">
             <div class="col-6">
@@ -98,11 +98,10 @@
                 @include('core.kakitangan.partials.semakanDT.datatables')
             </div>
         </div>
+        <input type="text" name="noPekerja" value="{{ auth()->id() }}" hidden>
     </div>
-        @include('layouts.footers.auth')
 
-    
-
+    @include('layouts.footers.auth')
     @include('core.kakitangan.partials.borangB1Modal')
 @endsection
 
@@ -122,6 +121,7 @@
     <script src="{{ asset('argon') }}/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/semakan.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/semakanPermohonanBaru.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarPengesahan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/eKedatangan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/kemaskiniModal.js"></script>

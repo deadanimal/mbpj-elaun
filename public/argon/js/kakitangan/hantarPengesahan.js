@@ -4,8 +4,8 @@ $.ajaxSetup({
     }
 });
 
-function changeDataTargetSemakan(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
-    var id_user = document.querySelector("#nopekerja").value;
+function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPermohonan){
+    var id_user = parseInt($("#noPekerjaB1").val());
 
     $.ajax({
         url: 'semakan/semak-permohonan/' + id_permohonan_baru,
@@ -29,8 +29,11 @@ function changeDataTargetSemakan(id_permohonan_baru,jenisPermohonanKT,jenisPermo
             $("#borangB1Modal textarea[id=lokasiB1]").val(data.permohonan.lokasi);
             $("#borangB1Modal input[name=idPermohonan]").val(data.permohonan.id_permohonan_baru);
             $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
-            $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").val('');
-            $("#borangB1Modal input[id=semakan-modal-individu-masaMulaSebenar]").val('');
+
+            $("#permohonanbaruModal textarea[name=masaMulaSebenar-individu]").val(data.masa_mula_sebenar);
+            $("#permohonanbaruModal textarea[name=masaAkhirSebenar-individu]").val(data.masa_akhir_sebenar);
+
+            getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
 
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
@@ -72,10 +75,8 @@ function deletePermohonan(id_permohonan_baru){
         data:{
             id_permohonan_baru : id_permohonan_baru
         },
-        success: function(data) {
+        success: function() {
             showSemakanDatatableKT();
-            console.log(data.permohonan);
-
         },
         error: function(data) {
             console.log(data);
@@ -164,9 +165,6 @@ function saveMasa(){
             akhirKerja:akhirKerja
         }, success: function(data) {
             hantarPengesahan(id_user,id_permohonan_baru)
-        //     console.log('dasdsadsa');
-        //    console.log(data);
-
         },
         error: function(data) {
             console.log(data);

@@ -88,9 +88,6 @@
                             <div class="col-8">
                                 <h2 class="mb-2">{{ __('Senarai Tuntutan Elaun Lebih Masa') }}</h2>
                             </div>
-                            <div class="col-4 text-right">
-                                <span id="printButton" onclick="printTuntutan()" style="cursor: pointer"><i class="fa fa-print fa-3x" ></i></span>
-                            </div>
                         </div>
                     </div>
                     <div class="card-body px-0">
@@ -104,12 +101,12 @@
                                     <th>Progres</th>
                                     <th>Masa Mula</th>
                                     <th>Masa Akhir</th>
-                                    <th>Masa</th>
+                                    {{-- <th>Masa</th>
                                     <th>Hari</th>
                                     <th>Waktu</th>
-                                    <th>Kadar Jam</th>
+                                    <th>Kadar Jam</th> --}}
                                     <th>Tujuan</th>
-                                    <th></th>
+                                    <th>Tindakan</th>
                                     <th hidden>Status</th>
                                     <th hidden></th>
                                     <th hidden></th>
@@ -127,7 +124,8 @@
                 </div>
             </div>
         </div>
-            <input id="idpekerja" value="{{$user}}" hidden>
+
+        @include('core.kakitangan.partials.borangB1Modal')
         @include('layouts.footers.auth')
     </div>
 @endsection
@@ -150,5 +148,7 @@
     <script src="{{ asset('argon') }}/js/kakitangan/charts.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/tuntutan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/hantarElaun.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/hantarPengesahan.js"></script>
     <script src="{{ asset('argon') }}/js/kakitangan/eKedatangan.js"></script>
+    <script src="{{ asset('argon') }}/js/kakitangan/semakanPermohonanBaru.js"></script>
 @endpush

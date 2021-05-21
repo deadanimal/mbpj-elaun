@@ -49,7 +49,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="kp">{{ __('Nama') }}</label>
-                                            <input type="text" name="name" id="kp" class="form-control form-control-sm"  value="{{ auth()->user()->NAME }}" disabled>
+                                            <input type="text" name="name" id="kp" class="form-control form-control-sm" value="{{ auth()->user()->NAME }}" disabled>
                                         </div>
                                     </div>
                                 </div>

@@ -237,7 +237,9 @@
         </div>
     </div>
     <input type="text" id="depcode" value="{{Auth::user()->DEPARTMENTCODE }}" hidden>
+
     @include('layouts.footers.auth')
+    <input type="text" name="noPekerjaB1" value="{{ auth()->id() }}" hidden>
 </div>
 
 @include('core.kakitangan.partials.permohonanbaruModal')

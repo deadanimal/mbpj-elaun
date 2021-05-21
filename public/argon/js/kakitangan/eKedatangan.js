@@ -8,11 +8,7 @@ let difference = '';
 var siang;
 var malam;
 
-function fillInEkedatanganKT(idKakitangan, id_permohonan_baru) {  
-    // Clear up ekedatangan nama and no. pekerja
-    $("#borangB1Modal input[name=ekedatanganNama]").val('');
-    $("#borangB1Modal input[name=ekedatanganNoPekerja]").val('');
-
+function fillInEkedatanganKT(idKakitangan, id_permohonan_baru) { 
     $.ajax({
         url: 'ekedatangan/semakan-ekedatangan/' + idKakitangan,
         type: 'GET',
@@ -90,7 +86,7 @@ function timeDiffCalc(dateFuture, dateNow) {
     // calculate days
     const days = Math.floor(diffInMilliSeconds / 86400);
     diffInMilliSeconds -= days * 86400;
-    console.log('calculated days', days);
+    // console.log('calculated days', days);
 
     // calculate hours
     // const hours = Math.floor(diffInMilliSeconds / 3600) % 24;

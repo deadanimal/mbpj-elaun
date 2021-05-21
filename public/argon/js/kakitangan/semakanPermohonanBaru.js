@@ -14,7 +14,6 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
 }
 
 function deletePermohonan(id_permohonan_baru){
-
     $.ajax({
         url: 'permohonan-baru/delete-permohonan/' + id_permohonan_baru,
         type: 'put', 
@@ -34,18 +33,19 @@ function deletePermohonan(id_permohonan_baru){
     });
 }
 
-function getPermohonan(id_permohonan_baru,jenis_permohonan){
-    idPermohonan = id_permohonan_baru
+function getPermohonan(id_permohonan_baru, jenis_permohonan){
+    console.log('getPermohonan');
+    // idPermohonan = id_permohonan_baru
 
     $.ajax({
         url: 'permohonan-baru/semak-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         data:{
-            id_permohonan_baru : id_permohonan_baru,
             jenis_permohonan:jenis_permohonan
         },
         dataType:"JSON",
         success: function(data) {
+            console.log();
             if( jenis_permohonan == 'OT1'){
                 var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 $("#permohonanbaruModal").modal("show");
@@ -64,8 +64,10 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
                 $("#permohonanbaruModal textarea[name=sebabID]").val(data.permohonan.tujuan);
                 $("#permohonanbaruModal textarea[name=lokasiID]").val(data.permohonan.lokasi);
 
-                getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
+                $("#permohonanbaruModal textarea[name=masaMulaSebenar-individu]").val(data.permohonan.permohonan_with_users.masa_mula_sebenar);
+                $("#permohonanbaruModal textarea[name=masaAkhirSebenar-individu]").val(data.permohonan.permohonan_with_users.masa_akhir_sebenar);
 
+                getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
                 
                 $('input').css('color', 'black');
                 $('textarea' ).css('color', 'black');
@@ -128,7 +130,7 @@ function getPermohonan(id_permohonan_baru,jenis_permohonan){
 }
 
 function getPegawai(pegSokongID, pegLulusID){
-    var id_user = document.querySelector("#noPekerja").value;
+    var id_user = ($('#noPekerja').val());
 
     $.ajax({
         url: 'permohonan-baru/pegawai/',
