@@ -18,8 +18,10 @@ class CreatePermohonanWithUsersTable extends Migration
             $table->unsignedBigInteger('id_permohonan_baru');
             $table->unsignedInteger('CUSTOMERID');
             $table->string('no_kumpulan')->default('');
-            $table->string('masa_mula_sebenar')->nullable();
-            $table->string('masa_akhir_sebenar')->nullable();
+            // $table->string('masa_mula_sebenar')->nullable();
+            // $table->string('masa_mula_sebenar')->nullable();
+            $table->string('masa_mula_sebenar')->default('-');
+            $table->string('masa_akhir_sebenar')->default('-');
             $table->string('masa_sebenar')->nullable();
             $table->string('jumlah_tuntutan_elaun')->default('0.00');
             $table->integer('is_rejected_individually')->default('0');

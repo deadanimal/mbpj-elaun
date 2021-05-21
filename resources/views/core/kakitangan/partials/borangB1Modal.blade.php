@@ -56,14 +56,14 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-name2">{{ __('No K/P Baru') }}</label>
-                                            <input type="text" name="name1" id="input-name2" class="form-control form-control-sm" placeholder="" value="{{ auth()->user()->NIRC }}" disabled>
+                                            <label class="form-control-label" for="noKPB1">{{ __('No K/P Baru') }}</label>
+                                            <input type="text" name="noKP" id="noKPB1" class="form-control form-control-sm" placeholder="" value="{{ auth()->user()->NIRC }}" disabled>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-name">{{ __('No. Pekerja') }}</label>
-                                            <input type="text" name="name1" id="input-name" class="form-control form-control-sm" placeholder="" value="{{ sprintf('%05d', auth()->user()->CUSTOMERID) }}" disabled>
+                                            <label class="form-control-label" for="noPekerjaB1">{{ __('No. Pekerja') }}</label>
+                                            <input type="text" name="noPekerja" id="noPekerjaB1" class="form-control form-control-sm" placeholder="" value="{{ sprintf('%05d', auth()->user()->CUSTOMERID) }}" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -99,63 +99,13 @@
                                 <div class="row">
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" value="{{auth()->user()->CUSTOMERID}}" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="">
+                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" value="{{ auth()->user()->CUSTOMERID }}" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="" autofocus required>
                                     </div>
                                     <div class="col form-group">
                                         <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="">
+                                        <input class="form-control form-control-sm" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="" required>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group mb-5">
-                                    <button type="button" onclick="kemaskiniModal('individu')" class="btn btn-primary btn-sm float-end">{{ __('Kemaskini Masa') }}</button>
-                                </div> --}}
-                                <!-- <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-name">{{ __('Hari') }}</label>
-                                            <input type="text" name="name1" id="input-name1" class="form-control" placeholder="" value="S" disabled >
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-sm-12">
-                                        <legend><h4 class="form-control-label">{{ __('Waktu') }}</h4></legend>
-                                        <div class="form-group">
-                                            
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" name="radioWaktu" type="radio" id="inlineRadiobox1" value="Pagi" disabled>
-                                                <label class="form-check-label" for="inlineRadiobox1">S</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" name="radioWaktu" type="radio" id="inlineRadiobox2" value="Petang" disabled>
-                                                <label class="form-check-label" for="inlineRadiobox2">P</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" name="radioWaktu" type="radio" id="inlineRadiobox3" value="Malam" disabled>
-                                                <label class="form-check-label" for="inlineRadiobox3">M</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <legend><h4 class="form-control-label">{{ __('Kadar Jam') }}</h4></legend>
-                                        <div class="form-group">
-                                            
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" name="radioJam" type="radio" id="inlineJamRadio1" value="option1" disabled>
-                                                <label class="form-check-label" for="inlineJamRadio1">1.125</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" name="radioJam" type="radio" id="inlineJamRadio2" value="option2" disabled>
-                                                <label class="form-check-label" for="inlineJamRadio2">1.225</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="row"> 
                                     <div class="col">
                                         <div class="form-group">
@@ -294,111 +244,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                {{-- <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="tarikh">{{ __('* Tarikh') }}</label>
-                                            <input type="text" name="tarikh" id="tarikh" class="form-control" placeholder="" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="namaPekerja">{{ __('Nama') }}</label>
-                                            <input type="text" name="namaPekerja" id="namaPekerja" class="form-control"  value="98121114234" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-name">{{ __('Status') }}</label>
-                                            <input type="text" name="name1" id="input-name1" class="form-control" placeholder="" value="{{ old('name', auth()->user()->id) }}" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="waktuMasuk">{{ __('Daftar Masuk') }}</label>
-                                            <input type="text" name="waktuMasuk" id="waktuMasuk" class="form-control"  value="98121114234" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="waktuKeluar">{{ __('Daftar Keluar') }}</label>
-                                            <input type="text" name="waktuKeluar" id="waktuKeluar" class="form-control" placeholder="" value="{{ old('name', auth()->user()->id) }}" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="jumlahMasa">{{ __('Jumlah') }}</label>
-                                            <input type="text" name="jumlahMasa" id="jumlahMasa" class="form-control"  value="98121114234" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="mulaKerja">{{ __('Mula Kerja') }}</label>
-                                            <input type="text" name="mulaKerja" id="mulaKerja" class="form-control" placeholder="" value="{{ old('name', auth()->user()->id) }}" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="akhirKerja">{{ __('Akhir Kerja') }}</label>
-                                            <input type="text" name="akhirKerja" id="akhirKerja" class="form-control"  value="98121114234" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="jumlahKerja">{{ __('Jumlah Kerja') }}</label>
-                                            <input type="text" name="jumlahKerja" id="jumlahKerja" class="form-control" placeholder="" value="{{ old('name', auth()->user()->id) }}" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="waktuAnjal">{{ __('Waktu Anjal') }}</label>
-                                            <input type="text" name="waktuAnjal" id="waktuAnjal" class="form-control"  value="98121114234" disabled>
-
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div> --}}
-                        
                     </form>
                 </div>
             </div>
@@ -408,7 +253,7 @@
                 <input name="jenisPermohonanReal" value="" hidden>
                 <input name="idPermohonan" value="" hidden>
                 <button onclick="event.preventDefault();closeModal('borangB1Modal');" type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button>
-                <button onclick="event.preventDefault();hantarPengesahan({{ auth()->user()->CUSTOMERID }});" type="button" class="btn btn-sm btn-success">Hantar Untuk Pengesahan</button>
+                <button id='buttonHantarPengesahan' onclick="event.preventDefault(); hantarPengesahan();"  type="button" class="btn btn-sm btn-success">Hantar Untuk Pengesahan</button>
             </div>
         </div>
     </div>

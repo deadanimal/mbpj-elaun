@@ -131,8 +131,9 @@ function showSemakanDatatableKT(){
                                 return allButton;
 
                             } else if(row['status'] == "DALAM PROSES" && (row['jenis_permohonan_kakitangan'] == ("PS1" || "PS2"))){
-                                return 'asdkjas';
-
+                                var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                                var allButton = button2;
+                                return allButton;
                             } else{
                                 return '';
 

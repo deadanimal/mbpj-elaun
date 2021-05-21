@@ -27,7 +27,7 @@ Route::group([
 			'uses' => 'kakitangan\semakanController@showModal',
 			'as'   => 'semakan.showModal',
 		]);
-		Route::put('/hantar-permohonan/{user_id}', [
+		Route::put('/hantar-permohonan/{id_permohonan}', [
 			'uses' => 'kakitangan\semakanController@update',
 			'as'   => 'semakan.update',
 		]);

@@ -330,7 +330,7 @@ function getIndividuDT(){
                         var allButton = button2;
                         return allButton;
 
-                    } else if(row['progres'] == "Belum sah" || row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
+                    } else if(row['progres'] == "Belum disahkan" || row['status'] == "PERLU KEMASKINI"){
                         var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center" onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
                         var allButton = button1 + button2;

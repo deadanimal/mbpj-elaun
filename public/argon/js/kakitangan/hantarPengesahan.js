@@ -55,6 +55,9 @@ function changeDataTargetSemakan(id_permohonan_baru,jenisPermohonanKT,jenisPermo
             
             $('input').css('color', 'black');
             $('textarea' ).css('color', 'black');
+
+            // set value of #buttonHantarPengesahan to current id_permohonan_baru
+            $("#buttonHantarPengesahan").attr("value", data.permohonan.id_permohonan_baru); 
         },
         error: function(data) {
             console.log(data);
@@ -63,7 +66,6 @@ function changeDataTargetSemakan(id_permohonan_baru,jenisPermohonanKT,jenisPermo
 }
 
 function deletePermohonan(id_permohonan_baru){
-
     $.ajax({
         url: 'semakan/delete-permohonan/' + id_permohonan_baru,
         type: 'put', 
@@ -81,42 +83,37 @@ function deletePermohonan(id_permohonan_baru){
     });
 }
 
-function hantarPengesahan(id_user,id_permohonan_baru){
-    
+function hantarPengesahan(){
+    var id_permohonan_baru = $('#buttonHantarPengesahan').attr('value');
     var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD-MM-YYYY").format("DD-MM-YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
     var masaAkhir = $("#borangB1Modal input[name=masaAkhir]").val();
+    var masaMulaSebenar = $("#borangB1Modal input[name=masaMulaSebenar-individu]").val();
+    var masaAkhirSebenar = $("#borangB1Modal input[name=masaAkhirSebenar-individu]").val();
     var jenisPermohonanKT = $("#borangB1Modal input[name=jenisPermohonanKT]").val();
     var jenisPermohonanReal = $("#borangB1Modal input[name=jenisPermohonanReal]").val();
-    var waktu = $("#borangB1Modal input[name=radioWaktu]").val();
     var tujuan = $("#borangB1Modal textarea[name=tujuan]").val();
+    var lokasi = $("#borangB1Modal textarea[name=lokasiB1]").val();
 
-    // console.log(tarikhMula);
-    // console.log(jenisPermohonanKT)
-    // console.log(id_permohonan_baru)
-    
-    var object = {
-        tarikh_permohonan:tarikhMula,
-        tarikh_akhir_kerja:tarikhAkhir,
-        masa_mula:masaMula,
-        masa_akhir:masaAkhir,
-        waktu:waktu,
-        tujuan:tujuan,
-        jenis_permohonan_kakitangan:jenisPermohonanKT,
-        jenis_permohonan:jenisPermohonanReal,
-        
-    }
     $.ajax({
         url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
         type: 'put', 
         data:{
-            id_permohonan_baru : id_permohonan_baru,
-            object : object,
+            tarikh_permohonan : tarikhMula,
+            tarikh_akhir_kerja : tarikhAkhir,
+            masa_mula : masaMula,
+            masa_akhir : masaAkhir,
+            masa_mula_sebenar : masaMulaSebenar,
+            masa_akhir_sebenar : masaAkhirSebenar,
+            tujuan : tujuan,
+            lokasi : lokasi,
+            jenis_permohonan_kakitangan : jenisPermohonanKT,
+            jenis_permohonan : jenisPermohonanReal,
         },
-        success: function(data) {
-            
+        success: function() {
             $("#borangB1Modal").modal("hide");
+
             Swal.fire(  
                 'Dihantar untuk Pengesahan!',
                 'Klik butang dibawah untuk tutup!',
@@ -124,14 +121,11 @@ function hantarPengesahan(id_user,id_permohonan_baru){
                 )
                 
             showSemakanDatatableKT();
-            // console.log(data.permohonan);
-
         },
         error: function(data) {
             console.log(data);
         } 
     });
-
 }
 
 function timeStringToMins(s) {

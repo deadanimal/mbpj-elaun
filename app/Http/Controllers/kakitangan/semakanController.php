@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\kakitangan;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -104,37 +104,47 @@ class semakanController extends Controller
     public function update(Request $request, $id)
     {
         $permohonan = PermohonanBaru::findOrFail($id);
-        $validator = Validator::make($request->all(), [ 
-                
-            'object.tarikh_permohonan' => 'required',
-            'object.masa_mula' => 'required',
-            'object.masa_akhir' => 'required',
-            'object.waktu'  => 'required',
-            'object.tujuan' => 'required',
 
+        $validator = Validator::make($request->all(), [ 
+            'tarikh_permohonan' => 'required',
+            'tarikh_akhir_kerja' => 'required',
+            'masa_mula' => 'required',
+            'masa_akhir' => 'required',
+            'masa_mula_sebenar' => 'required',
+            'masa_akhir_sebenar' => 'required',
+            'tujuan' => 'required',
+            'lokasi' => 'required',
         ]);
+
         if ($validator->fails()) {
             $errors = $validator->errors();
+
             foreach ($errors->all() as $message) {
                 dd($message);
             }
-        }else{
+        } else{
+            $permohonan->tarikh_mula_kerja = $request->input('tarikh_permohonan');
+            $permohonan->tarikh_akhir_kerja = $request->input('tarikh_akhir_kerja');
+            $permohonan->masa_mula = $request->input('masa_mula');
+            $permohonan->masa_akhir = $request->input('masa_akhir');
+            $permohonan->tujuan = $request->input('tujuan');
+            $permohonan->lokasi = $request->input('lokasi');
 
-        $permohonan->tarikh_mula_kerja = $request->input('object.tarikh_permohonan');
-        $permohonan->tarikh_akhir_kerja = $request->input('object.tarikh_akhir_kerja');
-        $permohonan->masa_mula = $request->input('object.masa_mula');
-        $permohonan->masa_akhir = $request->input('object.masa_akhir');
-        $permohonan->waktu = $request->input('object.waktu');
-        $permohonan->tujuan = $request->input('object.tujuan');
+            ($permohonan->users)->each(function($user) use ($permohonan, $request) {
+                $permohonan->users()
+                            ->updateExistingPivot($user->CUSTOMERID, array(
+                                    'masa_mula_sebenar' => $request->input('masa_mula_sebenar'),
+                                    'masa_akhir_sebenar' => $request->input('masa_akhir_sebenar'),
+                                ), 
+                                false);
+            });
 
-        $permohonan->save();
-        $permohonan->refresh();
-        event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));        
-        return response()->json([
-            'permohonan' => $permohonan
-        ],200);
+            event(new PermohonanStatusChangedEvent($permohonan, 0, 1, 0));   
+
+            return response()->json([
+                'permohonan' => $permohonan
+            ],200);
         }
-        
     }
 
     /**
