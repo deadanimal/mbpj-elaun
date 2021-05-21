@@ -6,7 +6,8 @@ $(document).ready(function(){
 })
 
 function showSemakanDatatableKT(){
-    var nopekerja = document.querySelector("#nopekerja").value;
+    var nopekerja = $('#noPekerjaB1').val();
+
     var permohonanDT = $('#permohonanDT').DataTable({
         dom: "lrtip",
         scrollX: false,

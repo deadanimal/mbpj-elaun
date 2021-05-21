@@ -119,7 +119,6 @@ function showTuntutanDatatableKT(){
                     if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                         // FOR STATUS SEMAK SEMULA
                         if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("PS1"||"PS2"))){
-                            // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+"'"+data.id_permohonan_baru+"'"+', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
                             var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+data.id_permohonan_baru +', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
                             var button2 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-success btn-sm ni ni-check-bold"  onclick="hantarElaun('+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                             var allButton = button1 + button2 ;
@@ -127,7 +126,6 @@ function showTuntutanDatatableKT(){
                         }
                         // FOR STATUS DITERIMA
                         else if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("EL1"||"EL2"))){ 
-                            // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTarget('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                             var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                             var allButton = button1;
                             return allButton;
@@ -146,7 +144,6 @@ function showTuntutanDatatableKT(){
                         }
                         // FOR STATUS PERLU KEMASKINI
                         else if(row['status'] == "PERLU KEMASKINI"){
-                            // var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+"'"+data.id_permohonan_baru+"'"+', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
                             var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+data.id_permohonan_baru+', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
                             var button2 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-success btn-sm ni ni-check-bold"  onclick="hantarElaun('+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                             var allButton = button1 + button2;
@@ -240,3 +237,7 @@ $('#min').datepicker({
 $('#max').datepicker({
     dateFormat: 'dd-mm-yy',
 });
+
+function closeModal(modal){
+    $("#"+modal).modal("hide");
+}

@@ -253,7 +253,7 @@
                 <input name="jenisPermohonanReal" value="" hidden>
                 <input name="idPermohonan" value="" hidden>
                 <button onclick="event.preventDefault();closeModal('borangB1Modal');" type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Tutup</button>
-                <button id='buttonHantarPengesahan' onclick="event.preventDefault(); hantarPengesahan();"  type="button" class="btn btn-sm btn-success">Hantar Untuk Pengesahan</button>
+                <button id='buttonHantarPengesahan' onclick="event.preventDefault(); hantarPengesahan();" type="button" class="btn btn-sm btn-success">Hantar Untuk Pengesahan</button>
             </div>
         </div>
     </div>

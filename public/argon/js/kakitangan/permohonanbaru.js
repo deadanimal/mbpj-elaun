@@ -618,3 +618,7 @@ $('#masa-mulaID').timepicker(
 $('#masa-akhirID').timepicker(
     LocaleMS
 );
+
+function closeModal(modal){
+    $("#"+modal).modal("hide");
+}
