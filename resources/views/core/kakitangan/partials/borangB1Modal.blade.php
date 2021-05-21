@@ -71,13 +71,13 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="tarikhKerjaMula">{{ __('Tarikh Kerja Mula') }}</label>
-                                            <input name="tarikhKerjaMula" id="tarikhKerjaMula" class="form-control form-control-sm"  value="20/01/2020" >
+                                            <input name="tarikhKerjaMula" id="tarikhKerjaMula" class="form-control form-control-sm"  value="" >
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="tarikhKerjaAkhir">{{ __('Tarikh Kerja Akhir') }}</label>
-                                            <input name="tarikhKerjaAkhir" id="tarikhKerjaAkhir" class="form-control form-control-sm"  value="20/01/2020" >
+                                            <input name="tarikhKerjaAkhir" id="tarikhKerjaAkhir" class="form-control form-control-sm"  value="" >
                                         </div>
                                     </div>
                                 </div>

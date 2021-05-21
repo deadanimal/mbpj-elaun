@@ -7,7 +7,6 @@ $.ajaxSetup({
 function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPermohonan){
     var arrayJenisPermohonan = ['PS1', 'PS2', 'EL1', 'EL2']
     var id_user = parseInt($("#noPekerjaB1").val());
-    console.log({jenisPermohonanKT});
 
     if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
         $('#buttonHantarPengesahan').attr("disabled", "disabled");

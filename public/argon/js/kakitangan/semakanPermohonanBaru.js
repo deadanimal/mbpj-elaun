@@ -11,6 +11,9 @@ $.ajaxSetup({
 function changeDataTarget(jenis_permohonan,id_permohonan_baru){
     getPermohonan(id_permohonan_baru,jenis_permohonan);
     edit = 1;   
+
+
+    $("#submitBtnID").attr('value', id_permohonan_baru)
 }
 
 function deletePermohonan(id_permohonan_baru){
@@ -34,18 +37,14 @@ function deletePermohonan(id_permohonan_baru){
 }
 
 function getPermohonan(id_permohonan_baru, jenis_permohonan){
-    console.log('getPermohonan');
-    // idPermohonan = id_permohonan_baru
-
     $.ajax({
         url: 'permohonan-baru/semak-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         data:{
-            jenis_permohonan:jenis_permohonan
+            jenis_permohonan: jenis_permohonan
         },
         dataType:"JSON",
         success: function(data) {
-            console.log();
             if( jenis_permohonan == 'OT1'){
                 var tarikhKerjaID = moment(data.permohonan.tarikh_mula_kerja,"DD-MM-YYYY").format("DD-MM-YYYY")
                 $("#permohonanbaruModal").modal("show");
@@ -196,6 +195,7 @@ function getPegawai(pegSokongID, pegLulusID){
 }
 
 function hantarPermohonanBerkumpulan(){
+    var idPermohonan = $('#submitBtnID').val();
     var namaPekerja = document.querySelector("#namaPekerjaBK").value;
     var pegPelulusBK = document.querySelector("#pegawaiLulusBK").value;
     var pegSokongBK = document.querySelector("#pegawaiSokongBK").value;
@@ -210,22 +210,22 @@ function hantarPermohonanBerkumpulan(){
     var sebab = document.querySelector("#sebabBK").value;
     var lokasi = document.querySelector("#lokasiBK").value;
     var hari = moment(tarikhKerjaBK).format("dddd");
-    var masa = getTimeDifference(masaMulaBK,masaAkhirBK);
-    var waktu = "";
+    // var masa = getTimeDifference(masaMulaBK,masaAkhirBK);
+    // var waktu = "";
     var hour = masaMulaBK.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = berkumpulan;
 
-    if(hour >= 6 && hour < 12)
-    {
-        waktu = "Pagi";
-    }else if(hour >= 12 && hour <= 19)
-    {
-        waktu = "Petang"
-    }else
-    {
-        waktu = "Malam"
-    }
+    // if(hour >= 6 && hour < 12)
+    // {
+    //     waktu = "Pagi";
+    // }else if(hour >= 12 && hour <= 19)
+    // {
+    //     waktu = "Petang"
+    // }else
+    // {
+    //     waktu = "Malam"
+    // }
     var nopekerja = [namaPekerja];
 
     $(".pekerjasform").each(function(j){
@@ -247,9 +247,9 @@ function hantarPermohonanBerkumpulan(){
         tarikh_permohonan:tarikhKerjaBK,
         masa_mula:masaMulaBK,
         masa_akhir:masaAkhirBK,
-        masa:masa,
+        // masa:masa,
         hari:hari,
-        waktu:waktu,
+        // waktu:waktu,
         lokasi:lokasi,
         kadar_jam:"1.125",
         status:status,
@@ -302,6 +302,7 @@ function hantarPermohonanBerkumpulan(){
 }
 
 function hantarPermohonanIndividu(){
+    var idPermohonan = $('#submitBtnID').val();
     var noPekerjaID = document.querySelector("#noPekerjaID").value;
     var pegPelulusID = document.querySelector("#pegawaiLulusID").value;
     var pegSokongID = document.querySelector("#pegawaiSokongID").value;
@@ -312,25 +313,24 @@ function hantarPermohonanIndividu(){
     var sebab = document.querySelector("#sebabID").value;
     var lokasi = document.querySelector("#lokasiID").value;
     var hari = moment(tarikhKerjaID,"DD-MM-YYYY").format("dddd");
-    var masa = getTimeDifference(masaMulaID,masaAkhirID);
-    var waktu = "";
-    var hour = masaMulaID.substring(0,2);
+    // var masa = getTimeDifference(masaMulaID,masaAkhirID);
+    // var waktu = "";
+    // var hour = masaMulaID.substring(0,2);
     var status = "DALAM PROSES";
     var jenis_permohonan = individu;
     var tarikhMula = moment(tarikhKerjaID,"DD-MM-YYYY").format("YYYY-MM-DD")
     var masaMula = tarikhMula + " " + masaMulaID + ":00"
     var tarikhAkhir = moment(tarikhAkhirKerjaID,"DD-MM-YYYY").format("YYYY-MM-DD")
     var masaAkhir = tarikhAkhir + " " + masaAkhirID + ":00"
-    // var differences = timeDiffCalc(new Date(masaMula),new Date(masaAkhir));
 
-    totalhours = totalhours.toFixed(2)
-    if(hour >= 6 && hour < 12){
-        waktu = "Pagi";
-    }else if(hour >= 12 && hour <= 19){
-        waktu = "Petang"
-    } else {
-        waktu = "Malam"
-    }
+    // totalhours = totalhours.toFixed(2)
+    // if(hour >= 6 && hour < 12){
+    //     waktu = "Pagi";
+    // }else if(hour >= 12 && hour <= 19){
+    //     waktu = "Petang"
+    // } else {
+    //     waktu = "Malam"
+    // }
 
     var nopekerja = [noPekerjaID];
     var user_id = noPekerjaID;
@@ -341,9 +341,7 @@ function hantarPermohonanIndividu(){
                     tarikh_permohonan:tarikhKerjaID,
                     masa_mula:masaMulaID,
                     masa_akhir:masaAkhirID,
-                    masa:totalhours,
                     hari:hari,
-                    waktu:waktu,
                     lokasi:lokasi,
                     kadar_jam:"1.125",
                     status:status,
@@ -353,6 +351,7 @@ function hantarPermohonanIndividu(){
                 };
 
     if (edit != 1){
+        console.log('edit0');
         $.ajax({
             url: 'permohonan-baru/hantar-permohonan',
             type: 'POST', 
@@ -373,29 +372,25 @@ function hantarPermohonanIndividu(){
                 console.log(data);
             } 
         });
-    }else if(edit == 1){
-        var objectUpdate = {
-            tarikh_akhir_kerja:tarikhAkhirKerjaID,
-            id_peg_pelulus:pegPelulusID,
-            id_peg_sokong:pegSokongID,
-            tarikh_permohonan:tarikhKerjaID,
-            masa_mula:masaMulaID,
-            masa_akhir:masaAkhirID,
-            masa:totalhours,
-            hari:hari,
-            waktu:waktu,
-            status:status,
-            tujuan:sebab,
-            };
+
+    } else if(edit == 1){
         $.ajax({
             url: 'permohonan-baru/kemaskini-permohonan/'+idPermohonan,
             type: 'put', 
-            data:{
-                idPermohonan:idPermohonan,
-                object:objectUpdate,
-                jenisPermohonan:jenis_permohonan
+            data: {
+                jenisPermohonan : jenis_permohonan,
+                tarikh_permohonan : tarikhKerjaID,
+                tarikh_akhir_kerja : tarikhAkhirKerjaID,
+                id_peg_pelulus : pegPelulusID,
+                id_peg_sokong : pegSokongID,
+                masa_mula : masaMulaID,
+                masa_akhir : masaAkhirID,
+                hari : hari, 
+                tujuan : sebab,
+                lokasi : lokasi,
+                id_user : noPekerjaID 
             },
-            success: function(data) {
+            success: function() {
                 $('#permohonanbaruModal').modal('hide');
                 successAlert();
                 getIndividuDT();

@@ -32,7 +32,7 @@ function showSemakanDatatableKT(){
         },
         serverSide: true,
         ajax: {
-                url: "semakan/"+nopekerja,
+                url: "semakan/"+ nopekerja,
                 type: 'GET',
                 data:{
                         nopekerja:nopekerja,
@@ -47,10 +47,6 @@ function showSemakanDatatableKT(){
                 {data: 'progres'},
                 {data: 'masa_mula'},
                 {data: 'masa_akhir'},
-                // {data: 'masa'},
-                // {data: 'hari'},
-                // {data: 'waktu'},
-                // {data: 'kadar_jam'},
                 {data: 'tujuan'},
                 {data: null},
                 {data: 'jenis_permohonan'},
@@ -119,7 +115,7 @@ function showSemakanDatatableKT(){
                                 var allButton = button1 ;
                                 return allButton;
 
-                            } else if(row['status'] == 'DITOLAK'){
+                            } else if(row['status'] == 'DITOLAK' || "DALAM PROSES"){
                                 var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+"'"+data.jenis_permohonan+"'"+','+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                                 var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                                 var allButton = button2;

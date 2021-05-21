@@ -194,14 +194,9 @@
                                                         <th>Progres</th>
                                                         <th>Masa Mula</th>
                                                         <th>Masa Akhir</th>
-                                                        {{-- <th>Masa</th>
-                                                        <th>Hari</th>
-                                                        <th>Waktu</th>
-                                                        <th>Kadar Jam</th> --}}
                                                         <th>Tujuan</th>
                                                         <th>Tindakan</th>
-                                                        {{-- <th>id user</th>
-                                                        <th>Status</th> --}}
+                                                        <th hidden></th>
                                                         <th hidden></th>
                                                         <th hidden></th>
                                                         <th hidden></th>

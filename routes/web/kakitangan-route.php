@@ -70,7 +70,7 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as'   => 'permohonan-baru.delete',
 		]);
-		Route::put('/kemaskini-permohonan/{user_id}', [
+		Route::put('/kemaskini-permohonan/{id_permohonan}', [
 			'uses' => 'kakitangan\permohonanController@update',
 			'as'   => 'permohonan-baru.update',
 		]);

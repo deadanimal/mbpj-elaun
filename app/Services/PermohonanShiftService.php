@@ -455,6 +455,7 @@ public $timeAkhirMalam;
                 $waktu = '';
                 $shiftSiang = DateTime::createFromFormat('H:i','06:00');
                 $shiftMalam = DateTime::createFromFormat('H:i','22:00');
+
                 foreach ($splitDate as $split) {
                     $splitTime = explode(" ", $split);
                     $date = new DateTime($splitTime[0]);
@@ -474,7 +475,6 @@ public $timeAkhirMalam;
                 foreach ($pekerjas[0] as $pekerja) {
                     $permohonanbaru = [];
                     $validator = Validator::make($data, array(
-                        
                         'id_peg_pelulus' => 'required',
                         'id_peg_sokong' => 'required' ,
                         'tarikh_permohonan' => 'required',
@@ -482,7 +482,6 @@ public $timeAkhirMalam;
                         'masa_akhir' => 'required',
                         'tujuan' => 'required',
                         'lokasi' => 'required',
-                        
                     ));
                     if ($validator->fails()) {
                         dd($data);
