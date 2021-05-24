@@ -5,12 +5,12 @@ $.ajaxSetup({
 });
 
 function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPermohonan){
-    var arrayJenisPermohonan = ['PS1', 'PS2', 'EL1', 'EL2']
+    // var arrayJenisPermohonan = ['PS1', 'PS2', 'EL1', 'EL2']
     var id_user = parseInt($("#noPekerjaB1").val());
 
-    if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
-        $('#buttonHantarPengesahan').attr("disabled", "disabled");
-    }
+    // if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
+    //     $('#buttonHantarPengesahan').attr("disabled", "disabled");
+    // }
 
     $.ajax({
         url: 'semakan/semak-permohonan/' + id_permohonan_baru,
@@ -37,6 +37,11 @@ function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPer
 
             $("#permohonanbaruModal textarea[name=masaMulaSebenar-individu]").val(data.masa_mula_sebenar);
             $("#permohonanbaruModal textarea[name=masaAkhirSebenar-individu]").val(data.masa_akhir_sebenar);
+
+            $("#borangB1Modal input[name=peg_sokong]").val(data.peg_sokong.NAME)
+            $("#borangB1Modal input[name=jawatan_peg_sokong]").val(data.peg_sokong.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN)
+            $("#borangB1Modal input[name=peg_pelulus]").val(data.peg_pelulus.NAME)
+            $("#borangB1Modal input[name=jawatan_peg_pelulus]").val(data.peg_pelulus.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN)
 
             getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
 

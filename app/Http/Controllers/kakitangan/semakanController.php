@@ -65,11 +65,13 @@ class semakanController extends Controller
         }
     }
 
-    public function showModal(Request $request,$id){
+    public function showModal(Request $request, $id){
         $pilihanKT = $request->input('pilihanKT');
         $pilihanReal = $request->input('pilihanReal');
 
         $permohonan = PermohonanBaru::findOrFail($id);
+        $peg_sokong = User::with('maklumat_pekerjaan.jawatan')->findOrFail($permohonan->id_peg_sokong);
+        $peg_pelulus = User::with('maklumat_pekerjaan.jawatan')->findOrFail($permohonan->id_peg_pelulus);
 
         foreach ($permohonan->users as $user) {
             $masa_mula_sebenar = $user->permohonan_with_users->masa_mula_sebenar;
@@ -80,6 +82,8 @@ class semakanController extends Controller
             'permohonan' => $permohonan,
             'masa_mula_sebenar' => $masa_mula_sebenar,
             'masa_akhir_sebenar' => $masa_akhir_sebenar,
+            'peg_sokong' => $peg_sokong,
+            'peg_pelulus' => $peg_pelulus,
         ],200);
         
     }

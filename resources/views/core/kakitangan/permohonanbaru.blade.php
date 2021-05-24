@@ -209,17 +209,13 @@
                 
                                         </div>
                                         <div class="col-12 my-4">
-                                        
-                                            <form class="form-inline" style="display: flex; justify-content: flex-end">
-                                                
+                                            {{-- <form class="form-inline" style="display: flex; justify-content: flex-end">
                                                     <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
                                                     <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan0" placeholder="" autocomplete="off" data-column="0">
 
                                                     <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
-                                                    <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan4" placeholder="" autocomplete="off" data-column="4">
-                                                                
-                                            </form>
-                                            
+                                                    <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan4" placeholder="" autocomplete="off" data-column="4">   
+                                            </form> --}}
                                         </div>
                                     </div>
                                 </div>

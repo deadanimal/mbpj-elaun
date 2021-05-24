@@ -23,7 +23,7 @@ Route::group([
 			'uses' => 'kakitangan\semakanController@show',
 			'as'   => 'semakan.show',
 		]);
-		Route::get('/semak-permohonan/{user_id}', [
+		Route::get('/semak-permohonan/{id_permohonan}', [
 			'uses' => 'kakitangan\semakanController@showModal',
 			'as'   => 'semakan.showModal',
 		]);

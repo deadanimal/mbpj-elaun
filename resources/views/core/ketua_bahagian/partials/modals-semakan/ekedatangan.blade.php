@@ -2,9 +2,6 @@
     @csrf
     @method('put')
 
-    @include('alerts.success')
-    @include('alerts.error_self_update', ['key' => 'not_allow_profile'])
-
     <div class="row">
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">

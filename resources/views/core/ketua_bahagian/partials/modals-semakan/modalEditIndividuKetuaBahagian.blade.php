@@ -102,28 +102,28 @@
                                 </div>
                                 </div>
                                 <div class="accordion-item">
-                                <h2 class="accordion-header" id="eKedatanganHeading">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#eKedatanganContent" aria-expanded="false" aria-controls="eKedatanganContent">
-                                    eKedatangan
-                                    </button>
-                                </h2>
-                                <div id="eKedatanganContent" class="accordion-collapse collapse show" aria-labelledby="eKedatanganHeading" data-bs-parent="#detailPermohananAccordion">
-                                    <div class="accordion-body">
-                                        @include('core.ketua_bahagian.partials.modals-semakan.ekedatangan')
-                                    </div>
-                                </div>
+                                    <h2 class="accordion-header" id="eKedatanganHeading">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#eKedatanganContent" aria-expanded="false" aria-controls="eKedatanganContent">
+                                        eKedatangan
+                                        </button>
+                                    </h2>
+                                        <div id="eKedatanganContent" class="accordion-collapse collapse show" aria-labelledby="eKedatanganHeading" data-bs-parent="#detailPermohananAccordion">
+                                            <div class="accordion-body">
+                                                @include('core.ketua_bahagian.partials.modals-semakan.ekedatangan')
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="accordion-item">
-                                <h2 class="accordion-header" id="kelulusanHeading">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kelulusanContent" aria-expanded="false" aria-controls="kelulusanContent">
-                                        Kelulusan
-                                    </button>
-                                </h2>
-                                <div id="kelulusanContent" class="accordion-collapse collapse" aria-labelledby="kelulusanHeading" data-bs-parent="#detailPermohananAccordion">
-                                    <div class="accordion-body">
-                                        @include('core.ketua_bahagian.partials.modals-semakan.kelulusan')
+                                    <h2 class="accordion-header" id="kelulusanHeading">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kelulusanContent" aria-expanded="false" aria-controls="kelulusanContent">
+                                            Kelulusan
+                                        </button>
+                                    </h2>
+                                    <div id="kelulusanContent" class="accordion-collapse collapse" aria-labelledby="kelulusanHeading" data-bs-parent="#detailPermohananAccordion">
+                                        <div class="accordion-body">
+                                            @include('core.ketua_bahagian.partials.modals-semakan.kelulusan')
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>

@@ -27,14 +27,20 @@ function fillInEkedatanganKT(idKakitangan, id_permohonan_baru) {
             $("#borangB1Modal input[name=tarikh]").val(data.ekedatangans.tarikh);
             $("#borangB1Modal input[name=waktuMasuk]").val(data.ekedatangans.waktu_masuk);
             $("#borangB1Modal input[name=waktuKeluar]").val(data.ekedatangans.waktu_keluar);
-            $("#borangB1Modal input[name=jumlahMasa]").val(data.ekedatangans.jumlah_waktu_kerja);
-            $("#borangB1Modal input[name=mulaKerja]").val(data.ekedatangans.waktu_masuk_OT_1);
-            $("#borangB1Modal input[name=akhirKerja]").val(data.ekedatangans.waktu_keluar_OT_1);
-            $("#borangB1Modal input[name=jumlahKerja]").val(data.ekedatangans.jumlah_OT_1);
+            $("#borangB1Modal input[name=jumlahWaktuKerja]").val(data.ekedatangans.jumlah_waktu_kerja);
+            $("#borangB1Modal input[name=waktuMasukOT1]").val(data.ekedatangans.waktu_masuk_OT_1);
+            $("#borangB1Modal input[name=waktuKeluarOT1]").val(data.ekedatangans.waktu_keluar_OT_1);
+            $("#borangB1Modal input[name=jumlahOT1]").val(data.ekedatangans.jumlah_OT_1);
+            $("#borangB1Modal input[name=waktuMasukOT2]").val(data.ekedatangans.waktu_masuk_OT_2);
+            $("#borangB1Modal input[name=waktuKeluarOT2]").val(data.ekedatangans.waktu_keluar_OT_2);
+            $("#borangB1Modal input[name=jumlahOT2]").val(data.ekedatangans.jumlah_OT_2);
+            $("#borangB1Modal input[name=waktuMasukOT3]").val(data.ekedatangans.waktu_masuk_OT_3);
+            $("#borangB1Modal input[name=waktuKeluarOT3]").val(data.ekedatangans.waktu_keluar_OT_3);
+            $("#borangB1Modal input[name=jumlahOT3]").val(data.ekedatangans.jumlah_OT_3);
             $("#borangB1Modal input[name=jumlahOTKeseluruhan]").val(data.ekedatangans.jumlah_OT_keseluruhan);
             $("#borangB1Modal input[name=waktuAnjal]").val(data.ekedatangans.waktu_anjal);
                 
-            },
+        },
         error: function(data) { console.log(data); }
     });
 }

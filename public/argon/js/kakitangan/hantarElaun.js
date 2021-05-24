@@ -49,11 +49,11 @@ function deletePermohonan(id_permohonan_baru){
 }
 
 function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
-    var arrayJenisPermohonan = ['OT1', 'OT2', 'PS1', 'PS2']
+    // var arrayJenisPermohonan = ['OT1', 'OT2', 'PS1', 'PS2']
 
-    if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
-        $('#buttonHantarPengesahan').attr("disabled", "disabled");
-    }
+    // if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
+    //     $('#buttonHantarPengesahan').attr("disabled", "disabled");
+    // }
 
     $.ajax({
         url: 'tuntutan/kemaskini-permohonan/' + id_permohonan_baru,
