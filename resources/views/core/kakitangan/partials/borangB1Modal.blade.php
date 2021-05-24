@@ -12,7 +12,6 @@
 
                         </div>
                     </div>
-                        
                     <div class="col-sm-6">
                         <div class="modal-header">
                             <h4 class="modal-title">
@@ -37,12 +36,9 @@
                 <div id="divPermohonanIndividu" class="my-3">
                     <form id="frmTuntutan">
                         <div class="row vdivide">
-
-
                                         <!--  -->
                             <!-- LEFT COLUMN FORM HERE -->
                                         <!--  -->
-
 
                             <div class="col-sm-6">
                                 <div class="row"> 
@@ -71,13 +67,13 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="tarikhKerjaMula">{{ __('Tarikh Kerja Mula') }}</label>
-                                            <input name="tarikhKerjaMula" id="tarikhKerjaMula" class="form-control form-control-sm"  value="" >
+                                            <input name="tarikhKerjaMula" id="tarikhKerjaMula" class="form-control form-control-sm"  value="" disabled>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="tarikhKerjaAkhir">{{ __('Tarikh Kerja Akhir') }}</label>
-                                            <input name="tarikhKerjaAkhir" id="tarikhKerjaAkhir" class="form-control form-control-sm"  value="" >
+                                            <input name="tarikhKerjaAkhir" id="tarikhKerjaAkhir" class="form-control form-control-sm"  value="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -85,38 +81,42 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="masaMula">{{ __('Masa Mula') }}</label>
-                                            <input name="masaMula" id="masaMula" class="form-control form-control-sm" placeholder="" value="">
+                                            <input name="masaMula" id="masaMula" class="form-control form-control-sm" placeholder="" value="" disabled>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="masaAkhir">{{ __('Masa Akhir') }}</label>
-                                            <input name="masaAkhir" id="masaAkhir" class="form-control form-control-sm" placeholder="" value="" >
+                                            <input name="masaAkhir" id="masaAkhir" class="form-control form-control-sm" placeholder="" value="" disabled>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
-                                    <div class="col form-group">
-                                        <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaMulaSebenar-individu" value="{{ auth()->user()->CUSTOMERID }}" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="" autofocus required>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-control-label">{{ __('Masa Mula Sebenar') }}</label>
+                                            {{-- <input class="form-control form-control-sm" name="masaMulaSebenar-individu" value="{{ auth()->user()->CUSTOMERID }}" id="semakan-modal-individu-masaMulaSebenar" type="text" placeholder="" autofocus required> --}}
+                                            <input class="form-control form-control-sm" name="masaMulaSebenar-individu" value="" id="semakan-modal-individu-masaMulaSebenar" placeholder="">
+                                        </div>
                                     </div>
-                                    <div class="col form-group">
-                                        <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
-                                        <input class="form-control form-control-sm" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" type="text" placeholder="" required>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="form-control-label">{{ __('Masa Akhir Sebenar') }}</label>
+                                            <input class="form-control form-control-sm" name="masaAkhirSebenar-individu" id="semakan-modal-individu-masaAkhirSebenar" placeholder="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row"> 
                                     <div class="col">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="tujuan">{{ __('Tujuan') }}</label>
-                                            <textarea name="tujuan" id="tujuan" class="form-control" ></textarea>
+                                            <label class="form-control-label" for="tujuan" >{{ __('Tujuan') }}</label>
+                                            <textarea name="tujuan" id="tujuan" class="form-control" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="form-control-label" for="lokasiB1">{{ __('Lokasi') }}</label>
-                                            <textarea name="lokasiB1" id="lokasiB1" class="form-control" ></textarea>
+                                            <textarea name="lokasiB1" id="lokasiB1" class="form-control" disabled></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +128,6 @@
                                         <!--  -->
 
                             <div class="col-sm-6">
-                                {{-- <h4>E-Kedatangan</h4> --}}
                                 <div class="accordion" id="detailPermohananAccordionKT">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="eKedatanganHeadingKT">
@@ -138,7 +137,6 @@
                                         </h2>
                                         <div id="eKedatanganContentKT" class="accordion-collapse collapse show" aria-labelledby="eKedatanganHeadingKT" data-bs-parent="#detailPermohananAccordionKT">
                                             <div class="accordion-body">
-                                                
                                                 <div class="row">
                                                     <div class="col-sm">
                                                         <div class="form-group">
@@ -254,7 +252,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -342,13 +339,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
             {{-- <div class="modal-footer mx-auto"> --}}
-            <div class="text-center mt-3">
+            <div class="text-center mb-3">
                 <input name="jenisPermohonanKT" value="" hidden>
                 <input name="jenisPermohonanReal" value="" hidden>
                 <input name="idPermohonan" value="" hidden>

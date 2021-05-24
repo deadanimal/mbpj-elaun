@@ -7,7 +7,10 @@ $(document).ready(function(){
 });
 
 function showTuntutanDatatableKT(){
+    var pilihanKT = ['PS1','PS2','EL1','EL2'];
+    var pilihanReal = ['EL1','EL2'];
     var nopekerja = parseInt($("#noPekerjaB1").val());
+    var is_semakan = 0;
     
     tuntutansDT = $('#tuntutansDT').DataTable({
         dom: "lrtip",
@@ -115,32 +118,32 @@ function showTuntutanDatatableKT(){
                     if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
                         // FOR STATUS SEMAK SEMULA
                         if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("PS1"||"PS2"))){
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+data.id_permohonan_baru +', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+is_semakan+','+data.id_permohonan_baru +', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
                             var button2 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-success btn-sm ni ni-check-bold"  onclick="hantarElaun('+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                             var allButton = button1 + button2 ;
                             return allButton;
                         }
                         // FOR STATUS DITERIMA
                         else if(row['status'] == "DITERIMA" && (row['jenis_permohonan_kakitangan'] == ("EL1"||"EL2"))){ 
-                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                             var allButton = button1;
                             return allButton;
                         }
                         // FOR STATUS DALAM PROSES
                         else if(row['status'] == "DALAM PROSES"){
-                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                             var allButton = button1;
                             return allButton;
                         }
                         // FOR STATUS DITOLAK
                         else if(row['status'] == "DITOLAK"){
-                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonan('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
+                            var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+');"></i>' 
                             var allButton = button1;
                             return allButton;
                         }
                         // FOR STATUS PERLU KEMASKINI
                         else if(row['status'] == "PERLU KEMASKINI"){
-                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+data.id_permohonan_baru+', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
+                            var button1 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-primary btn-sm ni ni-align-center"  onclick="changeDataTargetSemakan('+is_semakan+','+data.id_permohonan_baru+', '+"'"+data.jenis_permohonan_kakitangan+"'"+', '+"'"+data.jenis_permohonan+"'"+');"></i>'  
                             var button2 = '<i id="buttonEdit" data-toggle="modal" data-target="" class="btn btn-success btn-sm ni ni-check-bold"  onclick="hantarElaun('+"'"+data.id_permohonan_baru+"'"+');"></i>'  
                             var allButton = button1 + button2;
                             return allButton;

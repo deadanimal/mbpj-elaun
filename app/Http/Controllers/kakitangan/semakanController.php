@@ -55,14 +55,14 @@ class semakanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request, $id)
     {
-        $pilihanKT = $request->input('pilihanKT');
-        $pilihanReal = $request->input('pilihanReal');
+        $permohonans = User::findOrFail($id)->permohonans()
+                            ->whereIn('jenis_permohonan', array('PS1', 'PS2', 'EL1', 'EL2'))
+                            ->whereIn('jenis_permohonan_kakitangan', array('OT1', 'OT2', 'PS1', 'PS2'))
+                            ->statusAkhirBelomDiterima();
 
-        if(request()->ajax()){
-            return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
-        }
+        return datatables()->of($permohonans)->make(true);
     }
 
     public function showModal(Request $request, $id){

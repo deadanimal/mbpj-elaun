@@ -321,7 +321,7 @@ function getIndividuDT(){
                 targets: 7,
                 mRender: function(data,type,row)
                 {
-                    if(row['jenis_permohonan'] == 'PS1'){
+                    if(row['jenis_permohonan'] == 'PS1' || row['progres'] == "Sah P1"){
                         var button2= '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
                         var allButton = button2;
                         return allButton;
@@ -340,12 +340,12 @@ function getIndividuDT(){
                         return allButton;
                         
                     }
-                    else if(row['progres'] == "Sah P1" || row['progres'] == "Sah P2"){
-                        var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
-                        var allButton = button1 ;
-                        return allButton;
+                    // else if(row['progres'] == "Sah P1" || row['progres'] == "Sah P2"){
+                    //     var button1 = '<i id="tolakBtn" data-toggle="modal" data-target="" class="btn btn-danger btn-sm ni ni-fat-remove" onclick="deletePermohonanKT('+"'"+data.id_permohonan_baru+"'"+', '+ "'mohonBaruIndividu'"+')"></i>' 
+                    //     var allButton = button1 ;
+                    //     return allButton;
 
-                    }
+                    // }
                 }
                 
             },

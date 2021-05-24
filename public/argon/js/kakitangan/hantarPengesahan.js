@@ -4,7 +4,7 @@ $.ajaxSetup({
     }
 });
 
-function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPermohonan){
+function changeDataTargetSemakan(is_semakan, id_permohonan_baru, jenisPermohonanKT, jenisPermohonan){
     // var arrayJenisPermohonan = ['PS1', 'PS2', 'EL1', 'EL2']
     var id_user = parseInt($("#noPekerjaB1").val());
 
@@ -12,11 +12,15 @@ function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPer
     //     $('#buttonHantarPengesahan').attr("disabled", "disabled");
     // }
 
+    if (!is_semakan) {
+        $("#borangB1Modal input[name=masaMulaSebenar-individu]").attr('disabled', 'disabled');
+        $("#borangB1Modal input[name=masaAkhirSebenar-individu]").attr('disabled', 'disabled');
+    }
+
     $.ajax({
         url: 'semakan/semak-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         data:{
-            id_permohonan_baru : id_permohonan_baru,
             jenisPermohonanKT : jenisPermohonanKT,
             jenisPermohonan : jenisPermohonan
         },
@@ -33,10 +37,10 @@ function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPer
             $("#borangB1Modal textarea[id=tujuan]").val(data.permohonan.tujuan);
             $("#borangB1Modal textarea[id=lokasiB1]").val(data.permohonan.lokasi);
             $("#borangB1Modal input[name=idPermohonan]").val(data.permohonan.id_permohonan_baru);
-            $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
+            // $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
 
-            $("#permohonanbaruModal textarea[name=masaMulaSebenar-individu]").val(data.masa_mula_sebenar);
-            $("#permohonanbaruModal textarea[name=masaAkhirSebenar-individu]").val(data.masa_akhir_sebenar);
+            $("#borangB1Modal input[name=masaMulaSebenar-individu]").val(data.masa_mula_sebenar);
+            $("#borangB1Modal input[name=masaAkhirSebenar-individu]").val(data.masa_akhir_sebenar);
 
             $("#borangB1Modal input[name=peg_sokong]").val(data.peg_sokong.NAME)
             $("#borangB1Modal input[name=jawatan_peg_sokong]").val(data.peg_sokong.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN)
@@ -69,8 +73,12 @@ function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPer
             $('input').css('color', 'black');
             $('textarea' ).css('color', 'black');
 
+
             // set value of #buttonHantarPengesahan to current id_permohonan_baru
             $("#buttonHantarPengesahan").attr("value", data.permohonan.id_permohonan_baru); 
+
+            // set data-value to check if it for semakan or tuntutan
+            $("#buttonHantarPengesahan").attr("data-value", is_semakan); 
         },
         error: function(data) {
             console.log(data);
@@ -78,24 +86,25 @@ function changeDataTargetSemakan(id_permohonan_baru, jenisPermohonanKT, jenisPer
     });
 }
 
-function deletePermohonan(id_permohonan_baru){
-    $.ajax({
-        url: 'semakan/delete-permohonan/' + id_permohonan_baru,
-        type: 'put', 
-        data:{
-            id_permohonan_baru : id_permohonan_baru
-        },
-        success: function() {
-            showSemakanDatatableKT();
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
-}
+// function deletePermohonan(id_permohonan_baru){
+//     $.ajax({
+//         url: 'semakan/delete-permohonan/' + id_permohonan_baru,
+//         type: 'put', 
+//         data:{
+//             id_permohonan_baru : id_permohonan_baru
+//         },
+//         success: function() {
+//             showSemakanDatatableKT();
+//         },
+//         error: function(data) {
+//             console.log(data);
+//         } 
+//     });
+// }
 
 function hantarPengesahan(){
     var id_permohonan_baru = $('#buttonHantarPengesahan').attr('value');
+    var is_semakan = $('#buttonHantarPengesahan').attr('data-value');
     var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD-MM-YYYY").format("DD-MM-YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
@@ -131,7 +140,11 @@ function hantarPengesahan(){
                 'success'
                 )
                 
-            showSemakanDatatableKT();
+            if (is_semakan) {
+                showSemakanDatatableKT();
+            } else {
+                showTuntutanDatatableKT()
+            }
         },
         error: function(data) {
             console.log(data);
