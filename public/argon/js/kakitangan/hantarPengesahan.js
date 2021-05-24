@@ -177,6 +177,7 @@ function saveMasa(){
     var waktuKeluar = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val()
     var mulaKerja = $("#borangB1Modal input[name=masaMula]").val()
     var akhirKerja = $("#borangB1Modal input[name=masaAkhir]").val()
+    
     $.ajax({
         url:'semakan/masa-sebenar/' + id_user,
         type:'put',

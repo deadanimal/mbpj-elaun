@@ -109,6 +109,9 @@ class semakanController extends Controller
     public function update(Request $request, $id)
     {
         $permohonan = PermohonanBaru::findOrFail($id);
+        $masa_mula_sebenar = $request->input('masa_mula_sebenar');
+        $masa_akhir_sebenar = $request->input('masa_akhir_sebenar');
+        $masa_sebenar = 0;
 
         $validator = Validator::make($request->all(), [ 
             'tarikh_permohonan' => 'required',
@@ -135,11 +138,14 @@ class semakanController extends Controller
             $permohonan->tujuan = $request->input('tujuan');
             $permohonan->lokasi = $request->input('lokasi');
 
-            ($permohonan->users)->each(function($user) use ($permohonan, $request) {
+            $masa_sebenar = $this->timeDiff($masa_mula_sebenar, $masa_akhir_sebenar);
+
+            ($permohonan->users)->each(function($user) use ($permohonan, $request, $masa_mula_sebenar,  $masa_akhir_sebenar, $masa_sebenar) {
                 $permohonan->users()
                             ->updateExistingPivot($user->CUSTOMERID, array(
-                                    'masa_mula_sebenar' => $request->input('masa_mula_sebenar'),
-                                    'masa_akhir_sebenar' => $request->input('masa_akhir_sebenar'),
+                                    'masa_mula_sebenar' => $masa_mula_sebenar,
+                                    'masa_akhir_sebenar' =>  $masa_akhir_sebenar,
+                                    'masa_sebenar' => $masa_sebenar
                                 ), 
                                 false);
             });
@@ -150,6 +156,21 @@ class semakanController extends Controller
                 'permohonan' => $permohonan
             ],200);
         }
+    }
+
+    function timeDiff($masa_mula, $masa_akhir)
+    {
+        $secInAnHour = 3600;
+        // convert to unix timestamps
+        $masa_mula = strtotime($masa_mula);
+        $masa_akhir = strtotime($masa_akhir);
+
+        // perform subtraction to get the difference (in seconds) between times
+        $timeDiff = $masa_akhir - $masa_mula;
+
+        $timeDiff = floatval($timeDiff/$secInAnHour);
+
+        return $timeDiff;
     }
 
     /**

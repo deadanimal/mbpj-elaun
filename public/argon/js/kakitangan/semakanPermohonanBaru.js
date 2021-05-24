@@ -12,7 +12,6 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
     getPermohonan(id_permohonan_baru,jenis_permohonan);
     edit = 1;   
 
-
     $("#submitBtnID").attr('value', id_permohonan_baru)
 }
 
@@ -351,7 +350,6 @@ function hantarPermohonanIndividu(){
                 };
 
     if (edit != 1){
-        console.log('edit0');
         $.ajax({
             url: 'permohonan-baru/hantar-permohonan',
             type: 'POST', 
