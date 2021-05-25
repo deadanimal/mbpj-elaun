@@ -273,6 +273,7 @@ function getIndividuDT(){
             {data: 'progres'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
+            {data: 'masa'},
             {data: 'tujuan'},
             {data: null},
             {data: 'jenis_permohonan'},
@@ -318,7 +319,7 @@ function getIndividuDT(){
                 }
             },
             {
-                targets: 7,
+                targets: 8,
                 mRender: function(data,type,row)
                 {
                     if(row['jenis_permohonan'] == 'PS1' || row['progres'] == "Sah P1"){
@@ -350,17 +351,17 @@ function getIndividuDT(){
                 
             },
             {
-                targets: 8,
-                visible: false,
-                searchable: true
-            },
-            {
                 targets: 9,
                 visible: false,
                 searchable: true
             },
             {
                 targets: 10,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 11,
                 visible: false,
                 searchable: true
             }
@@ -417,6 +418,7 @@ function getBerkumpulanDT(){
             {data: 'progres'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
+            {data: 'masa'},
             {data: 'tujuan'},
             {data: null},
             {data: 'jenis_permohonan'},
@@ -462,7 +464,7 @@ function getBerkumpulanDT(){
                 }
             },
             {
-                targets: 7,
+                targets: 8,
                 mRender: function(data,type,row)
                 {   
                     if(row['jenis_permohonan'] == 'PS1'){
@@ -493,17 +495,17 @@ function getBerkumpulanDT(){
                 }
             },
             {
-                targets: 8,
-                visible: false,
-                searchable: true
-            },
-            {
                 targets: 9,
                 visible: false,
                 searchable: true
             },
             {
                 targets: 10,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 11,
                 visible: false,
                 searchable: true
             }

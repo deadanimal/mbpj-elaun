@@ -138,14 +138,9 @@
                                                     <th>Progres</th>
                                                     <th>Masa Mula</th>
                                                     <th>Masa Akhir</th>
-                                                    {{-- <th>Masa</th>
-                                                    <th>Hari</th>
-                                                    <th>Waktu</th>
-                                                    <th>Kadar Jam</th> --}}
+                                                    <th>Masa</th>
                                                     <th>Tujuan</th>
                                                     <th>Tindakan</th>
-                                                    {{-- <th>id user</th>
-                                                    <th>Status</th> --}}
                                                     <th hidden></th>
                                                     <th hidden></th>
                                                     <th hidden></th>
@@ -158,7 +153,7 @@
                                             </table>
                 
                                         </div>
-                                        <div class="col-12 my-4">
+                                        {{-- <div class="col-12 my-4">
                                         
                                             <form class="form-inline" style="display: flex; justify-content: flex-end">
                                                 
@@ -170,7 +165,7 @@
                                                                 
                                             </form>
                                             
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -194,6 +189,7 @@
                                                         <th>Progres</th>
                                                         <th>Masa Mula</th>
                                                         <th>Masa Akhir</th>
+                                                        <th>Masa</th>
                                                         <th>Tujuan</th>
                                                         <th>Tindakan</th>
                                                         <th hidden></th>
@@ -208,15 +204,15 @@
                                             </table>
                 
                                         </div>
-                                        <div class="col-12 my-4">
-                                            {{-- <form class="form-inline" style="display: flex; justify-content: flex-end">
+                                        {{-- <div class="col-12 my-4">
+                                            <form class="form-inline" style="display: flex; justify-content: flex-end">
                                                     <label for="jam" class="col-form-label col-form-label-sm">Jumlah Persamaan Jam:</label>
                                                     <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan0" placeholder="" autocomplete="off" data-column="0">
 
                                                     <label for="masa" class="col-form-label col-form-label-sm">Jumlah Tuntutan Lebih Masa:</label>
                                                     <input type="text" class="form-control form-control-sm column_filter_bk" id="filterKumpulan4" placeholder="" autocomplete="off" data-column="4">   
-                                            </form> --}}
-                                        </div>
+                                            </form>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

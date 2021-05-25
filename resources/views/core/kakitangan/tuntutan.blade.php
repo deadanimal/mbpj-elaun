@@ -101,8 +101,8 @@
                                     <th>Progres</th>
                                     <th>Masa Mula</th>
                                     <th>Masa Akhir</th>
-                                    {{-- <th>Masa</th>
-                                    <th>Hari</th>
+                                    <th>Masa</th>
+                                    {{-- <th>Hari</th>
                                     <th>Waktu</th>
                                     <th>Kadar Jam</th> --}}
                                     <th>Tujuan</th>
@@ -126,7 +126,7 @@
         </div>
 
         @include('core.kakitangan.partials.borangB1Modal')
-        @include('layouts.footers.auth')
+        {{-- @include('layouts.footers.auth') --}}
     </div>
 @endsection
 

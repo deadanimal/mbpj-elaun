@@ -56,6 +56,7 @@ function showTuntutanDatatableKT(){
             {data: 'progres'},
             {data: 'masa_mula'},
             {data: 'masa_akhir'},
+            {data: 'masa'},
             {data: 'tujuan'},
             {data: null},
             {data: 'jenis_permohonan'},
@@ -112,7 +113,7 @@ function showTuntutanDatatableKT(){
             },
 
             {
-                targets: 7,
+                targets: 8,
                 mRender: function(data,type,row)
                 {
                     if(pilihanKT.includes(row['jenis_permohonan_kakitangan'])){
@@ -156,17 +157,17 @@ function showTuntutanDatatableKT(){
                 
             },
             {
-                targets: 8,
-                visible: false,
-                searchable: true
-            },
-            {
                 targets: 9,
                 visible: false,
                 searchable: true
             },
             {
                 targets: 10,
+                visible: false,
+                searchable: true
+            },
+            {
+                targets: 11,
                 visible: false,
                 searchable: true
             },

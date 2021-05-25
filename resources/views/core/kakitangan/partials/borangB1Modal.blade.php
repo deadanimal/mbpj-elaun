@@ -344,7 +344,6 @@
                     </form>
                 </div>
             </div>
-            {{-- <div class="modal-footer mx-auto"> --}}
             <div class="text-center mb-3">
                 <input name="jenisPermohonanKT" value="" hidden>
                 <input name="jenisPermohonanReal" value="" hidden>
