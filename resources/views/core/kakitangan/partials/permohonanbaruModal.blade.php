@@ -130,7 +130,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="tarikh-kerjaBK">{{ __('Tarikh Kerja') }}</label>
+                                        <label class="form-control-label" for="tarikh-kerjaBK">{{ __('Tarikh Mula Kerja') }}</label>
                                         <input name="tarikh-kerjaBK" id="tarikh-kerjaBK" class="form-control form-control-sm" min="{{Carbon\Carbon::now()->toDateString()}}" >
                                     </div>
                                 </div> 
@@ -145,14 +145,14 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="masa-akhirBK">{{ __('Masa Akhir') }}</label>
-                                        <input name="masa-akhirBK" id="masa-akhirBK" class="form-control form-control-sm" autocomplete="off" >
+                                        <label class="form-control-label" for="masa-mulaBK">{{ __('Masa Mula') }}</label>
+                                        <input name="masa-mulaBK" id="masa-mulaBK" class="form-control form-control-sm" autocomplete="off" >
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="masa-mulaBK">{{ __('Masa Mula') }}</label>
-                                        <input name="masa-mulaBK" id="masa-mulaBK" class="form-control form-control-sm" autocomplete="off" >
+                                        <label class="form-control-label" for="masa-akhirBK">{{ __('Masa Akhir') }}</label>
+                                        <input name="masa-akhirBK" id="masa-akhirBK" class="form-control form-control-sm" autocomplete="off" >
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +189,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr class="my-3">
                             <div class="row">
+                                <h4>Senarai Pekerja Terlibat</h4>
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="form-control-label" for="namaPekerjaBK">{{ __('No Pekerja') }}</label>

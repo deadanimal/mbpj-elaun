@@ -220,8 +220,7 @@ function setEnableDropdown(){
         $("#divPermohonanBerkumpulan").hide();
         $("#permohonanbaruModal").modal("show");
 
-    }
-    else if ($("#jenisPermohonan").val() == "frmPermohonanBerkumpulan") {
+    } else if ($("#jenisPermohonan").val() == "frmPermohonanBerkumpulan") {
         document.getElementById('modaldialog').className = "modal-dialog modal-dialog-scrollable modal-xl"
         document.getElementById('selectpermohonan').className = "col-sm-6"
         $('#divPermohonanIndividu').hide();

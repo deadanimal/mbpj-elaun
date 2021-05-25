@@ -52,16 +52,17 @@ function changeDataTargetSemakan(is_semakan, id_permohonan_baru, jenisPermohonan
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
 
-            }else if(data.permohonan.kadar_jam == '1.25'){
+            } else if(data.permohonan.kadar_jam == '1.25'){
                 $("#borangB1Modal input[id=inlineJamRadio2]").prop("checked",true);
 
             }
+
             if(data.permohonan.waktu  == 'Pagi'){
                 $("#borangB1Modal input[id=inlineRadiobox1]").prop("checked",true);
-            }else if(data.permohonan.waktu  == 'Petang'){
+            } else if(data.permohonan.waktu  == 'Petang'){
                 $("#borangB1Modal input[id=inlineRadiobox2]").prop("checked",true);
 
-            }else if(data.permohonan.waktu  == 'Malam'){
+            } else if(data.permohonan.waktu  == 'Malam'){
                 $("#borangB1Modal input[id=inlineRadiobox3]").prop("checked",true);
 
             }
@@ -85,22 +86,6 @@ function changeDataTargetSemakan(is_semakan, id_permohonan_baru, jenisPermohonan
         } 
     });
 }
-
-// function deletePermohonan(id_permohonan_baru){
-//     $.ajax({
-//         url: 'semakan/delete-permohonan/' + id_permohonan_baru,
-//         type: 'put', 
-//         data:{
-//             id_permohonan_baru : id_permohonan_baru
-//         },
-//         success: function() {
-//             showSemakanDatatableKT();
-//         },
-//         error: function(data) {
-//             console.log(data);
-//         } 
-//     });
-// }
 
 function hantarPengesahan(){
     var id_permohonan_baru = $('#buttonHantarPengesahan').attr('value');
