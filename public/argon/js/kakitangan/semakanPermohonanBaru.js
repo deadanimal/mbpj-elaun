@@ -15,25 +15,25 @@ function changeDataTarget(jenis_permohonan,id_permohonan_baru){
     $("#submitBtnID").attr('value', id_permohonan_baru)
 }
 
-function deletePermohonan(id_permohonan_baru){
-    $.ajax({
-        url: 'permohonan-baru/delete-permohonan/' + id_permohonan_baru,
-        type: 'put', 
-        data:{
-            id_permohonan_baru : id_permohonan_baru
-        },
-        success: function(data) {
-            if(data.permohonan.jenis_permohonan_kakitangan == "OT1"){
-                getIndividuDT();
-            } else if(data.permohonan.jenis_permohonan_kakitangan == "OT2"){
-                getBerkumpulanDT();
-            }
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
-}
+// function deletePermohonan(id_permohonan_baru){
+//     $.ajax({
+//         url: 'permohonan-baru/delete-permohonan/' + id_permohonan_baru,
+//         type: 'put', 
+//         data:{
+//             id_permohonan_baru : id_permohonan_baru
+//         },
+//         success: function(data) {
+//             if(data.permohonan.jenis_permohonan_kakitangan == "OT1"){
+//                 getIndividuDT();
+//             } else if(data.permohonan.jenis_permohonan_kakitangan == "OT2"){
+//                 getBerkumpulanDT();
+//             }
+//         },
+//         error: function(data) {
+//             console.log(data);
+//         } 
+//     });
+// }
 
 function getPermohonan(id_permohonan_baru, jenis_permohonan){
     $.ajax({
@@ -61,9 +61,6 @@ function getPermohonan(id_permohonan_baru, jenis_permohonan){
                 $("#permohonanbaruModal input[name=masa-akhirID]").val(data.permohonan.masa_akhir);
                 $("#permohonanbaruModal textarea[name=sebabID]").val(data.permohonan.tujuan);
                 $("#permohonanbaruModal textarea[name=lokasiID]").val(data.permohonan.lokasi);
-
-                $("#permohonanbaruModal textarea[name=masaMulaSebenar-individu]").val(data.permohonan.permohonan_with_users.masa_mula_sebenar);
-                $("#permohonanbaruModal textarea[name=masaAkhirSebenar-individu]").val(data.permohonan.permohonan_with_users.masa_akhir_sebenar);
 
                 getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
                 
@@ -109,12 +106,13 @@ function getPermohonan(id_permohonan_baru, jenis_permohonan){
                 $("#permohonanbaruModal input[name=tarikh-akhir-kerjaBK]").val(data.permohonan.tarikh_akhir_kerja);
                 $("#permohonanbaruModal input[name=masa-mulaBK]").val(data.permohonan.masa_mula);
                 $("#permohonanbaruModal input[name=masa-akhirBK]").val(data.permohonan.masa_akhir);
-
-                document.getElementById('sebabBK').value = data.permohonan.tujuan;
-                document.getElementById('lokasiBK').value = data.permohonan.lokasi;
+                $("#permohonanbaruModal textarea[name=sebabBK]").val(data.permohonan.tujuan);
+                $("#permohonanbaruModal textarea[name=lokasiBK]").val(data.permohonan.lokasi);
 
                 getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
+                
                 $('input').css('color', 'black');
+                $('textarea' ).css('color', 'black');
 
                 $("#permohonanbaruModal").modal("show");
             }
