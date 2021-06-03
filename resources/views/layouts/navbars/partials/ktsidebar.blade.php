@@ -8,7 +8,6 @@
                     <i class="ni ni-shop text-primary"></i>
                     <span class="nav-link-text">{{ __('Dashboard') }}</span>
                 </a>
-                
             </li>
             <li class="nav-item {{ $parentSection == 'permohonan' ? 'active' : '' }}">
                 <a class="nav-link " href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="{{ $parentSection == 'permohonan' ? 'true' : '' }}" aria-controls="navbar-examples">

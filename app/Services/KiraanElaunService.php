@@ -50,10 +50,7 @@ class KiraanElaunService {
     public function jumlahTuntutanRounded()
     {
         $bayaranPerJam = $this->kadarBayaranSejam() * $this->kadarPerJam;
-        // $bayaranPerJamMalam = $this->kadarBayaranSejam() * 1.5;
         (float) $jumlahTuntutan = round($bayaranPerJam, 2) * $this->jumlahMasaBekerja;
-        // (float) $jumlahTuntutanMalam = round($bayaranPerJamMalam, 2) * $this->jumlahMasaBekerjaMalam;
-        // (float) $jumlahTuntutan = round($jumlahTuntutan, 2) + round($jumlahTuntutan, 2);
         
         $this->jumlahTuntutanAkhir = round($jumlahTuntutan, 2);
         

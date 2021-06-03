@@ -13,9 +13,16 @@ class CreateJawatansTable extends Migration
      */
     public function up()
     {
+        // this is needed for DO DB
+        // DB::statement('SET SESSION sql_require_primary_key=0');
+
         Schema::create('jawatans', function (Blueprint $table) {
-            // $table->increments('id_jawatan');
+            // For local
             $table->string('HR_KOD_JAWATAN')->index();
+
+            // For DO 
+            // $table->string('HR_KOD_JAWATAN')->primary();
+
             $table->text('HR_NAMA_JAWATAN');
             $table->string('HR_AKTIF_IND');
             $table->timestamps();

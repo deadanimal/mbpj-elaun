@@ -8,26 +8,23 @@
     </div>
     <div class="card-body px-0">
         <div class="table-responsive py-4">
-            <table class="table table-flush" id="permohonanDT">
+            <table class="table table-flush" id="permohonanDT" style="width: 100%">
                 <thead class="thead-light">
-                <tr>
-                    <th>No</th>
-                    <th>Tarikh Permohonan</th>
-                    <th>Status</th>
-                    <th>Progres</th>
-                    <th>Masa Mula</th>
-                    <th>Masa Akhir</th>
-                    <th>Masa</th>
-                    <th>Hari</th>
-                    <th>Waktu</th>
-                    <th>Kadar Jam</th>
-                    <th>Tujuan</th>
-                    <th></th>
-                    <th hidden>Status</th>
-                    <th hidden></th>
-                    <th hidden></th>
-                    <th ></th>
-                </tr>
+                    <tr>
+                        <th>No</th>
+                        <th>Tarikh Permohonan</th>
+                        <th>Status</th>
+                        <th>Progres</th>
+                        <th>Masa Mula</th>
+                        <th>Masa Akhir</th>
+                        <th>Masa</th>
+                        <th>Tujuan</th>
+                        <th>Tindakan</th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                    </tr>
                 </thead>
                 <tbody>
                     

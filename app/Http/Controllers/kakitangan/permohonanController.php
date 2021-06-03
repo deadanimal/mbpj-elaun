@@ -90,10 +90,8 @@ class permohonanController extends Controller
         $shiftSebenar = $masa->kiraMasa($masaMula,$masaAkhir);
         $dayCount = $shiftSebenar[0];
         $shiftType = "";
-        // $shiftKerja = array($shiftSebenar);
-        // print_r($dayCount);
+
         if($dayCount >= 1){
-            // dd('sahkdas');
             if(in_array("ss",$shiftSebenar) && in_array("st",$shiftSebenar)){
                 $shiftType = 'ssst';
             }else if(in_array("ss",$shiftSebenar) && in_array("mt",$shiftSebenar)){
@@ -105,10 +103,8 @@ class permohonanController extends Controller
             }else{
                 dd('takde pun');
             }        
-
-            // dd($shiftType);
         }else {
-            // dd($shiftSebenar);
+
             if("sse" == $shiftSebenar[1] && "nomalam" == $shiftSebenar[2]){
                 $shiftType = 'ssenom';
             }else if("mse" == $shiftSebenar[1] && "nosiang" == $shiftSebenar[2]){
@@ -145,14 +141,9 @@ class permohonanController extends Controller
      */
     public function show(Request $request, $idUser)
     {
-        //
         $pilihan = $request->input('pilihan');
-        // dd($pilihan);
-        // dd(substr($pilihan,0,2));
 
-        // $permohonan = $this->findPermohonanWithID($pilihan,Auth::user()->id)->first();
         if(request()->ajax()){
-            // dd($this->findPermohonanWithIDKakitangan($pilihan,$idUser));
             return datatables()->of($this->findPermohonanWithIDKakitangan($pilihan,$idUser))->make(true); 
         }
     }
@@ -177,24 +168,29 @@ class permohonanController extends Controller
      */
     public function update(Request $request, $idPermohonanBaru)
     {
-        //
-
-        $reject = array($request->input('reject'));
-        // dd($reject);
+        $id_user = $request->input('id_user');
         $jenisPermohonan = $request->input('jenisPermohonan');
+        $masa_mula = $request->input('masa_mula');
+        $masa_akhir = $request->input('masa_akhir');
+
+        $calculatedMasa = new PermohonanShiftService($id_user);
         
         $validator = Validator::make($request->all(), [ 
-                
-            'object.tarikh_permohonan' => 'required',
-            'object.masa_mula' => 'required',
-            'object.masa_akhir' => 'required',
-            'object.masa'   => 'required',
-            'object.waktu'  => 'required',
-            'object.tujuan' => 'required',
-
+            'jenisPermohonan' => 'required',
+            'tarikh_permohonan' => 'required',
+            'tarikh_akhir_kerja' => 'required',
+            'id_peg_pelulus' => 'required',
+            'id_peg_sokong' => 'required',
+            'masa_mula' => 'required',
+            'masa_akhir' => 'required',
+            'hari' => 'required',
+            'tujuan' => 'required',
+            'lokasi' => 'required'
         ]);
+
         if ($validator->fails()) {
             $errors = $validator->errors();
+
             foreach ($errors->all() as $message) {
                 dd($message);
             }
@@ -202,17 +198,24 @@ class permohonanController extends Controller
                 
             ],500);
         }
+
         if($jenisPermohonan == 'OT1'){
-            $permohonan = $this->findPermohonanWithIDKakitangan($jenisPermohonan,$idPermohonanBaru);
-            // dd($permohonan);
-            $permohonan->tarikh_mula_kerja = $request->input('object.tarikh_permohonan');
-            $permohonan->masa_mula = $request->input('object.masa_mula');
-            $permohonan->masa_akhir = $request->input('object.masa_akhir');
-            $permohonan->status = $request->input('object.status');
-            $permohonan->progres = "Belum sah";
-            $permohonan->masa = $request->input('object.masa');
-            $permohonan->waktu = $request->input('object.waktu');
-            $permohonan->tujuan = $request->input('object.tujuan');
+            $permohonan = PermohonanBaru::findOrFail($idPermohonanBaru);
+
+            $permohonan->tarikh_mula_kerja = $request->input('tarikh_permohonan');
+            $permohonan->tarikh_akhir_kerja = $request->input('tarikh_akhir_kerja');
+            $permohonan->masa_mula = $request->input('masa_mula');
+            $permohonan->masa_akhir = $request->input('masa_akhir');
+            // $permohonan->status = $request->input('status');
+            // $permohonan->progres = "Belum sah";
+            // $permohonan->masa = $calculatedMasa->kiraMasa($masa_mula,$masa_akhir);
+            $permohonan->masa = $this->timeDiff($masa_mula,$masa_akhir);
+            // $permohonan->waktu = $request->input('waktu');
+            $permohonan->hari = $request->input('hari');
+            $permohonan->tujuan = $request->input('tujuan');
+            $permohonan->lokasi = $request->input('lokasi');
+            $permohonan->id_peg_sokong = $request->input('id_peg_sokong');
+            $permohonan->id_peg_pelulus = $request->input('id_peg_pelulus');
 
             $permohonan->save();
             $permohonan->refresh();
@@ -220,32 +223,19 @@ class permohonanController extends Controller
             $this->sendEmailNotificationToPegawaiSokong($permohonan);
 
             return response()->json([
-                'permohonan' => $permohonan
+                'permohonan' => $permohonan->sebab
             ],200);
-        }
-        else if($jenisPermohonan == "OT2"){
-            foreach($reject as $rejected){
-                // dd($rejected);
-                // dd($idPermohonanBaru);
-            $permohonan = $this->findPermohonanForReject($rejected,$idPermohonanBaru)->first();
-            // $permohonans = $this->findPermohonanUser($rejected,$idPermohonanBaru);
-                // dd($permohonan);
 
-                // dd($permohonan);
-                event(new PermohonanStatusChangedEvent($permohonan, 0, 0, 1));
-            }
+        } else if($jenisPermohonan == "OT2"){
+            $permohonan = PermohonanBaru::findOrFail($idPermohonanBaru);
+
             $permohonan = $this->findPermohonanUser($idPermohonanBaru);
-            $permohonan->tarikh_permohonan = $request->input('object.tarikh_permohonan');
-            $permohonan->masa_mula = $request->input('object.masa_mula');
-            $permohonan->masa_akhir = $request->input('object.masa_akhir');
-            $permohonan->status = $request->input('object.status');
-            $permohonan->progres = "Belum sah";
-            $permohonan->masa = $request->input('object.masa');
-            $permohonan->waktu = $request->input('object.waktu');
-            $permohonan->tujuan = $request->input('object.tujuan');
-
-            $permohonan->save();
-            $permohonan->refresh();
+            $permohonan->tarikh_permohonan = $request->input('tarikh_permohonan');
+            $permohonan->masa_mula = $request->input('masa_mula');
+            $permohonan->masa_akhir = $request->input('masa_akhir');
+            $permohonan->masa = $request->input('masa');
+            $permohonan->waktu = $request->input('waktu');
+            $permohonan->tujuan = $request->input('tujuan');
 
             $this->sendEmailNotificationToPegawaiSokong($permohonan);
 
@@ -253,6 +243,22 @@ class permohonanController extends Controller
                 'permohonan' => $permohonan
             ],200);
         }
+    }
+
+    function timeDiff($masa_mula, $masa_akhir)
+    {
+        $secInAnHour = 3600;
+        // convert to unix timestamps
+        $masa_mula = strtotime($masa_mula);
+        $masa_akhir = strtotime($masa_akhir);
+
+        // perform subtraction to get the difference (in seconds) between times
+        $timeDiff = $masa_akhir-$masa_mula;
+
+        $timeDiff = floatval($timeDiff/$secInAnHour);
+
+        // return the difference
+        return $timeDiff;
     }
 
     /**
@@ -265,29 +271,29 @@ class permohonanController extends Controller
     {
         //
         $permohonan = PermohonanBaru::find($id);
-        $permohonan->is_deleted = 1;
+        $permohonan->status_akhir = 0;
         $permohonan->save();
         $permohonan->refresh();
+
         return response()->json([
             'permohonan' => $permohonan
         ],200);
         
     }
 
-   public function findPermohonan(Request $request){
-
-    $id_permohonan_baru = $request->input('id_permohonan_baru');
+//    public function findPermohonan(Request $request){
+   public function findPermohonan(Request $request, $id_permohonan_baru){
+    // $id_permohonan_baru = $request->input('id_permohonan_baru');
     $jenis_permohonan = $request->input('jenis_permohonan');
     $currUserID = auth()->user()->CUSTOMERID;
+
         if($jenis_permohonan == 'OT1'){
             $permohonan = User::findOrFail(auth()->user()->CUSTOMERID)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
             return response()->json([
                         'error' => false,
                         'permohonan'  => $permohonan,
                     ], 200);
-
-        }
-        else if($jenis_permohonan == "OT2"){
+        } else if($jenis_permohonan == "OT2"){
             $permohonanUsers = PermohonanBaru::findOrFail($id_permohonan_baru)->users()->get()->toArray();
             $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
             return response()->json([
@@ -296,7 +302,6 @@ class permohonanController extends Controller
                         'permohonan'  => $permohonan,
                         'userId' => $currUserID
                     ], 200);
-
         }
 
     }

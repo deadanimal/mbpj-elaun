@@ -29,26 +29,12 @@ function hantarElaun(id_permohonan_baru){
     });
 };
 
-function deletePermohonan(id_permohonan_baru){
-
-    $.ajax({
-        url: 'tuntutan/delete-permohonan/' + id_permohonan_baru,
-        type: 'put', 
-        data:{
-            id_permohonan_baru : id_permohonan_baru
-        },
-        success: function(data) {
-            showTuntutanDatatableKT();
-            console.log(data.permohonan);
-
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
-}
-
 function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
+    // var arrayJenisPermohonan = ['OT1', 'OT2', 'PS1', 'PS2']
+
+    // if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
+    //     $('#buttonHantarPengesahan').attr("disabled", "disabled");
+    // }
 
     $.ajax({
         url: 'tuntutan/kemaskini-permohonan/' + id_permohonan_baru,
@@ -70,7 +56,7 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
 
-            }else if(data.permohonan.kadar_jam == '1.225'){
+            }else if(data.permohonan.kadar_jam == '1.25'){
                 $("#borangB1Modal input[id=inlineJamRadio2]").prop("checked",true);
 
             }
@@ -84,8 +70,6 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
 
             }
             $("#borangB1Modal").modal("show");
-            
-            // console.log(data.permohonan);
 
         },
         error: function(data) {

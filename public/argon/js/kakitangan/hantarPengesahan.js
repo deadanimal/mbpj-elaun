@@ -4,20 +4,30 @@ $.ajaxSetup({
     }
 });
 
-function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
-    var id_user = document.querySelector("#nopekerja").value;
+function changeDataTargetSemakan(is_semakan, id_permohonan_baru, jenisPermohonanKT, jenisPermohonan){
+    // var arrayJenisPermohonan = ['PS1', 'PS2', 'EL1', 'EL2']
+    var id_user = parseInt($("#noPekerjaB1").val());
+
+    // if (arrayJenisPermohonan.indexOf(jenisPermohonan)) {
+    //     $('#buttonHantarPengesahan').attr("disabled", "disabled");
+    // }
+
+    if (!is_semakan) {
+        $("#borangB1Modal input[name=masaMulaSebenar-individu]").attr('disabled', 'disabled');
+        $("#borangB1Modal input[name=masaAkhirSebenar-individu]").attr('disabled', 'disabled');
+    }
+
     $.ajax({
         url: 'semakan/semak-permohonan/' + id_permohonan_baru,
         type: 'GET', 
         data:{
-            id_permohonan_baru : id_permohonan_baru,
             jenisPermohonanKT : jenisPermohonanKT,
             jenisPermohonan : jenisPermohonan
         },
         success: function(data) {
-            console.log(data.permohonan.tarikh_mula_kerja);
             var tarikhMula = moment(data.permohonan.tarikh_mula_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
             var tarikhAkhir = moment(data.permohonan.tarikh_akhir_kerja,'DD-MM-YYYY').format('DD-MM-YYYY')
+
             $("#borangB1Modal input[name=tarikhKerjaMula]").val(tarikhMula);
             $("#borangB1Modal input[name=tarikhKerjaAkhir]").val(tarikhAkhir);
             $("#borangB1Modal input[name=masaMula]").val(data.permohonan.masa_mula);
@@ -25,33 +35,51 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
             $("#borangB1Modal input[name=jenisPermohonanKT]").val(data.permohonan.jenis_permohonan_kakitangan);
             $("#borangB1Modal input[name=jenisPermohonanReal]").val(data.permohonan.jenis_permohonan);
             $("#borangB1Modal textarea[id=tujuan]").val(data.permohonan.tujuan);
+            $("#borangB1Modal textarea[id=lokasiB1]").val(data.permohonan.lokasi);
             $("#borangB1Modal input[name=idPermohonan]").val(data.permohonan.id_permohonan_baru);
-            $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
-            $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").val('');
-            $("#borangB1Modal input[id=semakan-modal-individu-masaMulaSebenar]").val('');
+            // $("#borangB1Modal input[id=semakan-modal-individu-masaAkhirSebenar]").attr('value',data.permohonan.id_permohonan_baru);
+
+            $("#borangB1Modal input[name=masaMulaSebenar-individu]").val(data.masa_mula_sebenar);
+            $("#borangB1Modal input[name=masaAkhirSebenar-individu]").val(data.masa_akhir_sebenar);
+
+            $("#borangB1Modal input[name=peg_sokong]").val(data.peg_sokong.NAME)
+            $("#borangB1Modal input[name=jawatan_peg_sokong]").val(data.peg_sokong.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN)
+            $("#borangB1Modal input[name=peg_pelulus]").val(data.peg_pelulus.NAME)
+            $("#borangB1Modal input[name=jawatan_peg_pelulus]").val(data.peg_pelulus.maklumat_pekerjaan.jawatan.HR_NAMA_JAWATAN)
+
+            getPegawai(data.permohonan.id_peg_sokong, data.permohonan.id_peg_pelulus);
 
             if(data.permohonan.kadar_jam == '1.125'){
                 $("#borangB1Modal input[id=inlineJamRadio1]").prop("checked",true);
 
-            }else if(data.permohonan.kadar_jam == '1.225'){
+            } else if(data.permohonan.kadar_jam == '1.25'){
                 $("#borangB1Modal input[id=inlineJamRadio2]").prop("checked",true);
 
             }
+
             if(data.permohonan.waktu  == 'Pagi'){
                 $("#borangB1Modal input[id=inlineRadiobox1]").prop("checked",true);
-            }else if(data.permohonan.waktu  == 'Petang'){
+            } else if(data.permohonan.waktu  == 'Petang'){
                 $("#borangB1Modal input[id=inlineRadiobox2]").prop("checked",true);
 
-            }else if(data.permohonan.waktu  == 'Malam'){
+            } else if(data.permohonan.waktu  == 'Malam'){
                 $("#borangB1Modal input[id=inlineRadiobox3]").prop("checked",true);
 
             }
-            fillInKedatangan(id_user)
+
+            fillInEkedatanganKT(id_user , data.permohonan.id_permohonan_baru)
+
             $("#borangB1Modal").modal("show");
             
-            
-            // console.log(data.permohonan);
+            $('input').css('color', 'black');
+            $('textarea' ).css('color', 'black');
 
+
+            // set value of #buttonHantarPengesahan to current id_permohonan_baru
+            $("#buttonHantarPengesahan").attr("value", data.permohonan.id_permohonan_baru); 
+
+            // set data-value to check if it for semakan or tuntutan
+            $("#buttonHantarPengesahan").attr("data-value", is_semakan); 
         },
         error: function(data) {
             console.log(data);
@@ -59,76 +87,54 @@ function changeDataTarget(id_permohonan_baru,jenisPermohonanKT,jenisPermohonan){
     });
 }
 
-function deletePermohonan(id_permohonan_baru){
-
-    $.ajax({
-        url: 'semakan/delete-permohonan/' + id_permohonan_baru,
-        type: 'put', 
-        data:{
-            id_permohonan_baru : id_permohonan_baru
-        },
-        success: function(data) {
-            showSemakanDatatableKT();
-            console.log(data.permohonan);
-
-        },
-        error: function(data) {
-            console.log(data);
-        } 
-    });
-}
-
-function hantarPengesahan(id_user,id_permohonan_baru){
-    
+function hantarPengesahan(){
+    var id_permohonan_baru = $('#buttonHantarPengesahan').attr('value');
+    var is_semakan = $('#buttonHantarPengesahan').attr('data-value');
     var tarikhMula = moment($("#borangB1Modal input[name=tarikhKerjaMula]").val(),"DD-MM-YYYY").format("DD-MM-YYYY",true);
     var tarikhAkhir = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val();
     var masaMula = $("#borangB1Modal input[name=masaMula]").val();
     var masaAkhir = $("#borangB1Modal input[name=masaAkhir]").val();
+    var masaMulaSebenar = $("#borangB1Modal input[name=masaMulaSebenar-individu]").val();
+    var masaAkhirSebenar = $("#borangB1Modal input[name=masaAkhirSebenar-individu]").val();
     var jenisPermohonanKT = $("#borangB1Modal input[name=jenisPermohonanKT]").val();
     var jenisPermohonanReal = $("#borangB1Modal input[name=jenisPermohonanReal]").val();
-    var waktu = $("#borangB1Modal input[name=radioWaktu]").val();
     var tujuan = $("#borangB1Modal textarea[name=tujuan]").val();
+    var lokasi = $("#borangB1Modal textarea[name=lokasiB1]").val();
 
-    console.log(tarikhMula);
-    console.log(jenisPermohonanKT)
-    console.log(id_permohonan_baru)
-    
-    var object = {
-        tarikh_permohonan:tarikhMula,
-        tarikh_akhir_kerja:tarikhAkhir,
-        masa_mula:masaMula,
-        masa_akhir:masaAkhir,
-        waktu:waktu,
-        tujuan:tujuan,
-        jenis_permohonan_kakitangan:jenisPermohonanKT,
-        jenis_permohonan:jenisPermohonanReal,
-        
-    }
     $.ajax({
         url: 'semakan/hantar-permohonan/' + id_permohonan_baru,
         type: 'put', 
         data:{
-            id_permohonan_baru : id_permohonan_baru,
-            object : object,
+            tarikh_permohonan : tarikhMula,
+            tarikh_akhir_kerja : tarikhAkhir,
+            masa_mula : masaMula,
+            masa_akhir : masaAkhir,
+            masa_mula_sebenar : masaMulaSebenar,
+            masa_akhir_sebenar : masaAkhirSebenar,
+            tujuan : tujuan,
+            lokasi : lokasi,
+            jenis_permohonan_kakitangan : jenisPermohonanKT,
+            jenis_permohonan : jenisPermohonanReal,
         },
-        success: function(data) {
-            
+        success: function() {
             $("#borangB1Modal").modal("hide");
+
             Swal.fire(  
                 'Dihantar untuk Pengesahan!',
                 'Klik butang dibawah untuk tutup!',
                 'success'
                 )
                 
-            showSemakanDatatableKT();
-            console.log(data.permohonan);
-
+            if (is_semakan) {
+                showSemakanDatatableKT();
+            } else {
+                showTuntutanDatatableKT()
+            }
         },
         error: function(data) {
             console.log(data);
         } 
     });
-
 }
 
 function timeStringToMins(s) {
@@ -156,6 +162,7 @@ function saveMasa(){
     var waktuKeluar = $("#borangB1Modal input[name=tarikhKerjaAkhir]").val()
     var mulaKerja = $("#borangB1Modal input[name=masaMula]").val()
     var akhirKerja = $("#borangB1Modal input[name=masaAkhir]").val()
+    
     $.ajax({
         url:'semakan/masa-sebenar/' + id_user,
         type:'put',
@@ -167,9 +174,6 @@ function saveMasa(){
             akhirKerja:akhirKerja
         }, success: function(data) {
             hantarPengesahan(id_user,id_permohonan_baru)
-            console.log('dasdsadsa');
-           console.log(data);
-
         },
         error: function(data) {
             console.log(data);

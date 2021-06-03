@@ -23,11 +23,11 @@ Route::group([
 			'uses' => 'kakitangan\semakanController@show',
 			'as'   => 'semakan.show',
 		]);
-		Route::get('/semak-permohonan/{user_id}', [
+		Route::get('/semak-permohonan/{id_permohonan}', [
 			'uses' => 'kakitangan\semakanController@showModal',
 			'as'   => 'semakan.showModal',
 		]);
-		Route::put('/hantar-permohonan/{user_id}', [
+		Route::put('/hantar-permohonan/{id_permohonan}', [
 			'uses' => 'kakitangan\semakanController@update',
 			'as'   => 'semakan.update',
 		]);
@@ -35,6 +35,10 @@ Route::group([
 	Route::resource('/bantuan','kakitangan\bantuanController',['except' => ['show','destroy']]);
 	Route::resource('/tuntutan','kakitangan\tuntutanController',['except' => ['show','destroy']]);
 	Route::group(['prefix' => 'tuntutan'], function () {
+		Route::get('/{user_id}', [
+			'uses' => 'kakitangan\tuntutanController@show',
+			'as'   => 'tuntutan.show',
+		]);
 		Route::put('/hantar-tuntutan/{user_id}', [
 			'uses' => 'kakitangan\tuntutanController@update',
 			'as'   => 'tuntutan.update',
@@ -66,7 +70,7 @@ Route::group([
 			'uses' => 'kakitangan\permohonanController@destroy',
 			'as'   => 'permohonan-baru.delete',
 		]);
-		Route::put('/kemaskini-permohonan/{user_id}', [
+		Route::put('/kemaskini-permohonan/{id_permohonan}', [
 			'uses' => 'kakitangan\permohonanController@update',
 			'as'   => 'permohonan-baru.update',
 		]);

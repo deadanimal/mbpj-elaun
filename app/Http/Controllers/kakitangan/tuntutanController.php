@@ -23,13 +23,13 @@ class tuntutanController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->id;
+        // $user = Auth::user()->id;
 
-        if(request()->ajax()) {
-            return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
-        }
+        // if(request()->ajax()) {
+        //     return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
+        // }
         
-        return view('core.kakitangan.tuntutan')->with('user',$user);
+        return view('core.kakitangan.tuntutan');
     }
 
     /**
@@ -59,31 +59,41 @@ class tuntutanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function show(Request $request, $id)
+    // {
+    //     //
+    //     $jenis_permohonan = $request->input('jenisPermohonan');
+    //     $currUserID = auth()->user()->CUSTOMERID;
+    //     if($jenis_permohonan == 'EL1'){
+    //         $permohonan = User::findOrFail(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
+    //         return response()->json([
+    //                     'error' => false,
+    //                     'permohonan'  => $permohonan,
+    //                 ], 200);
+
+    //     }
+    //     else if($jenis_permohonan == "EL2"){
+    //         $permohonanUsers = PermohonanBaru::findOrFail($id_permohonan_baru)->users()->get()->toArray();
+    //         $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
+    //         return response()->json([
+    //                     'error' => false,
+    //                     'permohonanUsers' =>  $permohonanUsers,
+    //                     'permohonan'  => $permohonan,
+    //                     'userId' => $currUserID
+    //                 ], 200);
+
+    //     }
+
+    // }
+
     public function show(Request $request, $id)
     {
-        //
-        $jenis_permohonan = $request->input('jenisPermohonan');
-        $currUserID = auth()->user()->CUSTOMERID;
-        if($jenis_permohonan == 'EL1'){
-            $permohonan = User::findOrFail(auth()->user()->id)->permohonans->where('id_permohonan_baru',$id_permohonan_baru)->first();
-            return response()->json([
-                        'error' => false,
-                        'permohonan'  => $permohonan,
-                    ], 200);
+        $pilihanKT = $request->input('pilihanKT');
+        $pilihanReal = $request->input('pilihanReal');
 
+        if(request()->ajax()){
+            return datatables()->of($this->findPermohonanWithIDSemakan($pilihanReal,$pilihanKT,$id))->make(true);
         }
-        else if($jenis_permohonan == "EL2"){
-            $permohonanUsers = PermohonanBaru::findOrFail($id_permohonan_baru)->users()->get()->toArray();
-            $permohonan = PermohonanBaru::findOrFail($id_permohonan_baru);
-            return response()->json([
-                        'error' => false,
-                        'permohonanUsers' =>  $permohonanUsers,
-                        'permohonan'  => $permohonan,
-                        'userId' => $currUserID
-                    ], 200);
-
-        }
-
     }
 
     /**

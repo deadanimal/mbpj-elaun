@@ -129,30 +129,29 @@ function fillInKadarJam(kadar_jam, saved_jenis_hari) {
     });
 }
 
-function noEkedatanganWithDefaultValue() {
-    var ekedatanganAttributes = new Array (
-        'tarikh',
-        'waktuMasuk',
-        'waktuKeluar',
-        'jumlahWaktuKerja',
-        'waktuMasukOT1',
-        'waktuKeluarOT1',
-        'jumlahOT1',
-        'waktuMasukOT2',
-        'waktuKeluarOT2',
-        'jumlahOT2',
-        'waktuMasukOT3',
-        'waktuKeluarOT3',
-        'jumlahOT3',
-        'jumlahOTKeseluruhan',
-        'waktuAnjal'
-    );
+// function noEkedatanganWithDefaultValue() {
+//     var ekedatanganAttributes = new Array (
+//         'tarikh',
+//         'waktuMasuk',
+//         'waktuKeluar',
+//         'jumlahWaktuKerja',
+//         'waktuMasukOT1',
+//         'waktuKeluarOT1',
+//         'jumlahOT1',
+//         'waktuMasukOT2',
+//         'waktuKeluarOT2',
+//         'jumlahOT2',
+//         'waktuMasukOT3',
+//         'waktuKeluarOT3',
+//         'jumlahOT3',
+//         'jumlahOTKeseluruhan',
+//         'waktuAnjal'
+//     );
 
-    ekedatanganAttributes.forEach(att => {
-        $("#formEkedatangan input[name="+att+"]").val("N/A");
-    });
-
-}
+//     ekedatanganAttributes.forEach(att => {
+//         $("#formEkedatangan input[name="+att+"]").val("N/A");
+//     });
+// }
 
 function fillInUserDetail(id_user) {
     $.ajax({
